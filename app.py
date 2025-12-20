@@ -4,6 +4,7 @@ from views.dashboard import dashboard_view
 from views.course_overview import course_overview_view
 from views.lesson import lesson_view
 from views import dashboard, lesson
+from views.auth import render_auth
 from firebase_config import initialize_firebase_admin, get_firebase_analytics_script
 from dotenv import load_dotenv
 import os
@@ -21,6 +22,17 @@ st.set_page_config(
 
 # Inject Firebase Analytics
 st.markdown(get_firebase_analytics_script(), unsafe_allow_html=True)
+
+# Authentication Flow
+if "user" not in st.session_state:
+    render_auth()
+    st.stop()
+
+# Logout Button (Sidebar)
+with st.sidebar:
+    if st.button("Abmelden", type="secondary"):
+        del st.session_state["user"]
+        st.rerun()
 
 # Load Env
 load_dotenv()

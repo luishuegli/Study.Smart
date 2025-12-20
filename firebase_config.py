@@ -46,3 +46,47 @@ def get_firebase_analytics_script():
       console.log("Firebase Analytics initialized");
     </script>
     """
+
+import requests
+import json
+
+# Firebase Web API Key (from your config snippet)
+FIREBASE_WEB_API_KEY = "AIzaSyBzKUmu5uNFzz1h0J7wrW0iy-zVkJ8yfiY"
+
+def sign_in_user(email, password):
+    """Signs in a user using Firebase REST API."""
+    request_url = f"https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key={FIREBASE_WEB_API_KEY}"
+    payload = {
+        "email": email,
+        "password": password,
+        "returnSecureToken": True
+    }
+    try:
+        response = requests.post(request_url, json=payload)
+        response.raise_for_status()
+        return response.json()
+    except requests.exceptions.HTTPError as e:
+        error_json = e.response.json()
+        error_message = error_json.get("error", {}).get("message", "Unknown error")
+        return {"error": error_message}
+    except Exception as e:
+        return {"error": str(e)}
+
+def sign_up_user(email, password):
+    """Signs up a new user using Firebase REST API."""
+    request_url = f"https://identitytoolkit.googleapis.com/v1/accounts:signUp?key={FIREBASE_WEB_API_KEY}"
+    payload = {
+        "email": email,
+        "password": password,
+        "returnSecureToken": True
+    }
+    try:
+        response = requests.post(request_url, json=payload)
+        response.raise_for_status()
+        return response.json()
+    except requests.exceptions.HTTPError as e:
+        error_json = e.response.json()
+        error_message = error_json.get("error", {}).get("message", "Unknown error")
+        return {"error": error_message}
+    except Exception as e:
+        return {"error": str(e)}

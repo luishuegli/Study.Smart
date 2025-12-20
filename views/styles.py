@@ -3,8 +3,7 @@ import streamlit as st
 
 def load_css():
     """Injects global CSS for the application."""
-    st.markdown("""
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    st.markdown("""<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* GLOBAL FONTS */
 html, body, [class*="css"] {
@@ -142,5 +141,4 @@ section[data-testid="stSidebar"] .stButton > button:hover {
     color: #0f172a;
     margin-bottom: 2rem;
 }
-</style>
-""", unsafe_allow_html=True)
+</style>""", unsafe_allow_html=True)

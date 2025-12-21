@@ -29,242 +29,115 @@ def render_icon(icon_name):
     
     return icons.get(icon_name, "")
 
-def load_css():
-    """Inject the Dual-Theme design system CSS (Technoir / Clean Apple)."""
+def load_design_system():
+    """Inject the Jony Ive Design System (Technoir Clarity)."""
     st.markdown("""
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* ========== GLOBAL VARIABLES & RESET ========== */
+        /* --- 1. VARIABLES (The Palette) --- */
         :root {
-            --card-radius: 24px;
-            --btn-radius: 50px;
-            --border-width: 1px;
-            --card-border: 1px solid rgba(128, 128, 128, 0.2);
-            --shadow-light: 0 4px 20px rgba(0,0,0,0.1);
+            --bg-void: #FFFFFF;
+            --bg-card: #F9F9FB; /* Very light grey for contrast against white void */
+            --text-primary: #111111;
+            --text-secondary: #666666;
+            --border-color: rgba(0,0,0,0.08);
+            --accent-fill: #000000; /* Buttons/Progress fill */
+            --accent-text: #FFFFFF; /* Text inside buttons */
+            --highlight: rgba(0,0,0,0.05); /* Hover state */
         }
 
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-void: #050505 !important;
+                --bg-card: #121212 !important;
+                --text-primary: #EDEDED !important;
+                --text-secondary: #A0A0A0 !important;
+                --border-color: rgba(255,255,255,0.1) !important;
+                --accent-fill: #FFFFFF !important;
+                --accent-text: #000000 !important;
+                --highlight: rgba(255,255,255,0.1) !important;
+            }
+        }
+
+        /* --- 2. GLOBAL RESET --- */
         .stApp { 
-            background-color: var(--background-color); 
-            font-family: 'Inter', sans-serif; 
-            color: var(--text-color);
+            background-color: var(--bg-void) !important; 
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
         }
         
-        /* ========== CARD CONTAINERS (BENTO GRID) ========== */
-        /* Target Vertical Blocks that look like cards */
+        /* --- 3. THE BENTO CARD (Fixing the Flat Look) --- */
+        /* Target the main vertical blocks */
         div[data-testid="stVerticalBlock"] > div[style*="flex-direction: column;"] > div[data-testid="stVerticalBlock"] {
-            background-color: var(--secondary-background-color);
-            border: var(--card-border);
-            border-radius: var(--card-radius);
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
             padding: 24px;
-            box-shadow: var(--shadow-light);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            gap: 16px; /* Spacing between elements inside card */
         }
-
-        /* ========== LATEX MATH FONT SIZE ========== */
-        .katex { 
-            font-size: 1.1em !important; 
-            color: var(--text-color) !important; 
-        }
-
-        /* ========== CUSTOM BUTTONS (PILL SHAPE - INVERTED) ========== */
+        
+        /* --- 4. BUTTONS (Visible & Tactile) --- */
         .stButton > button {
-            border-radius: var(--btn-radius);
-            font-weight: 600;
-            padding: 10px 24px;
+            width: 100%;
+            background-color: var(--accent-fill) !important;
+            color: var(--accent-text) !important;
+            border: 1px solid var(--border-color) !important; /* Force visibility */
+            border-radius: 50px !important;
+            font-weight: 600 !important;
+            padding: 10px 24px !important;
             transition: all 0.2s ease;
-            border: none;
+        }
+        .stButton > button:hover {
+            opacity: 0.85;
+            transform: scale(0.99);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
         
-        /* Primary buttons: High Contrast Inverted */
-        .stButton > button[kind="primary"] {
-            background-color: var(--text-color);
-            color: var(--background-color);
-        }
-        
-        .stButton > button[kind="primary"]:hover {
-            opacity: 0.8;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        }
-        
-        /* Secondary buttons: Subtle Outline */
+        /* Handle specific button types if needed, but the global override above enforces consistency */
         .stButton > button[kind="secondary"] {
-            background-color: transparent;
-            color: var(--text-color);
-            border: 1px solid rgba(128, 128, 128, 0.3);
+            background-color: transparent !important;
+            color: var(--text-primary) !important;
+            border: 1px solid var(--border-color) !important;
+        }
+         .stButton > button[kind="secondary"]:hover {
+            background-color: var(--bg-card) !important;
+        }
+
+        /* --- 5. PROGRESS BARS (The "Invisible" Fix) --- */
+        /* Forces the inner bar to be Black (Light Mode) or White (Dark Mode) */
+        .stProgress > div > div > div > div {
+            background-color: var(--accent-fill) !important;
         }
         
-        .stButton > button[kind="secondary"]:hover {
-            background-color: var(--secondary-background-color);
-            border-color: var(--text-color);
-        }
-        
-        /* ========== INTERACTIVE INPUTS (SLIDERS/FIELDS) ========== */
-        div[data-baseweb="slider"] { 
-            opacity: 0.9; 
-        }
-        
-        .stTextInput > div > div > input,
-        .stTextArea > div > div > textarea {
-            background-color: var(--secondary-background-color);
-            color: var(--text-color);
-            border: 1px solid rgba(128, 128, 128, 0.3);
-            border-radius: 12px;
-        }
-        
-        .stTextInput > div > div > input:focus,
-        .stTextArea > div > div > textarea:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 1px var(--primary-color);
-        }
-        
-        /* ========== THEORY BOXES ========== */
-        .theory-box {
-            background-color: var(--secondary-background-color);
-            border: var(--card-border);
-            border-radius: 16px;
-            padding: 32px;
-            margin: 24px 0;
-            box-shadow: var(--shadow-light);
-        }
-        
-        .theory-box-header {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 24px;
-            padding-bottom: 16px;
-            border-bottom: 1px solid rgba(128, 128, 128, 0.2);
-        }
-        
-        .theory-icon {
-            width: 48px;
-            height: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: var(--text-color);
-            border-radius: 12px;
-            color: var(--background-color);
-        }
-        
-        .theory-icon svg {
-            width: 28px !important;
-            height: 28px !important;
-        }
-        
-        .theory-title {
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--text-color);
-        }
-        
-        .theory-content {
-            color: var(--text-color);
-            line-height: 1.6;
-            font-size: 16px;
-            opacity: 0.9;
-        }
-        
-        .experiment-badge {
-            display: inline-flex;
-            align-items: center;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            padding: 8px 16px;
-            border-radius: 100px;
-            font-size: 12px;
+        /* --- 6. EXPANDERS (Making them clean) --- */
+        .streamlit-expanderHeader {
+            background-color: transparent !important;
+            color: var(--text-primary) !important;
             font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-top: 16px;
-            border: 1px solid rgba(128, 128, 128, 0.3);
+            border-bottom: 1px solid var(--border-color);
         }
         
-        /* ========== RADIO BUTTONS ========== */
-        div[class*="stRadio"] > div[role="radiogroup"] > label {
-            background-color: var(--secondary-background-color);
-            border: 1px solid rgba(128, 128, 128, 0.2);
-            border-radius: 12px !important;
-            padding: 16px !important;
-            margin-bottom: 8px !important;
-            transition: all 0.2s;
-            color: var(--text-color);
-        }
-        
-        div[class*="stRadio"] > div[role="radiogroup"] > label:hover {
-            border-color: var(--text-color);
-            background-color: var(--background-color);
-        }
-        
-        div[class*="stRadio"] > div[role="radiogroup"] > label:has(input:checked) {
-            border: 2px solid var(--text-color) !important;
-            background-color: var(--background-color);
-        }
-        
-        /* ========== TABS ========== */
-        .stTabs [data-baseweb="tab-list"] {
-            gap: 8px;
-            background-color: transparent;
-        }
-        
-        .stTabs [data-baseweb="tab"] {
-            background-color: var(--secondary-background-color);
-            border-radius: 12px;
-            color: var(--text-color);
-            padding: 12px 24px;
-            border: 1px solid rgba(128, 128, 128, 0.1);
-        }
-        
-        .stTabs [data-baseweb="tab"][aria-selected="true"] {
-            background-color: var(--text-color);
-            color: var(--background-color);
-            font-weight: 600;
-        }
-        
-        /* ========== SIDEBAR ========== */
-        section[data-testid="stSidebar"] {
-            background-color: var(--secondary-background-color);
-            border-right: 1px solid rgba(128, 128, 128, 0.1);
-        }
-        
-        section[data-testid="stSidebar"] .stButton > button {
-            text-align: left;
-            border: none;
-            background: transparent;
-        }
-        
-        section[data-testid="stSidebar"] .stButton > button:hover {
-            background-color: var(--background-color);
-        }
-        
-        /* ========== ALERTS & PROGRESS ========== */
-        .stAlert {
-            border-radius: 12px;
-            background-color: var(--secondary-background-color);
-            border: 1px solid rgba(128, 128, 128, 0.2);
-        }
-        
-        .stProgress > div > div > div {
-            background-color: var(--text-color);
-        }
-        
-        /* ========== HEADINGS ========== */
+        /* --- 7. TYPOGRAPHY --- */
         h1, h2, h3, h4, h5, h6 {
-            color: var(--text-color);
+            color: var(--text-primary);
             font-weight: 700;
         }
-        
-        /* ========== LINKS ========== */
-        a {
-            color: var(--text-color);
-            font-weight: 600;
-            text-decoration: none;
-            opacity: 0.9;
+        p, div, label {
+            color: var(--text-primary);
         }
         
+        /* --- 8. LINKS --- */
+        a {
+            color: var(--text-primary);
+            opacity: 0.7;
+            text-decoration: none;
+        }
         a:hover {
             opacity: 1.0;
             text-decoration: underline;
         }
+
     </style>
     """, unsafe_allow_html=True)
 

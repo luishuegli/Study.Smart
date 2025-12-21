@@ -5,7 +5,7 @@ from views.course_overview import course_overview_view
 from views.lesson import lesson_view
 from views import dashboard, lesson
 from views.auth import render_auth
-from views.styles import load_css
+from views.styles import load_design_system
 from firebase_config import initialize_firebase_admin, get_firebase_analytics_script
 from dotenv import load_dotenv
 import os
@@ -22,7 +22,7 @@ st.set_page_config(
 )
 
 # Inject Global Styles
-load_css()
+load_design_system()
 
 # Inject Firebase Analytics
 st.markdown(get_firebase_analytics_script(), unsafe_allow_html=True)

@@ -88,6 +88,13 @@ def load_design_system():
             padding: 10px 24px !important;
             transition: all 0.2s ease;
         }
+        
+        /* FIX: Ensure text inside buttons (often <p> tags) inherits the high-contrast color 
+           overriding the generic p { color: ... } rule below */
+        .stButton > button p {
+            color: inherit !important;
+        }
+        
         .stButton > button:hover {
             opacity: 0.85;
             transform: scale(0.99);
@@ -118,7 +125,47 @@ def load_design_system():
             border-bottom: 1px solid var(--border-color);
         }
         
-        /* --- 7. TYPOGRAPHY --- */
+            
+        /* --- 7. RADIO BUTTONS (No Red Circles - Border Selection) --- */
+        /* 1. Hide the default circle/dot */
+        div[class*="stRadio"] > div[role="radiogroup"] > label > div:first-child {
+            display: none !important;
+        }
+        
+        /* 2. Style the container (The "Grey Border") */
+        div[class*="stRadio"] > div[role="radiogroup"] > label {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color) !important;
+            border-radius: 12px !important;
+            padding: 16px !important;
+            margin-bottom: 8px !important;
+            transition: all 0.1s ease-in-out;
+            color: var(--text-primary);
+            cursor: pointer;
+            display: flex; /* Ensure content aligns nicely without the dot */
+            width: 100%; 
+        }
+        
+        /* 3. Hover State */
+        div[class*="stRadio"] > div[role="radiogroup"] > label:hover {
+            border-color: var(--text-primary) !important;
+            background-color: var(--bg-void);
+        }
+        
+        /* 4. Selected State (Thicker Border) */
+        div[class*="stRadio"] > div[role="radiogroup"] > label:has(input:checked) {
+            border: 2px solid var(--text-primary) !important;
+            background-color: var(--bg-void) !important;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        
+        /* Fix text alignment now that dot is gone */
+        div[class*="stRadio"] > div[role="radiogroup"] > label > div[data-testid="stMarkdownContainer"] {
+            margin-left: 0 !important;
+        }
+
+        /* --- 8. TYPOGRAPHY --- */
         h1, h2, h3, h4, h5, h6 {
             color: var(--text-primary);
             font-weight: 700;
@@ -127,7 +174,7 @@ def load_design_system():
             color: var(--text-primary);
         }
         
-        /* --- 8. LINKS --- */
+        /* --- 9. LINKS --- */
         a {
             color: var(--text-primary);
             opacity: 0.7;

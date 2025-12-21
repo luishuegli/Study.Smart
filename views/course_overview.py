@@ -33,7 +33,7 @@ def course_overview_view():
     
     # List Topics
     for topic in course["topics"]:
-        with st.expander(f"{topic['title']} ({topic['status']})", expanded=True):
+        with st.expander(f"{loc.t(topic['title'])} ({topic['status']})", expanded=True):
             col1, col2 = st.columns([3, 1])
             with col1:
                 st.markdown(loc.t({

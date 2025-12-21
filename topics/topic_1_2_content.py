@@ -161,6 +161,10 @@ def render_subtopic_1_2(model):
     [data-testid="column"] > div {
         height: 100%;
     }
+    /* Force all inner bordered containers to same min-height */
+    [data-testid="stVerticalBlock"] > div[data-testid="stVerticalBlock"] > div[data-testid="element-container"] > div[data-testid="stMarkdownContainer"] + div[data-testid="stVerticalBlock"] {
+        min-height: 280px !important;
+    }
     </style>
     """, unsafe_allow_html=True)
     
@@ -177,9 +181,6 @@ def render_subtopic_1_2(model):
                 st.markdown("")
                 st.markdown(f"*{t({'de': 'Beispiel', 'en': 'Example'})}:*")
                 st.markdown(content_1_2['definitions']['union']["example_de"])
-                st.markdown("")
-                st.markdown("")
-                st.markdown("")  # Extra padding to match Complement box
         
         with col2_r1:
             with st.container(border=True):
@@ -189,9 +190,6 @@ def render_subtopic_1_2(model):
                 st.markdown("")
                 st.markdown(f"*{t({'de': 'Beispiel', 'en': 'Example'})}:*")
                 st.markdown(content_1_2['definitions']['sect']["example_de"])
-                st.markdown("")
-                st.markdown("")
-                st.markdown("")  # Extra padding to match Complement box
         
         # ROW 2: Difference and Complement
         col1_r2, col2_r2 = st.columns(2)
@@ -204,9 +202,6 @@ def render_subtopic_1_2(model):
                 st.markdown("")
                 st.markdown(f"*{t({'de': 'Beispiel', 'en': 'Example'})}:*")
                 st.markdown(content_1_2['definitions']['diff']["example_de"])
-                st.markdown("")
-                st.markdown("")
-                st.markdown("")  # Extra padding to match Complement box
         
         with col2_r2:
             with st.container(border=True):
@@ -216,8 +211,6 @@ def render_subtopic_1_2(model):
                 st.markdown("")
                 st.markdown(f"*{t({'de': 'Beispiel', 'en': 'Example'})}:*")
                 st.markdown(content_1_2['definitions']['comp']["example_de"])
-                st.markdown("")
-                st.markdown("")  # Keep original padding
     
     st.markdown("---")
     
@@ -225,38 +218,40 @@ def render_subtopic_1_2(model):
     st.markdown(f"### {t(content_1_2['interactive_header'])}")
     st.markdown("")
     
-    col_controls, col_diagram = st.columns([1, 2])
-    
-    with col_controls:
-        st.markdown(f"**{t({'de': 'Wähle Operation:', 'en': 'Select Operation:'})}**")
-        st.markdown("")
+    # Wrap in bordered container
+    with st.container(border=True):
+        col_controls, col_diagram = st.columns([1, 2])
         
-        # Vertical button stack
-        op_map = {
-            "A": "A",
-            "B": "B",
-            "A ∪ B": "union",
-            "A ∩ B": "sect",
-            "A \\ B": "diff",
-            "Ā": "comp"
-        }
+        with col_controls:
+            st.markdown(f"**{t({'de': 'Wähle Operation:', 'en': 'Select Operation:'})}**")
+            st.markdown("")
+            
+            # Vertical button stack
+            op_map = {
+                "A": "A",
+                "B": "B",
+                "A ∪ B": "union",
+                "A ∩ B": "sect",
+                "A \\ B": "diff",
+                "Ā": "comp"
+            }
+            
+            if "selected_op_1_2" not in st.session_state:
+                st.session_state.selected_op_1_2 = "union"
+            
+            for label, key in op_map.items():
+                if st.button(
+                    label, 
+                    key=f"op_btn_{key}",
+                    type="primary" if st.session_state.selected_op_1_2 == key else "secondary",
+                    use_container_width=True
+                ):
+                    st.session_state.selected_op_1_2 = key
+                    st.rerun()
         
-        if "selected_op_1_2" not in st.session_state:
-            st.session_state.selected_op_1_2 = "union"
-        
-        for label, key in op_map.items():
-            if st.button(
-                label, 
-                key=f"op_btn_{key}",
-                type="primary" if st.session_state.selected_op_1_2 == key else "secondary",
-                use_container_width=True
-            ):
-                st.session_state.selected_op_1_2 = key
-                st.rerun()
-    
-    with col_diagram:
-        fig = get_venn_figure(st.session_state.selected_op_1_2)
-        st.plotly_chart(fig, use_container_width=False, config={'displayModeBar': False})
+        with col_diagram:
+            fig = get_venn_figure(st.session_state.selected_op_1_2)
+            st.plotly_chart(fig, use_container_width=False, config={'displayModeBar': False})
 
     # --- THE EXAM WORKBENCH ---
     st.markdown("<br><br>", unsafe_allow_html=True)

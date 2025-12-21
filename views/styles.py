@@ -216,28 +216,30 @@ def load_design_system():
         }
 
         /* --- 10. SIDEBAR TWEAKS --- */
-        /* Hide the drag handle to prevent resizing */
-        div[data-testid="stSidebar"] + div,
-        div[class*="stSidebarResizeHandle"] {
+        /* HELL BANNED RE-SIZE HANDLE */
+        div[data-testid="stSidebar"] > div[class^="stSidebarResizeHandle"],
+        div[data-testid="stSidebar"] .stSidebarResizeHandle,
+        div[class^="stSidebarResizeHandle"] {
             display: none !important;
+            width: 0 !important;
         }
-
-        /* Fix unnecessary scrollbar in sidebar */
+        
+        /* Fix unnecessary scrollbar in sidebar - HIDE UI but allow scroll */
         section[data-testid="stSidebar"] > div { 
-            overflow-y: auto !important; /* Only scroll if needed */
+            overflow-y: auto !important; 
             overflow-x: hidden !important;
         }
         
-        /* Optional: Style the scrollbar to be subtle */
+        /* Hide the Scrollbar UI completely */
         section[data-testid="stSidebar"] > div::-webkit-scrollbar {
-            width: 6px;
+            display: none !important;
+            width: 0 !important;
+            height: 0 !important;
         }
-        section[data-testid="stSidebar"] > div::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        section[data-testid="stSidebar"] > div::-webkit-scrollbar-thumb {
-            background-color: rgba(0,0,0,0.1);
-            border-radius: 3px;
+        
+        /* Ensure specific elements in sidebar don't trigger wide width */
+        section[data-testid="stSidebar"] .stElementContainer {
+            width: 100% !important;
         }
 
     </style>

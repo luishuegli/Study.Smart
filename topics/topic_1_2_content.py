@@ -178,7 +178,8 @@ def render_subtopic_1_2(model):
                 st.markdown(f"*{t({'de': 'Beispiel', 'en': 'Example'})}:*")
                 st.markdown(content_1_2['definitions']['union']["example_de"])
                 st.markdown("")
-                st.markdown("")  # Extra padding for equal height
+                st.markdown("")
+                st.markdown("")  # Extra padding to match Complement box
         
         with col2_r1:
             with st.container(border=True):
@@ -189,7 +190,8 @@ def render_subtopic_1_2(model):
                 st.markdown(f"*{t({'de': 'Beispiel', 'en': 'Example'})}:*")
                 st.markdown(content_1_2['definitions']['sect']["example_de"])
                 st.markdown("")
-                st.markdown("")  # Extra padding for equal height
+                st.markdown("")
+                st.markdown("")  # Extra padding to match Complement box
         
         # ROW 2: Difference and Complement
         col1_r2, col2_r2 = st.columns(2)
@@ -203,7 +205,8 @@ def render_subtopic_1_2(model):
                 st.markdown(f"*{t({'de': 'Beispiel', 'en': 'Example'})}:*")
                 st.markdown(content_1_2['definitions']['diff']["example_de"])
                 st.markdown("")
-                st.markdown("")  # Extra padding for equal height
+                st.markdown("")
+                st.markdown("")  # Extra padding to match Complement box
         
         with col2_r2:
             with st.container(border=True):
@@ -214,7 +217,7 @@ def render_subtopic_1_2(model):
                 st.markdown(f"*{t({'de': 'Beispiel', 'en': 'Example'})}:*")
                 st.markdown(content_1_2['definitions']['comp']["example_de"])
                 st.markdown("")
-                st.markdown("")  # Extra padding for equal height
+                st.markdown("")  # Keep original padding
     
     st.markdown("---")
     

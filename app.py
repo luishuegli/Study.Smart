@@ -9,17 +9,21 @@ from views.styles import load_design_system
 from firebase_config import initialize_firebase_admin, get_firebase_analytics_script
 from dotenv import load_dotenv
 import os
+import utils.localization as loc
 
 # Initialize Firebase
 initialize_firebase_admin()
 
 # Configure page settings
 st.set_page_config(
-    page_title="VWL Statistik",
+    page_title="Study.Smart",
     page_icon="tao.png",
     layout="centered",
     initial_sidebar_state="expanded", # User requested sidebar back
 )
+
+# Initialize Language State
+loc.init_lang()
 
 # Inject Global Styles
 load_design_system()
@@ -36,7 +40,9 @@ if "user" not in st.session_state:
 
 # Logout Button (Sidebar)
 with st.sidebar:
-    if st.button("Abmelden", type="secondary"):
+    loc.render_language_selector()
+    
+    if st.button(loc.t({"de": "Abmelden", "en": "Sign Out"}), type="secondary"):
         del st.session_state["user"]
         st.rerun()
 

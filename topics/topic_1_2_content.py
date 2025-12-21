@@ -163,7 +163,7 @@ def render_subtopic_1_2(model):
     }
     /* Force all inner bordered containers to same min-height */
     [data-testid="stVerticalBlock"] > div[data-testid="stVerticalBlock"] > div[data-testid="element-container"] > div[data-testid="stMarkdownContainer"] + div[data-testid="stVerticalBlock"] {
-        min-height: 310px !important;
+        min-height: 340px !important;
     }
     </style>
     """, unsafe_allow_html=True)

@@ -152,7 +152,7 @@ def render_subtopic_1_2(model):
     st.markdown(f"### {t(content_1_2['theory_header'])}")
     st.markdown("")
     
-    # CSS for equal-height boxes
+    # CSS for column gaps
     st.markdown("""
     <style>
     [data-testid="stHorizontalBlock"] {
@@ -160,10 +160,6 @@ def render_subtopic_1_2(model):
     }
     [data-testid="column"] > div {
         height: 100%;
-    }
-    /* Force all inner bordered containers to same min-height */
-    [data-testid="stVerticalBlock"] > div[data-testid="stVerticalBlock"] > div[data-testid="element-container"] > div[data-testid="stMarkdownContainer"] + div[data-testid="stVerticalBlock"] {
-        min-height: 340px !important;
     }
     </style>
     """, unsafe_allow_html=True)

@@ -352,6 +352,11 @@ def render_subtopic_1_1():
                         
                         load_dotenv()
                         api_key = os.getenv("GEMINI_API_KEY")
+                        if not api_key:
+                            try:
+                                api_key = st.secrets.get("GEMINI_API_KEY")
+                            except FileNotFoundError:
+                                pass
                         if api_key:
                             genai.configure(api_key=api_key)
                             model = genai.GenerativeModel('gemini-2.0-flash')

@@ -16,9 +16,6 @@ def render_auth():
     col1, col2, col3 = st.columns([1, 2, 1])
     
     with col2:
-        # Language Selector top right of the card
-        loc.render_language_selector(container=st)
-        
         st.markdown(f"<div class='auth-header'><h1>{icon('menu_book', 32)} VWL Statistik</h1><p>{loc.t({'de': 'Bitte melden Sie sich an.', 'en': 'Please sign in.'})}</p></div>", unsafe_allow_html=True)
         
         tab1, tab2 = st.tabs([loc.t({"de": "Anmelden", "en": "Sign In"}), loc.t({"de": "Registrieren", "en": "Sign Up"})])
@@ -63,10 +60,21 @@ def render_auth():
                             else:
                                 # Update profile with username
                                 updated_user = firebase.update_user_profile(user["idToken"], display_name=new_username)
+                                
+                                # Auto-login logic
+                                # If update failed, we stick with the original user but warn
                                 if "error" in updated_user:
                                     st.warning(f"{loc.t({'de': 'Konto erstellt, aber Benutzername konnte nicht gesetzt werden', 'en': 'Account created, but username could not be set'})}: {updated_user['error']}")
                                 else:
-                                    # Merge the update info back into user object for session state if we were to auto-login
-                                    pass
-                                    
-                                st.success(loc.t({"de": "Konto erstellt! Sie können sich jetzt anmelden.", "en": "Account created! You can now sign in."}))
+                                    # If update successful, the response usually contains the updated data
+                                    # We can merge it or just trust the auth flow will reload it on next sign in
+                                    # For session state, we update the display name locally to be safe
+                                    user["displayName"] = new_username
+                                
+                                st.success(loc.t({"de": "Konto erstellt! Sie werden angemeldet...", "en": "Account created! Signing you in..."}))
+                                st.session_state["user"] = user
+                                st.rerun()
+        
+        # Language Selector bottom of the card
+        st.markdown("<br>", unsafe_allow_html=True)
+        loc.render_language_selector(container=st)

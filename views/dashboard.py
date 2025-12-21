@@ -8,8 +8,8 @@ def dashboard_view():
     with st.sidebar:
         loc.render_sidebar_footer()
     
-    st.title("Herzlich Willkommen im Kursbereich")
-    st.subheader("Meine aktiven Kurse:")
+    st.title(loc.t({"de": "Herzlich Willkommen im Kursbereich", "en": "Welcome to the Course Area"}))
+    st.subheader(loc.t({"de": "Meine aktiven Kurse:", "en": "My Active Courses:"}))
     
     cols = st.columns(3)
     
@@ -30,10 +30,10 @@ def dashboard_view():
                         margin-bottom: 20px;
                         transition: all 0.3s ease;
                     " onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 8px 30px rgba(0,0,0,0.15)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 20px rgba(0,0,0,0.1)';">
-                        <h3 style="margin-top: 0; color: var(--text-color); font-weight: 700;">{course_data['title']}</h3>
-                        <p style="color: var(--text-color); opacity: 0.8; font-size: 0.9em; line-height: 1.6;">{course_data['description']}</p>
+                        <h3 style="margin-top: 0; color: var(--text-color); font-weight: 700;">{loc.t(course_data['title'])}</h3>
+                        <p style="color: var(--text-color); opacity: 0.8; font-size: 0.9em; line-height: 1.6;">{loc.t(course_data['description'])}</p>
                         <div style="margin-top: 20px;">
-                            <span style="font-size: 0.85em; color: {course_data['color']}; font-weight: 600;">Fortschritt: {int(course_data['progress'] * 100)}%</span>
+                            <span style="font-size: 0.85em; color: {course_data['color']}; font-weight: 600;">{loc.t({'de': 'Fortschritt', 'en': 'Progress'})}: {int(course_data['progress'] * 100)}%</span>
                             <div style="background-color: rgba(128,128,128,0.2); border-radius: 9999px; height: 8px; width: 100%; margin-top: 8px; overflow: hidden;">
                                 <div style="background: linear-gradient(90deg, {course_data['color']} 0%, {course_data['color']}dd 100%); height: 8px; border-radius: 9999px; width: {course_data['progress'] * 100}%; transition: width 0.5s ease;"></div>
                             </div>

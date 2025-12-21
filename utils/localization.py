@@ -69,6 +69,8 @@ def render_language_selector(container=None):
     # without gaps, we'll use native columns with buttons and custom class styling or just native buttons.
     # Given the constraint of "simple toggle", standard Streamlit buttons in columns work best.
     
+    # Given the constraint of "simple toggle", standard Streamlit buttons in columns work best.
+    
     if container is None:
         container = st.sidebar
 
@@ -79,13 +81,13 @@ def render_language_selector(container=None):
         return "primary" if st.session_state.lang == target_lang else "secondary"
 
     with col1:
-        if st.button("DE", key="lang_de", type=get_type("de"), use_container_width=True):
-            st.session_state.lang = "de"
+        if st.button("EN", key="lang_en", type=get_type("en"), use_container_width=True):
+            st.session_state.lang = "en"
             st.rerun()
             
     with col2:
-        if st.button("EN", key="lang_en", type=get_type("en"), use_container_width=True):
-            st.session_state.lang = "en"
+        if st.button("DE", key="lang_de", type=get_type("de"), use_container_width=True):
+            st.session_state.lang = "de"
             st.rerun()
 
 def render_sidebar_footer():

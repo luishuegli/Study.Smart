@@ -10,19 +10,19 @@ COURSES = {
         "topics": [
             {
                 "id": "topic_1", 
-                "title": "1. Grundlagen der Wahrscheinlichkeit", 
+                "title": {"de": "1. Grundlagen der Wahrscheinlichkeit", "en": "1. Basics of Probability"}, 
                 "status": "open",
                 "slide_range": (7, 92),
                 "subtopics": [
-                    {"id": "1.1", "title": "1.1 Ereignisse, Ereignisraum und Ereignismenge", "slide_start": 8},
-                    {"id": "1.2", "title": "1.2 Das Rechnen mit Ereignissen", "slide_start": 19},
-                    {"id": "1.3", "title": "1.3 Der Wahrscheinlichkeitsbegriff", "slide_start": 27},
-                    {"id": "1.4", "title": "1.4 Axiomatik der Wahrscheinlichkeitstheorie", "slide_start": 41},
-                    {"id": "1.5", "title": "1.5 Wichtige Regeln der Wahrscheinlichkeitsrechnung", "slide_start": 44},
-                    {"id": "1.6", "title": "1.6 Wahrscheinlichkeitsräume", "slide_start": 50},
-                    {"id": "1.7", "title": "1.7 Bedingte Wahrscheinlichkeit und stochastische Unabhängigkeit", "slide_start": 64},
-                    {"id": "1.8", "title": "1.8 Totale Wahrscheinlichkeit", "slide_start": 77},
-                    {"id": "1.9", "title": "1.9 Das Bayes-Theorem", "slide_start": 85},
+                    {"id": "1.1", "title": {"de": "1.1 Ereignisse, Ereignisraum und Ereignismenge", "en": "1.1 Events, Sample Space and Sets"}, "slide_start": 8},
+                    {"id": "1.2", "title": {"de": "1.2 Das Rechnen mit Ereignissen", "en": "1.2 Operations with Events"}, "slide_start": 19},
+                    {"id": "1.3", "title": {"de": "1.3 Der Wahrscheinlichkeitsbegriff", "en": "1.3 The Concept of Probability"}, "slide_start": 27},
+                    {"id": "1.4", "title": {"de": "1.4 Axiomatik der Wahrscheinlichkeitstheorie", "en": "1.4 Axioms of Probability Theory"}, "slide_start": 41},
+                    {"id": "1.5", "title": {"de": "1.5 Wichtige Regeln der Wahrscheinlichkeitsrechnung", "en": "1.5 Important Rules of Probability"}, "slide_start": 44},
+                    {"id": "1.6", "title": {"de": "1.6 Wahrscheinlichkeitsräume", "en": "1.6 Probability Spaces"}, "slide_start": 50},
+                    {"id": "1.7", "title": {"de": "1.7 Bedingte Wahrscheinlichkeit und stochastische Unabhängigkeit", "en": "1.7 Conditional Probability and Independence"}, "slide_start": 64},
+                    {"id": "1.8", "title": {"de": "1.8 Totale Wahrscheinlichkeit", "en": "1.8 Total Probability"}, "slide_start": 77},
+                    {"id": "1.9", "title": {"de": "1.9 Das Bayes-Theorem", "en": "1.9 Bayes' Theorem"}, "slide_start": 85},
                 ]
             },
             {

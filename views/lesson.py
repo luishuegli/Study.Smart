@@ -4,6 +4,7 @@ import numpy as np
 import course_config as config
 import google.generativeai as genai
 import os
+import utils.localization as loc
 from data import COURSES
 from exam_data import EXAM_QUESTIONS
 from dotenv import load_dotenv
@@ -20,7 +21,7 @@ else:
 def lesson_view():
     # --- SIDEBAR NAVIGATION ---
     with st.sidebar:
-        st.markdown(f"<h2>{render_icon('book')} &nbsp; Course Navigation</h2>", unsafe_allow_html=True)
+        st.markdown(f"<h2>{render_icon('book')} &nbsp; {loc.t({'de': 'Kursnavigation', 'en': 'Course Navigation'})}</h2>", unsafe_allow_html=True)
         # Custom CSS to reduce padding and make radio buttons look like a list
         
         
@@ -28,7 +29,7 @@ def lesson_view():
         course = COURSES.get(current_course_id)
         
         if course:
-            st.subheader(course["title"])
+            st.subheader(loc.t(course["title"]))
             
             # Define callback to handle selection
             def on_subtopic_change(topic_id, sub_map, key):
@@ -52,10 +53,11 @@ def lesson_view():
                 # Logic: Expand if it contains the selected subtopic OR if it's the selected topic
                 is_expanded = (topic["id"] == current_topic_id)
                 
-                with st.expander(f"{topic['title']}", expanded=is_expanded):
+                with st.expander(loc.t(topic['title']), expanded=is_expanded):
                     subtopics = topic.get("subtopics", [])
                     if subtopics:
-                        sub_map = {s["title"]: s["id"] for s in subtopics}
+                        # Translate titles for the map
+                        sub_map = {loc.t(s["title"]): s["id"] for s in subtopics}
                         sub_titles = list(sub_map.keys())
                         
                         # Determine index. 
@@ -82,7 +84,7 @@ def lesson_view():
                         )
         
         st.markdown("---")
-        if st.button("← Back to Dashboard"):
+        if st.button(f"← {loc.t({'de': 'Zurück zum Dashboard', 'en': 'Back to Dashboard'})}"):
             st.session_state.current_page = "dashboard"
             st.rerun()
 
@@ -103,11 +105,11 @@ def render_topic_content(model, topic_id, subtopic_id):
         st.error(f"Topic not found: {topic_id}")
         return
 
-    st.title(topic["title"])
+    st.title(loc.t(topic["title"]))
     if subtopic_id:
         sub = next((s for s in topic["subtopics"] if s["id"] == subtopic_id), None)
         if sub:
-            st.caption(f"Section: {sub['title']}")
+            st.caption(f"{loc.t({'de': 'Abschnitt', 'en': 'Section'})}: {loc.t(sub['title'])}")
 
     # Check if this is Topic 1 (Grundlagen) with interactive content
     if topic_id == "topic_1":
@@ -117,8 +119,8 @@ def render_topic_content(model, topic_id, subtopic_id):
             
             # Single unified view with slides as a separate tab
             tab_learn, tab_slides = st.tabs([
-                "Learn & Apply",
-                "Lecture Slides (Reference)"
+                loc.t({"de": "Lernen & Anwenden", "en": "Learn & Apply"}),
+                loc.t({"de": "Vorlesungsfolien", "en": "Lecture Slides"})
             ])
             
             # --- TAB: UNIFIED LEARN & APPLY ---
@@ -128,10 +130,13 @@ def render_topic_content(model, topic_id, subtopic_id):
         except ImportError as e:
             st.error(f"Interactive content not available: {str(e)}")
             # Fall back to slides only
-            tab_slides = st.tabs(["Lecture Slides"])[0]
+            tab_slides = st.tabs([loc.t({"de": "Vorlesungsfolien", "en": "Lecture Slides"})])[0]
     else:
         # Other topics: Standard two-tab layout
-        tab_slides, tab_practice = st.tabs(["Lecture Slides", "Practice Questions"])
+        tab_slides, tab_practice = st.tabs([
+            loc.t({"de": "Vorlesungsfolien", "en": "Lecture Slides"}), 
+            loc.t({"de": "Übungsaufgaben", "en": "Practice Questions"})
+        ])
     
     # --- TAB 1: SLIDES ---
     with tab_slides:

@@ -70,8 +70,7 @@ def render_subtopic_1_1():
             }))
 
         with col_c1_interact:
-            # Action Zone Wrapper
-            st.markdown('<div style="background: rgba(0,0,0,0.03); border-radius: 12px; padding: 20px;">', unsafe_allow_html=True)
+            # Action Zone Wrapper removed to fix empty space layout bug
             st.markdown(f"**{t({'de': 'Experiment', 'en': 'Experiment'})}:** {t({'de': 'Würfel einmal.', 'en': 'Roll once.'})}", unsafe_allow_html=True)
             
             if 'dice_result' not in st.session_state:
@@ -93,7 +92,6 @@ def render_subtopic_1_1():
                  st.markdown(get_dice_svg(6, 60), unsafe_allow_html=True)
                  st.caption(t({"de": "Warte auf Wurf...", "en": "Waiting for roll..."}))
             st.markdown("</div>", unsafe_allow_html=True)
-            st.markdown('</div>', unsafe_allow_html=True) # Close Action Zone
     
     st.markdown("<br>", unsafe_allow_html=True)
     
@@ -127,7 +125,7 @@ def render_subtopic_1_1():
             }))
          
         with col_c2_interact:
-            st.markdown('<div style="background: rgba(0,0,0,0.03); border-radius: 12px; padding: 20px;">', unsafe_allow_html=True)
+            # Action Zone Wrapper removed
             st.markdown(f"**Mission:** {t({'de': 'Baue den Raum $S$.', 'en': 'Build space $S$.'})}", unsafe_allow_html=True)
             
             if 'selected_outcomes' not in st.session_state:
@@ -152,7 +150,6 @@ def render_subtopic_1_1():
             elif count > 0:
                 st.caption(f"{t({'de': 'Fortschritt', 'en': 'Progress'})}: {count}/6")
             st.markdown("</div>", unsafe_allow_html=True)
-            st.markdown('</div>', unsafe_allow_html=True) # Close Action Zone
 
     st.markdown("<br>", unsafe_allow_html=True)
 
@@ -182,7 +179,7 @@ def render_subtopic_1_1():
             }))
         
         with col_c3_interact:
-            st.markdown('<div style="background: rgba(0,0,0,0.03); border-radius: 12px; padding: 20px;">', unsafe_allow_html=True)
+            # Action Zone Wrapper removed
             st.markdown(f"**Mission:** {t({'de': 'Wähle Gerade Zahlen.', 'en': 'Select Even Numbers.'})}", unsafe_allow_html=True)
             
             if 'event_selection' not in st.session_state:
@@ -208,7 +205,6 @@ def render_subtopic_1_1():
                 if st.session_state.event_selection == {2, 4, 6}:
                     st.success(t({"de": "✅ Korrekt! $A = \{2, 4, 6\}$", "en": "✅ Correct! $A = \{2, 4, 6\}$"}))
             st.markdown("</div>", unsafe_allow_html=True)
-            st.markdown('</div>', unsafe_allow_html=True) # Close Action Zone
     
     st.markdown("---")
     
@@ -273,7 +269,7 @@ def render_subtopic_1_1():
     user_choice = st.radio(
         t({"de": "Wähle eine Antwort:", "en": "Choose an answer:"}),
         list(current_options.keys()),
-        format_func=lambda x: f"{x}: {current_options[x]}",
+        format_func=lambda x: f"**{x}**: {current_options[x]}",
         key=f"{q_key}_radio",
         disabled=st.session_state[f"{q_key}_submitted"],
         label_visibility="collapsed"

@@ -393,13 +393,13 @@ def render_subtopic_1_1():
 
 
 # Main render function for Topic 1
-def render_topic_1_content(subtopic_id=None):
+def render_topic_1_content(model, subtopic_id=None):
     """Render content for Topic 1 based on selected subtopic"""
     
     if subtopic_id == "1.1" or subtopic_id is None:
         render_subtopic_1_1()
     elif subtopic_id == "1.2":
         from topics.topic_1_2_content import render_subtopic_1_2
-        render_subtopic_1_2()
+        render_subtopic_1_2(model)
     else:
         st.info(f"Content for subtopic {subtopic_id} is under development.")

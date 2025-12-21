@@ -125,7 +125,7 @@ def render_topic_content(model, topic_id, subtopic_id):
             
             # --- TAB: UNIFIED LEARN & APPLY ---
             with tab_learn:
-                render_topic_1_content(subtopic_id)
+                render_topic_1_content(model, subtopic_id)
                 
         except ImportError as e:
             st.error(f"Interactive content not available: {str(e)}")

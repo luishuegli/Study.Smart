@@ -82,16 +82,23 @@ def render_subtopic_1_1():
                 st.rerun()
 
             # Result Display
-            st.markdown("<div style='text-align: center; margin-top: 10px;'>", unsafe_allow_html=True)
             if st.session_state.dice_result:
-                dice_svg_output = get_dice_svg(st.session_state.dice_result, 60)
-                st.markdown(dice_svg_output, unsafe_allow_html=True)
-                st.markdown(f"### $\omega = {st.session_state.dice_result}$")
-                st.caption(t({"de": "Ein unteilbares Ergebnis.", "en": "An indivisible outcome."}))
+                dice_svg = get_dice_svg(st.session_state.dice_result, 60)
+                caption_text = t({"de": "Ein unteilbares Ergebnis.", "en": "An indivisible outcome."})
+                
+                # Use a text-align center block which is often more robust in Streamlit markdown
+                st.markdown(f"""
+                <div style="width: 100%; text-align: center; margin-top: 16px; margin-bottom: 12px;">
+                    <div style="display: inline-block; margin: 0 auto;">
+                        {dice_svg}
+                    </div>
+                    <h3 style="margin: 8px 0 4px 0; text-align: center; font-family: 'Source Sans Pro', sans-serif;">&omega; = {st.session_state.dice_result}</h3>
+                    <div style="color: rgba(49, 51, 63, 0.6); font-size: 14px; text-align: center;">{caption_text}</div>
+                </div>
+                """, unsafe_allow_html=True)
             else:
-                 st.markdown(get_dice_svg(6, 60), unsafe_allow_html=True)
-                 st.caption(t({"de": "Warte auf Wurf...", "en": "Waiting for roll..."}))
-            st.markdown("</div>", unsafe_allow_html=True)
+                 # HIDE initial state as requested
+                 pass
     
     st.markdown("<br>", unsafe_allow_html=True)
     

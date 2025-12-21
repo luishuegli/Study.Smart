@@ -166,11 +166,16 @@ def render_subtopic_1_2(model):
         flex-direction: column;
         justify_content: space-between;
     }
-    /* Make radio button options extend to full width but keep text left-aligned */
+    /* Make radio button options extend to full width */
+    div[role="radiogroup"] {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+    }
     div[role="radiogroup"] label {
         width: 100% !important;
-        display: flex !important;
-        justify-content: flex-start !important;
+        display: block !important;
+        box-sizing: border-box !important;
     }
     div[role="radiogroup"] label > div {
         width: 100% !important;

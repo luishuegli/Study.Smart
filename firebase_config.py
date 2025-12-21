@@ -90,3 +90,26 @@ def sign_up_user(email, password):
         return {"error": error_message}
     except Exception as e:
         return {"error": str(e)}
+
+def update_user_profile(id_token, display_name=None, photo_url=None):
+    """Updates user profile (displayName, photoUrl) using Firebase REST API."""
+    request_url = f"https://identitytoolkit.googleapis.com/v1/accounts:update?key={FIREBASE_WEB_API_KEY}"
+    payload = {
+        "idToken": id_token,
+        "returnSecureToken": True
+    }
+    if display_name:
+        payload["displayName"] = display_name
+    if photo_url:
+        payload["photoUrl"] = photo_url
+        
+    try:
+        response = requests.post(request_url, json=payload)
+        response.raise_for_status()
+        return response.json()
+    except requests.exceptions.HTTPError as e:
+        error_json = e.response.json()
+        error_message = error_json.get("error", {}).get("message", "Unknown error")
+        return {"error": error_message}
+    except Exception as e:
+        return {"error": str(e)}

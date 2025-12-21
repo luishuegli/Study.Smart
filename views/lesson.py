@@ -21,6 +21,13 @@ else:
 def lesson_view():
     # --- SIDEBAR NAVIGATION ---
     with st.sidebar:
+        # 1. Back Button at Field Top
+        if st.button(f"← {loc.t({'de': 'Zurück zum Dashboard', 'en': 'Back to Dashboard'})}", use_container_width=True):
+            st.session_state.current_page = "dashboard"
+            st.rerun()
+        
+        st.markdown("---")
+        
         st.markdown(f"<h2>{render_icon('book')} &nbsp; {loc.t({'de': 'Kursnavigation', 'en': 'Course Navigation'})}</h2>", unsafe_allow_html=True)
         # Custom CSS to reduce padding and make radio buttons look like a list
         
@@ -83,10 +90,9 @@ def lesson_view():
                             args=(topic["id"], sub_map, radio_key)
                         )
         
-        st.markdown("---")
-        if st.button(f"← {loc.t({'de': 'Zurück zum Dashboard', 'en': 'Back to Dashboard'})}"):
-            st.session_state.current_page = "dashboard"
-            st.rerun()
+        
+        # Render sidebar footer (language selector + logout)
+        loc.render_sidebar_footer()
 
     # --- MAIN CONTENT ---
     topic_id = st.session_state.get("selected_topic", "topic_1") # Default to Topic 1

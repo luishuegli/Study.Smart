@@ -3,13 +3,10 @@ from data import COURSES
 
 def dashboard_view():
     # Hide sidebar on dashboard as it provides no value here
-    st.markdown("""
-    <style>
-        [data-testid="stSidebar"] {
-            display: none;
-        }
-    </style>
-    """, unsafe_allow_html=True)
+    # Sidebar with footer
+    import utils.localization as loc
+    with st.sidebar:
+        loc.render_sidebar_footer()
     
     st.title("Herzlich Willkommen im Kursbereich")
     st.subheader("Meine aktiven Kurse:")

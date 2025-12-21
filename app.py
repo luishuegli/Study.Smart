@@ -32,19 +32,11 @@ load_design_system()
 st.markdown(get_firebase_analytics_script(), unsafe_allow_html=True)
 
 # Authentication Flow
-# Authentication Flow (DISABLED FOR DEV)
+# Authentication Flow
 if "user" not in st.session_state:
-    # render_auth()
-    # st.stop()
-    st.session_state["user"] = {"email": "dev@example.com", "localId": "dev_user"}
-
-# Logout Button (Sidebar)
-with st.sidebar:
-    loc.render_language_selector()
-    
-    if st.button(loc.t({"de": "Abmelden", "en": "Sign Out"}), type="secondary"):
-        del st.session_state["user"]
-        st.rerun()
+    render_auth()
+    st.stop()
+    # st.session_state["user"] = {"email": "dev@example.com", "localId": "dev_user"}
 
 # Load Env
 load_dotenv()

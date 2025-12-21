@@ -125,23 +125,49 @@ def load_design_system():
         }
         
         /* --- 7. RADIO BUTTONS (Border Selection Logic) --- */
+        /* Force the element container wrapper to full width */
+        div.stElementContainer:has(div.stRadio) {
+            width: 100% !important;
+        }
+        
+        /* Force the entire radio widget to full width */
+        div[class*="stRadio"] {
+            width: 100% !important;
+        }
+        
         /* Hide Dot */
         div[class*="stRadio"] > div[role="radiogroup"] > label > div:first-child {
             display: none !important;
         }
         
-        /* Container Style */
+        /* Force radiogroup to full width */
+        div[class*="stRadio"] > div[role="radiogroup"] {
+            display: flex !important;
+            flex-direction: column !important;
+            width: 100% !important;
+            gap: 0 !important;
+        }
+        
+        /* Container Style - Force full width */
         div[class*="stRadio"] > div[role="radiogroup"] > label {
             background-color: var(--bg-void); /* White background for options */
             border: 1px solid var(--border-color) !important;
             border-radius: 12px !important;
-            padding: 16px !important;
+            padding: 12px 16px !important;
             margin-bottom: 8px !important;
             transition: all 0.1s ease-in-out;
             color: var(--text-primary);
             cursor: pointer;
-            display: flex;
-            width: 100%; 
+            display: block !important; /* Changed to block */
+            width: 100% !important;
+            max-width: 100% !important;
+            box-sizing: border-box !important;
+        }
+        
+        /* Force the inner div to also be full width */
+        div[class*="stRadio"] > div[role="radiogroup"] > label > div {
+            width: 100% !important;
+            max-width: 100% !important;
         }
         
         div[class*="stRadio"] > div[role="radiogroup"] > label:hover {
@@ -187,6 +213,31 @@ def load_design_system():
         a:hover {
             opacity: 1.0;
             text-decoration: underline;
+        }
+
+        /* --- 10. SIDEBAR TWEAKS --- */
+        /* Hide the drag handle to prevent resizing */
+        div[data-testid="stSidebar"] + div,
+        div[class*="stSidebarResizeHandle"] {
+            display: none !important;
+        }
+
+        /* Fix unnecessary scrollbar in sidebar */
+        section[data-testid="stSidebar"] > div { 
+            overflow-y: auto !important; /* Only scroll if needed */
+            overflow-x: hidden !important;
+        }
+        
+        /* Optional: Style the scrollbar to be subtle */
+        section[data-testid="stSidebar"] > div::-webkit-scrollbar {
+            width: 6px;
+        }
+        section[data-testid="stSidebar"] > div::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        section[data-testid="stSidebar"] > div::-webkit-scrollbar-thumb {
+            background-color: rgba(0,0,0,0.1);
+            border-radius: 3px;
         }
 
     </style>

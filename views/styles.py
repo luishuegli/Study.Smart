@@ -223,12 +223,15 @@ def load_design_system():
         }
         
         /* The resize handle is often a div with a specific class or style in Streamlit */
+        /* SAFE REVERT: These selectors were likely hiding the main content div */
+        /* 
         div[data-testid="stSidebar"] + div,
         section[data-testid="stSidebar"] + div {
             display: none !important;
             width: 0 !important;
             pointer-events: none !important;
         }
+        */
 
         /* Fix unnecessary scrollbar in sidebar - HIDE UI but allow scroll */
         /* We target the user content part specifically */

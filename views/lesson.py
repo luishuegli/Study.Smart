@@ -168,6 +168,29 @@ def render_topic_content(model, topic_id, subtopic_id):
                 if st.button("▶", key="next_slide"):
                     st.session_state.current_slide_num = min(end, st.session_state.current_slide_num + 1)
                     st.rerun()
+            
+            # --- PROGRESS TRACKING LOGIC ---
+            # If user reaches the last slide, mark topic as done and update course progress
+            if st.session_state.current_slide_num == end:
+                # 1. Track completed topics in session
+                current_course_id = st.session_state.get("selected_course", "vwl")
+                if "completed_topics" not in st.session_state:
+                    st.session_state.completed_topics = set()
+                
+                st.session_state.completed_topics.add(topic_id)
+                
+                # 2. Calculate Progress
+                total_topics = len(course["topics"])
+                completed_count = len(st.session_state.completed_topics)
+                new_progress = min(1.0, completed_count / total_topics)
+                
+                # 3. Save to Firestore
+                from firebase_config import save_progress
+                user_id = st.session_state["user"]["localId"]
+                save_progress(user_id, current_course_id, new_progress)
+                
+                # Optional: Show a subtle toast
+                # st.toast(f"Topik {loc.t(topic['title'])} abgeschlossen! Fortschritt gespeichert.", icon="💾")
 
             with col_img:
                 current = st.session_state.current_slide_num

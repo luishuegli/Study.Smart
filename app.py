@@ -33,7 +33,7 @@ st.markdown(get_firebase_analytics_script(), unsafe_allow_html=True)
 
 # Authentication Flow with Persistence
 import extra_streamlit_components as stx
-cookie_manager = stx.CookieManager()
+cookie_manager = stx.CookieManager(key="main_auth_cookies")
 
 if "user" not in st.session_state:
     # Try to recover session from cookie
@@ -63,8 +63,14 @@ if "user" not in st.session_state:
         print(f"Session recovery failed: {e}")
 
 if "user" not in st.session_state:
-    render_auth(cookie_manager=cookie_manager)
-    st.stop()
+    # DEV MODE: Bypass Auth
+    st.session_state["user"] = {
+        "localId": "dev_user_123", 
+        "email": "dev@example.com", 
+        "displayName": "Dev User"
+    }
+    # render_auth(cookie_manager=cookie_manager)
+    # st.stop()
     
 # Load Env
 load_dotenv()

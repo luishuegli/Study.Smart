@@ -3,7 +3,7 @@ import streamlit as st
 def init_lang():
     """Initialize language state if not present."""
     if 'lang' not in st.session_state:
-        st.session_state.lang = 'de'
+        st.session_state.lang = 'en'
 
 def t(content_dict):
     """

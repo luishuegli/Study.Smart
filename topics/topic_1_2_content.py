@@ -202,6 +202,7 @@ def render_subtopic_1_2(model):
                 st.markdown("")
                 st.markdown(f"*{t({'de': 'Beispiel', 'en': 'Example'})}:*")
                 st.markdown(content_1_2['definitions']['diff']["example_de"])
+                st.markdown("")  # Extra line to match Complement's two-line formula
         
         with col2_r2:
             with st.container(border=True):

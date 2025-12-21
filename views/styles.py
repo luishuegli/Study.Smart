@@ -62,9 +62,9 @@ def load_design_system():
             background-color: var(--bg-card) !important;
             border: 1px solid var(--border-color) !important;
             border-radius: 20px !important;
-            padding: 24px !important;
+            padding: 40px !important; /* Increased from 24px for more breathability */
             box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important; /* Subtle shadow */
-            gap: 16px;
+            gap: 24px;
         }
         
         div[data-testid="stVerticalBlockBorderWrapper"] > div {

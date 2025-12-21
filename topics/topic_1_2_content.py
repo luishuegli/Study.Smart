@@ -166,6 +166,11 @@ def render_subtopic_1_2(model):
         flex-direction: column;
         justify_content: space-between;
     }
+    /* Make radio button options extend to full width */
+    div[role="radiogroup"] label {
+        width: 100% !important;
+        display: block !important;
+    }
     </style>
     """, unsafe_allow_html=True)
     

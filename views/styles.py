@@ -68,13 +68,22 @@ def load_design_system():
         
         /* --- 3. THE BENTO CARD (Fixing the Flat Look) --- */
         /* Target the main vertical blocks */
-        div[data-testid="stVerticalBlock"] > div[style*="flex-direction: column;"] > div[data-testid="stVerticalBlock"] {
+        /* --- 3. THE BENTO CARD (Fixing the Flat Look) --- */
+        /* Target the main vertical blocks & Native Containers */
+        div[data-testid="stVerticalBlock"] > div[style*="flex-direction: column;"] > div[data-testid="stVerticalBlock"],
+        div[data-testid="stVerticalBlockBorderWrapper"] {
             background-color: var(--bg-card);
             border: 1px solid var(--border-color);
             border-radius: 20px;
             padding: 24px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.03);
             gap: 16px; /* Spacing between elements inside card */
+        }
+        
+        /* Specific fix for the native border wrapper to remove its default internal padding if needed, 
+           or adjust it. Streamlit adds 1rem by default. Let's force our padding. */
+        div[data-testid="stVerticalBlockBorderWrapper"] > div {
+             gap: 16px;
         }
         
         /* --- 4. BUTTONS (Visible & Tactile) --- */

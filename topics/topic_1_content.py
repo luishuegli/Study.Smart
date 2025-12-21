@@ -47,53 +47,44 @@ def render_subtopic_1_1():
     col_c1_theory, col_c1_interact = st.columns([1, 1], gap="large")
     
     with col_c1_theory:
-        st.markdown(f"""
-        <div style="padding: 24px; background: var(--bg-card); border-radius: 20px; border: 1px solid var(--border-color); height: 100%;">
-            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+        with st.container(border=True):
+            # Header
+            st.markdown(f"""<div style="display: flex; align-items: center; gap: 12px; margin-bottom: 2px;">
                 <div class="theory-icon">{render_icon("square")}</div>
-                <div class="theory-title">Was ist das?</div>
-            </div>
-            <div class="theory-content">
-                Ein <strong>Elementarereignis</strong> ist das kleinstmögliche, unteilbare Ergebnis eines Zufallsexperiments.
-                <br><br>
-                <strong>Beispiel:</strong> Beim Würfelwurf ist jede einzelne Zahl (1, 2, 3, 4, 5, 6) ein Elementarereignis.
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+                <div class="theory-title" style="margin: 0;">Was ist das?</div>
+            </div>""", unsafe_allow_html=True)
+            
+            # Content (Native Markdown for LaTeX)
+            st.markdown("""
+            Ein **Elementarereignis** ist das kleinstmögliche, unteilbare Ergebnis eines Zufallsexperiments.
+            
+            **Beispiel:** Beim Würfelwurf ist jede einzelne Zahl (1, 2, 3, 4, 5, 6) ein Elementarereignis.
+            """)
 
     with col_c1_interact:
-        st.markdown(f"""<div style="padding: 24px; background: var(--bg-card); border-radius: 20px; border: 1px solid var(--border-color); text-align: center;">""", unsafe_allow_html=True)
-        st.markdown("**Experiment:** Würfel einmal.")
-        
-        if 'dice_result' not in st.session_state:
-            st.session_state.dice_result = None
+        with st.container(border=True):
+            st.markdown("**Experiment:** Würfel einmal.", unsafe_allow_html=True)
             
-        # Interactive Button
-        if st.button("Würfel werfen", key="dice_btn_interactive", type="primary", use_container_width=True):
-            st.session_state.dice_result = np.random.randint(1, 7)
-            st.rerun()
+            if 'dice_result' not in st.session_state:
+                st.session_state.dice_result = None
+                
+            # Interactive Button
+            if st.button("Würfel werfen", key="dice_btn_interactive", type="primary", use_container_width=True):
+                st.session_state.dice_result = np.random.randint(1, 7)
+                st.rerun()
 
-        # Result Display inside the card
-        if st.session_state.dice_result:
-            dice_svg_output = get_dice_svg(st.session_state.dice_result, 60)
-            st.markdown(f"""
-            <div style='margin-top: 20px; animation: fadeIn 0.5s;'>
-                {dice_svg_output}
-                <div style='color: var(--text-primary); font-size: 20px; font-weight: 700; margin-top: 12px;'>
-                    $\omega = {st.session_state.dice_result}$
-                </div>
-                <div style='color: var(--text-secondary); font-size: 14px;'>Ein unteilbares Ergebnis.</div>
-            </div>
-            """, unsafe_allow_html=True)
-        else:
-             st.markdown(f"""
-            <div style='margin-top: 20px; opacity: 0.5;'>
-                {get_dice_svg(6, 60)}
-                <div style='margin-top: 12px;'>Warte auf Wurf...</div>
-            </div>
-            """, unsafe_allow_html=True)
-            
-        st.markdown("</div>", unsafe_allow_html=True)
+            # Result Display
+            st.markdown("<div style='text-align: center; margin-top: 10px;'>", unsafe_allow_html=True)
+            if st.session_state.dice_result:
+                dice_svg_output = get_dice_svg(st.session_state.dice_result, 60)
+                st.markdown(dice_svg_output, unsafe_allow_html=True)
+                # LaTeX Result
+                st.markdown(f"### $\omega = {st.session_state.dice_result}$")
+                st.caption("Ein unteilbares Ergebnis.")
+            else:
+                 st.markdown(get_dice_svg(6, 60), unsafe_allow_html=True)
+                 st.caption("Warte auf Wurf...")
+            st.markdown("</div>", unsafe_allow_html=True)
     
     st.markdown("<br>", unsafe_allow_html=True)
     
@@ -103,48 +94,47 @@ def render_subtopic_1_1():
     col_c2_theory, col_c2_interact = st.columns([1, 1], gap="large")
     
     with col_c2_theory:
-         st.markdown(f"""
-        <div style="padding: 24px; background: var(--bg-card); border-radius: 20px; border: 1px solid var(--border-color); height: 100%;">
-            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+         with st.container(border=True):
+            st.markdown(f"""<div style="display: flex; align-items: center; gap: 12px; margin-bottom: 2px;">
                 <div class="theory-icon">{render_icon("bar-chart")}</div>
-                <div class="theory-title">Die Gesamtheit</div>
-            </div>
-            <div class="theory-content">
-                Der <strong>Ereignisraum</strong> ist die Menge aller möglichen Elementarereignisse.
-                <br><br>
-                <strong>Beispiel:</strong> Beim Würfel ist $S = \\{{1, 2, 3, 4, 5, 6\\}}$.
-                <br><br>
-                <em>Diskret</em> (abzählbar) vs. <em>Stetig</em> (Intervalle).
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+                <div class="theory-title" style="margin: 0;">Die Gesamtheit</div>
+            </div>""", unsafe_allow_html=True)
+            
+            st.markdown("""
+            Der **Ereignisraum** ist die Menge aller möglichen Elementarereignisse.
+            
+            **Beispiel:** Beim Würfel ist $S = \{1, 2, 3, 4, 5, 6\}$.
+            
+            *Diskret* (abzählbar) vs. *Stetig* (Intervalle).
+            """)
          
     with col_c2_interact:
-        st.markdown(f"""<div style="padding: 24px; background: var(--bg-card); border-radius: 20px; border: 1px solid var(--border-color);">""", unsafe_allow_html=True)
-        st.markdown("**Mission:** Baue den Raum $S$. Klicke alle möglichen Ergebnisse an.")
-        
-        if 'selected_outcomes' not in st.session_state:
-            st.session_state.selected_outcomes = set()
-
-        # Grid of Buttons
-        grid_cols = st.columns(3)
-        for i in range(1, 7):
-            col_idx = (i-1) % 3
-            with grid_cols[col_idx]:
-                 is_selected = i in st.session_state.selected_outcomes
-                 if st.button(f"{i}", key=f"s_btn_{i}", type="primary" if is_selected else "secondary", use_container_width=True):
-                     if is_selected: st.session_state.selected_outcomes.discard(i)
-                     else: st.session_state.selected_outcomes.add(i)
-                     st.rerun()
-
-        # Feedback
-        count = len(st.session_state.selected_outcomes)
-        if count == 6:
-            st.success("✅ Vollständig! $S = \{1,..,6\}$")
-        elif count > 0:
-            st.caption(f"Fortschritt: {count}/6 ausgewählt")
+        with st.container(border=True):
+            st.markdown("**Mission:** Baue den Raum $S$. Klicke alle möglichen Ergebnisse an.")
             
-        st.markdown("</div>", unsafe_allow_html=True)
+            if 'selected_outcomes' not in st.session_state:
+                st.session_state.selected_outcomes = set()
+
+            # Grid of Buttons
+            grid_cols = st.columns(3)
+            for i in range(1, 7):
+                col_idx = (i-1) % 3
+                with grid_cols[col_idx]:
+                     is_selected = i in st.session_state.selected_outcomes
+                     if st.button(f"{i}", key=f"s_btn_{i}", type="primary" if is_selected else "secondary", use_container_width=True):
+                         if is_selected: st.session_state.selected_outcomes.discard(i)
+                         else: st.session_state.selected_outcomes.add(i)
+                         st.rerun()
+
+            # Feedback
+            count = len(st.session_state.selected_outcomes)
+            if count == 6:
+                st.success("✅ Vollständig! $S = \{1,..,6\}$")
+            elif count > 0:
+                st.caption(f"Fortschritt: {count}/6 ausgewählt")
+            
+            # Reset visual spacing
+            st.markdown("")
 
     st.markdown("<br>", unsafe_allow_html=True)
 
@@ -154,46 +144,44 @@ def render_subtopic_1_1():
     col_c3_theory, col_c3_interact = st.columns([1, 1], gap="large")
     
     with col_c3_theory:
-        st.markdown(f"""
-        <div style="padding: 24px; background: var(--bg-card); border-radius: 20px; border: 1px solid var(--border-color); height: 100%;">
-            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+        with st.container(border=True):
+            st.markdown(f"""<div style="display: flex; align-items: center; gap: 12px; margin-bottom: 2px;">
                 <div class="theory-icon">{render_icon("filter")}</div>
-                <div class="theory-title">Die Auswahl</div>
-            </div>
-            <div class="theory-content">
-                Ein <strong>Ereignis</strong> ist eine Teilmenge des Ereignisraums ($A \subseteq S$).
-                <br><br>
-                <strong>Beispiel:</strong> "Gerade Zahl" ist $A = \\{{2, 4, 6\\}}$.
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+                <div class="theory-title" style="margin: 0;">Die Auswahl</div>
+            </div>""", unsafe_allow_html=True)
+            
+            st.markdown("""
+            Ein **Ereignis** ist eine Teilmenge des Ereignisraums ($A \subseteq S$).
+            
+            **Beispiel:** "Gerade Zahl" ist $A = \{2, 4, 6\}$.
+            """)
         
     with col_c3_interact:
-        st.markdown(f"""<div style="padding: 24px; background: var(--bg-card); border-radius: 20px; border: 1px solid var(--border-color);">""", unsafe_allow_html=True)
-        st.markdown("**Mission:** Wähle das Ereignis 'Gerade Zahlen'.")
-        
-        if 'event_selection' not in st.session_state:
-            st.session_state.event_selection = set()
+        with st.container(border=True):
+            st.markdown("**Mission:** Wähle das Ereignis 'Gerade Zahlen'.")
+            
+            if 'event_selection' not in st.session_state:
+                st.session_state.event_selection = set()
 
-        # Grid of Buttons
-        grid_cols_e = st.columns(3)
-        for i in range(1, 7):
-            col_idx_e = (i-1) % 3
-            with grid_cols_e[col_idx_e]:
-                 is_in_event = i in st.session_state.event_selection
-                 if st.button(f"{i}", key=f"e_btn_{i}", type="primary" if is_in_event else "secondary", use_container_width=True):
-                     if is_in_event: st.session_state.event_selection.discard(i)
-                     else: st.session_state.event_selection.add(i)
-                     st.rerun()
-                     
-        # Dynamic Equation Display
-        if st.session_state.event_selection:
-            sorted_sel = sorted(list(st.session_state.event_selection))
-            st.markdown(f"<div style='text-align: center; font-weight: bold; margin-top: 10px;'>$A = \\{{ {', '.join(map(str, sorted_sel))} \\}}$</div>", unsafe_allow_html=True)
-            if st.session_state.event_selection == {2, 4, 6}:
-                st.success("✅ Korrekt! $A = \{2, 4, 6\}$")
-
-        st.markdown("</div>", unsafe_allow_html=True)
+            # Grid of Buttons
+            grid_cols_e = st.columns(3)
+            for i in range(1, 7):
+                col_idx_e = (i-1) % 3
+                with grid_cols_e[col_idx_e]:
+                     is_in_event = i in st.session_state.event_selection
+                     if st.button(f"{i}", key=f"e_btn_{i}", type="primary" if is_in_event else "secondary", use_container_width=True):
+                         if is_in_event: st.session_state.event_selection.discard(i)
+                         else: st.session_state.event_selection.add(i)
+                         st.rerun()
+                         
+            # Dynamic Equation Display
+            if st.session_state.event_selection:
+                sorted_sel = sorted(list(st.session_state.event_selection))
+                # Using standard markdown for equation
+                st.markdown(f"##### $A = \\{{ {', '.join(map(str, sorted_sel))} \\}}$")
+                
+                if st.session_state.event_selection == {2, 4, 6}:
+                    st.success("✅ Korrekt! $A = \{2, 4, 6\}$")
     
     st.markdown("---")
     

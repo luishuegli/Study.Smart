@@ -40,29 +40,29 @@ def render_subtopic_1_1():
     st.markdown(f'''<h3>{render_icon('book')} &nbsp; Theorie & Experimente</h3>''', unsafe_allow_html=True)
     st.markdown("*Lerne jedes Konzept und wende es sofort interaktiv an!*")
     
-    # ===== CONCEPT 1: Elementarereignis (Interactive Canvas) =====
-    st.markdown("#### 1. Elementarereignis ($\omega$)")
-    
-    # Create a 2-column layout: Left=Theory, Right=Interaction
-    col_c1_theory, col_c1_interact = st.columns([1, 1], gap="large")
-    
-    with col_c1_theory:
-        with st.container(border=True):
+    # ===== CONCEPT 1: Elementarereignis (Unified Capsule) =====
+    with st.container(border=True):
+        st.markdown("#### 1. Elementarereignis ($\omega$)")
+        
+        col_c1_theory, col_c1_interact = st.columns([1, 1], gap="large")
+        
+        with col_c1_theory:
             # Header
             st.markdown(f"""<div style="display: flex; align-items: center; gap: 12px; margin-bottom: 2px;">
                 <div class="theory-icon">{render_icon("square")}</div>
                 <div class="theory-title" style="margin: 0;">Was ist das?</div>
             </div>""", unsafe_allow_html=True)
             
-            # Content (Native Markdown for LaTeX)
+            # Content
             st.markdown("""
             Ein **Elementarereignis** ist das kleinstmögliche, unteilbare Ergebnis eines Zufallsexperiments.
             
             **Beispiel:** Beim Würfelwurf ist jede einzelne Zahl (1, 2, 3, 4, 5, 6) ein Elementarereignis.
             """)
 
-    with col_c1_interact:
-        with st.container(border=True):
+        with col_c1_interact:
+            # Action Zone Wrapper
+            st.markdown('<div style="background: rgba(0,0,0,0.03); border-radius: 12px; padding: 20px;">', unsafe_allow_html=True)
             st.markdown("**Experiment:** Würfel einmal.", unsafe_allow_html=True)
             
             if 'dice_result' not in st.session_state:
@@ -78,23 +78,23 @@ def render_subtopic_1_1():
             if st.session_state.dice_result:
                 dice_svg_output = get_dice_svg(st.session_state.dice_result, 60)
                 st.markdown(dice_svg_output, unsafe_allow_html=True)
-                # LaTeX Result
                 st.markdown(f"### $\omega = {st.session_state.dice_result}$")
                 st.caption("Ein unteilbares Ergebnis.")
             else:
                  st.markdown(get_dice_svg(6, 60), unsafe_allow_html=True)
                  st.caption("Warte auf Wurf...")
             st.markdown("</div>", unsafe_allow_html=True)
+            st.markdown('</div>', unsafe_allow_html=True) # Close Action Zone
     
     st.markdown("<br>", unsafe_allow_html=True)
     
-    # ===== CONCEPT 2: Ereignisraum (Interactive Canvas) =====
-    st.markdown("#### 2. Ereignisraum ($S$)")
-    
-    col_c2_theory, col_c2_interact = st.columns([1, 1], gap="large")
-    
-    with col_c2_theory:
-         with st.container(border=True):
+    # ===== CONCEPT 2: Ereignisraum (Unified Capsule) =====
+    with st.container(border=True):
+        st.markdown("#### 2. Ereignisraum ($S$)")
+        
+        col_c2_theory, col_c2_interact = st.columns([1, 1], gap="large")
+        
+        with col_c2_theory:
             st.markdown(f"""<div style="display: flex; align-items: center; gap: 12px; margin-bottom: 2px;">
                 <div class="theory-icon">{render_icon("bar-chart")}</div>
                 <div class="theory-title" style="margin: 0;">Die Gesamtheit</div>
@@ -108,9 +108,9 @@ def render_subtopic_1_1():
             *Diskret* (abzählbar) vs. *Stetig* (Intervalle).
             """)
          
-    with col_c2_interact:
-        with st.container(border=True):
-            st.markdown("**Mission:** Baue den Raum $S$. Klicke alle möglichen Ergebnisse an.")
+        with col_c2_interact:
+            st.markdown('<div style="background: rgba(0,0,0,0.03); border-radius: 12px; padding: 20px;">', unsafe_allow_html=True)
+            st.markdown("**Mission:** Baue den Raum $S$.", unsafe_allow_html=True)
             
             if 'selected_outcomes' not in st.session_state:
                 st.session_state.selected_outcomes = set()
@@ -127,24 +127,24 @@ def render_subtopic_1_1():
                          st.rerun()
 
             # Feedback
+            st.markdown("<div style='margin-top: 10px;'>", unsafe_allow_html=True)
             count = len(st.session_state.selected_outcomes)
             if count == 6:
                 st.success("✅ Vollständig! $S = \{1,..,6\}$")
             elif count > 0:
                 st.caption(f"Fortschritt: {count}/6 ausgewählt")
-            
-            # Reset visual spacing
-            st.markdown("")
+            st.markdown("</div>", unsafe_allow_html=True)
+            st.markdown('</div>', unsafe_allow_html=True) # Close Action Zone
 
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # ===== CONCEPT 3: Ereignis (Interactive Canvas) =====
-    st.markdown("#### 3. Ereignis ($A$)")
-    
-    col_c3_theory, col_c3_interact = st.columns([1, 1], gap="large")
-    
-    with col_c3_theory:
-        with st.container(border=True):
+    # ===== CONCEPT 3: Ereignis (Unified Capsule) =====
+    with st.container(border=True):
+        st.markdown("#### 3. Ereignis ($A$)")
+        
+        col_c3_theory, col_c3_interact = st.columns([1, 1], gap="large")
+        
+        with col_c3_theory:
             st.markdown(f"""<div style="display: flex; align-items: center; gap: 12px; margin-bottom: 2px;">
                 <div class="theory-icon">{render_icon("filter")}</div>
                 <div class="theory-title" style="margin: 0;">Die Auswahl</div>
@@ -156,9 +156,9 @@ def render_subtopic_1_1():
             **Beispiel:** "Gerade Zahl" ist $A = \{2, 4, 6\}$.
             """)
         
-    with col_c3_interact:
-        with st.container(border=True):
-            st.markdown("**Mission:** Wähle das Ereignis 'Gerade Zahlen'.")
+        with col_c3_interact:
+            st.markdown('<div style="background: rgba(0,0,0,0.03); border-radius: 12px; padding: 20px;">', unsafe_allow_html=True)
+            st.markdown("**Mission:** Wähle 'Gerade Zahlen'.", unsafe_allow_html=True)
             
             if 'event_selection' not in st.session_state:
                 st.session_state.event_selection = set()
@@ -175,13 +175,15 @@ def render_subtopic_1_1():
                          st.rerun()
                          
             # Dynamic Equation Display
+            st.markdown("<div style='margin-top: 10px;'>", unsafe_allow_html=True)
             if st.session_state.event_selection:
                 sorted_sel = sorted(list(st.session_state.event_selection))
-                # Using standard markdown for equation
                 st.markdown(f"##### $A = \\{{ {', '.join(map(str, sorted_sel))} \\}}$")
                 
                 if st.session_state.event_selection == {2, 4, 6}:
                     st.success("✅ Korrekt! $A = \{2, 4, 6\}$")
+            st.markdown("</div>", unsafe_allow_html=True)
+            st.markdown('</div>', unsafe_allow_html=True) # Close Action Zone
     
     st.markdown("---")
     

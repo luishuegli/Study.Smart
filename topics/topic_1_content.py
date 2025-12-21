@@ -1,132 +1,62 @@
 """
 Interactive Content for Topic 1: Grundlagen der Wahrscheinlichkeit
-Brilliant.org-style learning experience
+Brilliant.org-style learning experience with TechNoir theme
 """
 
 import streamlit as st
 import plotly.graph_objects as go
 import numpy as np
+from views.styles import render_icon
 
+def get_dice_svg(number, size=48):
+    """Generate SVG for dice faces 1-6 with dark mode support"""
+    dots = {
+        1: [(50, 50)],
+        2: [(30, 30), (70, 70)],
+        3: [(30, 30), (50, 50), (70, 70)],
+        4: [(30, 30), (70, 30), (30, 70), (70, 70)],
+        5: [(30, 30), (70, 30), (50, 50), (30, 70), (70, 70)],
+        6: [(30, 30), (70, 30), (30, 50), (70, 50), (30, 70), (70, 70)]
+    }
+    
+    svg = f'''<svg width="{size}" height="{size}" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="dice-svg">
+    <style>
+        .dice-svg rect {{ fill: #f8fafc; stroke: #334155; }}
+        .dice-svg circle {{ fill: #334155; }}
+    </style>
+    <rect width="100" height="100" rx="15" stroke-width="3"/>'''
+    
+    for x, y in dots[number]:
+        svg += f'<circle cx="{x}" cy="{y}" r="8"/>'
+    
+    svg += '</svg>'
+    return svg
 
 def render_subtopic_1_1():
     """1.1 Ereignisse, Ereignisraum und Ereignismenge"""
     st.header("1.1 Ereignisse, Ereignisraum und Ereignismenge")
     
-    # Inject custom CSS - uses st.markdown with unsafe_allow_html
-    st.markdown("""
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-* {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-}
-
-/* White buttons by default */
-.stButton > button {
-    background-color: white !important;
-    background: white !important;
-    color: #1f2937 !important;
-    border: 2px solid #d1d5db !important;
-    border-radius: 20px !important;
-    font-weight: 500 !important;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
-}
-
-.stButton > button:hover {
-    background-color: #f3f4f6 !important;
-    border-color: #9ca3af !important;
-}
-
-/* Purple/indigo for primary buttons (selected dice) */
-.stButton > button[data-testid="baseButton-primary"],
-.stButton > button[kind="primary"] {
-    background-color: #6366f1 !important;
-    background: #6366f1 !important;
-    color: white !important;
-    border-color: #6366f1 !important;
-}
-
-.stButton > button[data-testid="baseButton-primary"]:hover {
-    background-color: #4f46e5 !important;
-}
-
-/* Theory boxes */
-.theory-box {
-    background: white;
-    border: 2px solid #e5e7eb;
-    border-radius: 12px;
-    padding: 28px 32px;
-    margin: 24px 0;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-}
-
-.theory-box-header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 20px;
-    padding-bottom: 16px;
-    border-bottom: 2px solid #f3f4f6;
-}
-
-.theory-icon {
-    width: 56px;
-    height: 56px;
-    min-width: 56px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #ecfeff;
-    border-radius: 10px;
-}
-
-.theory-title {
-    font-size: 22px;
-    font-weight: 700;
-    color: #0f172a;
-}
-
-.theory-content {
-    color: #475569;
-    line-height: 1.7;
-    font-size: 15px;
-    margin-bottom: 20px;
-}
-
-.experiment-badge {
-    display: inline-block;
-    background: #ecfeff;
-    color: #0891b2;
-    padding: 8px 16px;
-    border-radius: 6px;
-    font-size: 13px;
-    font-weight: 600;
-    margin-bottom: 16px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-</style>
-    """, unsafe_allow_html=True)
-    
-    st.subheader("📚 Theorie & Experimente")
+    # Section header with Lucide icon
+    st.markdown(f'''<h3>{render_icon('book')} &nbsp; Theorie & Experimente</h3>''', unsafe_allow_html=True)
     st.markdown("*Lerne jedes Konzept und wende es sofort interaktiv an!*")
     
     # ===== CONCEPT 1: Elementarereignis =====
+    st.markdown('<div class="theory-box">', unsafe_allow_html=True)
+    col_icon, col_title = st.columns([0.1, 0.9])
+    with col_icon:
+        st.markdown(f'<div class="theory-icon">{render_icon("square")}</div>', unsafe_allow_html=True)
+    with col_title:
+        st.markdown('<div class="theory-title">Elementarereignis ($\omega$)</div>', unsafe_allow_html=True)
+    
     st.markdown("""
-    <div class="theory-box">
-        <div class="theory-box-header">
-            <div class="theory-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#14b8a6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><path d="M12 12h.01"/></svg>
-            </div>
-            <div class="theory-title">Elementarereignis (ω)</div>
-        </div>
-        <div class="theory-content">
-            Ein <strong>Elementarereignis</strong> ist das kleinstmögliche, unteilbare Ergebnis eines Zufallsexperiments.
-            <br><br>
-            <strong>Beispiel:</strong> Beim Würfelwurf ist jede einzelne Zahl (1, 2, 3, 4, 5, 6) ein Elementarereignis.
-        </div>
-        <div class="experiment-badge">🎲 Jetzt ausprobieren</div>
+    <div class="theory-content">
+    Ein <strong>Elementarereignis</strong> ist das kleinstmögliche, unteilbare Ergebnis eines Zufallsexperiments.
+    <br><br>
+    <strong>Beispiel:</strong> Beim Würfelwurf ist jede einzelne Zahl (1, 2, 3, 4, 5, 6) ein Elementarereignis.
     </div>
     """, unsafe_allow_html=True)
+    st.markdown(f'<div class="experiment-badge">{render_icon("beaker")} Jetzt ausprobieren</div>', unsafe_allow_html=True)
+    st.markdown('</div>', unsafe_allow_html=True)
     
     # Experiment 1
     col1, col2, col3 = st.columns([1, 2, 1])
@@ -134,20 +64,46 @@ def render_subtopic_1_1():
     with col2:
         if 'dice_result' not in st.session_state:
             st.session_state.dice_result = None
+        if 'dice_click_count' not in st.session_state:
+            st.session_state.dice_click_count = 0
         
-        if st.button("🎲 Würfel werfen", type="primary", use_container_width=True, key="dice_btn"):
+        # Create custom button with larger dice SVG
+        dice_icon_svg = get_dice_svg(5, 40)
+        
+        st.markdown(f"""
+        <div style="text-align: center; margin: 20px 0;">
+            <div id="dice-button" style="
+                display: inline-block;
+                background: var(--secondary-background-color);
+                border: 1px solid rgba(128, 128, 128, 0.2);
+                border-radius: 12px;
+                padding: 16px 32px;
+                cursor: pointer;
+                transition: all 0.2s;
+                font-size: 16px;
+                font-weight: 600;
+                color: var(--text-color);
+            " onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'; this.style.transform='scale(1.05)';" onmouseout="this.style.boxShadow='none'; this.style.transform='scale(1)';">
+                {dice_icon_svg} &nbsp; Würfel werfen
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        # Hidden button for actual functionality
+        if st.button("Roll Dice", key="dice_btn_hidden", type="secondary", use_container_width=True):
             st.session_state.dice_result = np.random.randint(1, 7)
+            st.session_state.dice_click_count += 1
             st.rerun()
         
         if st.session_state.dice_result:
-            dice_symbols = ["⚀", "⚁", "⚂", "⚃", "⚄", "⚅"]
+            dice_svg_output = get_dice_svg(st.session_state.dice_result, 80)
             st.markdown(f"""
-            <div style='background: linear-gradient(135deg, #14b8a6 0%, #0891b2 100%); 
+            <div style='background: var(--background-color); border: 1px solid rgba(128, 128, 128, 0.2);
                         padding: 32px; border-radius: 12px; text-align: center;
-                        box-shadow: 0 8px 20px rgba(20, 184, 166, 0.2); margin: 20px 0;'>
-                <div style='font-size: 80px; margin-bottom: 16px;'>{dice_symbols[st.session_state.dice_result - 1]}</div>
-                <div style='color: white; font-size: 22px; font-weight: 600;'>
-                    Elementarereignis: ω = {st.session_state.dice_result}
+                        box-shadow: 0 8px 20px rgba(0,0,0,0.1); margin: 20px 0;'>
+                <div style='margin-bottom: 16px;'>{dice_svg_output}</div>
+                <div style='color: var(--text-color); font-size: 22px; font-weight: 600;'>
+                    Elementarereignis: $\omega = {st.session_state.dice_result}$
                 </div>
             </div>
             """, unsafe_allow_html=True)
@@ -157,24 +113,24 @@ def render_subtopic_1_1():
     st.markdown("<br>", unsafe_allow_html=True)
     
     # ===== CONCEPT 2: Ereignisraum =====
+    st.markdown('<div class="theory-box">', unsafe_allow_html=True)
+    col_icon, col_title = st.columns([0.1, 0.9])
+    with col_icon:
+        st.markdown(f'<div class="theory-icon">{render_icon("bar-chart")}</div>', unsafe_allow_html=True)
+    with col_title:
+        st.markdown('<div class="theory-title">Ereignisraum ($S$ oder $\Omega$)</div>', unsafe_allow_html=True)
+    
     st.markdown("""
-    <div class="theory-box">
-        <div class="theory-box-header">
-            <div class="theory-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#14b8a6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
-            </div>
-            <div class="theory-title">Ereignisraum (S oder Ω)</div>
-        </div>
-        <div class="theory-content">
-            Der <strong>Ereignisraum</strong> ist die Menge aller möglichen Elementarereignisse eines Experiments.
-            <br><br>
-            <strong>Beispiel:</strong> Beim Würfel ist <em>S = {1, 2, 3, 4, 5, 6}</em> – alle möglichen Ergebnisse.
-            <br><br>
-            <strong>Wichtig:</strong> Der Ereignisraum kann <em>diskret</em> (abzählbar, wie beim Würfel) oder <em>stetig</em> (unendlich viele Punkte, wie Wartezeit) sein.
-        </div>
-        <div class="experiment-badge">🧪 Baue den Ereignisraum</div>
+    <div class="theory-content">
+    Der <strong>Ereignisraum</strong> ist die Menge aller möglichen Elementarereignisse eines Experiments.
+    <br><br>
+    <strong>Beispiel:</strong> Beim Würfel ist $S = \{1, 2, 3, 4, 5, 6\}$ – alle möglichen Ergebnisse.
+    <br><br>
+    <strong>Wichtig:</strong> Der Ereignisraum kann <em>diskret</em> (abzählbar, wie beim Würfel) oder <em>stetig</em> (unendlich viele Punkte, wie Wartezeit) sein.
     </div>
     """, unsafe_allow_html=True)
+    st.markdown(f'<div class="experiment-badge">{render_icon("beaker")} Baue den Ereignisraum</div>', unsafe_allow_html=True)
+    st.markdown('</div>', unsafe_allow_html=True)
     
     # Experiment 2
     if 'selected_outcomes' not in st.session_state:
@@ -183,15 +139,24 @@ def render_subtopic_1_1():
     st.markdown("**Aufgabe:** Welche Ergebnisse sind beim Würfelwurf möglich? Klicke alle an!")
     
     cols = st.columns(6)
-    dice_faces = ["⚀", "⚁", "⚂", "⚃", "⚄", "⚅"]
     
     for i, col in enumerate(cols):
         with col:
             outcome = i + 1
             is_selected = outcome in st.session_state.selected_outcomes
             
+            # Display dice SVG and number
+            dice_svg = get_dice_svg(outcome, 48)
+            st.markdown(f"""
+            <div style="text-align: center; margin-bottom: 8px;">
+                {dice_svg}
+                <div style="margin-top: 8px; font-size: 18px; font-weight: 600;">{outcome}</div>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            # Button for interaction
             if st.button(
-                f"{dice_faces[i]}\n\n{outcome}",
+                f"⠀",  # Invisible character
                 key=f"outcome_{outcome}",
                 type="primary" if is_selected else "secondary",
                 use_container_width=True
@@ -203,52 +168,62 @@ def render_subtopic_1_1():
                 st.rerun()
     
     if len(st.session_state.selected_outcomes) == 6:
-        st.success("✅ **Perfekt!** Du hast den vollständigen Ereignisraum **S = {1, 2, 3, 4, 5, 6}** gebaut!")
+        st.success("✅ **Perfekt!** Du hast den vollständigen Ereignisraum $S = \{1, 2, 3, 4, 5, 6\}$ gebaut!")
         st.info("**Erkenntnis:** Der Ereignisraum ist die **Gesamtheit** aller möglichen Ergebnisse. Hier: **diskret** und **abzählbar**.")
     elif len(st.session_state.selected_outcomes) > 0:
         st.warning(f"Du hast {len(st.session_state.selected_outcomes)} von 6 ausgewählt. Fehlt noch etwas?")
     
-    if st.button("🔄 Zurücksetzen", key="reset_space"):
+    if st.button("↻ Zurücksetzen", key="reset_space"):
         st.session_state.selected_outcomes = set()
         st.rerun()
     
     st.markdown("<br>", unsafe_allow_html=True)
     
     # ===== CONCEPT 3: Ereignis =====
+    st.markdown('<div class="theory-box">', unsafe_allow_html=True)
+    col_icon, col_title = st.columns([0.1, 0.9])
+    with col_icon:
+        st.markdown(f'<div class="theory-icon">{render_icon("filter")}</div>', unsafe_allow_html=True)
+    with col_title:
+        st.markdown('<div class="theory-title">Ereignis ($A$)</div>', unsafe_allow_html=True)
+    
     st.markdown("""
-    <div class="theory-box">
-        <div class="theory-box-header">
-            <div class="theory-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#14b8a6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
-            </div>
-            <div class="theory-title">Ereignis (A)</div>
-        </div>
-        <div class="theory-content">
-            Ein <strong>Ereignis</strong> ist eine Teilmenge des Ereignisraums – eine Auswahl von Ergebnissen, die uns interessieren.
-            <br><br>
-            <strong>Beispiel:</strong> "Gerade Zahl würfeln" ist das Ereignis <em>A = {2, 4, 6}</em> (eine Teilmenge von S).
-            <br><br>
-            <strong>Notation:</strong> A ⊆ S (A ist Teilmenge von S)
-        </div>
-        <div class="experiment-badge">🎯 Definiere ein Ereignis</div>
+    <div class="theory-content">
+    Ein <strong>Ereignis</strong> ist eine Teilmenge des Ereignisraums – eine Auswahl von Ergebnissen, die uns interessieren.
+    <br><br>
+    <strong>Beispiel:</strong> "Gerade Zahl würfeln" ist das Ereignis $A = \{2, 4, 6\}$ (eine Teilmenge von $S$).
+    <br><br>
+    <strong>Notation:</strong> $A \subseteq S$ ($A$ ist Teilmenge von $S$)
     </div>
     """, unsafe_allow_html=True)
+    st.markdown(f'<div class="experiment-badge">{render_icon("target")} Definiere ein Ereignis</div>', unsafe_allow_html=True)
+    st.markdown('</div>', unsafe_allow_html=True)
     
     # Experiment 3
-    st.markdown("**Aufgabe:** Wähle alle **geraden Zahlen** aus!")
-    
     if 'event_selection' not in st.session_state:
         st.session_state.event_selection = set()
     
-    dice_faces = ["⚀", "⚁", "⚂", "⚃", "⚄", "⚅"]
-    event_cols = st.columns(6)
-    for i, col in enumerate(event_cols):
+    st.markdown("**Aufgabe:** Wähle alle geraden Zahlen aus!")
+    
+    cols = st.columns(6)
+    
+    for i, col in enumerate(cols):
         with col:
             outcome = i + 1
             is_in_event = outcome in st.session_state.event_selection
             
+            # Display dice SVG and number
+            dice_svg = get_dice_svg(outcome, 48)
+            st.markdown(f"""
+            <div style="text-align: center; margin-bottom: 8px;">
+                {dice_svg}
+                <div style="margin-top: 8px; font-size: 18px; font-weight: 600;">{outcome}</div>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            # Button for interaction
             if st.button(
-                f"{dice_faces[i]}\n\n{outcome}",
+                f"⠀",  # Invisible character
                 key=f"event_{outcome}",
                 type="primary" if is_in_event else "secondary",
                 use_container_width=True
@@ -262,37 +237,37 @@ def render_subtopic_1_1():
     if st.session_state.event_selection:
         selected_list = sorted(list(st.session_state.event_selection))
         st.markdown(f"""
-        <div style='background: #f0f9ff; border: 2px solid #0891b2; border-radius: 12px; 
+        <div style='background: rgba(255, 255, 255, 0.05); border: 2px solid white; border-radius: 12px; 
                     padding: 24px; margin: 20px 0; text-align: center;'>
-            <div style='font-size: 16px; color: #0891b2; font-weight: 600; margin-bottom: 12px;'>
-                Dein Ereignis A:
+            <div style='font-size: 16px; color: #a5b4fc; font-weight: 600; margin-bottom: 12px;'>
+                Dein Ereignis $A$:
             </div>
-            <div style='font-size: 28px; font-weight: 700; color: #0f172a;'>
-                A = {{{", ".join(map(str, selected_list))}}}
+            <div style='font-size: 28px; font-weight: 700; color: #E0E0E0;'>
+                $A = \{{ {", ".join(map(str, selected_list))} \}}$
             </div>
         </div>
         """, unsafe_allow_html=True)
         
         if st.session_state.event_selection == {2, 4, 6}:
-            st.success("✅ **Richtig!** Das Ereignis 'Gerade Zahl' ist **A = {2, 4, 6}**.")
-            st.info("**Erkenntnis:** Ereignisse sind **Teilmengen** des Ereignisraums (A ⊆ S). Wir können beliebige Kombinationen wählen!")
+            st.success("✅ **Richtig!** Das Ereignis 'Gerade Zahl' ist $A = \{2, 4, 6\}$.")
+            st.info("**Erkenntnis:** Ereignisse sind **Teilmengen** des Ereignisraums ($A \subseteq S$). Wir können beliebige Kombinationen wählen!")
         elif st.session_state.event_selection:
             st.info("💡 Sind das wirklich **alle** geraden Zahlen?")
     
-    if st.button("🔄 Zurücksetzen", key="reset_event"):
+    if st.button("↻ Zurücksetzen", key="reset_event"):
         st.session_state.event_selection = set()
         st.rerun()
     
     st.markdown("---")
     
     # SUMMARY
-    st.subheader("📝 Zusammenfassung")
+    st.markdown(f'<h3>{render_icon("file-text")} &nbsp; Zusammenfassung</h3>', unsafe_allow_html=True)
     st.markdown("""
     Du hast gelernt:
     
-    - **Elementarereignis (ω):** Ein einzelnes, unteilbares Ergebnis
-    - **Ereignisraum (S):** Die Menge **aller** möglichen Elementarereignisse
-    - **Ereignis (A):** Eine **Teilmenge** von S (A ⊆ S)
+    - **Elementarereignis ($\omega$):** Ein einzelnes, unteilbares Ergebnis
+    - **Ereignisraum ($S$):** Die Menge **aller** möglichen Elementarereignisse
+    - **Ereignis ($A$):** Eine **Teilmenge** von $S$ ($A \subseteq S$)
     
     **Diskret vs. Stetig:**
     - **Diskret:** Abzählbare Ergebnisse (z.B. Würfel, Münze)
@@ -300,40 +275,7 @@ def render_subtopic_1_1():
     """)
     
     # 3. PRACTICE QUESTION
-    st.subheader("📝 Konzept-Check")
-    
-    # Custom CSS for boxed answer choices with selection indication
-    st.markdown("""
-    <style>
-    /* Style radio buttons as boxes */
-    div[data-testid="stRadio"] > div {
-        gap: 10px;
-    }
-    div[data-testid="stRadio"] > div > label {
-        background-color: #f8f9fa;
-        border: 2px solid #dee2e6;
-        border-radius: 8px;
-        padding: 12px 16px;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        display: block;
-        width: 100%;
-    }
-    div[data-testid="stRadio"] > div > label:hover {
-        border-color: #6366f1;
-        background-color: #f0f0ff;
-    }
-    /* Selected state - highlight with color */
-    div[data-testid="stRadio"] > div > label[data-baseweb="radio"] > div:first-child[aria-checked="true"] {
-        background-color: #6366f1 !important;
-    }
-    div[data-testid="stRadio"] > div > label:has(input:checked) {
-        border-color: #6366f1;
-        background-color: #eef2ff;
-        font-weight: 600;
-    }
-    </style>
-    """, unsafe_allow_html=True)
+    st.markdown(f'<h3>{render_icon("check-circle")} &nbsp; Konzept-Check</h3>', unsafe_allow_html=True)
     
     q_key = "q_1_1_stetig"
     if f"{q_key}_submitted" not in st.session_state:
@@ -385,7 +327,7 @@ def render_subtopic_1_1():
             
             # AI Q&A Feature (INSIDE the solution expander)
             st.markdown("---")
-            st.markdown("### 🤖 Ask AI")
+            st.markdown(f'<h3>{render_icon("bot")} &nbsp; Ask AI</h3>', unsafe_allow_html=True)
             
             ai_query = st.text_area(
                 "Deine Frage:",
@@ -393,7 +335,7 @@ def render_subtopic_1_1():
                 key=f"{q_key}_ai_input"
             )
             
-            if st.button("Ask Theory Agent", key=f"{q_key}_ai_btn"):
+            if st.button("Ask Theory Agent", key=f"{q_key}_ai_btn", type="primary"):
                 if ai_query:
                     # Import AI model
                     try:
@@ -443,7 +385,7 @@ def render_subtopic_1_1():
                 else:
                     st.warning("Bitte gib eine Frage ein.")
         
-        if st.button("Frage zurücksetzen", key=f"{q_key}_retry"):
+        if st.button("Frage zurücksetzen", key=f"{q_key}_retry", type="secondary"):
             st.session_state[f"{q_key}_submitted"] = False
             st.rerun()
 

@@ -17,7 +17,7 @@ initialize_firebase_admin()
 st.set_page_config(
     page_title="VWL Statistik",
     page_icon="tao.png",
-    layout="wide",
+    layout="centered",
     initial_sidebar_state="expanded", # User requested sidebar back
 )
 
@@ -28,9 +28,11 @@ load_css()
 st.markdown(get_firebase_analytics_script(), unsafe_allow_html=True)
 
 # Authentication Flow
+# Authentication Flow (DISABLED FOR DEV)
 if "user" not in st.session_state:
-    render_auth()
-    st.stop()
+    # render_auth()
+    # st.stop()
+    st.session_state["user"] = {"email": "dev@example.com", "localId": "dev_user"}
 
 # Logout Button (Sidebar)
 with st.sidebar:
@@ -42,6 +44,14 @@ with st.sidebar:
 load_dotenv()
 
 def main():
+    # Handle Query Params for Navigation (Clickable Cards)
+    if "course" in st.query_params:
+        course_id = st.query_params["course"]
+        st.session_state.current_page = "course_overview"
+        st.session_state.selected_course = course_id
+        st.query_params.clear()
+        st.rerun()
+
     # Initialize Session State
     if "current_page" not in st.session_state:
         st.session_state.current_page = "dashboard"

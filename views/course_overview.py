@@ -2,7 +2,16 @@ import streamlit as st
 from data import COURSES
 
 def course_overview_view():
-    course_id = st.session_state.get("selected_course", "vwl")
+    # Hide sidebar on course overview as it's empty and provides no value
+    st.markdown("""
+    <style>
+        [data-testid="stSidebar"] {
+            display: none;
+        }
+    </style>
+    """, unsafe_allow_html=True)
+    
+    course_id = st.query_params.get("course", st.session_state.get("selected_course", "vwl"))
     course = COURSES.get(course_id)
     
     if not course:
@@ -13,7 +22,7 @@ def course_overview_view():
         return
 
     # Back Navigation
-    if st.button("← Back to Dashboard"):
+    if st.button("← Back to Dashboard", type="secondary"):
         st.session_state.current_page = "dashboard"
         st.rerun()
 
@@ -43,7 +52,7 @@ def course_overview_view():
                 if topic['status'] == 'locked':
                     st.button("Locked", key=topic['id'], disabled=True)
                 else:
-                    if st.button("Start Learning", key=topic['id']):
+                    if st.button("Start Learning", key=topic['id'], type="primary"):
                         st.session_state.current_page = "lesson"
                         st.session_state.selected_topic = topic['id']
                         st.rerun()

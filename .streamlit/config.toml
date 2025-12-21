@@ -1,0 +1,11 @@
+[theme]
+base = "light"           # Default to Light Mode
+primaryColor = "#000000" # Black accents (crisp in light mode)
+
+# LIGHT MODE COLORS (Apple Style)
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F5F5F7" # Light Grey for Cards
+textColor = "#1D1D1F"
+
+[server]
+headless = true

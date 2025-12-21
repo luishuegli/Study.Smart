@@ -1,47 +1,18 @@
 
 import streamlit as st
 import firebase_config as firebase
+from views.styles import icon
 
 def render_auth():
     """Renders the authentication view (Login/Signup)."""
     
     # Custom CSS for the auth card
-    st.markdown("""
-        <style>
-        .auth-container {
-            max-width: 400px;
-            margin: 0 auto;
-            padding: 2rem;
-            border-radius: 12px;
-            background: white;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            border: 1px solid #e5e7eb;
-        }
-        .auth-header {
-            text-align: center;
-            color: #0f172a;
-            margin-bottom: 2rem;
-        }
-        .stButton button {
-            width: 100%;
-            background-color: #6366f1;
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            font-weight: 500;
-        }
-        .stButton button:hover {
-            background-color: #4f46e5;
-            color: white;
-            border-color: #4f46e5;
-        }
-        </style>
-    """, unsafe_allow_html=True)
+    
 
     col1, col2, col3 = st.columns([1, 2, 1])
     
     with col2:
-        st.markdown("<div class='auth-header'><h1>📚 VWL Statistik</h1><p>Bitte melden Sie sich an.</p></div>", unsafe_allow_html=True)
+        st.markdown(f"<div class='auth-header'><h1>{icon('menu_book', 32)} VWL Statistik</h1><p>Bitte melden Sie sich an.</p></div>", unsafe_allow_html=True)
         
         tab1, tab2 = st.tabs(["Anmelden", "Registrieren"])
         

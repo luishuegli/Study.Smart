@@ -7,6 +7,7 @@ import os
 from data import COURSES
 from exam_data import EXAM_QUESTIONS
 from dotenv import load_dotenv
+from views.styles import render_icon
 
 load_dotenv()
 api_key = os.getenv("GEMINI_API_KEY")
@@ -19,30 +20,9 @@ else:
 def lesson_view():
     # --- SIDEBAR NAVIGATION ---
     with st.sidebar:
-        st.header("📚 Course Navigation")
+        st.markdown(f"<h2>{render_icon('book')} &nbsp; Course Navigation</h2>", unsafe_allow_html=True)
         # Custom CSS to reduce padding and make radio buttons look like a list
-        st.markdown("""
-        <style>
-        .stRadio div[role="radiogroup"] > label {
-            padding-top: 4px !important;
-            padding-bottom: 4px !important;
-            border-radius: 4px;
-        }
-        .stRadio div[role="radiogroup"] > label:hover {
-            background-color: #f0f2f6;
-        }
-        /* Hide the circle radio icon (First Child) */
-        div[role="radiogroup"] label > div:first-child {
-            display: none !important;
-        }
-        /* Ensure the text container (Subsequent Children) is visible and aligned */
-        div[role="radiogroup"] label > div:nth-child(n+2) {
-            display: block !important;
-            margin-left: 0px !important;
-            padding-left: 8px !important;
-        }
-        </style>
-        """, unsafe_allow_html=True)
+        
         
         current_course_id = st.session_state.get("selected_course", "vwl")
         course = COURSES.get(current_course_id)
@@ -137,8 +117,8 @@ def render_topic_content(model, topic_id, subtopic_id):
             
             # Single unified view with slides as a separate tab
             tab_learn, tab_slides = st.tabs([
-                "📖 Learn & Apply",
-                "🎞️ Lecture Slides (Reference)"
+                "Learn & Apply",
+                "Lecture Slides (Reference)"
             ])
             
             # --- TAB: UNIFIED LEARN & APPLY ---
@@ -148,10 +128,10 @@ def render_topic_content(model, topic_id, subtopic_id):
         except ImportError as e:
             st.error(f"Interactive content not available: {str(e)}")
             # Fall back to slides only
-            tab_slides = st.tabs(["🎞️ Lecture Slides"])[0]
+            tab_slides = st.tabs(["Lecture Slides"])[0]
     else:
         # Other topics: Standard two-tab layout
-        tab_slides, tab_practice = st.tabs(["🎞️ Lecture Slides", "📝 Practice Questions"])
+        tab_slides, tab_practice = st.tabs(["Lecture Slides", "Practice Questions"])
     
     # --- TAB 1: SLIDES ---
     with tab_slides:
@@ -194,18 +174,19 @@ def render_topic_content(model, topic_id, subtopic_id):
         else:
             st.info("No slides available for this topic.")
 
-    # --- TAB 2: QUESTIONS ---
-    with tab_practice:
-        st.subheader("Exam Questions")
-        # Placeholder: Fetch questions for this topic specifically
-        # For now, show "Descriptive Stats" questions if Topic 7, else generic
-        questions = EXAM_QUESTIONS.get("descr_stats", []) if topic_id == "topic_7" else []
-        
-        if questions:
-            for q in questions:
-                render_exam_question(q, model)
-        else:
-            st.info("No practice questions added for this topic yet.")
+    # --- TAB 2: QUESTIONS (only for non-topic_1) ---
+    if topic_id != "topic_1":
+        with tab_practice:
+            st.subheader("Exam Questions")
+            # Placeholder: Fetch questions for this topic specifically
+            # For now, show "Descriptive Stats" questions if Topic 7, else generic
+            questions = EXAM_QUESTIONS.get("descr_stats", []) if topic_id == "topic_7" else []
+            
+            if questions:
+                for q in questions:
+                    render_exam_question(q, model)
+            else:
+                st.info("No practice questions added for this topic yet.")
 
 def render_exam_question(q, model):
     st.markdown(f"**{ q['source'] }**")
@@ -233,5 +214,5 @@ def render_exam_question(q, model):
                  st.session_state[f"{qid}_submitted"] = False
                  st.rerun()
         
-        with st.expander("🔓 Master Solution", expanded=True):
+        with st.expander("Master Solution", expanded=True):
             st.markdown(q['solution_text'])

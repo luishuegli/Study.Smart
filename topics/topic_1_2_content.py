@@ -148,16 +148,28 @@ def render_subtopic_1_2(model):
     st.caption(t(content_1_2["theory_intro"]))
     st.markdown("---")
     
-    # --- TOP SECTION: 4-COLUMN THEORY (WITH BORDERS) ---
+    # --- TOP SECTION: 2x2 GRID THEORY (WITH EQUAL-SIZED BOXES) ---
     st.markdown(f"### {t(content_1_2['theory_header'])}")
     st.markdown("")
     
+    # CSS for equal-height boxes
+    st.markdown("""
+    <style>
+    [data-testid="stHorizontalBlock"] {
+        gap: 1rem !important;
+    }
+    [data-testid="column"] > div {
+        height: 100%;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+    
     # Outer border container
     with st.container(border=True):
-        col1, col2, col3, col4 = st.columns(4)
+        # ROW 1: Union and Intersection
+        col1_r1, col2_r1 = st.columns(2)
         
-        # Column 1: Union
-        with col1:
+        with col1_r1:
             with st.container(border=True):
                 st.markdown(f"**{content_1_2['definitions']['union']['symbol']}**")
                 st.caption(t({"de": content_1_2['definitions']['union']["title_de"], "en": content_1_2['definitions']['union']["title_en"]}))
@@ -165,10 +177,10 @@ def render_subtopic_1_2(model):
                 st.markdown("")
                 st.markdown(f"*{t({'de': 'Beispiel', 'en': 'Example'})}:*")
                 st.markdown(content_1_2['definitions']['union']["example_de"])
-                st.markdown("")  # Padding for alignment
+                st.markdown("")
+                st.markdown("")  # Extra padding for equal height
         
-        # Column 2: Intersection
-        with col2:
+        with col2_r1:
             with st.container(border=True):
                 st.markdown(f"**{content_1_2['definitions']['sect']['symbol']}**")
                 st.caption(t({"de": content_1_2['definitions']['sect']["title_de"], "en": content_1_2['definitions']['sect']["title_en"]}))
@@ -176,10 +188,13 @@ def render_subtopic_1_2(model):
                 st.markdown("")
                 st.markdown(f"*{t({'de': 'Beispiel', 'en': 'Example'})}:*")
                 st.markdown(content_1_2['definitions']['sect']["example_de"])
-                st.markdown("")  # Padding for alignment
+                st.markdown("")
+                st.markdown("")  # Extra padding for equal height
         
-        # Column 3: Difference
-        with col3:
+        # ROW 2: Difference and Complement
+        col1_r2, col2_r2 = st.columns(2)
+        
+        with col1_r2:
             with st.container(border=True):
                 st.markdown(f"**{content_1_2['definitions']['diff']['symbol']}**")
                 st.caption(t({"de": content_1_2['definitions']['diff']["title_de"], "en": content_1_2['definitions']['diff']["title_en"]}))
@@ -187,10 +202,10 @@ def render_subtopic_1_2(model):
                 st.markdown("")
                 st.markdown(f"*{t({'de': 'Beispiel', 'en': 'Example'})}:*")
                 st.markdown(content_1_2['definitions']['diff']["example_de"])
-                st.markdown("")  # Padding for alignment
+                st.markdown("")
+                st.markdown("")  # Extra padding for equal height
         
-        # Column 4: Complement
-        with col4:
+        with col2_r2:
             with st.container(border=True):
                 st.markdown(f"**{content_1_2['definitions']['comp']['symbol']}**")
                 st.caption(t({"de": content_1_2['definitions']['comp']["title_de"], "en": content_1_2['definitions']['comp']["title_en"]}))
@@ -198,7 +213,8 @@ def render_subtopic_1_2(model):
                 st.markdown("")
                 st.markdown(f"*{t({'de': 'Beispiel', 'en': 'Example'})}:*")
                 st.markdown(content_1_2['definitions']['comp']["example_de"])
-                st.markdown("")  # Padding for alignment
+                st.markdown("")
+                st.markdown("")  # Extra padding for equal height
     
     st.markdown("---")
     

@@ -2,7 +2,7 @@ import streamlit as st
 
 def render_icon(icon_name):
     """
-    Render Lucide SVG icons for the TechNoir theme.
+    Render Lucide SVG icons for the 'Apple Pro' Light theme.
     
     Args:
         icon_name: Name of the Lucide icon to render
@@ -11,6 +11,7 @@ def render_icon(icon_name):
         HTML string with SVG icon
     """
     # Lucide Icons SVG library (stroke-width: 2px, size: 20x20)
+    # Using strict black/dark grey for icons
     icons = {
         "book": """<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>""",
         "activity": """<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>""",
@@ -30,33 +31,21 @@ def render_icon(icon_name):
     return icons.get(icon_name, "")
 
 def load_design_system():
-    """Inject the Jony Ive Design System (Technoir Clarity)."""
+    """Inject the Strict 'Apple Pro' Light Mode CSS."""
     st.markdown("""
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* --- 1. VARIABLES (The Palette) --- */
+        /* --- 1. VARIABLES (The Purge: Strict Light Mode) --- */
         :root {
-            --bg-void: #FFFFFF;
-            --bg-card: #F9F9FB; /* Very light grey for contrast against white void */
-            --text-primary: #111111;
-            --text-secondary: #666666;
+            /* Apple Pro Palette */
+            --bg-void: #FFFFFF;           /* The Pure White Void */
+            --bg-card: #F5F5F7;           /* The 'Surface' (Soft Grey) */
+            --text-primary: #1D1D1F;      /* Near Black for Text */
+            --text-secondary: #86868b;
             --border-color: rgba(0,0,0,0.08);
-            --accent-fill: #000000; /* Buttons/Progress fill */
-            --accent-text: #FFFFFF; /* Text inside buttons */
-            --highlight: rgba(0,0,0,0.05); /* Hover state */
-        }
-
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg-void: #050505 !important;
-                --bg-card: #121212 !important;
-                --text-primary: #EDEDED !important;
-                --text-secondary: #A0A0A0 !important;
-                --border-color: rgba(255,255,255,0.1) !important;
-                --accent-fill: #FFFFFF !important;
-                --accent-text: #000000 !important;
-                --highlight: rgba(255,255,255,0.1) !important;
-            }
+            --accent-fill: #000000;       /* Pure Black for Action */
+            --accent-text: #FFFFFF;       /* White Text on Black */
+            --highlight: rgba(0,0,0,0.04);
         }
 
         /* --- 2. GLOBAL RESET --- */
@@ -66,42 +55,37 @@ def load_design_system():
             color: var(--text-primary);
         }
         
-        /* --- 3. THE BENTO CARD (Fixing the Flat Look) --- */
-        /* Target the main vertical blocks */
-        /* --- 3. THE BENTO CARD (Fixing the Flat Look) --- */
+        /* --- 3. THE BENTO CARD & NATIVE CONTAINERS --- */
         /* Target the main vertical blocks & Native Containers */
         div[data-testid="stVerticalBlock"] > div[style*="flex-direction: column;"] > div[data-testid="stVerticalBlock"],
         div[data-testid="stVerticalBlockBorderWrapper"] {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 24px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-            gap: 16px; /* Spacing between elements inside card */
+            background-color: var(--bg-card) !important;
+            border: 1px solid var(--border-color) !important;
+            border-radius: 20px !important;
+            padding: 24px !important;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important; /* Subtle shadow */
+            gap: 16px;
         }
         
-        /* Specific fix for the native border wrapper to remove its default internal padding if needed, 
-           or adjust it. Streamlit adds 1rem by default. Let's force our padding. */
         div[data-testid="stVerticalBlockBorderWrapper"] > div {
              gap: 16px;
         }
         
-        /* --- 4. BUTTONS (Visible & Tactile) --- */
+        /* --- 4. BUTTONS (The 'Ghost' Fix) --- */
         .stButton > button {
             width: 100%;
-            background-color: var(--accent-fill) !important;
+            background-color: var(--accent-fill) !important; /* Pure Black */
             color: var(--accent-text) !important;
-            border: 1px solid var(--border-color) !important; /* Force visibility */
+            border: 1px solid var(--border-color) !important;
             border-radius: 50px !important;
             font-weight: 600 !important;
             padding: 10px 24px !important;
             transition: all 0.2s ease;
         }
         
-        /* FIX: Ensure text inside buttons (often <p> tags) inherits the high-contrast color 
-           overriding the generic p { color: ... } rule below */
+        /* FIX: Force internal text to White */
         .stButton > button p {
-            color: inherit !important;
+            color: var(--accent-text) !important;
         }
         
         .stButton > button:hover {
@@ -110,23 +94,29 @@ def load_design_system():
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
         
-        /* Handle specific button types if needed, but the global override above enforces consistency */
+        /* Secondary Buttons (Outlined) */
         .stButton > button[kind="secondary"] {
             background-color: transparent !important;
             color: var(--text-primary) !important;
             border: 1px solid var(--border-color) !important;
         }
          .stButton > button[kind="secondary"]:hover {
-            background-color: var(--bg-card) !important;
+            background-color: rgba(0,0,0,0.05) !important;
+        }
+        /* Fix secondary button text */
+        .stButton > button[kind="secondary"] p {
+             color: var(--text-primary) !important;
         }
 
-        /* --- 5. PROGRESS BARS (The "Invisible" Fix) --- */
-        /* Forces the inner bar to be Black (Light Mode) or White (Dark Mode) */
+        /* --- 5. PROGRESS BARS (Force Black) --- */
         .stProgress > div > div > div > div {
-            background-color: var(--accent-fill) !important;
+            background-color: var(--accent-fill) !important; /* Black Bar */
+        }
+        .stProgress > div > div > div {
+             background-color: #E5E5E5 !important; /* Light Grey Track */
         }
         
-        /* --- 6. EXPANDERS (Making them clean) --- */
+        /* --- 6. EXPANDERS --- */
         .streamlit-expanderHeader {
             background-color: transparent !important;
             color: var(--text-primary) !important;
@@ -134,16 +124,15 @@ def load_design_system():
             border-bottom: 1px solid var(--border-color);
         }
         
-            
-        /* --- 7. RADIO BUTTONS (No Red Circles - Border Selection) --- */
-        /* 1. Hide the default circle/dot */
+        /* --- 7. RADIO BUTTONS (Border Selection Logic) --- */
+        /* Hide Dot */
         div[class*="stRadio"] > div[role="radiogroup"] > label > div:first-child {
             display: none !important;
         }
         
-        /* 2. Style the container (The "Grey Border") */
+        /* Container Style */
         div[class*="stRadio"] > div[role="radiogroup"] > label {
-            background-color: var(--bg-card);
+            background-color: var(--bg-void); /* White background for options */
             border: 1px solid var(--border-color) !important;
             border-radius: 12px !important;
             padding: 16px !important;
@@ -151,25 +140,24 @@ def load_design_system():
             transition: all 0.1s ease-in-out;
             color: var(--text-primary);
             cursor: pointer;
-            display: flex; /* Ensure content aligns nicely without the dot */
+            display: flex;
             width: 100%; 
         }
         
-        /* 3. Hover State */
         div[class*="stRadio"] > div[role="radiogroup"] > label:hover {
             border-color: var(--text-primary) !important;
-            background-color: var(--bg-void);
+            background-color: #FAFAFA;
         }
         
-        /* 4. Selected State (Thicker Border) */
+        /* Selected State: Thick Black Border */
         div[class*="stRadio"] > div[role="radiogroup"] > label:has(input:checked) {
-            border: 2px solid var(--text-primary) !important;
+            border: 2px solid var(--text-primary) !important; /* Black Border */
             background-color: var(--bg-void) !important;
             font-weight: 600;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
         
-        /* Fix text alignment now that dot is gone */
+        /* Fix text alignment */
         div[class*="stRadio"] > div[role="radiogroup"] > label > div[data-testid="stMarkdownContainer"] {
             margin-left: 0 !important;
         }
@@ -178,11 +166,18 @@ def load_design_system():
         h1, h2, h3, h4, h5, h6 {
             color: var(--text-primary);
             font-weight: 700;
+            letter-spacing: -0.02em; /* Tight "Pro" tracking */
         }
-        p, div, label {
+        p, div, label, li {
             color: var(--text-primary);
         }
         
+        .theory-content {
+             font-size: 1.05rem;
+             line-height: 1.6;
+             color: #333;
+        }
+
         /* --- 9. LINKS --- */
         a {
             color: var(--text-primary);
@@ -197,10 +192,9 @@ def load_design_system():
     </style>
     """, unsafe_allow_html=True)
 
-# Legacy compatibility - keep icon() function for backward compatibility
+# Legacy compatibility
 def icon(name, size=24, color=None):
     """Legacy Material Icon function - redirects to Lucide icons."""
-    # Map Material icon names to Lucide equivalents
     icon_map = {
         'menu_book': 'book',
         'school': 'book',

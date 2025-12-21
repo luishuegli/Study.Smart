@@ -46,8 +46,8 @@ content_1_2 = {
             "title_en": "Complement",
             "def_de": "Alles im Ereignisraum S, was nicht in A liegt.",
             "def_en": "Everything in sample space S that is not in A.",
-            "example_de": "Wenn $S=\\{1,2,3\\}$ und $A=\\{1\\}$, dann $\\bar{A}=\\{2,3\\}$",
-            "example_en": "If $S=\\{1,2,3\\}$ and $A=\\{1\\}$, then $\\bar{A}=\\{2,3\\}$"
+            "example_de": "Wenn $S = \\{1, 2, 3\\}$ und $A = \\{1\\}$  \n$\\rightarrow \\bar{A} = \\{2, 3\\}$",
+            "example_en": "If $S = \\{1, 2, 3\\}$ and $A = \\{1\\}$  \n$\\rightarrow \\bar{A} = \\{2, 3\\}$"
         }
     },
     "interactive_header": {"de": "Interaktive Visualisierung", "en": "Interactive Visualization"},
@@ -163,7 +163,7 @@ def render_subtopic_1_2(model):
     }
     /* Force all inner bordered containers to same min-height */
     [data-testid="stVerticalBlock"] > div[data-testid="stVerticalBlock"] > div[data-testid="element-container"] > div[data-testid="stMarkdownContainer"] + div[data-testid="stVerticalBlock"] {
-        min-height: 280px !important;
+        min-height: 310px !important;
     }
     </style>
     """, unsafe_allow_html=True)

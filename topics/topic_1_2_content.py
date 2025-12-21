@@ -148,51 +148,57 @@ def render_subtopic_1_2(model):
     st.caption(t(content_1_2["theory_intro"]))
     st.markdown("---")
     
-    # --- TOP SECTION: 4-COLUMN THEORY ---
+    # --- TOP SECTION: 4-COLUMN THEORY (WITH BORDERS) ---
     st.markdown(f"### {t(content_1_2['theory_header'])}")
     st.markdown("")
     
-    col1, col2, col3, col4 = st.columns(4)
-    
-    # Column 1: Union
-    with col1:
-        d = content_1_2["definitions"]["union"]
-        st.markdown(f"**{d['symbol']}**")
-        st.caption(t({"de": d["title_de"], "en": d["title_en"]}))
-        st.markdown(t({"de": d["def_de"], "en": d["def_en"]}))
-        st.markdown("")
-        st.markdown(f"*{t({'de': 'Beispiel', 'en': 'Example'})}:*")
-        st.latex(d["example_de"])
-    
-    # Column 2: Intersection
-    with col2:
-        d = content_1_2["definitions"]["sect"]
-        st.markdown(f"**{d['symbol']}**")
-        st.caption(t({"de": d["title_de"], "en": d["title_en"]}))
-        st.markdown(t({"de": d["def_de"], "en": d["def_en"]}))
-        st.markdown("")
-        st.markdown(f"*{t({'de': 'Beispiel', 'en': 'Example'})}:*")
-        st.latex(d["example_de"])
-    
-    # Column 3: Difference
-    with col3:
-        d = content_1_2["definitions"]["diff"]
-        st.markdown(f"**{d['symbol']}**")
-        st.caption(t({"de": d["title_de"], "en": d["title_en"]}))
-        st.markdown(t({"de": d["def_de"], "en": d["def_en"]}))
-        st.markdown("")
-        st.markdown(f"*{t({'de': 'Beispiel', 'en': 'Example'})}:*")
-        st.latex(d["example_de"])
-    
-    # Column 4: Complement
-    with col4:
-        d = content_1_2["definitions"]["comp"]
-        st.markdown(f"**{d['symbol']}**")
-        st.caption(t({"de": d["title_de"], "en": d["title_en"]}))
-        st.markdown(t({"de": d["def_de"], "en": d["def_en"]}))
-        st.markdown("")
-        st.markdown(f"*{t({'de': 'Beispiel', 'en': 'Example'})}:*")
-        st.latex(d["example_de"])
+    # Outer border container
+    with st.container(border=True):
+        col1, col2, col3, col4 = st.columns(4)
+        
+        # Column 1: Union
+        with col1:
+            with st.container(border=True):
+                st.markdown(f"**{content_1_2['definitions']['union']['symbol']}**")
+                st.caption(t({"de": content_1_2['definitions']['union']["title_de"], "en": content_1_2['definitions']['union']["title_en"]}))
+                st.markdown(t({"de": content_1_2['definitions']['union']["def_de"], "en": content_1_2['definitions']['union']["def_en"]}))
+                st.markdown("")
+                st.markdown(f"*{t({'de': 'Beispiel', 'en': 'Example'})}:*")
+                st.markdown(content_1_2['definitions']['union']["example_de"])
+                st.markdown("")  # Padding for alignment
+        
+        # Column 2: Intersection
+        with col2:
+            with st.container(border=True):
+                st.markdown(f"**{content_1_2['definitions']['sect']['symbol']}**")
+                st.caption(t({"de": content_1_2['definitions']['sect']["title_de"], "en": content_1_2['definitions']['sect']["title_en"]}))
+                st.markdown(t({"de": content_1_2['definitions']['sect']["def_de"], "en": content_1_2['definitions']['sect']["def_en"]}))
+                st.markdown("")
+                st.markdown(f"*{t({'de': 'Beispiel', 'en': 'Example'})}:*")
+                st.markdown(content_1_2['definitions']['sect']["example_de"])
+                st.markdown("")  # Padding for alignment
+        
+        # Column 3: Difference
+        with col3:
+            with st.container(border=True):
+                st.markdown(f"**{content_1_2['definitions']['diff']['symbol']}**")
+                st.caption(t({"de": content_1_2['definitions']['diff']["title_de"], "en": content_1_2['definitions']['diff']["title_en"]}))
+                st.markdown(t({"de": content_1_2['definitions']['diff']["def_de"], "en": content_1_2['definitions']['diff']["def_en"]}))
+                st.markdown("")
+                st.markdown(f"*{t({'de': 'Beispiel', 'en': 'Example'})}:*")
+                st.markdown(content_1_2['definitions']['diff']["example_de"])
+                st.markdown("")  # Padding for alignment
+        
+        # Column 4: Complement
+        with col4:
+            with st.container(border=True):
+                st.markdown(f"**{content_1_2['definitions']['comp']['symbol']}**")
+                st.caption(t({"de": content_1_2['definitions']['comp']["title_de"], "en": content_1_2['definitions']['comp']["title_en"]}))
+                st.markdown(t({"de": content_1_2['definitions']['comp']["def_de"], "en": content_1_2['definitions']['comp']["def_en"]}))
+                st.markdown("")
+                st.markdown(f"*{t({'de': 'Beispiel', 'en': 'Example'})}:*")
+                st.markdown(content_1_2['definitions']['comp']["example_de"])
+                st.markdown("")  # Padding for alignment
     
     st.markdown("---")
     

@@ -4,10 +4,28 @@ import firebase_config as firebase
 from views.styles import icon
 import utils.localization as loc
 
-def render_auth():
-    """Renders the authentication view (Login/Signup)."""
-    
-    # Custom CSS for the auth card
+def render_auth(cookie_manager=None):
+    """
+    Renders login/signup tabs.
+    """
+    # Centered card layout
+    st.markdown("""
+    <style>
+    /* Center the auth container */
+    [data-testid="stVerticalBlock"] > [style*="flex-direction: column;"] > [data-testid="stVerticalBlock"] {
+        align-items: center;
+    }
+    .auth-container {
+        width: 100%;
+        max-width: 400px;
+        margin: auto;
+    }
+    .auth-header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    </style>
+    """, unsafe_allow_html=True)
     
 
     # Initialize language
@@ -37,6 +55,9 @@ def render_auth():
                             else:
                                 st.success(loc.t({"de": "Erfolgreich angemeldet!", "en": "Successfully signed in!"}))
                                 st.session_state["user"] = user
+                                # Set persistence cookie if manager available
+                                if cookie_manager:
+                                    cookie_manager.set("token", user["idToken"])
                                 st.rerun()
 
         with tab2:
@@ -73,6 +94,9 @@ def render_auth():
                                 
                                 st.success(loc.t({"de": "Konto erstellt! Sie werden angemeldet...", "en": "Account created! Signing you in..."}))
                                 st.session_state["user"] = user
+                                # Set persistence cookie
+                                if cookie_manager:
+                                    cookie_manager.set("token", user["idToken"])
                                 st.rerun()
         
         # Language Selector bottom of the card

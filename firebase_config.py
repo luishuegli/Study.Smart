@@ -113,3 +113,55 @@ def update_user_profile(id_token, display_name=None, photo_url=None):
         return {"error": error_message}
     except Exception as e:
         return {"error": str(e)}
+
+def save_progress(user_id, course_id, progress_data):
+    """
+    Saves user progress to Firestore (Admin SDK).
+    Structure: users/{user_id}/{course_id}/progress
+    """
+    try:
+        db = firebase_admin.firestore.client()
+        # Create/Update document in users collection
+        # We store progress in a map under the course_id
+        user_ref = db.collection("users").document(user_id)
+        user_ref.set({
+            "progress": {
+                course_id: progress_data
+            }
+        }, merge=True)
+        return True
+    except Exception as e:
+        print(f"Error saving progress: {e}")
+        return False
+
+def load_progress(user_id):
+    """
+    Loads user progress from Firestore.
+    Returns a dictionary of progress data or empty dict.
+    """
+    try:
+        db = firebase_admin.firestore.client()
+        user_ref = db.collection("users").document(user_id)
+        doc = user_ref.get()
+        if doc.exists:
+            data = doc.to_dict()
+            return data.get("progress", {})
+        return {}
+    except Exception as e:
+        print(f"Error loading progress: {e}")
+        return {}
+
+def get_account_info(id_token):
+    """
+    Get user info using ID token to verify session.
+    """
+    rest_api_url = f"https://identitytoolkit.googleapis.com/v1/accounts:lookup?key={FIREBASE_WEB_API_KEY}"
+    payload = {
+        "idToken": id_token
+    }
+    try:
+        response = requests.post(rest_api_url, json=payload)
+        return response.json()
+    except Exception as e:
+        print(f"Error verifying token: {e}")
+        return {}

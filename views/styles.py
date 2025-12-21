@@ -217,21 +217,31 @@ def load_design_system():
 
         /* --- 10. SIDEBAR TWEAKS --- */
         /* HELL BANNED RE-SIZE HANDLE */
-        div[data-testid="stSidebar"] > div[class^="stSidebarResizeHandle"],
-        div[data-testid="stSidebar"] .stSidebarResizeHandle,
-        div[class^="stSidebarResizeHandle"] {
-            display: none !important;
-            width: 0 !important;
+        /* Target the resizing div that typically appears after the section */
+        div[data-testid="stSidebar"] > div {
+             overflow: hidden !important; 
         }
         
+        /* The resize handle is often a div with a specific class or style in Streamlit */
+        div[data-testid="stSidebar"] + div,
+        section[data-testid="stSidebar"] + div {
+            display: none !important;
+            width: 0 !important;
+            pointer-events: none !important;
+        }
+
         /* Fix unnecessary scrollbar in sidebar - HIDE UI but allow scroll */
+        /* We target the user content part specifically */
+        section[data-testid="stSidebar"] [data-testid="stSidebarUserContent"] {
+             padding-bottom: 20px;
+        }
+
         section[data-testid="stSidebar"] > div { 
             overflow-y: auto !important; 
             overflow-x: hidden !important;
         }
         
-        /* Hide the Scrollbar UI completely */
-        section[data-testid="stSidebar"] > div::-webkit-scrollbar {
+        section[data-testid="stSidebar"] ::-webkit-scrollbar {
             display: none !important;
             width: 0 !important;
             height: 0 !important;

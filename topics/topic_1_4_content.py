@@ -48,23 +48,22 @@ content_1_4 = {
         "error_gap": {"de": "Lücke! Axiom 2 nicht erfüllt.", "en": "Gap! Axiom 2 not satisfied."}
     },
     "scenarios": {
-        "coin": {
-            "name": {"de": "Gezinkte Münze", "en": "Biased Coin"},
-            "given": [{"label": "Kopf (Heads)", "value": 0.35}],
-            "target_label": {"de": "Zahl (Tails)", "en": "Tails"},
-            "color": "#FF9500"  # Orange
+        "weather": {
+            "name": {"de": "Wettervorhersage", "en": "Weather Forecast"},
+            "given": [{"label": {"de": "Sonnig", "en": "Sunny"}, "value": 0.45}],
+            "targets": [
+                {"label": {"de": "Bewölkt", "en": "Cloudy"}, "color": "#AF52DE"},
+                {"label": {"de": "Regnerisch", "en": "Rainy"}, "color": "#007AFF"}
+            ]
         },
-        "market": {
-            "name": {"de": "Aktienmarkt", "en": "Stock Market"},
-            "given": [{"label": "Bull Market", "value": 0.45}, {"label": "Bear Market", "value": 0.30}],
-            "target_label": {"de": "Seitwärts (Neutral)", "en": "Neutral"},
-            "color": "#AF52DE"  # Purple
-        },
-        "quality": {
-            "name": {"de": "Qualitätskontrolle", "en": "Quality Control"},
-            "given": [{"label": "OK", "value": 0.92}, {"label": "Ausschuss", "value": 0.03}],
-            "target_label": {"de": "Nacharbeit", "en": "Rework"},
-            "color": "#FF2D55"  # Red
+        "transport": {
+            "name": {"de": "Verkehrsmittel", "en": "Transportation Mode"},
+            "given": [{"label": {"de": "Auto", "en": "Car"}, "value": 0.40}],
+            "targets": [
+                {"label": {"de": "Bus", "en": "Bus"}, "color": "#FF9500"},
+                {"label": {"de": "Fahrrad", "en": "Bike"}, "color": "#34C759"},
+                {"label": {"de": "Zu Fuß", "en": "Walking"}, "color": "#FF2D55"}
+            ]
         }
     },
     "exam": {
@@ -87,25 +86,30 @@ content_1_4 = {
     }
 }
 
-def get_scenario_donut(scenario_key, user_value):
-    """Generate the Plotly donut chart for the scenario solver."""
+def get_scenario_donut(scenario_key, user_values):
+    """Generate the Plotly donut chart for the scenario solver.
+    
+    Args:
+        scenario_key: Key of the scenario
+        user_values: List of user-set probabilities for each target
+    """
     scenario = content_1_4["scenarios"][scenario_key]
     
     # Calculate given sum
     given_sum = sum(item["value"] for item in scenario["given"])
-    total_prob = given_sum + user_value
+    user_sum = sum(user_values)
+    total_prob = given_sum + user_sum
     
-    # Build data
-    labels = [item["label"] for item in scenario["given"]]
+    # Build data - start with given slices
+    labels = [t(item["label"]) for item in scenario["given"]]
     values = [item["value"] for item in scenario["given"]]
+    colors = ["#007AFF"] * len(scenario["given"])  # Given slices in Apple Blue
     
-    # Add user slice
-    target_label = t(scenario["target_label"])
-    labels.append(target_label)
-    values.append(user_value)
-    
-    # Colors: Given slices in Apple Blue, User slice in scenario color
-    colors = ["#007AFF"] * len(scenario["given"]) + [scenario["color"]]
+    # Add user slices
+    for idx, target in enumerate(scenario["targets"]):
+        labels.append(t(target["label"]))
+        values.append(user_values[idx])
+        colors.append(target["color"])
     
     fig = go.Figure(data=[go.Pie(
         labels=labels,
@@ -205,9 +209,8 @@ def render_subtopic_1_4(model):
             
             # Scenario Selector
             scenario_options = {
-                t(content_1_4["scenarios"]["coin"]["name"]): "coin",
-                t(content_1_4["scenarios"]["market"]["name"]): "market",
-                t(content_1_4["scenarios"]["quality"]["name"]): "quality"
+                t(content_1_4["scenarios"]["weather"]["name"]): "weather",
+                t(content_1_4["scenarios"]["transport"]["name"]): "transport"
             }
             
             selected_name = st.selectbox(
@@ -224,26 +227,27 @@ def render_subtopic_1_4(model):
             st.markdown("**Given:**")
             given_sum = 0
             for item in scenario["given"]:
-                st.markdown(f"- {item['label']}: **{item['value']:.2f}**")
+                st.markdown(f"- {t(item['label'])}: **{item['value']:.2f}**")
                 given_sum += item["value"]
             
             st.markdown("")
             
-            # The Solver Slider
-            target_label = t(scenario["target_label"])
-            missing_correct = 1.0 - given_sum
-            
-            user_val = st.slider(
-                f"Set P({target_label})",
-                min_value=0.0,
-                max_value=1.0,
-                value=0.0,
-                step=0.01,
-                key=f"slider_1_4_{scenario_key}"
-            )
+            # Multiple Sliders for each target
+            user_values = []
+            for target in scenario["targets"]:
+                target_label = t(target["label"])
+                user_val = st.slider(
+                    f"Set P({target_label})",
+                    min_value=0.0,
+                    max_value=1.0,
+                    value=0.0,
+                    step=0.01,
+                    key=f"slider_1_4_{scenario_key}_{target_label}"
+                )
+                user_values.append(user_val)
             
             # Validation Feedback (moved above chart to prevent overlap)
-            total_prob = given_sum + user_val
+            total_prob = given_sum + sum(user_values)
             gap = 1.0 - total_prob
             
             if abs(total_prob - 1.0) < 0.001:
@@ -256,7 +260,7 @@ def render_subtopic_1_4(model):
             st.markdown("<br>", unsafe_allow_html=True)  # Increased spacer to prevent overlap
             
             # The Donut Chart
-            fig = get_scenario_donut(scenario_key, user_val)
+            fig = get_scenario_donut(scenario_key, user_values)
             st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False})
 
     # --- EXAM WORKBENCH ---

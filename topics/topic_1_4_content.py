@@ -244,7 +244,7 @@ def render_subtopic_1_4(model):
         opts = content_1_4["exam"]["options"]
         opt_labels = [o["text"] for o in opts]
         
-        # Radio
+        # Radio with instant feedback
         radio_key = "mcq_1_4"
         user_selection = st.radio(
             "Selection", 
@@ -254,23 +254,23 @@ def render_subtopic_1_4(model):
             label_visibility="collapsed"
         )
         
-        # Submit
-        if st.button(t({"de": "Überprüfen", "en": "Check"}), key="check_1_4", type="primary"):
-            if user_selection:
-                selected_idx = opt_labels.index(user_selection)
-                selected_id = opts[selected_idx]["id"]
-                
-                if selected_id == content_1_4["exam"]["correct_id"]:
-                    st.success(t({"de": "Korrekt!", "en": "Correct!"}))
-                    st.session_state.show_sol_1_4 = True
-                else:
-                    st.error(t({"de": "Das stimmt nicht ganz.", "en": "That is not quite right."}))
+        # Instant feedback when selection is made
+        if user_selection:
+            selected_idx = opt_labels.index(user_selection)
+            selected_id = opts[selected_idx]["id"]
+            
+            if selected_id == content_1_4["exam"]["correct_id"]:
+                st.success(t({"de": "Korrekt!", "en": "Correct!"}))
+                st.session_state.show_sol_1_4 = True
+            else:
+                st.error(t({"de": "Das stimmt nicht ganz.", "en": "That is not quite right."}))
         
-        # Solution
+        # Solution (only show if correct answer was selected)
         if st.session_state.get("show_sol_1_4", False):
             st.markdown("---")
+            # Fix: Use unsafe_allow_html=True to render HTML tags properly
             sol_text = t(content_1_4["exam"]["solution"])
-            st.info(sol_text)
+            st.markdown(sol_text, unsafe_allow_html=True)
             
             # AI Tutor
             st.markdown("---")

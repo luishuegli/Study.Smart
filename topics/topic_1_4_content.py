@@ -15,17 +15,29 @@ content_1_4 = {
         "1": {
             "title": {"de": "1. Nicht-Negativität", "en": "1. Non-Negativity"},
             "desc": {"de": "Eine Wahrscheinlichkeit ist nie kleiner als 0.", "en": "A probability is never less than 0."},
-            "latex": r"P(A) \ge 0"
+            "latex": r"P(A) \ge 0",
+            "example": {
+                "de": "**Beispiel:** Würfel werfen\n- $P(\\text{Sechs}) = \\frac{1}{6} \\approx 0.167$ ✓\n- $P(\\text{Unmöglich}) = 0$ ✓\n- $P(\\text{Fehler}) = -0.2$ ✗",
+                "en": "**Example:** Rolling a die\n- $P(\\text{Six}) = \\frac{1}{6} \\approx 0.167$ ✓\n- $P(\\text{Impossible}) = 0$ ✓\n- $P(\\text{Error}) = -0.2$ ✗"
+            }
         },
         "2": {
             "title": {"de": "2. Normierung", "en": "2. Normalization"},
             "desc": {"de": "Die Wahrscheinlichkeit des gesamten Ereignisraums ist 100%.", "en": "The probability of the entire sample space is 100%."},
-            "latex": r"P(S) = 1"
+            "latex": r"P(S) = 1",
+            "example": {
+                "de": "**Beispiel:** Münzwurf\n- $P(\\text{Kopf}) + P(\\text{Zahl}) = 1$\n- Bei fairer Münze: $0.5 + 0.5 = 1$ ✓",
+                "en": "**Example:** Coin flip\n- $P(\\text{Heads}) + P(\\text{Tails}) = 1$\n- Fair coin: $0.5 + 0.5 = 1$ ✓"
+            }
         },
         "3": {
             "title": {"de": "3. Additivität", "en": "3. Additivity"},
             "desc": {"de": "Für disjunkte (getrennte) Ereignisse addieren sich die Wahrscheinlichkeiten.", "en": "For disjoint (separate) events, probabilities add up."},
-            "latex": r"P(A \cup B) = P(A) + P(B)"
+            "latex": r"P(A \cup B) = P(A) + P(B)",
+            "example": {
+                "de": "**Beispiel:** Würfel\n- $A = \\{1,2\\}$, $B = \\{5,6\\}$ (disjunkt)\n- $P(A \\cup B) = \\frac{2}{6} + \\frac{2}{6} = \\frac{4}{6}$ ✓",
+                "en": "**Example:** Die roll\n- $A = \\{1,2\\}$, $B = \\{5,6\\}$ (disjoint)\n- $P(A \\cup B) = \\frac{2}{6} + \\frac{2}{6} = \\frac{4}{6}$ ✓"
+            }
         }
     },
     "interactive": {
@@ -104,16 +116,16 @@ def get_scenario_donut(scenario_key, user_value):
             line=dict(color='#FFFFFF', width=2)
         ),
         textinfo='label+percent',
-        # BOLD TYPOGRAPHY
+        # BOLD TYPOGRAPHY - BLACK TEXT
         textfont=dict(
             family="Arial Black, sans-serif",
             size=18,
-            color="white"
+            color="black"
         ),
         insidetextfont=dict(
             family="Arial Black, sans-serif",
             size=18,
-            color="white"
+            color="black"
         ),
         hoverinfo='label+value',
         sort=False
@@ -174,6 +186,10 @@ def render_subtopic_1_4(model):
                     st.markdown(f"**{t(axiom['title'])}**")
                     st.caption(t(axiom['desc']))
                     st.latex(axiom['latex'])
+                    
+                    # Add example
+                    st.markdown("")
+                    st.markdown(t(axiom['example']), unsafe_allow_html=True)
                 
                 # Spacing between cards
                 if axiom_num != "3":

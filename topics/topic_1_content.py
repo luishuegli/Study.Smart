@@ -361,5 +361,8 @@ def render_topic_1_content(model, subtopic_id=None):
     elif subtopic_id == "1.4":
         from topics.topic_1_4_content import render_subtopic_1_4
         render_subtopic_1_4(model)
+    elif subtopic_id == "1.5":
+        from topics.topic_1_5_content import render_subtopic_1_5
+        render_subtopic_1_5(model)
     else:
         st.info(f"Content for subtopic {subtopic_id} is under development.")

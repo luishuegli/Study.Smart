@@ -18,7 +18,7 @@ COURSES = {
                     {"id": "1.2", "title": {"de": "1.2 Das Rechnen mit Ereignissen", "en": "1.2 Operations with Events"}, "slide_start": 19},
                     {"id": "1.3", "title": {"de": "1.3 Der Wahrscheinlichkeitsbegriff", "en": "1.3 The Concept of Probability"}, "slide_start": 27},
                     {"id": "1.4", "title": {"de": "1.4 Axiomatik der Wahrscheinlichkeitstheorie", "en": "1.4 Axioms of Probability Theory"}, "slide_start": 41},
-                    {"id": "1.5", "title": {"de": "1.5 Wichtige Regeln der Wahrscheinlichkeitsrechnung", "en": "1.5 Important Rules of Probability"}, "slide_start": 44},
+                    {"id": "1.5", "title": {"de": "1.5 Wichtige Regeln (Additionssatz)", "en": "1.5 Important Rules (Addition Law)"}, "slide_start": 44},
                     {"id": "1.6", "title": {"de": "1.6 Wahrscheinlichkeitsräume", "en": "1.6 Probability Spaces"}, "slide_start": 50},
                     {"id": "1.7", "title": {"de": "1.7 Bedingte Wahrscheinlichkeit und stochastische Unabhängigkeit", "en": "1.7 Conditional Probability and Independence"}, "slide_start": 64},
                     {"id": "1.8", "title": {"de": "1.8 Totale Wahrscheinlichkeit", "en": "1.8 Total Probability"}, "slide_start": 77},

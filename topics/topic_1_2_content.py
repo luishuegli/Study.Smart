@@ -133,17 +133,28 @@ def get_venn_figure(selection):
         fig.add_trace(go.Scatter(x=xb, y=yb, mode='lines', line=dict(color='black', width=2), hoverinfo='skip'))
 
     fig.update_layout(
-        xaxis=dict(range=[-2.0, 2.0], visible=False), 
-        yaxis=dict(range=[-2.0, 2.0], visible=False), 
-        width=500, 
-        height=500, 
-        margin=dict(l=10, r=10, t=10, b=10), 
+        xaxis=dict(
+            visible=False, 
+            scaleanchor="y", 
+            scaleratio=1, 
+            range=[-2.5, 2.5],
+            fixedrange=True
+        ), 
+        yaxis=dict(
+            visible=False, 
+            range=[-1.8, 1.8],
+            fixedrange=True
+        ), 
+        width=None, # Allow Streamlit to handle width
+        height=400, 
+        margin=dict(l=0, r=0, t=0, b=0), 
         plot_bgcolor="rgba(0,0,0,0)", 
         paper_bgcolor="rgba(0,0,0,0)", 
-        showlegend=False
+        showlegend=False,
+        dragmode=False
     )
-    fig.add_annotation(x=-0.6, y=0, text="A", showarrow=False, font=dict(size=20, color="black"))
-    fig.add_annotation(x=0.6, y=0, text="B", showarrow=False, font=dict(size=20, color="black"))
+    fig.add_annotation(x=-0.6, y=0, text="A", showarrow=False, font=dict(size=18, color="black", family="Arial Black"))
+    fig.add_annotation(x=0.6, y=0, text="B", showarrow=False, font=dict(size=18, color="black", family="Arial Black"))
     return fig
 
 def render_subtopic_1_2(model):
@@ -266,9 +277,25 @@ def render_subtopic_1_2(model):
                 "Ā": "comp"
             }
             
+            # Load indices from session state or defaults
             if "selected_op_1_2" not in st.session_state:
                 st.session_state.selected_op_1_2 = "union"
             
+            # --- MISSION STATUS ---
+            from utils.progress_tracker import track_question_answer, is_question_answered
+            user = st.session_state.get("user")
+            user_id = user["localId"] if user else None
+            
+            is_mission_solved = st.session_state.selected_op_1_2 == "sect"
+            if is_mission_solved and user_id:
+                track_question_answer(user_id, "vwl", "1", "1.2", "1_2_mission", True)
+            
+            # Mission Message
+            if is_mission_solved:
+                 st.markdown("<div style='color: #34C759; font-weight: bold; font-size: 0.9rem; margin-bottom: 15px;'>MISSION ACCOMPLISHED</div>", unsafe_allow_html=True)
+            else:
+                 st.markdown("<div style='color: #AF52DE; font-weight: bold; font-size: 0.9rem; margin-bottom: 15px;'>MISSION: FIND THE INTERSECTION</div>", unsafe_allow_html=True)
+
             for label, key in op_map.items():
                 if st.button(
                     label, 

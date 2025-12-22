@@ -6,10 +6,10 @@ from utils.progress_tracker import get_user_progress
 # Define total questions per subtopic for progress calculation
 SUBTOPIC_QUESTION_COUNTS = {
     "1.1": 1,  # q_1_1_stetig
-    "1.2": 3,  # 1_2_A, 1_2_B, 1_2_C
+    "1.2": 4,  # 1_2_A, 1_2_B, 1_2_C + Venn Selection Mission
     "1.3": 1,  # 1_3_exam
     "1.4": 1,  # 1_4_exam
-    # Add more as you create content
+    "1.5": 2,  # 1_5_exam + Detective Mode Mission
 }
 
 def calculate_topic_progress(topic_data, subtopic_ids):

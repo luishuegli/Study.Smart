@@ -74,7 +74,7 @@ def reset_cake():
     st.session_state.slice_counter = 1
 
 def get_probability_donut():
-    """Generate the Plotly donut chart for probability cake."""
+    """Generate the Plotly donut chart for probability cake with bold visuals and center HUD."""
     slices = st.session_state.cake_slices_1_4
     current_sum = sum(s['value'] for s in slices)
     remaining = 1.0 - current_sum
@@ -83,37 +83,60 @@ def get_probability_donut():
     labels = [s['name'] for s in slices]
     values = [s['value'] for s in slices]
     
-    # Apple System Colors for user slices
-    colors = ['#007AFF', '#AF52DE', '#FF9500', '#34C759']
-    slice_colors = [colors[i % len(colors)] for i in range(len(slices))]
+    # Apple System Colors + distinct Grey for Empty
+    colors = ['#007AFF', '#AF52DE', '#FF9500', '#34C759', '#FF2D55']
+    color_map = {slice['name']: colors[i % len(colors)] for i, slice in enumerate(slices)}
     
     # Add dummy "Empty" slice if needed
     if remaining > 0.0001:
         labels.append('Empty (S)')
         values.append(remaining)
-        slice_colors.append('#F0F2F6')  # Grey for empty
+        color_map["Empty (S)"] = '#F0F2F6'  # Grey for empty
+    
+    # Build color list in order
+    slice_colors = [color_map[l] for l in labels]
     
     fig = go.Figure(data=[go.Pie(
         labels=labels,
         values=values,
-        hole=0.4,
-        marker=dict(colors=slice_colors),
+        hole=0.5,  # Larger hole for the HUD
+        marker=dict(
+            colors=slice_colors,
+            line=dict(color='#FFFFFF', width=2)
+        ),
         textinfo='label+percent',
-        hoverinfo='label+value'
+        # BOLD TYPOGRAPHY FIX
+        textfont=dict(
+            family="Arial Black, sans-serif",
+            size=15,
+            color="white"
+        ),
+        hoverinfo='label+value',
+        sort=False
     )])
     
+    # THE CENTER HUD (The "Intuitive" Link)
+    center_text = f"<b>Σ = {current_sum:.2f}</b>"
+    center_color = "black"
+    
+    if current_sum >= 0.999:
+        center_text = "<b>100%<br>VALID</b>"
+        center_color = "#34C759"  # Apple Green
+    
     fig.update_layout(
-        height=350,
-        margin=dict(l=10, r=10, t=30, b=10),
-        paper_bgcolor='rgba(0,0,0,0)',
-        plot_bgcolor='rgba(0,0,0,0)',
-        showlegend=False,
-        title=dict(
-            text=f"Σ = {current_sum:.2f}",
+        annotations=[dict(
+            text=center_text,
             x=0.5,
-            xanchor='center',
-            font=dict(size=14)
-        )
+            y=0.5,
+            font_size=20,
+            font_color=center_color,
+            showarrow=False
+        )],
+        showlegend=False,
+        margin=dict(l=10, r=10, t=10, b=10),
+        height=350,
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)'
     )
     
     return fig
@@ -163,10 +186,14 @@ def render_subtopic_1_4(model):
             st.markdown(f"### {render_icon('pie-chart')} {t(content_1_4['interactive']['header'])}", unsafe_allow_html=True)
             st.caption(t(content_1_4["interactive"]["desc"]))
             
-            # Input Controls
-            col_input, col_btn = st.columns([2, 1])
+            # Calculate current state
+            current_sum = sum(s['value'] for s in st.session_state.cake_slices_1_4)
+            remaining = 1.0 - current_sum
             
-            with col_input:
+            # Input Controls (3 columns: Input, Add, Auto-Fill)
+            c1, c2, c3 = st.columns([1.5, 1, 1])
+            
+            with c1:
                 new_value = st.number_input(
                     "Probability",
                     min_value=0.01,
@@ -177,10 +204,8 @@ def render_subtopic_1_4(model):
                     key="prob_input_1_4"
                 )
             
-            with col_btn:
+            with c2:
                 if st.button(t(content_1_4["interactive"]["label_add"]), key="add_slice_1_4", type="primary", use_container_width=True):
-                    current_sum = sum(s['value'] for s in st.session_state.cake_slices_1_4)
-                    
                     # VALIDATION: Check Axiom 2
                     if current_sum + new_value > 1.0001:
                         st.error(t(content_1_4["interactive"]["err_overflow"]))
@@ -188,6 +213,14 @@ def render_subtopic_1_4(model):
                         # Add slice
                         new_name = get_next_slice_name()
                         st.session_state.cake_slices_1_4.append({'name': new_name, 'value': new_value})
+                        st.rerun()
+            
+            with c3:
+                # Auto-Fill button (only show if there's remaining space)
+                if remaining > 0.0001:
+                    if st.button("Auto-Fill", key="autofill_1_4", type="secondary", use_container_width=True, help="Instantly satisfy Axiom 2"):
+                        new_name = get_next_slice_name()
+                        st.session_state.cake_slices_1_4.append({'name': 'Rest', 'value': remaining})
                         st.rerun()
             
             # The Donut Chart

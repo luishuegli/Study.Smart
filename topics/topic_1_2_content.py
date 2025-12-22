@@ -38,8 +38,8 @@ content_1_2 = {
             "def_de": "Alles was in A ist, aber nicht in B.",
             "def_en": "Everything in A, but not in B.",
             # FIX: Expanded to 2 lines to match the height of 'Complement'
-            "example_de": "Sei $A=\\{1,2\\}, B=\\{2,3\\}$  \n$\\rightarrow A \\setminus B = \\{1\\}$",
-            "example_en": "Let $A=\\{1,2\\}, B=\\{2,3\\}$  \n$\\rightarrow A \\setminus B = \\{1\\}$"
+            "example_de": "$\\text{Sei } A=\\{1,2\\}, B=\\{2,3\\}$  \n$\\rightarrow A \\setminus B = \\{1\\}$",
+            "example_en": "$\\text{Let } A=\\{1,2\\}, B=\\{2,3\\}$  \n$\\rightarrow A \\setminus B = \\{1\\}$"
         },
         "comp": {
             "symbol": "Ā",
@@ -47,8 +47,8 @@ content_1_2 = {
             "title_en": "Complement",
             "def_de": "Alles im Ereignisraum S, was nicht in A liegt.",
             "def_en": "Everything in sample space S that is not in A.",
-            "example_de": "Wenn $S = \\{1, 2, 3\\}$ und $A = \\{1\\}$  \n$\\rightarrow \\bar{A} = \\{2, 3\\}$",
-            "example_en": "If $S = \\{1, 2, 3\\}$ and $A = \\{1\\}$  \n$\\rightarrow \\bar{A} = \\{2, 3\\}$"
+            "example_de": "$\\text{Wenn } S = \\{1, 2, 3\\} \\text{ und } A = \\{1\\}$  \n$\\rightarrow \\bar{A} = \\{2, 3\\}$",
+            "example_en": "$\\text{If } S = \\{1, 2, 3\\} \\text{ and } A = \\{1\\}$  \n$\\rightarrow \\bar{A} = \\{2, 3\\}$"
         }
     },
     "interactive_header": {"de": "Interaktive Visualisierung", "en": "Interactive Visualization"},

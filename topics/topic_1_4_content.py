@@ -17,8 +17,8 @@ content_1_4 = {
             "desc": {"de": "Eine Wahrscheinlichkeit ist nie kleiner als 0.", "en": "A probability is never less than 0."},
             "latex": r"P(A) \ge 0",
             "example": {
-                "de": "**Beispiel:** Würfel werfen\n- $P(\\text{Sechs}) = \\frac{1}{6} \\approx 0.167$ ✓\n- $P(\\text{Unmöglich}) = 0$ ✓\n- $P(\\text{Fehler}) = -0.2$ ✗",
-                "en": "**Example:** Rolling a die\n- $P(\\text{Six}) = \\frac{1}{6} \\approx 0.167$ ✓\n- $P(\\text{Impossible}) = 0$ ✓\n- $P(\\text{Error}) = -0.2$ ✗"
+                "de": "$\\textbf{Beispiel: Würfel werfen}$\n- $P(\\text{Sechs}) = \\frac{1}{6} \\approx 0.167$ ✓\n- $P(\\text{Unmöglich}) = 0$ ✓\n- $P(\\text{Fehler}) = -0.2$ ✗",
+                "en": "$\\textbf{Example: Rolling a die}$\n- $P(\\text{Six}) = \\frac{1}{6} \\approx 0.167$ ✓\n- $P(\\text{Impossible}) = 0$ ✓\n- $P(\\text{Error}) = -0.2$ ✗"
             }
         },
         "2": {
@@ -26,8 +26,8 @@ content_1_4 = {
             "desc": {"de": "Die Wahrscheinlichkeit des gesamten Ereignisraums ist 100%.", "en": "The probability of the entire sample space is 100%."},
             "latex": r"P(S) = 1",
             "example": {
-                "de": "**Beispiel:** Münzwurf\n- $P(\\text{Kopf}) + P(\\text{Zahl}) = 1$\n- Bei fairer Münze: $0.5 + 0.5 = 1$ ✓",
-                "en": "**Example:** Coin flip\n- $P(\\text{Heads}) + P(\\text{Tails}) = 1$\n- Fair coin: $0.5 + 0.5 = 1$ ✓"
+                "de": "$\\textbf{Beispiel: Münzwurf}$\n- $P(\\text{Kopf}) + P(\\text{Zahl}) = 1$\n- $\\text{Bei fairer Münze: } 0.5 + 0.5 = 1$ ✓",
+                "en": "$\\textbf{Example: Coin flip}$\n- $P(\\text{Heads}) + P(\\text{Tails}) = 1$\n- $\\text{Fair coin: } 0.5 + 0.5 = 1$ ✓"
             }
         },
         "3": {
@@ -35,8 +35,8 @@ content_1_4 = {
             "desc": {"de": "Für disjunkte (getrennte) Ereignisse addieren sich die Wahrscheinlichkeiten.", "en": "For disjoint (separate) events, probabilities add up."},
             "latex": r"P(A \cup B) = P(A) + P(B)",
             "example": {
-                "de": "**Beispiel:** Würfel\n- $A = \\{1,2\\}$, $B = \\{5,6\\}$ (disjunkt)\n- $P(A \\cup B) = \\frac{2}{6} + \\frac{2}{6} = \\frac{4}{6}$ ✓",
-                "en": "**Example:** Die roll\n- $A = \\{1,2\\}$, $B = \\{5,6\\}$ (disjoint)\n- $P(A \\cup B) = \\frac{2}{6} + \\frac{2}{6} = \\frac{4}{6}$ ✓"
+                "de": "$\\textbf{Beispiel: Würfel}$\n- $A = \\{1,2\\}$, $B = \\{5,6\\}$ $\\text{(disjunkt)}$\n- $P(A \\cup B) = \\frac{2}{6} + \\frac{2}{6} = \\frac{4}{6}$ ✓",
+                "en": "$\\textbf{Example: Die roll}$\n- $A = \\{1,2\\}$, $B = \\{5,6\\}$ $\\text{(disjoint)}$\n- $P(A \\cup B) = \\frac{2}{6} + \\frac{2}{6} = \\frac{4}{6}$ ✓"
             }
         }
     },
@@ -116,15 +116,15 @@ def get_scenario_donut(scenario_key, user_value):
             line=dict(color='#FFFFFF', width=2)
         ),
         textinfo='label+percent',
-        # BOLD TYPOGRAPHY - BLACK TEXT
+        # BOLD TYPOGRAPHY - BLACK TEXT (smaller size)
         textfont=dict(
             family="Arial Black, sans-serif",
-            size=18,
+            size=14,
             color="black"
         ),
         insidetextfont=dict(
             family="Arial Black, sans-serif",
-            size=18,
+            size=14,
             color="black"
         ),
         hoverinfo='label+value',
@@ -246,7 +246,7 @@ def render_subtopic_1_4(model):
                 key=f"slider_1_4_{scenario_key}"
             )
             
-            # Validation Feedback
+            # Validation Feedback (moved above chart to prevent overlap)
             total_prob = given_sum + user_val
             gap = 1.0 - total_prob
             
@@ -256,6 +256,8 @@ def render_subtopic_1_4(model):
                 st.error(t(content_1_4["interactive"]["error_overflow"]))
             elif total_prob < 1.0:
                 st.warning(f"{t(content_1_4['interactive']['error_gap'])} ({gap:.2%} missing)")
+            
+            st.markdown("")  # Small spacer
             
             # The Donut Chart
             fig = get_scenario_donut(scenario_key, user_val)

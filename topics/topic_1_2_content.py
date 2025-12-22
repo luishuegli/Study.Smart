@@ -320,6 +320,12 @@ def render_subtopic_1_2(model):
                     st.markdown("---")
                     st.caption(t({"de": "AI Tutor:", "en": "AI Tutor:"}))
                     
+                    # AI Response Area (appears above input)
+                    if f"ai_response_1_2_{event_key}" in st.session_state:
+                        st.markdown(f"**AI:** {st.session_state[f'ai_response_1_2_{event_key}']}")
+                        st.markdown("---")
+                    
+                    # Input and Button (full width layout)
                     c_ai_1, c_ai_2 = st.columns([4, 1])
                     with c_ai_1:
                         ai_q = st.text_input(
@@ -335,7 +341,8 @@ def render_subtopic_1_2(model):
                                     prompt = f"Explain this statistics solution: {e_data['sol_en']} \nUser Question: {ai_q}"
                                     try:
                                         response = model.generate_content(prompt)
-                                        st.markdown(f"**AI:** {response.text}")
+                                        st.session_state[f"ai_response_1_2_{event_key}"] = response.text
+                                        st.rerun()
                                     except Exception as e:
                                         st.error(f"Error: {e}")
                             elif not model:

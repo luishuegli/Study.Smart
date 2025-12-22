@@ -297,6 +297,12 @@ def render_subtopic_1_3(model):
             st.markdown("---")
             st.caption("AI Tutor")
             
+            # AI Response Area (appears above input)
+            if "ai_response_1_3" in st.session_state:
+                st.markdown(f"**AI:** {st.session_state['ai_response_1_3']}")
+                st.markdown("---")
+            
+            # Input and Button
             c_ai_1, c_ai_2 = st.columns([4, 1])
             with c_ai_1:
                 ai_q = st.text_input(
@@ -312,7 +318,8 @@ def render_subtopic_1_3(model):
                             prompt = f"Context: Probability definitions (Laplace vs Frequentist). User Question: {ai_q}"
                             try:
                                 response = model.generate_content(prompt)
-                                st.markdown(f"**AI:** {response.text}")
+                                st.session_state["ai_response_1_3"] = response.text
+                                st.rerun()
                             except Exception as e:
                                 st.error(f"Error: {e}")
                     elif not model:

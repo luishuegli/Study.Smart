@@ -188,8 +188,8 @@ def render_subtopic_1_3(model):
         st.markdown("<br>", unsafe_allow_html=True)
 
         # 2. Columns (Left: Cards, Right: Sim)
-        # Increased right column weight (1.4) to help buttons fit
-        col_theory, col_vis = st.columns([1, 1.4], gap="large")
+        # Increased right column weight to 1.5 to give buttons more room
+        col_theory, col_vis = st.columns([1, 1.5], gap="large")
         
         # --- LEFT: THEORY CARDS ---
         with col_theory:
@@ -216,14 +216,19 @@ def render_subtopic_1_3(model):
 
         # --- RIGHT: VISUALIZATION ---
         with col_vis:
-            # Move Experiment Up (Removed spacer)
+            # Force alignment with CSS hack to remove top margin of the header so it aligns with the card border
+            st.markdown("""
+                <style>
+                h3 { margin-top: 0 !important; padding-top: 0 !important; }
+                </style>
+            """, unsafe_allow_html=True)
+            
             st.markdown(f"### {t(content_1_3['vis_header'])}")
             st.caption(t(content_1_3["vis_desc"]))
             
-            # Controls - Use 4 columns but check alignment
-            c1, c2, c3, c4 = st.columns([1, 1, 1, 1.2]) # Give +100 slightly more room if needed, or equal
+            # Controls: Equal width now to prevent squeezes
+            c1, c2, c3, c4 = st.columns(4) 
             with c1:
-                # User requested "back arrow" effectively. Using standard refresh symbol.
                 if st.button("↺", key="reset_1_3", type="secondary", use_container_width=True):
                     reset_rolls()
                     st.rerun()
@@ -236,8 +241,6 @@ def render_subtopic_1_3(model):
                     update_rolls(10)
                     st.rerun()
             with c4:
-                # Using thin space or just text to ensure it fits. 
-                # If +100 wraps, we try to ensure column is wide enough.
                 if st.button("+100", key="add_100_1_3", type="primary", use_container_width=True):
                     update_rolls(100)
                     st.rerun()

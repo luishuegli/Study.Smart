@@ -202,7 +202,7 @@ def render_subtopic_1_3(model):
                 
                 # Check for localized formula key
                 f_key = "formula_de" if st.session_state.lang == 'de' else "formula_en"
-                st.latexy(c.get(f_key, c.get("formula", ""))) # Fallback
+                st.latex(c.get(f_key, c.get("formula", ""))) # Fallback
 
             st.markdown("<br>", unsafe_allow_html=True)
 

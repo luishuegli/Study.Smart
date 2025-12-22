@@ -67,24 +67,24 @@ content_1_2 = {
                 "text_en": "A: 'At least one die shows a six'",
                 "sol_de": r"Die Menge der günstigen Fälle ist $\{(1,6), (2,6), ..., (5,6), (6,6), (6,5), ..., (6,1)\}$. Das sind $6+5=11$ Ergebnisse. $$P(A) = \frac{11}{36}$$",
                 "sol_en": r"The set of favorable cases is $\{(1,6), (2,6), ..., (5,6), (6,6), (6,5), ..., (6,1)\}$. These are $6+5=11$ outcomes. $$P(A) = \frac{11}{36}$$",
-                "options": ["1/6", "11/36", "5/18", "1/2"],
-                "correct_opt": "11/36"
+                "options": [r"$\frac{1}{6}$", r"$\frac{11}{36}$", r"$\frac{5}{18}$", r"$\frac{1}{2}$"],
+                "correct_opt": r"$\frac{11}{36}$"
             },
             "B": {
                 "text_de": "B: 'Die Augenzahl beider Würfel ist gleich'",
                 "text_en": "B: 'The number of spots on both dice is the same'",
                 "sol_de": r"Die Paare sind $\{(1,1), (2,2), (3,3), (4,4), (5,5), (6,6)\}$. Das sind 6 Ergebnisse. $$P(B) = \frac{6}{36} = \frac{1}{6}$$",
                 "sol_en": r"The pairs are $\{(1,1), (2,2), (3,3), (4,4), (5,5), (6,6)\}$. These are 6 outcomes. $$P(B) = \frac{6}{36} = \frac{1}{6}$$",
-                "options": ["1/36", "1/6", "1/12", "1/2"],
-                "correct_opt": "1/6"
+                "options": [r"$\frac{1}{36}$", r"$\frac{1}{6}$", r"$\frac{1}{12}$", r"$\frac{1}{2}$"],
+                "correct_opt": r"$\frac{1}{6}$"
             },
             "C": {
                 "text_de": "C: 'Beide Würfel zeigen ungerade Zahlen'",
                 "text_en": "C: 'Both dice show odd numbers'",
                 "sol_de": r"Ungerade Zahlen sind $\{1, 3, 5\}$. Es gibt 3 Möglichkeiten für Würfel 1 und 3 Möglichkeiten für Würfel 2. $3 \times 3 = 9$ Ergebnisse. $$P(C) = \frac{9}{36} = \frac{1}{4}$$",
                 "sol_en": r"Odd numbers are $\{1, 3, 5\}$. There are 3 possibilities for die 1 and 3 possibilities for die 2. $3 \times 3 = 9$ outcomes. $$P(C) = \frac{9}{36} = \frac{1}{4}$$",
-                 "options": ["1/6", "1/4", "1/3", "1/2"],
-                 "correct_opt": "1/4"
+                "options": [r"$\frac{1}{6}$", r"$\frac{1}{4}$", r"$\frac{1}{3}$", r"$\frac{1}{2}$"],
+                "correct_opt": r"$\frac{1}{4}$"
             }
         }
     }

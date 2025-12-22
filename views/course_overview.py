@@ -113,7 +113,18 @@ def course_overview_view():
         else:
             status = topic.get("status", "open")
         
-        with st.expander(f"{loc.t(topic['title'])} ({status})", expanded=True):
+        # Prepare Header Label
+        base_title = loc.t(topic['title'])
+        header_label = base_title
+        
+        if status == "completed":
+            # Clean SVG checkmark (same as sidebar)
+            checkmark_svg_b64 = "PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiMzNEM3NTkiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cG9seWxpbmUgcG9pbnRzPSIyMCA2IDkgMTcgNCAxMiI+PC9wb2x5bGluZT48L3N2Zz4="
+            header_label = f"{base_title} ![check](data:image/svg+xml;base64,{checkmark_svg_b64})"
+        elif status == "in_progress":
+            header_label = f"{base_title} ({int(completed_pct * 100)}%)"
+        
+        with st.expander(header_label, expanded=True):
             col1, col2 = st.columns([3, 1])
             with col1:
                 st.markdown(loc.t({

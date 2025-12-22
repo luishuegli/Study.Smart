@@ -259,10 +259,10 @@ def render_subtopic_1_1(model):
     
     # Options setup
     opts_raw = [
-        {"id": "A", "de": "$S = \{1, 2, 3, 4, 5, 6\}$ (Würfelwurf)", "en": "$S = \{1, 2, 3, 4, 5, 6\}$ (Die Roll)"},
-        {"id": "B", "de": "$S = \{\\text{Kopf}, \\text{Zahl}\}$ (Münzwurf)", "en": "$S = \{\\text{Heads}, \\text{Tails}\}$ (Coin Toss)"},
-        {"id": "C", "de": "$S = [0, \\infty)$ (Wartezeit an der Haltestelle)", "en": "$S = [0, \\infty)$ (Waiting time at bus stop)"},
-        {"id": "D", "de": "$S = \{0, 1, 2, \\dots\}$ (Anzahl Kunden pro Tag)", "en": "$S = \{0, 1, 2, \\dots\}$ (Number of customers per day)"}
+        {"id": "A", "de": r"$S = \{1, 2, 3, 4, 5, 6\} \text{ (Würfelwurf)}$", "en": r"$S = \{1, 2, 3, 4, 5, 6\} \text{ (Die Roll)}$"},
+        {"id": "B", "de": r"$S = \{\text{Kopf}, \text{Zahl}\} \text{ (Münzwurf)}$", "en": r"$S = \{\text{Heads}, \text{Tails}\} \text{ (Coin Toss)}$"},
+        {"id": "C", "de": r"$S = [0, \infty) \text{ (Wartezeit an der Haltestelle)}$", "en": r"$S = [0, \infty) \text{ (Waiting time at bus stop)}$"},
+        {"id": "D", "de": r"$S = \{0, 1, 2, \dots\} \text{ (Anzahl Kunden pro Tag)}$", "en": r"$S = \{0, 1, 2, \dots\} \text{ (Number of customers per day)}$"}
     ]
     
     # Format options for display

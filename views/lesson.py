@@ -80,25 +80,49 @@ def lesson_view():
                     subtopics = topic.get("subtopics", [])
                     if subtopics:
                         # Translate titles for the map
-                        sub_map = {loc.t(s["title"]): s["id"] for s in subtopics}
-                        sub_titles = list(sub_map.keys())
+                        # --- PROGRESS LABELS ---
+                        from views.course_overview import SUBTOPIC_QUESTION_COUNTS
+                        user_progress = st.session_state.get("user_progress", {})
+                        topic_data = user_progress.get("topics", {}).get(topic["id"].replace("topic_", ""), {})
+                        subtopic_progress = topic_data.get("subtopics", {})
                         
-                        # Determine index. 
-                        # If this topic is NOT active, index should be None (no selection).
-                        # If active, find the index of the selected subtopic.
+                        dynamic_sub_titles = []
+                        sub_map = {} # label -> id
+                        
+                        for s in subtopics:
+                            s_id = s["id"]
+                            base_title = loc.t(s["title"])
+                            
+                            # Calculate progress
+                            done_count = len(subtopic_progress.get(s_id, {}).get("completed_questions", []))
+                            total_count = SUBTOPIC_QUESTION_COUNTS.get(s_id, 0)
+                            
+                            if total_count > 0:
+                                if done_count >= total_count:
+                                    # Base64 encoded version of a clean checkmark SVG
+                                    checkmark_svg_b64 = "PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiMzNEM3NTkiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cG9seWxpbmUgcG9pbnRzPSIyMCA2IDkgMTcgNCAxMiI+PC9wb2x5bGluZT48L3N2Zz4="
+                                    label = f"{base_title} ![check](data:image/svg+xml;base64,{checkmark_svg_b64})"
+                                else:
+                                    label = f"{base_title} ({done_count}/{total_count})"
+                            else:
+                                label = base_title
+                            
+                            dynamic_sub_titles.append(label)
+                            sub_map[label] = s_id
+                        
+                        # Determine index based on dynamic labels
                         index = None
                         if topic["id"] == current_topic_id and current_sub_id:
-                            # Find which title corresponds to active ID
                             active_title = next((k for k, v in sub_map.items() if v == current_sub_id), None)
-                            if active_title in sub_titles:
-                                index = sub_titles.index(active_title)
+                            if active_title in dynamic_sub_titles:
+                                index = dynamic_sub_titles.index(active_title)
                         
                         # Radio Key
                         radio_key = f"radio_{topic['id']}"
                         
                         st.radio(
                             "Subtopics", 
-                            sub_titles, 
+                            dynamic_sub_titles, 
                             index=index,
                             key=radio_key, 
                             label_visibility="collapsed",
@@ -116,6 +140,52 @@ def lesson_view():
     
     # Render Content
     render_topic_content(model, topic_id, subtopic_id)
+    
+    # Render Navigation
+    render_navigation_buttons(current_course_id, topic_id, subtopic_id)
+
+def render_navigation_buttons(course_id, current_topic_id, current_subtopic_id):
+    """Renders 'Next Lesson' button at the bottom."""
+    course = COURSES.get(course_id)
+    if not course:
+        return
+
+    topics = course.get("topics", [])
+    next_topic_id = None
+    next_subtopic_id = None
+    next_subtopic_title = None
+
+    # Find current position
+    for t_idx, topic in enumerate(topics):
+        if topic["id"] == current_topic_id:
+            subtopics = topic.get("subtopics", [])
+            for s_idx, sub in enumerate(subtopics):
+                if sub["id"] == current_subtopic_id:
+                    # Found current subtopic. Is there a next one in this topic?
+                    if s_idx + 1 < len(subtopics):
+                        next_topic_id = current_topic_id
+                        next_subtopic_id = subtopics[s_idx + 1]["id"]
+                        next_subtopic_title = loc.t(subtopics[s_idx + 1]["title"])
+                    # No more subtopics in this topic. Is there a next topic?
+                    elif t_idx + 1 < len(topics):
+                        next_topic = topics[t_idx + 1]
+                        next_topic_id = next_topic["id"]
+                        next_subs = next_topic.get("subtopics", [])
+                        if next_subs:
+                            next_subtopic_id = next_subs[0]["id"]
+                            next_subtopic_title = loc.t(next_subs[0]["title"])
+                    break
+            break
+
+    if next_topic_id and next_subtopic_id:
+        st.markdown("<br><br>", unsafe_allow_html=True)
+        col1, col2, col3 = st.columns([1, 2, 1])
+        with col2:
+            button_label = f"{loc.t({'de': 'Nächste Lektion', 'en': 'Next Lesson'})}: {next_subtopic_title} →"
+            if st.button(button_label, use_container_width=True, type="primary"):
+                st.session_state.selected_topic = next_topic_id
+                st.session_state.selected_subtopic = next_subtopic_id
+                st.rerun()
 
 
 def render_topic_content(model, topic_id, subtopic_id):

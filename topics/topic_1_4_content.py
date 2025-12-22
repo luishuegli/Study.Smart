@@ -101,9 +101,9 @@ content_1_4 = {
             "en": r"Which of the following probability assignments is invalid? ($S = \{e_1, e_2, e_3\}$)"
         },
         "options": [
-            {"id": "a", "text": "P(e₁)=0.3, P(e₂)=0.3, P(e₃)=0.4"},
-            {"id": "b", "text": "P(e₁)=0.5, P(e₂)=0.5, P(e₃)=0"},
-            {"id": "c", "text": "P(e₁)=0.6, P(e₂)=-0.1, P(e₃)=0.5"}
+            {"id": "a", "text": r"$P(e_1)=0.3, P(e_2)=0.3, P(e_3)=0.4$"},
+            {"id": "b", "text": r"$P(e_1)=0.5, P(e_2)=0.5, P(e_3)=0$"},
+            {"id": "c", "text": r"$P(e_1)=0.6, P(e_2)=-0.1, P(e_3)=0.5$"}
         ],
         "correct_id": "c",
         "solution": {

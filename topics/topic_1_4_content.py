@@ -29,10 +29,31 @@ content_1_4 = {
         }
     },
     "interactive": {
-        "header": {"de": "Der Wahrscheinlichkeits-Kuchen", "en": "The Probability Cake"},
-        "desc": {"de": "Baue den Ereignisraum $S$. Versuche, mehr als 100% hinzuzufügen.", "en": "Build the sample space $S$. Try to add more than 100%."},
-        "label_add": {"de": "Ereignis hinzufügen", "en": "Add Event"},
-        "err_overflow": {"de": "Fehler: Verletzung von Axiom 2! Summe > 1.", "en": "Error: Violation of Axiom 2! Sum > 1."}
+        "header": {"de": "Axiom-Labor: Vervollständige den Raum", "en": "Axiom Lab: Complete the Space"},
+        "desc": {"de": "Diese Modelle sind unvollständig. Finde die fehlende Wahrscheinlichkeit, um Axiom 2 ($P(S)=1$) zu erfüllen.", "en": "These models are incomplete. Find the missing probability to satisfy Axiom 2 ($P(S)=1$)."},
+        "success_msg": {"de": "Perfekt! Der Ereignisraum ist normiert.", "en": "Perfect! The sample space is normalized."},
+        "error_overflow": {"de": "Zu hoch! Axiom 2 verletzt.", "en": "Too high! Axiom 2 violated."},
+        "error_gap": {"de": "Lücke! Axiom 2 nicht erfüllt.", "en": "Gap! Axiom 2 not satisfied."}
+    },
+    "scenarios": {
+        "coin": {
+            "name": {"de": "Gezinkte Münze", "en": "Biased Coin"},
+            "given": [{"label": "Kopf (Heads)", "value": 0.35}],
+            "target_label": {"de": "Zahl (Tails)", "en": "Tails"},
+            "color": "#FF9500"  # Orange
+        },
+        "market": {
+            "name": {"de": "Aktienmarkt", "en": "Stock Market"},
+            "given": [{"label": "Bull Market", "value": 0.45}, {"label": "Bear Market", "value": 0.30}],
+            "target_label": {"de": "Seitwärts (Neutral)", "en": "Neutral"},
+            "color": "#AF52DE"  # Purple
+        },
+        "quality": {
+            "name": {"de": "Qualitätskontrolle", "en": "Quality Control"},
+            "given": [{"label": "OK", "value": 0.92}, {"label": "Ausschuss", "value": 0.03}],
+            "target_label": {"de": "Nacharbeit", "en": "Rework"},
+            "color": "#FF2D55"  # Red
+        }
     },
     "exam": {
         "title": {"de": "Logik-Check", "en": "Logic Check"},
@@ -54,74 +75,61 @@ content_1_4 = {
     }
 }
 
-def init_cake_state():
-    """Initialize the probability cake state."""
-    if "cake_slices_1_4" not in st.session_state:
-        st.session_state.cake_slices_1_4 = [{'name': 'A', 'value': 0.2}]
-    if "slice_counter" not in st.session_state:
-        st.session_state.slice_counter = 1  # Start at 1 (B is next)
-
-def get_next_slice_name():
-    """Generate next slice name (B, C, D, ...)."""
-    letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    name = letters[st.session_state.slice_counter % 26]
-    st.session_state.slice_counter += 1
-    return name
-
-def reset_cake():
-    """Reset the probability cake to initial state."""
-    st.session_state.cake_slices_1_4 = [{'name': 'A', 'value': 0.2}]
-    st.session_state.slice_counter = 1
-
-def get_probability_donut():
-    """Generate the Plotly donut chart for probability cake with bold visuals and center HUD."""
-    slices = st.session_state.cake_slices_1_4
-    current_sum = sum(s['value'] for s in slices)
-    remaining = 1.0 - current_sum
+def get_scenario_donut(scenario_key, user_value):
+    """Generate the Plotly donut chart for the scenario solver."""
+    scenario = content_1_4["scenarios"][scenario_key]
+    
+    # Calculate given sum
+    given_sum = sum(item["value"] for item in scenario["given"])
+    total_prob = given_sum + user_value
     
     # Build data
-    labels = [s['name'] for s in slices]
-    values = [s['value'] for s in slices]
+    labels = [item["label"] for item in scenario["given"]]
+    values = [item["value"] for item in scenario["given"]]
     
-    # Apple System Colors + distinct Grey for Empty
-    colors = ['#007AFF', '#AF52DE', '#FF9500', '#34C759', '#FF2D55']
-    color_map = {slice['name']: colors[i % len(colors)] for i, slice in enumerate(slices)}
+    # Add user slice
+    target_label = t(scenario["target_label"])
+    labels.append(target_label)
+    values.append(user_value)
     
-    # Add dummy "Empty" slice if needed
-    if remaining > 0.0001:
-        labels.append('Empty (S)')
-        values.append(remaining)
-        color_map["Empty (S)"] = '#F0F2F6'  # Grey for empty
-    
-    # Build color list in order
-    slice_colors = [color_map[l] for l in labels]
+    # Colors: Given slices in Apple Blue, User slice in scenario color
+    colors = ["#007AFF"] * len(scenario["given"]) + [scenario["color"]]
     
     fig = go.Figure(data=[go.Pie(
         labels=labels,
         values=values,
-        hole=0.5,  # Larger hole for the HUD
+        hole=0.5,  # Larger hole for HUD
         marker=dict(
-            colors=slice_colors,
+            colors=colors,
             line=dict(color='#FFFFFF', width=2)
         ),
         textinfo='label+percent',
-        # BOLD TYPOGRAPHY FIX
+        # BOLD TYPOGRAPHY
         textfont=dict(
             family="Arial Black, sans-serif",
-            size=15,
+            size=18,
+            color="white"
+        ),
+        insidetextfont=dict(
+            family="Arial Black, sans-serif",
+            size=18,
             color="white"
         ),
         hoverinfo='label+value',
         sort=False
     )])
     
-    # THE CENTER HUD (The "Intuitive" Link)
-    center_text = f"<b>Σ = {current_sum:.2f}</b>"
+    # THE CENTER HUD (Dynamic Color)
+    center_text = f"<b>Σ = {total_prob:.2f}</b>"
     center_color = "black"
     
-    if current_sum >= 0.999:
+    # Success: Green
+    if abs(total_prob - 1.0) < 0.001:
         center_text = "<b>100%<br>VALID</b>"
         center_color = "#34C759"  # Apple Green
+    # Overflow: Red
+    elif total_prob > 1.0:
+        center_color = "#FF3B30"  # Apple Red
     
     fig.update_layout(
         annotations=[dict(
@@ -142,9 +150,6 @@ def get_probability_donut():
     return fig
 
 def render_subtopic_1_4(model):
-    # Initialize State
-    init_cake_state()
-
     # --- HEADER ---
     st.header(t(content_1_4["title"]))
     st.markdown("---")
@@ -157,7 +162,7 @@ def render_subtopic_1_4(model):
         st.markdown(t(content_1_4["intro"]))
         st.markdown("<br>", unsafe_allow_html=True)
 
-        # 2. Columns (Left: Axiom Cards, Right: Probability Cake)
+        # 2. Columns (Left: Axiom Cards, Right: Scenario Solver)
         col_theory, col_vis = st.columns([1, 1.2], gap="large")
         
         # --- LEFT: THE 3 AXIOM CARDS (STACKED) ---
@@ -174,7 +179,7 @@ def render_subtopic_1_4(model):
                 if axiom_num != "3":
                     st.markdown("")
 
-        # --- RIGHT: PROBABILITY CAKE VALIDATOR ---
+        # --- RIGHT: SCENARIO SOLVER ---
         with col_vis:
             # Force alignment
             st.markdown("""
@@ -183,54 +188,62 @@ def render_subtopic_1_4(model):
                 </style>
             """, unsafe_allow_html=True)
             
-            st.markdown(f"### {render_icon('pie-chart')} {t(content_1_4['interactive']['header'])}", unsafe_allow_html=True)
+            st.markdown(f"### {render_icon('puzzle')} {t(content_1_4['interactive']['header'])}", unsafe_allow_html=True)
             st.caption(t(content_1_4["interactive"]["desc"]))
             
-            # Calculate current state
-            current_sum = sum(s['value'] for s in st.session_state.cake_slices_1_4)
-            remaining = 1.0 - current_sum
+            # Scenario Selector
+            scenario_options = {
+                t(content_1_4["scenarios"]["coin"]["name"]): "coin",
+                t(content_1_4["scenarios"]["market"]["name"]): "market",
+                t(content_1_4["scenarios"]["quality"]["name"]): "quality"
+            }
             
-            # Input Controls (3 columns: Input, Add, Auto-Fill)
-            c1, c2, c3 = st.columns([1.5, 1, 1])
+            selected_name = st.selectbox(
+                "Scenario",
+                options=list(scenario_options.keys()),
+                label_visibility="collapsed",
+                key="scenario_selector_1_4"
+            )
             
-            with c1:
-                new_value = st.number_input(
-                    "Probability",
-                    min_value=0.01,
-                    max_value=1.0,
-                    value=0.1,
-                    step=0.05,
-                    label_visibility="collapsed",
-                    key="prob_input_1_4"
-                )
+            scenario_key = scenario_options[selected_name]
+            scenario = content_1_4["scenarios"][scenario_key]
             
-            with c2:
-                if st.button(t(content_1_4["interactive"]["label_add"]), key="add_slice_1_4", type="primary", use_container_width=True):
-                    # VALIDATION: Check Axiom 2
-                    if current_sum + new_value > 1.0001:
-                        st.error(t(content_1_4["interactive"]["err_overflow"]))
-                    else:
-                        # Add slice
-                        new_name = get_next_slice_name()
-                        st.session_state.cake_slices_1_4.append({'name': new_name, 'value': new_value})
-                        st.rerun()
+            # Display "Given" probabilities
+            st.markdown("**Given:**")
+            given_sum = 0
+            for item in scenario["given"]:
+                st.markdown(f"- {item['label']}: **{item['value']:.2f}**")
+                given_sum += item["value"]
             
-            with c3:
-                # Auto-Fill button (only show if there's remaining space)
-                if remaining > 0.0001:
-                    if st.button("Auto-Fill", key="autofill_1_4", type="secondary", use_container_width=True, help="Instantly satisfy Axiom 2"):
-                        new_name = get_next_slice_name()
-                        st.session_state.cake_slices_1_4.append({'name': 'Rest', 'value': remaining})
-                        st.rerun()
+            st.markdown("")
+            
+            # The Solver Slider
+            target_label = t(scenario["target_label"])
+            missing_correct = 1.0 - given_sum
+            
+            user_val = st.slider(
+                f"Set P({target_label})",
+                min_value=0.0,
+                max_value=1.0,
+                value=0.0,
+                step=0.01,
+                key=f"slider_1_4_{scenario_key}"
+            )
+            
+            # Validation Feedback
+            total_prob = given_sum + user_val
+            gap = 1.0 - total_prob
+            
+            if abs(total_prob - 1.0) < 0.001:
+                st.success(t(content_1_4["interactive"]["success_msg"]))
+            elif total_prob > 1.0:
+                st.error(t(content_1_4["interactive"]["error_overflow"]))
+            elif total_prob < 1.0:
+                st.warning(f"{t(content_1_4['interactive']['error_gap'])} ({gap:.2%} missing)")
             
             # The Donut Chart
-            fig = get_probability_donut()
+            fig = get_scenario_donut(scenario_key, user_val)
             st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False})
-            
-            # Reset Button
-            if st.button("Reset", key="reset_cake_1_4", type="secondary", use_container_width=True):
-                reset_cake()
-                st.rerun()
 
     # --- EXAM WORKBENCH ---
     st.markdown("<br><br>", unsafe_allow_html=True)

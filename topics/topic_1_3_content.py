@@ -188,9 +188,8 @@ def render_subtopic_1_3(model):
         st.markdown("<br>", unsafe_allow_html=True)
 
         # 2. Columns (Left: Cards, Right: Sim)
-        # Increased right column weight significantly to 1.8 and reduced left to 0.8
-        # Also reduced gap to 'medium' to save space
-        col_theory, col_vis = st.columns([0.8, 1.8], gap="medium")
+        # With wider page, we can balance this better: [1, 1.6]
+        col_theory, col_vis = st.columns([1, 1.6], gap="medium")
         
         # --- LEFT: THEORY CARDS ---
         with col_theory:

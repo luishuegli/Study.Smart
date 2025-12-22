@@ -66,6 +66,13 @@ def load_design_system():
             box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important; /* Subtle shadow */
             gap: 24px;
         }
+
+        /* --- 3b. CONTAINER WIDTH (Widen the central column) --- */
+        .block-container {
+            max-width: 66rem !important; /* Increased from default ~46rem (approx +300px) */
+            padding-left: 2rem !important;
+            padding-right: 2rem !important;
+        }
         
         div[data-testid="stVerticalBlockBorderWrapper"] > div {
              gap: 16px;

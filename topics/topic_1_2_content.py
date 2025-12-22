@@ -3,6 +3,8 @@ import plotly.graph_objects as go
 import numpy as np
 from views.styles import render_icon
 from utils.localization import t
+from utils.ai_helper import render_ai_tutor
+from utils.quiz_helper import render_mcq, render_tab_progress_css
 
 # 1. DATA STRUCTURE: BALANCED CONTENT
 content_1_2 = {
@@ -152,32 +154,42 @@ def render_subtopic_1_2(model):
     # --- CSS: FORCE EQUAL HEIGHT COLUMNS ---
     st.markdown("""
     <style>
-    [data-testid="column"] {
-        display: flex;
-        flex-direction: column;
+    /* Force horizontal blocks (rows) to stretch columns to equal height */
+    [data-testid="stHorizontalBlock"] {
+        align-items: stretch !important;
     }
-    [data-testid="column"] > div {
-        height: 100%;
-    }
-    /* Target the specific bordered container within columns to stretch */
-    [data-testid="column"] div[data-testid="stVerticalBlockBorderWrapper"] > div {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify_content: space-between;
-    }
-    /* Make radio button options extend to full width */
-    div[role="radiogroup"] {
+    
+    /* Make columns vertical flex containers (covering both new and old IDs) */
+    [data-testid="column"], [data-testid="stColumn"] {
         display: flex !important;
         flex-direction: column !important;
-        width: 100% !important;
     }
-    div[role="radiogroup"] label {
-        width: 100% !important;
-        display: block !important;
-        box-sizing: border-box !important;
+
+    /* Ensure the direct child of the column (vertical block) takes full height */
+    [data-testid="column"] > div, [data-testid="stColumn"] > div {
+        flex: 1 !important; 
+        display: flex !important;
+        flex-direction: column !important;
+        height: 100% !important;
     }
-    div[role="radiogroup"] label > div {
+    
+    /* Target the specific vertical block wrappers to ensure they grow */
+    div[data-testid="stVerticalBlock"], 
+    div[data-testid="stVerticalBlockBorderWrapper"],
+    div[data-testid="stLayoutWrapper"] {
+        flex: 1 !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    
+    /* Ensure internal content of the bordered box also grows */
+    div[data-testid="stVerticalBlockBorderWrapper"] > div {
+        flex: 1 !important;
+        justify_content: space-between !important;
+    }
+
+    /* Radio button fix */
+    div[role="radiogroup"] {
         width: 100% !important;
     }
     </style>
@@ -281,6 +293,10 @@ def render_subtopic_1_2(model):
         st.markdown(t(content_1_2["exam"]["question"]))
         st.markdown("")
         
+        # Apply green indicators for answered tabs
+        tab_css = render_tab_progress_css(["A", "B", "C"], "1_2", topic_id="1", subtopic_id="1.2")
+        st.markdown(tab_css, unsafe_allow_html=True)
+        
         tab_a, tab_b, tab_c = st.tabs(["Event A", "Event B", "Event C"])
         
         def render_exam_workbench(event_key):
@@ -288,65 +304,32 @@ def render_subtopic_1_2(model):
             st.markdown(f"**{t({'de': e_data['text_de'], 'en': e_data['text_en']})}**")
             st.markdown("")
             
-            radio_key = f"mcq_1_2_{event_key}"
-            user_selection = st.radio(
-                t({"de": "Wähle:", "en": "Select:"}),
-                e_data["options"],
-                key=radio_key,
-                index=None,
+            # Prepare data for render_mcq
+            opts = e_data["options"]
+            try:
+                correct_idx = opts.index(e_data["correct_opt"])
+            except ValueError:
+                correct_idx = 0 # Fallback
+                
+            # Render MCQ
+            ctx = f"Explain this statistics solution: {e_data['sol_en']}"
+            
+            render_mcq(
+                key_suffix=f"1_2_{event_key}",
+                question_text=t({"de": "Wähle:", "en": "Select:"}),
+                options=opts,
+                correct_idx=correct_idx,
+                solution_text_dict={'de': e_data['sol_de'], 'en': e_data['sol_en']},
+                success_msg_dict={"de": "Richtig", "en": "Correct"},
+                error_msg_dict={"de": "Falsch.", "en": "Incorrect."},
+                model=model,
+                ai_context=ctx,
+                allow_retry=False,
+                course_id="vwl",
+                topic_id="1",
+                subtopic_id="1.2",
+                question_id=f"1_2_{event_key}"
             )
-            
-            if user_selection:
-                if user_selection == e_data["correct_opt"]:
-                    st.success(t({"de": "Richtig!", "en": "Correct!"}))
-                else:
-                    st.error(t({"de": "Falsch.", "en": "Incorrect."}))
-            
-            st.markdown("<br>", unsafe_allow_html=True)
-            
-            btn_key = f"sol_btn_1_2_{event_key}"
-            if f"{btn_key}_state" not in st.session_state:
-                st.session_state[f"{btn_key}_state"] = False
-                
-            if st.button(t({"de": "Lösung zeigen", "en": "Show Solution"}), key=btn_key):
-                st.session_state[f"{btn_key}_state"] = not st.session_state[f"{btn_key}_state"]
-                
-            if st.session_state[f"{btn_key}_state"]:
-                st.markdown("")
-                
-                with st.container(border=True):
-                    st.info(t({'de': e_data['sol_de'], 'en': e_data['sol_en']}))
-                    
-                    st.markdown("---")
-                    st.caption(t({"de": "AI Tutor:", "en": "AI Tutor:"}))
-                    
-                    # AI Response Area (appears above input)
-                    if f"ai_response_1_2_{event_key}" in st.session_state:
-                        st.markdown(f"**AI:** {st.session_state[f'ai_response_1_2_{event_key}']}")
-                        st.markdown("---")
-                    
-                    # Input and Button (full width layout)
-                    c_ai_1, c_ai_2 = st.columns([4, 1])
-                    with c_ai_1:
-                        ai_q = st.text_input(
-                            t({"de": "Frage:", "en": "Question:"}), 
-                            key=f"ai_q_1_2_{event_key}", 
-                            placeholder=t({"de": "Was ist unklar?", "en": "What is unclear?"}),
-                            label_visibility="collapsed"
-                        )
-                    with c_ai_2:
-                        if st.button(t({"de": "Ask", "en": "Ask"}), key=f"ai_btn_1_2_{event_key}", type="primary", use_container_width=True):
-                            if model and ai_q:
-                                with st.spinner("..."):
-                                    prompt = f"Explain this statistics solution: {e_data['sol_en']} \nUser Question: {ai_q}"
-                                    try:
-                                        response = model.generate_content(prompt)
-                                        st.session_state[f"ai_response_1_2_{event_key}"] = response.text
-                                        st.rerun()
-                                    except Exception as e:
-                                        st.error(f"Error: {e}")
-                            elif not model:
-                                st.error("Model unavailable")
 
         with tab_a: render_exam_workbench("A")
         with tab_b: render_exam_workbench("B")

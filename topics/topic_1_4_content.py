@@ -2,6 +2,8 @@ import streamlit as st
 import plotly.graph_objects as go
 from utils.localization import t
 from views.styles import render_icon
+from utils.ai_helper import render_ai_tutor
+from utils.quiz_helper import render_mcq
 
 # 1. THE CONTENT DICTIONARY (Rosetta Stone Protocol)
 content_1_4 = {
@@ -48,22 +50,47 @@ content_1_4 = {
         "error_gap": {"de": "Lücke! Axiom 2 nicht erfüllt.", "en": "Gap! Axiom 2 not satisfied."}
     },
     "scenarios": {
-        "weather": {
-            "name": {"de": "Wettervorhersage", "en": "Weather Forecast"},
-            "given": [{"label": {"de": "Sonnig", "en": "Sunny"}, "value": 0.45}],
+        "market": {
+            "mode": "normalization", # Axiom 2
+            "name": {"de": "Marktanteile (Lücke)", "en": "Market Shares (Gap)"},
+            "icon": "pie-chart",
+            "desc": {"de": "Der Bericht ist unvollständig. Finde den Restwert.", "en": "The report is incomplete. Find the residual value."},
+            "fixed": [
+                {"label": {"de": "Apple", "en": "Apple"}, "value": 0.30, "color": "#000000"},
+                {"label": {"de": "Samsung", "en": "Samsung"}, "value": 0.25, "color": "#007AFF"}
+            ],
             "targets": [
-                {"label": {"de": "Bewölkt", "en": "Cloudy"}, "color": "#AF52DE"},
-                {"label": {"de": "Regnerisch", "en": "Rainy"}, "color": "#007AFF"}
-            ]
+                {"label": {"de": "Andere", "en": "Others"}, "color": "#8E8E93"}
+            ],
+            "initial": 0.0
         },
-        "transport": {
-            "name": {"de": "Verkehrsmittel", "en": "Transportation Mode"},
-            "given": [{"label": {"de": "Auto", "en": "Car"}, "value": 0.40}],
+        "merger": {
+            "mode": "additivity", # Axiom 3
+            "name": {"de": "Die Fusion (Additivität)", "en": "The Merger (Additivity)"},
+            "icon": "git-merge",
+            "desc": {"de": "Company A (0.15) und B (0.20) fusionieren. Wie groß ist die neue Firma?", "en": "Company A (0.15) and B (0.20) merge. How big is the new entity?"},
+            "fixed": [
+                {"label": {"de": "Markt Rest", "en": "Market Rest"}, "value": 0.65, "color": "#E5E5EA"}
+            ],
             "targets": [
-                {"label": {"de": "Bus", "en": "Bus"}, "color": "#FF9500"},
-                {"label": {"de": "Fahrrad", "en": "Bike"}, "color": "#34C759"},
-                {"label": {"de": "Zu Fuß", "en": "Walking"}, "color": "#FF2D55"}
-            ]
+                {"label": {"de": "New Giant (A+B)", "en": "New Giant (A+B)"}, "color": "#AF52DE"}
+            ],
+            "correct_val": 0.35, # 0.15 + 0.20
+            "initial": 0.10
+        },
+        "glitch": {
+            "mode": "negativity", # Axiom 1
+            "name": {"de": "Daten-Fehler (Nicht-Negativität)", "en": "Data Glitch (Non-Negativity)"},
+            "icon": "alert-triangle",
+            "desc": {"de": "Ein Algorithmus hat einen negativen Wert berechnet (-0.15). Korrigiere das.", "en": "An algorithm calculated a negative value (-0.15). Correct this."},
+            "fixed": [
+                {"label": {"de": "Valid Data", "en": "Valid Data"}, "value": 0.80, "color": "#34C759"}
+            ],
+            "targets": [
+                {"label": {"de": "Error Term", "en": "Error Term"}, "color": "#FF2D55"}
+            ],
+            "initial": -0.15,
+            "min_val": -0.20
         }
     },
     "exam": {
@@ -81,83 +108,105 @@ content_1_4 = {
         "correct_id": "c",
         "solution": {
             "de": "**Richtig! (c)**<br>Wahrscheinlichkeiten können nicht negativ sein. Dies verletzt **Axiom 1**.",
-            "en": "**Correct! (c)**<br>Probabilities cannot be negative. This violates **Axiom 1**."
+            "en": "**Correct (c)**<br>Probabilities cannot be negative. This violates **Axiom 1**."
         }
     }
 }
 
 def get_scenario_donut(scenario_key, user_values):
     """Generate the Plotly donut chart for the scenario solver.
-    
-    Args:
-        scenario_key: Key of the scenario
-        user_values: List of user-set probabilities for each target
     """
     scenario = content_1_4["scenarios"][scenario_key]
+    mode = scenario.get("mode", "normalization")
     
-    # Calculate given sum
-    given_sum = sum(item["value"] for item in scenario["given"])
+    # Calculate fixed sum
+    fixed_sum = sum(item["value"] for item in scenario["fixed"])
     user_sum = sum(user_values)
-    total_prob = given_sum + user_sum
+    total_prob = fixed_sum + user_sum
     
-    # Build data - start with given slices
-    labels = [t(item["label"]) for item in scenario["given"]]
-    values = [item["value"] for item in scenario["given"]]
-    colors = ["#007AFF"] * len(scenario["given"])  # Given slices in Apple Blue
+    # Build data - start with fixed slices
+    labels = [t(item["label"]) for item in scenario["fixed"]]
+    values = [item["value"] for item in scenario["fixed"]]
+    colors = [item.get("color", "#007AFF") for item in scenario["fixed"]]
+    patterns = [""] * len(scenario["fixed"])
     
     # Add user slices
     for idx, target in enumerate(scenario["targets"]):
+        val = user_values[idx]
         labels.append(t(target["label"]))
-        values.append(user_values[idx])
-        colors.append(target["color"])
+        
+        # Handle Negative Values (Visual Hack)
+        if val < 0:
+            values.append(abs(val)) # Plot absolute size
+            colors.append(target["color"]) 
+            patterns.append("/") # Stripe pattern for error
+        else:
+            values.append(val)
+            colors.append(target["color"])
+            patterns.append("")
     
     fig = go.Figure(data=[go.Pie(
         labels=labels,
         values=values,
-        hole=0.5,  # Larger hole for HUD
+        hole=0.5,
         marker=dict(
             colors=colors,
+            pattern=dict(shape=patterns),
             line=dict(color='#FFFFFF', width=2)
         ),
         textinfo='label+percent',
-        # BOLD TYPOGRAPHY - BLACK TEXT (smaller size)
-        textfont=dict(
-            family="Arial Black, sans-serif",
-            size=14,
-            color="black"
-        ),
-        insidetextfont=dict(
-            family="Arial Black, sans-serif",
-            size=14,
-            color="black"
-        ),
+        textposition='outside', # Move labels outside the donut
+        textfont=dict(family="Arial Black, sans-serif", size=14, color="black"),
         hoverinfo='label+value',
         sort=False
     )])
     
-    # THE CENTER HUD (Dynamic Color)
-    center_text = f"<b>Σ = {total_prob:.2f}</b>"
+    # HUD LOGIC BY MODE
+    center_text = ""
     center_color = "black"
     
-    # Success: Green
-    if abs(total_prob - 1.0) < 0.001:
-        center_text = "<b>100%<br>VALID</b>"
-        center_color = "#34C759"  # Apple Green
-    # Overflow: Red
-    elif total_prob > 1.0:
-        center_color = "#FF3B30"  # Apple Red
+    if mode == "normalization":
+        center_text = f"<b>Σ = {total_prob:.2f}</b>"
+        if abs(total_prob - 1.0) < 0.001:
+            center_text = "<b>100%<br>VALID</b>"
+            center_color = "#34C759"
+        elif total_prob > 1.0:
+            center_color = "#FF3B30"
+            
+    elif mode == "additivity":
+        # Target is specific sum (A+B)
+        # We assume the user is manipulating the target slices (New Giant)
+        # Current logic: total_prob includes the "Fixed" background.
+        # We want to show the SUM of the target parts? Or Total?
+        # Let's show the specific Sum (P(A U B))?
+        # Actually user manipulated "New Giant".
+        # If correct, show Valid.
+        correct_val = scenario.get("correct_val", 0.0)
+        # Check if user value (user_sum) matches correct_val (ignoring fixed background)
+        # Wait, for "merger", fixed is 0.65. Correct output is 0.35.
+        if abs(user_sum - correct_val) < 0.001:
+             center_text = f"<b>P(A∪B)<br>{user_sum:.2f}</b>"
+             center_color = "#34C759"
+        else:
+             center_text = f"<b>P(A∪B)<br>{user_sum:.2f}</b>"
+             center_color = "#AF52DE" # Purple
+             
+    elif mode == "negativity":
+        # Show the error term
+        center_text = f"<b>Error<br>{user_sum:.2f}</b>"
+        if user_sum < 0:
+             center_color = "#FF3B30"
+        elif user_sum == 0:
+             center_text = "<b>VALID<br>0.00</b>"
+             center_color = "#34C759"
     
     fig.update_layout(
         annotations=[dict(
             text=center_text,
-            x=0.5,
-            y=0.5,
-            font_size=20,
-            font_color=center_color,
-            showarrow=False
+            x=0.5, y=0.5, font_size=18, font_color=center_color, showarrow=False
         )],
         showlegend=False,
-        margin=dict(l=10, r=10, t=10, b=10),
+        margin=dict(l=80, r=80, t=60, b=60), # Increased margins for outside labels
         height=350,
         paper_bgcolor='rgba(0,0,0,0)',
         plot_bgcolor='rgba(0,0,0,0)'
@@ -208,10 +257,7 @@ def render_subtopic_1_4(model):
             st.caption(t(content_1_4["interactive"]["desc"]))
             
             # Scenario Selector
-            scenario_options = {
-                t(content_1_4["scenarios"]["weather"]["name"]): "weather",
-                t(content_1_4["scenarios"]["transport"]["name"]): "transport"
-            }
+            scenario_options = {t(v["name"]): k for k, v in content_1_4["scenarios"].items()}
             
             selected_name = st.selectbox(
                 "Scenario",
@@ -222,42 +268,66 @@ def render_subtopic_1_4(model):
             
             scenario_key = scenario_options[selected_name]
             scenario = content_1_4["scenarios"][scenario_key]
+            mode = scenario.get("mode", "normalization")
             
-            # Display "Given" probabilities
+            # Display "Fixed" probabilities
             st.markdown("**Given:**")
-            given_sum = 0
-            for item in scenario["given"]:
+            fixed_sum = 0
+            for item in scenario["fixed"]:
                 st.markdown(f"- {t(item['label'])}: **{item['value']:.2f}**")
-                given_sum += item["value"]
+                fixed_sum += item["value"]
             
             st.markdown("")
             
             # Multiple Sliders for each target
             user_values = []
+            
+            # Dynamic range for sliders
+            min_val = scenario.get("min_val", 0.0)
+            
             for target in scenario["targets"]:
                 target_label = t(target["label"])
                 user_val = st.slider(
                     f"Set P({target_label})",
-                    min_value=0.0,
+                    min_value=min_val, 
                     max_value=1.0,
-                    value=0.0,
+                    value=scenario.get("initial", 0.0),
                     step=0.01,
                     key=f"slider_1_4_{scenario_key}_{target_label}"
                 )
                 user_values.append(user_val)
             
-            # Validation Feedback (moved above chart to prevent overlap)
-            total_prob = given_sum + sum(user_values)
-            gap = 1.0 - total_prob
+            # LOGIC ENGINE
+            user_total = sum(user_values)
             
-            if abs(total_prob - 1.0) < 0.001:
-                st.success(t(content_1_4["interactive"]["success_msg"]))
-            elif total_prob > 1.0:
-                st.error(t(content_1_4["interactive"]["error_overflow"]))
-            elif total_prob < 1.0:
-                st.warning(f"{t(content_1_4['interactive']['error_gap'])} ({gap:.2%} missing)")
-            
-            st.markdown("<br>", unsafe_allow_html=True)  # Increased spacer to prevent overlap
+            if mode == "normalization":
+                total_prob = fixed_sum + user_total
+                gap = 1.0 - total_prob
+                if abs(total_prob - 1.0) < 0.001:
+                    st.success(f"{t(content_1_4['interactive']['success_msg'])} (Axiom 2)")
+                elif total_prob > 1.0:
+                    st.error(t(content_1_4["interactive"]["error_overflow"]))
+                else:
+                    st.warning(f"{t(content_1_4['interactive']['error_gap'])} ({gap:.2%} missing)")
+                    
+            elif mode == "additivity":
+                correct_val = scenario.get("correct_val", 0.0)
+                if abs(user_total - correct_val) < 0.001:
+                    st.success(f"Correct $P(A \\cup B) = P(A) + P(B)$ (Axiom 3). New Size: {user_total:.2f}")
+                elif user_total < correct_val:
+                    st.warning("Too small! $P(A \\cup B)$ must be the sum of the merging companies.")
+                else:
+                    st.error("Too high! Probabilities only add up, they don't multiply/expand magically.")
+                    
+            elif mode == "negativity":
+                if user_total == 0.0:
+                    st.success("Correct. Probabilities cannot be negative (Axiom 1).")
+                elif user_total < 0:
+                    st.error(f"Invalid! Found negative probability: {user_total:.2f}. Axiom 1 violated.")
+                else:
+                    st.info("Set the error term to 0.")
+
+            st.markdown("<br>", unsafe_allow_html=True) 
             
             # The Donut Chart
             fig = get_scenario_donut(scenario_key, user_values)
@@ -269,68 +339,27 @@ def render_subtopic_1_4(model):
     st.caption(content_1_4['exam']['source'])
     
     with st.container(border=True):
-        st.markdown(t(content_1_4["exam"]["question"]))
-        
-        # Options
+        # Prepare Options
         opts = content_1_4["exam"]["options"]
         opt_labels = [o["text"] for o in opts]
         
-        # Radio with instant feedback
-        radio_key = "mcq_1_4"
-        user_selection = st.radio(
-            "Selection", 
-            options=opt_labels, 
-            index=None, 
-            key=radio_key,
-            label_visibility="collapsed"
+        # Calculate correct index
+        correct_id = content_1_4["exam"]["correct_id"]
+        correct_idx = next((i for i, o in enumerate(opts) if o["id"] == correct_id), 0)
+        
+        render_mcq(
+            key_suffix="1_4_exam",
+            question_text=t(content_1_4["exam"]["question"]),
+            options=opt_labels,
+            correct_idx=correct_idx,
+            solution_text_dict=content_1_4["exam"]["solution"],
+            success_msg_dict={"de": "Korrekt", "en": "Correct"},
+            error_msg_dict={"de": "Das stimmt nicht ganz.", "en": "That is not quite right."},
+            model=model,
+            ai_context="Context: Kolmogorov Axioms of Probability.",
+            allow_retry=False,
+            course_id="vwl",
+            topic_id="1",
+            subtopic_id="1.4",
+            question_id="1_4_exam"
         )
-        
-        # Instant feedback when selection is made
-        if user_selection:
-            selected_idx = opt_labels.index(user_selection)
-            selected_id = opts[selected_idx]["id"]
-            
-            if selected_id == content_1_4["exam"]["correct_id"]:
-                st.success(t({"de": "Korrekt!", "en": "Correct!"}))
-                st.session_state.show_sol_1_4 = True
-            else:
-                st.error(t({"de": "Das stimmt nicht ganz.", "en": "That is not quite right."}))
-        
-        # Solution (only show if correct answer was selected)
-        if st.session_state.get("show_sol_1_4", False):
-            st.markdown("---")
-            # Fix: Use unsafe_allow_html=True to render HTML tags properly
-            sol_text = t(content_1_4["exam"]["solution"])
-            st.markdown(sol_text, unsafe_allow_html=True)
-            
-            # AI Tutor
-            st.markdown("---")
-            st.caption(f"{render_icon('bot')} AI Tutor", unsafe_allow_html=True)
-            
-            # AI Response Area (appears above input)
-            if "ai_response_1_4" in st.session_state:
-                st.markdown(f"**AI:** {st.session_state['ai_response_1_4']}")
-                st.markdown("---")
-            
-            # Input and Button
-            c_ai_1, c_ai_2 = st.columns([4, 1])
-            with c_ai_1:
-                ai_q = st.text_input(
-                    t({"de": "Frage:", "en": "Question:"}), 
-                    key="ai_q_1_4", 
-                    placeholder=t({"de": "Was ist unklar?", "en": "What is unclear?"}),
-                    label_visibility="collapsed"
-                )
-            with c_ai_2:
-                if st.button("Ask", key="ai_btn_1_4", type="primary", use_container_width=True):
-                    if model and ai_q:
-                        with st.spinner("..."):
-                            prompt = f"Context: Kolmogorov Axioms of Probability. User Question: {ai_q}"
-                            try:
-                                response = model.generate_content(prompt)
-                                st.session_state["ai_response_1_4"] = response.text
-                                st.rerun()
-                            except Exception as e:
-                                st.error(f"Error: {e}")
-                    elif not model:
-                        st.error("Model unavailable")

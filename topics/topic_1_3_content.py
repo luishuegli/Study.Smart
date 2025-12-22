@@ -3,6 +3,9 @@ import plotly.graph_objects as go
 import numpy as np
 from utils.localization import t
 from views.styles import render_icon
+from utils.localization import t
+from utils.ai_helper import render_ai_tutor
+from utils.quiz_helper import render_mcq
 import random
 
 # 1. THE CONTENT DICTIONARY (Rosetta Stone Protocol)
@@ -60,7 +63,7 @@ content_1_3 = {
         "correct_id": "c",
         "solution": {
             "de": "**Richtig! (c)**<br>Das 'Indifferenzprinzip' ist entscheidend. Bei einem gezinkten Würfel (ungleiche Wahrscheinlichkeiten) funktioniert Laplace nicht.",
-            "en": "**Correct! (c)**<br>The 'Principle of Indifference' is crucial. Laplace does not work for loaded dice (unequal probabilities)."
+            "en": "**Correct (c)**<br>The 'Principle of Indifference' is crucial. Laplace does not work for loaded dice (unequal probabilities)."
         }
     }
 }
@@ -258,68 +261,27 @@ def render_subtopic_1_3(model):
     st.caption(content_1_3['exam']['source'])
     
     with st.container(border=True):
-        st.markdown(t(content_1_3["exam"]["question"]))
-        
-        # Options
+        # Prepare Options
         opts = content_1_3["exam"]["options"]
         opt_labels = [t({"de": o["de"], "en": o["en"]}) for o in opts]
         
-        # Radio with instant feedback
-        radio_key = "mcq_1_3"
-        user_selection = st.radio(
-            "Selection", 
-            options=opt_labels, 
-            index=None, 
-            key=radio_key,
-            label_visibility="collapsed"
+        # Calculate correct index
+        correct_id = content_1_3["exam"]["correct_id"]
+        correct_idx = next((i for i, o in enumerate(opts) if o["id"] == correct_id), 0)
+        
+        render_mcq(
+            key_suffix="1_3_exam",
+            question_text=t(content_1_3["exam"]["question"]),
+            options=opt_labels,
+            correct_idx=correct_idx,
+            solution_text_dict=content_1_3["exam"]["solution"],
+            success_msg_dict={"de": "Korrekt", "en": "Correct"},
+            error_msg_dict={"de": "Das stimmt nicht ganz.", "en": "That is not quite right."},
+            model=model,
+            ai_context="Context: Probability definitions (Laplace vs Frequentist).",
+            allow_retry=False,
+            course_id="vwl",
+            topic_id="1",
+            subtopic_id="1.3",
+            question_id="1_3_exam"
         )
-        
-        # Instant feedback when selection is made
-        if user_selection:
-            selected_idx = opt_labels.index(user_selection)
-            selected_id = opts[selected_idx]["id"]
-            
-            if selected_id == content_1_3["exam"]["correct_id"]:
-                st.success(t({"de": "Korrekt!", "en": "Correct!"}))
-                st.session_state.show_sol_1_3 = True
-            else:
-                st.error(t({"de": "Das stimmt nicht ganz.", "en": "That is not quite right."}))
-        
-        # Solution (only show if correct answer was selected)
-        if st.session_state.get("show_sol_1_3", False):
-            st.markdown("---")
-            # Fix: Use unsafe_allow_html=True to render HTML tags properly
-            sol_text = t(content_1_3["exam"]["solution"])
-            st.markdown(sol_text, unsafe_allow_html=True)
-            
-            # AI Tutor integration
-            st.markdown("---")
-            st.caption("AI Tutor")
-            
-            # AI Response Area (appears above input)
-            if "ai_response_1_3" in st.session_state:
-                st.markdown(f"**AI:** {st.session_state['ai_response_1_3']}")
-                st.markdown("---")
-            
-            # Input and Button
-            c_ai_1, c_ai_2 = st.columns([4, 1])
-            with c_ai_1:
-                ai_q = st.text_input(
-                    t({"de": "Frage:", "en": "Question:"}), 
-                    key="ai_q_1_3", 
-                    placeholder=t({"de": "Was ist unklar?", "en": "What is unclear?"}),
-                    label_visibility="collapsed"
-                )
-            with c_ai_2:
-                if st.button("Ask", key="ai_btn_1_3", type="primary", use_container_width=True):
-                    if model and ai_q:
-                        with st.spinner("..."):
-                            prompt = f"Context: Probability definitions (Laplace vs Frequentist). User Question: {ai_q}"
-                            try:
-                                response = model.generate_content(prompt)
-                                st.session_state["ai_response_1_3"] = response.text
-                                st.rerun()
-                            except Exception as e:
-                                st.error(f"Error: {e}")
-                    elif not model:
-                        st.error("Model unavailable")

@@ -26,6 +26,7 @@ def render_icon(icon_name):
         "menu": """<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>""",
         "arrow-left": """<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" x2="5" y1="12" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>""",
         "slideshow": """<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="14" x="3" y="3" rx="2"/><path d="m9 10 2 2 4-4"/></svg>""",
+        "send": """<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" x2="11" y1="2" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>""",
     }
     
     return icons.get(icon_name, "")
@@ -72,6 +73,13 @@ def load_design_system():
             max-width: 56rem !important; /* Sweet spot between default 46rem and 66rem */
             padding-left: 2rem !important;
             padding-right: 2rem !important;
+            padding-top: 12px !important; /* Aggressively reduced to 12px */
+            padding-bottom: 2rem !important;
+        }
+        
+        /* Remove default margin from top headers to avoid double spacing */
+        h1, h2, h3 {
+             margin-top: 0 !important;
         }
         
         div[data-testid="stVerticalBlockBorderWrapper"] > div {
@@ -82,23 +90,36 @@ def load_design_system():
         .stButton > button {
             width: 100%;
             background-color: var(--accent-fill) !important; /* Pure Black */
-            color: var(--accent-text) !important;
+            color: #FFFFFF !important; /* Force Pure White for Icon */
             border: 1px solid var(--border-color) !important;
-            border-radius: 50px !important;
+            border-radius: 24px !important; /* MATCH INPUT ROUNDEDNESS */
             font-weight: 600 !important;
-            padding: 10px 24px !important;
+            padding: 8px 24px !important; /* Reduced padding to match input height */
+            line-height: normal !important; /* Use normal line height for button */
             transition: all 0.2s ease;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
         }
         
-        /* FIX: Force internal text to White */
-        .stButton > button p {
-            color: var(--accent-text) !important;
+        /* FIX: Force internal text to White and remove margins */
+        .stButton > button p, 
+        .stButton > button div,
+        .stButton > button span,
+        div[data-testid="stFormSubmitButton"] > button p,
+        div[data-testid="stFormSubmitButton"] > button div,
+        div[data-testid="stFormSubmitButton"] > button span {
+            color: #FFFFFF !important; /* Force Pure White */
+            margin: 0 !important;
+            line-height: 1 !important;
+            padding: 0 !important;
         }
         
         .stButton > button:hover {
             opacity: 0.85;
             transform: scale(0.99);
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            color: #FFFFFF !important;
         }
         
         /* Secondary Buttons (Outlined) */
@@ -114,6 +135,10 @@ def load_design_system():
         .stButton > button[kind="secondary"] p {
              color: var(--text-primary) !important;
         }
+        
+
+        /* AI Chat Input Styling - REMOVED TO FIX BORDER ISSUES */
+        /* See ai_helper.py for local override or use default Streamlit style */
 
         /* --- 5. PROGRESS BARS (Force Black) --- */
         .stProgress > div > div > div > div {

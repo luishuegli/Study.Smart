@@ -1,6 +1,38 @@
 import streamlit as st
 import utils.localization as loc
 from data import COURSES
+from utils.progress_tracker import get_user_progress
+
+# Define total questions per subtopic for progress calculation
+SUBTOPIC_QUESTION_COUNTS = {
+    "1.1": 1,  # q_1_1_stetig
+    "1.2": 3,  # 1_2_A, 1_2_B, 1_2_C
+    "1.3": 1,  # 1_3_exam
+    "1.4": 1,  # 1_4_exam
+    # Add more as you create content
+}
+
+def calculate_topic_progress(topic_data, subtopic_ids):
+    """Calculate overall topic completion percentage from all its subtopics."""
+    total_completed = 0
+    total_questions = 0
+    
+    for subtopic_id in subtopic_ids:
+        question_count = SUBTOPIC_QUESTION_COUNTS.get(subtopic_id, 0)
+        if question_count == 0:
+            continue
+            
+        total_questions += question_count
+        
+        subtopics = topic_data.get("subtopics", {})
+        if subtopic_id in subtopics:
+            subtopic = subtopics[subtopic_id]
+            total_completed += len(subtopic.get("completed_questions", []))
+    
+    if total_questions == 0:
+        return 0.0
+    
+    return total_completed / total_questions
 
 def course_overview_view():
     # Add sidebar footer
@@ -23,12 +55,39 @@ def course_overview_view():
             st.rerun()
         return
 
+    # Load user progress from Firestore
+    user = st.session_state.get("user")
+    user_progress = {}
+    if user and "localId" in user:
+        user_id = user["localId"]
+        user_progress = get_user_progress(user_id, course_id)
 
     st.title(course["title"])
     
+    # Calculate overall course progress
+    overall_completed = 0.0
+    topic_count = 0
+    
+    for topic in course["topics"]:
+        topic_id = topic["id"].replace("topic_", "")  # "topic_1" -> "1"
+        subtopic_ids = [st["id"] for st in topic.get("subtopics", [])]
+        
+        # Get topic data from progress
+        topics_data = user_progress.get("topics", {})
+        topic_data = topics_data.get(topic_id, {})
+        
+        # Calculate progress for this topic
+        completed_pct = calculate_topic_progress(topic_data, subtopic_ids)
+        overall_completed += completed_pct
+        topic_count += 1
+    
+    # Average across all topics
+    if topic_count > 0:
+        overall_completed /= topic_count
+    
     # Global Progress
-    st.markdown(f"**{loc.t({'de': 'Mein Gesamtfortschritt', 'en': 'My Total Progress'})}:** {int(course['progress'] * 100)}%")
-    st.progress(course["progress"])
+    st.markdown(f"**{loc.t({'de': 'Mein Gesamtfortschritt', 'en': 'My Total Progress'})}:** {int(overall_completed * 100)}%")
+    st.progress(overall_completed)
     
     st.markdown("---")
     
@@ -36,21 +95,37 @@ def course_overview_view():
     
     # List Topics
     for topic in course["topics"]:
-        with st.expander(f"{loc.t(topic['title'])} ({topic['status']})", expanded=True):
+        topic_id = topic["id"].replace("topic_", "")
+        subtopic_ids = [st["id"] for st in topic.get("subtopics", [])]
+        
+        # Get topic data from progress
+        topics_data = user_progress.get("topics", {})
+        topic_data = topics_data.get(topic_id, {})
+        
+        # Calculate progress
+        completed_pct = calculate_topic_progress(topic_data, subtopic_ids)
+        
+        # Determine status based on progress
+        if completed_pct >= 1.0:
+            status = "completed"
+        elif completed_pct > 0:
+            status = "in_progress"
+        else:
+            status = topic.get("status", "open")
+        
+        with st.expander(f"{loc.t(topic['title'])} ({status})", expanded=True):
             col1, col2 = st.columns([3, 1])
             with col1:
                 st.markdown(loc.t({
                     "de": "Hier finden Sie Vorlesungen, Übungen und Prüfungen zu diesem Thema.",
                     "en": "Here you will find lectures, exercises, and exams related to this topic."
                 }))
-                # Fake progress sliders for visual effect
-                st.caption(loc.t({"de": "Bearbeitet:", "en": "Completed:"}))
-                st.progress(0.1 if topic['status'] == 'in_progress' else 0.0)
-                st.caption(loc.t({"de": "Verstanden:", "en": "Understood:"}))
-                st.progress(0.0)
+                # Progress bar
+                st.caption(loc.t({"de": "Fortschritt:", "en": "Progress:"}))
+                st.progress(completed_pct)
                 
             with col2:
-                if topic['status'] == 'locked':
+                if status == 'locked':
                     st.button(loc.t({"de": "Gesperrt", "en": "Locked"}), key=topic['id'], disabled=True)
                 else:
                     if st.button(loc.t({"de": "Lernen starten", "en": "Start Learning"}), key=topic['id'], type="primary"):

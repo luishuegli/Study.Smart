@@ -24,6 +24,17 @@ else:
     model = None
 
 def lesson_view():
+    # --- LOAD USER PROGRESS ---
+    from utils.progress_tracker import get_user_progress
+    user = st.session_state.get("user")
+    course_id = st.session_state.get("selected_course", "vwl")
+    
+    if user and "localId" in user:
+        # We store it in session state so it's accessible by components
+        if "user_progress" not in st.session_state or st.session_state.get("last_progress_load") != course_id:
+            st.session_state["user_progress"] = get_user_progress(user["localId"], course_id)
+            st.session_state["last_progress_load"] = course_id
+
     # --- SIDEBAR NAVIGATION ---
     with st.sidebar:
         # 1. Back Button at Field Top
@@ -128,104 +139,24 @@ def render_topic_content(model, topic_id, subtopic_id):
         try:
             from topics.topic_1_content import render_topic_1_content
             
-            # Single unified view with slides as a separate tab
-            tab_learn, tab_slides = st.tabs([
-                loc.t({"de": "Lernen & Anwenden", "en": "Learn & Apply"}),
-                loc.t({"de": "Vorlesungsfolien", "en": "Lecture Slides"})
-            ])
-            
-            # --- TAB: UNIFIED LEARN & APPLY ---
-            with tab_learn:
-                render_topic_1_content(model, subtopic_id)
+            # Render content directly without tabs
+            render_topic_1_content(model, subtopic_id)
                 
         except ImportError as e:
             st.error(f"Interactive content not available: {str(e)}")
-            # Fall back to slides only
-            tab_slides = st.tabs([loc.t({"de": "Vorlesungsfolien", "en": "Lecture Slides"})])[0]
     else:
-        # Other topics: Standard two-tab layout
-        tab_slides, tab_practice = st.tabs([
-            loc.t({"de": "Vorlesungsfolien", "en": "Lecture Slides"}), 
-            loc.t({"de": "Übungsaufgaben", "en": "Practice Questions"})
-        ])
-    
-    # --- TAB 1: SLIDES ---
-    with tab_slides:
-        if "slide_range" in topic:
-            start, end = topic["slide_range"]
-            
-            # Sync state for slide navigation
-            if "current_slide_num" not in st.session_state:
-                st.session_state.current_slide_num = start
-            
-            # Ensure within bounds (in case we switched topics)
-            if not (start <= st.session_state.current_slide_num <= end):
-                st.session_state.current_slide_num = start
-
-            col_nav_1, col_img, col_nav_2 = st.columns([0.1, 0.8, 0.1])
-            
-            with col_nav_1:
-                if st.button("◀", key="prev_slide"):
-                    st.session_state.current_slide_num = max(start, st.session_state.current_slide_num - 1)
-                    st.rerun()
-            
-            with col_nav_2:
-                if st.button("▶", key="next_slide"):
-                    st.session_state.current_slide_num = min(end, st.session_state.current_slide_num + 1)
-                    st.rerun()
-            
-            # --- PROGRESS TRACKING LOGIC ---
-            # If user reaches the last slide, mark topic as done and update course progress
-            if st.session_state.current_slide_num == end:
-                # 1. Track completed topics in session
-                current_course_id = st.session_state.get("selected_course", "vwl")
-                if "completed_topics" not in st.session_state:
-                    st.session_state.completed_topics = set()
-                
-                st.session_state.completed_topics.add(topic_id)
-                
-                # 2. Calculate Progress
-                total_topics = len(course["topics"])
-                completed_count = len(st.session_state.completed_topics)
-                new_progress = min(1.0, completed_count / total_topics)
-                
-                # 3. Save to Firestore
-                from firebase_config import save_progress
-                user_id = st.session_state["user"]["localId"]
-                save_progress(user_id, current_course_id, new_progress)
-                
-                # Optional: Show a subtle toast
-                # st.toast(f"Topik {loc.t(topic['title'])} abgeschlossen! Fortschritt gespeichert.", icon="💾")
-
-            with col_img:
-                current = st.session_state.current_slide_num
-                slide_filename = f"Slides/Statistikskript_VWL_HS2025 (3)-{current:03d}.png"
-                if os.path.exists(slide_filename):
-                    st.image(slide_filename, caption=f"Slide {current} / {end}", use_container_width=True)
-                else:
-                    st.warning(f"Slide not found: {slide_filename}")
-                    
-                # Direct Jump Input
-                new_slide = st.number_input("Go to Slide", min_value=start, max_value=end, value=current, key="slide_jump")
-                if new_slide != current:
-                    st.session_state.current_slide_num = new_slide
-                    st.rerun()
+        # Other topics: Show practice questions only
+        st.subheader("Exam Questions")
+        # Placeholder: Fetch questions for this topic specifically
+        # For now, show "Descriptive Stats" questions if Topic 7, else generic
+        questions = EXAM_QUESTIONS.get("descr_stats", []) if topic_id == "topic_7" else []
+        
+        if questions:
+            for q in questions:
+                render_exam_question(q, model)
         else:
-            st.info("No slides available for this topic.")
+            st.info("No practice questions added for this topic yet.")
 
-    # --- TAB 2: QUESTIONS (only for non-topic_1) ---
-    if topic_id != "topic_1":
-        with tab_practice:
-            st.subheader("Exam Questions")
-            # Placeholder: Fetch questions for this topic specifically
-            # For now, show "Descriptive Stats" questions if Topic 7, else generic
-            questions = EXAM_QUESTIONS.get("descr_stats", []) if topic_id == "topic_7" else []
-            
-            if questions:
-                for q in questions:
-                    render_exam_question(q, model)
-            else:
-                st.info("No practice questions added for this topic yet.")
 
 def render_exam_question(q, model):
     st.markdown(f"**{ q['source'] }**")

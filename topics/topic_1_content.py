@@ -8,6 +8,8 @@ import plotly.graph_objects as go
 import numpy as np
 from views.styles import render_icon
 from utils.localization import t
+from utils.ai_helper import render_ai_tutor
+from utils.quiz_helper import render_mcq
 
 def get_dice_svg(number, size=48):
     """Generate SVG for dice faces 1-6 with dark mode support"""
@@ -33,7 +35,7 @@ def get_dice_svg(number, size=48):
     svg += '</svg>'
     return svg
 
-def render_subtopic_1_1():
+def render_subtopic_1_1(model):
     """1.1 Ereignisse, Ereignisraum und Ereignismenge"""
     # Header
     st.header(t({"de": "1.1 Ereignisse, Ereignisraum und Ereignismenge", "en": "1.1 Events, Sample Space and Sets"}))
@@ -60,12 +62,16 @@ def render_subtopic_1_1():
                 "de": """
                 Ein **Elementarereignis** ist das kleinstmögliche, unteilbare Ergebnis eines Zufallsexperiments.
                 
-                **Beispiel:** Beim Würfelwurf ist jede einzelne Zahl (1, 2, 3, 4, 5, 6) ein Elementarereignis.
+                **Beispiel:**
+                
+                Beim Würfelwurf ist jede einzelne Zahl (1, 2, 3, 4, 5, 6) ein Elementarereignis.
                 """,
                 "en": """
                 An **Elementary Event** is the smallest possible, indivisible outcome of a random experiment.
                 
-                **Example:** In a die roll, each single number (1, 2, 3, 4, 5, 6) is an elementary event.
+                **Example:**
+                
+                In a die roll, each single number (1, 2, 3, 4, 5, 6) is an elementary event.
                 """
             }))
 
@@ -153,7 +159,7 @@ def render_subtopic_1_1():
             st.markdown("<div style='margin-top: 10px;'>", unsafe_allow_html=True)
             count = len(st.session_state.selected_outcomes)
             if count == 6:
-                st.success(t({"de": "✅ Vollständig! $S = \{1,..,6\}$", "en": "✅ Complete! $S = \{1,..,6\}$"}))
+                st.success(t({"de": "Vollständig! $S = \{1,..,6\}$", "en": "Complete! $S = \{1,..,6\}$"}))
             elif count > 0:
                 st.caption(f"{t({'de': 'Fortschritt', 'en': 'Progress'})}: {count}/6")
             st.markdown("</div>", unsafe_allow_html=True)
@@ -210,198 +216,134 @@ def render_subtopic_1_1():
                 st.markdown(f"##### $A = \\{{ {', '.join(map(str, sorted_sel))} \\}}$")
                 
                 if st.session_state.event_selection == {2, 4, 6}:
-                    st.success(t({"de": "✅ Korrekt! $A = \{2, 4, 6\}$", "en": "✅ Correct! $A = \{2, 4, 6\}$"}))
+                    st.success(t({"de": "Korrekt $A = \{2, 4, 6\}$", "en": "Correct $A = \{2, 4, 6\}$"}))
             st.markdown("</div>", unsafe_allow_html=True)
     
     st.markdown("---")
     
     # SUMMARY
     st.markdown(f'<h3>{render_icon("file-text")} &nbsp; {t({"de": "Zusammenfassung", "en": "Summary"})}</h3>', unsafe_allow_html=True)
-    st.markdown(t({
-        "de": """
-        Du hast gelernt:
-        
-        - **Elementarereignis ($\omega$):** Ein einzelnes, unteilbares Ergebnis
-        - **Ereignisraum ($S$):** Die Menge **aller** möglichen Elementarereignisse
-        - **Ereignis ($A$):** Eine **Teilmenge** von $S$ ($A \subseteq S$)
-        
-        **Diskret vs. Stetig:**
-        - **Diskret:** Abzählbare Ergebnisse (z.B. Würfel, Münze)
-        - **Stetig:** Kontinuum, unendlich viele Punkte (z.B. Wartezeit, Temperatur)
-        """,
-        "en": """
-        You have learned:
-        
-        - **Elementary Event ($\omega$):** A single, indivisible outcome
-        - **Sample Space ($S$):** The set of **all** possible outcomes
-        - **Event ($A$):** A **subset** of $S$ ($A \subseteq S$)
-        
-        **Discrete vs. Continuous:**
-        - **Discrete:** Countable outcomes (e.g., dice, coin)
-        - **Continuous:** Continuum, infinite points (e.g., waiting time, temperature)
-        """
-    }))
+    
+    with st.container(border=True):
+        st.markdown(t({
+            "de": """
+            Du hast gelernt:
+            
+            - **Elementarereignis ($\omega$):** Ein einzelnes, unteilbares Ergebnis
+            - **Ereignisraum ($S$):** Die Menge **aller** möglichen Elementarereignisse
+            - **Ereignis ($A$):** Eine **Teilmenge** von $S$ ($A \subseteq S$)
+            
+            **Diskret vs. Stetig:**
+            - **Diskret:** Abzählbare Ergebnisse (z.B. Würfel, Münze)
+            - **Stetig:** Kontinuum, unendlich viele Punkte (z.B. Wartezeit, Temperatur)
+            """,
+            "en": """
+            You have learned:
+            
+            - **Elementary Event ($\omega$):** A single, indivisible outcome
+            - **Sample Space ($S$):** The set of **all** possible outcomes
+            - **Event ($A$):** A **subset** of $S$ ($A \subseteq S$)
+            
+            **Discrete vs. Continuous:**
+            - **Discrete:** Countable outcomes (e.g., dice, coin)
+            - **Continuous:** Continuum, infinite points (e.g., waiting time, temperature)
+            """
+        }))
     
     # 3. PRACTICE QUESTION
     st.markdown(f'<h3>{render_icon("check-circle")} &nbsp; {t({"de": "Konzept-Check", "en": "Concept Check"})}</h3>', unsafe_allow_html=True)
     
     q_key = "q_1_1_stetig"
-    if f"{q_key}_submitted" not in st.session_state:
-        st.session_state[f"{q_key}_submitted"] = False
     
-    st.markdown(f"**{t({'de': 'Frage', 'en': 'Question'})}:** {t({'de': 'Welcher der folgenden Ereignisräume $S$ ist stetig?', 'en': 'Which of the following sample spaces $S$ is continuous?'})}")
+    question_text = t({'de': 'Welcher der folgenden Ereignisräume $S$ ist stetig?', 'en': 'Which of the following sample spaces $S$ is continuous?'})
     
-    options = {
-        "A": {
-            "de": "$S = \{1, 2, 3, 4, 5, 6\}$ (Würfelwurf)",
-            "en": "$S = \{1, 2, 3, 4, 5, 6\}$ (Die Roll)"
-        },
-        "B": {
-            "de": "$S = \{\\text{Kopf}, \\text{Zahl}\}$ (Münzwurf)",
-            "en": "$S = \{\\text{Heads}, \\text{Tails}\}$ (Coin Toss)"
-        },
-        "C": {
-            "de": "$S = [0, \\infty)$ (Wartezeit an der Haltestelle)",
-            "en": "$S = [0, \\infty)$ (Waiting time at bus stop)"
-        },
-        "D": {
-            "de": "$S = \{0, 1, 2, \\dots\}$ (Anzahl Kunden pro Tag)",
-            "en": "$S = \{0, 1, 2, \\dots\}$ (Number of customers per day)"
-        }
+    # Options setup
+    opts_raw = [
+        {"id": "A", "de": "$S = \{1, 2, 3, 4, 5, 6\}$ (Würfelwurf)", "en": "$S = \{1, 2, 3, 4, 5, 6\}$ (Die Roll)"},
+        {"id": "B", "de": "$S = \{\\text{Kopf}, \\text{Zahl}\}$ (Münzwurf)", "en": "$S = \{\\text{Heads}, \\text{Tails}\}$ (Coin Toss)"},
+        {"id": "C", "de": "$S = [0, \\infty)$ (Wartezeit an der Haltestelle)", "en": "$S = [0, \\infty)$ (Waiting time at bus stop)"},
+        {"id": "D", "de": "$S = \{0, 1, 2, \\dots\}$ (Anzahl Kunden pro Tag)", "en": "$S = \{0, 1, 2, \\dots\}$ (Number of customers per day)"}
+    ]
+    
+    # Format options for display
+    options_display = [t(opt) for opt in opts_raw]
+    
+    # Messages
+    success_msg = {
+        "de": "**Richtig!** Stetige Räume beschreiben Messgrößen wie Zeit, Länge oder Temperatur.",
+        "en": "**Correct** Continuous spaces describe measurements like time, length, or temperature."
+    }
+    error_msg = {
+        "de": "**Nicht ganz.** Stetige Räume sind Intervalle (z.B. $[0, \\infty)$), keine diskreten Punkte.",
+        "en": "**Not quite.** Continuous spaces are intervals (e.g. $[0, \\infty)$), not discrete points."
     }
     
-    # Determine language-specific options for display
-    current_options = {k: t(v) for k, v in options.items()}
-    
-    user_choice = st.radio(
-        t({"de": "Wähle eine Antwort:", "en": "Choose an answer:"}),
-        list(current_options.keys()),
-        format_func=lambda x: f"**{x}**: {current_options[x]}",
-        key=f"{q_key}_radio",
-        disabled=st.session_state[f"{q_key}_submitted"],
-        label_visibility="collapsed"
-    )
-    
-    if not st.session_state[f"{q_key}_submitted"]:
-        if st.button(t({"de": "Antwort überprüfen", "en": "Check Answer"}), key=f"{q_key}_btn", type="primary"):
-            st.session_state[f"{q_key}_submitted"] = True
-            st.session_state[f"{q_key}_correct"] = (user_choice == "C")
-            st.rerun()
-    else:
-        if st.session_state[f"{q_key}_correct"]:
-            st.success(t({
-                "de": "✅ **Richtig!** Stetige Räume beschreiben Messgrößen wie Zeit, Länge oder Temperatur.",
-                "en": "✅ **Correct!** Continuous spaces describe measurements like time, length, or temperature."
-            }))
-        else:
-            st.error(t({
-                "de": "❌ **Nicht ganz.** Stetige Räume sind Intervalle (z.B. $[0, \\infty)$), keine diskreten Punkte.",
-                "en": "❌ **Not quite.** Continuous spaces are intervals (e.g. $[0, \\infty)$), not discrete points."
-            }))
+    solution_text = {
+        "de": """
+        **Antwort: (C)**
         
-        with st.expander(t({"de": "🔓 Lösung anzeigen", "en": "🔓 Show Solution"}), expanded=True):
-            st.markdown(t({
-                "de": """
-                **Antwort: (C)**
-                
-                Stetige Räume beschreiben **Messgrößen** wie:
-                - Zeit (Wartezeit)
-                - Länge
-                - Temperatur
-                
-                Diskrete Räume beschreiben **Zählgrößen** oder Kategorien:
-                - Würfelergebnisse (1, 2, 3...)
-                - Anzahl Kunden (0, 1, 2...)
-                - Münzwurf (Kopf/Zahl)
-                """,
-                "en": """
-                **Answer: (C)**
-                
-                Continuous spaces describe **measurements** like:
-                - Time (Waiting time)
-                - Length
-                - Temperature
-                
-                Discrete spaces describe **counts** or categories:
-                - Die results (1, 2, 3...)
-                - Number of customers (0, 1, 2...)
-                - Coin toss (Heads/Tails)
-                """
-            }))
-            
-            # AI Q&A Feature (INSIDE the solution expander)
-            st.markdown("---")
-            st.markdown(f'<h3>{render_icon("bot")} &nbsp; Ask AI</h3>', unsafe_allow_html=True)
-            
-            ai_query = st.text_area(
-                t({"de": "Deine Frage:", "en": "Your Question:"}),
-                placeholder=t({
-                    "de": "z.B. 'Warum ist Wartezeit stetig?' oder 'Was ist der Unterschied zwischen S und Omega?'",
-                    "en": "e.g., 'Why is waiting time continuous?' or 'What is the difference between S and Omega?'"
-                }),
-                key=f"{q_key}_ai_input"
-            )
-            
-            if st.button("Ask Theory Agent", key=f"{q_key}_ai_btn", type="primary"):
-                if ai_query:
-                    # Import AI model
-                    try:
-                        import google.generativeai as genai
-                        import os
-                        from dotenv import load_dotenv
-                        
-                        load_dotenv()
-                        api_key = os.getenv("GEMINI_API_KEY")
-                        if not api_key:
-                            try:
-                                api_key = st.secrets.get("GEMINI_API_KEY")
-                            except FileNotFoundError:
-                                pass
-                        if api_key:
-                            genai.configure(api_key=api_key)
-                            model = genai.GenerativeModel('gemini-2.0-flash')
-                            
-                            current_lang_full = "German" if st.session_state.lang == 'de' else "English"
-                            
-                            # Build context-aware prompt
-                            theory_context = f"""
-                            You are a helpful statistics tutor.
+        Stetige Räume beschreiben **Messgrößen** wie:
+        - Zeit (Wartezeit)
+        - Länge
+        - Temperatur
+        
+        Diskrete Räume beschreiben **Zählgrößen** oder Kategorien:
+        - Würfelergebnisse (1, 2, 3...)
+        - Anzahl Kunden (0, 1, 2...)
+        - Münzwurf (Kopf/Zahl)
+        """,
+        "en": """
+        **Answer: (C)**
+        
+        Continuous spaces describe **measurements** like:
+        - Time (Waiting time)
+        - Length
+        - Temperature
+        
+        Discrete spaces describe **counts** or categories:
+        - Die results (1, 2, 3...)
+        - Number of customers (0, 1, 2...)
+        - Coin toss (Heads/Tails)
+        """
+    }
+    
+    # Context
+    current_lang_full = "German" if st.session_state.lang == 'de' else "English"
+    theory_context = f"""
+    You are a helpful statistics tutor.
 
-                            --- STUDENT IS LEARNING THIS THEORY ---
-                            Topic: Ereignisse, Ereignisraum und Ereignismenge (Events, Event Space, Event Sets)
-                            
-                            Key Concepts:
-                            - Elementarereignis (ω): The smallest possible outcome (e.g., rolling a "3")
-                            - Ereignisraum (S or Ω): The set of all possible outcomes
-                            - Ereignis (A): A subset of the event space (collection of outcomes we care about)
-                            
-                            Types of Event Spaces:
-                            - **Discrete**: Countable points (coin flip, dice roll)
-                            - **Continuous**: Intervals, uncountable (waiting time, temperature)
-                            
-                            --- QUESTION FROM THE EXERCISE ---
-                            "Which of the following event spaces S is continuous?"
-                            Correct Answer: S = [0, ∞) (Waiting time at bus stop)
-                            
-                            --- USER QUESTION ---
-                            "{ai_query}"
-                            
-                            Please answer in {current_lang_full}, concisely and clearly, relating back to the concepts above.
-                            """
-                            
-                            response = model.generate_content(theory_context)
-                            st.markdown("**🤖 AI Theory Agent:**")
-                            st.info(response.text)
-                        else:
-                            st.warning(t({"de": "AI feature requires API key configuration.", "en": "AI feature requires API key."}))
-                    except Exception as e:
-                        st.error(f"AI Error: {str(e)}")
-                else:
-                    st.warning(t({"de": "Bitte gib eine Frage ein.", "en": "Please enter a question."}))
-        
-        if st.button(t({"de": "Frage zurücksetzen", "en": "Reset Question"}), key=f"{q_key}_retry", type="secondary"):
-            st.session_state[f"{q_key}_submitted"] = False
-            st.rerun()
+    --- STUDENT IS LEARNING THIS THEORY ---
+    Topic: Ereignisse, Ereignisraum und Ereignismenge (Events, Event Space, Event Sets)
+    
+    Key Concepts:
+    - Elementarereignis (ω): The smallest possible outcome (e.g., rolling a "3")
+    - Ereignisraum (S or Ω): The set of all possible outcomes
+    - Ereignis (A): A subset of the event space (collection of outcomes we care about)
+    
+    Types of Event Spaces:
+    - **Discrete**: Countable points (coin flip, dice roll)
+    - **Continuous**: Intervals, uncountable (waiting time, temperature)
+    
+    Please answer in {current_lang_full}, concisely and clearly, relating back to the concepts above.
+    """
+
+    with st.container(border=True):
+        render_mcq(
+            key_suffix=q_key,
+            question_text=question_text,
+            options=options_display,
+            correct_idx=2, # C
+            solution_text_dict=solution_text,
+            success_msg_dict=success_msg,
+            error_msg_dict=error_msg,
+            model=model,
+            ai_context=theory_context,
+            allow_retry=False,
+            course_id="vwl",
+            topic_id="1",
+            subtopic_id="1.1",
+            question_id="q_1_1_stetig"
+        )
 
 
 # Main render function for Topic 1
@@ -409,7 +351,7 @@ def render_topic_1_content(model, subtopic_id=None):
     """Render content for Topic 1 based on selected subtopic"""
     
     if subtopic_id == "1.1" or subtopic_id is None:
-        render_subtopic_1_1()
+        render_subtopic_1_1(model)
     elif subtopic_id == "1.2":
         from topics.topic_1_2_content import render_subtopic_1_2
         render_subtopic_1_2(model)

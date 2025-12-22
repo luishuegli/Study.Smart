@@ -63,14 +63,8 @@ if "user" not in st.session_state:
         print(f"Session recovery failed: {e}")
 
 if "user" not in st.session_state:
-    # DEV MODE: Bypass Auth
-    st.session_state["user"] = {
-        "localId": "dev_user_123", 
-        "email": "dev@example.com", 
-        "displayName": "Dev User"
-    }
-    # render_auth(cookie_manager=cookie_manager)
-    # st.stop()
+    render_auth(cookie_manager=cookie_manager)
+    st.stop()
     
 # Load Env
 load_dotenv()

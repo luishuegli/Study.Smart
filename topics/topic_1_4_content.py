@@ -253,7 +253,7 @@ def render_subtopic_1_4(model):
             elif total_prob < 1.0:
                 st.warning(f"{t(content_1_4['interactive']['error_gap'])} ({gap:.2%} missing)")
             
-            st.markdown("")  # Small spacer
+            st.markdown("<br>", unsafe_allow_html=True)  # Increased spacer to prevent overlap
             
             # The Donut Chart
             fig = get_scenario_donut(scenario_key, user_val)

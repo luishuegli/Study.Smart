@@ -69,7 +69,7 @@ def load_design_system():
 
         /* --- 3b. CONTAINER WIDTH (Widen the central column) --- */
         .block-container {
-            max-width: 66rem !important; /* Increased from default ~46rem (approx +300px) */
+            max-width: 56rem !important; /* Sweet spot between default 46rem and 66rem */
             padding-left: 2rem !important;
             padding-right: 2rem !important;
         }

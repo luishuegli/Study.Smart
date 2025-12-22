@@ -216,18 +216,15 @@ def render_subtopic_1_3(model):
 
         # --- RIGHT: VISUALIZATION ---
         with col_vis:
-            # Move Experiment Further Down via spacer
-            st.markdown("<br>", unsafe_allow_html=True) 
-            
+            # Move Experiment Up (Removed spacer)
             st.markdown(f"### {t(content_1_3['vis_header'])}")
             st.caption(t(content_1_3["vis_desc"]))
             
             # Controls - Use 4 columns but check alignment
-            # Using custom CSS for button width sometimes helps, but use_container_width=True is best practice
-            c1, c2, c3, c4 = st.columns(4)
+            c1, c2, c3, c4 = st.columns([1, 1, 1, 1.2]) # Give +100 slightly more room if needed, or equal
             with c1:
-                # "Reset" might be long. Let's use icon? No, text is clearer.
-                if st.button("Reset", key="reset_1_3", type="secondary", use_container_width=True):
+                # User requested "back arrow" effectively. Using standard refresh symbol.
+                if st.button("↺", key="reset_1_3", type="secondary", use_container_width=True):
                     reset_rolls()
                     st.rerun()
             with c2:
@@ -239,6 +236,8 @@ def render_subtopic_1_3(model):
                     update_rolls(10)
                     st.rerun()
             with c4:
+                # Using thin space or just text to ensure it fits. 
+                # If +100 wraps, we try to ensure column is wide enough.
                 if st.button("+100", key="add_100_1_3", type="primary", use_container_width=True):
                     update_rolls(100)
                     st.rerun()
@@ -247,8 +246,8 @@ def render_subtopic_1_3(model):
             fig = get_freq_chart()
             st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False})
             
-            # Additional Note
-            st.info(t(content_1_3["vis_note"]), icon="ℹ️")
+            # Additional Note (No Emoji)
+            st.info(t(content_1_3["vis_note"]))
 
     # --- EXAM WORKBENCH ---
     st.markdown("<br><br>", unsafe_allow_html=True)

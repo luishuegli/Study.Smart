@@ -179,7 +179,7 @@ def render_subtopic_1_4(model):
         
         # --- LEFT: THE 3 AXIOM CARDS (STACKED) ---
         with col_theory:
-            for axiom_num in ["1", "2", "3"]:
+            for idx, axiom_num in enumerate(["1", "2", "3"]):
                 axiom = content_1_4["axioms"][axiom_num]
                 
                 with st.container(border=True):
@@ -190,10 +190,6 @@ def render_subtopic_1_4(model):
                     # Add example
                     st.markdown("")
                     st.markdown(t(axiom['example']), unsafe_allow_html=True)
-                
-                # Spacing between cards
-                if axiom_num != "3":
-                    st.markdown("")
 
         # --- RIGHT: SCENARIO SOLVER ---
         with col_vis:

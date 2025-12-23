@@ -3,6 +3,10 @@ import firebase_admin
 from firebase_admin import credentials
 import streamlit as st
 import os
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 def initialize_firebase_admin():
     """Initializes the Firebase Admin SDK."""
@@ -24,21 +28,29 @@ def initialize_firebase_admin():
 
 def get_firebase_analytics_script():
     """Returns the HTML script for Firebase Analytics."""
-    # This config matches the one provided by the user
-    return """
-    <script type="module">
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-      import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
+    # Values fetched from environment variables
+    api_key = os.getenv("FIREBASE_API_KEY")
+    auth_domain = os.getenv("FIREBASE_AUTH_DOMAIN")
+    project_id = os.getenv("FIREBASE_PROJECT_ID")
+    storage_bucket = os.getenv("FIREBASE_STORAGE_BUCKET")
+    sender_id = os.getenv("FIREBASE_MESSAGING_SENDER_ID")
+    app_id = os.getenv("FIREBASE_APP_ID")
+    measurement_id = os.getenv("FIREBASE_MEASUREMENT_ID")
 
-      const firebaseConfig = {
-        apiKey: "AIzaSyBzKUmu5uNFzz1h0J7wrW0iy-zVkJ8yfiY",
-        authDomain: "study-smart-a0cbf.firebaseapp.com",
-        projectId: "study-smart-a0cbf",
-        storageBucket: "study-smart-a0cbf.firebasestorage.app",
-        messagingSenderId: "505742105384",
-        appId: "1:505742105384:web:f7da31c53348233bd94e1d",
-        measurementId: "G-836JT7D6N7"
-      };
+    return f"""
+    <script type="module">
+      import {{ initializeApp }} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+      import {{ getAnalytics }} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
+
+      const firebaseConfig = {{
+        apiKey: "{api_key}",
+        authDomain: "{auth_domain}",
+        projectId: "{project_id}",
+        storageBucket: "{storage_bucket}",
+        messagingSenderId: "{sender_id}",
+        appId: "{app_id}",
+        measurementId: "{measurement_id}"
+      }};
 
       // Initialize Firebase
       const app = initializeApp(firebaseConfig);
@@ -50,8 +62,8 @@ def get_firebase_analytics_script():
 import requests
 import json
 
-# Firebase Web API Key (from your config snippet)
-FIREBASE_WEB_API_KEY = "AIzaSyBzKUmu5uNFzz1h0J7wrW0iy-zVkJ8yfiY"
+# Firebase Web API Key
+FIREBASE_WEB_API_KEY = os.getenv("FIREBASE_API_KEY")
 
 def sign_in_user(email, password):
     """Signs in a user using Firebase REST API."""

@@ -101,12 +101,68 @@ def render_mcq(
         if radio_key not in st.session_state and saved_index is not None:
              initial_index = saved_index
 
+    # --- CALLBACK FOR IMMEDIATE SYNC ---
+    def on_mcq_change():
+        selection = st.session_state[radio_key]
+        if selection and all([course_id, topic_id, subtopic_id, question_id]):
+            try:
+                sel_idx = options.index(selection)
+            except ValueError:
+                sel_idx = -1
+            
+            is_correct = (sel_idx == correct_idx)
+            user = st.session_state.get("user")
+            if user and "localId" in user:
+                user_id = user["localId"]
+                # Track the answer in Firestore
+                success = track_question_answer(
+                    user_id=user_id,
+                    course_id=course_id,
+                    topic_id=topic_id,
+                    subtopic_id=subtopic_id,
+                    question_id=question_id,
+                    is_correct=is_correct,
+                    selected_index=sel_idx
+                )
+                
+                # Update local session progress immediately
+                if success:
+                    if "user_progress" not in st.session_state:
+                        st.session_state["user_progress"] = {"topics": {}}
+                    
+                    prog = st.session_state["user_progress"]
+                    t_id = str(topic_id)
+                    s_id = str(subtopic_id)
+                    
+                    if "topics" not in prog: prog["topics"] = {}
+                    if t_id not in prog["topics"]: prog["topics"][t_id] = {"subtopics": {}}
+                    if s_id not in prog["topics"][t_id]["subtopics"]:
+                        prog["topics"][t_id]["subtopics"][s_id] = {"completed_questions": [], "correct_questions": [], "answers": {}}
+                    
+                    sub_data = prog["topics"][t_id]["subtopics"][s_id]
+                    if "completed_questions" not in sub_data: sub_data["completed_questions"] = []
+                    if "correct_questions" not in sub_data: sub_data["correct_questions"] = []
+                    if "answers" not in sub_data: sub_data["answers"] = {}
+
+                    if question_id not in sub_data["completed_questions"]:
+                        sub_data["completed_questions"].append(question_id)
+                    
+                    if is_correct:
+                        if question_id not in sub_data["correct_questions"]:
+                            sub_data["correct_questions"].append(question_id)
+                    else:
+                        if question_id in sub_data["correct_questions"]:
+                            sub_data["correct_questions"].remove(question_id)
+                    
+                    sub_data["answers"][question_id] = sel_idx
+
     user_selection = st.radio(
         "Select Answer:",
         options,
         index=initial_index,
         key=radio_key,
-        label_visibility="collapsed"
+        label_visibility="collapsed",
+        on_change=on_mcq_change
     )
     
     # 3. Check Answer & Feedback
@@ -123,57 +179,6 @@ def render_mcq(
             st.success(t(success_msg_dict))
         else:
             st.error(t(error_msg_dict))
-        
-        # Track progress if all tracking parameters are provided
-        if all([course_id, topic_id, subtopic_id, question_id]):
-            # Check if user is logged in - get user ID from auth system
-            user = st.session_state.get("user")
-            if user and "localId" in user:
-                user_id = user["localId"]
-                # Track the answer
-                success = track_question_answer(
-                    user_id=user_id,
-                    course_id=course_id,
-                    topic_id=topic_id,
-                    subtopic_id=subtopic_id,
-                    question_id=question_id,
-                    is_correct=is_correct,
-                    selected_index=sel_idx
-                )
-                
-                # Update local session progress immediately so UI (like tab bars) updates
-                if success:
-                    if "user_progress" not in st.session_state:
-                        st.session_state["user_progress"] = {"topics": {}}
-                    
-                    prog = st.session_state["user_progress"]
-                    t_id = str(topic_id)
-                    s_id = str(subtopic_id)
-                    
-                    if "topics" not in prog: prog["topics"] = {}
-                    if t_id not in prog["topics"]: prog["topics"][t_id] = {"subtopics": {}}
-                    if s_id not in prog["topics"][t_id]["subtopics"]:
-                        prog["topics"][t_id]["subtopics"][s_id] = {"completed_questions": [], "correct_questions": [], "answers": {}}
-                    
-                    sub_data = prog["topics"][t_id]["subtopics"][s_id]
-                    
-                    # Ensure structure exists
-                    if "completed_questions" not in sub_data: sub_data["completed_questions"] = []
-                    if "correct_questions" not in sub_data: sub_data["correct_questions"] = []
-                    if "answers" not in sub_data: sub_data["answers"] = {}
-                    
-                    # Sync question ID
-                    if question_id not in sub_data["completed_questions"]:
-                        sub_data["completed_questions"].append(question_id)
-                    
-                    # Sync correctness
-                    if is_correct and question_id not in sub_data["correct_questions"]:
-                        sub_data["correct_questions"].append(question_id)
-                    elif not is_correct and question_id in sub_data["correct_questions"]:
-                        sub_data["correct_questions"].remove(question_id)
-                    
-                    # Sync selected index
-                    sub_data["answers"][question_id] = sel_idx
             
     # Spacer removed for tighter layout
     

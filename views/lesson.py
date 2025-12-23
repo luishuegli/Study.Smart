@@ -9,6 +9,7 @@ from data import COURSES
 from exam_data import EXAM_QUESTIONS
 from dotenv import load_dotenv
 from views.styles import render_icon
+from utils.progress_tracker import track_question_answer, get_user_progress
 
 load_dotenv()
 api_key = os.getenv("GEMINI_API_KEY")
@@ -35,6 +36,44 @@ def lesson_view():
             st.session_state["user_progress"] = get_user_progress(user["localId"], course_id)
             st.session_state["last_progress_load"] = course_id
 
+    # --- INITIALIZE NAVIGATION STATE (if not set) ---
+    course = COURSES.get(course_id)
+    if "selected_topic" not in st.session_state:
+        if course and course["topics"]:
+            st.session_state.selected_topic = course["topics"][0]["id"]
+            
+    if "selected_subtopic" not in st.session_state:
+        current_topic_id = st.session_state.get("selected_topic")
+        if course:
+            topic = next((t for t in course["topics"] if t["id"] == current_topic_id), None)
+            if topic and topic.get("subtopics"):
+                first_sub = topic["subtopics"][0]
+                st.session_state.selected_subtopic = first_sub["id"]
+                st.session_state.current_slide_num = first_sub.get("slide_start", 0)
+            else:
+                st.session_state.selected_subtopic = None
+    
+    # --- NAVIGATION HANDLER ---
+    def navigate_to_subtopic(topic_id, subtopic_id):
+        """Centralized handler for all course navigation."""
+        st.session_state.selected_topic = topic_id
+        st.session_state.selected_subtopic = subtopic_id
+        
+        # Determine slide number
+        c = COURSES.get(st.session_state.get("selected_course", "vwl"))
+        t = next((x for x in c["topics"] if x["id"] == topic_id), None)
+        if t:
+            s = next((x for x in t["subtopics"] if x["id"] == subtopic_id), None)
+            if s and "slide_start" in s:
+                st.session_state.current_slide_num = s["slide_start"]
+        
+        # Clear radio state to prevent lag (forces radio to use 'index' based on new selection)
+        radio_key = f"radio_{topic_id}"
+        if radio_key in st.session_state:
+            del st.session_state[radio_key]
+            
+        st.rerun()
+
     # --- SIDEBAR NAVIGATION ---
     with st.sidebar:
         # 1. Back Button at Field Top
@@ -58,6 +97,8 @@ def lesson_view():
             def on_subtopic_change(topic_id, sub_map, key):
                 selected_title = st.session_state[key]
                 selected_id = sub_map[selected_title]
+                # Use the centralized handler (but without rerun here as on_change already triggers it)
+                # However, for consistency and to handle the 'lag', we'll just set the state
                 st.session_state.selected_topic = topic_id
                 st.session_state.selected_subtopic = selected_id
                 
@@ -142,9 +183,9 @@ def lesson_view():
     render_topic_content(model, topic_id, subtopic_id)
     
     # Render Navigation
-    render_navigation_buttons(current_course_id, topic_id, subtopic_id)
+    render_navigation_buttons(current_course_id, topic_id, subtopic_id, navigate_to_subtopic)
 
-def render_navigation_buttons(course_id, current_topic_id, current_subtopic_id):
+def render_navigation_buttons(course_id, current_topic_id, current_subtopic_id, navigate_to_subtopic):
     """Renders 'Next Lesson' button at the bottom."""
     course = COURSES.get(course_id)
     if not course:
@@ -183,9 +224,7 @@ def render_navigation_buttons(course_id, current_topic_id, current_subtopic_id):
         with col2:
             button_label = f"{loc.t({'de': 'Nächste Lektion', 'en': 'Next Lesson'})}: {next_subtopic_title} →"
             if st.button(button_label, use_container_width=True, type="primary"):
-                st.session_state.selected_topic = next_topic_id
-                st.session_state.selected_subtopic = next_subtopic_id
-                st.rerun()
+                navigate_to_subtopic(next_topic_id, next_subtopic_id)
 
 
 def render_topic_content(model, topic_id, subtopic_id):
@@ -243,7 +282,24 @@ def render_exam_question(q, model):
     if not st.session_state[f"{qid}_submitted"]:
         if st.button("Submit", key=f"{qid}_btn"):
             st.session_state[f"{qid}_submitted"] = True
-            st.session_state[f"{qid}_correct"] = (user_choice == q['correct_answer'])
+            is_correct = (user_choice == q['correct_answer'])
+            st.session_state[f"{qid}_correct"] = is_correct
+            
+            # Track progress
+            user = st.session_state.get("user")
+            course_id = st.session_state.get("selected_course", "vwl")
+            topic_id = st.session_state.get("selected_topic", "topic_1").replace("topic_", "")
+            subtopic_id = st.session_state.get("selected_subtopic", "unknown")
+            
+            if user and "localId" in user:
+                track_question_answer(
+                    user_id=user["localId"],
+                    course_id=course_id,
+                    topic_id=topic_id,
+                    subtopic_id=subtopic_id,
+                    question_id=qid,
+                    is_correct=is_correct
+                )
             st.rerun()
     else:
         if st.session_state[f"{qid}_correct"]:

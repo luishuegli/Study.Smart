@@ -280,21 +280,6 @@ def render_subtopic_1_2(model):
             # Load indices from session state or defaults
             if "selected_op_1_2" not in st.session_state:
                 st.session_state.selected_op_1_2 = "union"
-            
-            # --- MISSION STATUS ---
-            from utils.progress_tracker import track_question_answer, is_question_answered
-            user = st.session_state.get("user")
-            user_id = user["localId"] if user else None
-            
-            is_mission_solved = st.session_state.selected_op_1_2 == "sect"
-            if is_mission_solved and user_id:
-                track_question_answer(user_id, "vwl", "1", "1.2", "1_2_mission", True)
-            
-            # Mission Message
-            if is_mission_solved:
-                 st.markdown("<div style='color: #34C759; font-weight: bold; font-size: 0.9rem; margin-bottom: 15px;'>MISSION ACCOMPLISHED</div>", unsafe_allow_html=True)
-            else:
-                 st.markdown("<div style='color: #AF52DE; font-weight: bold; font-size: 0.9rem; margin-bottom: 15px;'>MISSION: FIND THE INTERSECTION</div>", unsafe_allow_html=True)
 
             for label, key in op_map.items():
                 if st.button(

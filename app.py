@@ -32,39 +32,21 @@ load_design_system()
 st.markdown(get_firebase_analytics_script(), unsafe_allow_html=True)
 
 # Authentication Flow with Persistence
-import extra_streamlit_components as stx
-cookie_manager = stx.CookieManager(key="main_auth_cookies")
+# import extra_streamlit_components as stx
+# cookie_manager = stx.CookieManager(key="main_auth_cookies")
 
 if "user" not in st.session_state:
-    # Try to recover session from cookie
-    try:
-        cookies = cookie_manager.get_all()
-        token = cookies.get("token")
-        if token:
-            from firebase_config import get_account_info
-            user_info = get_account_info(token)
-            if "users" in user_info:
-                # Token valid
-                user_data = user_info["users"][0]
-                # Map Firebase user format to our session format
-                st.session_state["user"] = {
-                    "localId": user_data.get("localId"),
-                    "email": user_data.get("email"),
-                    "displayName": user_data.get("displayName"),
-                    "idToken": token # Keep the token for future calls
-                }
-                st.rerun()
-            else:
-                # Token invalid/expired
-                print("Token invalid or expired")
-                # cookie_manager.delete("token") # deleting might require a key, safe to ignore for now
-    except Exception as e:
-        # If cookie manager fails or other error, fallback to auth
-        print(f"Session recovery failed: {e}")
+    # Bypass Auth for testing
+    st.session_state["user"] = {
+        "localId": "test_user_id",
+        "email": "test@example.com",
+        "displayName": "Test User",
+        "idToken": "dummy_token"
+    }
 
-if "user" not in st.session_state:
-    render_auth(cookie_manager=cookie_manager)
-    st.stop()
+# if "user" not in st.session_state:
+#     render_auth(cookie_manager=cookie_manager)
+#     st.stop()
     
 # Load Env
 load_dotenv()

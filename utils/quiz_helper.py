@@ -13,18 +13,14 @@ def render_tab_progress_css(tab_keys, key_prefix, topic_id=None, subtopic_id=Non
     user_progress = st.session_state.get("user_progress", {})
     topic_data = user_progress.get("topics", {}).get(str(topic_id), {})
     subtopic_data = topic_data.get("subtopics", {}).get(str(subtopic_id), {})
-    completed_questions = subtopic_data.get("completed_questions", [])
+    correct_questions = subtopic_data.get("correct_questions", [])
 
     for tab_key in tab_keys:
-        # Check session state first (immediate feedback)
-        radio_key = f"mcq_radio_{key_prefix}_{tab_key}"
-        if radio_key in st.session_state and st.session_state[radio_key] is not None:
-            answered_tabs.append(tab_key)
-            continue
+        # Check current progress (handles both Firestore and immediate session updates)
             
         # Check Firestore progress
         question_id = f"{key_prefix}_{tab_key}"
-        if question_id in completed_questions:
+        if question_id in correct_questions:
             answered_tabs.append(tab_key)
     
     # Check if all tabs are answered
@@ -72,6 +68,7 @@ def render_mcq(
     error_msg_dict,
     model,
     ai_context,
+    hint_text_dict=None,
     allow_retry=False,
     course_id=None,
     topic_id=None,
@@ -81,9 +78,15 @@ def render_mcq(
     """
     Renders a standardized Multiple Choice Question with persistence.
     """
+    from utils.localization import t
     
     # 1. Question
-    st.markdown(f"**{question_text}**")
+    st.markdown(question_text)
+    
+    # 2. Hint (Always below question)
+    if hint_text_dict:
+        with st.expander(t({"de": "Hinweis anzeigen", "en": "Show Hint"})):
+            st.markdown(t(hint_text_dict))
     
     # 2. Options (Radio)
     radio_key = f"mcq_radio_{key_suffix}"
@@ -127,34 +130,8 @@ def render_mcq(
                 
                 # Update local session progress immediately
                 if success:
-                    if "user_progress" not in st.session_state:
-                        st.session_state["user_progress"] = {"topics": {}}
-                    
-                    prog = st.session_state["user_progress"]
-                    t_id = str(topic_id)
-                    s_id = str(subtopic_id)
-                    
-                    if "topics" not in prog: prog["topics"] = {}
-                    if t_id not in prog["topics"]: prog["topics"][t_id] = {"subtopics": {}}
-                    if s_id not in prog["topics"][t_id]["subtopics"]:
-                        prog["topics"][t_id]["subtopics"][s_id] = {"completed_questions": [], "correct_questions": [], "answers": {}}
-                    
-                    sub_data = prog["topics"][t_id]["subtopics"][s_id]
-                    if "completed_questions" not in sub_data: sub_data["completed_questions"] = []
-                    if "correct_questions" not in sub_data: sub_data["correct_questions"] = []
-                    if "answers" not in sub_data: sub_data["answers"] = {}
-
-                    if question_id not in sub_data["completed_questions"]:
-                        sub_data["completed_questions"].append(question_id)
-                    
-                    if is_correct:
-                        if question_id not in sub_data["correct_questions"]:
-                            sub_data["correct_questions"].append(question_id)
-                    else:
-                        if question_id in sub_data["correct_questions"]:
-                            sub_data["correct_questions"].remove(question_id)
-                    
-                    sub_data["answers"][question_id] = sel_idx
+                    from utils.progress_tracker import update_local_progress
+                    update_local_progress(topic_id, subtopic_id, question_id, is_correct, sel_idx)
 
     user_selection = st.radio(
         "Select Answer:",

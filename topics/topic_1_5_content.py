@@ -40,8 +40,8 @@ content_1_5 = {
     "exam": {
         "title": {"de": "Prüfungstraining: HS2022 (MC 5)", "en": "Exam Practice: HS2022 (MC 5)"},
         "question": {
-            "de": "Gegeben sind: $P(A)=0.3$, $P(B)=0.4$, $P(\\overline{A}|B)=0.75$. Gesucht ist $P(A \\cup B)$.",
-            "en": "Given: $P(A)=0.3$, $P(B)=0.4$, $P(\\overline{A}|B)=0.75$. Find $P(A \\cup B)$."
+            "de": r"**Gegeben sind:** $P(A)=0.3, P(B)=0.4, P(\overline{A}|B)=0.75$.\n\n**Gesucht ist:** $P(A \cup B)$.",
+            "en": r"**Given:** $P(A)=0.3, P(B)=0.4, P(\overline{A}|B)=0.75$.\n\n**Find:** $P(A \cup B)$."
         },
         "hint": {
             "de": "Hinweis: Nutze zuerst das Komplement $P(A|B) = 1 - P(\\overline{A}|B)$. Verwende dann die Multiplikationsregel: $P(A \\cap B) = P(A|B) \\cdot P(B)$.", 
@@ -171,29 +171,24 @@ def render_subtopic_1_5(model):
     st.markdown(f"### {render_icon('clipboard-list')} {t(content_1_5['exam']['title'])}", unsafe_allow_html=True)
     
     with st.container(border=True):
-        st.markdown(t(content_1_5["exam"]["question"]))
-        
-        with st.expander(t({"de": "Hinweis anzeigen", "en": "Show Hint"})):
-            st.markdown(t(content_1_5["exam"]["hint"]))
-        
         opts = content_1_5["exam"]["options"]
         correct_idx = opts.index(content_1_5["exam"]["correct_opt"])
         
         render_mcq(
-            key_suffix="1_5_exam",
-            question_text=t({"de": "Wähle das richtige Ergebnis:", "en": "Select the correct result:"}),
+            key_suffix="1_5_q1",
+            question_text=t(content_1_5["exam"]["question"]),
             options=opts,
             correct_idx=correct_idx,
             solution_text_dict=content_1_5["exam"]["solution"],
-            success_msg_dict={"de": "Richtig", "en": "Correct"},
-            error_msg_dict={"de": "Falsch.", "en": "Incorrect."},
+            success_msg_dict={"de": "Korrekt!", "en": "Correct!"},
+            error_msg_dict={"de": "Falsch. Schau dir den Lösungsweg an.", "en": "Incorrect. Check the solution steps."},
             model=model,
-            ai_context="Explain the Addition Rule and how to subtract the intersection.",
-            allow_retry=False,
+            hint_text_dict=content_1_5["exam"]["hint"],
+            ai_context="Addition rule and conditional probability calculation.",
             course_id="vwl",
             topic_id="1",
             subtopic_id="1.5",
-            question_id="1_5_exam"
+            question_id="1_5_q1"
         )
 
 def render_simulator_1_5():
@@ -408,11 +403,19 @@ def render_simulator_1_5():
                 if not st.session_state.get("balloons_done"):
                     st.balloons()
                     st.session_state.balloons_done = True
-                # Update progress
-                from utils.progress_tracker import track_question_answer
-                user = st.session_state.get("user")
-                if user:
-                    track_question_answer(user["localId"], "vwl", "1", "1.5", "1_5_mission", True)
+                    
+                    # Update progress correctly (Local + Firestore)
+                    from utils.progress_tracker import track_question_answer, update_local_progress
+                    user = st.session_state.get("user")
+                    if user:
+                        user_id = user["localId"]
+                        # 1. Update Firestore
+                        track_question_answer(user_id, "vwl", "1", "1.5", "1_5_mission", True)
+                        # 2. Update Local Session State (UI Sync)
+                        update_local_progress("1", "1.5", "1_5_mission", True)
+                        
+                        # 3. Trigger Rerun to update sidebar immediately
+                        st.rerun()
             else:
                 st.session_state.balloons_done = False
                 diff = curr_un - target_union

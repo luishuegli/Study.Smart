@@ -25,6 +25,18 @@ else:
     model = None
 
 def lesson_view():
+    # --- GLOBAL UI RULES: EQUAL HEIGHT BOXES ---
+    # --- GLOBAL UI RULES ---
+    st.markdown("""
+    <style>
+    /* Make columns vertical flex containers */
+    [data-testid="column"], [data-testid="stColumn"] {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
     # --- LOAD USER PROGRESS ---
     from utils.progress_tracker import get_user_progress
     user = st.session_state.get("user")
@@ -81,6 +93,12 @@ def lesson_view():
             st.session_state.current_page = "dashboard"
             st.rerun()
         
+        # --- COURSE LEVEL PROGRESS ---
+        overall_completed = st.session_state.get("overall_course_progress", 0.0)
+        st.markdown("<br>", unsafe_allow_html=True)
+        st.markdown(f"**{loc.t({'de': 'Gesamtfortschritt', 'en': 'Total Progress'})}:** {int(overall_completed * 100)}%")
+        st.progress(overall_completed)
+        
         st.markdown("---")
         
         st.markdown(f"<h2>{render_icon('book')} &nbsp; {loc.t({'de': 'Kursnavigation', 'en': 'Course Navigation'})}</h2>", unsafe_allow_html=True)
@@ -134,8 +152,8 @@ def lesson_view():
                             s_id = s["id"]
                             base_title = loc.t(s["title"])
                             
-                            # Calculate progress
-                            done_count = len(subtopic_progress.get(s_id, {}).get("completed_questions", []))
+                            # Calculate progress based on CORRECT answers
+                            done_count = len(subtopic_progress.get(s_id, {}).get("correct_questions", []))
                             total_count = SUBTOPIC_QUESTION_COUNTS.get(s_id, 0)
                             
                             if total_count > 0:
@@ -303,9 +321,9 @@ def render_exam_question(q, model):
             st.rerun()
     else:
         if st.session_state[f"{qid}_correct"]:
-            st.success("✅ Correct!")
+            st.success(loc.t({"de": "Richtig!", "en": "Correct!"}))
         else:
-            st.error("❌ Incorrect.")
+            st.error(loc.t({"de": "Falsch.", "en": "Incorrect."}))
             if st.button("Retry", key=f"{qid}_retry"):
                  st.session_state[f"{qid}_submitted"] = False
                  st.rerun()

@@ -19,8 +19,8 @@ content_1_4 = {
             "desc": {"de": "Eine Wahrscheinlichkeit ist nie kleiner als 0.", "en": "A probability is never less than 0."},
             "latex": r"P(A) \ge 0",
             "example": {
-                "de": "$\\textbf{Beispiel: Würfel werfen}$\n- $P(\\text{Sechs}) = \\frac{1}{6} \\approx 0.167$ ✓\n- $P(\\text{Unmöglich}) = 0$ ✓\n- $P(\\text{Fehler}) = -0.2$ ✗",
-                "en": "$\\textbf{Example: Rolling a die}$\n- $P(\\text{Six}) = \\frac{1}{6} \\approx 0.167$ ✓\n- $P(\\text{Impossible}) = 0$ ✓\n- $P(\\text{Error}) = -0.2$ ✗"
+                "de": r"$\textbf{Beispiel: Würfel werfen}$" + "\n" + r"- $P(\text{Sechs}) = \frac{1}{6} \approx 0.167 \quad \checkmark$" + "\n" + r"- $P(\text{Unmöglich}) = 0 \quad \checkmark$" + "\n" + r"- $P(\text{Fehler}) = -0.2 \quad \text{false}$",
+                "en": r"$\textbf{Example: Rolling a die}$" + "\n" + r"- $P(\text{Six}) = \frac{1}{6} \approx 0.167 \quad \checkmark$" + "\n" + r"- $P(\text{Impossible}) = 0 \quad \checkmark$" + "\n" + r"- $P(\text{Error}) = -0.2 \quad \text{false}$"
             }
         },
         "2": {
@@ -28,8 +28,8 @@ content_1_4 = {
             "desc": {"de": "Die Wahrscheinlichkeit des gesamten Ereignisraums ist 100%.", "en": "The probability of the entire sample space is 100%."},
             "latex": r"P(S) = 1",
             "example": {
-                "de": "$\\textbf{Beispiel: Münzwurf}$\n- $P(\\text{Kopf}) + P(\\text{Zahl}) = 1$\n- $\\text{Bei fairer Münze: } 0.5 + 0.5 = 1$ ✓",
-                "en": "$\\textbf{Example: Coin flip}$\n- $P(\\text{Heads}) + P(\\text{Tails}) = 1$\n- $\\text{Fair coin: } 0.5 + 0.5 = 1$ ✓"
+                "de": r"$\textbf{Beispiel: Münzwurf}$" + "\n" + r"- $P(\text{Kopf}) + P(\text{Zahl}) = 1$" + "\n" + r"- $\text{Bei fairer Münze: } 0.5 + 0.5 = 1 \quad \checkmark$",
+                "en": r"$\textbf{Example: Coin flip}$" + "\n" + r"- $P(\text{Heads}) + P(\text{Tails}) = 1$" + "\n" + r"- $\text{Fair coin: } 0.5 + 0.5 = 1 \quad \checkmark$"
             }
         },
         "3": {
@@ -37,8 +37,8 @@ content_1_4 = {
             "desc": {"de": "Für disjunkte (getrennte) Ereignisse addieren sich die Wahrscheinlichkeiten.", "en": "For disjoint (separate) events, probabilities add up."},
             "latex": r"P(A \cup B) = P(A) + P(B)",
             "example": {
-                "de": "$\\textbf{Beispiel: Würfel}$\n- $A = \\{1,2\\}$, $B = \\{5,6\\}$ $\\text{(disjunkt)}$\n- $P(A \\cup B) = \\frac{2}{6} + \\frac{2}{6} = \\frac{4}{6}$ ✓",
-                "en": "$\\textbf{Example: Die roll}$\n- $A = \\{1,2\\}$, $B = \\{5,6\\}$ $\\text{(disjoint)}$\n- $P(A \\cup B) = \\frac{2}{6} + \\frac{2}{6} = \\frac{4}{6}$ ✓"
+                "de": r"$\textbf{Beispiel: Würfel}$" + "\n" + r"- $A = \{1,2\}$" + "\n" + r"- $B = \{5,6\} \quad \text{(disjunkt)}$" + "\n" + r"- $P(A \cup B) = \frac{2}{6} + \frac{2}{6} = \frac{4}{6} \quad \checkmark$",
+                "en": r"$\textbf{Example: Die roll}$" + "\n" + r"- $A = \{1,2\}$" + "\n" + r"- $B = \{5,6\} \quad \text{(disjoint)}$" + "\n" + r"- $P(A \cup B) = \frac{2}{6} + \frac{2}{6} = \frac{4}{6} \quad \checkmark$"
             }
         }
     },
@@ -97,8 +97,8 @@ content_1_4 = {
         "title": {"de": "Logik-Check", "en": "Logic Check"},
         "source": "Selbst erstellt / Self-created",
         "question": {
-            "de": r"Welche der folgenden Wahrscheinlichkeitszuweisungen ist ungültig? ($S = \{e_1, e_2, e_3\}$)",
-            "en": r"Which of the following probability assignments is invalid? ($S = \{e_1, e_2, e_3\}$)"
+            "de": r"**Welche der folgenden Wahrscheinlichkeitszuweisungen ist ungültig? ($S = \{e_1, e_2, e_3\}$)**",
+            "en": r"**Which of the following probability assignments is invalid? ($S = \{e_1, e_2, e_3\}$)**"
         },
         "options": [
             {"id": "a", "text": r"$P(e_1)=0.3, P(e_2)=0.3, P(e_3)=0.4$"},

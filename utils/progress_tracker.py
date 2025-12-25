@@ -244,3 +244,48 @@ def get_saved_answer_index(user_id: str, course_id: str, topic_id: str, subtopic
     subtopic_progress = get_subtopic_progress(user_id, course_id, topic_id, subtopic_id)
     answers = subtopic_progress.get("answers", {})
     return answers.get(question_id)
+
+
+def update_local_progress(
+    topic_id: str,
+    subtopic_id: str,
+    question_id: str,
+    is_correct: bool,
+    selected_index: Optional[int] = None
+):
+    """
+    Updates the st.session_state['user_progress'] in-place to ensure 
+    immediate UI feedback before the next Firestore sync.
+    """
+    if "user_progress" not in st.session_state:
+        st.session_state["user_progress"] = {"topics": {}}
+    
+    prog = st.session_state["user_progress"]
+    t_id = str(topic_id)
+    s_id = str(subtopic_id)
+
+    # Ensure nesting
+    if "topics" not in prog: prog["topics"] = {}
+    if t_id not in prog["topics"]:
+        prog["topics"][t_id] = {"subtopics": {}, "topic_id": t_id}
+    if s_id not in prog["topics"][t_id]["subtopics"]:
+        prog["topics"][t_id]["subtopics"][s_id] = {
+            "completed_questions": [],
+            "correct_questions": [],
+            "answers": {}
+        }
+    
+    sub_data = prog["topics"][t_id]["subtopics"][s_id]
+    
+    # Update data
+    if "answers" not in sub_data: sub_data["answers"] = {}
+    if selected_index is not None:
+        sub_data["answers"][question_id] = selected_index
+        
+    if question_id not in sub_data["completed_questions"]:
+        sub_data["completed_questions"].append(question_id)
+        
+    if is_correct and question_id not in sub_data["correct_questions"]:
+        sub_data["correct_questions"].append(question_id)
+    elif not is_correct and question_id in sub_data["correct_questions"]:
+        sub_data["correct_questions"].remove(question_id)

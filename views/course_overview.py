@@ -6,10 +6,11 @@ from utils.progress_tracker import get_user_progress
 # Define total questions per subtopic for progress calculation
 SUBTOPIC_QUESTION_COUNTS = {
     "1.1": 1,  # q_1_1_stetig
-    "1.2": 4,  # 1_2_A, 1_2_B, 1_2_C + Venn Selection Mission
+    "1.2": 3,  # 1_2_A, 1_2_B, 1_2_C (Mission removed)
     "1.3": 1,  # 1_3_exam
     "1.4": 1,  # 1_4_exam
-    "1.5": 2,  # 1_5_exam + Detective Mode Mission
+    "1.5": 2,  # 1_5_exam + Market Analyst Mission
+    "1.7": 3,  # 1_7_q1, 1_7_q2 + Pop-Matrix Filter
 }
 
 def calculate_topic_progress(topic_data, subtopic_ids):
@@ -27,12 +28,13 @@ def calculate_topic_progress(topic_data, subtopic_ids):
         subtopics = topic_data.get("subtopics", {})
         if subtopic_id in subtopics:
             subtopic = subtopics[subtopic_id]
-            total_completed += len(subtopic.get("completed_questions", []))
+            total_completed += len(subtopic.get("correct_questions", []))
     
     if total_questions == 0:
         return 0.0
     
-    return total_completed / total_questions
+    # Clamp to 1.0 incase of ghost data (e.g., renamed ids)
+    return min(1.0, total_completed / total_questions)
 
 def course_overview_view():
     # Add sidebar footer
@@ -84,6 +86,9 @@ def course_overview_view():
     # Average across all topics
     if topic_count > 0:
         overall_completed /= topic_count
+    
+    # Store in session state for sidebar/dashboard sync
+    st.session_state["overall_course_progress"] = overall_completed
     
     # Global Progress
     st.markdown(f"**{loc.t({'de': 'Mein Gesamtfortschritt', 'en': 'My Total Progress'})}:** {int(overall_completed * 100)}%")

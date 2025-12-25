@@ -7,9 +7,11 @@ When creating a new topic, follow this checklist:
 - [ ] Create topic file: `topics/topic_X_Y_content.py`
 - [ ] Define content dictionary with bilingual strings
 - [ ] Add MCQ questions with tracking parameters
+- [ ] Check iconography: **No Emojis!** (Use SVG icons)
+- [ ] Implement side-by-side boxes with equal height CSS
 - [ ] Update `SUBTOPIC_QUESTION_COUNTS` in `course_overview.py`
-- [ ] Use standard spacing and container patterns
-- [ ] Test progress tracking
+- [ ] Test progress tracking (Checkmarks in sidebar)
+- [ ] Verify LaTeX for all formulas and logical operators
 
 ---
 
@@ -67,7 +69,34 @@ col_content, col_button = st.columns([3, 1])
 - Content/Button: `[3, 1]` - standard for topic cards
 - Equal split: `[1, 1]` - for balanced content
 
-### 4. Header Hierarchy
+### 4. Equal Height Columns (Critical)
+
+When placing bordered containers in columns, you **must** inject this CSS to force them to stretch to the same height:
+
+```python
+st.markdown("""
+<style>
+/* Force columns to stretch to equal height */
+[data-testid="stHorizontalBlock"] { align-items: stretch !important; }
+
+/* Make columns vertical flex containers */
+[data-testid="column"], [data-testid="stColumn"] {
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+/* Ensure container child takes full height */
+[data-testid="column"] > div, [data-testid="stColumn"] > div {
+    flex: 1 !important; 
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
+}
+</style>
+""", unsafe_allow_html=True)
+```
+
+### 5. Header Hierarchy
 
 ```python
 # Topic title (H1)
@@ -272,19 +301,19 @@ Use this when aligning headers with bordered containers in columns.
 ## Localization Best Practices
 
 ```python
-# ✅ GOOD - Separate keys for complex content
+# [CORRECT] - Separate keys for complex content
 "intro": {
     "de": "Deutscher Text...",
     "en": "English text..."
 }
 
-# ✅ GOOD - Inline for simple labels
+# [CORRECT] - Inline for simple labels
 st.button(t({"de": "Klicken", "en": "Click"}))
 
-# ❌ AVOID - Hardcoded strings
+# [INCORRECT] - AVOID - Hardcoded strings
 st.markdown("This is not translated")
 
-# ✅ GOOD - LaTeX doesn't need translation
+# [CORRECT] - LaTeX doesn't need translation
 "formula": r"P(A) = \frac{1}{6}"
 ```
 
@@ -383,4 +412,7 @@ with st.container(border=True):
 - [ ] Updated `SUBTOPIC_QUESTION_COUNTS`
 - [ ] Containers have `border=True`
 - [ ] Standard spacing used (`<br><br>`, `---`)
+- [ ] Rule Check: **No Emojis** (All icons are SVG/Lucide)
+- [ ] Rule Check: **LaTeX Standard** (All math + logical connectors)
+- [ ] Rule Check: **Equal Height** (Columns are stretched)
 - [ ] Tested in browser

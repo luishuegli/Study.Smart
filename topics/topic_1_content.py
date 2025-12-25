@@ -255,7 +255,7 @@ def render_subtopic_1_1(model):
     
     q_key = "q_1_1_stetig"
     
-    question_text = t({'de': 'Welcher der folgenden Ereignisräume $S$ ist stetig?', 'en': 'Which of the following sample spaces $S$ is continuous?'})
+    question_text = t({'de': '**Welcher der folgenden Ereignisräume $S$ ist stetig?**', 'en': '**Which of the following sample spaces $S$ is continuous?**'})
     
     # Options setup
     opts_raw = [
@@ -364,5 +364,8 @@ def render_topic_1_content(model, subtopic_id=None):
     elif subtopic_id == "1.5":
         from topics.topic_1_5_content import render_subtopic_1_5
         render_subtopic_1_5(model)
+    elif subtopic_id == "1.7":
+        from topics.topic_1_7_content import render_subtopic_1_7
+        render_subtopic_1_7(model)
     else:
         st.info(f"Content for subtopic {subtopic_id} is under development.")

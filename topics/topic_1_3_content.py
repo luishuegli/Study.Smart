@@ -51,8 +51,8 @@ content_1_3 = {
         "title": {"de": "Konzept-Check", "en": "Concept Check"},
         "source": "Selbst erstellt / Self-created",
         "question": {
-            "de": r"Wann darf man die Laplace-Formel $P(A) = \frac{g}{m}$ verwenden?",
-            "en": r"When are you allowed to use the Laplace formula $P(A) = \frac{g}{m}$?"
+            "de": r"**$\text{Wann darf man die Laplace-Formel } P(A) = \frac{g}{m} \text{ verwenden?}$**",
+            "en": r"**$\text{When are you allowed to use the Laplace formula } P(A) = \frac{g}{m}?$**"
         },
         "options": [
             {"id": "a", "de": "Immer.", "en": "Always."},
@@ -232,7 +232,8 @@ def render_subtopic_1_3(model):
             # Controls: Equal width now to prevent squeezes
             c1, c2, c3, c4 = st.columns(4) 
             with c1:
-                if st.button("↺", key="reset_1_3", type="secondary", use_container_width=True):
+                # FIX: st.button does not support SVG/HTML in label. Use text.
+                if st.button(t({"de": "Reset", "en": "Reset"}), key="reset_1_3", type="secondary", use_container_width=True):
                     reset_rolls()
                     st.rerun()
             with c2:

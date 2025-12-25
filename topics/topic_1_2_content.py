@@ -19,38 +19,37 @@ content_1_2 = {
             "symbol": "A ∪ B",
             "title_de": "Vereinigung",
             "title_en": "Union",
-            "def_de": "ODER-Verknüpfung. Das Element ist in A, in B oder in beiden.",
-            "def_en": "OR Operator. The element is in A, in B, or in both.",
-            "example_de": "$\\{1,2\\} \\cup \\{2,3\\} = \\{1,2,3\\}$",
-            "example_en": "$\\{1,2\\} \\cup \\{2,3\\} = \\{1,2,3\\}$"
+            "def_de": "ODER-Verknüpfung. Das Element ist in $A, B$ oder in beiden.",
+            "def_en": "OR Operator. The element is in $A, B$, or in both.",
+            "example_de": r"$\text{Wenn } A=\{1,2\} \text{ und } B=\{2,3\}$" + "\n\n" + r"$\rightarrow A \cup B = \{1,2,3\}$",
+            "example_en": r"$\text{If } A=\{1,2\} \text{ and } B=\{2,3\}$" + "\n\n" + r"$\rightarrow A \cup B = \{1,2,3\}$"
         },
         "sect": {
             "symbol": "A ∩ B",
             "title_de": "Schnittmenge",
             "title_en": "Intersection",
-            "def_de": "UND-Verknüpfung. Das Element muss in A und gleichzeitig in B sein.",
-            "def_en": "AND Operator. The element must be in A and simultaneously in B.",
-            "example_de": "$\\{1,2\\} \\cap \\{2,3\\} = \\{2\\}$",
-            "example_en": "$\\{1,2\\} \\cap \\{2,3\\} = \\{2\\}$"
+            "def_de": "UND-Verknüpfung. Das Element muss in $A$ und $B$ sein.",
+            "def_en": "AND Operator. The element must be in $A$ and $B$.",
+            "example_de": r"$\text{Wenn } A=\{1,2\} \text{ und } B=\{2,3\}$" + "\n\n" + r"$\rightarrow A \cap B = \{2\}$",
+            "example_en": r"$\text{If } A=\{1,2\} \text{ and } B=\{2,3\}$" + "\n\n" + r"$\rightarrow A \cap B = \{2\}$"
         },
         "diff": {
             "symbol": "A \\ B",
             "title_de": "Differenz",
             "title_en": "Difference",
-            "def_de": "Alles was in A ist, aber nicht in B.",
-            "def_en": "Everything in A, but not in B.",
-            # FIX: Expanded to 2 lines to match the height of 'Complement'
-            "example_de": "$\\text{Sei } A=\\{1,2\\}, B=\\{2,3\\}$  \n$\\rightarrow A \\setminus B = \\{1\\}$",
-            "example_en": "$\\text{Let } A=\\{1,2\\}, B=\\{2,3\\}$  \n$\\rightarrow A \\setminus B = \\{1\\}$"
+            "def_de": "Alles was in $A$ ist, aber nicht in $B$.",
+            "def_en": "Everything in $A$, but not in $B$.",
+            "example_de": r"$\text{Wenn } A=\{1,2\}, B=\{2,3\}$" + "\n\n" + r"$\rightarrow A \setminus B = \{1\}$",
+            "example_en": r"$\text{If } A=\{1,2\}, B=\{2,3\}$" + "\n\n" + r"$\rightarrow A \setminus B = \{1\}$"
         },
         "comp": {
             "symbol": "Ā",
             "title_de": "Komplement",
             "title_en": "Complement",
-            "def_de": "Alles im Ereignisraum S, was nicht in A liegt.",
-            "def_en": "Everything in sample space S that is not in A.",
-            "example_de": "$\\text{Wenn } S = \\{1, 2, 3\\} \\text{ und } A = \\{1\\}$  \n$\\rightarrow \\bar{A} = \\{2, 3\\}$",
-            "example_en": "$\\text{If } S = \\{1, 2, 3\\} \\text{ and } A = \\{1\\}$  \n$\\rightarrow \\bar{A} = \\{2, 3\\}$"
+            "def_de": "Alles im Ereignisraum $S$, was nicht in $A$ liegt.",
+            "def_en": "Everything in sample space $S$ that is not in $A$.",
+            "example_de": r"$\text{Wenn } S = \{1, 2, 3\} \text{ und } A = \{1\}$" + "\n\n" + r"$\rightarrow \bar{A} = \{2, 3\}$",
+            "example_en": r"$\text{If } S = \{1, 2, 3\} \text{ and } A = \{1\}$" + "\n\n" + r"$\rightarrow \bar{A} = \{2, 3\}$"
         }
     },
     "interactive_header": {"de": "Interaktive Visualisierung", "en": "Interactive Visualization"},
@@ -328,7 +327,7 @@ def render_subtopic_1_2(model):
             
             render_mcq(
                 key_suffix=f"1_2_{event_key}",
-                question_text=t({"de": "Wähle:", "en": "Select:"}),
+                question_text=t({"de": "**Wähle:**", "en": "**Select:**"}),
                 options=opts,
                 correct_idx=correct_idx,
                 solution_text_dict={'de': e_data['sol_de'], 'en': e_data['sol_en']},

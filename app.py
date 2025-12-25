@@ -25,6 +25,24 @@ st.set_page_config(
 # Initialize Language State
 loc.init_lang()
 
+# --- Theme Toggle ---
+# Check if the theme is already set in the session state, default to 'light'
+if "theme" not in st.session_state:
+    st.session_state.theme = "light"
+
+# Create a toggle button in the sidebar. The value is determined by the current theme.
+# The label changes based on the theme to be more descriptive.
+toggle_label = "Switch to Dark Mode" if st.session_state.theme == "light" else "Switch to Light Mode"
+is_dark_mode = st.sidebar.toggle(toggle_label, value=(st.session_state.theme == "dark"))
+
+# Update the theme in the session state based on the toggle's status
+new_theme = "dark" if is_dark_mode else "light"
+
+# If the theme has changed, update the session state and rerun the app to apply the new theme
+if st.session_state.theme != new_theme:
+    st.session_state.theme = new_theme
+    st.rerun()
+
 # Inject Global Styles
 load_design_system()
 

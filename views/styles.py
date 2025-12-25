@@ -37,83 +37,88 @@ def render_icon(icon_name):
 
 def load_design_system():
     """Inject the Strict 'Apple Pro' Light Mode CSS."""
-    st.markdown("""
+
+    # Determine current theme
+    theme = st.session_state.get('theme', 'light')
+
+    # Define CSS for both themes
+    css = """
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* --- 1. VARIABLES (The Purge: Strict Light Mode) --- */
-        :root {
-            /* Apple Pro Palette */
-            --bg-void: #FFFFFF;           /* The Pure White Void */
-            --bg-card: #F5F5F7;           /* The 'Surface' (Soft Grey) */
-            --text-primary: #1D1D1F;      /* Near Black for Text */
+        /* --- 1. VARIABLES --- */
+        body.light-mode {
+            --bg-void: #FFFFFF;
+            --bg-card: #F5F5F7;
+            --text-primary: #1D1D1F;
             --text-secondary: #86868b;
             --border-color: rgba(0,0,0,0.08);
-            --accent-fill: #000000;       /* Pure Black for Action */
-            --accent-text: #FFFFFF;       /* White Text on Black */
+            --accent-fill: #000000;
+            --accent-text: #FFFFFF;
             --highlight: rgba(0,0,0,0.04);
         }
 
+        body.dark-mode {
+            --bg-void: #000000;
+            --bg-card: #1C1C1E;
+            --text-primary: #FFFFFF;
+            --text-secondary: #8D8D92;
+            --border-color: rgba(255,255,255,0.1);
+            --accent-fill: #FFFFFF;
+            --accent-text: #000000;
+            --highlight: rgba(255,255,255,0.05);
+        }
+
         /* --- 2. GLOBAL RESET --- */
-        .stApp { 
-            background-color: var(--bg-void) !important; 
+        .stApp {
+            background-color: var(--bg-void) !important;
             font-family: 'Inter', sans-serif;
             color: var(--text-primary);
         }
         
         /* --- 3. THE BENTO CARD & NATIVE CONTAINERS --- */
-        /* Target the main vertical blocks & Native Containers */
         div[data-testid="stVerticalBlock"] > div[style*="flex-direction: column;"] > div[data-testid="stVerticalBlock"],
         div[data-testid="stVerticalBlockBorderWrapper"] {
             background-color: var(--bg-card) !important;
             border: 1px solid var(--border-color) !important;
             border-radius: 20px !important;
-            padding: 40px !important; /* Increased from 24px for more breathability */
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important; /* Subtle shadow */
+            padding: 40px !important;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important;
             gap: 24px;
         }
 
-        /* --- 3b. CONTAINER WIDTH (Widen the central column) --- */
+        /* --- 3b. CONTAINER WIDTH --- */
         .block-container {
-            max-width: 56rem !important; /* Sweet spot between default 46rem and 66rem */
+            max-width: 56rem !important;
             padding-left: 2rem !important;
             padding-right: 2rem !important;
-            padding-top: 12px !important; /* Aggressively reduced to 12px */
+            padding-top: 12px !important;
             padding-bottom: 2rem !important;
         }
         
-        /* Remove default margin from top headers to avoid double spacing */
-        h1, h2, h3 {
-             margin-top: 0 !important;
-        }
+        h1, h2, h3 { margin-top: 0 !important; }
+        div[data-testid="stVerticalBlockBorderWrapper"] > div { gap: 16px; }
         
-        div[data-testid="stVerticalBlockBorderWrapper"] > div {
-             gap: 16px;
-        }
-        
-        /* --- 4. BUTTONS (The 'Ghost' Fix) --- */
+        /* --- 4. BUTTONS --- */
         .stButton > button {
             width: 100%;
-            background-color: var(--accent-fill) !important; /* Pure Black */
-            color: #FFFFFF !important; /* Force Pure White for Icon */
+            background-color: var(--accent-fill) !important;
+            color: var(--accent-text) !important;
             border: 1px solid var(--border-color) !important;
-            border-radius: 24px !important; /* MATCH INPUT ROUNDEDNESS */
+            border-radius: 24px !important;
             font-weight: 600 !important;
-            padding: 8px 24px !important; /* Reduced padding to match input height */
-            line-height: normal !important; /* Use normal line height for button */
+            padding: 8px 24px !important;
+            line-height: normal !important;
             transition: all 0.2s ease;
             display: flex !important;
             align-items: center !important;
             justify-content: center !important;
         }
         
-        /* FIX: Force internal text to White and remove margins */
-        .stButton > button p, 
-        .stButton > button div,
-        .stButton > button span,
+        .stButton > button p, .stButton > button div, .stButton > button span,
         div[data-testid="stFormSubmitButton"] > button p,
         div[data-testid="stFormSubmitButton"] > button div,
         div[data-testid="stFormSubmitButton"] > button span {
-            color: #FFFFFF !important; /* Force Pure White */
+            color: var(--accent-text) !important;
             margin: 0 !important;
             line-height: 1 !important;
             padding: 0 !important;
@@ -123,34 +128,19 @@ def load_design_system():
             opacity: 0.85;
             transform: scale(0.99);
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            color: #FFFFFF !important;
         }
         
-        /* Secondary Buttons (Outlined) */
         .stButton > button[kind="secondary"] {
             background-color: transparent !important;
             color: var(--text-primary) !important;
             border: 1px solid var(--border-color) !important;
         }
-         .stButton > button[kind="secondary"]:hover {
-            background-color: rgba(0,0,0,0.05) !important;
-        }
-        /* Fix secondary button text */
-        .stButton > button[kind="secondary"] p {
-             color: var(--text-primary) !important;
-        }
+        .stButton > button[kind="secondary"]:hover { background-color: var(--highlight) !important; }
+        .stButton > button[kind="secondary"] p { color: var(--text-primary) !important; }
         
-
-        /* AI Chat Input Styling - REMOVED TO FIX BORDER ISSUES */
-        /* See ai_helper.py for local override or use default Streamlit style */
-
-        /* --- 5. PROGRESS BARS (Force Black) --- */
-        .stProgress > div > div > div > div {
-            background-color: var(--accent-fill) !important; /* Black Bar */
-        }
-        .stProgress > div > div > div {
-             background-color: #E5E5E5 !important; /* Light Grey Track */
-        }
+        /* --- 5. PROGRESS BARS --- */
+        .stProgress > div > div > div > div { background-color: var(--accent-fill) !important; }
+        .stProgress > div > div > div { background-color: #E5E5E5 !important; }
         
         /* --- 6. EXPANDERS --- */
         .streamlit-expanderHeader {
@@ -160,33 +150,18 @@ def load_design_system():
             border-bottom: 1px solid var(--border-color);
         }
         
-        /* --- 7. RADIO BUTTONS (Border Selection Logic) --- */
-        /* Force the element container wrapper to full width */
-        div.stElementContainer:has(div.stRadio) {
-            width: 100% !important;
-        }
-        
-        /* Force the entire radio widget to full width */
-        div[class*="stRadio"] {
-            width: 100% !important;
-        }
-        
-        /* Hide Dot */
-        div[class*="stRadio"] > div[role="radiogroup"] > label > div:first-child {
-            display: none !important;
-        }
-        
-        /* Force radiogroup to full width */
+        /* --- 7. RADIO BUTTONS --- */
+        div.stElementContainer:has(div.stRadio) { width: 100% !important; }
+        div[class*="stRadio"] { width: 100% !important; }
+        div[class*="stRadio"] > div[role="radiogroup"] > label > div:first-child { display: none !important; }
         div[class*="stRadio"] > div[role="radiogroup"] {
             display: flex !important;
             flex-direction: column !important;
             width: 100% !important;
             gap: 0 !important;
         }
-        
-        /* Container Style - Force full width */
         div[class*="stRadio"] > div[role="radiogroup"] > label {
-            background-color: var(--bg-void); /* White background for options */
+            background-color: var(--bg-void);
             border: 1px solid var(--border-color) !important;
             border-radius: 12px !important;
             padding: 12px 16px !important;
@@ -194,105 +169,57 @@ def load_design_system():
             transition: all 0.1s ease-in-out;
             color: var(--text-primary);
             cursor: pointer;
-            display: block !important; /* Changed to block */
+            display: block !important;
             width: 100% !important;
             max-width: 100% !important;
             box-sizing: border-box !important;
         }
-        
-        /* Force the inner div to also be full width */
-        div[class*="stRadio"] > div[role="radiogroup"] > label > div {
-            width: 100% !important;
-            max-width: 100% !important;
-        }
-        
+        div[class*="stRadio"] > div[role="radiogroup"] > label > div { width: 100% !important; max-width: 100% !important; }
         div[class*="stRadio"] > div[role="radiogroup"] > label:hover {
             border-color: var(--text-primary) !important;
-            background-color: #FAFAFA;
+            background-color: var(--highlight);
         }
-        
-        /* Selected State: Thick Black Border */
         div[class*="stRadio"] > div[role="radiogroup"] > label:has(input:checked) {
-            border: 2px solid var(--text-primary) !important; /* Black Border */
+            border: 2px solid var(--text-primary) !important;
             background-color: var(--bg-void) !important;
             font-weight: 600;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
-        
-        /* Fix text alignment */
-        div[class*="stRadio"] > div[role="radiogroup"] > label > div[data-testid="stMarkdownContainer"] {
-            margin-left: 0 !important;
-        }
+        div[class*="stRadio"] > div[role="radiogroup"] > label > div[data-testid="stMarkdownContainer"] { margin-left: 0 !important; }
 
         /* --- 8. TYPOGRAPHY --- */
         h1, h2, h3, h4, h5, h6 {
             color: var(--text-primary);
             font-weight: 700;
-            letter-spacing: -0.02em; /* Tight "Pro" tracking */
+            letter-spacing: -0.02em;
         }
-        p, div, label, li {
-            color: var(--text-primary);
-        }
-        
-        .theory-content {
-             font-size: 1.05rem;
-             line-height: 1.6;
-             color: #333;
-        }
+        p, div, label, li { color: var(--text-primary); }
+        .theory-content { font-size: 1.05rem; line-height: 1.6; color: #333; }
 
         /* --- 9. LINKS --- */
-        a {
-            color: var(--text-primary);
-            opacity: 0.7;
-            text-decoration: none;
-        }
-        a:hover {
-            opacity: 1.0;
-            text-decoration: underline;
-        }
+        a { color: var(--text-primary); opacity: 0.7; text-decoration: none; }
+        a:hover { opacity: 1.0; text-decoration: underline; }
 
         /* --- 10. SIDEBAR TWEAKS --- */
-        /* HELL BANNED RE-SIZE HANDLE */
-        /* Target the resizing div that typically appears after the section */
-        div[data-testid="stSidebar"] > div {
-             overflow: hidden !important; 
-        }
-        
-        /* The resize handle is often a div with a specific class or style in Streamlit */
-        /* SAFE REVERT: These selectors were likely hiding the main content div */
-        /* 
-        div[data-testid="stSidebar"] + div,
-        section[data-testid="stSidebar"] + div {
-            display: none !important;
-            width: 0 !important;
-            pointer-events: none !important;
-        }
-        */
-
-        /* Fix unnecessary scrollbar in sidebar - HIDE UI but allow scroll */
-        /* We target the user content part specifically */
-        section[data-testid="stSidebar"] [data-testid="stSidebarUserContent"] {
-             padding-bottom: 20px;
-        }
-
-        section[data-testid="stSidebar"] > div { 
-            overflow-y: auto !important; 
-            overflow-x: hidden !important;
-        }
-        
-        section[data-testid="stSidebar"] ::-webkit-scrollbar {
-            display: none !important;
-            width: 0 !important;
-            height: 0 !important;
-        }
-        
-        /* Ensure specific elements in sidebar don't trigger wide width */
-        section[data-testid="stSidebar"] .stElementContainer {
-            width: 100% !important;
-        }
-
+        div[data-testid="stSidebar"] > div { overflow: hidden !important; }
+        section[data-testid="stSidebar"] [data-testid="stSidebarUserContent"] { padding-bottom: 20px; }
+        section[data-testid="stSidebar"] > div { overflow-y: auto !important; overflow-x: hidden !important; }
+        section[data-testid="stSidebar"] ::-webkit-scrollbar { display: none !important; width: 0 !important; height: 0 !important; }
+        section[data-testid="stSidebar"] .stElementContainer { width: 100% !important; }
     </style>
-    """, unsafe_allow_html=True)
+    """
+
+    # Define JS to apply the correct theme class
+    script = f"""
+    <script>
+        const body = parent.document.body;
+        body.classList.remove('light-mode', 'dark-mode'); // Clean up previous classes
+        body.classList.add('{theme}-mode');
+    </script>
+    """
+
+    # Combine and render
+    st.markdown(css + script, unsafe_allow_html=True)
 
 # Legacy compatibility
 def icon(name, size=24, color=None):

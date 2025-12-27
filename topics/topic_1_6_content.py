@@ -180,6 +180,9 @@ def render_subtopic_1_6(model):
         else:
             st.balloons()
             st.success(f"🌌 **{t({'de': 'Finale:', 'en': 'Final Step:'})}** {t({'de': 'Universum erobert! P=1. Überprüfe die Mathematik unten.', 'en': 'Universe captured! P=1. Check the math below.'})}")
+            if user := st.session_state.get("user"):
+                from utils.progress_tracker import track_question_answer
+                track_question_answer(user["localId"], "vwl", "1", "1.6", "1_6_dart_mission", True)
 
         st.markdown("<br>", unsafe_allow_html=True)
 

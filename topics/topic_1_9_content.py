@@ -221,8 +221,8 @@ def render_subtopic_1_9(model):
             
             elif stage == 1:
                 st.markdown(t({
-                    "de": f"🧬 **Die Wahrheit:** In unserer Welt sind $P(S) = 4/16$ krank. Nur die **{render_icon('circle', '#FF4B4B')} Roten Punkte** sind betroffen.",
-                    "en": f"🧬 **The Truth:** In our world, $P(S) = 4/16$ are sick. Only the **{render_icon('circle', '#FF4B4B')} Red Dots** are affected."
+                    "de": f"🧬 **Die Wahrheit:** In unserer Welt sind $P(S) = 4/16$ krank. Nur die **{render_icon('circle', color='#FF4B4B')} Roten Punkte** sind betroffen.",
+                    "en": f"🧬 **The Truth:** In our world, $P(S) = 4/16$ are sick. Only the **{render_icon('circle', color='#FF4B4B')} Red Dots** are affected."
                 }), unsafe_allow_html=True)
             
             elif stage == 2:
@@ -238,8 +238,8 @@ def render_subtopic_1_9(model):
                     "en": "🔍 **The Filter:** We ignore everyone without a yellow border. Your new universe is ONLY the 6 people with a positive test."
                 }))
                 
-                # Track progress
-                track_question_answer(model, "vwl", "1", "1.9", "1_9_medical_mission", True)
+                if user := st.session_state.get("user"):
+                    track_question_answer(user["localId"], "vwl", "1", "1.9", "1_9_medical_mission", True)
                 
                 # Pro Tip: Concrete Counts
                 c1, c2 = st.columns(2)
@@ -502,6 +502,7 @@ def render_subtopic_1_9(model):
             st.session_state.search_attempts = 0
             st.session_state.search_msg = ""
             st.session_state.search_last_click = None
+            st.session_state.search_history = [] # List of (r, c) misses
 
         # AGGRESSIVE GUIDANCE HUD
         attempts = st.session_state.get("search_attempts", 0)
@@ -544,16 +545,13 @@ def render_subtopic_1_9(model):
             hovertemplate='%{x}%{y}<br>Prob: %{z:.1%}<extra></extra>'
         ))
         
-        # Add a marker for the last clicked spot if it was a miss
-        if st.session_state.search_last_click and not found:
-             last_c, last_r = st.session_state.search_last_click
-             # Convert numeric index back to labels for plotting or just use indices if compatible?
-             # Heatmap x/y are strings "A", "1". Plotly handles categorical axis overlap if we match values.
+        # Add markers for all misses
+        for m_c, m_r in st.session_state.search_history:
              fig_s.add_trace(go.Scatter(
-                 x=[chr(65+last_c)], 
-                 y=[str(last_r+1)],
+                 x=[chr(65+m_c)], 
+                 y=[str(m_r+1)],
                  mode='markers',
-                 marker=dict(symbol='x', color='red', size=15, line=dict(width=2)),
+                 marker=dict(symbol='x', color='red', size=12),
                  showlegend=False,
                  hoverinfo='skip'
              ))
@@ -604,7 +602,6 @@ def render_subtopic_1_9(model):
                 # EXECUTE SEARCH LOGIC
                 target = st.session_state.search_target
                 st.session_state.search_attempts += 1
-                st.session_state.search_last_click = (c_idx, r_idx)
                 
                 # Detection Prob (Power)
                 P_D_given_O = 0.7 
@@ -618,7 +615,8 @@ def render_subtopic_1_9(model):
                     if np.random.random() < P_D_given_O:
                         found_now = True
                         st.session_state.search_found = True
-                        track_question_answer(model, "vwl", "1", "1.9", "1_9_search_mission", True)
+                        if user := st.session_state.get("user"):
+                            track_question_answer(user["localId"], "vwl", "1", "1.9", "1_9_search_mission", True)
                 
                 if not found_now:
                     # BAYES UPDATE
@@ -634,6 +632,7 @@ def render_subtopic_1_9(model):
                     
                     # Normalize
                     st.session_state.search_grid = new_grid / np.sum(new_grid)
+                    st.session_state.search_history.append((c_idx, r_idx))
                 
                 st.rerun()
                 

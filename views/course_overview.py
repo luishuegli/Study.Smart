@@ -10,7 +10,7 @@ SUBTOPIC_QUESTION_COUNTS = {
     "1.3": 1,  # 1_3_exam
     "1.4": 1,  # 1_4_exam
     "1.5": 2,  # 1_5_exam + Market Analyst Mission
-    "1.6": 1,  # p_single_point
+    "1.6": 2,  # p_single_point, 1_6_dart_mission
     "1.7": 4,  # 1_7_q1_narrative, 1_7_q2_narrative, 1_7_narrative_mission, 1_7_balance_mission
     "1.8": 2,  # 1_8_factory, 1_8_mission
     "1.9": 3,  # 1_9_prisoners, 1_9_medical_mission, 1_9_search_mission

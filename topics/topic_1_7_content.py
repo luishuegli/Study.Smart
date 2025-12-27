@@ -417,8 +417,7 @@ def render_subtopic_1_7(model):
         
         # Progress Tracking
         from utils.progress_tracker import update_local_progress, track_question_answer
-        user = st.session_state.get("user")
-        if user:
+        if user := st.session_state.get("user"):
             update_local_progress("1", "1.7", "1_7_narrative_mission", True)
             track_question_answer(user["localId"], "vwl", "1", "1.7", "1_7_narrative_mission", True)
             
@@ -649,8 +648,7 @@ def render_subtopic_1_7(model):
         
         # Progress Tracking
         from utils.progress_tracker import update_local_progress, track_question_answer
-        user = st.session_state.get("user")
-        if user:
+        if user := st.session_state.get("user"):
             update_local_progress("1", "1.7", "1_7_balance_mission", True)
             track_question_answer(user["localId"], "vwl", "1", "1.7", "1_7_balance_mission", True)
     

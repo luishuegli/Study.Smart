@@ -127,7 +127,7 @@ def render_subtopic_1_summary(model):
     st.markdown("### 📝 Cheat Sheet")
     
     with st.container(border=True):
-        st.subheader(f"{render_icon('info', '#555')} {t(content_1_10['cheat_sheet']['def_title'])}")
+        st.subheader(f"{render_icon('info', color='#555')} {t(content_1_10['cheat_sheet']['def_title'])}")
         st.markdown(t(content_1_10["cheat_sheet"]["def_content"]))
         st.info(t({
             "de": "💡 **Aha-Moment:** In stetigen Räumen (wie der Dartscheibe) haben Punkte keine Fläche. Nur 'Sektoren' haben Gewicht!",
@@ -135,7 +135,7 @@ def render_subtopic_1_summary(model):
         }))
 
     with st.container(border=True):
-        st.subheader(f"{render_icon('combine', '#555')} {t(content_1_10['cheat_sheet']['rules_title'])}")
+        st.subheader(f"{render_icon('combine', color='#555')} {t(content_1_10['cheat_sheet']['rules_title'])}")
         st.markdown(t(content_1_10["cheat_sheet"]["rules_content"]))
         st.warning(t({
             "de": "⚠️ **Kardinalfehler:** Vergiss nie $P(A \cap B)$ beim Additionssatz abzuziehen, sonst zählst du die Überschneidung doppelt!",
@@ -143,7 +143,7 @@ def render_subtopic_1_summary(model):
         }))
 
     with st.container(border=True):
-        st.subheader(f"{render_icon('microscope', '#555')} {t(content_1_10['cheat_sheet']['bayes_title'])}")
+        st.subheader(f"{render_icon('microscope', color='#555')} {t(content_1_10['cheat_sheet']['bayes_title'])}")
         st.markdown(t(content_1_10["cheat_sheet"]["bayes_content"]))
         st.success(t({
             "de": "🔍 **Bayes-Geheimnis:** Neue Daten ändern nicht die Realität, sondern unser Wissen darüber. Update complete.",

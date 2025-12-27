@@ -356,8 +356,8 @@ def render_subtopic_1_8(model):
             # CHECK TARGET
             if total_defect_pct < target_val:
                 st.success(f"{t({'de': 'ZIEL ERREICHT!', 'en': 'TARGET REACHED!'})} ({total_defect_pct:.1f}% < {target_val}%)")
-                # Track progress (Mission Accomplished)
-                track_question_answer(model, "vwl", "1", "1.8", "1_8_mission", True)
+                if user := st.session_state.get("user"):
+                    track_question_answer(user["localId"], "vwl", "1", "1.8", "1_8_mission", True)
             else:
                 st.warning(f"{t({'de': 'Ziel verfehlt.', 'en': 'Target missed.'})} ({total_defect_pct:.1f}% > {target_val}%)")
             

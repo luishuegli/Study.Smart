@@ -23,6 +23,7 @@ COURSES = {
                     {"id": "1.7", "title": {"de": "1.7 Bedingte Wahrscheinlichkeit und stochastische Unabhängigkeit", "en": "1.7 Conditional Probability and Independence"}, "slide_start": 64},
                     {"id": "1.8", "title": {"de": "1.8 Totale Wahrscheinlichkeit", "en": "1.8 Total Probability"}, "slide_start": 77},
                     {"id": "1.9", "title": {"de": "1.9 Das Bayes-Theorem", "en": "1.9 Bayes' Theorem"}, "slide_start": 85},
+                    {"id": "1.10", "title": {"de": "1.10 Zusammenfassung & Prüfung", "en": "1.10 Summary & Exam"}, "slide_start": 92},
                 ]
             },
             {

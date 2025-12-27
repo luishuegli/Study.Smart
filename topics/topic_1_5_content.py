@@ -200,17 +200,28 @@ def render_simulator_1_5():
     # --- CSS: SCOPED SLIDER COLORS ---
     st.markdown("""
     <style>
-    /* Blue Slider (First) */
-    div[data-testid="stVerticalBlock"] div[data-baseweb="slider"]:nth-of-type(1) div[class*="bg-"] { background-color: #007AFF !important; }
-    div[data-testid="stVerticalBlock"] div[data-baseweb="slider"]:nth-of-type(1) div[role="slider"] { background-color: #007AFF !important; }
-    
-    /* Purple Slider (Second) */
-    div[data-testid="stVerticalBlock"] div[data-baseweb="slider"]:nth-of-type(2) div[class*="bg-"] { background-color: #AF52DE !important; }
-    div[data-testid="stVerticalBlock"] div[data-baseweb="slider"]:nth-of-type(2) div[role="slider"] { background-color: #AF52DE !important; }
-    
-    /* Indigo Slider (Third) */
-    div[data-testid="stVerticalBlock"] div[data-baseweb="slider"]:nth-of-type(3) div[class*="bg-"] { background-color: #5856D6 !important; }
-    div[data-testid="stVerticalBlock"] div[data-baseweb="slider"]:nth-of-type(3) div[role="slider"] { background-color: #5856D6 !important; }
+    /* 1. iPhone (Blue) */
+    .stSlider:has([aria-label*="iPhone"]) div[data-baseweb="slider"] > div:first-child > div:first-child { background-color: #007AFF !important; }
+    .stSlider:has([aria-label*="iPhone"]) div[role="slider"] { background-color: #FFFFFF !important; border: 2px solid #007AFF !important; }
+
+    /* 2. MacBook (Purple) */
+    .stSlider:has([aria-label*="Mac"]) div[data-baseweb="slider"] > div:first-child > div:first-child { background-color: #AF52DE !important; }
+    .stSlider:has([aria-label*="Mac"]) div[role="slider"] { background-color: #FFFFFF !important; border: 2px solid #AF52DE !important; }
+
+    /* 3. Intersection/Overlap (Indigo) - Selector 1 */
+    .stSlider:has([aria-label*="P(A and B)"]) div[data-baseweb="slider"] > div:first-child > div:first-child { background-color: #5856D6 !important; }
+    .stSlider:has([aria-label*="P(A and B)"]) div[role="slider"] { background-color: #FFFFFF !important; border: 2px solid #5856D6 !important; }
+
+    /* 4. Intersection/Overlap (Indigo) - Selector 2 (Mission) */
+    .stSlider:has([aria-label*="Overlap"]) div[data-baseweb="slider"] > div:first-child > div:first-child { background-color: #5856D6 !important; }
+    .stSlider:has([aria-label*="Overlap"]) div[role="slider"] { background-color: #FFFFFF !important; border: 2px solid #5856D6 !important; }
+
+    /* Global Slider Label/Value Tweak */
+    div[data-baseweb="slider"] > div > div > div[role="slider"] + div {
+        background-color: transparent !important;
+        color: inherit !important;
+        font-weight: bold !important;
+    }
     </style>
     """, unsafe_allow_html=True)
 

@@ -364,8 +364,20 @@ def render_topic_1_content(model, subtopic_id=None):
     elif subtopic_id == "1.5":
         from topics.topic_1_5_content import render_subtopic_1_5
         render_subtopic_1_5(model)
+    elif subtopic_id == "1.6":
+        from topics.topic_1_6_content import render_subtopic_1_6
+        render_subtopic_1_6(model)
     elif subtopic_id == "1.7":
         from topics.topic_1_7_content import render_subtopic_1_7
         render_subtopic_1_7(model)
+    elif subtopic_id == "1.8":
+        from topics.topic_1_8_content import render_subtopic_1_8
+        render_subtopic_1_8(model)
+    elif subtopic_id == "1.9":
+        from topics.topic_1_9_content import render_subtopic_1_9
+        render_subtopic_1_9(model)
+    elif subtopic_id == "1.10":
+        from topics.topic_1_summary import render_subtopic_1_summary
+        render_subtopic_1_summary(model)
     else:
         st.info(f"Content for subtopic {subtopic_id} is under development.")

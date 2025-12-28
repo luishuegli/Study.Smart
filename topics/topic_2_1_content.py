@@ -124,7 +124,7 @@ def render_subtopic_2_1(client):
     # =========================================================================
     # THEORY SECTION - COMPREHENSIVE PEDAGOGICAL CONTENT
     # =========================================================================
-    st.markdown(f"### {render_icon('book-open')} {t({'de': 'Theorie', 'en': 'Theory'})}", unsafe_allow_html=True)
+    st.markdown(f"### {t({'de': 'Theorie', 'en': 'Theory'})}")
     
     # --- ROW 1: THE BIG QUESTION ---
     with st.container(border=True):
@@ -340,7 +340,7 @@ But the permutation formula counts each order separately! For 3 people, there ar
         st.markdown("---")
         
         # 3. THE MULTIVERSE VISUALIZATION
-        st.markdown(f"### {render_icon('layout-grid')} The Multiverse (n=4, k=2)", unsafe_allow_html=True)
+        st.markdown(f"### The Multiverse (n=4, k=2)")
         
         # Prepare Data
         items = c["scenarios"][scen_key]["items"]
@@ -388,7 +388,7 @@ But the permutation formula counts each order separately! For 3 people, there ar
 
     # --- EXAM SECTION ---
     st.markdown("<br><br>", unsafe_allow_html=True)
-    st.markdown(f"### {render_icon('clipboard-list')} {t({'de': 'Prüfungssimulation', 'en': 'Exam Simulation'})}", unsafe_allow_html=True)
+    st.markdown(f"### {t({'de': 'Prüfungssimulation', 'en': 'Exam Simulation'})}")
     
     with st.container(border=True):
         render_mcq(

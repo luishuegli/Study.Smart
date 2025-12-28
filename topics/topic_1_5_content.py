@@ -290,7 +290,7 @@ def render_simulator_1_5():
         col_ctrl, col_vis = st.columns([1, 1.5], gap="large")
 
         with col_ctrl:
-            st.markdown(f"#### {render_icon('clipboard-list')} Control Panel", unsafe_allow_html=True)
+            st.markdown("#### Control Panel")
 
             # --- STEP 1: IPHONE DATA ---
             if step == 1:

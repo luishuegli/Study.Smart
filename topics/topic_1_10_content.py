@@ -325,7 +325,7 @@ def render_subtopic_1_10(model):
     st.markdown("<br><br>", unsafe_allow_html=True)
 
     # 2. THE EXAM (Tabbed Interface)
-    st.markdown(f"### {render_icon('award')} {t(content_1_10['exam']['header'])}", unsafe_allow_html=True)
+    st.markdown(f"### {t(content_1_10['exam']['header'])}")
     st.caption(t(content_1_10["exam"]["desc"]))
     
     # Generate tabs from level data

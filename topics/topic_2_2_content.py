@@ -149,16 +149,16 @@ def render_subtopic_2_2(client):
     with st.container(border=True):
         # --- ROW 1: THE KEY INSIGHT ---
         st.markdown(f"""
-<div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; border-left: 4px solid #10b981; margin-bottom: 16px;">
+<div style="background: #fef3c7; border: 1px solid #fde68a; border-radius: 12px; padding: 20px; border-left: 4px solid #d97706; margin-bottom: 16px;">
     <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-        <div style="background: #ecfdf5; padding: 6px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">{render_icon('zap', size=18, color='#10b981')}</div>
-        <div style="font-size: 0.85em; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; color: #10b981;">{t({'de': 'Die goldene Regel', 'en': 'The Golden Rule'})}</div>
+        <div style="background: #fef3c7; padding: 6px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">{render_icon('zap', size=18, color='#d97706')}</div>
+        <div style="font-size: 0.85em; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; color: #92400e;">{t({'de': 'Die goldene Regel', 'en': 'The Golden Rule'})}</div>
     </div>
     <div style="display: flex; gap: 40px; align-items: center;">
         <div>
             <div style="font-size: 1.2em; font-weight: 700; color: #1e293b;">{t({'de': 'UND', 'en': 'AND'})}</div>
             <div style="font-size: 0.9em; color: #64748b;">{t({'de': 'Entscheidungs-Kette', 'en': 'Choice Chain'})}</div>
-            <div style="font-size: 1.5em; font-weight: 800; color: #10b981; margin-top: 4px;">&times;</div>
+            <div style="font-size: 1.5em; font-weight: 800; color: #92400e; margin-top: 4px;">&times;</div>
         </div>
         <div style="width: 1px; height: 40px; background: #e2e8f0;"></div>
         <div>

@@ -109,7 +109,12 @@ content_1_10 = {
                 "title": {"de": "Level 1: Totale Wahrscheinlichkeit", "en": "Level 1: Total Probability"},
                 "q": {"de": "Die Wahrscheinlichkeit für Sonne beträgt 60%. Wenn die Sonne scheint, ist die Laune zu 90% gut. Wenn es regnet (keine Sonne), ist die Laune nur zu 30% gut. Wie hoch ist die Wahrscheinlichkeit für gute Laune insgesamt?",
                       "en": "The probability of sun is 60%. If the sun shines, the mood is 90% good. If it rains (no sun), the mood is only 30% good. What is the total probability of a good mood?"},
-                "opts": ["60%", "66%", "54%", "90%"],
+                "opts": [
+                    {"de": "60%", "en": "60%"},
+                    {"de": "66%", "en": "66%"},
+                    {"de": "54%", "en": "54%"},
+                    {"de": "90%", "en": "90%"}
+                ],
                 "correct": 1,
                 "sol": {"de": "$0.9\\cdot0.6 + 0.3\\cdot0.4 = 0.54 + 0.12 = 0.66$", "en": "$0.9\\cdot0.6 + 0.3\\cdot0.4 = 0.54 + 0.12 = 0.66$"},
                 "err": {"de": "Hast du bedacht, dass es auch bei Regen gute Laune geben kann? (Gegenwahrscheinlichkeit von Sonne!)", "en": "Did you consider that mood can be good even when it rains? (Complement of Sun!)"}
@@ -120,7 +125,12 @@ content_1_10 = {
                 "title": {"de": "Level 2: Bayes Basic", "en": "Level 2: Bayes Basic"},
                 "q": {"de": "Maschine M1 produziert 20% aller Teile mit einer Fehlerrate von 5%. Maschine M2 produziert den Rest (80%) mit nur 1% Fehlern. Ein zufällig geprüftes Teil ist defekt. Wie hoch ist die Wahrscheinlichkeit, dass es von Maschine M1 stammt?", 
                       "en": "Machine M1 produces 20% of all parts with a 5% error rate. Machine M2 produces the rest (80%) with only 1% errors. A randomly checked part is defective. What is the probability that it came from Machine M1?"},
-                "opts": ["20%", "55.5%", "80%", "5%"],
+                "opts": [
+                    {"de": "20%", "en": "20%"},
+                    {"de": "55.5%", "en": "55.5%"},
+                    {"de": "80%", "en": "80%"},
+                    {"de": "5%", "en": "5%"}
+                ],
                 "correct": 1,
                 "sol": {"de": "P(M1|D) = (0.05*0.2) / 0.018 ≈ 55.5%. Beachte: Obwohl M1 viel weniger produziert, ist sie für die Mehrheit der Fehler verantwortlich!", "en": "P(M1|D) = (0.05*0.2) / 0.018 ≈ 55.5%. Note: Although M1 produces much less, it is responsible for the majority of errors!"},
                 "err": {"de": "Nutze Bayes: Prior (Marktanteil) mal Likelihood (Fehlerrate). M1 ist zwar klein, aber unzuverlässig.", "en": "Use Bayes: Prior (Share) times Likelihood (Error Rate). M1 is small but unreliable."}
@@ -131,7 +141,12 @@ content_1_10 = {
                 "title": {"de": "Level 3: Bayesian Search", "en": "Level 3: Bayesian Search"},
                 "q": {"de": "Ein U-Boot versteckt sich in Zone A (40%), B (35%) oder C (25%). Wir suchen Zone A ab, aber finden nichts (obwohl unsere Sensoren das Boot zu 80% finden würden, wenn es dort wäre). Wie hoch ist nun die Wahrscheinlichkeit, dass das Boot doch in Zone A ist?",
                       "en": "A submarine is hiding in Zone A (40%), B (35%), or C (25%). We search Zone A but find nothing (even though our sensors detect it 80% of the time if present). What is the new probability that the boat is actually in Zone A?"},
-                "opts": ["8%", "11.8%", "40%", "32%"],
+                "opts": [
+                    {"de": "8%", "en": "8%"},
+                    {"de": "11.8%", "en": "11.8%"},
+                    {"de": "40%", "en": "40%"},
+                    {"de": "32%", "en": "32%"}
+                ],
                 "correct": 1,
                 "sol": {"de": "P(A|¬Fund) = (0.2*0.4) / (0.2*0.4 + 1*0.35 + 1*0.25) ≈ 11.8%", "en": "P(A|¬Found) = (0.2*0.4) / (0.2*0.4 + 1*0.35 + 1*0.25) ≈ 11.8%"},
                 "err": {"de": "Der Zähler ist P(in A) * P(nicht gefunden | in A). Der Nenner ist die Summe aller Möglichkeiten, nichts zu finden.", "en": "The numerator is P(in A) * P(not found | in A). The denominator is the sum of all ways to find nothing."}
@@ -142,7 +157,12 @@ content_1_10 = {
                 "title": {"de": "Level 4: Monty Hall", "en": "Level 4: Monty Hall"},
                 "q": {"de": "Du stehst vor 3 Türen. Hinter einer ist ein Gewinn. Du wählst Tür 1. Der Moderator, der weiß, wo der Gewinn ist, öffnet Tür 3 (eine Niete). Er bietet dir an, zu Tür 2 zu wechseln. Solltest du das tun?",
                       "en": "You face 3 doors. Behind one is a prize. You pick Door 1. The host, who knows where the prize is, opens Door 3 (empty). He offers you to switch to Door 2. Should you switch?"},
-                "opts": ["33% (Egal)", "66% (Ja, Wechseln)", "50% (Egal)", "25% (Nein, Bleiben)"],
+                "opts": [
+                    {"de": "33% - Egal, bleiben", "en": "33% - Indifferent, stay"},
+                    {"de": "66% - Ja, wechseln", "en": "66% - Yes, switch"},
+                    {"de": "50% - Egal, 50/50", "en": "50% - Indifferent, 50/50"},
+                    {"de": "25% - Nein, bleiben", "en": "25% - No, stay"}
+                ],
                 "correct": 1,
                 "sol": {"de": "Ja! Deine Tür 1 hat eine Chance von 1/3. Die anderen beiden Türen haben zusammen 2/3. Da Tür 3 nun offen ist, konzentrieren sich die gesamten 2/3 auf Tür 2.",
                         "en": "Yes! Your Door 1 has a 1/3 chance. The defined 'Other' group has 2/3. Since Door 3 is revealed as empty, the entire 2/3 probability collapses onto Door 2."},
@@ -154,7 +174,12 @@ content_1_10 = {
                 "title": {"de": "Level 5: Independence", "en": "Level 5: Independence"},
                 "q": {"de": "Person A wirft eine Münze und erhält 'Kopf'. Person B wirft eine eigene Münze und erhält 'Zahl'. Beeinflussen sich diese Ereignisse gegenseitig (stochastische Unabhängigkeit)?",
                       "en": "Person A flips a coin and gets 'Heads'. Person B flips their own coin and gets 'Tails'. Do these events match the criteria for stochastic independence?"},
-                "opts": ["Nein", "Ja", "Nur bei fairen Münzen", "Nicht entscheidbar"],
+                "opts": [
+                    {"de": "Nein", "en": "No"},
+                    {"de": "Ja", "en": "Yes"},
+                    {"de": "Nur bei fairen Münzen", "en": "Only for fair coins"},
+                    {"de": "Nicht entscheidbar", "en": "Cannot be determined"}
+                ],
                 "correct": 1,
                 "sol": {"de": "Ja. Das physikalische Ergebnis von Wurf A hat keinen Einfluss auf die Wahrscheinlichkeiten von Wurf B. P(A und B) = P(A)*P(B).", "en": "Yes. The physical result of Flip A has no impact on the probabilities of Flip B. P(A and B) = P(A)*P(B)."},
                 "err": {"de": "Überlege kausal: Ändert Wissen über A irgendetwas an deiner Vorhersage für B?", "en": "Think causally: Does knowing A change your prediction for B in any way?"}
@@ -165,7 +190,12 @@ content_1_10 = {
                 "title": {"de": "Level 6: Combinatorics", "en": "Level 6: Combinatorics"},
                 "q": {"de": "In einer Urne sind 3 rote und 2 blaue Kugeln. Du ziehst eine Kugel und legst sie NICHT zurück. Die erste Kugel war rot. Wie hoch ist die Wahrscheinlichkeit, dass die zweite Kugel ebenfalls rot ist?",
                       "en": "An urn contains 3 red and 2 blue balls. You draw one ball and do NOT replace it. The first ball was red. What is the probability that the second ball is also red?"},
-                "opts": ["3/5", "2/4 (50%)", "3/4", "2/5"],
+                "opts": [
+                    {"de": "3/5 (60%)", "en": "3/5 (60%)"},
+                    {"de": "2/4 (50%)", "en": "2/4 (50%)"},
+                    {"de": "3/4 (75%)", "en": "3/4 (75%)"},
+                    {"de": "2/5 (40%)", "en": "2/5 (40%)"}
+                ],
                 "correct": 1,
                 "sol": {"de": "Nach dem ersten Zug (Rot) verbleiben 4 Kugeln in der Urne: 2 Rote und 2 Blaue. Die Chance ist also 2 von 4.", "en": "After the first draw (Red), 4 balls remain: 2 Red and 2 Blue. The chance is therefore 2 out of 4."},
                 "err": {"de": "Das 'Gedächtnis' der Urne zählt. Die Gesamtzahl und die roten Kugeln haben sich verringert.", "en": "The 'memory' of the urn matters. Both the total count and the red count decreased."}
@@ -261,13 +291,24 @@ def render_swimlane(title, icon_name, items):
 # --- HELPER: RENDER EXAM LEVEL ---
 def render_level(lvl, model):
     """Secondary helper to render a specific exam level."""
+    from utils.quiz_helper import shuffle_options
+    
     st.markdown(f"**{t(lvl['title'])}**")
+    
+    # Translate bilingual options
+    raw_opts = lvl["opts"]
+    translated_opts = [t(opt) for opt in raw_opts]
+    correct_idx = lvl["correct"]
+    
+    # Shuffle with stable seed based on level ID (deterministic per question)
+    seed = hash(lvl['id']) % 10000  # Stable seed
+    shuffled_opts, new_correct_idx = shuffle_options(translated_opts, correct_idx, seed)
     
     render_mcq(
         key_suffix=f"exam_{lvl['id']}",
         question_text=t(lvl["q"]),
-        options=lvl["opts"],
-        correct_idx=lvl["correct"],
+        options=shuffled_opts,
+        correct_idx=new_correct_idx,
         solution_text_dict=lvl["sol"],
         success_msg_dict={"de": "Korrekt!", "en": "Correct!"},
         error_msg_dict={"de": "Noch nicht ganz...", "en": "Not quite..."},

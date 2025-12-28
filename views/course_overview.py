@@ -17,6 +17,8 @@ SUBTOPIC_QUESTION_COUNTS = {
     "1.10": 6, # exam_l1 to exam_l6
     "2.1": 1,  # q_2_1_scenario_mastery
     "2.2": 1,  # q_2_2_club
+    "2.4": 1,  # q_2_4_lottery
+    "2.5": 1,  # q_2_5_coin
 }
 
 def calculate_topic_progress(topic_data, subtopic_ids):

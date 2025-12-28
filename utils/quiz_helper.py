@@ -1,13 +1,27 @@
 
 import streamlit as st
+import random
 from utils.localization import t
 from utils.ai_helper import render_ai_tutor
 from utils.progress_tracker import track_question_answer
 
+def shuffle_options(options, correct_idx, seed):
+    """
+    Shuffles options deterministically based on seed.
+    Returns shuffled options and the new correct index.
+    """
+    random.seed(seed)
+    indices = list(range(len(options)))
+    random.shuffle(indices)
+    shuffled = [options[i] for i in indices]
+    # Find where the original correct index ended up
+    new_correct = indices.index(correct_idx)
+    return shuffled, new_correct
+
 def render_tab_progress_css(tab_keys, key_prefix, topic_id=None, subtopic_id=None):
     """
     Generates CSS to show green indicators on answered tabs.
-    Checks both session state and loaded Firestore progress.
+    Uses a 4px left accent bar for better visibility (Option C).
     """
     answered_tabs = []
     user_progress = st.session_state.get("user_progress", {})
@@ -16,8 +30,6 @@ def render_tab_progress_css(tab_keys, key_prefix, topic_id=None, subtopic_id=Non
     correct_questions = subtopic_data.get("correct_questions", [])
 
     for tab_key in tab_keys:
-        # Check current progress (handles both Firestore and immediate session updates)
-            
         # Check Firestore progress
         question_id = f"{key_prefix}_{tab_key}"
         if question_id in correct_questions:
@@ -26,32 +38,31 @@ def render_tab_progress_css(tab_keys, key_prefix, topic_id=None, subtopic_id=Non
     # Check if all tabs are answered
     all_answered = len(answered_tabs) == len(tab_keys)
     
-    # Generate CSS for green indicators
+    # Generate CSS for left accent bar indicators (Option C - thick left border)
     css = """<style>
-    /* Add padding to tab text for spacing, but keep borders continuous */
+    /* Base tab styling */
     button[data-baseweb="tab"] {
         padding-left: 16px !important;
         padding-right: 16px !important;
+        border-left: 4px solid transparent !important;
+        transition: border-color 0.2s ease;
     }
     """
     
     if all_answered:
+        # All tabs completed - show green left border on all
         css += """
         button[data-baseweb="tab"] {
-            border-bottom: 2px solid #34C759 !important;
+            border-left: 4px solid #34C759 !important;
         }
         """
     else:
-        css += """
-        button[data-baseweb="tab"] {
-            border-bottom: 2px solid transparent !important;
-        }
-        """
+        # Only completed tabs get green left border
         for i, tab_key in enumerate(tab_keys):
             if tab_key in answered_tabs:
                 css += f"""
                 button[data-baseweb="tab"]:nth-child({i + 1}) {{
-                    border-bottom: 2px solid #34C759 !important;
+                    border-left: 4px solid #34C759 !important;
                 }}
                 """
     

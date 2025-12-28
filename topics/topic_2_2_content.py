@@ -295,49 +295,71 @@ def render_subtopic_2_2(client):
 
         st.markdown(f"**{t({'de': 'Faustregel:', 'en': 'Rule of thumb:'})}** " + t({'de': 'Wenn die erste Wahl die zweite beeinflusst → prüfe genau!', 'en': 'If the first choice affects the second → check carefully!'}))
 
-        # --- INTEGRATED DECISION GUIDE (Vertical Swimlane - Rule 10.7) ---
+        # --- DECISION GUIDE (Swimlane Layout like 1.10) ---
         st.markdown("<hr style='margin: 20px 0; border: 0; border-top: 1.5px solid #f3f4f6;'>", unsafe_allow_html=True)
-        st.markdown(f"**{t({'de': 'Entscheidungshilfe: Wann welche Formel?', 'en': 'Decision Guide: When to Use What?'})}**")
+        st.markdown(f"### {t({'de': 'Formel-Kompass', 'en': 'Formula Compass'})}")
         
-        st.markdown("<br>", unsafe_allow_html=True)
+        # Define the 4 formulas with intuitions, examples, and pro tips
+        formulas = [
+            {
+                "title": {"de": "Multiplikationsprinzip", "en": "Multiplication Principle"},
+                "latex": r"N = \color{#007AFF}{n_1} \cdot \color{#FF4B4B}{n_2}",
+                "intuition": {"de": "UND = Multiplizieren. Jede Wahl öffnet neue Pfade.", "en": "AND = Multiply. Each choice opens new paths."},
+                "example": {"de": "3 Hauptgerichte UND 4 Desserts = 12 Menüs", "en": "3 mains AND 4 desserts = 12 meals"},
+                "pro_tip": {"de": "Zeichne einen Baum. Wenn er sich verzweigt → multiplizieren.", "en": "Draw a tree. If it branches out → multiply."}
+            },
+            {
+                "title": {"de": "Kombination (ohne Reihenfolge)", "en": "Combination (No Order)"},
+                "latex": r"\binom{\color{#007AFF}{n}}{\color{#FF4B4B}{k}} = \frac{\color{#007AFF}{n}!}{\color{#FF4B4B}{k}! \cdot (\color{#007AFF}{n} - \color{#FF4B4B}{k})!}",
+                "intuition": {"de": "Teamfoto: Egal wer wo steht.", "en": "Team photo: nobody cares who stands where."},
+                "example": {"de": "Lotto: 6 aus 49 Zahlen wählen", "en": "Lottery: Pick 6 from 49 numbers"},
+                "pro_tip": {"de": "Würde Tauschen das Ergebnis ändern? NEIN → Teile durch k!", "en": "Would swapping names change the outcome? NO → Divide by k!"}
+            },
+            {
+                "title": {"de": "Permutation (mit Reihenfolge)", "en": "Permutation (Order Matters)"},
+                "latex": r"P(\color{#007AFF}{n}, \color{#FF4B4B}{k}) = \frac{\color{#007AFF}{n}!}{(\color{#007AFF}{n} - \color{#FF4B4B}{k})!}",
+                "intuition": {"de": "Podium: Gold ≠ Silber ≠ Bronze.", "en": "Podium: Gold ≠ Silver ≠ Bronze."},
+                "example": {"de": "8 Läufer: Wie viele Gold-Silber-Bronze Vergaben?", "en": "8 runners: How many ways to award Gold, Silver, Bronze?"},
+                "pro_tip": {"de": "Wärst du sauer, wenn 1. und 3. tauschen? JA → Nicht teilen.", "en": "Would you be upset if 1st and 3rd switched? YES → Don't divide."}
+            },
+            {
+                "title": {"de": "Mit Wiederholung", "en": "With Repetition"},
+                "latex": r"\color{#007AFF}{n}^{\color{#FF4B4B}{k}}",
+                "intuition": {"de": "Unbegrenzter Vorrat. Nichts wird 'verbraucht'.", "en": "Infinite supply. Nothing gets 'used up'."},
+                "example": {"de": "iPhone-PIN: 4 Ziffern, je 0-9", "en": "iPhone passcode: 4 digits, each 0-9"},
+                "pro_tip": {"de": "Kannst du dasselbe zweimal wählen? JA → n^k", "en": "Can you pick the same thing twice? YES → n^k"}
+            }
+        ]
         
-        # Row 1: Independent choices (Primary - highlighted)
-        st.markdown(f"""
-<div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 12px 16px; margin-bottom: 8px;">
-<div style="font-size: 0.95em; color: #2563eb; font-weight: 500; margin-bottom: 8px;">{t({"de": "Unabhängige Entscheidungen (Hemd UND Hose)", "en": "Independent choices (shirt AND pants)"})}</div>
+        # Render in a single container (swimlane style)
+        with st.container(border=True):
+            for i, f in enumerate(formulas):
+                col_formula, col_explain = st.columns([1, 1.2], gap="medium")
+                
+                with col_formula:
+                    st.markdown(f"**{t(f['title'])}**")
+                    st.latex(f['latex'])
+                
+                with col_explain:
+                    st.markdown(f"""
+<div style="font-size: 0.95rem; color: #333; margin-bottom: 8px; display: flex; align-items: start; gap: 8px;">
+    <span style="color: #666; margin-top: 2px;">{render_icon('lightbulb', size=16)}</span>
+    <span>{t(f['intuition'])}</span>
 </div>
-""", unsafe_allow_html=True)
-        st.latex(r"N = \color{#007AFF}{n_1} \cdot \color{#FF4B4B}{n_2}")
-        
-        st.markdown("<br>", unsafe_allow_html=True)
-        
-        # Row 2: Selection without order
-        st.markdown(f"""
-<div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; margin-bottom: 8px;">
-<div style="font-size: 0.95em; color: #1e293b; font-weight: 500; margin-bottom: 8px;">{t({"de": "Auswahl ohne Reihenfolge (Team bilden)", "en": "Selection without order (form a team)"})}</div>
+<div style="font-size: 0.85rem; color: #666; padding-left: 26px; font-style: italic; margin-bottom: 12px;">
+    Ex: {t(f['example'])}
 </div>
-""", unsafe_allow_html=True)
-        st.latex(r"\binom{\color{#007AFF}{n}}{\color{#FF4B4B}{k}} = \frac{\color{#007AFF}{n}!}{\color{#FF4B4B}{k}! \cdot (\color{#007AFF}{n} - \color{#FF4B4B}{k})!}")
-        
-        st.markdown("<br>", unsafe_allow_html=True)
-        
-        # Row 3: Selection with order
-        st.markdown(f"""
-<div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; margin-bottom: 8px;">
-<div style="font-size: 0.95em; color: #1e293b; font-weight: 500; margin-bottom: 8px;">{t({"de": "Auswahl mit Reihenfolge (Podium)", "en": "Selection with order (podium)"})}</div>
+<div style="background: #f4f4f5; border-left: 3px solid #71717a; padding: 8px 12px; border-radius: 6px; font-size: 0.85rem; color: #3f3f46;">
+    <strong>Pro Tip:</strong> {t(f['pro_tip'])}
 </div>
-""", unsafe_allow_html=True)
-        st.latex(r"P(\color{#007AFF}{n}, \color{#FF4B4B}{k}) = \frac{\color{#007AFF}{n}!}{(\color{#007AFF}{n} - \color{#FF4B4B}{k})!}")
-        
-        st.markdown("<br>", unsafe_allow_html=True)
-        
-        # Row 4: With repetition
-        st.markdown(f"""
-<div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; margin-bottom: 8px;">
-<div style="font-size: 0.95em; color: #1e293b; font-weight: 500; margin-bottom: 8px;">{t({"de": "Mit Wiederholung (PIN-Code)", "en": "With repetition (PIN code)"})}</div>
-</div>
-""", unsafe_allow_html=True)
-        st.latex(r"\color{#007AFF}{n}^{\color{#FF4B4B}{k}}")
+                    """, unsafe_allow_html=True)
+                
+                # Separator (not after last item)
+                if i < len(formulas) - 1:
+                    st.markdown("<hr style='margin: 24px 0; border: 0; border-top: 1.5px solid #f3f4f6;'>", unsafe_allow_html=True)
+            
+            # Safety margin for last pro tip
+            st.markdown("<div style='margin-bottom: 12px;'></div>", unsafe_allow_html=True)
     
     st.markdown("<br>", unsafe_allow_html=True)
 

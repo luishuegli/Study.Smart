@@ -1,0 +1,313 @@
+import streamlit as st
+from math import factorial
+from utils.localization import t
+from utils.quiz_helper import render_mcq
+from views.styles import render_icon
+
+# --- CONTENT DICTIONARY (BILINGUAL) ---
+content_2_4 = {
+    "title": {"de": "2.4 Kombinationen (Auswahl ohne Reihenfolge)", "en": "2.4 Combinations (Selection Without Order)"},
+    
+    "intro": {
+        "de": "Bei Kombinationen zählt nur WER ausgewählt wird, nicht in welcher Reihenfolge.",
+        "en": "In combinations, only WHO is selected matters, not the order of selection."
+    },
+    
+    "context_anchor": {
+        "de": """**Zurück zum Konzertkomitee:**
+
+Wir wählen 3 Musiker für ein Komitee aus 5 Kandidaten: Alice, Bob, Charlie, Diana, Ethan.
+
+**Die entscheidende Frage:** 
+- Ist {Alice, Bob, Charlie} dasselbe Komitee wie {Charlie, Bob, Alice}?
+- **JA!** Es sind dieselben drei Personen – nur in anderer Reihenfolge genannt.
+
+Das ist der Kern von **Kombinationen**: Die Reihenfolge der Auswahl spielt keine Rolle.""",
+        "en": """**Back to the Concert Committee:**
+
+We're selecting 3 musicians for a committee from 5 candidates: Alice, Bob, Charlie, Diana, Ethan.
+
+**The key question:** 
+- Is {Alice, Bob, Charlie} the same committee as {Charlie, Bob, Alice}?
+- **YES!** They're the same three people – just named in different order.
+
+This is the essence of **Combinations**: The order of selection doesn't matter."""
+    },
+    
+    "worked_example_title": {"de": "Durchgerechnetes Beispiel: Warum durch k! teilen?", "en": "Worked Example: Why Divide by k!?"},
+    
+    "formula": {
+        "title": {"de": "Kombinationsformel", "en": "Combination Formula"},
+        "latex": r"C(\color{#007AFF}{n}, \color{#FF4B4B}{k}) = \binom{\color{#007AFF}{n}}{\color{#FF4B4B}{k}} = \frac{\color{#007AFF}{n}!}{\color{#FF4B4B}{k}! \cdot (\color{#007AFF}{n} - \color{#FF4B4B}{k})!}",
+        "intuition": {"de": "Teamfoto: Egal wer wo steht.", "en": "Team photo: nobody cares who stands where."},
+        "example": {"de": "Lotto: 6 aus 49 Zahlen", "en": "Lottery: Pick 6 from 49 numbers"},
+        "pro_tip": {"de": "Würde Tauschen das Ergebnis ändern? NEIN → Teile durch k!", "en": "Would swapping change the outcome? NO → Divide by k!"}
+    },
+    
+    "interactive_title": {"de": "Komitee-Baukasten", "en": "Committee Builder"},
+    "interactive_instr": {
+        "de": "Wähle genau 3 Musiker aus. Beobachte: Egal in welcher Reihenfolge du klickst – das System sortiert automatisch!",
+        "en": "Select exactly 3 musicians. Notice: No matter what order you click – the system auto-sorts!"
+    },
+    
+    "contrast_title": {"de": "Kontrast: Permutation vs. Kombination", "en": "Contrast: Permutation vs. Combination"},
+    
+    "exam": {
+        "title": {"de": "Prüfungsfrage", "en": "Exam Question"},
+        "source": "Kombinatorik Grundlagen",
+        "question": {
+            "de": "Beim Schweizer Lotto '6 aus 49' wählt man 6 Zahlen aus 49. Wie viele verschiedene Tipps sind möglich?",
+            "en": "In the Swiss Lotto '6 out of 49', you pick 6 numbers from 49. How many different tickets are possible?"
+        },
+        "options": [
+            {"de": "49! (alle Anordnungen)", "en": "49! (all arrangements)"},
+            {"de": "C(49,6) = 13'983'816", "en": "C(49,6) = 13,983,816"},
+            {"de": "49^6 (mit Zurücklegen)", "en": "49^6 (with replacement)"},
+            {"de": "P(49,6) = 49!/43!", "en": "P(49,6) = 49!/43!"}
+        ],
+        "correct_id": 1,
+        "solution": {
+            "de": "<b>Richtig: C(49,6)</b><br><br>Beim Lotto zählt nur WELCHE Zahlen du hast, nicht in welcher Reihenfolge du sie angekreuzt hast. {1,2,3,4,5,6} = {6,5,4,3,2,1} = derselbe Tipp! Daher: Kombination, nicht Permutation.",
+            "en": "<b>Correct: C(49,6)</b><br><br>In the lottery, only WHICH numbers you have matters, not the order you picked them. {1,2,3,4,5,6} = {6,5,4,3,2,1} = same ticket! Therefore: Combination, not Permutation."
+        }
+    }
+}
+
+# --- MAIN RENDERING FUNCTION ---
+def render_subtopic_2_4(model):
+    """Renders Section 2.4: Combinations (Selection Without Order)"""
+    
+    # --- HEADER ---
+    st.header(t(content_2_4["title"]))
+    st.markdown("---")
+    
+    # --- CONTEXT ANCHOR ---
+    with st.container(border=True):
+        st.markdown(t(content_2_4["context_anchor"]))
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+    # --- WORKED EXAMPLE: WHY DIVIDE BY K! ---
+    with st.container(border=True):
+        st.markdown(f"### {t(content_2_4['worked_example_title'])}")
+        
+        col_scenario, col_math = st.columns([1.4, 1], gap="large")
+        
+        with col_scenario:
+            st.markdown(f"**{t({'de': 'Schritt 1: Wenn Reihenfolge zählen würde', 'en': 'Step 1: If order mattered'})}**")
+            st.markdown(f"""
+<div style="background: #fef3c7; border-left: 3px solid #d97706; padding: 12px; border-radius: 6px; color: #92400e;">
+{t({"de": "Wähle 2 aus {{A, B, C}}. Mit Reihenfolge wären das:",
+    "en": "Pick 2 from {{A, B, C}}. With order, these would be:"})}
+<br><br>
+A→B, B→A, A→C, C→A, B→C, C→B = <b>6 Ergebnisse</b>
+<br><br>
+{t({"de": "Formel: P(3,2) = 3 × 2 = 6", "en": "Formula: P(3,2) = 3 × 2 = 6"})}
+</div>
+""", unsafe_allow_html=True)
+            
+            st.markdown("<br>", unsafe_allow_html=True)
+            
+            st.markdown(f"**{t({'de': 'Schritt 2: Bemerke die Duplikate', 'en': 'Step 2: Notice the duplicates'})}**")
+            st.markdown(f"""
+<div style="background: #fee2e2; border-left: 3px solid #ef4444; padding: 12px; border-radius: 6px; color: #991b1b;">
+{t({"de": "Aber für ein KOMITEE sind diese GLEICH:", "en": "But for a COMMITTEE, these are THE SAME:"})}
+<br><br>
+{{A, B}} = {{B, A}} → {t({"de": "Beide beschreiben dieselbe 2er-Gruppe!", "en": "Both describe the same 2-person group!"})}
+<br><br>
+{t({"de": "Jedes Paar wurde 2! = 2 mal gezählt.", "en": "Each pair was counted 2! = 2 times."})}
+</div>
+""", unsafe_allow_html=True)
+            
+            st.markdown("<br>", unsafe_allow_html=True)
+            
+            st.markdown(f"**{t({'de': 'Schritt 3: Teile durch k!', 'en': 'Step 3: Divide by k!'})}**")
+            st.markdown(f"""
+<div style="background: #d1fae5; border-left: 3px solid #10b981; padding: 12px; border-radius: 6px; color: #065f46;">
+6 ÷ 2! = 6 ÷ 2 = <b>3</b> {t({"de": "einzigartige Komitees", "en": "unique committees"})}
+<br><br>
+{{A, B}}, {{A, C}}, {{B, C}}
+</div>
+""", unsafe_allow_html=True)
+        
+        with col_math:
+            st.latex(r"\text{Schritt 1: Mit Reihenfolge}")
+            st.latex(r"P(3,2) = \frac{3!}{(3-2)!} = \frac{6}{1} = 6")
+            
+            st.markdown("<br>", unsafe_allow_html=True)
+            
+            st.latex(r"\text{Schritt 2: Duplikate}")
+            st.latex(r"\text{Jedes Paar } k! = 2! = 2 \text{ mal}")
+            
+            st.markdown("<br>", unsafe_allow_html=True)
+            
+            st.latex(r"\text{Schritt 3: Kombination}")
+            st.latex(r"C(3,2) = \frac{P(3,2)}{k!} = \frac{6}{2} = 3")
+            
+            st.markdown("<br>", unsafe_allow_html=True)
+            
+            st.latex(r"\boxed{C(n,k) = \frac{n!}{k!(n-k)!}}")
+    
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    
+    # --- INTERACTIVE: COMMITTEE BUILDER ---
+    with st.container(border=True):
+        st.markdown(f"### {t(content_2_4['interactive_title'])}")
+        st.caption(t(content_2_4['interactive_instr']))
+        
+        # State initialization (Rule 6.3)
+        if "committee_2_4" not in st.session_state:
+            st.session_state.committee_2_4 = []
+        
+        musicians = ["Alice", "Bob", "Charlie", "Diana", "Ethan"]
+        
+        col_select, col_display = st.columns([1.5, 1.5], gap="large")
+        
+        with col_select:
+            st.markdown(f"**{t({'de': 'Verfügbare Musiker', 'en': 'Available Musicians'})}**")
+            
+            cols = st.columns(3)
+            for idx, musician in enumerate(musicians):
+                col_idx = idx % 3
+                is_selected = musician in st.session_state.committee_2_4
+                btn_type = "primary" if is_selected else "secondary"
+                
+                with cols[col_idx]:
+                    if st.button(musician, key=f"musician_2_4_{musician}", type=btn_type, use_container_width=True):
+                        if is_selected:
+                            st.session_state.committee_2_4.remove(musician)
+                        elif len(st.session_state.committee_2_4) < 3:
+                            st.session_state.committee_2_4.append(musician)
+                        st.rerun()
+        
+        with col_display:
+            st.markdown(f"**{t({'de': 'Dein Komitee', 'en': 'Your Committee'})}**")
+            
+            # Auto-sort to prove order doesn't matter
+            sorted_committee = sorted(st.session_state.committee_2_4)
+            
+            if len(st.session_state.committee_2_4) == 0:
+                st.info(t({"de": "Wähle 3 Musiker aus...", "en": "Select 3 musicians..."}))
+            else:
+                selection_order = " → ".join(st.session_state.committee_2_4)
+                sorted_order = ", ".join(sorted_committee)
+                
+                st.markdown(f"""
+**{t({"de": "Klick-Reihenfolge:", "en": "Click order:"})}**  
+`{selection_order}`
+
+**{t({"de": "Komitee (sortiert):", "en": "Committee (sorted):"})}**  
+`{{{sorted_order}}}`
+""")
+                
+                if len(st.session_state.committee_2_4) == 3:
+                    st.success(t({
+                        "de": "Egal in welcher Reihenfolge du geklickt hast – es ist DASSELBE Komitee!",
+                        "en": "No matter what order you clicked – it's the SAME committee!"
+                    }))
+        
+        st.markdown("<hr style='margin: 20px 0; border: 0; border-top: 1.5px solid #f3f4f6;'>", unsafe_allow_html=True)
+        
+        # Live math display
+        n = 5
+        k = len(st.session_state.committee_2_4) if len(st.session_state.committee_2_4) > 0 else 3
+        
+        if k > 0:
+            c_result = factorial(n) // (factorial(k) * factorial(n - k))
+            st.latex(rf"C({n}, {k}) = \frac{{{n}!}}{{{k}! \cdot {n-k}!}} = {c_result}")
+            st.caption(t({
+                "de": f"Es gibt genau {c_result} verschiedene {k}er-Komitees aus 5 Musikern.",
+                "en": f"There are exactly {c_result} different {k}-person committees from 5 musicians."
+            }))
+        
+        # Reset button
+        if len(st.session_state.committee_2_4) > 0:
+            if st.button(t({"de": "Zurücksetzen", "en": "Reset"}), key="reset_committee_2_4"):
+                st.session_state.committee_2_4 = []
+                st.rerun()
+    
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    
+    # --- CONTRAST TABLE ---
+    with st.container(border=True):
+        st.markdown(f"### {t(content_2_4['contrast_title'])}")
+        
+        col_perm, col_comb = st.columns([1, 1], gap="large")
+        
+        with col_perm:
+            st.markdown(f"**{t({'de': 'Permutation (2.3)', 'en': 'Permutation (2.3)'})}**")
+            st.markdown(f"""
+<div style="background: #fef3c7; border-radius: 8px; padding: 16px;">
+<b>{t({"de": "Reihenfolge ZÄHLT", "en": "Order MATTERS"})}</b><br><br>
+{t({"de": "Beispiel: Podiumsplätze", "en": "Example: Podium places"})}<br>
+{t({"de": "Gold-Silber-Bronze ≠ Bronze-Silber-Gold", "en": "Gold-Silver-Bronze ≠ Bronze-Silver-Gold"})}<br><br>
+<b>{t({"de": "Test:", "en": "Test:"})}</b> {t({"de": "Wärst du sauer, wenn getauscht wird?", "en": "Would you be upset if positions swap?"})}<br>
+<span style="color: #059669;">→ JA = Permutation</span>
+</div>
+""", unsafe_allow_html=True)
+            st.latex(r"P(n,k) = \frac{n!}{(n-k)!}")
+        
+        with col_comb:
+            st.markdown(f"**{t({'de': 'Kombination (2.4)', 'en': 'Combination (2.4)'})}**")
+            st.markdown(f"""
+<div style="background: #d1fae5; border-radius: 8px; padding: 16px;">
+<b>{t({"de": "Reihenfolge EGAL", "en": "Order DOESN'T MATTER"})}</b><br><br>
+{t({"de": "Beispiel: Teamauswahl", "en": "Example: Team selection"})}<br>
+{{Alice, Bob}} = {{Bob, Alice}}<br><br>
+<b>{t({"de": "Test:", "en": "Test:"})}</b> {t({"de": "Würde Tauschen etwas ändern?", "en": "Would swapping change anything?"})}<br>
+<span style="color: #059669;">→ NEIN = Kombination</span>
+</div>
+""", unsafe_allow_html=True)
+            st.latex(r"C(n,k) = \frac{n!}{k!(n-k)!}")
+    
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    
+    # -- FORMULA COMPASS (like 2.2) ---
+    with st.container(border=True):
+        st.markdown(f"### {t({'de': 'Formel-Kompass', 'en': 'Formula Compass'})}")
+        
+        col_formula, col_explain = st.columns([1, 1.2], gap="medium")
+        
+        with col_formula:
+            st.markdown(f"**{t(content_2_4['formula']['title'])}**")
+            st.latex(content_2_4['formula']['latex'])
+        
+        with col_explain:
+            st.markdown(f"""
+<div style="font-size: 0.95rem; color: #333; margin-bottom: 8px; display: flex; align-items: start; gap: 8px;">
+    <span style="color: #666; margin-top: 2px;">{render_icon('lightbulb', size=16)}</span>
+    <span>{t(content_2_4['formula']['intuition'])}</span>
+</div>
+<div style="font-size: 0.85rem; color: #666; padding-left: 26px; font-style: italic; margin-bottom: 12px;">
+    Ex: {t(content_2_4['formula']['example'])}
+</div>
+<div style="background: #f4f4f5; border-left: 3px solid #71717a; padding: 8px 12px; border-radius: 6px; font-size: 0.85rem; color: #3f3f46;">
+    <strong>Pro Tip:</strong> {t(content_2_4['formula']['pro_tip'])}
+</div>
+            """, unsafe_allow_html=True)
+    
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    
+    # --- EXAM SECTION ---
+    st.markdown(f"### {t(content_2_4['exam']['title'])}")
+    st.caption(content_2_4['exam']['source'])
+    
+    with st.container(border=True):
+        opts = content_2_4["exam"]["options"]
+        opt_labels = [t(opt) for opt in opts]
+        
+        render_mcq(
+            key_suffix="2_4_lottery",
+            question_text=t(content_2_4["exam"]["question"]),
+            options=opt_labels,
+            correct_idx=content_2_4["exam"]["correct_id"],
+            solution_text_dict=content_2_4["exam"]["solution"],
+            success_msg_dict={"de": "Korrekt!", "en": "Correct!"},
+            error_msg_dict={"de": "Noch nicht ganz...", "en": "Not quite..."},
+            client=model,
+            ai_context="Combinations: Lottery problem C(49,6)",
+            course_id="vwl",
+            topic_id="2",
+            subtopic_id="2.4",
+            question_id="q_2_4_lottery"
+        )

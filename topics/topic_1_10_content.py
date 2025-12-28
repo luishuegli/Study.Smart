@@ -21,18 +21,21 @@ content_1_10 = {
                     "latex": r"P(A) = \frac{|A|}{|\Omega|}",
                     "title": {"de": "Laplace (Gleichverteilung)", "en": "Laplace (Equally Likely)"},
                     "intuition": {"de": "Günstige durch Mögliche.", "en": "Favorable over Possible."},
+                    "pro_tip": {"de": "Funktioniert NUR bei Gleichverteilung. Gezinkter Würfel? Laplace versagt.", "en": "Only works when all outcomes are equally likely. Loaded dice? Laplace fails."},
                     "example": {"de": "Würfel 6: 1 Günstige / 6 Mögliche", "en": "Roll 6: 1 Favorable / 6 Possible"}
                 },
                 {
                     "latex": r"P(S) = 1",
                     "title": {"de": "Normierung", "en": "Normalization"},
                     "intuition": {"de": "Irgendetwas passiert immer (100%).", "en": "Something happens always (100%)."},
+                    "pro_tip": {"de": "Prüfe deine Arbeit: Wenn die Summe ≠ 1, hast du einen Fehler gemacht.", "en": "Use this to check your work: if probabilities don't sum to 1, you made an error."},
                     "example": {"de": "Sonne + Regen + ... = 1", "en": "Sun + Rain + ... = 1"}
                 },
                 {
                     "latex": r"P(A^c) = 1 - P(A)",
                     "title": {"de": "Gegenwahrscheinlichkeit", "en": "Complement"},
                     "intuition": {"de": "Alles außer A.", "en": "Everything except A."},
+                    "pro_tip": {"de": "Der Trick für 'mindestens eins': 1 − P(keins) ist fast immer einfacher.", "en": "The shortcut for 'at least one' problems: 1 − P(none) is almost always easier."},
                     "example": {"de": "Nicht 6 = 1 - (1/6) = 5/6", "en": "Not 6 = 1 - (1/6) = 5/6"}
                 }
             ]
@@ -46,18 +49,21 @@ content_1_10 = {
                     "latex": r"P(A \cup B) = P(A) + P(B) - P(A \cap B)",
                     "title": {"de": "Additionssatz", "en": "Addition Law"},
                     "intuition": {"de": "Addieren, aber Schnitt nicht doppelt zählen.", "en": "Add, but don't double count overlap."},
+                    "pro_tip": {"de": "Wenn P(A) + P(B) > 1, MÜSSEN sich A und B überschneiden.", "en": "If P(A) + P(B) > 1, then A and B MUST overlap. Impossible to avoid intersection."},
                     "example": {"de": "Herz oder König? 13 + 4 - 1 (Herz-König)", "en": "Heart or King? 13 + 4 - 1 (King of Hearts)"}
                 },
                 {
                     "latex": r"P(A|B) = \frac{P(A \cap B)}{P(B)}",
                     "title": {"de": "Bedingte Wsk.", "en": "Conditional Prob."},
                     "intuition": {"de": "Zoom in die Welt B (neuer Nenner).", "en": "Zoom into world B (new denominator)."},
+                    "pro_tip": {"de": "Der Nenner schrumpft! Du filterst das Universum. Denke: 'Gegeben dass ich schon in B bin...'", "en": "The denominator shrinks! You're filtering the universe. Think: 'Given I'm already in B...'"},
                     "example": {"de": "Von den Rauchern (B), wer hat Krebs (A)?", "en": "Of Smokers (B), who has cancer (A)?"}
                 },
                 {
                     "latex": r"P(A \cap B) = P(A) \cdot P(B)",
                     "title": {"de": "Unabhängigkeit", "en": "Independence"},
                     "intuition": {"de": "A ist B egal. Information ändert nichts.", "en": "A doesn't care about B. Info changes nothing."},
+                    "pro_tip": {"de": "Selten im echten Leben. Wenn du dir IRGENDEINEN Zusammenhang vorstellen kannst, sind sie wahrscheinlich NICHT unabhängig.", "en": "Rare in real life. If you can imagine ANY mechanism linking A and B, they're probably NOT independent."},
                     "example": {"de": "Münze (Kopf) und Würfel (6).", "en": "Coin (Head) and Die (6)."}
                 }
             ]
@@ -71,18 +77,21 @@ content_1_10 = {
                     "latex": r"P(B) = \sum P(B|A_i)P(A_i)",
                     "title": {"de": "Totale Wahrscheinlichkeit", "en": "Total Probability"},
                     "intuition": {"de": "Summe aller Pfade, die zu B führen.", "en": "Sum of all paths leading to B."},
+                    "pro_tip": {"de": "Die 'Baumdiagramm'-Formel. Zerlege in Fälle, gewichte nach Wahrscheinlichkeit, summiere.", "en": "The 'tree diagram' formula. Split by cases, weight by their probability, add up."},
                     "example": {"de": "Defekt von M1 + Defekt von M2...", "en": "Defect from M1 + Defect from M2..."}
                 },
                 {
                     "latex": r"P(A|B) = \frac{P(B|A)P(A)}{P(B)}",
                     "title": {"de": "Satz von Bayes", "en": "Bayes' Theorem"},
                     "intuition": {"de": "Bedingung umkehren (Inferenz).", "en": "Flip the condition (Inference)."},
+                    "pro_tip": {"de": "Ärzte irren hier oft. Positiver Test ≠ hohe Krankheitswahrscheinlichkeit, wenn die Krankheit selten ist (Base-Rate-Neglect).", "en": "Doctors get this wrong. A positive test ≠ high chance of disease if the disease is rare (base rate neglect)."},
                     "example": {"de": "Test positiv -> Krank?", "en": "Test positive -> Sick?"}
                 },
                 {
                     "latex": r"\text{Prior} \to \text{Posterior}",
                     "title": {"de": "Wissens-Update", "en": "Knowledge Update"},
                     "intuition": {"de": "Heute ist der Posterior von gestern.", "en": "Today is yesterday's posterior."},
+                    "pro_tip": {"de": "Bayesianisches Lernen: Jede neue Evidenz aktualisiert deinen Glauben. Nie von Null anfangen.", "en": "Bayesian learning: each new piece of evidence updates your belief. Never start from scratch."},
                     "example": {"de": "Suche im Meer: Keine Fund -> Wsk sinkt.", "en": "Search at sea: No find -> Prob drops."}
                 }
             ]
@@ -234,8 +243,11 @@ def render_swimlane(title, icon_name, items):
     <span style="color: #666; margin-top: 2px;">{render_icon('lightbulb', size=16)}</span>
     <span>{t(item['intuition'])}</span>
 </div>
-<div style="font-size: 0.85rem; color: #666; padding-left: 26px; font-style: italic;">
+<div style="font-size: 0.85rem; color: #666; padding-left: 26px; font-style: italic; margin-bottom: 12px;">
     Ex: {t(item['example'])}
+</div>
+<div style="background: #f4f4f5; border-left: 3px solid #71717a; padding: 8px 12px; border-radius: 6px; font-size: 0.85rem; color: #3f3f46;">
+    <strong>Pro Tip:</strong> {t(item.get('pro_tip', {'de': '', 'en': ''}))}
 </div>
                 """, unsafe_allow_html=True)
 

@@ -228,9 +228,9 @@ def render_swimlane(title, icon_name, items):
     </div>
     """, unsafe_allow_html=True)
     
-    # 2. Render Each Item as a Full-Width Card
-    for item in items:
-        with st.container(border=True):
+    # 2. Unified Category Container
+    with st.container(border=True):
+        for i, item in enumerate(items):
             col_formula, col_explain = st.columns([1.2, 1], gap="large")
             
             with col_formula:
@@ -250,6 +250,10 @@ def render_swimlane(title, icon_name, items):
     <strong>Pro Tip:</strong> {t(item.get('pro_tip', {'de': '', 'en': ''}))}
 </div>
                 """, unsafe_allow_html=True)
+            
+            # Add separator between items (but not after the last one)
+            if i < len(items) - 1:
+                st.markdown("<hr style='margin: 24px 0; border: 0; border-top: 1px dashed #e5e7eb;'>", unsafe_allow_html=True)
 
 # ==============================================================================
 # 3. MAIN RENDERER

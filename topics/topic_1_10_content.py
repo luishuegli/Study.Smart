@@ -253,7 +253,32 @@ def render_swimlane(title, icon_name, items):
             
             # Add separator between items (but not after the last one)
             if i < len(items) - 1:
-                st.markdown("<hr style='margin: 24px 0; border: 0; border-top: 1px dashed #e5e7eb;'>", unsafe_allow_html=True)
+                st.markdown("<hr style='margin: 24px 0; border: 0; border-top: 1.5px solid #f3f4f6;'>", unsafe_allow_html=True)
+        
+        # Bottom Margin Mandate: Ensure last Pro Tip doesn't collide with border
+        st.markdown("<div style='margin-bottom: 12px;'></div>", unsafe_allow_html=True)
+
+# --- HELPER: RENDER EXAM LEVEL ---
+def render_level(lvl, model):
+    """Secondary helper to render a specific exam level."""
+    st.markdown(f"**{t(lvl['title'])}**")
+    
+    render_mcq(
+        key_suffix=f"exam_{lvl['id']}",
+        question_text=t(lvl["q"]),
+        options=lvl["opts"],
+        correct_idx=lvl["correct"],
+        solution_text_dict=lvl["sol"],
+        success_msg_dict={"de": "Korrekt!", "en": "Correct!"},
+        error_msg_dict={"de": "Noch nicht ganz...", "en": "Not quite..."},
+        hint_text_dict=lvl["err"],
+        client=model,
+        ai_context=f"Final Exam Level: {t(lvl['title'])}",
+        course_id="vwl",
+        topic_id="1",
+        subtopic_id="1.10",
+        question_id=f"1_10_{lvl['id']}"
+    )
 
 # ==============================================================================
 # 3. MAIN RENDERER

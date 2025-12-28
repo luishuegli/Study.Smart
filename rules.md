@@ -119,3 +119,40 @@ This document contains **MUST-FOLLOW** rules for all agentic work. These rules a
     2. **Layouts stretch** (check CSS).
     3. **Math aligns** (check LaTeX).
     4. **No Overlap** (check narrow widths).
+
+---
+
+## 10. Design Cohesion (The "Unified Language" Protocol)
+
+This section formalizes the visual and structural patterns that ensure consistency across all subtopics.
+
+### 10.1 Section Titles (Minimal)
+- Section headers use **plain H3 (`###`)** without icons.
+- Icons belong *inside* content, not on titles.
+- *Example*: `### Interactive Visualization` (NOT `### {icon} Interactive Visualization`).
+
+### 10.2 Interactive Element Framing (Unified Container)
+- Wrap **all** interactive elements (controls, visualization, and feedback) in a **single** `st.container(border=True)`.
+- Do NOT fragment into multiple separate bordered boxes.
+- *Exception*: If an interactive section is extremely long (scroll required), consider logical sub-sections.
+
+### 10.3 Callout Styling (Warm Accent)
+- **ALL** tutorial hints, notes, and step instructions use a **consistent warm accent background**: `#fef3c7` (Amber-100).
+- Text color for callouts: `#92400e` (Amber-800).
+- Icon color (if present): `#d97706` (Amber-600).
+- **NO other callout colors** (blue, green, red) except for explicit Success/Error feedback.
+
+### 10.5 Control Placement (Context-Dependent)
+- **Default**: Place controls (buttons, sliders, pills) **above** the visualization.
+- **Alternative**: If the visualization benefits from side-by-side comparison (e.g., radio buttons selecting Venn operations), use a **left-column layout** for controls.
+- **Guideline**: Choose the layout that maximizes the visualization's clear space.
+
+### 10.6 Live Math Placement (Result Below)
+- Dynamic formulas and calculated results go **below** the visualization.
+- This follows the "Input → Visualization → Result" information flow.
+- Static formulas (definitions) can appear above or within theory sections.
+
+### 10.7 Consolidated Containers (Reference Style)
+- **Separators**: NEVER use dashed or colored lines between items. Use a subtle solid line (`#f3f4f6`) or pure whitespace.
+- **The "Safety Margin" Mandate**: When items contain callouts or backgrounded divs (like Pro Tips) near the bottom of a container, you MUST add at least `24px` of bottom padding/margin to prevent the callout from "colliding" with the container border.
+- **Consolidation Rule**: If a lesson has 3+ small related cards, consolidate them into a single `st.container(border=True)` to reduce visual noise.

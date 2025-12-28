@@ -184,7 +184,7 @@ def render_subtopic_2_2(client):
 <li><b>{t({'de': 'Entscheidung 1:', 'en': 'Decision 1:'})}</b> {t({'de': 'Du wählst ein Hemd', 'en': 'You pick a shirt'})} (<span style="color:#007AFF; font-weight:600;">3 options</span>)</li>
 <li><b>{t({'de': 'Für JEDES Hemd:', 'en': 'For EACH shirt:'})}</b> {t({'de': 'Du wählst eine Hose', 'en': 'You pick pants'})} (<span style="color:#FF4B4B; font-weight:600;">4 options</span>)</li>
 </ol>
-<div style="margin-top: 16px; padding-top: 12px; border-top: 1px dashed #e2e8f0; font-size: 0.95em;">
+<div style="margin-top: 16px; padding-top: 12px; border-top: 1.5px solid #f3f4f6; font-size: 0.95em;">
 {t({'de': 'Anzahl der Pfade', 'en': 'Number of paths'})} = <span style="color:#007AFF; font-weight:600;">3</span> × <span style="color:#FF4B4B; font-weight:600;">4</span> = <b>12</b>
 </div>
 </div>
@@ -197,19 +197,26 @@ def render_subtopic_2_2(client):
             with st.container(border=True):
                 st.latex(r"N = \color{#007AFF}{n}_1 \cdot \color{#FF4B4B}{n}_2 \cdot \dots \cdot n_k")
                 
-                # --- PARAMETER SPEC LIST (Rounded & Natural) ---
-                def render_spec_row(label, desc, color="#64748b"):
-                    return f"""<div style="display: flex; align-items: center; gap: 12px; padding: 10px 12px; background: #fafafa; border-radius: 8px; margin-bottom: 6px;"><div style="min-width: 40px; font-family: serif; font-size: 1.1em; font-weight: 600; color: {color}; text-align: center;">{label}</div><div style="font-size: 0.9em; color: #475569;">{desc}</div></div>"""
-
+                # --- PARAMETER SPEC LIST (Native Streamlit for LaTeX rendering) ---
+                st.markdown("<hr style='margin: 12px 0; border: 0; border-top: 1.5px solid #f3f4f6;'>", unsafe_allow_html=True)
+                
+                # Helper to render a styled row
+                def render_param_row(latex_var, desc, bg_color="#fafafa", text_color="#475569", var_color="#64748b"):
+                    c_var, c_desc = st.columns([0.15, 0.85], gap="small")
+                    with c_var:
+                        st.latex(latex_var)
+                    with c_desc:
+                        st.markdown(f"<div style='display:flex; align-items:center; height:100%; padding:8px 0; font-size:0.9em; color:{text_color};'>{desc}</div>", unsafe_allow_html=True)
+                
+                render_param_row(r"k", t({"de": "Anzahl Entscheidungen", "en": "Number of selection steps"}))
+                render_param_row(r"\color{#007AFF}{n_1}", t({"de": "Optionen bei Schritt 1", "en": "Options at step 1"}))
+                render_param_row(r"\color{#FF4B4B}{n_2}", t({"de": "Optionen bei Schritt 2", "en": "Options at step 2"}))
+                
+                # Result row (highlighted)
                 st.markdown(f"""
-<div style="margin-top: 12px; border-top: 1px dashed #e2e8f0; padding-top: 12px;">
-{render_spec_row("$k$", t({"de": "Anzahl Entscheidungen", "en": "Number of selection steps"}))}
-{render_spec_row("$n_1$", t({"de": "Optionen bei Schritt 1", "en": "Options at step 1"}), color="#007AFF")}
-{render_spec_row("$n_2$", t({"de": "Optionen bei Schritt 2", "en": "Options at step 2"}), color="#FF4B4B")}
 <div style="display: flex; align-items: center; gap: 12px; padding: 10px 12px; background: #ecfdf5; border-radius: 8px; margin-top: 10px; border: 1px solid #d1fae5;">
-<div style="min-width: 40px; font-family: serif; font-size: 1.1em; font-weight: 800; color: #10B981; text-align: center;">$N$</div>
+<div style="min-width: 40px; font-family: serif; font-size: 1.1em; font-weight: 800; color: #10B981; text-align: center;">N</div>
 <div style="font-size: 0.9em; font-weight: 600; color: #064e3b;">{t({"de": "Ergebnis", "en": "Result"})}</div>
-</div>
 </div>
 """, unsafe_allow_html=True)
 
@@ -262,8 +269,8 @@ def render_subtopic_2_2(client):
     with st.container(border=True):
         st.markdown(f"""
 <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-{render_icon('info', size=18, color='#3b82f6')} 
-<span style="font-weight: 600; color: #1e293b;">{t({'de': 'Die Falle: Unabhängigkeit prüfen!', 'en': 'The Trap: Check Independence!'})}</span>
+{render_icon('info', size=18, color='#d97706')} 
+<span style="font-weight: 600; color: #92400e;">{t({'de': 'Die Falle: Unabhängigkeit prüfen!', 'en': 'The Trap: Check Independence!'})}</span>
 </div>
 """, unsafe_allow_html=True)
 
@@ -287,34 +294,30 @@ def render_subtopic_2_2(client):
 
         st.markdown("<br>", unsafe_allow_html=True)
 
-        st.markdown(f"<b>{t({'de': 'Faustregel:', 'en': 'Rule of thumb:'})}</b> " + t({'de': 'Wenn die erste Wahl die zweite beeinflusst → prüfe genau!', 'en': 'If the first choice affects the second → check carefully!'}))
+        st.markdown(f"**{t({'de': 'Faustregel:', 'en': 'Rule of thumb:'})}** " + t({'de': 'Wenn die erste Wahl die zweite beeinflusst → prüfe genau!', 'en': 'If the first choice affects the second → check carefully!'}))
 
-        # --- INTEGRATED DECISION GUIDE (Rounded List Strategy) ---
-        st.markdown("<hr style='margin: 20px 0; border: 0; border-top: 1px dashed #e2e8f0;'>", unsafe_allow_html=True)
+        # --- INTEGRATED DECISION GUIDE (Native Streamlit for LaTeX) ---
+        st.markdown("<hr style='margin: 20px 0; border: 0; border-top: 1.5px solid #f3f4f6;'>", unsafe_allow_html=True)
         st.markdown(f"**{t({'de': 'Entscheidungshilfe: Wann welche Formel?', 'en': 'Decision Guide: When to Use What?'})}**")
         
-        def render_guide_row(situation, formula, is_primary=False):
-            bg = "#f8fafc" if not is_primary else "#eff6ff"
-            border = "1px solid #e2e8f0" if not is_primary else "1px solid #bfdbfe"
-            return f"""<div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: {bg}; border: {border}; border-radius: 10px; margin-bottom: 8px;"><div style="font-size: 0.95em; color: #1e293b; font-weight: 500;">{situation}</div><div style="font-family: serif; font-size: 1.1em; font-weight: 600; color: {'#2563eb' if is_primary else '#475569'};">{formula}</div></div>"""
-
-        row1_text = t({"de": "Unabhängige Entscheidungen (Hemd UND Hose)", "en": "Independent choices (shirt AND pants)"})
-        row1_formula = "$N = n_1 \cdot n_2$"
-        row2_text = t({"de": "Auswahl ohne Reihenfolge (Team bilden)", "en": "Selection without order (form a team)"})
-        row2_formula = "$\\binom{n}{k}$"
-        row3_text = t({"de": "Auswahl mit Reihenfolge (Podium)", "en": "Selection with order (podium)"})
-        row3_formula = "$P(n,k)$"
-        row4_text = t({"de": "Mit Wiederholung (PIN-Code)", "en": "With repetition (PIN code)"})
-        row4_formula = "$n^k$"
-
-        st.markdown(f"""
-<div style="margin-top: 12px;">
-{render_guide_row(row1_text, row1_formula, is_primary=True)}
-{render_guide_row(row2_text, row2_formula)}
-{render_guide_row(row3_text, row3_formula)}
-{render_guide_row(row4_text, row4_formula)}
-</div>
-""", unsafe_allow_html=True)
+        # Helper to render a decision row with proper LaTeX
+        def render_decision_row(situation_dict, latex_formula, is_primary=False):
+            bg = "#eff6ff" if is_primary else "#f8fafc"
+            border_color = "#bfdbfe" if is_primary else "#e2e8f0"
+            text_color = "#2563eb" if is_primary else "#1e293b"
+            
+            col_sit, col_form = st.columns([3, 1], gap="small")
+            with col_sit:
+                st.markdown(f"<div style='display:flex; align-items:center; min-height:40px; padding:8px 12px; background:{bg}; border:1px solid {border_color}; border-radius:8px 0 0 8px; border-right:none; font-size:0.95em; color:{text_color}; font-weight:500;'>{t(situation_dict)}</div>", unsafe_allow_html=True)
+            with col_form:
+                st.markdown(f"<div style='display:flex; align-items:center; justify-content:center; min-height:40px; padding:8px 12px; background:{bg}; border:1px solid {border_color}; border-radius:0 8px 8px 0;'>", unsafe_allow_html=True)
+                st.latex(latex_formula)
+                st.markdown("</div>", unsafe_allow_html=True)
+        
+        render_decision_row({"de": "Unabhängige Entscheidungen (Hemd UND Hose)", "en": "Independent choices (shirt AND pants)"}, r"N = n_1 \cdot n_2", is_primary=True)
+        render_decision_row({"de": "Auswahl ohne Reihenfolge (Team bilden)", "en": "Selection without order (form a team)"}, r"\binom{n}{k}")
+        render_decision_row({"de": "Auswahl mit Reihenfolge (Podium)", "en": "Selection with order (podium)"}, r"P(n,k)")
+        render_decision_row({"de": "Mit Wiederholung (PIN-Code)", "en": "With repetition (PIN code)"}, r"n^k")
     
     st.markdown("<br>", unsafe_allow_html=True)
 

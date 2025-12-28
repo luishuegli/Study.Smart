@@ -194,6 +194,14 @@ Aber die Permutationsformel zählt jede Reihenfolge separat! Für 3 Personen gib
 
 But the permutation formula counts each order separately! For 3 people, there are $3! = 6$ orderings. So we divide by 6 to remove the "ghosts" (duplicates)."""
         }))
+        
+        # --- PRO TIP (Rule 5.4) ---
+        st.markdown("<br>", unsafe_allow_html=True)
+        st.markdown(f"""
+<div style="background: #f4f4f5; border-left: 3px solid #71717a; padding: 12px 16px; border-radius: 6px; font-size: 0.9rem; color: #3f3f46;">
+    <strong>Pro Tip:</strong> {t({'de': 'Signalwörter in der Klausur: "Team", "Gruppe", "Auswahl" → Kombination. "Rangliste", "Reihenfolge", "Position" → Permutation.', 'en': 'Exam signal words: "Team", "Group", "Select" → Combination. "Rank", "Order", "Position" → Permutation.'})}
+</div>
+""", unsafe_allow_html=True)
     
     # --- ROW 5: THE TRAP (COMMON MISTAKE) ---
     st.markdown("<br>", unsafe_allow_html=True)
@@ -224,7 +232,7 @@ But the permutation formula counts each order separately! For 3 people, there ar
             'en': '<b>Ask yourself:</b> Can the same person/thing appear multiple times?'}), unsafe_allow_html=True)
 
         # --- INTEGRATED DECISION GUIDE (Stable Flexbox Strategy) ---
-        st.markdown("<hr style='margin: 24px 0; border: 0; border-top: 1px dashed #e2e8f0;'>", unsafe_allow_html=True)
+        st.markdown("<hr style='margin: 24px 0; border: 0; border-top: 1.5px solid #f3f4f6;'>", unsafe_allow_html=True)
         st.markdown(f"**{t({'de': 'Klausur-Entscheidungshilfe: Signalwörter', 'en': 'Exam Decision Guide: Signal Words'})}**")
         
         def get_signal_rows(words, color):

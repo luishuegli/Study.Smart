@@ -244,21 +244,20 @@ def render_subtopic_1_6(model):
             plot_bgcolor='rgba(0,0,0,0)'
         )
 
-        event = st.plotly_chart(fig, on_select="rerun", selection_mode="points", use_container_width=True, key="dart_direct_hit", config={'displayModeBar': False})
-        
-        if event and event["selection"]["points"]:
-            # Logic: Set radius to the distance of the click from center
-            pt = event["selection"]["points"][0]
-            click_x = pt.get("x", 0)
-            click_y = pt.get("y", 0)
-            dist = np.sqrt(click_x**2 + click_y**2)
-            
-            # Map 0.0-1.0+ to 0-100 int
-            new_r_int = min(100, max(0, int(dist * 100)))
-            
-            if new_r_int != st.session_state.dart_internal_radius:
+        # Callback to handle selection BEFORE the chart is re-rendered
+        def handle_dart_click():
+            event = st.session_state.get("dart_direct_hit")
+            if event and event["selection"]["points"]:
+                pt = event["selection"]["points"][0]
+                click_x = pt.get("x", 0)
+                click_y = pt.get("y", 0)
+                dist = np.sqrt(click_x**2 + click_y**2)
+                
+                # Map 0.0-1.0+ to 0-100 int
+                new_r_int = min(100, max(0, int(dist * 100)))
                 st.session_state.dart_internal_radius = new_r_int
-                st.rerun()
+
+        event = st.plotly_chart(fig, on_select=handle_dart_click, selection_mode="points", use_container_width=True, key="dart_direct_hit", config={'displayModeBar': False})
 
         # 3. LIVE NOTATION (Color Coupled)
         st.divider()

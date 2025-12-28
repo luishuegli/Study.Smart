@@ -2,7 +2,7 @@ import streamlit as st
 import plotly.graph_objects as go
 import numpy as np
 import course_config as config
-import google.generativeai as genai
+from google import genai
 import os
 import utils.localization as loc
 from data import COURSES
@@ -16,13 +16,13 @@ api_key = os.getenv("GEMINI_API_KEY")
 if not api_key:
     try:
         api_key = st.secrets.get("GEMINI_API_KEY")
-    except FileNotFoundError:
+    except (FileNotFoundError, KeyError):
         pass
+
 if api_key:
-    genai.configure(api_key=api_key)
-    model = genai.GenerativeModel('gemini-2.0-flash')
+    client = genai.Client(api_key=api_key)
 else:
-    model = None
+    client = None
 
 def lesson_view():
     # --- GLOBAL UI RULES: EQUAL HEIGHT BOXES ---
@@ -198,7 +198,7 @@ def lesson_view():
     subtopic_id = st.session_state.get("selected_subtopic")
     
     # Render Content
-    render_topic_content(model, topic_id, subtopic_id)
+    render_topic_content(client, topic_id, subtopic_id)
     
     # Render Navigation
     render_navigation_buttons(current_course_id, topic_id, subtopic_id, navigate_to_subtopic)
@@ -245,7 +245,7 @@ def render_navigation_buttons(course_id, current_topic_id, current_subtopic_id, 
                 navigate_to_subtopic(next_topic_id, next_subtopic_id)
 
 
-def render_topic_content(model, topic_id, subtopic_id):
+def render_topic_content(client, topic_id, subtopic_id):
     # Retrieve Topic Data
     course = COURSES.get(st.session_state.get("selected_course", "vwl"))
     topic = next((t for t in course["topics"] if t["id"] == topic_id), None)
@@ -260,15 +260,22 @@ def render_topic_content(model, topic_id, subtopic_id):
         if sub:
             st.caption(f"{loc.t({'de': 'Abschnitt', 'en': 'Section'})}: {loc.t(sub['title'])}")
 
-    # Check if this is Topic 1 (Grundlagen) with interactive content
+    # Check if this is Topic 1 or Topic 2 with interactive content
     if topic_id == "topic_1":
         # Import interactive content module
         try:
             from topics.topic_1_content import render_topic_1_content
             
             # Render content directly without tabs
-            render_topic_1_content(model, subtopic_id)
+            render_topic_1_content(client, subtopic_id)
                 
+        except ImportError as e:
+            st.error(f"Interactive content not available: {str(e)}")
+            
+    elif topic_id == "topic_2":
+        try:
+            from topics.topic_2_content import render_topic_2_content
+            render_topic_2_content(client, subtopic_id)
         except ImportError as e:
             st.error(f"Interactive content not available: {str(e)}")
     else:
@@ -280,12 +287,12 @@ def render_topic_content(model, topic_id, subtopic_id):
         
         if questions:
             for q in questions:
-                render_exam_question(q, model)
+                render_exam_question(q, client)
         else:
             st.info("No practice questions added for this topic yet.")
 
 
-def render_exam_question(q, model):
+def render_exam_question(q, client):
     st.markdown(f"**{ q['source'] }**")
     st.markdown(q['question_text'])
     

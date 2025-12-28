@@ -1,3 +1,7 @@
+---
+description: Design Rules
+---
+
 # Content Creation Guide & Design System
 
 ## Quick Start Checklist

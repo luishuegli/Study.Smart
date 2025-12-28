@@ -15,6 +15,8 @@ SUBTOPIC_QUESTION_COUNTS = {
     "1.8": 2,  # 1_8_factory, 1_8_mission
     "1.9": 3,  # 1_9_prisoners, 1_9_medical_mission, 1_9_search_mission
     "1.10": 6, # exam_l1 to exam_l6
+    "2.1": 1,  # q_2_1_scenario_mastery
+    "2.2": 1,  # q_2_2_club
 }
 
 def calculate_topic_progress(topic_data, subtopic_ids):

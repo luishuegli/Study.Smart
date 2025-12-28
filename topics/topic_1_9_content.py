@@ -28,20 +28,40 @@ content_1_9 = {
             "de": "Das berühmteste Rätsel der Wahrscheinlichkeitsrechnung. Es entlarvt unsere falsche Intuition.",
             "en": "The most famous puzzle in probability. It exposes the flaws of our intuition."
         },
+        "origin": {
+            "title": {"de": "Die Ursprungsgeschichte (1990)", "en": "The Origin Story (1990)"},
+            "text": {
+                "de": """
+                **New York, 1990:** Marilyn vos Savant (höchster IQ der Welt) veröffentlichte dieses Rätsel im *Parade Magazine*. Ihre Antwort: **"Wechseln verdoppelt die Gewinnchance."**
+                
+                Die Reaktion? Tausende Briefe, viele von Mathematik-PhDs, die sie beschimpften: *"Sie haben einen Fehler gemacht... als Mathematiker bin ich entsetzt!"*
+                
+                Warum irrten sich so viele Experten? Weil sie den Kontext ignorierten.
+                """,
+                "en": """
+                **New York, 1990:** Marilyn vos Savant (highest IQ record) published this puzzle in *Parade Magazine*. Her answer: **"Switching doubles your chance."**
+                
+                The reaction? Thousands of letters, many from Math PhDs, calling her wrong: *"You made a mistake... as a mathematician I am appalled!"*
+                
+                Why did so many experts get it wrong? Because they ignored the context.
+                """
+            }
+        },
         "constraints": {
-            "title": {"de": "Die Regeln (Der Host Constraint)", "en": "The Rules (The Host Constraint)"},
+            "title": {"de": "Das Spiel-Setup (Kontext ist alles)", "en": "The Game Setup (Context is King)"},
+            "intro": {"de": "Du bist in einer Game Show. Der Host ist Monty Hall.", "en": "You are on a Game Show. The host is Monty Hall."},
             "list": {
                 "de": [
-                    "1. Monty **MUSS** eine Tür öffnen.",
-                    "2. Monty kann **NICHT** deine Tür öffnen.",
-                    "3. Monty kann **NICHT** das Auto öffnen.",
-                    "4. Monty wählt **ZUFÄLLIG**, wenn er die Wahl hat."
+                    "1. **Drei Türen:** Hinter einer ist ein **Auto** (Gewinn), hinter zwei sind **Ziegen** (Nieten).",
+                    "2. **Deine Wahl:** Du wählst eine Tür (z.B. Tür 1).",
+                    "3. **Montys Zwang:** Monty (der weiß, wo das Auto ist) **MUSS** eine andere Tür öffnen, hinter der eine **Ziege** steht.",
+                    "4. **Das Angebot:** Monty fragt dich: *'Möchtest du zu der verbleibenden Tür wechseln?'*"
                 ],
                 "en": [
-                    "1. Monty **MUST** open a door.",
-                    "2. Monty cannot open **YOUR** door.",
-                    "3. Monty cannot open the **CAR** door.",
-                    "4. Monty chooses **RANDOMLY** if he has a choice."
+                    "1. **Three Doors:** Behind one is a **Car** (Win), behind two are **Goats** (Loss).",
+                    "2. **Your Choice:** You pick a door (e.g., Door 1).",
+                    "3. **Monty's Constraint:** Monty (who knows where the car is) **MUST** open another door revealing a **Goat**.",
+                    "4. **The Offer:** Monty asks: *'Do you want to switch to the remaining door?'*"
                 ]
             }
         },
@@ -400,8 +420,16 @@ def render_subtopic_1_9(model):
     with st.container(border=True):
         st.caption(t(content_1_9["monty"]["intro"]))
         
-        # CONSTRAINTS
+        # 1. ORIGIN STORY
+        with st.expander(t(content_1_9["monty"]["origin"]["title"]), expanded=False):
+            st.info(t(content_1_9["monty"]["origin"]["text"]))
+            
+        st.markdown("<br>", unsafe_allow_html=True)
+
+        # 2. THE GAME SETUP
         st.markdown(f"**{t(content_1_9['monty']['constraints']['title'])}**")
+        st.caption(t(content_1_9["monty"]["constraints"]["intro"]))
+        
         for rule in t(content_1_9['monty']['constraints']['list']):
             st.markdown(f"- {rule}")
             

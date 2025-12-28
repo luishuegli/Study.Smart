@@ -66,7 +66,7 @@ def render_mcq(
     solution_text_dict,
     success_msg_dict,
     error_msg_dict,
-    model,
+    client,
     ai_context,
     hint_text_dict=None,
     allow_retry=False,
@@ -102,7 +102,11 @@ def render_mcq(
         # If we have a saved index, use it. 
         # But if it's already in session state (meaning user just clicked it), session state wins.
         if radio_key not in st.session_state and saved_index is not None:
-             initial_index = saved_index
+             # Validate index to prevent StreamlitAPIException
+             if isinstance(saved_index, int) and 0 <= saved_index < len(options):
+                 initial_index = saved_index
+             else:
+                 initial_index = 0 # Default to first option if saved index is invalid
 
     # --- CALLBACK FOR IMMEDIATE SYNC ---
     def on_mcq_change():
@@ -177,7 +181,7 @@ def render_mcq(
             # 5. AI Tutor
             # We append the user's view of the question to the context if not present
             full_context = f"{ai_context}\n\nProblem: {question_text}\nCorrect Answer Index: {correct_idx}"
-            render_ai_tutor(f"mcq_ai_{key_suffix}", full_context, model)
+            render_ai_tutor(f"mcq_ai_{key_suffix}", full_context, client)
             
     # Retry logic if requested (optional)
     if allow_retry:

@@ -223,7 +223,7 @@ def render_subtopic_1_4(model):
     with st.container(border=True):
         
         # 1. Full Width Intro
-        st.markdown(f"### {render_icon('book-open')} {t(content_1_4['theory_header'])}", unsafe_allow_html=True)
+        st.markdown(f"### {t(content_1_4['theory_header'])}")
         st.markdown(t(content_1_4["intro"]))
         st.markdown("<br>", unsafe_allow_html=True)
 
@@ -253,7 +253,7 @@ def render_subtopic_1_4(model):
                 </style>
             """, unsafe_allow_html=True)
             
-            st.markdown(f"### {render_icon('puzzle')} {t(content_1_4['interactive']['header'])}", unsafe_allow_html=True)
+            st.markdown(f"### {t(content_1_4['interactive']['header'])}")
             st.caption(t(content_1_4["interactive"]["desc"]))
             
             # Scenario Selector
@@ -335,7 +335,7 @@ def render_subtopic_1_4(model):
 
     # --- EXAM WORKBENCH ---
     st.markdown("<br><br>", unsafe_allow_html=True)
-    st.markdown(f"### {render_icon('clipboard-list')} {t(content_1_4['exam']['title'])}", unsafe_allow_html=True)
+    st.markdown(f"### {t(content_1_4['exam']['title'])}", unsafe_allow_html=True)
     st.caption(content_1_4['exam']['source'])
     
     with st.container(border=True):

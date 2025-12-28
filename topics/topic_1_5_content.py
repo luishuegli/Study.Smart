@@ -126,7 +126,7 @@ def render_subtopic_1_5(model):
     st.markdown(t({"de": "Wie addiert man Wahrscheinlichkeiten korrekt, ohne doppelt zu zählen?", "en": "How to add probabilities correctly without double counting?"}))
     
     # ROW 1: THE INTUITION (Full Width)
-    st.markdown(f"### {render_icon('book-open')} {t(content_1_5['intro']['header'])}", unsafe_allow_html=True)
+    st.markdown(f"### {t(content_1_5['intro']['header'])}")
     st.markdown(t(content_1_5["intro"]["text"]))
     
     st.markdown("<br>", unsafe_allow_html=True)
@@ -168,7 +168,7 @@ def render_subtopic_1_5(model):
 
     # EXAM SECTION
     st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown(f"### {render_icon('clipboard-list')} {t(content_1_5['exam']['title'])}", unsafe_allow_html=True)
+    st.markdown(f"### {t(content_1_5['exam']['title'])}")
     
     with st.container(border=True):
         opts = content_1_5["exam"]["options"]
@@ -228,7 +228,7 @@ def render_simulator_1_5():
     # ==========================================
     # SECTION 1: PLAYGROUND (Free Mode)
     # ==========================================
-    st.markdown(f"### {render_icon('layers')} Playground", unsafe_allow_html=True)
+    st.markdown(f"### Playground")
     with st.container(border=True):
         st.caption("Experiment freely. The Overlap slider automatically adapts.")
         
@@ -258,7 +258,7 @@ def render_simulator_1_5():
     # ==========================================
     # SECTION 2: THE MISSION (Strict Mode - Bulletproof)
     # ==========================================
-    st.markdown(f"### {render_icon('target')} Mission: Market Analyst", unsafe_allow_html=True)
+    st.markdown(f"### Mission: Market Analyst")
     with st.container(border=True):
         # 1. Briefing
         st.markdown(t(content_1_5['interactive']['mission_text']))

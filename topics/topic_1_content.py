@@ -41,7 +41,7 @@ def render_subtopic_1_1(model):
     st.header(t({"de": "1.1 Ereignisse, Ereignisraum und Ereignismenge", "en": "1.1 Events, Sample Space and Sets"}))
     
     # Section header with Lucide icon
-    st.markdown(f'''<h3>{render_icon('book')} &nbsp; {t({"de": "Theorie & Experimente", "en": "Theory & Experiments"})}</h3>''', unsafe_allow_html=True)
+    st.markdown(f"### {t({'de': 'Theorie & Experimente', 'en': 'Theory & Experiments'})}")
     st.markdown(f"*{t({'de': 'Lerne jedes Konzept und wende es sofort interaktiv an!', 'en': 'Learn each concept and apply it interactively immediately!'})}*")
     
     # ===== CONCEPT 1: Elementarereignis (Unified Capsule) =====
@@ -222,7 +222,7 @@ def render_subtopic_1_1(model):
     st.markdown("---")
     
     # SUMMARY
-    st.markdown(f'<h3>{render_icon("file-text")} &nbsp; {t({"de": "Zusammenfassung", "en": "Summary"})}</h3>', unsafe_allow_html=True)
+    st.markdown(f"### {t({'de': 'Zusammenfassung', 'en': 'Summary'})}")
     
     with st.container(border=True):
         st.markdown(t({
@@ -251,7 +251,7 @@ def render_subtopic_1_1(model):
         }))
     
     # 3. PRACTICE QUESTION
-    st.markdown(f'<h3>{render_icon("check-circle")} &nbsp; {t({"de": "Konzept-Check", "en": "Concept Check"})}</h3>', unsafe_allow_html=True)
+    st.markdown(f"### {t({'de': 'Konzept-Check', 'en': 'Concept Check'})}")
     
     q_key = "q_1_1_stetig"
     

@@ -136,3 +136,42 @@ This document contains **MUST-FOLLOW** rules for all agentic work. These rules a
 ## 9. Semantic Integrity & Completeness
 - **9.1 The "Impossible State" Lock**: UI controls must never allow a user to create a logically or mathematically invalid state (e.g., "Unordered Race"). Instead of explaining away the awkwardness, you must **programmatically lock/disable** the control for that scenario.
 - **9.2 The "Full Inventory" Check**: When introducing a formula or concept, you must explicitly define **100%** of its variables/components in the immediate UI. If you define $k!$, you must define $n!$. If you show $P(A|B)$, you must define $A$ and $B$. Completeness > Brevity.
+
+---
+
+## 10. Design Cohesion (The "Unified Language" Protocol)
+
+This section formalizes the visual and structural patterns that ensure consistency across all subtopics.
+
+### 10.1 Section Titles (Minimal)
+- Section headers use **plain H3 (`###`)** without icons.
+- Icons belong *inside* content, not on titles.
+- *Example*: `### Interactive Visualization` (NOT `### {icon} Interactive Visualization`).
+
+### 10.2 Interactive Element Framing (Unified Container)
+- Wrap **all** interactive elements (controls, visualization, and feedback) in a **single** `st.container(border=True)`.
+- Do NOT fragment into multiple separate bordered boxes.
+- *Exception*: If an interactive section is extremely long (scroll required), consider logical sub-sections.
+
+### 10.3 Callout Styling (Warm Accent)
+- **ALL** tutorial hints, notes, and step instructions use a **consistent warm accent background**: `#fef3c7` (Amber-100).
+- Text color for callouts: `#92400e` (Amber-800).
+- Icon color (if present): `#d97706` (Amber-600).
+- **NO other callout colors** (blue, green, red) except for explicit Success/Error feedback.
+
+### 10.4 Visualization Color Palette (Semantic Only)
+- **Blue (`#007AFF`)**: Represents Set A, Variable $n$, or the "Pool".
+- **Red (`#FF4B4B`)**: Represents Event, Variable $k$, or the "Selection".
+- **Purple (overlap)**: Represents Intersection or combined outcomes.
+- **Gray (#6B7280)**: For neutral/inactive elements.
+- **NO rainbow Plotly defaults.** If a chart has non-semantic data, use grayscale.
+
+### 10.5 Control Placement (Context-Dependent)
+- **Default**: Place controls (buttons, sliders, pills) **above** the visualization.
+- **Alternative**: If the visualization benefits from side-by-side comparison (e.g., radio buttons selecting Venn operations), use a **left-column layout** for controls.
+- **Guideline**: Choose the layout that maximizes the visualization's clear space.
+
+### 10.6 Live Math Placement (Result Below)
+- Dynamic formulas and calculated results go **below** the visualization.
+- This follows the "Input → Visualization → Result" information flow.
+- Static formulas (definitions) can appear above or within theory sections.

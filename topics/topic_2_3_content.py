@@ -117,7 +117,7 @@ color: #111827 !important;
     st.markdown("---")
     
     # --- THEORY SECTION ---
-    st.markdown(f"### {render_icon('book-open')} {t(c['theory_header'])}", unsafe_allow_html=True)
+    st.markdown(f"### {t(c['theory_header'])}")
     with st.container(border=True):
         col_t1, col_t2 = st.columns([1, 1], gap="medium")
         with col_t1:
@@ -151,7 +151,7 @@ color: #111827 !important;
 
     # --- INTERACTIVE TOY: THE DJ DECK ---
     with st.container(border=True):
-        st.markdown(f"### {render_icon('music')} {t(c['toy']['title'])}", unsafe_allow_html=True)
+        st.markdown(f"### {t(c['toy']['title'])}")
         st.caption(t(c["toy"]["instr"]))
         
         # State Management

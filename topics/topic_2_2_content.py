@@ -144,7 +144,7 @@ def render_subtopic_2_2(client):
     # =========================================================================
     # THEORY SECTION - COMPREHENSIVE PEDAGOGICAL CONTENT
     # =========================================================================
-    st.markdown(f"<h3>{render_icon('book-open')} &nbsp; {t({'de': 'Theorie: Das Multiplikationsprinzip', 'en': 'Theory: The Multiplication Principle'})}</h3>", unsafe_allow_html=True)
+    st.markdown(f"### {t({'de': 'Theorie: Das Multiplikationsprinzip', 'en': 'Theory: The Multiplication Principle'})}")
     
     with st.container(border=True):
         # --- ROW 1: THE KEY INSIGHT ---
@@ -175,7 +175,7 @@ def render_subtopic_2_2(client):
         col_text, col_form = st.columns([1, 1], gap="large")
         
         with col_text:
-            st.markdown(f"<h4>{render_icon('map-pin', size=18)} &nbsp; {t({'de': 'Das Gedankenmodell', 'en': 'The Mental Model'})}</h4>", unsafe_allow_html=True)
+            st.markdown(f"#### {t({'de': 'Das Gedankenmodell', 'en': 'The Mental Model'})}")
             # Subtle background and padding to even out the visual weight with the Formula box
             st.markdown(f"""
 <div style="background: #fafafa; border-radius: 12px; padding: 16px; border: 1px solid #f1f5f9; min-height: 200px;">
@@ -191,7 +191,7 @@ def render_subtopic_2_2(client):
 """, unsafe_allow_html=True)
             
         with col_form:
-            st.markdown(f"<h4>{render_icon('function', size=18)} &nbsp; {t({'de': 'Die Formel', 'en': 'The Formula'})}</h4>", unsafe_allow_html=True)
+            st.markdown(f"#### {t({'de': 'Die Formel', 'en': 'The Formula'})}")
             
             # Use a container to match the height and styling of the left side
             with st.container(border=True):
@@ -322,7 +322,7 @@ def render_subtopic_2_2(client):
     with st.container(border=True):
         col_head, _ = st.columns([2, 1])
         with col_head:
-            st.markdown(f"<h3>{render_icon('shirt')} &nbsp; {t({'de': 'Der Outfit-Konfigurator', 'en': 'The Outfit Configurator'})}</h3>", unsafe_allow_html=True)
+            st.markdown(f"### {t({'de': 'Der Outfit-Konfigurator', 'en': 'The Outfit Configurator'})}")
         
         # 1. Split Layout: Inputs (Builder) | Visual (Matrix)
         col_inp, col_vis = st.columns([1, 2], gap="large")
@@ -457,7 +457,7 @@ border-color: #3B82F6;
 
     # --- EXAM SECTION ---
     st.markdown("<br><br>", unsafe_allow_html=True)
-    st.markdown(f"<h3>{render_icon('clipboard-list')} &nbsp; {t({'de': 'Prüfungstraining', 'en': 'Exam Practice'})}</h3>", unsafe_allow_html=True)
+    st.markdown(f"### {t({'de': 'Prüfungstraining', 'en': 'Exam Practice'})}")
     
     with st.container(border=True):
         render_mcq(

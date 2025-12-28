@@ -289,7 +289,7 @@ def render_subtopic_1_7(model):
         # 1. NARRATIVE HUD (AGGRESSIVE GUIDANCE)
         if current_noise == 3:
             st.markdown(f"""
-<div style="background: #fef3c7; border-left: 4px solid #d97706; padding: 12px 16px; border-radius: 8px; color: #92400e;">
+<div style="background: #f4f4f5; border-left: 4px solid #71717a; padding: 12px 16px; border-radius: 8px; color: #18181b;">
     <strong>{t({'de': 'Schritt 1:', 'en': 'Step 1:'})}</strong> {t({'de': 'Klicke auf die Quadrate, um sie aus dem Universum zu werfen.', 'en': 'Click on the squares to kick them out of the universe.'})}
 </div>
 """, unsafe_allow_html=True)
@@ -344,7 +344,7 @@ def render_subtopic_1_7(model):
                     st.session_state.visible_indices_1_7.remove(p_idx)
                     st.rerun()
                 elif p_type != "noise" and p_idx in st.session_state.visible_indices_1_7:
-                    st.toast("⚠️ Keep the Circles! We need them for the condition.", icon="⚠️")
+                    st.toast("Keep the Circles! We need them for the condition.", icon="info")
 
         # C. The "Live Math" Panel (Right Side) - Simplified
         with col_math:

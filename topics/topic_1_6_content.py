@@ -169,12 +169,20 @@ def render_subtopic_1_6(model):
         curr_r = st.session_state.dart_internal_radius
         
         if curr_r == 0:
-            st.info(f"🎯 **{t({'de': 'Schritt 1:', 'en': 'Step 1:'})}** {t({'de': 'Klicke irgendwo auf die Scheibe, um den ersten Dart zu werfen.', 'en': 'Click anywhere on the board to throw your first dart.'})}")
+            st.markdown(f"""
+<div style="background: #f4f4f5; border-left: 4px solid #71717a; padding: 12px 16px; border-radius: 8px; color: #18181b;">
+    <strong>{t({'de': 'Schritt 1:', 'en': 'Step 1:'})}</strong> {t({'de': 'Klicke irgendwo auf die Scheibe, um den ersten Dart zu werfen.', 'en': 'Click anywhere on the board to throw your first dart.'})}
+</div>
+""", unsafe_allow_html=True)
         elif curr_r < 95:
-            st.success(f"✨ **{t({'de': 'Schritt 2:', 'en': 'Step 2:'})}** {t({'de': 'Super! Du hast eine Fläche erzeugt. Klicke jetzt auf den Rand, um alles abzudecken.', 'en': 'Great! You created an area. Now click the edge to cover everything.'})}")
+            st.markdown(f"""
+<div style="background: #f4f4f5; border-left: 4px solid #71717a; padding: 12px 16px; border-radius: 8px; color: #18181b;">
+    <strong>{t({'de': 'Schritt 2:', 'en': 'Step 2:'})}</strong> {t({'de': 'Super! Du hast eine Fläche erzeugt. Klicke jetzt auf den Rand, um alles abzudecken.', 'en': 'Great! You created an area. Now click the edge to cover everything.'})}
+</div>
+""", unsafe_allow_html=True)
         else:
             st.balloons()
-            st.success(f"🌌 **{t({'de': 'Finale:', 'en': 'Final Step:'})}** {t({'de': 'Universum erobert! P=1. Überprüfe die Mathematik unten.', 'en': 'Universe captured! P=1. Check the math below.'})}")
+            st.success(f"**{t({'de': 'Finale:', 'en': 'Final Step:'})}** {t({'de': 'Universum erobert! P=1. Überprüfe die Mathematik unten.', 'en': 'Universe captured! P=1. Check the math below.'})}")
             if user := st.session_state.get("user"):
                 from utils.progress_tracker import track_question_answer
                 track_question_answer(user["localId"], "vwl", "1", "1.6", "1_6_dart_mission", True)

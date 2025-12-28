@@ -58,87 +58,57 @@ def render_cassette(text, color, is_empty=False, slot_label="", options_left=0):
     if is_empty:
         # Ghost State (The Receptacle)
         label = t({"de": f"Wähle 1 aus {options_left}", "en": f"Pick 1 of {options_left}"})
-        return f"""
-        <div style="
-            height: 54px; 
-            border: 2px dashed #d1d5db; 
-            border-radius: 12px; 
-            background: #f9fafb; 
-            display: flex; 
-            align-items: center; 
-            justify-content: space-between; 
-            padding: 0 16px; 
-            color: #9ca3af; 
-            font-family: 'Inter', sans-serif; 
-            margin-bottom: 12px;
-            transition: all 0.3s ease;
-        ">
-            <span style="font-weight:600; font-size: 0.85em; text-transform:uppercase; letter-spacing: 0.5px;">{slot_label}</span>
-            <span style="background:#e5e7eb; padding: 4px 10px; border-radius: 6px; font-size: 0.8em; color: #6b7280;">{label}</span>
-        </div>
-        """
+        return f"""<div style="height: 54px; border: 2px dashed #d1d5db; border-radius: 12px; background: #f9fafb; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; color: #9ca3af; font-family: 'Inter', sans-serif; margin-bottom: 12px; transition: all 0.3s ease;"><span style="font-weight:600; font-size: 0.85em; text-transform:uppercase; letter-spacing: 0.5px;">{slot_label}</span><span style="background:#e5e7eb; padding: 4px 10px; border-radius: 6px; font-size: 0.8em; color: #6b7280;">{label}</span></div>"""
     else:
         # Filled State (The Physical Media) - Jony Ive Style (Clean, Depth)
-        return f"""
-        <div style="
-            height: 54px; 
-            border-left: 6px solid {color}; 
-            border-radius: 8px; 
-            background: white; 
-            color: #1f2937; 
-            display: flex; 
-            align-items: center; 
-            justify-content: space-between; 
-            padding: 0 16px; 
-            margin-bottom: 12px; 
-            box-shadow: 0 2px 4px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02); 
-            font-family: 'Inter', sans-serif;
-            font-weight: 500;
-            border: 1px solid #e5e7eb;
-            border-left-width: 6px; /* Ensure color accent is kept */
-            animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        ">
-            <span style="font-size: 1em;">{text}</span>
-            <div style="
-                width: 12px; height: 12px; 
-                background: {color}; 
-                border-radius: 50%; 
-                opacity: 0.8;
-                box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-            "></div>
-        </div>
-        """
+        return f"""<div style="height: 54px; border-left: 6px solid {color}; border-radius: 8px; background: white; color: #1f2937; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; margin-bottom: 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02); font-family: 'Inter', sans-serif; font-weight: 500; border: 1px solid #e5e7eb; border-left-width: 6px; animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);"><span style="font-size: 1em;">{text}</span><div style="width: 12px; height: 12px; background: {color}; border-radius: 50%; opacity: 0.8; box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);"></div></div>"""
 
 # ==============================================================================
 # 3. MAIN RENDERER
 # ==============================================================================
 def render_subtopic_2_3(client):
+    c = content_2_3
+    
+    # --- CSS: SHARED STYLES ---
+    st.markdown("""
+        <style>
+        .icon-header {
+            display: flex !important;
+            align-items: center !important;
+            gap: 12px !important;
+            margin-bottom: 12px !important;
+        }
+        .icon-header svg {
+            flex-shrink: 0 !important;
+        }
+        </style>
+    """, unsafe_allow_html=True)
     # --- CSS: LAYOUT STABILITY & ANIMATION ---
     st.markdown("""
-    <style>
-    [data-testid="stHorizontalBlock"] { align-items: stretch; }
-    [data-testid="column"] { display: flex; flex-direction: column; }
-    
-    /* Button Styling to match Cassette height */
-    .stButton button { 
-        width: 100%; 
-        border-radius: 10px; 
-        height: 54px; 
-        font-weight: 500;
-        border: 1px solid #e5e7eb !important;
-        transition: all 0.2s ease;
-        color: #1f2937 !important; /* Dark text for visibility */
-    }
-    .stButton button:hover {
-        border-color: #d1d5db !important;
-        background-color: #f9fafb !important;
-        transform: translateY(-1px);
-        color: #111827 !important;
-    }
-    
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-    </style>
-    """, unsafe_allow_html=True)
+<style>
+[data-testid="stHorizontalBlock"] { align-items: stretch; }
+[data-testid="column"] { display: flex; flex-direction: column; }
+
+/* Button Styling to match Cassette height */
+.stButton button { 
+width: 100%; 
+border-radius: 10px; 
+height: 54px; 
+font-weight: 500;
+border: 1px solid #e5e7eb !important;
+transition: all 0.2s ease;
+color: #1f2937 !important; /* Dark text for visibility */
+}
+.stButton button:hover {
+border-color: #d1d5db !important;
+background-color: #f9fafb !important;
+transform: translateY(-1px);
+color: #111827 !important;
+}
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+""", unsafe_allow_html=True)
 
     c = content_2_3
     
@@ -266,7 +236,12 @@ def render_subtopic_2_3(client):
 
     # --- EXAM SECTION ---
     st.markdown("<br><br>", unsafe_allow_html=True)
-    st.markdown(f"### {render_icon('clipboard-list')} {t(c['exam']['title'])}", unsafe_allow_html=True)
+    st.markdown(f"""
+        <div class="icon-header">
+            {render_icon('clipboard-list', size=24)}
+            <h3 style="margin:0;">{t(c['exam']['title'])}</h3>
+        </div>
+    """, unsafe_allow_html=True)
     st.caption(c["exam"]["source"])
     
     with st.container(border=True):
@@ -290,26 +265,26 @@ def render_subtopic_2_3(client):
         # A visual bridge between the toy (3) and the exam (50)
         if st.toggle(t({"de": "Visualisierung (Größenordnung)", "en": "Visualize Scale"})):
             st.markdown(f"""
-            <div style="
-                margin-top: 10px;
-                padding: 20px;
-                background: #f9fafb;
-                border-radius: 12px;
-                border: 1px solid #e5e7eb;
-                overflow-x: auto;
-            ">
-                <div style="font-size:0.8em; color:#6b7280; margin-bottom:12px; text-transform:uppercase; letter-spacing:1px; font-weight:600;">The Factorial Chain (n=50)</div>
-                <div style="display: flex; gap: 8px; align-items: flex-end; justify-content: flex-start; font-family: 'Menlo', monospace; height: 40px;">
-                    <div style="text-align:center;"><span style="color:#EF4444; font-weight:bold; font-size:1.2em;">50</span></div>
-                    <span style="color:#9ca3af; padding-bottom: 4px;">×</span>
-                    <div style="text-align:center;"><span style="color:#3B82F6; font-weight:bold; font-size:1.1em;">49</span></div>
-                    <span style="color:#9ca3af; padding-bottom: 4px;">×</span>
-                    <div style="text-align:center;"><span style="color:#F59E0B; font-weight:bold; font-size:1.1em;">48</span></div>
-                    <span style="color:#d1d5db; margin: 0 10px; padding-bottom: 4px;">... × ...</span>
-                    <div style="text-align:center;"><span style="color:#6b7280; font-weight:bold;">1</span></div>
-                </div>
-                <div style="text-align: left; margin-top: 16px; font-size: 0.95em; color: #374151; border-top: 1px dashed #d1d5db; padding-top: 12px;">
-                    Result: <b>3.04 × 10⁶⁴</b> <span style="color: #6b7280; font-style: italic; margin-left:8px;">&mdash; {t(c['exam']['scale_viz'])}</span>
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
+<div style="
+margin-top: 10px;
+padding: 20px;
+background: #f9fafb;
+border-radius: 12px;
+border: 1px solid #e5e7eb;
+overflow-x: auto;
+">
+<div style="font-size:0.8em; color:#6b7280; margin-bottom:12px; text-transform:uppercase; letter-spacing:1px; font-weight:600;">The Factorial Chain (n=50)</div>
+<div style="display: flex; gap: 8px; align-items: flex-end; justify-content: flex-start; font-family: 'Menlo', monospace; height: 40px;">
+<div style="text-align:center;"><span style="color:#EF4444; font-weight:bold; font-size:1.2em;">50</span></div>
+<span style="color:#9ca3af; padding-bottom: 4px;">×</span>
+<div style="text-align:center;"><span style="color:#3B82F6; font-weight:bold; font-size:1.1em;">49</span></div>
+<span style="color:#9ca3af; padding-bottom: 4px;">×</span>
+<div style="text-align:center;"><span style="color:#F59E0B; font-weight:bold; font-size:1.1em;">48</span></div>
+<span style="color:#d1d5db; margin: 0 10px; padding-bottom: 4px;">... × ...</span>
+<div style="text-align:center;"><span style="color:#6b7280; font-weight:bold;">1</span></div>
+</div>
+<div style="text-align: left; margin-top: 16px; font-size: 0.95em; color: #374151; border-top: 1px dashed #d1d5db; padding-top: 12px;">
+Result: <b>3.04 × 10⁶⁴</b> <span style="color: #6b7280; font-style: italic; margin-left:8px;">&mdash; {t(c['exam']['scale_viz'])}</span>
+</div>
+</div>
+""", unsafe_allow_html=True)

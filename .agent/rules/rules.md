@@ -1,5 +1,5 @@
 ---
-description: Implementation Rules
+trigger: always_on
 ---
 
 # Permanent Implementation Rules (Study.Smart)
@@ -45,6 +45,10 @@ This document contains **MUST-FOLLOW** rules for all agentic work. These rules a
     - Element Break: `st.markdown("<br>", unsafe_allow_html=True)`
     - Divider: `st.markdown("---")`
 - **2.6 Plotly Geometry Lock**: Any geometric visualization (Venn, Scatter) MUST use `scaleanchor="y"` and `scaleratio=1` in the layout config. This prevents circles from becoming ovals when the window resizes.
+- **2.7 The Split-Row Grid Protocol (Alignment Guarantee)**:
+    - **Context**: When rendering multiple items side-by-side (e.g., 3 formulas) where sub-elements (like "Intuition" icons) must align perfectly horizontally, but the content above them (the formulas) has variable height.
+    - **Rule**: Do NOT stack [Formula + Intuition] in a single column. Instead, split them into **Row 1** (Formulas) and **Row 2** (Intuitions).
+    - **Implementation**: Use `st.columns` for Row 1, add a spacer, then use `st.columns` for Row 2. This mathematically forces alignment.
 
 ---
 
@@ -105,6 +109,10 @@ This document contains **MUST-FOLLOW** rules for all agentic work. These rules a
     - **Primary Action**: Solid Color Button (`type="primary"`).
     - **Secondary Action**: Outlined/Ghost Button (`type="secondary"`).
     - **Tertiary**: Text Link.
+- **7.5 Design Integrity (Anti-Frustration Protocols)**:
+    - **Minimalist Success**: Success states must be clean and text-focused. Do NOT create multi-column layouts with large icons just for a "Found" message.
+    - **High-Contrast Overlays**: Any icon overlay on a chart/grid must be **Black (#000000)** or White (#FFFFFF). Do NOT use colored icons (Green/Red) on data visualizations.
+    - **The "Revealed" State**: When an item is found/revealed on a grid, the background of that specific cell must be cleared (set to 0/White) to maximize contrast for the icon. Do not overlay icons on dark backgrounds.
 
 ---
 
@@ -118,4 +126,13 @@ This document contains **MUST-FOLLOW** rules for all agentic work. These rules a
     1. **SVGs render** (check `viewBox`).
     2. **Layouts stretch** (check CSS).
     3. **Math aligns** (check LaTeX).
-    4. **No Overlap** (check narrow widths).
+    4. **No Overlap** (check narrow widths).- **8.7 SYNTAX INTEGRITY CHECK (MANDATORY)**:
+    - After *every* `replace_file_content` or edit, you **MUST** verify the app is still running.
+    - If you see `IndentationError` or `SyntaxError`, you have **FAILED**. Fix it immediately.
+    - **Never** assume a complex edit worked without verification.
+
+---
+
+## 9. Semantic Integrity & Completeness
+- **9.1 The "Impossible State" Lock**: UI controls must never allow a user to create a logically or mathematically invalid state (e.g., "Unordered Race"). Instead of explaining away the awkwardness, you must **programmatically lock/disable** the control for that scenario.
+- **9.2 The "Full Inventory" Check**: When introducing a formula or concept, you must explicitly define **100%** of its variables/components in the immediate UI. If you define $k!$, you must define $n!$. If you show $P(A|B)$, you must define $A$ and $B$. Completeness > Brevity.

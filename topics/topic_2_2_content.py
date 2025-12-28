@@ -43,25 +43,10 @@ def render_clothing_stack(shirt_name, pant_name, colors):
     s_col = colors.get(shirt_name, "#ccc")
     p_col = colors.get(pant_name, "#666")
     
-    return f"""
-    <div style="display:flex; flex-direction:column; align-items:center; margin: 4px;">
-        <div style="
-            width:34px; height:24px; 
-            background:{s_col}; 
-            border-radius: 6px 6px 2px 2px; 
-            border:1px solid rgba(0,0,0,0.05);
-            box-shadow: inset 0 -2px 0 rgba(0,0,0,0.1);
-        " title="{shirt_name}"></div>
-        <div style="
-            width:30px; height:32px; 
-            background:{p_col}; 
-            border-radius: 0 0 6px 6px; 
-            border:1px solid rgba(0,0,0,0.05);
-            margin-top:-2px;
-            z-index:2;
-        " title="{pant_name}"></div>
-    </div>
-    """
+    return f"""<div style="display:flex; flex-direction:column; align-items:center; margin: 4px;">
+        <div style="width:34px; height:24px; background:{s_col}; border-radius: 6px 6px 2px 2px; border:1px solid rgba(0,0,0,0.05); box-shadow: inset 0 -2px 0 rgba(0,0,0,0.1);" title="{shirt_name}"></div>
+        <div style="width:30px; height:32px; background:{p_col}; border-radius: 0 0 6px 6px; border:1px solid rgba(0,0,0,0.05); margin-top:-2px; z-index:2;" title="{pant_name}"></div>
+    </div>""".replace("\n", "")
 
 def get_committee_matrix_html(rows=6, cols=15):
     """Generates the HTML for the 6x15 Committee Matrix Grid."""
@@ -193,17 +178,17 @@ def render_subtopic_2_2(client):
             st.markdown(f"<h4>{render_icon('map-pin', size=18)} &nbsp; {t({'de': 'Das Gedankenmodell', 'en': 'The Mental Model'})}</h4>", unsafe_allow_html=True)
             # Subtle background and padding to even out the visual weight with the Formula box
             st.markdown(f"""
-            <div style="background: #fafafa; border-radius: 12px; padding: 16px; border: 1px solid #f1f5f9; min-height: 200px;">
-                <p style="margin-top: 0; font-weight: 500; color: #475569;">{t({'de': 'Stell dir vor, du stehst an einer Weggabelung:', 'en': 'Imagine standing at a fork in the road:'})}</p>
-                <ol style="margin-bottom: 0; color: #1e293b;">
-                    <li><b>{t({'de': 'Entscheidung 1:', 'en': 'Decision 1:'})}</b> {t({'de': 'Du wählst ein Hemd', 'en': 'You pick a shirt'})} (<span style="color:#007AFF; font-weight:600;">3 options</span>)</li>
-                    <li><b>{t({'de': 'Für JEDES Hemd:', 'en': 'For EACH shirt:'})}</b> {t({'de': 'Du wählst eine Hose', 'en': 'You pick pants'})} (<span style="color:#FF4B4B; font-weight:600;">4 options</span>)</li>
-                </ol>
-                <div style="margin-top: 16px; padding-top: 12px; border-top: 1px dashed #e2e8f0; font-size: 0.95em;">
-                    {t({'de': 'Anzahl der Pfade', 'en': 'Number of paths'})} = <span style="color:#007AFF; font-weight:600;">3</span> × <span style="color:#FF4B4B; font-weight:600;">4</span> = <b>12</b>
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
+<div style="background: #fafafa; border-radius: 12px; padding: 16px; border: 1px solid #f1f5f9; min-height: 200px;">
+<p style="margin-top: 0; font-weight: 500; color: #475569;">{t({'de': 'Stell dir vor, du stehst an einer Weggabelung:', 'en': 'Imagine standing at a fork in the road:'})}</p>
+<ol style="margin-bottom: 0; color: #1e293b;">
+<li><b>{t({'de': 'Entscheidung 1:', 'en': 'Decision 1:'})}</b> {t({'de': 'Du wählst ein Hemd', 'en': 'You pick a shirt'})} (<span style="color:#007AFF; font-weight:600;">3 options</span>)</li>
+<li><b>{t({'de': 'Für JEDES Hemd:', 'en': 'For EACH shirt:'})}</b> {t({'de': 'Du wählst eine Hose', 'en': 'You pick pants'})} (<span style="color:#FF4B4B; font-weight:600;">4 options</span>)</li>
+</ol>
+<div style="margin-top: 16px; padding-top: 12px; border-top: 1px dashed #e2e8f0; font-size: 0.95em;">
+{t({'de': 'Anzahl der Pfade', 'en': 'Number of paths'})} = <span style="color:#007AFF; font-weight:600;">3</span> × <span style="color:#FF4B4B; font-weight:600;">4</span> = <b>12</b>
+</div>
+</div>
+""", unsafe_allow_html=True)
             
         with col_form:
             st.markdown(f"<h4>{render_icon('function', size=18)} &nbsp; {t({'de': 'Die Formel', 'en': 'The Formula'})}</h4>", unsafe_allow_html=True)
@@ -214,24 +199,19 @@ def render_subtopic_2_2(client):
                 
                 # --- PARAMETER SPEC LIST (Rounded & Natural) ---
                 def render_spec_row(label, desc, color="#64748b"):
-                    return f"""
-                    <div style="display: flex; align-items: center; gap: 12px; padding: 10px 12px; background: #fafafa; border-radius: 8px; margin-bottom: 6px;">
-                        <div style="min-width: 40px; font-family: serif; font-size: 1.1em; font-weight: 600; color: {color}; text-align: center;">{label}</div>
-                        <div style="font-size: 0.9em; color: #475569;">{desc}</div>
-                    </div>
-                    """
+                    return f"""<div style="display: flex; align-items: center; gap: 12px; padding: 10px 12px; background: #fafafa; border-radius: 8px; margin-bottom: 6px;"><div style="min-width: 40px; font-family: serif; font-size: 1.1em; font-weight: 600; color: {color}; text-align: center;">{label}</div><div style="font-size: 0.9em; color: #475569;">{desc}</div></div>"""
 
                 st.markdown(f"""
-                <div style="margin-top: 12px; border-top: 1px dashed #e2e8f0; padding-top: 12px;">
-                    {render_spec_row("$k$", t({"de": "Anzahl Entscheidungen", "en": "Number of selection steps"}))}
-                    {render_spec_row("$n_1$", t({"de": "Optionen bei Schritt 1", "en": "Options at step 1"}), color="#007AFF")}
-                    {render_spec_row("$n_2$", t({"de": "Optionen bei Schritt 2", "en": "Options at step 2"}), color="#FF4B4B")}
-                    <div style="display: flex; align-items: center; gap: 12px; padding: 10px 12px; background: #ecfdf5; border-radius: 8px; margin-top: 10px; border: 1px solid #d1fae5;">
-                        <div style="min-width: 40px; font-family: serif; font-size: 1.1em; font-weight: 800; color: #10B981; text-align: center;">$N$</div>
-                        <div style="font-size: 0.9em; font-weight: 600; color: #064e3b;">{t({"de": "Ergebnis", "en": "Result"})}</div>
-                    </div>
-                </div>
-                """, unsafe_allow_html=True)
+<div style="margin-top: 12px; border-top: 1px dashed #e2e8f0; padding-top: 12px;">
+{render_spec_row("$k$", t({"de": "Anzahl Entscheidungen", "en": "Number of selection steps"}))}
+{render_spec_row("$n_1$", t({"de": "Optionen bei Schritt 1", "en": "Options at step 1"}), color="#007AFF")}
+{render_spec_row("$n_2$", t({"de": "Optionen bei Schritt 2", "en": "Options at step 2"}), color="#FF4B4B")}
+<div style="display: flex; align-items: center; gap: 12px; padding: 10px 12px; background: #ecfdf5; border-radius: 8px; margin-top: 10px; border: 1px solid #d1fae5;">
+<div style="min-width: 40px; font-family: serif; font-size: 1.1em; font-weight: 800; color: #10B981; text-align: center;">$N$</div>
+<div style="font-size: 0.9em; font-weight: 600; color: #064e3b;">{t({"de": "Ergebnis", "en": "Result"})}</div>
+</div>
+</div>
+""", unsafe_allow_html=True)
 
         # --- ROW 3: FULL WIDTH DECISION TREE ---
         st.markdown("<br>", unsafe_allow_html=True)
@@ -281,11 +261,11 @@ def render_subtopic_2_2(client):
     st.markdown("<br>", unsafe_allow_html=True)
     with st.container(border=True):
         st.markdown(f"""
-        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-            {render_icon('info', size=18, color='#3b82f6')} 
-            <span style="font-weight: 600; color: #1e293b;">{t({'de': 'Die Falle: Unabhängigkeit prüfen!', 'en': 'The Trap: Check Independence!'})}</span>
-        </div>
-        """, unsafe_allow_html=True)
+<div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+{render_icon('info', size=18, color='#3b82f6')} 
+<span style="font-weight: 600; color: #1e293b;">{t({'de': 'Die Falle: Unabhängigkeit prüfen!', 'en': 'The Trap: Check Independence!'})}</span>
+</div>
+""", unsafe_allow_html=True)
 
         st.markdown(t({
             'de': 'Das Multiplikationsprinzip gilt <b>nur für unabhängige Entscheidungen</b>.', 
@@ -316,12 +296,7 @@ def render_subtopic_2_2(client):
         def render_guide_row(situation, formula, is_primary=False):
             bg = "#f8fafc" if not is_primary else "#eff6ff"
             border = "1px solid #e2e8f0" if not is_primary else "1px solid #bfdbfe"
-            return f"""
-            <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: {bg}; border: {border}; border-radius: 10px; margin-bottom: 8px;">
-                <div style="font-size: 0.95em; color: #1e293b; font-weight: 500;">{situation}</div>
-                <div style="font-family: serif; font-size: 1.1em; font-weight: 600; color: {'#2563eb' if is_primary else '#475569'};">{formula}</div>
-            </div>
-            """
+            return f"""<div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: {bg}; border: {border}; border-radius: 10px; margin-bottom: 8px;"><div style="font-size: 0.95em; color: #1e293b; font-weight: 500;">{situation}</div><div style="font-family: serif; font-size: 1.1em; font-weight: 600; color: {'#2563eb' if is_primary else '#475569'};">{formula}</div></div>"""
 
         row1_text = t({"de": "Unabhängige Entscheidungen (Hemd UND Hose)", "en": "Independent choices (shirt AND pants)"})
         row1_formula = "$N = n_1 \cdot n_2$"
@@ -333,13 +308,13 @@ def render_subtopic_2_2(client):
         row4_formula = "$n^k$"
 
         st.markdown(f"""
-        <div style="margin-top: 12px;">
-            {render_guide_row(row1_text, row1_formula, is_primary=True)}
-            {render_guide_row(row2_text, row2_formula)}
-            {render_guide_row(row3_text, row3_formula)}
-            {render_guide_row(row4_text, row4_formula)}
-        </div>
-        """, unsafe_allow_html=True)
+<div style="margin-top: 12px;">
+{render_guide_row(row1_text, row1_formula, is_primary=True)}
+{render_guide_row(row2_text, row2_formula)}
+{render_guide_row(row3_text, row3_formula)}
+{render_guide_row(row4_text, row4_formula)}
+</div>
+""", unsafe_allow_html=True)
     
     st.markdown("<br>", unsafe_allow_html=True)
 
@@ -391,33 +366,33 @@ def render_subtopic_2_2(client):
             
             st.markdown("<br><hr style='margin:10px 0; border-top: 1px solid #eee;'>", unsafe_allow_html=True)
             st.markdown(f"""
-            <div style="
-                background: #F8F9FA; 
-                border-radius: 12px; 
-                padding: 16px; 
-                border: 1px solid #E0E0E0;
-                text-align: center;
-                font-family: 'Inter', sans-serif;
-            ">
-                <div style="font-size: 0.85em; color: #666; margin-bottom: 8px; font-weight: 500;">LIVE MATH</div>
-                <div style="display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 1.4em; font-weight: 600;">
-                    <div style="color: #007AFF;" title="n1 (Shirts)">{n_s}</div>
-                    <div style="color: #ccc;">×</div>
-                    <div style="color: #FF4B4B;" title="n2 (Pants)">{n_p}</div>
-                    <div style="color: #ccc;">=</div>
-                    <div style="color: #10B981;">{total}</div>
-                </div>
-                <div style="
-                    margin-top: 8px; 
-                    font-size: 0.8em; 
-                    color: #888; 
-                    border-top: 1px solid #eee; 
-                    padding-top: 6px;
-                ">
-                    Total (N) = <span style="color:#007AFF;">n₁</span> · <span style="color:#FF4B4B;">n₂</span>
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
+<div style="
+background: #F8F9FA; 
+border-radius: 12px; 
+padding: 16px; 
+border: 1px solid #E0E0E0;
+text-align: center;
+font-family: 'Inter', sans-serif;
+">
+<div style="font-size: 0.85em; color: #666; margin-bottom: 8px; font-weight: 500;">LIVE MATH</div>
+<div style="display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 1.4em; font-weight: 600;">
+<div style="color: #007AFF;" title="n1 (Shirts)">{n_s}</div>
+<div style="color: #ccc;">×</div>
+<div style="color: #FF4B4B;" title="n2 (Pants)">{n_p}</div>
+<div style="color: #ccc;">=</div>
+<div style="color: #10B981;">{total}</div>
+</div>
+<div style="
+margin-top: 8px; 
+font-size: 0.8em; 
+color: #888; 
+border-top: 1px solid #eee; 
+padding-top: 6px;
+">
+Total (N) = <span style="color:#007AFF;">n₁</span> · <span style="color:#FF4B4B;">n₂</span>
+</div>
+</div>
+""", unsafe_allow_html=True)
             
             # Relate (Connection)
             if total > 0:
@@ -435,36 +410,36 @@ def render_subtopic_2_2(client):
                 # Dynamic CSS Grid: The layout itself is the math lesson.
                 # Columns = n_pants. Rows = n_shirts.
                 st.markdown(f"""
-                <style>
-                .visual-stage {{
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    min-height: 450px; /* Adaptive height to match left column */
-                    width: 100%;
-                }}
-                .wardrobe-grid {{
-                    display: grid;
-                    grid-template-columns: repeat({max(1, n_p)}, 120px);
-                    justify-content: center;
-                    gap: 12px;
-                    padding: 12px;
-                    /* Removed border and background for cleaner look */
-                }}
-                .wardrobe-item {{
-                    background: white; border: 1px solid #e0e0e0; border-radius: 8px;
-                    display: flex; justify-content: center; align-items: center; padding: 12px;
-                    aspect-ratio: 1 / 1;
-                    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
-                    transition: transform 0.2s ease, box-shadow 0.2s ease;
-                }}
-                .wardrobe-item:hover {{ 
-                    transform: translateY(-2px) scale(1.02); 
-                    box-shadow: 0 4px 8px rgba(0,0,0,0.08); 
-                    border-color: #3B82F6; 
-                }}
-                </style>
-                """, unsafe_allow_html=True)
+<style>
+.visual-stage {{
+display: flex;
+justify-content: center;
+align-items: center;
+min-height: 450px; /* Adaptive height to match left column */
+width: 100%;
+}}
+.wardrobe-grid {{
+display: grid;
+grid-template-columns: repeat({max(1, n_p)}, 120px);
+justify-content: center;
+gap: 12px;
+padding: 12px;
+/* Removed border and background for cleaner look */
+}}
+.wardrobe-item {{
+background: white; border: 1px solid #e0e0e0; border-radius: 8px;
+display: flex; justify-content: center; align-items: center; padding: 12px;
+aspect-ratio: 1 / 1;
+box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+transition: transform 0.2s ease, box-shadow 0.2s ease;
+}}
+.wardrobe-item:hover {{ 
+transform: translateY(-2px) scale(1.02); 
+box-shadow: 0 4px 8px rgba(0,0,0,0.08); 
+border-color: #3B82F6; 
+}}
+</style>
+""", unsafe_allow_html=True)
                 
                 # Render Grid Items wrapped in Stage
                 grid_html = "<div class='visual-stage'><div class='wardrobe-grid'>"
@@ -502,13 +477,12 @@ def render_subtopic_2_2(client):
         if st.toggle(t({"de": "Lösung visualisieren", "en": "Visualize Solution"})):
             # The Committee Matrix (6x15 Grid)
             # Safe HTML Header to prevent SVG issues
-            header_html = f"""
-            <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
-                {render_icon('layout-grid')}
-                <h4 style="margin:0; padding:0;">The Committee Matrix</h4>
-            </div>
-            """
-            st.markdown(header_html, unsafe_allow_html=True)
+            st.markdown(f"""
+<div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
+{render_icon('layout-grid')}
+<h4 style="margin:0; padding:0;">The Committee Matrix</h4>
+</div>
+""", unsafe_allow_html=True)
             
             st.caption(t({
                 "de": "Jede Zelle ist ein möglicher Vorstand. 6 Zeilen (Frauen-Paare) × 15 Spalten (Männer-Paare).",

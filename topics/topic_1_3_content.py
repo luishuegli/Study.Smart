@@ -278,7 +278,7 @@ def render_subtopic_1_3(model):
             solution_text_dict=content_1_3["exam"]["solution"],
             success_msg_dict={"de": "Korrekt", "en": "Correct"},
             error_msg_dict={"de": "Das stimmt nicht ganz.", "en": "That is not quite right."},
-            model=model,
+            client=model,
             ai_context="Context: Probability definitions (Laplace vs Frequentist).",
             allow_retry=False,
             course_id="vwl",

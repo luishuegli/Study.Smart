@@ -332,7 +332,7 @@ def render_subtopic_1_6(model):
             solution_text_dict=sol_text,
             success_msg_dict=content_1_6["quiz"]["success_msg"],
             error_msg_dict=content_1_6["quiz"]["error_msg"],
-            model=model,
+            client=model,
             ai_context=ai_context,
             allow_retry=False,
             course_id="vwl",

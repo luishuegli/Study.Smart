@@ -66,27 +66,27 @@ content_1_9 = {
             }
         },
         "intuition_100": {
-            "title": {"de": "Der 100-Türen-Trick (Intuition Pump)", "en": "The 100 Doors Trick (Intuition Pump)"},
+            "title": {"de": "Der 50-Türen-Trick (Intuition Pump)", "en": "The 50 Doors Trick (Intuition Pump)"},
             "text": {
                 "de": """
-                Stell dir vor, es gibt **100 Türen**.
-                1. Du wählst **Tür 1**. Chance: **1/100**.
-                2. Die 'Anderen' (Tür 2-100) haben zusammen **99/100**.
-                3. Monty öffnet **98** dieser anderen Türen (alles Ziegen).
-                4. Nur **Tür 100** bleibt von den 'Anderen' übrig.
+                Stell dir vor, es gibt **50 Türen**.
+                1. Du wählst **Tür 1**. Chance: **1/50**.
+                2. Die 'Anderen' (Tür 2-50) haben zusammen **49/50**.
+                3. Monty öffnet **48** dieser anderen Türen (alles Ziegen).
+                4. Nur **Tür 50** bleibt von den 'Anderen' übrig.
                 
-                Die 99/100 der 'Anderen' sind nicht verschwunden. Sie haben sich auf Tür 100 konzentriert.
-                **Tür 1:** 1/100. **Tür 100:** 99/100. **Wechseln!**
+                Die 49/50 der 'Anderen' sind nicht verschwunden. Sie haben sich auf Tür 50 konzentriert.
+                **Tür 1:** 1/50. **Tür 50:** 49/50. **Wechseln!**
                 """,
                 "en": """
-                Imagine there are **100 doors**.
-                1. You pick **Door 1**. Chance: **1/100**.
-                2. The 'Others' (Doors 2-100) have a combined **99/100**.
-                3. Monty opens **98** of these other doors (all goats).
-                4. Only **Door 100** remains closed from the 'Others'.
+                Imagine there are **50 doors**.
+                1. You pick **Door 1**. Chance: **1/50**.
+                2. The 'Others' (Doors 2-50) have a combined **49/50**.
+                3. Monty opens **48** of these other doors (all goats).
+                4. Only **Door 50** remains closed from the 'Others'.
                 
-                The 99/100 probability of the 'Others' didn't disappear. It concentrated on **Door 100**.
-                **Door 1:** 1/100. **Door 100:** 99/100. **Switch!**
+                The 49/50 probability of the 'Others' didn't disappear. It concentrated on **Door 50**.
+                **Door 1:** 1/50. **Door 50:** 49/50. **Switch!**
                 """
             }
         },
@@ -235,27 +235,27 @@ def render_subtopic_1_9(model):
         with st.container(border=True):
             if stage == 0:
                 st.info(t({
-                    "de": "🎯 **Anker:** Wir starten mit einer Bevölkerung von 16. Aktuell könnte *jeder* krank sein. Wir wissen nichts.",
-                    "en": "🎯 **Anchor:** We start with a population of 16. At this point, *anyone* could be sick. We know nothing."
+                    "de": "**Anker:** Wir starten mit einer Bevölkerung von 16. Aktuell könnte *jeder* krank sein. Wir wissen nichts.",
+                    "en": "**Anchor:** We start with a population of 16. At this point, *anyone* could be sick. We know nothing."
                 }))
             
             elif stage == 1:
                 st.markdown(t({
-                    "de": f"🧬 **Die Wahrheit:** In unserer Welt sind $P(S) = 4/16$ krank. Nur die **{render_icon('circle', color='#FF4B4B')} Roten Punkte** sind betroffen.",
-                    "en": f"🧬 **The Truth:** In our world, $P(S) = 4/16$ are sick. Only the **{render_icon('circle', color='#FF4B4B')} Red Dots** are affected."
+                    "de": f"**Die Wahrheit:** In unserer Welt sind $P(S) = 4/16$ krank. Nur die **{render_icon('circle', color='#FF4B4B')} Roten Punkte** sind betroffen.",
+                    "en": f"**The Truth:** In our world, $P(S) = 4/16$ are sick. Only the **{render_icon('circle', color='#FF4B4B')} Red Dots** are affected."
                 }), unsafe_allow_html=True)
             
             elif stage == 2:
                 st.warning(t({
-                    "de": "🧪 **Das Testergebnis:** Schau dir die gelben Ränder an! Der Test hat 3 Kranke 'erwischt', aber auch 3 Gesunde 'falsch verdächtigt'.",
-                    "en": "🧪 **The Test Result:** Look at the yellow borders! The test 'caught' 3 sick people, but it also 'falsely accused' 3 healthy people."
+                    "de": "**Das Testergebnis:** Schau dir die gelben Ränder an! Der Test hat 3 Kranke 'erwischt', aber auch 3 Gesunde 'falsch verdächtigt'.",
+                    "en": "**The Test Result:** Look at the yellow borders! The test 'caught' 3 sick people, but it also 'falsely accused' 3 healthy people."
                 }))
                 st.latex(r"P(+|S) = 75\% \text{ (Sensitivity)} \quad P(+|H) = 25\% \text{ (False Positive Rate)}")
     
             elif stage == 3:
                 st.success(t({
-                    "de": "🔍 **Der Filter:** Wir ignorieren alle ohne gelben Rand. Dein neues Universum sind NUR die 6 Personen mit positivem Test.",
-                    "en": "🔍 **The Filter:** We ignore everyone without a yellow border. Your new universe is ONLY the 6 people with a positive test."
+                    "de": "**Der Filter:** Wir ignorieren alle ohne gelben Rand. Dein neues Universum sind NUR die 6 Personen mit positivem Test.",
+                    "en": "**The Filter:** We ignore everyone without a yellow border. Your new universe is ONLY the 6 people with a positive test."
                 }))
                 
                 if user := st.session_state.get("user"):
@@ -420,39 +420,55 @@ def render_subtopic_1_9(model):
     with st.container(border=True):
         st.caption(t(content_1_9["monty"]["intro"]))
         
-        # 1. ORIGIN STORY
-        with st.expander(t(content_1_9["monty"]["origin"]["title"]), expanded=False):
+        # 1. ORIGIN STORY (Always visible now)
+        with st.container():
+            st.markdown(f"#### {t(content_1_9['monty']['origin']['title'])}")
             st.info(t(content_1_9["monty"]["origin"]["text"]))
             
         st.markdown("<br>", unsafe_allow_html=True)
 
         # 2. THE GAME SETUP
-        st.markdown(f"**{t(content_1_9['monty']['constraints']['title'])}**")
-        st.caption(t(content_1_9["monty"]["constraints"]["intro"]))
+        st.markdown(f"#### {t(content_1_9['monty']['constraints']['title'])}")
+        st.markdown(t(content_1_9["monty"]["constraints"]["intro"]))
         
         for rule in t(content_1_9['monty']['constraints']['list']):
             st.markdown(f"- {rule}")
             
         st.markdown("---")
-        st.markdown(t(content_1_9["monty"]["anchor"]))
+        st.markdown(f"**{t(content_1_9['monty']['anchor'])}**")
         
-        # 100 DOORS INTUITION
-        with st.expander(t(content_1_9["monty"]["intuition_100"]["title"])):
-            st.markdown(t(content_1_9["monty"]["intuition_100"]["text"]))
+        # 3. INTUITION PUMP (100 Doors - Always visible)
+        st.markdown("<br>", unsafe_allow_html=True)
+        st.markdown(f"#### {t(content_1_9['monty']['intuition_100']['title'])}")
         
-        if st.button(t(content_1_9["monty"]["sim_btn"]), key="monty_sim"):
+        st.warning(t(content_1_9["monty"]["intuition_100"]["text"]))
+        
+        # VISUAL PROOF (50 DOORS)
+        fig_doors = go.Figure()
+        fig_doors.add_trace(go.Bar(
+            x=[t({"de": "Deine Tür (1)", "en": "Your Door (1)"}), t({"de": "Die Überlebende (50)", "en": "The Survivor (50)"})],
+            y=[1, 49],
+            text=["1/50 (2%)", "49/50 (98%)"],
+            textposition='auto',
+            marker_color=["#9CA3AF", "#EF4444"]
+        ))
+        fig_doors.update_layout(
+            title=dict(text=t({"de": "Die Last der Wahrscheinlichkeit", "en": "The Weight of Probability"}), font=dict(size=14)),
+            yaxis=dict(visible=False),
+            height=200,
+            margin=dict(t=30, b=0, l=0, r=0),
+            paper_bgcolor='rgba(0,0,0,0)',
+            plot_bgcolor='rgba(0,0,0,0)'
+        )
+        st.plotly_chart(fig_doors, use_container_width=True, config={'staticPlot': True})
+        
+        st.markdown("<br>", unsafe_allow_html=True)
+        
+        if st.button(t(content_1_9["monty"]["sim_btn"]), key="monty_sim", use_container_width=True):
             # Simulation
             n_sim = 1000
-            wins_switch = 0
-            wins_stay = 0
             
             # Simple Monte Carlo
-            # Door with Car: Random(3)
-            # Choice: Random(3)
-            # Stay: Win if Choice == Car (1/3)
-            # Switch: Win if Choice != Car (2/3)
-            
-            # We can just simulate the outcome directly
             cars = np.random.randint(0, 3, n_sim)
             choices = np.random.randint(0, 3, n_sim)
             
@@ -467,20 +483,21 @@ def render_subtopic_1_9(model):
             # Bar Chart
             fig_m = go.Figure()
             fig_m.add_trace(go.Bar(
-                x=[t({"de": "Bleiben", "en": "Stay"}), t({"de": "Wechseln", "en": "Switch"})],
+                x=[t({"de": "Bleiben (Stay)", "en": "Stay"}), t({"de": "Wechseln (Switch)", "en": "Switch"})],
                 y=[stay, switch],
                 marker_color=["#EF4444", "#10B981"],
-                text=[f"{stay/10}%", f"{switch/10}%"],
+                text=[f"{stay/10:.1f}%", f"{switch/10:.1f}%"],
                 textposition='auto',
             ))
-            fig_m.update_layout(height=250, margin=dict(t=10, b=10))
+            fig_m.update_layout(height=300, margin=dict(t=10, b=10), yaxis_title="Wins (out of 1000)")
             st.plotly_chart(fig_m, use_container_width=True)
             
             if switch > stay:
                 st.success(t({"de": "Beweis: Wechseln verdoppelt die Chance!", "en": "Proof: Switching doubles your chance!"}))
-                
-        # MATRIX EXPLANATION
-        with st.expander(t(content_1_9["monty"]["matrix_title"])):
+
+        # 4. WHY IT WORKS (The Matrix) - Kept as expander for deep dive
+        st.markdown("<br>", unsafe_allow_html=True)
+        with st.expander(t(content_1_9['monty']['matrix_title'])):
             st.markdown(t({
                 "de": """
                 | Deine Wahl | Auto ist hinter | Monty öffnet | Wechseln gewinnt? |
@@ -489,7 +506,7 @@ def render_subtopic_1_9(model):
                 | **Tür 1** | Tür 2 | Tür 3 (Zwang!) | **Ja (Auto)** |
                 | **Tür 1** | Tür 3 | Tür 2 (Zwang!) | **Ja (Auto)** |
                 
-                Monty **muss** die Ziege zeigen. Das ist Information.
+                **Die Logik:** Wenn du bleibst, musst du von Anfang an richtig liegen (Chance 1/3). Wenn du wechselst, gewinnst du immer dann, wenn du anfangs *falsch* lagst (Chance 2/3).
                 """,
                 "en": """
                 | Your Pick | Car is behind | Monty opens | Switch wins? |
@@ -498,7 +515,7 @@ def render_subtopic_1_9(model):
                 | **Door 1** | Door 2 | Door 3 (Forced!) | **Yes (Car)** |
                 | **Door 1** | Door 3 | Door 2 (Forced!) | **Yes (Car)** |
                 
-                Monty **must** show the goat. That is information.
+                **The Logic:** If you stay, you must be right from the start (1/3 chance). If you switch, you win whenever you were *wrong* initially (2/3 chance).
                 """
             }))
 
@@ -514,18 +531,23 @@ def render_subtopic_1_9(model):
 
     with st.container(border=True):
         st.markdown(t(content_1_9["search"]["story"]))
-        # st.caption(t(content_1_9["search"]["instruction"])) # Replaced by Aggressive Guidance
         
-        # INIT SEARCH
-        GridSize = 6
+        # INIT SEARCH (Smaller grid for faster gameplay)
+        GridSize = 4
         if "search_grid" not in st.session_state:
-            # Gaussian Prior centered at 3,3
+            # Gaussian Prior centered at center of grid
             x, y = np.meshgrid(np.arange(GridSize), np.arange(GridSize))
-            d = np.sqrt((x-2.5)**2 + (y-2.5)**2)
-            sigma, mu = 1.5, 0.0
+            center = (GridSize - 1) / 2
+            d = np.sqrt((x-center)**2 + (y-center)**2)
+            sigma, mu = 1.0, 0.0
             g = np.exp(-( (d-mu)**2 / ( 2.0 * sigma**2 ) ) )
             st.session_state.search_grid = g / np.sum(g) # Normalize to 1
-            st.session_state.search_target = (np.random.randint(0, GridSize), np.random.randint(0, GridSize))
+            # Fix: Target must be generated based on the probability distribution!
+            # Flatten grid and sample index
+            flat_probs = st.session_state.search_grid.flatten()
+            flat_idx = np.random.choice(len(flat_probs), p=flat_probs)
+            t_r, t_c = divmod(flat_idx, GridSize)
+            st.session_state.search_target = (t_c, t_r)
             st.session_state.search_found = False
             st.session_state.search_attempts = 0
             st.session_state.search_msg = ""
@@ -538,136 +560,224 @@ def render_subtopic_1_9(model):
         
         if found:
             st.balloons()
+            
+            # Simplified Success UI (User Request: "Clean up layout")
             st.success(t({
-                "de": f"🎉 **Gefunden!** Du hast das Objekt nach {attempts} Versuchen lokalisiert.", 
-                "en": f"🎉 **Found it!** You located the object after {attempts} attempts."
+                "de": f"**Gefunden!** Du hast das Objekt nach {attempts} Versuchen lokalisiert.\n\nDa unser Sensor jetzt 'perfekt' ist (100% Detection), hast du systematisch alle leeren Sektoren eliminiert. Das ist die Extremform von Bayes: P(Ort|Miss) = 0.", 
+                "en": f"**Found it!** You located the object after {attempts} attempts.\n\nSince our sensor is now 'perfect' (100% detection), you systematically eliminated all empty sectors. This is the extreme form of Bayes: P(Location|Miss) = 0."
             }))
         elif attempts == 0:
             st.info(t({
-                "de": "🔍 **Deine Mission:** Das Raster zeigt Wahrscheinlichkeiten. Klicke auf den **dunkelsten Sektor** (höchste Chance), um zu suchen.",
-                "en": "🔍 **Your Mission:** The grid shows probabilities. Click the **darkest sector** (highest chance) to scan it."
+                "de": "**Deine Mission:** Das Raster zeigt Wahrscheinlichkeiten. Klicke auf den **dunkelsten Sektor** (höchste Chance), um zu suchen.",
+                "en": "**Your Mission:** The grid shows probabilities. Click the **darkest sector** (highest chance) to scan it."
             }))
         else:
-            st.warning(t({
-                "de": f"📉 **Misserfolg ({attempts}):** Nichts gefunden. Die Wahrscheinlichkeiten haben sich 'verteilt'. Suche weiter im neuen Hotspot!",
-                "en": f"📉 **Miss ({attempts}):** Nothing found. Probabilities have 'flowed' elsewhere. Keep hunting the new hotspot!"
-            }))
+            # Pedagogical Feedback: Explain the "Water Flow"
+            last_click = st.session_state.search_history[-1] if st.session_state.search_history else None
+            coord_str = f"{chr(65+last_click[0])}{last_click[1]+1}" if last_click else "?"
+            
+            st.warning(f"**Miss at {coord_str}:** {t({'de': 'Nichts gefunden.', 'en': 'Nothing found.'})}")
+            
+            # The "Aha!" Moment Visualization
+            c_narrative, c_math = st.columns([0.7, 0.3])
+            with c_narrative:
+                st.caption(t({
+                    "de": "**Was ist gerade passiert?** Da du dort *nichts* gefunden hast, ist es *unwahrscheinlicher*, dass das Objekt dort ist. Diese 'verlorene' Wahrscheinlichkeit verschwindet nicht – sie **fließt** wie Wasser auf die anderen Zellen.",
+                    "en": "**What happened?** Since you found *nothing* there, it's now *less likely* to be there. This 'lost' probability doesn't vanish—it **flows** like water to the other cells."
+                }))
+            with c_math:
+                st.metric(
+                    label="Probability Shift", 
+                    value="Distributed", 
+                    delta="Spread to neighbors"
+                )
 
         st.markdown("<br>", unsafe_allow_html=True)
 
-        # RENDER HEATMAP
+        # RENDER: HYBRID APPROACH
+        # 1. Heatmap for perfect seamless visuals
+        # 2. Transparent Scatter layer for reliable clicks
+        
         grid_data = st.session_state.search_grid
         
-        # Annotate values for better clarity? Maybe too cluttered. Let's stick to hover/color.
-        # Actually, let's add text for high prob cells? 
-        # For now, clean heatmap is best for "Spatial Interaction".
+        # Prepare Plot Data
+        # If found, we want the target cell to be "White" (0 probability visually) 
+        # so the ship pops out, similar to how X's are on white.
+        plot_grid = grid_data.copy()
+        if found:
+             t_c, t_r = st.session_state.search_target
+             plot_grid[t_r, t_c] = 0.0
         
-        fig_s = go.Figure(data=go.Heatmap(
-            z=grid_data,
-            x=[chr(65+i) for i in range(GridSize)], # A, B, C...
-            y=[str(i+1) for i in range(GridSize)], # 1, 2, 3...
+        # Prepare data for scatter layer
+        x_coords = []
+        y_coords = []
+        hover_texts = []
+        
+        for row in range(GridSize):
+            for col in range(GridSize):
+                x_coords.append(chr(65 + col))  # A, B, C...
+                y_coords.append(str(row + 1))    # 1, 2, 3...
+                prob_val = grid_data[row, col]
+                hover_texts.append(f"{chr(65+col)}{row+1}<br>Prob: {prob_val:.1%}")
+        
+        fig_s = go.Figure()
+        
+        # TRACE 0: Visual Heatmap (Background)
+        fig_s.add_trace(go.Heatmap(
+            z=plot_grid,
+            x=[chr(65+i) for i in range(GridSize)],
+            y=[str(i+1) for i in range(GridSize)],
             colorscale='Blues',
             zmin=0, zmax=np.max(grid_data),
             showscale=True,
             hoverongaps=False,
-            hovertemplate='%{x}%{y}<br>Prob: %{z:.1%}<extra></extra>'
+            hoverinfo='skip' # Handled by scatter
         ))
         
-        # Add markers for all misses
+        # TRACE 1: Invisible Clickable Layer (Foreground)
+        fig_s.add_trace(go.Scatter(
+            x=x_coords,
+            y=y_coords,
+            mode='markers',
+            marker=dict(
+                size=60, # Large enough to be easily clickable
+                color='rgba(0,0,0,0)', # Invisible
+                symbol='square',
+            ),
+            text=hover_texts,
+            hovertemplate='%{text}<extra></extra>',
+            showlegend=False
+        ))
+        
+        import base64
+
+        # TRACE 2: Miss Markers (X)
         for m_c, m_r in st.session_state.search_history:
-             fig_s.add_trace(go.Scatter(
-                 x=[chr(65+m_c)], 
-                 y=[str(m_r+1)],
-                 mode='markers',
-                 marker=dict(symbol='x', color='red', size=12),
-                 showlegend=False,
-                 hoverinfo='skip'
-             ))
+            fig_s.add_trace(go.Scatter(
+                x=[chr(65+m_c)], 
+                y=[str(m_r+1)],
+                mode='markers',
+                marker=dict(symbol='x', color='red', size=20, line=dict(width=3)),
+                showlegend=False,
+                hoverinfo='skip'
+            ))
+
+        # TRACE 3: FOUND SHIP (If found)
+        if found:
+            t_c, t_r = st.session_state.search_target
+            
+            # Black Ship SVG, slightly smaller
+            ship_svg = """<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 21c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1 .6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M19.38 20A11.6 11.6 0 0 0 21 14l-9-4-9 4c0 2.9.9 5.8 2.5 8"/><path d="M10 10V4a2 2 0 0 1 2-2a2 2 0 0 1 2 2v6"/><polyline points="14 7 8 7"/></svg>"""
+            
+            b64_ship = base64.b64encode(ship_svg.encode('utf-8')).decode("utf-8")
+            ship_uri = f"data:image/svg+xml;base64,{b64_ship}"
+            
+            # Add image overlay
+            fig_s.add_layout_image(
+                dict(
+                    source=ship_uri,
+                    xref="x",
+                    yref="y",
+                    x=chr(65+t_c),
+                    y=str(t_r+1),
+                    sizex=0.7, # Smaller
+                    sizey=0.7,
+                    xanchor="center",
+                    yanchor="middle",
+                    layer="above"
+                )
+            )
 
         fig_s.update_layout(
-            height=400, 
-            margin=dict(t=10, b=10, l=10, r=10),
-            xaxis=dict(fixedrange=True, side='top'), # Axis on top like a map
-            yaxis=dict(fixedrange=True, autorange='reversed'), # 1 at top convention? Or standard bottom-up? 
-            # Standard matrix is typically 1 at top-left. Plotly Heatmap defaults 0 at bottom.
-            # Let's keep Y axis standard (1 at bottom) to match school graphs, or reverse for matrix intuition.
-            # The previous one used standard (1 at bottom). Let's stick to valid clicking.
+            height=400,
+            width=500, # Constrain width to help aspect ratio
+            margin=dict(t=30, b=10, l=10, r=10),
+            xaxis=dict(
+                fixedrange=True, 
+                side='top',
+                title=None
+            ),
+            yaxis=dict(
+                fixedrange=True, 
+                autorange='reversed',
+                scaleanchor='x', # Force square aspect ratio
+                scaleratio=1,
+                title=None
+            ),
             clickmode='event+select',
-            dragmode=False
+            plot_bgcolor='rgba(0,0,0,0)',
+            showlegend=False
         )
         
         # INTERACTION EVENT
         event = st.plotly_chart(fig_s, on_select="rerun", selection_mode="points", use_container_width=True, key="bayes_search_map", config={'displayModeBar': False})
         
-        if event and event["selection"]["points"] and not found:
-            pt = event["selection"]["points"][0]
-            # Plotly returns x and y coordinates. Since axes are categorical [A,B..] and [1,2..], 
-            # pt['x'] might be 'A' or index? selection event usually provides 'point_index' for 1D, or x/y values.
-            # For 2D Heatmap, point_index might be flattened index.
-            # Safer to rely on x and y values if they are passed.
+        if event and event.get("selection") and event["selection"].get("points") and not found:
+            clicked_point = event["selection"]["points"][0]
             
-            click_x_val = pt.get("x") # "A" or index
-            click_y_val = pt.get("y") # "1" or index
+            # HANDLE CLICKS
+            # Note: Clicks might register on Trace 0 (Heatmap) or Trace 1 (Scatter) depending on Plotly version quirks.
+            # We standardize by calculating index from x/y if possible, or using point_index from Scatter.
             
-            # Robust Parsing for Categorical Axes
-            # Plotly selection might return the Category Name (str) OR the index (int/float)
-            try:
-                # Handle X (Columns A-F)
-                if isinstance(click_x_val, str):
-                    c_idx = ord(click_x_val) - 65
-                else:
-                    c_idx = int(click_x_val)
+            # Fallback to point_index which is ROBUST for this grid
+            # Trace 1 is the Scatter layer
+            if clicked_point.get("curve_number") == 1:
+                point_idx = clicked_point.get("point_index")
+                if point_idx is not None:
+                    c_idx = point_idx % GridSize
+                    r_idx = point_idx // GridSize
+
+            if c_idx is not None and r_idx is not None:
+                try:
+                    # EXECUTE SEARCH LOGIC
+                    target = st.session_state.search_target
+                    st.session_state.search_attempts += 1
                     
-                # Handle Y (Rows 1-6)
-                # Note: Y-axis title strings are "1", "2"... 
-                if isinstance(click_y_val, str):
-                    r_idx = int(click_y_val) - 1
-                else:
-                    r_idx = int(click_y_val) # If index, Plotly indices usually match the array index 0..N-1
-                    # Double check if Heatmap data layout matches this. 
-                    # If we passed y=["1","2"], index 0 is "1". So index 0 -> r_idx 0 is correct.
-            
-                # EXECUTE SEARCH LOGIC
-                target = st.session_state.search_target
-                st.session_state.search_attempts += 1
-                
-                # Detection Prob (Power)
-                P_D_given_O = 0.7 
-                
-                # IS IT THERE?
-                is_there = (r_idx == target[1] and c_idx == target[0])
-                
-                found_now = False
-                if is_there:
-                    # Roll dice
-                    if np.random.random() < P_D_given_O:
-                        found_now = True
-                        st.session_state.search_found = True
-                        if user := st.session_state.get("user"):
-                            track_question_answer(user["localId"], "vwl", "1", "1.9", "1_9_search_mission", True)
-                
-                if not found_now:
-                    # BAYES UPDATE
-                    prob_k = grid_data[r_idx, c_idx]
-                    prob_not_D_given_Ok = 1.0 - P_D_given_O
+                    # Detection Prob (Power) - 100% (Elimination) to avoid user frustration
+                    # Teacher Mode: "Sensor is perfect now"
+                    P_D_given_O = 1.0 
                     
-                    # Numerator for k
-                    num_k = prob_not_D_given_Ok * prob_k
+                    # IS IT THERE?
+                    is_there = (r_idx == target[1] and c_idx == target[0])
                     
-                    # Construct unnormalized grid
-                    new_grid = grid_data.copy()
-                    new_grid[r_idx, c_idx] = num_k 
+                    found_now = False
+                    if is_there:
+                        # 100% Detection if it's there
+                        if np.random.random() < P_D_given_O:
+                            found_now = True
+                            st.session_state.search_found = True
+                            if user := st.session_state.get("user"):
+                                track_question_answer(user["localId"], "vwl", "1", "1.9", "1_9_search_mission", True)
                     
-                    # Normalize
-                    st.session_state.search_grid = new_grid / np.sum(new_grid)
-                    st.session_state.search_history.append((c_idx, r_idx))
-                
-                st.rerun()
-                
-            except Exception as e:
-                st.error(f"Interaction Error: {e} | X: {click_x_val} ({type(click_x_val)}) Y: {click_y_val} ({type(click_y_val)})")
+                    if not found_now:
+                        # BAYES UPDATE (ELIMINATION)
+                        # P(Miss | ObjectThere) = 0.0 (Impossible with 100% sensor)
+                        # P(Miss | ObjectNotThere) = 1.0
+                        
+                        prob_k = grid_data[r_idx, c_idx]
+                        prob_not_D_given_Ok = 1.0 - P_D_given_O # 0.0
+                        
+                        num_k = prob_not_D_given_Ok * prob_k # Becomes 0.0
+                        
+                        new_grid = grid_data.copy()
+                        new_grid[r_idx, c_idx] = num_k 
+                        
+                        # Normalize
+                        if np.sum(new_grid) > 0:
+                            st.session_state.search_grid = new_grid / np.sum(new_grid)
+                        
+                        if (c_idx, r_idx) not in st.session_state.search_history:
+                            st.session_state.search_history.append((c_idx, r_idx))
+                    
+                    st.rerun()
+                    
+                except Exception as e:
+                    st.error(f"Error: {e}")
 
     st.markdown("---")
+
+
+
 
     # --- PART 4: CONCEPT CHECK (Three Prisoners) ---
     st.markdown("<br>", unsafe_allow_html=True)
@@ -686,7 +796,7 @@ def render_subtopic_1_9(model):
             solution_text_dict=content_1_9["quiz"]["solution"],
             success_msg_dict={"de": "Exakt.", "en": "Exactly."},
             error_msg_dict={"de": "Überlege: Hat der Wärter eine Wahl?", "en": "Think: Did the warden have a choice?"},
-            model=model,
+            client=model,
             ai_context="Bayes Theorem / Three Prisoners Problem",
             course_id="vwl", topic_id="1", subtopic_id="1.9", question_id="1_9_prisoners"
         )

@@ -175,19 +175,19 @@ def render_subtopic_1_8(model):
         
         if pa_val == 30 and defa_val == 5: # Defaults
              st.info(t({
-                 "de": "🎯 **Schritt 1:** Passe die **Marktanteile** (Priors) an. Wer produziert am meisten?",
-                 "en": "🎯 **Step 1:** Adjust the **Market Shares** (Priors). Who produced the most?"
+                 "de": "**Schritt 1:** Passe die **Marktanteile** (Priors) an. Wer produziert am meisten?",
+                 "en": "**Step 1:** Adjust the **Market Shares** (Priors). Who produced the most?"
              }))
         elif res >= 2.0:
             st.warning(t({
-                "de": "✨ **Schritt 2:** Die Defektrate ist zu hoch! Optimiere die **Fehlerraten**, um unter das Ziel von 2.0% zu kommen.",
-                "en": "✨ **Step 2:** The defect rate is too high! Optimize the **Defect Rates** to get under the 2.0% target."
+                "de": "**Schritt 2:** Die Defektrate ist zu hoch! Optimiere die **Fehlerraten**, um unter das Ziel von 2.0% zu kommen.",
+                "en": "**Step 2:** The defect rate is too high! Optimize the **Defect Rates** to get under the 2.0% target."
             }))
         else:
             st.balloons()
             st.success(t({
-                "de": "🏆 **Mission erfüllt!** Du hast die totale Wahrscheinlichkeit durch kluge Partitionierung unter das Limit gedrückt.",
-                "en": "🏆 **Mission Accomplished!** You pushed the total probability under the limit through smart partitioning."
+                "de": "**Mission erfüllt!** Du hast die totale Wahrscheinlichkeit durch kluge Partitionierung unter das Limit gedrückt.",
+                "en": "**Mission Accomplished!** You pushed the total probability under the limit through smart partitioning."
             }))
         
         st.markdown("<br>", unsafe_allow_html=True)
@@ -485,7 +485,7 @@ def render_subtopic_1_8(model):
             solution_text_dict=content_1_8["quiz"]["solution"],
             success_msg_dict={"de": "Korrekt! Weighted Sum angewendet.", "en": "Correct! Weighted Sum applied."},
             error_msg_dict={"de": "Falsch. Hast du die Basisraten (20% vs 80%) berücksichtigt?", "en": "Incorrect. Did you account for the base rates (20% vs 80%)?"},
-            model=model,
+            client=model,
             ai_context="Total Probability Law",
             course_id="vwl", topic_id="1", subtopic_id="1.8", question_id="1_8_factory"
         )

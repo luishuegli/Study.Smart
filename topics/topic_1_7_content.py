@@ -304,12 +304,12 @@ def render_subtopic_1_7(model):
     with st.container(border=True):
         # 1. NARRATIVE HUD (AGGRESSIVE GUIDANCE)
         if current_noise == 3:
-            st.info(f"🎯 **{t({'de': 'Schritt 1:', 'en': 'Step 1:'})}** {t({'de': 'Klicke auf die Quadrate, um sie aus dem Universum zu werfen.', 'en': 'Click on the squares to kick them out of the universe.'})}")
+            st.info(f"**{t({'de': 'Schritt 1:', 'en': 'Step 1:'})}** {t({'de': 'Klicke auf die Quadrate, um sie aus dem Universum zu werfen.', 'en': 'Click on the squares to kick them out of the universe.'})}")
         elif current_noise > 0:
-            st.success(f"✨ **{t({'de': 'Schritt 2:', 'en': 'Step 2:'})}** {t({'de': 'Gut! Das Universum schrumpft. Entferne alle Quadrate.', 'en': 'Good! The universe is shrinking. Remove all squares.'})}")
+            st.success(f"**{t({'de': 'Schritt 2:', 'en': 'Step 2:'})}** {t({'de': 'Gut! Das Universum schrumpft. Entferne alle Quadrate.', 'en': 'Good! The universe is shrinking. Remove all squares.'})}")
         else:
             st.balloons()
-            st.success(f"🏆 **{t({'de': 'Filter Komplett!', 'en': 'Filter Complete!'})}** {t({'de': 'In der Kreis-Welt ist Rot nun viel wahrscheinlicher.', 'en': 'In the Circle-World, Red is now much more likely.'})}")
+            st.success(f"**{t({'de': 'Filter Komplett!', 'en': 'Filter Complete!'})}** {t({'de': 'In der Kreis-Welt ist Rot nun viel wahrscheinlicher.', 'en': 'In the Circle-World, Red is now much more likely.'})}")
         
         st.markdown("<br>", unsafe_allow_html=True)
         
@@ -340,7 +340,7 @@ def render_subtopic_1_7(model):
                 yaxis=dict(visible=False, fixedrange=True, range=[-0.5, 2.5], scaleanchor="x", scaleratio=1),
                 margin=dict(l=10, r=10, t=10, b=10),
                 height=350,
-                clickmode='event+select', dragmode=False,
+                clickmode='event+select',
                 plot_bgcolor='rgba(0,0,0,0)'
             )
 
@@ -446,7 +446,7 @@ def render_subtopic_1_7(model):
             solution_text_dict=content_1_7["exam"]["q1"]["solution"],
             success_msg_dict={"de": "Korrekt", "en": "Correct"},
             error_msg_dict={"de": "Falsch", "en": "Incorrect"},
-            model=model,
+            client=model,
             ai_context="Conditional probability", 
             hint_text_dict=content_1_7["exam"]["q1"]["hint"],
             course_id="vwl", topic_id="1", subtopic_id="1.7", question_id="1_7_q1_narrative"
@@ -465,7 +465,7 @@ def render_subtopic_1_7(model):
             solution_text_dict=content_1_7["exam"]["q2"]["solution"],
             success_msg_dict={"de": "Korrekt", "en": "Correct"},
             error_msg_dict={"de": "Falsch", "en": "Incorrect"},
-            model=model,
+            client=model,
             ai_context="Independence logic",
             hint_text_dict=content_1_7["exam"]["q2"]["hint"],
             course_id="vwl", topic_id="1", subtopic_id="1.7", question_id="1_7_q2_narrative"
@@ -576,7 +576,6 @@ def render_subtopic_1_7(model):
             margin=dict(l=10, r=10, t=10, b=10),
             height=300,
             clickmode='event+select',
-            dragmode=False,
             plot_bgcolor='rgba(0,0,0,0)'
         )
         

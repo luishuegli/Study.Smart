@@ -49,11 +49,13 @@ def course_overview_view():
     with st.sidebar:
         if st.button(f"← {loc.t({'de': 'Zurück zum Dashboard', 'en': 'Back to Dashboard'})}", use_container_width=True):
             st.session_state.current_page = "dashboard"
+            st.session_state.selected_topic = None
+            st.session_state.selected_subtopic = None
             st.rerun()
             
         loc.render_sidebar_footer()
 
-    course_id = st.query_params.get("course", st.session_state.get("selected_course", "vwl"))
+    course_id = st.session_state.get("selected_course", "vwl")
     course = COURSES.get(course_id)
     
     if not course:

@@ -336,7 +336,7 @@ def render_subtopic_1_1(model):
             solution_text_dict=solution_text,
             success_msg_dict=success_msg,
             error_msg_dict=error_msg,
-            model=model,
+            client=model,
             ai_context=theory_context,
             allow_retry=False,
             course_id="vwl",
@@ -377,7 +377,7 @@ def render_topic_1_content(model, subtopic_id=None):
         from topics.topic_1_9_content import render_subtopic_1_9
         render_subtopic_1_9(model)
     elif subtopic_id == "1.10":
-        from topics.topic_1_summary import render_subtopic_1_summary
-        render_subtopic_1_summary(model)
+        from topics.topic_1_10_content import render_subtopic_1_10
+        render_subtopic_1_10(model)
     else:
         st.info(f"Content for subtopic {subtopic_id} is under development.")

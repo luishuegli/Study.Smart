@@ -1,5 +1,5 @@
 ---
-description: Design Rules
+trigger: always_on
 ---
 
 # Content Creation Guide & Design System

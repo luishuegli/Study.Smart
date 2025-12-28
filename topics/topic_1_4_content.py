@@ -355,7 +355,7 @@ def render_subtopic_1_4(model):
             solution_text_dict=content_1_4["exam"]["solution"],
             success_msg_dict={"de": "Korrekt", "en": "Correct"},
             error_msg_dict={"de": "Das stimmt nicht ganz.", "en": "That is not quite right."},
-            model=model,
+            client=model,
             ai_context="Context: Kolmogorov Axioms of Probability.",
             allow_retry=False,
             course_id="vwl",

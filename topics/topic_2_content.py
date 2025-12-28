@@ -19,6 +19,6 @@ def render_topic_2_content(client, subtopic_id=None):
         render_subtopic_2_3(client)
     else:
         st.info(t({
-            "de": "🚀 Dieser Abschnitt ist noch in Entwicklung. Schau bald wieder vorbei!",
-            "en": "🚀 This section is still in development. Check back soon!"
+            "de": "Dieser Abschnitt ist noch in Entwicklung. Schau bald wieder vorbei!",
+            "en": "This section is still in development. Check back soon!"
         }))

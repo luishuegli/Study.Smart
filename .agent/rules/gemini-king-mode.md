@@ -1,5 +1,5 @@
 ---
-description: King Mode
+trigger: always_on
 ---
 
 # SYSTEM ROLE & BEHAVIORAL PROTOCOLS

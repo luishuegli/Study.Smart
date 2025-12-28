@@ -91,6 +91,8 @@ def lesson_view():
         # 1. Back Button at Field Top
         if st.button(f"← {loc.t({'de': 'Zurück zum Dashboard', 'en': 'Back to Dashboard'})}", use_container_width=True):
             st.session_state.current_page = "dashboard"
+            st.session_state.selected_topic = None
+            st.session_state.selected_subtopic = None
             st.rerun()
         
         # --- COURSE LEVEL PROGRESS ---
@@ -127,6 +129,9 @@ def lesson_view():
                     s = next((x for x in t["subtopics"] if x["id"] == selected_id), None)
                     if s and "slide_start" in s:
                         st.session_state.current_slide_num = s["slide_start"]
+                    # If it's a new topic, ensure subtopic is updated immediately for query param sync
+                    st.session_state.selected_topic = topic_id
+                    st.session_state.selected_subtopic = selected_id
 
             current_topic_id = st.session_state.get("selected_topic")
             current_sub_id = st.session_state.get("selected_subtopic")

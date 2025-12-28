@@ -1,4 +1,8 @@
 ---
+trigger: always_on
+---
+
+---
 description: Guidelines for creating intuitive and efficient learning content
 ---
 

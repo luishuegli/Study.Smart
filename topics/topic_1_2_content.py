@@ -333,7 +333,7 @@ def render_subtopic_1_2(model):
                 solution_text_dict={'de': e_data['sol_de'], 'en': e_data['sol_en']},
                 success_msg_dict={"de": "Richtig", "en": "Correct"},
                 error_msg_dict={"de": "Falsch.", "en": "Incorrect."},
-                model=model,
+                client=model,
                 ai_context=ctx,
                 allow_retry=False,
                 course_id="vwl",

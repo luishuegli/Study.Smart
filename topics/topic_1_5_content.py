@@ -182,7 +182,7 @@ def render_subtopic_1_5(model):
             solution_text_dict=content_1_5["exam"]["solution"],
             success_msg_dict={"de": "Korrekt!", "en": "Correct!"},
             error_msg_dict={"de": "Falsch. Schau dir den Lösungsweg an.", "en": "Incorrect. Check the solution steps."},
-            model=model,
+            client=model,
             hint_text_dict=content_1_5["exam"]["hint"],
             ai_context="Addition rule and conditional probability calculation.",
             course_id="vwl",

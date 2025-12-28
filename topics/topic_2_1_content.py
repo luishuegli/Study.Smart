@@ -130,10 +130,10 @@ def render_subtopic_2_1(client):
     with st.container(border=True):
         st.markdown(f"""
 <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 2px;">
-<div style="background: #ecfeff; padding: 6px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">{render_icon('help-circle', size=18, color='#0d9488')}</div>
-<div style="font-size: 0.85em; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; color: #0d9488;">{t({'de': 'Die zentrale Frage', 'en': 'The Central Question'})}</div>
+<div style="background: #f4f4f5; padding: 6px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">{render_icon('help-circle', size=18, color='#111111')}</div>
+<div style="font-size: 0.85em; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; color: #111111;">{t({'de': 'Die zentrale Frage', 'en': 'The Central Question'})}</div>
 </div>
-<h3 style="margin-top: 8px; font-weight: 600; color: #1e293b;">{t({'de': 'Zählt die Reihenfolge oder nicht?', 'en': 'Does the order matter or not?'})}</h3>
+<h3 style="margin-top: 8px; font-weight: 600; color: #111111;">{t({'de': 'Zählt die Reihenfolge oder nicht?', 'en': 'Does the order matter or not?'})}</h3>
 """, unsafe_allow_html=True)
         
         # --- ROW 2: MENTAL MODEL - PODIUM VS LOTTERY ---
@@ -144,34 +144,39 @@ def render_subtopic_2_1(client):
         with col_perm:
             st.markdown(f"<h4>{render_icon('trophy', size=18)} &nbsp; {t({'de': 'Permutation (Podium)', 'en': 'Permutation (Podium)'})}</h4>", unsafe_allow_html=True)
             st.markdown(f"""
-            <div style="margin-bottom: 12px; color: #334155;">
-                {t({'de': 'Gold ≠ Silber. Wer <b>WANN</b> ins Ziel kommt, zählt.', 'en': 'Gold ≠ Silver. WHO finishes <b>WHEN</b> matters.'})}
-            </div>
-            """, unsafe_allow_html=True)
+<div style="margin-bottom: 12px; color: #334155;">
+{t({'de': 'Gold ≠ Silber. Wer <b>WANN</b> ins Ziel kommt, zählt.', 'en': 'Gold ≠ Silver. WHO finishes <b>WHEN</b> matters.'})}
+</div>
+""", unsafe_allow_html=True)
             st.latex(r"P(\color{#007AFF}{n}, \color{#FF4B4B}{k}) = \frac{\color{#007AFF}{n}!}{\left( \color{#007AFF}{n} - \color{#FF4B4B}{k} \right)!}")
             st.caption(t({"de": "Reihenfolge ist wichtig.", "en": "Order is important."}))
             
         with col_comb:
             st.markdown(f"<h4>{render_icon('ticket', size=18)} &nbsp; {t({'de': 'Kombination (Lotterie)', 'en': 'Combination (Lottery)'})}</h4>", unsafe_allow_html=True)
             st.markdown(f"""
-            <div style="margin-bottom: 12px; color: #334155;">
-                {t({'de': '{3, 7, 12} = {12, 3, 7}. Nur <b>WER</b> gezogen wird, zählt.', 'en': '{3, 7, 12} = {12, 3, 7}. Only <b>WHO</b> is drawn matters.'})}
-            </div>
-            """, unsafe_allow_html=True)
-            st.latex(r"\left( \begin{smallmatrix} \color{#007AFF}{n} \\ \color{#FF4B4B}{k} \end{smallmatrix} \right) = \frac{\color{#007AFF}{n}!}{\color{#FF4B4B}{k}! \left( \color{#007AFF}{n} - \color{#FF4B4B}{k} \right)!}")
+<div style="margin-bottom: 12px; color: #334155;">
+{t({'de': '{3, 7, 12} = {12, 3, 7}. Nur <b>WER</b> gezogen wird, zählt.', 'en': '{3, 7, 12} = {12, 3, 7}. Only <b>WHO</b> is drawn matters.'})}
+</div>
+""", unsafe_allow_html=True)
+            st.latex(r"\binom{\color{#007AFF}{n}}{\color{#FF4B4B}{k}} = \frac{\color{#007AFF}{n}!}{\color{#FF4B4B}{k}! \left( \color{#007AFF}{n} - \color{#FF4B4B}{k} \right)!}")
             st.caption(t({"de": "Reihenfolge egal.", "en": "Order irrelevant."}))
         
         st.markdown("<br>", unsafe_allow_html=True)
         
         # --- ROW 3: NOTATION ---
         st.markdown(f"**{t({'de': 'Notation (immer zuerst klären!)', 'en': 'Notation (always clarify first!)'})}**")
-        c1, c2, c3 = st.columns(3)
-        with c1:
-            st.markdown(f"$\\color{{#007AFF}}{{n}}$ = " + t({"de": "Gesamtpool (verfügbare Elemente)", "en": "Total pool (available items)"}))
-        with c2:
-            st.markdown(f"$\\color{{#FF4B4B}}{{k}}$ = " + t({"de": "Anzahl, die wir auswählen", "en": "Number we select"}))
-        with c3:
-            st.markdown(f"$\\color{{#FF4B4B}}{{k!}}$ = " + t({"de": "Anzahl der Anordnungen von k", "en": "Number of arrangements of k"}))
+        
+        # Helper for stacked notation
+        def notation_card(col, latex, div_id, desc_dict):
+             with col:
+                st.latex(latex)
+                st.markdown(f"<div style='text-align: center; font-size: 0.85em; color: #444; margin-top: -12px;'>{t(desc_dict)}</div>", unsafe_allow_html=True)
+
+        c1, c2, c3, c4 = st.columns(4)
+        notation_card(c1, r"\color{#007AFF}{n}", "not_n", {"de": "Gesamtpool", "en": "Total Pool"})
+        notation_card(c2, r"\color{#FF4B4B}{k}", "not_k", {"de": "Auswahl", "en": "Selection"})
+        notation_card(c3, r"\color{#007AFF}{n!}", "not_nfac", {"de": "Alle Anordnungen", "en": "Total Arragements"})
+        notation_card(c4, r"\color{#FF4B4B}{k!}", "not_kfac", {"de": "Auswahl Anordnungen", "en": "Selection Arrangements"})
         
         st.markdown("<br>", unsafe_allow_html=True)
         
@@ -190,11 +195,11 @@ But the permutation formula counts each order separately! For 3 people, there ar
     st.markdown("<br>", unsafe_allow_html=True)
     with st.container(border=True):
         st.markdown(f"""
-        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-            {render_icon('info', size=18, color='#3b82f6')} 
-            <span style="font-weight: 600; color: #1e293b;">{t({'de': 'Die Falle: Variation vs. Permutation', 'en': 'The Trap: Variation vs. Permutation'})}</span>
-        </div>
-        """, unsafe_allow_html=True)
+<div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+{render_icon('info', size=18, color='#3b82f6')} 
+<span style="font-weight: 600; color: #1e293b;">{t({'de': 'Die Falle: Variation vs. Permutation', 'en': 'The Trap: Variation vs. Permutation'})}</span>
+</div>
+""", unsafe_allow_html=True)
         
         st.markdown(t({
             'de': '<b>Variation mit Wiederholung</b> ($n^k$): Jede Position kann jeden Wert haben (z.B. PIN-Code 1-1-1-1 erlaubt).', 
@@ -231,23 +236,23 @@ But the permutation formula counts each order separately! For 3 people, there ar
         })
 
         st.markdown(f"""
-        <div style="display: flex; gap: 20px; margin-top: 12px; align-items: flex-start;">
-            <div style="flex: 1;">
-                <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 8px;">
-                    {render_icon('arrow-down-0-9', size=16, color='#007AFF')}
-                    <span style="font-weight: 600; color: #1e293b; font-size: 0.9em;">{t({'de': 'Permutation', 'en': 'Permutation'})}</span>
-                </div>
-                {get_signal_rows(p_words, '#007AFF')}
-            </div>
-            <div style="flex: 1;">
-                <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 8px;">
-                    {render_icon('users', size=16, color='#FF4B4B')}
-                    <span style="font-weight: 600; color: #1e293b; font-size: 0.9em;">{t({'de': 'Kombination', 'en': 'Combination'})}</span>
-                </div>
-                {get_signal_rows(c_words, '#FF4B4B')}
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+<div style="display: flex; gap: 24px; margin-top: 16px; align-items: flex-start;">
+<div style="flex: 1;">
+<div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px; height: 24px;">
+{render_icon('arrow-down-0-9', size=18, color='#007AFF')}
+<span style="font-weight: 700; color: #1e293b; font-size: 0.95em;">{t({'de': 'Permutation', 'en': 'Permutation'})}</span>
+</div>
+{get_signal_rows(p_words, '#007AFF')}
+</div>
+<div style="flex: 1;">
+<div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px; height: 24px;">
+{render_icon('users', size=18, color='#FF4B4B')}
+<span style="font-weight: 700; color: #1e293b; font-size: 0.95em;">{t({'de': 'Kombination', 'en': 'Combination'})}</span>
+</div>
+{get_signal_rows(c_words, '#FF4B4B')}
+</div>
+</div>
+""", unsafe_allow_html=True)
 
     st.markdown("<br>", unsafe_allow_html=True)
     
@@ -273,22 +278,39 @@ But the permutation formula counts each order separately! For 3 people, there ar
             icon_map = {"abstract": "shapes", "race": "trophy", "lotto": "ticket"}
             active_icon = render_icon(icon_map.get(scen_key, "shapes"), size=24)
             
-            # Logic: Auto-set defaults based on scenario
-            if "last_scen" not in st.session_state: st.session_state.last_scen = "abstract"
+            # Logic: Scenario-Lock Protocol
+            # We strictly enforce the state based on the scenario to prevent illogical combinations.
             
-            # If scenario changed, update defaults
-            if scen_key != st.session_state.last_scen:
-                st.session_state.last_scen = scen_key
-                if scen_key == "race": st.session_state.ignore_order = False
-                elif scen_key == "lotto": st.session_state.ignore_order = True
+            is_disabled = False
+            toggle_value = st.session_state.get("ignore_order", False)
             
-            # Manual Toggle (Always visible for 'What If' learning)
+            if scen_key == "race":
+                is_disabled = True
+                toggle_value = False # Race ALWAYS cares about order
+            elif scen_key == "lotto":
+                is_disabled = True
+                toggle_value = True # Lotto NEVER cares about order
+            else:
+                # Abstract: Let the user play (Lab Mode)
+                is_disabled = False
+                # Keep previous state or default to False if not set
+                toggle_value = st.session_state.get("ignore_order", False)
+
+            # Update session state immediately to ensure downstream math uses correct value
+            st.session_state.ignore_order = toggle_value
+            
+            # Manual Toggle (Locked for descriptive scenarios)
             st.markdown("<br>", unsafe_allow_html=True)
             is_comb = st.toggle(
                 t({"de": "Reihenfolge ignorieren?", "en": "Ignore Order?"}),
-                value=st.session_state.get("ignore_order", False),
-                key="ignore_order"
+                value=toggle_value,
+                disabled=is_disabled,
+                key="ignore_order_toggle" # Changed key to avoid conflict with manual state set
             )
+            
+            # Sync toggle back to state if it was interactive
+            if not is_disabled:
+                st.session_state.ignore_order = is_comb
             
             desc = c["scenarios"][scen_key]["desc"]
             st.markdown(f"<div style='display:flex; align-items:center; gap:8px; margin-top:8px;'>{active_icon} <span>{t(desc)}</span></div>", unsafe_allow_html=True)

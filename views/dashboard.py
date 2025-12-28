@@ -37,7 +37,7 @@ def dashboard_view():
             # Create a card-like container with clickable link
             st.markdown(
                 f"""
-                <a href="/?course={course_id}" target="_self" style="text-decoration: none; color: inherit; display: block;">
+                <a href="/?page=course_overview&course={course_id}" target="_self" style="text-decoration: none; color: inherit; display: block;">
                     <div style="
                         background-color: var(--background-color);
                         border: 1px solid rgba(128, 128, 128, 0.2);

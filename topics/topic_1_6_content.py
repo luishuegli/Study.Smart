@@ -156,12 +156,7 @@ def render_subtopic_1_6(model):
     st.markdown("<br>", unsafe_allow_html=True)
     
     # --- SECTION HEADER ---
-    st.markdown(f"""
-        <div class="icon-header">
-            {render_icon('target', size=24)}
-            <h3 style="margin:0;">{t(content_1_6['interactive']['mission'])}</h3>
-        </div>
-    """, unsafe_allow_html=True)
+    st.markdown(f"### {t(content_1_6['interactive']['mission'])}")
     
     # --- THE INTERACTIVE DARTBOARD (DIRECT HIT EDITION) ---
     with st.container(border=True):
@@ -269,12 +264,7 @@ def render_subtopic_1_6(model):
     st.markdown("<br>", unsafe_allow_html=True)
     
     # --- CONCEPT CHECK MCQ ---
-    st.markdown(f"""
-        <div class="icon-header">
-            {render_icon('check-circle', size=24)}
-            <h3 style="margin:0;">{t({"de": "Konzept-Check", "en": "Concept Check"})}</h3>
-        </div>
-    """, unsafe_allow_html=True)
+    st.markdown(f"### {t({'de': 'Konzept-Check', 'en': 'Concept Check'})}")
     
     # DYNAMIC EXAM: Reference the user's actual selection
     selected_r_val = f"{r_float:.3f}"

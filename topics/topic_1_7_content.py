@@ -282,23 +282,7 @@ def render_subtopic_1_7(model):
     # --- 3. LAYOUT: STORY MODE ---
     
     # Section Header with Icon - Add inline CSS to ensure icon is on the left
-    st.markdown(f"""
-        <style>
-        .icon-header {{
-            display: flex !important;
-            align-items: center !important;
-            gap: 12px !important;
-            margin-bottom: 16px !important;
-        }}
-        .icon-header svg {{
-            flex-shrink: 0 !important;
-        }}
-        </style>
-        <div class="icon-header">
-            {render_icon('target', size=24)}
-            <h3 style="margin:0;">Experiment</h3>
-        </div>
-    """, unsafe_allow_html=True)
+    st.markdown("### Experiment")
     
     # The Interactive Experiment
     with st.container(border=True):
@@ -428,12 +412,7 @@ def render_subtopic_1_7(model):
 
     # --- EXAM SECTION ---
     st.markdown("<br><br>", unsafe_allow_html=True)
-    st.markdown(f"""
-        <div class="icon-header">
-            {render_icon('clipboard-list', size=24)}
-            <h3 style="margin:0;">{t({'de': 'Prüfungstraining', 'en': 'Exam Practice'})}</h3>
-        </div>
-    """, unsafe_allow_html=True)
+    st.markdown(f"### {t({'de': 'Prüfungstraining', 'en': 'Exam Practice'})}")
     
     # Q1
     with st.container(border=True):
@@ -475,12 +454,7 @@ def render_subtopic_1_7(model):
     
     # ===== EXPERIMENT 2: INDEPENDENCE BALANCE CHALLENGE =====
     st.markdown("---")
-    st.markdown(f"""
-        <div class="icon-header">
-            {render_icon('target', size=24)}
-            <h3 style="margin:0;">{t(content_1_7['independence']['mission']['title'])}</h3>
-        </div>
-    """, unsafe_allow_html=True)
+    st.markdown(f"### {t(content_1_7['independence']['mission']['title'])}")
     
     # --- STATE INITIALIZATION ---
     if "shapes_1_7_balance" not in st.session_state:

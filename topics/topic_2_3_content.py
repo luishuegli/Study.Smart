@@ -236,12 +236,7 @@ color: #111827 !important;
 
     # --- EXAM SECTION ---
     st.markdown("<br><br>", unsafe_allow_html=True)
-    st.markdown(f"""
-        <div class="icon-header">
-            {render_icon('clipboard-list', size=24)}
-            <h3 style="margin:0;">{t(c['exam']['title'])}</h3>
-        </div>
-    """, unsafe_allow_html=True)
+    st.markdown(f"### {t(c['exam']['title'])}")
     st.caption(c["exam"]["source"])
     
     with st.container(border=True):

@@ -207,48 +207,37 @@ def render_bento_card(title, icon_name, color, items):
             # st.latex(item['latex'])
             # st.caption(...)
 
-# --- HELPER: RENDER SWIMLANE (ROW) ---
+# --- HELPER: RENDER SWIMLANE (VERTICAL STACK) ---
 def render_swimlane(title, icon_name, items):
-    """Renders a full-width section with items arranged in 2-column rows for better readability."""
+    """Renders a section with each item as a full-width horizontal card (formula left, explanation right)."""
     
-    # 1. Section Header (Minimalist, Monochrome)
+    # 1. Section Header
     st.markdown(f"""
-    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px; margin-top: 32px;">
+    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px; margin-top: 32px;">
         <div style="display:flex; align-items:center; color: #111;">{render_icon(icon_name, size=28)}</div>
         <h3 style="margin:0; padding:0; color: #111; font-weight: 700;">{title}</h3>
     </div>
     """, unsafe_allow_html=True)
     
-    # 2. Unified Card Container
-    with st.container(border=True):
-        
-        # Split items into rows of 2
-        for row_start in range(0, len(items), 2):
-            row_items = items[row_start:row_start + 2]
+    # 2. Render Each Item as a Full-Width Card
+    for item in items:
+        with st.container(border=True):
+            col_formula, col_explain = st.columns([1.2, 1], gap="large")
             
-            # Create 2 columns (or 1 if odd item at the end)
-            cols = st.columns(2)
+            with col_formula:
+                st.markdown(f"**{t(item['title'])}**")
+                st.latex(item['latex'])
             
-            for i, item in enumerate(row_items):
-                with cols[i]:
-                    # Title
-                    st.markdown(f"**{t(item['title'])}**")
-                    # Formula (Central Feature)
-                    st.latex(item['latex'])
-                    # Intuition & Example
-                    st.markdown(f"""
-<div style="font-size: 0.9rem; color: #444; margin-bottom: 6px; display: flex; align-items: start; gap: 8px;">
+            with col_explain:
+                st.markdown(f"""
+<div style="font-size: 0.95rem; color: #333; margin-bottom: 8px; display: flex; align-items: start; gap: 8px;">
     <span style="color: #666; margin-top: 2px;">{render_icon('lightbulb', size=16)}</span>
     <span>{t(item['intuition'])}</span>
 </div>
-<div style="font-size: 0.85rem; color: #888; padding-left: 26px; margin-top: 8px; font-style: italic;">
+<div style="font-size: 0.85rem; color: #666; padding-left: 26px; font-style: italic;">
     Ex: {t(item['example'])}
 </div>
-                    """, unsafe_allow_html=True)
-            
-            # Add spacer between rows (but not after the last one)
-            if row_start + 2 < len(items):
-                st.markdown("<hr style='margin: 16px 0; border: 0; border-top: 1px dashed #e0e0e0;'>", unsafe_allow_html=True)
+                """, unsafe_allow_html=True)
 
 # ==============================================================================
 # 3. MAIN RENDERER

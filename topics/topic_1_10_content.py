@@ -207,10 +207,9 @@ def render_bento_card(title, icon_name, color, items):
             # st.latex(item['latex'])
             # st.caption(...)
 
-# --- REDEFINED HELPER FOR ROBUSTNESS ---
 # --- HELPER: RENDER SWIMLANE (ROW) ---
 def render_swimlane(title, icon_name, items):
-    """Renders a full-width section with items arranged in a Split-Row Grid for perfect alignment."""
+    """Renders a full-width section with items arranged in 2-column rows for better readability."""
     
     # 1. Section Header (Minimalist, Monochrome)
     st.markdown(f"""
@@ -223,38 +222,33 @@ def render_swimlane(title, icon_name, items):
     # 2. Unified Card Container
     with st.container(border=True):
         
-        # --- ROW 1: TITLES & FORMULAS ---
-        cols_top = st.columns(len(items))
-        for i, col in enumerate(cols_top):
-            item = items[i]
-            with col:
-                # Title
-                st.markdown(f"<div style='font-weight:600; font-size:1rem; margin-bottom:12px; color:#111;'>{t(item['title'])}</div>", unsafe_allow_html=True)
-                # Formula (Central Feature)
-                st.latex(item['latex'])
-
-        # --- SPACER (Visual Separation) ---
-        st.markdown("<br>", unsafe_allow_html=True)
-
-        # --- ROW 2: INTUITION & EXAMPLES ---
-        # This split ensures that ALL intuition blocks start at the exact same Y-coordinate,
-        # regardless of how tall the formula above was.
-        cols_bottom = st.columns(len(items))
-        for i, col in enumerate(cols_bottom):
-            item = items[i]
-            with col:
-                # Intuition & Example (Subtle, Grayscale)
-                st.markdown(f"""
-                <div>
-                    <div style="font-size: 0.9rem; color: #444; margin-bottom: 6px; display: flex; align-items: start; gap: 8px;">
-                        <span style="color: #666; margin-top: 2px;">{render_icon('lightbulb', size=16)}</span>
-                        <span>{t(item['intuition'])}</span>
-                    </div>
-                    <div style="font-size: 0.85rem; color: #888; padding-left: 26px; margin-top: 8px; font-style: italic;">
-                        Ex: {t(item['example'])}
-                    </div>
-                </div>
-                """, unsafe_allow_html=True)
+        # Split items into rows of 2
+        for row_start in range(0, len(items), 2):
+            row_items = items[row_start:row_start + 2]
+            
+            # Create 2 columns (or 1 if odd item at the end)
+            cols = st.columns(2)
+            
+            for i, item in enumerate(row_items):
+                with cols[i]:
+                    # Title
+                    st.markdown(f"**{t(item['title'])}**")
+                    # Formula (Central Feature)
+                    st.latex(item['latex'])
+                    # Intuition & Example
+                    st.markdown(f"""
+<div style="font-size: 0.9rem; color: #444; margin-bottom: 6px; display: flex; align-items: start; gap: 8px;">
+    <span style="color: #666; margin-top: 2px;">{render_icon('lightbulb', size=16)}</span>
+    <span>{t(item['intuition'])}</span>
+</div>
+<div style="font-size: 0.85rem; color: #888; padding-left: 26px; margin-top: 8px; font-style: italic;">
+    Ex: {t(item['example'])}
+</div>
+                    """, unsafe_allow_html=True)
+            
+            # Add spacer between rows (but not after the last one)
+            if row_start + 2 < len(items):
+                st.markdown("<hr style='margin: 16px 0; border: 0; border-top: 1px dashed #e0e0e0;'>", unsafe_allow_html=True)
 
 # ==============================================================================
 # 3. MAIN RENDERER

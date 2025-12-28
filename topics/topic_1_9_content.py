@@ -167,11 +167,7 @@ def render_subtopic_1_9(model):
 
     # --- PART 1: MEDICAL DETECTIVE (1000 Dots) ---
     # --- PART 1: MEDICAL DETECTIVE (N=16 Intuition) ---
-    c_icon_1, c_title_1 = st.columns([0.1, 0.9], gap="small")
-    with c_icon_1:
-        st.markdown(f"<div style='display:flex; align-items:center; justify-content:center; height:100%;'>{render_icon('microscope', size=24, color='#000000')}</div>", unsafe_allow_html=True)
-    with c_title_1:
-        st.markdown(f"<h3 style='margin:0; padding-top:4px; color:#000000;'>1. {t(content_1_9['mission']['title'])}</h3>", unsafe_allow_html=True)
+    st.markdown(f"### 1. {t(content_1_9['mission']['title'])}")
     
     with st.container(border=True):
         st.markdown(t(content_1_9["mission"]["anchor"]))
@@ -411,11 +407,7 @@ def render_subtopic_1_9(model):
 
     # --- PART 2: MONTY HALL ---
     st.markdown("<br>", unsafe_allow_html=True)
-    c_icon_2, c_title_2 = st.columns([0.1, 0.9], gap="small")
-    with c_icon_2:
-        st.markdown(f"<div style='display:flex; align-items:center; justify-content:center; height:100%;'>{render_icon('door-open', size=24, color='#000000')}</div>", unsafe_allow_html=True)
-    with c_title_2:
-        st.markdown(f"<h3 style='margin:0; padding-top:4px; color:#000000;'>{t(content_1_9['monty']['title'])}</h3>", unsafe_allow_html=True)
+    st.markdown(f"### {t(content_1_9['monty']['title'])}")
     
     with st.container(border=True):
         st.caption(t(content_1_9["monty"]["intro"]))
@@ -523,11 +515,7 @@ def render_subtopic_1_9(model):
 
     # --- PART 3: BAYESIAN SEARCH ---
     st.markdown("<br>", unsafe_allow_html=True)
-    c_icon_s, c_title_s = st.columns([0.1, 0.9], gap="small")
-    with c_icon_s:
-        st.markdown(f"<div style='display:flex; align-items:center; justify-content:center; height:100%;'>{render_icon('search', size=24, color='#000000')}</div>", unsafe_allow_html=True)
-    with c_title_s:
-        st.markdown(f"<h3 style='margin:0; padding-top:4px; color:#000000;'>{t(content_1_9['search']['title'])}</h3>", unsafe_allow_html=True)
+    st.markdown(f"### {t(content_1_9['search']['title'])}")
 
     with st.container(border=True):
         st.markdown(t(content_1_9["search"]["story"]))
@@ -781,11 +769,7 @@ def render_subtopic_1_9(model):
 
     # --- PART 4: CONCEPT CHECK (Three Prisoners) ---
     st.markdown("<br>", unsafe_allow_html=True)
-    c_icon_3, c_title_3 = st.columns([0.1, 0.9], gap="small")
-    with c_icon_3:
-        st.markdown(f"<div style='display:flex; align-items:center; justify-content:center; height:100%;'>{render_icon('check-circle', size=24, color='#000000')}</div>", unsafe_allow_html=True)
-    with c_title_3:
-        st.markdown(f"<h3 style='margin:0; padding-top:4px; color:#000000;'>{t(content_1_9['quiz']['title'])}</h3>", unsafe_allow_html=True)
+    st.markdown(f"### {t(content_1_9['quiz']['title'])}")
     
     with st.container(border=True):
         render_mcq(

@@ -142,7 +142,7 @@ def render_subtopic_2_1(client):
         col_perm, col_comb = st.columns(2, gap="medium")
         
         with col_perm:
-            st.markdown(f"<h4>{render_icon('trophy', size=18)} &nbsp; {t({'de': 'Permutation (Podium)', 'en': 'Permutation (Podium)'})}</h4>", unsafe_allow_html=True)
+            st.markdown(f"<h4>{t({'de': 'Permutation (Podium)', 'en': 'Permutation (Podium)'})}</h4>", unsafe_allow_html=True)
             st.markdown(f"""
 <div style="margin-bottom: 12px; color: #334155;">
 {t({'de': 'Gold ≠ Silber. Wer <b>WANN</b> ins Ziel kommt, zählt.', 'en': 'Gold ≠ Silver. WHO finishes <b>WHEN</b> matters.'})}
@@ -152,7 +152,7 @@ def render_subtopic_2_1(client):
             st.caption(t({"de": "Reihenfolge ist wichtig.", "en": "Order is important."}))
             
         with col_comb:
-            st.markdown(f"<h4>{render_icon('ticket', size=18)} &nbsp; {t({'de': 'Kombination (Lotterie)', 'en': 'Combination (Lottery)'})}</h4>", unsafe_allow_html=True)
+            st.markdown(f"<h4>{t({'de': 'Kombination (Lotterie)', 'en': 'Combination (Lottery)'})}</h4>", unsafe_allow_html=True)
             st.markdown(f"""
 <div style="margin-bottom: 12px; color: #334155;">
 {t({'de': '{3, 7, 12} = {12, 3, 7}. Nur <b>WER</b> gezogen wird, zählt.', 'en': '{3, 7, 12} = {12, 3, 7}. Only <b>WHO</b> is drawn matters.'})}
@@ -262,7 +262,7 @@ But the permutation formula counts each order separately! For 3 people, there ar
         
         # 1. CONTROLS
         with col_ctrl:
-            st.markdown(f"<h4>{render_icon('settings-2')} &nbsp; {t({'de': 'Szenario', 'en': 'Scenario'})}</h4>", unsafe_allow_html=True)
+            st.markdown(f"<h4>{t({'de': 'Szenario', 'en': 'Scenario'})}</h4>", unsafe_allow_html=True)
             
             # Map scenarios to icons for display (NOT inside pills, but as context)
             scen_key = st.pills(
@@ -317,7 +317,7 @@ But the permutation formula counts each order separately! For 3 people, there ar
 
         # 2. MATH HUD
         with col_math:
-            st.markdown(f"<h4>{render_icon('calculator')} &nbsp; Math</h4>", unsafe_allow_html=True)
+            st.markdown("<h4>Math</h4>", unsafe_allow_html=True)
             
             # Variable Definitions (CRITICAL: Never assume students know notation)
             st.markdown("**Notation:**")

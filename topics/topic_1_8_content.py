@@ -120,11 +120,7 @@ def render_subtopic_1_8(model):
     # --- PART 1: THE FACTORY (Interactive Visualizer) ---
     # --- PART 1: THE FACTORY (Interactive Visualizer) ---
     # --- PART 1: THE FACTORY (Interactive Visualizer) ---
-    c_icon_1, c_title_1 = st.columns([0.1, 0.9], gap="small")
-    with c_icon_1:
-        st.markdown(f"<div style='display:flex; align-items:center; justify-content:center; height:100%;'>{render_icon('factory', size=24, color='#000000')}</div>", unsafe_allow_html=True)
-    with c_title_1:
-        st.markdown(f"<h3 style='margin:0; padding-top:4px; color:#000000;'>{t(content_1_8['mission']['title'])}</h3>", unsafe_allow_html=True)
+    st.markdown(f"### {t(content_1_8['mission']['title'])}")
     
     # --- CSS: SCOPED SLIDER COLORS FOR 1.8 (REFINED) ---
     st.markdown("""
@@ -373,11 +369,7 @@ def render_subtopic_1_8(model):
     st.markdown("<br>", unsafe_allow_html=True)
     # --- PART 2: THE BRIDGE (System Reliability) ---
     st.markdown("<br>", unsafe_allow_html=True)
-    c_icon_2, c_title_2 = st.columns([0.1, 0.9], gap="small")
-    with c_icon_2:
-        st.markdown(f"<div style='display:flex; align-items:center; justify-content:center; height:100%;'>{render_icon('combine', size=24, color='#000000')}</div>", unsafe_allow_html=True)
-    with c_title_2:
-        st.markdown(f"<h3 style='margin:0; padding-top:4px; color:#000000;'>{t(content_1_8['bridge']['title'])}</h3>", unsafe_allow_html=True)
+    st.markdown(f"### {t(content_1_8['bridge']['title'])}")
     
     with st.container(border=True):
         st.markdown(t(content_1_8["bridge"]["intro"]))
@@ -470,11 +462,7 @@ def render_subtopic_1_8(model):
     st.markdown("<br>", unsafe_allow_html=True)
     # --- PART 3: CONCEPT CHECK ---
     st.markdown("<br>", unsafe_allow_html=True)
-    c_icon_3, c_title_3 = st.columns([0.1, 0.9], gap="small")
-    with c_icon_3:
-        st.markdown(f"<div style='display:flex; align-items:center; justify-content:center; height:100%;'>{render_icon('check-circle', size=24, color='#000000')}</div>", unsafe_allow_html=True)
-    with c_title_3:
-        st.markdown(f"<h3 style='margin:0; padding-top:4px; color:#000000;'>{t({'de': 'Konzept-Check', 'en': 'Concept Check'})}</h3>", unsafe_allow_html=True)
+    st.markdown(f"### {t({'de': 'Konzept-Check', 'en': 'Concept Check'})}")
     
     with st.container(border=True):
         render_mcq(

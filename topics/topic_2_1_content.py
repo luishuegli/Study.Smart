@@ -62,7 +62,7 @@ def render_avatar(item, style_type="circle"):
         # Circle for balls/abstract
         return f"<span style='display:inline-block; width:26px; height:26px; line-height:26px; text-align:center; background:{bg}; color:{text_color}; border:{border}; border-radius:50%; font-weight:bold; margin:0 2px;'>{item}</span>"
 
-def render_subtopic_2_1(model):
+def render_subtopic_2_1(client):
     c = content_2_1
     
     # --- CSS: LAYOUT & CARDS ---
@@ -377,7 +377,7 @@ But the permutation formula counts each order separately! For 3 people, there ar
             solution_text_dict=c["exam"]["solution"],
             success_msg_dict={"de": "Richtig!", "en": "Correct!"},
             error_msg_dict={"de": "Falsch.", "en": "Incorrect."},
-            model=model,
+            client=client,
             ai_context="The student is checking their understanding of the scenario-based learning (Abstract vs Podium vs Lotto) and why removing order requires dividing by k!.",
             course_id="vwl",
             topic_id="2",

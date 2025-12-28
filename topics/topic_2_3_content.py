@@ -112,7 +112,7 @@ def render_cassette(text, color, is_empty=False, slot_label="", options_left=0):
 # ==============================================================================
 # 3. MAIN RENDERER
 # ==============================================================================
-def render_subtopic_2_3(model):
+def render_subtopic_2_3(client):
     # --- CSS: LAYOUT STABILITY & ANIMATION ---
     st.markdown("""
     <style>
@@ -278,7 +278,7 @@ def render_subtopic_2_3(model):
             solution_text_dict=c["exam"]["solution"],
             success_msg_dict={"de": "Korrekt!", "en": "Correct!"},
             error_msg_dict={"de": "Falsch.", "en": "Incorrect."},
-            model=model,
+            client=client,
             ai_context="Topic: Permutations without replacement (Factorial). Problem: 50 DVDs in 50 Cases.",
             course_id="stats_hsg",
             topic_id="2",

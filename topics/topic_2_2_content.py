@@ -150,7 +150,7 @@ def get_committee_matrix_html(rows=6, cols=15):
     
     return css + html
 
-def render_subtopic_2_2(model):
+def render_subtopic_2_2(client):
     c = content_2_2
     
     st.markdown(f"## {t(c['title'])}")
@@ -323,12 +323,21 @@ def render_subtopic_2_2(model):
             </div>
             """
 
+        row1_text = t({"de": "Unabhängige Entscheidungen (Hemd UND Hose)", "en": "Independent choices (shirt AND pants)"})
+        row1_formula = "$N = n_1 \cdot n_2$"
+        row2_text = t({"de": "Auswahl ohne Reihenfolge (Team bilden)", "en": "Selection without order (form a team)"})
+        row2_formula = "$\\binom{n}{k}$"
+        row3_text = t({"de": "Auswahl mit Reihenfolge (Podium)", "en": "Selection with order (podium)"})
+        row3_formula = "$P(n,k)$"
+        row4_text = t({"de": "Mit Wiederholung (PIN-Code)", "en": "With repetition (PIN code)"})
+        row4_formula = "$n^k$"
+
         st.markdown(f"""
         <div style="margin-top: 12px;">
-            {render_guide_row(t({"de": "Unabhängige Entscheidungen (Hemd UND Hose)", "en": "Independent choices (shirt AND pants)"}), "$N = n_1 \\cdot n_2$", is_primary=True)}
-            {render_guide_row(t({"de": "Auswahl ohne Reihenfolge (Team bilden)", "en": "Selection without order (form a team)"}), "$\\binom{n}{k}$")}
-            {render_guide_row(t({"de": "Auswahl mit Reihenfolge (Podium)", "en": "Selection with order (podium)"}), "$P(n,k)$")}
-            {render_guide_row(t({"de": "Mit Wiederholung (PIN-Code)", "en": "With repetition (PIN code)"}), "$n^k$")}
+            {render_guide_row(row1_text, row1_formula, is_primary=True)}
+            {render_guide_row(row2_text, row2_formula)}
+            {render_guide_row(row3_text, row3_formula)}
+            {render_guide_row(row4_text, row4_formula)}
         </div>
         """, unsafe_allow_html=True)
     
@@ -484,7 +493,7 @@ def render_subtopic_2_2(model):
             solution_text_dict=c["exam_q"]["sol"], 
             success_msg_dict={"de": "Korrekt!", "en": "Correct!"},
             error_msg_dict={"de": "Falsch.", "en": "Incorrect."}, 
-            model=model, 
+            client=client, 
             ai_context="The user is learning the Fundamental Counting Principle. The problem involves combining choices (women, men) using multiplication.",
             course_id="vwl", topic_id="2", subtopic_id="2.2", question_id="q_2_2_club"
         )

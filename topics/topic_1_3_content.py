@@ -207,7 +207,7 @@ def render_subtopic_1_3(model):
                 f_key = "formula_de" if st.session_state.lang == 'de' else "formula_en"
                 st.latex(c.get(f_key, c.get("formula", ""))) # Fallback
 
-            st.markdown("<br>", unsafe_allow_html=True)
+
 
             # Card 2: Frequentist
             with st.container(border=True):

@@ -114,8 +114,6 @@ def render_subtopic_1_8(model):
             st.markdown(f"**{t(content_1_8['theory_cards']['total_prob']['title'])}**")
             st.caption(t(content_1_8["theory_cards"]["total_prob"]["text"]))
         
-        st.markdown("<br>", unsafe_allow_html=True)
-        
         # ROW 2: Formulas (Split-Row Grid Protocol - Rule 2.7)
         f1, f2 = st.columns(2, gap="medium")
         with f1:

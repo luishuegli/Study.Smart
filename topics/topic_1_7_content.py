@@ -288,7 +288,11 @@ def render_subtopic_1_7(model):
     with st.container(border=True):
         # 1. NARRATIVE HUD (AGGRESSIVE GUIDANCE)
         if current_noise == 3:
-            st.info(f"**{t({'de': 'Schritt 1:', 'en': 'Step 1:'})}** {t({'de': 'Klicke auf die Quadrate, um sie aus dem Universum zu werfen.', 'en': 'Click on the squares to kick them out of the universe.'})}")
+            st.markdown(f"""
+<div style="background: #fef3c7; border-left: 4px solid #d97706; padding: 12px 16px; border-radius: 8px; color: #92400e;">
+    <strong>{t({'de': 'Schritt 1:', 'en': 'Step 1:'})}</strong> {t({'de': 'Klicke auf die Quadrate, um sie aus dem Universum zu werfen.', 'en': 'Click on the squares to kick them out of the universe.'})}
+</div>
+""", unsafe_allow_html=True)
         elif current_noise > 0:
             st.success(f"**{t({'de': 'Schritt 2:', 'en': 'Step 2:'})}** {t({'de': 'Gut! Das Universum schrumpft. Entferne alle Quadrate.', 'en': 'Good! The universe is shrinking. Remove all squares.'})}")
         else:
@@ -495,26 +499,10 @@ def render_subtopic_1_7(model):
         # 1. NARRATIVE HUD (AGGRESSIVE GUIDANCE)
         if is_independent:
             st.balloons()
-            st.success(f"🏆 **{t({'de': 'Unabhängigkeit Erreicht!', 'en': 'Independence Achieved!'})}** {t({'de': 'Die Wahrscheinlichkeit für Rot ist in beiden Welten gleich.', 'en': 'The chance of Red is the same in both worlds.'})}")
+            st.success(f"**{t({'de': 'Unabhängigkeit Erreicht!', 'en': 'Independence Achieved!'})}** {t({'de': 'Die Wahrscheinlichkeit für Rot ist in beiden Welten gleich.', 'en': 'The chance of Red is the same in both worlds.'})}")
         else:
-            st.warning(f"⚖️ **{t({'de': 'Die Waage steht schief:', 'en': 'The scale is unbalanced:'})}** {t({'de': 'Wissen über Kreise verändert deine Einschätzung über Rot.', 'en': 'Information about Circles changes your estimate of Red.'})}")
-        
-        st.markdown("<br>", unsafe_allow_html=True)
-        
-        # METRICS ROW
-        met_col1, met_col2 = st.columns(2)
-        with met_col1:
-            st.metric(
-                label=f"P(A) - {t(content_1_7['independence']['metrics']['p_a_label'])}",
-                value=f"{P_A:.2f}"
-            )
-        with met_col2:
-            st.metric(
-                label=f"P(A|B) - {t(content_1_7['independence']['metrics']['p_a_given_b_label'])}",
-                value=f"{P_A_given_B:.2f}" if circle_count > 0 else "N/A"
-            )
-        
-        st.markdown("<br>", unsafe_allow_html=True)
+            st.warning(f"**{t({'de': 'Die Waage steht schief:', 'en': 'The scale is unbalanced:'})}** {t({'de': 'Wissen über Kreise verändert deine Einschätzung über Rot.', 'en': 'Information about Circles changes your estimate of Red.'})}")
+
         
         # INTERACTIVE GRID (4x3)
         x_coords = []
@@ -573,6 +561,19 @@ def render_subtopic_1_7(model):
             st.rerun()
         
         st.markdown("<br>", unsafe_allow_html=True)
+        
+        # METRICS ROW (Moved below grid per Rule 10.6)
+        met_col1, met_col2 = st.columns(2)
+        with met_col1:
+            st.metric(
+                label=f"P(A) - {t(content_1_7['independence']['metrics']['p_a_label'])}",
+                value=f"{P_A:.2f}"
+            )
+        with met_col2:
+            st.metric(
+                label=f"P(A|B) - {t(content_1_7['independence']['metrics']['p_a_given_b_label'])}",
+                value=f"{P_A_given_B:.2f}" if circle_count > 0 else "N/A"
+            )
         
         # INDEPENDENCE STATUS
         if is_independent:

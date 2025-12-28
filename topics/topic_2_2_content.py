@@ -212,13 +212,12 @@ def render_subtopic_2_2(client):
                 render_param_row(r"\color{#007AFF}{n_1}", t({"de": "Optionen bei Schritt 1", "en": "Options at step 1"}))
                 render_param_row(r"\color{#FF4B4B}{n_2}", t({"de": "Optionen bei Schritt 2", "en": "Options at step 2"}))
                 
-                # Result row (highlighted)
-                st.markdown(f"""
-<div style="display: flex; align-items: center; gap: 12px; padding: 10px 12px; background: #ecfdf5; border-radius: 8px; margin-top: 10px; border: 1px solid #d1fae5;">
-<div style="min-width: 40px; font-family: serif; font-size: 1.1em; font-weight: 800; color: #10B981; text-align: center;">N</div>
-<div style="font-size: 0.9em; font-weight: 600; color: #064e3b;">{t({"de": "Ergebnis", "en": "Result"})}</div>
-</div>
-""", unsafe_allow_html=True)
+                # Result row (highlighted) - Using native Streamlit for proper LaTeX
+                c_n, c_result = st.columns([0.15, 0.85], gap="small")
+                with c_n:
+                    st.latex(r"\color{#10B981}{N}")
+                with c_result:
+                    st.markdown(f"<div style='display:flex; align-items:center; height:100%; padding:8px 12px; background:#ecfdf5; border-radius:8px; border:1px solid #d1fae5; font-size:0.9em; font-weight:600; color:#064e3b;'>{t({'de': 'Ergebnis', 'en': 'Result'})}</div>", unsafe_allow_html=True)
 
         # --- ROW 3: FULL WIDTH DECISION TREE ---
         st.markdown("<br>", unsafe_allow_html=True)
@@ -296,28 +295,49 @@ def render_subtopic_2_2(client):
 
         st.markdown(f"**{t({'de': 'Faustregel:', 'en': 'Rule of thumb:'})}** " + t({'de': 'Wenn die erste Wahl die zweite beeinflusst → prüfe genau!', 'en': 'If the first choice affects the second → check carefully!'}))
 
-        # --- INTEGRATED DECISION GUIDE (Native Streamlit for LaTeX) ---
+        # --- INTEGRATED DECISION GUIDE (Vertical Swimlane - Rule 10.7) ---
         st.markdown("<hr style='margin: 20px 0; border: 0; border-top: 1.5px solid #f3f4f6;'>", unsafe_allow_html=True)
         st.markdown(f"**{t({'de': 'Entscheidungshilfe: Wann welche Formel?', 'en': 'Decision Guide: When to Use What?'})}**")
         
-        # Helper to render a decision row with proper LaTeX
-        def render_decision_row(situation_dict, latex_formula, is_primary=False):
-            bg = "#eff6ff" if is_primary else "#f8fafc"
-            border_color = "#bfdbfe" if is_primary else "#e2e8f0"
-            text_color = "#2563eb" if is_primary else "#1e293b"
-            
-            col_sit, col_form = st.columns([3, 1], gap="small")
-            with col_sit:
-                st.markdown(f"<div style='display:flex; align-items:center; min-height:40px; padding:8px 12px; background:{bg}; border:1px solid {border_color}; border-radius:8px 0 0 8px; border-right:none; font-size:0.95em; color:{text_color}; font-weight:500;'>{t(situation_dict)}</div>", unsafe_allow_html=True)
-            with col_form:
-                st.markdown(f"<div style='display:flex; align-items:center; justify-content:center; min-height:40px; padding:8px 12px; background:{bg}; border:1px solid {border_color}; border-radius:0 8px 8px 0;'>", unsafe_allow_html=True)
-                st.latex(latex_formula)
-                st.markdown("</div>", unsafe_allow_html=True)
+        st.markdown("<br>", unsafe_allow_html=True)
         
-        render_decision_row({"de": "Unabhängige Entscheidungen (Hemd UND Hose)", "en": "Independent choices (shirt AND pants)"}, r"N = n_1 \cdot n_2", is_primary=True)
-        render_decision_row({"de": "Auswahl ohne Reihenfolge (Team bilden)", "en": "Selection without order (form a team)"}, r"\binom{n}{k}")
-        render_decision_row({"de": "Auswahl mit Reihenfolge (Podium)", "en": "Selection with order (podium)"}, r"P(n,k)")
-        render_decision_row({"de": "Mit Wiederholung (PIN-Code)", "en": "With repetition (PIN code)"}, r"n^k")
+        # Row 1: Independent choices (Primary - highlighted)
+        st.markdown(f"""
+<div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 12px 16px; margin-bottom: 8px;">
+<div style="font-size: 0.95em; color: #2563eb; font-weight: 500; margin-bottom: 8px;">{t({"de": "Unabhängige Entscheidungen (Hemd UND Hose)", "en": "Independent choices (shirt AND pants)"})}</div>
+</div>
+""", unsafe_allow_html=True)
+        st.latex(r"N = \color{#007AFF}{n_1} \cdot \color{#FF4B4B}{n_2}")
+        
+        st.markdown("<br>", unsafe_allow_html=True)
+        
+        # Row 2: Selection without order
+        st.markdown(f"""
+<div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; margin-bottom: 8px;">
+<div style="font-size: 0.95em; color: #1e293b; font-weight: 500; margin-bottom: 8px;">{t({"de": "Auswahl ohne Reihenfolge (Team bilden)", "en": "Selection without order (form a team)"})}</div>
+</div>
+""", unsafe_allow_html=True)
+        st.latex(r"\binom{\color{#007AFF}{n}}{\color{#FF4B4B}{k}} = \frac{\color{#007AFF}{n}!}{\color{#FF4B4B}{k}! \cdot (\color{#007AFF}{n} - \color{#FF4B4B}{k})!}")
+        
+        st.markdown("<br>", unsafe_allow_html=True)
+        
+        # Row 3: Selection with order
+        st.markdown(f"""
+<div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; margin-bottom: 8px;">
+<div style="font-size: 0.95em; color: #1e293b; font-weight: 500; margin-bottom: 8px;">{t({"de": "Auswahl mit Reihenfolge (Podium)", "en": "Selection with order (podium)"})}</div>
+</div>
+""", unsafe_allow_html=True)
+        st.latex(r"P(\color{#007AFF}{n}, \color{#FF4B4B}{k}) = \frac{\color{#007AFF}{n}!}{(\color{#007AFF}{n} - \color{#FF4B4B}{k})!}")
+        
+        st.markdown("<br>", unsafe_allow_html=True)
+        
+        # Row 4: With repetition
+        st.markdown(f"""
+<div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; margin-bottom: 8px;">
+<div style="font-size: 0.95em; color: #1e293b; font-weight: 500; margin-bottom: 8px;">{t({"de": "Mit Wiederholung (PIN-Code)", "en": "With repetition (PIN code)"})}</div>
+</div>
+""", unsafe_allow_html=True)
+        st.latex(r"\color{#007AFF}{n}^{\color{#FF4B4B}{k}}")
     
     st.markdown("<br>", unsafe_allow_html=True)
 

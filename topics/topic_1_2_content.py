@@ -210,45 +210,55 @@ def render_subtopic_1_2(model):
     
     # Outer border container
     with st.container(border=True):
-        # ROW 1: Union and Intersection
-        col1_r1, col2_r1 = st.columns(2)
-        
-        with col1_r1:
+        # --- PAIR 1: UNION & INTERSECTION ---
+        # ROW 1: Titles & Definitions
+        c1_t, c2_t = st.columns(2)
+        with c1_t:
             with st.container(border=True):
                 st.markdown(f"### {content_1_2['definitions']['union']['symbol']}")
                 st.caption(t({"de": content_1_2['definitions']['union']["title_de"], "en": content_1_2['definitions']['union']["title_en"]}))
                 st.markdown(t({"de": content_1_2['definitions']['union']["def_de"], "en": content_1_2['definitions']['union']["def_en"]}))
-                st.markdown("")
-                st.markdown(f"*{t({'de': 'Beispiel', 'en': 'Example'})}:*")
-                st.markdown(t({"de": content_1_2['definitions']['union']["example_de"], "en": content_1_2['definitions']['union']["example_en"]}))
-        
-        with col2_r1:
+        with c2_t:
             with st.container(border=True):
                 st.markdown(f"### {content_1_2['definitions']['sect']['symbol']}")
                 st.caption(t({"de": content_1_2['definitions']['sect']["title_de"], "en": content_1_2['definitions']['sect']["title_en"]}))
                 st.markdown(t({"de": content_1_2['definitions']['sect']["def_de"], "en": content_1_2['definitions']['sect']["def_en"]}))
-                st.markdown("")
+        
+        # ROW 2: Examples (Split-Row Grid Protocol - Rule 2.7)
+        c1_e, c2_e = st.columns(2)
+        with c1_e:
+            with st.container(border=True):
+                st.markdown(f"*{t({'de': 'Beispiel', 'en': 'Example'})}:*")
+                st.markdown(t({"de": content_1_2['definitions']['union']["example_de"], "en": content_1_2['definitions']['union']["example_en"]}))
+        with c2_e:
+            with st.container(border=True):
                 st.markdown(f"*{t({'de': 'Beispiel', 'en': 'Example'})}:*")
                 st.markdown(t({"de": content_1_2['definitions']['sect']["example_de"], "en": content_1_2['definitions']['sect']["example_en"]}))
-        
-        # ROW 2: Difference and Complement
-        col1_r2, col2_r2 = st.columns(2)
-        
-        with col1_r2:
+
+        st.markdown("<br>", unsafe_allow_html=True)
+
+        # --- PAIR 2: DIFFERENCE & COMPLEMENT ---
+        # ROW 3: Titles & Definitions
+        c3_t, c4_t = st.columns(2)
+        with c3_t:
             with st.container(border=True):
                 st.markdown(f"### {content_1_2['definitions']['diff']['symbol']}")
                 st.caption(t({"de": content_1_2['definitions']['diff']["title_de"], "en": content_1_2['definitions']['diff']["title_en"]}))
                 st.markdown(t({"de": content_1_2['definitions']['diff']["def_de"], "en": content_1_2['definitions']['diff']["def_en"]}))
-                st.markdown("")
-                st.markdown(f"*{t({'de': 'Beispiel', 'en': 'Example'})}:*")
-                st.markdown(t({"de": content_1_2['definitions']['diff']["example_de"], "en": content_1_2['definitions']['diff']["example_en"]}))
-        
-        with col2_r2:
+        with c4_t:
             with st.container(border=True):
                 st.markdown(f"### {content_1_2['definitions']['comp']['symbol']}")
                 st.caption(t({"de": content_1_2['definitions']['comp']["title_de"], "en": content_1_2['definitions']['comp']["title_en"]}))
                 st.markdown(t({"de": content_1_2['definitions']['comp']["def_de"], "en": content_1_2['definitions']['comp']["def_en"]}))
-                st.markdown("")
+        
+        # ROW 4: Examples (Split-Row Grid Protocol - Rule 2.7)
+        c3_e, c4_e = st.columns(2)
+        with c3_e:
+            with st.container(border=True):
+                st.markdown(f"*{t({'de': 'Beispiel', 'en': 'Example'})}:*")
+                st.markdown(t({"de": content_1_2['definitions']['diff']["example_de"], "en": content_1_2['definitions']['diff']["example_en"]}))
+        with c4_e:
+            with st.container(border=True):
                 st.markdown(f"*{t({'de': 'Beispiel', 'en': 'Example'})}:*")
                 st.markdown(t({"de": content_1_2['definitions']['comp']["example_de"], "en": content_1_2['definitions']['comp']["example_en"]}))
     

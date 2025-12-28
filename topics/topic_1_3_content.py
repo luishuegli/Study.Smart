@@ -249,12 +249,16 @@ def render_subtopic_1_3(model):
                     update_rolls(100)
                     st.rerun()
             
-            # Chart
+            # Chart moved to after the column block to allow Note to span full width
             fig = get_freq_chart()
             st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False})
             
-            # Additional Note (No Emoji)
-            st.info(t(content_1_3["vis_note"]))
+        # --- FULL WIDTH ELEMENTS (Outside Columns) ---
+        st.markdown(f"""
+<div style="background: #f4f4f5; border-left: 4px solid #71717a; padding: 12px 16px; border-radius: 8px; color: #18181b;">
+    {t(content_1_3["vis_note"])}
+</div>
+""", unsafe_allow_html=True)
 
     # --- EXAM WORKBENCH ---
     st.markdown("<br><br>", unsafe_allow_html=True)

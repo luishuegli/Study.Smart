@@ -105,14 +105,20 @@ def render_subtopic_1_8(model):
     """, unsafe_allow_html=True)
     
     with st.container(border=True):
+        # ROW 1: Titles and Descriptions
         c1, c2 = st.columns(2, gap="medium")
         with c1:
             st.markdown(f"**{t(content_1_8['theory_cards']['partition']['title'])}**")
             st.caption(t(content_1_8["theory_cards"]["partition"]["text"]))
-            st.latex(content_1_8["theory_cards"]["partition"]["formula"])
         with c2:
             st.markdown(f"**{t(content_1_8['theory_cards']['total_prob']['title'])}**")
             st.caption(t(content_1_8["theory_cards"]["total_prob"]["text"]))
+            
+        # ROW 2: Formulas (Split-Row Grid Protocol - Rule 2.7)
+        f1, f2 = st.columns(2, gap="medium")
+        with f1:
+            st.latex(content_1_8["theory_cards"]["partition"]["formula"])
+        with f2:
             st.latex(content_1_8["theory_cards"]["total_prob"]["formula"])
             
     st.markdown("<br>", unsafe_allow_html=True)

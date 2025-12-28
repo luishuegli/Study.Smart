@@ -139,25 +139,29 @@ def render_subtopic_2_1(client):
         # --- ROW 2: MENTAL MODEL - PODIUM VS LOTTERY ---
         st.markdown(f"**{t({'de': 'Gedächtnisstütze: Podium vs. Lotterie', 'en': 'Memory Hook: Podium vs. Lottery'})}**")
         
-        col_perm, col_comb = st.columns(2, gap="medium")
-        
-        with col_perm:
+        # ROW 1: Titles and Descriptions
+        c_perm_t, c_comb_t = st.columns(2, gap="medium")
+        with c_perm_t:
             st.markdown(f"<h4>{t({'de': 'Permutation (Podium)', 'en': 'Permutation (Podium)'})}</h4>", unsafe_allow_html=True)
             st.markdown(f"""
 <div style="margin-bottom: 12px; color: #334155;">
 {t({'de': 'Gold ≠ Silber. Wer <b>WANN</b> ins Ziel kommt, zählt.', 'en': 'Gold ≠ Silver. WHO finishes <b>WHEN</b> matters.'})}
 </div>
 """, unsafe_allow_html=True)
-            st.latex(r"P(\color{#007AFF}{n}, \color{#FF4B4B}{k}) = \frac{\color{#007AFF}{n}!}{\left( \color{#007AFF}{n} - \color{#FF4B4B}{k} \right)!}")
-            st.caption(t({"de": "Reihenfolge ist wichtig.", "en": "Order is important."}))
-            
-        with col_comb:
+        with c_comb_t:
             st.markdown(f"<h4>{t({'de': 'Kombination (Lotterie)', 'en': 'Combination (Lottery)'})}</h4>", unsafe_allow_html=True)
             st.markdown(f"""
 <div style="margin-bottom: 12px; color: #334155;">
 {t({'de': '{3, 7, 12} = {12, 3, 7}. Nur <b>WER</b> gezogen wird, zählt.', 'en': '{3, 7, 12} = {12, 3, 7}. Only <b>WHO</b> is drawn matters.'})}
 </div>
 """, unsafe_allow_html=True)
+            
+        # ROW 2: Formulas (Split-Row Grid Protocol - Rule 2.7)
+        c_perm_f, c_comb_f = st.columns(2, gap="medium")
+        with c_perm_f:
+            st.latex(r"P(\color{#007AFF}{n}, \color{#FF4B4B}{k}) = \frac{\color{#007AFF}{n}!}{\left( \color{#007AFF}{n} - \color{#FF4B4B}{k} \right)!}")
+            st.caption(t({"de": "Reihenfolge ist wichtig.", "en": "Order is important."}))
+        with c_comb_f:
             st.latex(r"\binom{\color{#007AFF}{n}}{\color{#FF4B4B}{k}} = \frac{\color{#007AFF}{n}!}{\color{#FF4B4B}{k}! \left( \color{#007AFF}{n} - \color{#FF4B4B}{k} \right)!}")
             st.caption(t({"de": "Reihenfolge egal.", "en": "Order irrelevant."}))
         

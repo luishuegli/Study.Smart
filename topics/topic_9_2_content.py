@@ -24,7 +24,7 @@ def render_subtopic_9_2(model):
     st.markdown(f"### {t({'de': 'Prüfungstraining', 'en': 'Exam Practice'})}")
     
     # MCQ: hs2023_mc5 (Confidence interval calculation)
-    q1 = get_question("8", "hs2023_mc5")
+    q1 = get_question("9", "hs2023_mc5")
     if q1:
         with st.container(border=True):
             st.caption(q1.get("source", ""))

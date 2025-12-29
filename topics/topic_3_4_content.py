@@ -22,7 +22,50 @@ def render_subtopic_3_4(model):
     st.markdown(f"### {t({'de': 'Prüfungstraining', 'en': 'Exam Practice'})}")
     
     with st.container(border=True):
-        st.info(t({
-            "de": "Für diesen Abschnitt gibt es derzeit nur Langform-Übungsaufgaben (keine MCQs). Diese werden in einem zukünftigen Update hinzugefügt.",
-            "en": "This section currently only has long-form practice problems (no MCQs). These will be added in a future update."
-        }))
+        st.caption("HS 2024 Januar, MC #7")
+        q1 = get_question("3.4", "hs2024_mc7")
+        # Handle options
+        if q1:
+            opts = q1.get("options", [])
+            if opts and isinstance(opts[0], dict):
+                option_labels = [t(o) for o in opts]
+            else:
+                option_labels = opts
+                
+            render_mcq(
+                key_suffix="3_4_mc7",
+                question_text=t(q1["question"]),
+                options=option_labels,
+                correct_idx=q1["correct_idx"],
+                solution_text_dict=q1["solution"],
+                success_msg_dict={"de": "Korrekt!", "en": "Correct!"},
+                error_msg_dict={"de": "Falsch.", "en": "Incorrect."},
+                client=model,
+                ai_context="Expected value of symmetrical PDF",
+                course_id="vwl", topic_id="3", subtopic_id="3.4", question_id="3_4_mc7"
+            )
+            
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+    with st.container(border=True):
+        st.caption("HS 2024 Januar, MC #12")
+        q2 = get_question("3.4", "hs2024_mc12")
+        if q2:
+            opts = q2.get("options", [])
+            if opts and isinstance(opts[0], dict):
+                option_labels = [t(o) for o in opts]
+            else:
+                option_labels = opts
+                
+            render_mcq(
+                key_suffix="3_4_mc12",
+                question_text=t(q2["question"]),
+                options=option_labels,
+                correct_idx=q2["correct_idx"],
+                solution_text_dict=q2["solution"],
+                success_msg_dict={"de": "Korrekt!", "en": "Correct!"},
+                error_msg_dict={"de": "Falsch.", "en": "Incorrect."},
+                client=model,
+                ai_context="Expected value, Wald's identity",
+                course_id="vwl", topic_id="3", subtopic_id="3.4", question_id="3_4_mc12"
+            )

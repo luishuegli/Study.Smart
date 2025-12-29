@@ -107,3 +107,29 @@ def render_subtopic_4_3(model):
                 subtopic_id="4.3",
                 question_id="4_3_casino"
             )
+    # MCQ 4: hs2022_mc6 (Bernoulli rain)
+    q4 = get_question("4.3", "hs2022_mc6")
+    if q4:
+        with st.container(border=True):
+            st.caption(q4.get("source", ""))
+            opts = q4.get("options", [])
+            if opts and isinstance(opts[0], dict):
+                option_labels = [t(o) for o in opts]
+            else:
+                option_labels = opts
+            
+            render_mcq(
+                key_suffix="4_3_rain_2",
+                question_text=t(q4["question"]),
+                options=option_labels,
+                correct_idx=q4["correct_idx"],
+                solution_text_dict=q4["solution"],
+                success_msg_dict={"de": "Korrekt!", "en": "Correct!"},
+                error_msg_dict={"de": "Nicht ganz.", "en": "Not quite."},
+                client=model,
+                ai_context="Binomial probability",
+                course_id="vwl",
+                topic_id="4",
+                subtopic_id="4.3",
+                question_id="4_3_rain_2"
+            )

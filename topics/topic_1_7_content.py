@@ -622,3 +622,5 @@ def render_subtopic_1_7(model):
     render_exam_q("Q6", "hs2023_mc1", "1_7_hs2023_mc1", "HS 2023, MC 1")
     st.markdown("<br>", unsafe_allow_html=True)
     render_exam_q("Q7", "test3_q1", "1_7_test3_q1", "Test 3, Frage 1")
+    st.markdown("<br>", unsafe_allow_html=True)
+    render_exam_q("Q8", "hs2024_mc5", "1_7_hs2024_mc5", "HS 2024, MC 5")

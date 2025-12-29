@@ -12,11 +12,11 @@ SUBTOPIC_QUESTION_COUNTS = {
     "1.4": 1,  # 1_4_exam
     "1.5": 2,  # 1_5_exam + Market Analyst Mission
     "1.6": 2,  # p_single_point, 1_6_dart_mission
-    "1.7": 8,  # Existing + test1_q1, uebung1_mc5, uebung1_mc8, hs2015_prob2
+    "1.7": 12, # Integrated HS2024 MC3, MC5
     "1.8": 4,  # 1_8_factory, 1_8_mission, 1_8_bayes_coins, 1_8_game_theory
-    "1.9": 3,  # 1_9_prisoners, 1_9_medical_mission, 1_9_search_mission
+    "1.9": 4,  # + hs2024_mc6
     "1.10": 6, # exam_l1 to exam_l6
-    "1.11": 1, # Additional Questions
+    "1.11": 11, # hs2024_mc10 + 10 uebung1_mc
     "2.1": 1,  # q_2_1_scenario_mastery
     "2.2": 1,  # q_2_2_club
     "2.3": 3,  # q_2_3_dvd, 2_3_test1_q3, 2_3_hs2015_mc4
@@ -27,29 +27,30 @@ SUBTOPIC_QUESTION_COUNTS = {
     "3.1": 1,  # uebung2_mc6
     "3.2": 3,  # uebung2_mc5, test2_q4, hs2015_mc5
     "3.3": 1,  # test2_q3
-    "3.4": 1,  # hs2022_mc11 added
+    "3.4": 6,  # + hs2024_mc7, mc12
     "3.5": 1,  # uebung2_mc8
     "3.6": 1,  # test3_q2
-    "3.7": 0,  # Additional Questions
+    "3.7": 10,  # hs2024_mc11, hs2023_mc6 + 4 uebung2 + 4 Test
     # Topic 4: Stochastic Models and Distributions
     "4.1": 0,  # No MCQs
     "4.2": 0,  # Problems only
-    "4.3": 3,  # uebung2_giro, hs2022_mc7, hs2023_mc12
+    "4.3": 4,  # uebung2_giro, hs2022_mc7, hs2023_mc12, hs2022_mc6
     "4.4": 1,  # test4_q1
     "4.5": 1,  # test2_q2
     "4.6": 3,  # uebung2_mc12, hs2015_prob3, hs2022_mc4
-    "4.7": 5,  # uebung2_mc13, hs2023_mc7, hs2022_mc3, hs2024_mc3_tanker, hs2015_mc3 (mc9 already)
+    "4.7": 6,  # + hs2024_mc9
     "4.8": 1,  # hypergeom_10_5_3
-    "4.9": 0,  # Additional Questions
+    "4.9": 9,  # hs2023_prob3 + 4 uebung2 + 2 Test + 2 Audit (uebung2_mc11, hs2022_mc6)
     # Topic 5: Multidimensional Random Variables
     "5.1": 3,  # test3_q4, uebung3_mc5, hs2015_prob4
     "5.2": 2,  # test3_q5, uebung3_mc7
-    "5.3": 6,  # uebung3_mc1, uebung3_mc9, test4_q2, test4_q4, hs2015_mc1, hs2015_mc7
+    "5.3": 7,  # + hs2024_mc2
     "5.4": 3,  # uebung3_mc10, uebung3_mc11, hs2025_mc6
-    "5.5": 1,  # Additional Questions
+    "5.5": 11,  # uebung3_mc2,3,4,6,8,12,13 + 4 Test
     # Topic 6: Central Limit Theorem
     "6.1": 1,  # hs2022_mc3
     "6.2": 1,  # hs2022_mc10
+    "6.3": 5,  # uebung4_mc1,2,3, prob3, prob7
     "6.3": 0,  # Additional Questions
     # Topic 7: Descriptive Statistics
     "7.1": 0,  # No MCQs
@@ -57,23 +58,23 @@ SUBTOPIC_QUESTION_COUNTS = {
     "7.3": 1,  # hs2015_prob1 (Boxplot)
     "7.4": 0,  # No MCQs
     "7.5": 0,  # No MCQs
-    "7.6": 1,  # Additional Questions
+    "7.6": 3,  # Additional Questions + test4_mc3
     # Topic 8: Point Estimation
     "8.1": 0,  # No MCQs
     "8.2": 2,  # hs2023_mc10, hs2015_mc10
     "8.3": 3,  # hs2022_mc8, hs2015_prob5, +1
-    "8.4": 1,  # Additional Questions
+    "8.4": 21,  # uebung5_mc1-15 + prob1,3,5,6,8 + test5_mc3 (Audit Complete)
     # Topic 9: Confidence Intervals
     "9.1": 0,  # No MCQs
     "9.2": 1,  # hs2023_mc5
     "9.3": 0,  # No MCQs
-    "9.4": 0,  # Additional Questions
+    "9.4": 5,  # uebung5_mc16-18 + prob9 + test5_mc4
     # Topic 10: Hypothesis Tests
     "10.1": 0,  # No MCQs
     "10.2": 0,  # No MCQs
     "10.3": 0,  # No MCQs
     "10.4": 0,  # No MCQs
-    "10.5": 0,  # Additional Questions
+    "10.5": 4,  # uebung6_prob1-4
     # Topic 11: Interdisciplinary
     "11.1": 0,
 }

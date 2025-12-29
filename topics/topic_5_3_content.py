@@ -136,3 +136,36 @@ def render_subtopic_5_3(model):
                 subtopic_id="5.3",
                 question_id="5_3_indep"
             )
+            
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+    # MCQ 5: hs2024_mc2 (Correlation properties)
+    q5 = get_question("5.3", "hs2024_mc2")
+    if q5:
+        with st.container(border=True):
+            st.caption(q5.get("source", ""))
+            opts = q5.get("options", [])
+            if opts and isinstance(opts[0], dict):
+                option_labels = [t(o) for o in opts]
+            else:
+                option_labels = opts
+            
+            render_mcq(
+                key_suffix="5_3_corr_props",
+                question_text=t(q5["question"]),
+                options=option_labels,
+                correct_idx=q5["correct_idx"],
+                solution_text_dict=q5["solution"],
+                success_msg_dict={"de": "Korrekt!", "en": "Correct!"},
+                error_msg_dict={"de": "Nicht ganz.", "en": "Not quite."},
+                client=model,
+                ai_context="Correlation vs Independence properties",
+                course_id="vwl",
+                topic_id="5",
+                subtopic_id="5.3",
+                question_id="5_3_corr_props"
+            )
+            
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+

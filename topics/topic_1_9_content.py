@@ -774,3 +774,31 @@ def render_subtopic_1_9(model):
             ai_context="Bayes Theorem / Three Prisoners Problem",
             course_id="vwl", topic_id="1", subtopic_id="1.9", question_id="1_9_prisoners"
         )
+    
+    # --- EXAM WORKBENCH ---
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    st.markdown(f"### {t({'de': 'Prüfungstraining', 'en': 'Exam Practice'})}")
+    
+    with st.container(border=True):
+        q_data = get_question("1.9", "hs2024_mc6")
+        if q_data:
+            # Handle bilingual options if needed
+            opts = q_data.get("options", [])
+            if opts and isinstance(opts[0], dict):
+                 option_labels = [t(o) for o in opts]
+            else:
+                 option_labels = opts
+            
+            render_mcq(
+                key_suffix="1_9_hs2024_mc6",
+                question_text=t(q_data["question"]),
+                options=option_labels,
+                correct_idx=q_data["correct_idx"],
+                solution_text_dict=q_data["solution"],
+                success_msg_dict={"de": "Richtig!", "en": "Correct!"},
+                error_msg_dict={"de": "Falsch.", "en": "Incorrect."},
+                client=model,
+                ai_context="Conditional Probability / Total Probability",
+                hint_text_dict=q_data.get("hint"),
+                course_id="vwl", topic_id="1", subtopic_id="1.9", question_id="1_9_hs2024_mc6"
+            )

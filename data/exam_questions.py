@@ -329,6 +329,25 @@ QUESTIONS_1_6 = {
 
 # 1.7 Bedingte Wahrscheinlichkeit und stochastische Unabhängigkeit
 QUESTIONS_1_7 = {
+    "hs2024_mc5": {
+        "source": "HS 2024 Januar, MC #5",
+        "type": "mc",
+        "question": {
+            "de": r"4 Zahlen aus ersten 12 Primzahlen ohne Zurücklegen. A: Summe ungerade. B: Alle 4 ungerade. Beziehung zwischen A und B?",
+            "en": r"4 numbers from first 12 primes without replacement. A: Sum odd. B: All 4 odd. Relation between A and B?"
+        },
+        "options": [
+            r"Unabhängig und disjunkt.",
+            r"Unabhängig, aber nicht disjunkt.",
+            r"Abhängig und disjunkt.",
+            r"Abhängig und nicht disjunkt."
+        ],
+        "correct_idx": 2,
+        "solution": {
+            "de": r"**Richtig: (c)**<br>Primzahlen: {2, 3, 5, ...}. Nur die 2 ist gerade.<br>A (Summe ungerade) $\implies$ genau eine Gerade (die 2) oder 3 Gerade (unmöglich). Also 2 muss dabei sein.<br>B (Alle ungerade) $\implies$ 2 ist NICHT dabei.<br>A und B schließen sich aus (disjunkt). Disjunkte Ereignisse sind abhängig.",
+            "en": r"**Correct: (c)**<br>Primes: {2, 3, 5, ...}. Only 2 is even.<br>A (Sum odd) $\implies$ exactly one even (2) present.<br>B (All odd) $\implies$ 2 is NOT present.<br>A and B exclude each other (disjoint). Disjoint events are dependent."
+        }
+    },
     "uebung1_mc1": {
         "source": "Übung 1, MC1",
         "question": {
@@ -449,6 +468,44 @@ QUESTIONS_1_7 = {
         "hint": {
             "de": "Hinweis: Wie viele gerade Primzahlen gibt es?",
             "en": "Hint: How many even prime numbers are there?"
+        }
+    },
+    "hs2023_mc1": {
+        "source": "HS 2023 Januar, MC #1",
+        "type": "mc",
+        "question": {
+            "de": r"Folgende Informationen sind gegeben: $P(A) = 0.5$, $P(B) = 0.3$, $P(A \cup B) = 0.4$. Welche der folgenden Aussagen ist wahr?",
+            "en": r"Given: $P(A) = 0.5$, $P(B) = 0.3$, $P(A \cup B) = 0.4$. Which of the following statements is true?"
+        },
+        "options": [
+            r"A und B sind disjunkt.",
+            r"A und B sind unabhängig.",
+            r"A und B sind nicht unabhängig.",
+            r"Nicht genügend Informationen gegeben."
+        ],
+        "correct_idx": 2,
+        "solution": {
+            "de": r"**Richtig: (c)**<br>$P(A \cap B) = P(A) + P(B) - P(A \cup B) = 0.5 + 0.3 - 0.4 = 0.4$.<br>Unabhängigkeitstest: $P(A)P(B) = 0.15 \neq 0.4$. Also abhängig.",
+            "en": r"**Correct: (c)**<br>$P(A \cap B) = P(A) + P(B) - P(A \cup B) = 0.5 + 0.3 - 0.4 = 0.4$.<br>Independence check: $P(A)P(B) = 0.15 \neq 0.4$. Thus dependent."
+        }
+    },
+    "hs2023_mc8": {
+        "source": "HS 2023 Januar, MC #8",
+        "type": "mc",
+        "question": {
+            "de": r"Seien A, B, C Ereignisse mit positiver Wahrscheinlichkeit. Welche Aussage ist wahr?",
+            "en": r"Let A, B, C be events with positive probability. Which statement is true?"
+        },
+        "options": [
+            r"Falls A perp B und B perp C, dann A perp C.",
+            r"$P(A|B) > P(A) \iff P(A|B^c) < P(A)$",
+            r"Wenn A, B disjunkt, dann unabhängig.",
+            r"Keine der obigen."
+        ],
+        "correct_idx": 1,
+        "solution": {
+            "de": r"**Richtig: (b)**<br>Wenn B das Ereignis A wahrscheinlicher macht, muss das Nicht-Eintreten von B das Ereignis A unwahrscheinlicher machen (Erhaltung der Gesamtwahrscheinlichkeit).",
+            "en": r"**Correct: (b)**<br>If B makes A more likely, then Not-B must make A less likely (Conservation of Probability)."
         }
     },
     "hs2022_mc9": {
@@ -584,6 +641,20 @@ QUESTIONS_1_8 = {
     }
 }
 QUESTIONS_1_9 = {
+    "hs2024_mc6": {
+        "source": "HS 2024 Januar, MC #6",
+        "type": "mc",
+        "question": {
+            "de": r"Interview $P(I)=0.1$. Gute Note $G$. $P(G|I)=0.9$, $P(G|\bar{I})=0.2$. Gesucht $P(G)$.",
+            "en": r"Interview $P(I)=0.1$. Good grade $G$. $P(G|I)=0.9$, $P(G|\bar{I})=0.2$. Find $P(G)$."
+        },
+        "options": [r"18%", r"25%", r"27%", r"50%"],
+        "correct_idx": 2,
+        "solution": {
+            "de": r"**Richtig: 27%**<br>Satz der totalen Wahrscheinlichkeit:<br>$P(G) = P(G|I)P(I) + P(G|\bar{I})P(\bar{I}) = 0.9 \cdot 0.1 + 0.2 \cdot 0.9 = 0.09 + 0.18 = 0.27$.",
+            "en": r"**Correct: 27%**<br>Law of Total Probability:<br>$P(G) = P(G|I)P(I) + P(G|\bar{I})P(\bar{I}) = 0.9 \cdot 0.1 + 0.2 \cdot 0.9 = 0.09 + 0.18 = 0.27$."
+        }
+    },
     # Include 1.8 questions if needed, but defining specific ones here
     "uebung1_prob6": QUESTIONS_1_8["uebung1_prob6"], # Reference to existing if reused
     "three_prisoners": {
@@ -831,6 +902,37 @@ QUESTIONS_2_5 = {
     }
 }
 
+QUESTIONS_2_6 = {
+    "test1_mc3": {
+        "source": "Test 1, Q3",
+        "type": "mc",
+        "question": {
+            "de": r"50 DVDs und 50 Hüllen. Zufällige Verteilung. Wie viele Möglichkeiten?",
+            "en": r"50 DVDs, 50 cases. Random arrangement. How many possibilities?"
+        },
+        "options": [r"$50!$", r"$(50!)^2$", r"$50! \cdot 49!$", r"$100$"],
+        "correct_idx": 0,
+        "solution": {
+            "de": r"**Richtig: $50!$**<br>Permutation von 50 unterschiedlichen Objekten.",
+            "en": r"**Correct: $50!$**<br>Permutation of 50 distinct objects."
+        }
+    },
+    "test2_mc1": {
+        "source": "Test 2, Q1",
+        "type": "mc",
+        "question": {
+            "de": r"10 Mitglieder (4F, 6M). Vorstand: 2 Damen, 2 Herren. Anzahl Möglichkeiten?",
+            "en": r"10 members (4F, 6M). Board: 2F, 2M. Combinations?"
+        },
+        "options": [r"89", r"210", r"90", r"75"],
+        "correct_idx": 2,
+        "solution": {
+            "de": r"**Richtig: 90**<br>$\binom{4}{2} \cdot \binom{6}{2} = 6 \cdot 15 = 90$.",
+            "en": r"**Correct: 90**<br>$\binom{4}{2} \cdot \binom{6}{2} = 6 \cdot 15 = 90$."
+        }
+    }
+}
+
 # =============================================================================
 # PART II: ZUFALLSVARIABLEN (Random Variables)
 # =============================================================================
@@ -932,6 +1034,25 @@ QUESTIONS_3_2 = {
             "de": r"**Richtig: c = 35**<br>Summe der Wahrscheinlichkeiten muss 1 sein: $\sum_{x=1}^5 \frac{x+4}{c} = 1$.<br>Zähler-Summe: $(1+4)+(2+4)+(3+4)+(4+4)+(5+4) = 5+6+7+8+9 = 35$.<br>Also $35/c = 1 \Rightarrow c=35$.",
             "en": r"**Correct: c = 35**<br>Sum of probabilities must match 1: $\sum_{x=1}^5 \frac{x+4}{c} = 1$.<br>Numerator sum: $(1+4)+(2+4)+(3+4)+(4+4)+(5+4) = 5+6+7+8+9 = 35$.<br>Thus $35/c = 1 \Rightarrow c=35$."
         }
+    },
+    "hs2023_mc4": {
+        "source": "HS 2023 Januar, MC #4",
+        "type": "mc",
+        "question": {
+            "de": r"Gegeben Dichtefunktion $f_Y(y) = 2y$ für $0 < y < 1$, sonst 0. Wie gross ist die Varianz von Y?",
+            "en": r"Given PDF $f_Y(y) = 2y$ for $0 < y < 1$, else 0. What is the variance of Y?"
+        },
+        "options": [
+            r"$\frac{1}{2}$",
+            r"$\frac{1}{18}$",
+            r"$\frac{1}{3}$",
+            r"$\frac{1}{4}$"
+        ],
+        "correct_idx": 1,
+        "solution": {
+            "de": r"**Richtig: (b)**<br>$E[Y] = 2/3$. $E[Y^2] = 1/2$.<br>$Var(Y) = 1/2 - 4/9 = 1/18$.",
+            "en": r"**Correct: (b)**<br>$E[Y] = 2/3$. $E[Y^2] = 1/2$.<br>$Var(Y) = 1/2 - 4/9 = 1/18$."
+        }
     }
 }
 
@@ -954,6 +1075,58 @@ QUESTIONS_3_3 = {
 
 # 3.4 Erwartungswerte
 QUESTIONS_3_4 = {
+    "hs2024_mc7": {
+        "source": "HS 2024 Januar, MC #7",
+        "type": "mc",
+        "question": {
+            "de": r"$f_Y(y) = \frac{1}{2}\sin(y)$ für $0 < y < \pi$. Erwartungswert $E[Y]$?",
+            "en": r"$f_Y(y) = \frac{1}{2}\sin(y)$ for $0 < y < \pi$. Expectation $E[Y]$?"
+        },
+        "options": [
+            r"$\ln(\pi)$",
+            r"$\pi/2$",
+            r"$\sqrt{2\pi}$",
+            r"$3\pi/2$"
+        ],
+        "correct_idx": 1,
+        "solution": {
+            "de": r"**Richtig: (b)**<br>Symmetrie-Argument: Die Dichte ist symmetrisch um $\pi/2$ im Intervall $[0, \pi]$. Daher ist der Erwartungswert die Mitte.",
+            "en": r"**Correct: (b)**<br>Symmetry argument: The density is symmetric around $\pi/2$ in the interval $[0, \pi]$. Thus the expectation is the center."
+        }
+    },
+    "hs2024_mc12": {
+        "source": "HS 2024 Januar, MC #12",
+        "type": "mc",
+        "question": {
+            "de": r"Brunnen 10L. Täglich Entnahme $U[0, 1]$. Durchschnittliche Tage bis leer?",
+            "en": r"Well 10L. Daily removal $U[0, 1]$. Avg days until empty?"
+        },
+        "options": ["12.5", "15", "17.5", "20"],
+        "correct_idx": 3,
+        "solution": {
+            "de": r"**Richtig: 20**<br>Durchschnittliche Entnahme pro Tag: $E[X] = 0.5$.<br>Waldsche Identität / Intuition: $n \cdot E[X] = 10 \Rightarrow n = 10/0.5 = 20$.",
+            "en": r"**Correct: 20**<br>Average removal per day: $E[X] = 0.5$.<br>Wald's Identity / Intuition: $n \cdot E[X] = 10 \Rightarrow n = 10/0.5 = 20$."
+        }
+    },
+    "hs2023_mc11": {
+        "source": "HS 2023 Januar, MC #11",
+        "type": "mc",
+        "question": {
+            "de": r"Würfelspiel: Auszahlung=Augenzahl. Bei 4,5,6 darf man additiv neu würfeln. Bei 1,2,3 Ende. Erwarteter Gewinn?",
+            "en": r"Dice game: Payoff=value. If 4,5,6 roll again (additiv). If 1,2,3 end. Expected payoff?"
+        },
+        "options": [
+            r"3.5",
+            r"5",
+            r"6",
+            r"7"
+        ],
+        "correct_idx": 3,
+        "solution": {
+            "de": r"**Richtig: (d)**<br>Rekursion: $E = 3.5 + 0.5 E$. $E=7$.",
+            "en": r"**Correct: (d)**<br>Recursion: $E = 3.5 + 0.5 E$. $E=7$."
+        }
+    },
     "uebung2_prob5": {
         "source": "Übung 2, Problem 5",
         "type": "problem",
@@ -1032,6 +1205,181 @@ QUESTIONS_3_6 = {
         }
     }
 }
+
+# 3.7 Additional Questions (Random Variables)
+QUESTIONS_3_7 = {
+    "hs2023_mc6": {
+        "source": "HS 2023 Januar, MC #6",
+        "type": "mc",
+        "question": {
+            "de": r"Für welche Konstante $c$ ist $p(x) = \frac{c}{x!}$ für $x=0, 1, 2, ...$ eine Wahrscheinlichkeitsmassefunktion?",
+            "en": r"For which constant $c$ is $p(x) = \frac{c}{x!}$ for $x=0, 1, 2, ...$ a probability mass function?"
+        },
+        "options": [
+            r"$c = \frac{1}{\pi}$",
+            r"$c = 1$",
+            r"$c = \frac{1}{e}$",
+            r"Jedes beliebige $c$"
+        ],
+        "correct_idx": 2,
+        "solution": {
+            "de": r"**Richtig: (c)**<br>Summe der Wahrscheinlichkeiten muss 1 sein. $\sum \frac{1}{x!} = e$ (Taylorreihe). Also $c = 1/e$.",
+            "en": r"**Correct: (c)**<br>Sum of probabilities must be 1. $\sum \frac{1}{x!} = e$ (Taylor series). Thus $c = 1/e$."
+        }
+    },
+    "uebung2_mc1": {
+        "source": "Übung 2, MC #1",
+        "type": "mc",
+        "question": {
+            "de": r"Diskret ist eine Zufallsvariable, wenn:",
+            "en": r"A random variable is discrete if:"
+        },
+        "options": [
+            r"sie nur abzählbar viele Werte annehmen kann.",
+            r"sie überabzählbar viele Werte annehmen kann.",
+            r"sie nur endlich viele Werte annehmen kann.",
+            r"sie unendlich viele Werte annehmen kann."
+        ],
+        "correct_idx": 0,
+        "solution": {
+            "de": r"**Richtig: (a)**<br>Diskret = Abzählbar (endlich oder abzählbar unendlich). CDF ist Treppenfunktion.",
+            "en": r"**Correct: (a)**<br>Discrete = Countable. CDF is a step function."
+        }
+    },
+    "uebung2_mc2": {
+        "source": "Übung 2, MC #2",
+        "type": "mc",
+        "question": {
+            "de": r"Stetig ist eine Zufallsvariable, wenn:",
+            "en": r"A random variable is continuous if:"
+        },
+        "options": [
+            r"sie nur abzählbar viele Werte annehmen kann.",
+            r"sie überabzählbar viele Werte annehmen kann.",
+            r"sie nur endlich viele Werte annehmen kann.",
+            r"sie unendlich viele Werte annehmen kann."
+        ],
+        "correct_idx": 1,
+        "solution": {
+            "de": r"**Richtig: (b)**<br>Stetig = Überabzählbar viele Werte (Intervalle).",
+            "en": r"**Correct: (b)**<br>Continuous = Uncountably many values (intervals)."
+        }
+    },
+    "uebung2_mc3": {
+        "source": "Übung 2, MC #3",
+        "type": "mc",
+        "question": {
+            "de": r"Der Erwartungswert einer Verteilung ist:",
+            "en": r"The expectation of a distribution is:"
+        },
+        "options": [
+            r"der Median (50% Punkt).",
+            r"der Modus (dichtester Punkt).",
+            r"der Schwerpunkt (Center of Gravity).",
+            r"immer der wahrscheinlichste Wert."
+        ],
+        "correct_idx": 2,
+        "solution": {
+            "de": r"**Richtig: (c)**<br>E[X] entspricht physikalisch dem Schwerpunkt der Wahrscheinlichkeitsmasse.",
+            "en": r"**Correct: (c)**<br>E[X] corresponds physically to the center of gravity."
+        }
+    },
+    "uebung2_mc4": {
+        "source": "Übung 2, MC #4",
+        "type": "mc",
+        "question": {
+            "de": r"Die Varianz einer diskreten Zufallsvariablen X ist:",
+            "en": r"The variance of a discrete random variable X is:"
+        },
+        "options": [
+            r"$\sum (x_i f(x_i) - E[X])^2$",
+            r"ein Mass für die Streuung um den Erwartungswert.",
+            r"die quadrierte Standardabweichung.",
+            r"Alle obigen sind falsch."
+        ],
+        "correct_idx": 1,
+        "solution": {
+            "de": r"**Richtig: (b)**<br>Varianz misst die Streuung. (c) wäre auch richtig, (a) ist Formel-Salat (fresch geklammert).",
+            "en": r"**Correct: (b)**<br>Variance measures dispersion."
+        }
+    },
+    "uebung2_mc7": {
+        "source": "Übung 2, MC #7",
+        "type": "mc",
+        "question": {
+            "de": r"$f(x) = \frac{1}{2}x^2 - b$ für $1 \le x \le 2$, sonst 0. Für welches $b$ ist dies eine Dichte?",
+            "en": r"$f(x) = \frac{1}{2}x^2 - b$ on $[1, 2]$. Find $b$."
+        },
+        "options": [
+            r"$b=1/2$",
+            r"$b=1/3$",
+            r"$b=1/6$",
+            r"$b=1$"
+        ],
+        "correct_idx": 2,
+        "solution": {
+            "de": r"**Richtig: (c)**<br>Integral muss 1 sein. $\int_1^2 (\frac{1}{2}x^2 - b) dx = [\frac{x^3}{6} - bx]_1^2 = (\frac{8}{6}-2b) - (\frac{1}{6}-b) = \frac{7}{6}-b = 1 \implies b=1/6$.",
+            "en": r"**Correct: (c)**<br>Integral must be 1. Result $b=1/6$."
+        }
+    },
+    "test2_mc2": {
+        "source": "Test 2, Q2",
+        "type": "mc",
+        "question": {
+            "de": r"$X \sim U[-4, 4]$. $P(X^2 \le 9)$?",
+            "en": r"$X \sim U[-4, 4]$. $P(X^2 \le 9)$?"
+        },
+        "options": [r"7/9", r"4/9", r"2/3", r"3/4"],
+        "correct_idx": 3,
+        "solution": {
+            "de": r"**Richtig: 3/4**<br>$[-3, 3]$ hat Länge 6. Intervall $[-4, 4]$ hat Länge 8. $6/8 = 3/4$.",
+            "en": r"**Correct: 3/4**<br>$[-3, 3]$ length 6. Interval $[-4, 4]$ length 8. $6/8 = 3/4$."
+        }
+    },
+    "test2_mc3": {
+        "source": "Test 2, Q3",
+        "type": "mc",
+        "question": {
+            "de": r"$X$ auf $[0, 10]$ mit Dichte $f(x) = \frac{x}{100} + \frac{1}{20}$. $P(2 \le X \le 6)$?",
+            "en": r"$X$ on $[0, 10]$ with pdf $f(x) = x/100 + 1/20$. $P(2 \le X \le 6)$?"
+        },
+        "options": [r"9/25", r"2/50", r"1/12", r"3/50"],
+        "correct_idx": 0,
+        "solution": {
+            "de": r"**Richtig: 9/25**<br>Integral von 2 bis 6 über $f(x)$ ergibt $0.36 = 36/100 = 9/25$.",
+            "en": r"**Correct: 9/25**<br>Integral from 2 to 6 of $f(x)$ yields $0.36 = 36/100 = 9/25$."
+        }
+    },
+    "test2_mc4": {
+        "source": "Test 2, Q4",
+        "type": "mc",
+        "question": {
+            "de": r"Diskrete ZV $f(x) = \frac{x+4}{c}$ für $x=1,..,5$. Bestimme c.",
+            "en": r"Discrete RV $f(x) = (x+4)/c$ for $x=1..5$. Find c."
+        },
+        "options": [r"20", r"25", r"30", r"35"],
+        "correct_idx": 3,
+        "solution": {
+            "de": r"**Richtig: 35**<br>Summe der Zähler: $5+6+7+8+9 = 35$. Damit Summe 1 ist, muss $c=35$.",
+            "en": r"**Correct: 35**<br>Sum of numerators: $5+6+7+8+9 = 35$. For sum to be 1, $c=35$."
+        }
+    },
+    "test3_mc2": {
+        "source": "Test 3, Q2",
+        "type": "mc",
+        "question": {
+            "de": r"$Y = X/\sigma$. $E(Y^2)$?",
+            "en": r"$Y = X/\sigma$. $E(Y^2)$?"
+        },
+        "options": [r"1", r"$1 - \mu^2/\sigma^2$", r"$1 + \mu^2/\sigma^2$", r"N/A"],
+        "correct_idx": 2,
+        "solution": {
+            "de": r"**Richtig: (c)**<br>$E[Y^2] = Var(Y) + E[Y]^2 = 1/\sigma^2 \cdot Var(X) + (\mu/\sigma)^2 = 1 + \mu^2/\sigma^2$.",
+            "en": r"**Correct: (c)**<br>$E[Y^2] = Var(Y) + E[Y]^2 = 1/\sigma^2 \cdot Var(X) + (\mu/\sigma)^2 = 1 + \mu^2/\sigma^2$."
+        }
+    }
+}
+
 
 # =============================================================================
 # PART III: VERTEILUNGEN (Distributions)
@@ -1199,11 +1547,68 @@ QUESTIONS_4_6 = {
             "de": r"**Lösung:**<br>1. $F(t) = 1 - e^{-t/500}$.<br>2. $e^{-1} \approx 0.368$.<br>3. $x \approx 805$ Tage.<br>4. $T \sim \text{Exp}(1/250)$.<br>5. Summe von 20 Exp-Variablen $\to$ Näherung durch Normalverteilung (CLT). $P(S > 5475) \approx 0.39$.",
             "en": r"**Solution:**<br>1. $F(t) = 1 - e^{-t/500}$.<br>2. $e^{-1} \approx 0.368$.<br>3. $x \approx 805$ days.<br>4. $T \sim \text{Exp}(1/250)$.<br>5. Sum of 20 Exp variables $\to$ Approx via Normal (CLT). $P(S > 5475) \approx 0.39$."
         }
+    },
+    "hs2023_mc12": {
+        "source": "HS 2023 Januar, MC #12",
+        "type": "mc",
+        "question": {
+            "de": r"Casino. 100 Automaten. Gewinnchance $p=0.2$. An jedem Automaten 5 Spiele. Wahrscheinlichkeit, dass an mindestens 4 Automaten mehr als 2 mal gewonnen wird?",
+            "en": r"Casino. 100 slots. Win chance $p=0.2$. 5 games per slot. Probability of winning > 2 times on at least 4 slots?"
+        },
+        "options": [
+            r"0.0579",
+            r"0.8372",
+            r"0.9421",
+            r"0.1628"
+        ],
+        "correct_idx": 1,
+        "solution": {
+            "de": r"**Richtig: (b)**<br>Zuerst $p_{neu} = P(\text{Win}>2)$ für einen Automaten ($B(5,0.2)$) berechnen ($\approx 0.0579$).<br>Dann $Y \sim B(100, p_{neu})$. Gesucht $P(Y \ge 4)$.",
+            "en": r"**Correct: (b)**<br>First calc $p_{new} = P(\text{Win}>2)$ per slot ($B(5,0.2)$) ($\approx 0.0579$).<br>Then $Y \sim B(100, p_{new})$. Find $P(Y \ge 4)$."
+        }
     }
 }
 
 # 4.7 Normalverteilung
 QUESTIONS_4_7 = {
+    "hs2023_mc7": {
+        "source": "HS 2023 Januar, MC #7",
+        "type": "mc",
+        "question": {
+            "de": r"Punkte in Statistik Kurs: $\mu=20, \sigma^2=9$. Normalverteilt. Wahrscheinlichkeit, dass Student < 25 Punkte erreicht?",
+            "en": r"Points in Stats course: $\mu=20, \sigma^2=9$. Normally distributed. Probability that student gets < 25 points?"
+        },
+        "options": [
+            r"0.952",
+            r"0.048",
+            r"0.726",
+            r"0.274"
+        ],
+        "correct_idx": 0,
+        "solution": {
+            "de": r"**Richtig: (a)**<br>$Z = \frac{25-20}{3} \approx 1.67$. $\Phi(1.67) \approx 0.952$.",
+            "en": r"**Correct: (a)**<br>$Z = \frac{25-20}{3} \approx 1.67$. $\Phi(1.67) \approx 0.952$."
+        }
+    },
+    "hs2024_mc9": {
+        "source": "HS 2024 Januar, MC #9",
+        "type": "mc",
+        "question": {
+            "de": r"Lognormal $\ln(X) \sim N(8, 4)$. Wahrscheinlichkeit $X < 12000$?",
+            "en": r"Lognormal $\ln(X) \sim N(8, 4)$. Probability $X < 12000$?"
+        },
+        "options": [
+            r"0.242",
+            r"0.363",
+            r"0.637",
+            r"0.758"
+        ],
+        "correct_idx": 3,
+        "solution": {
+            "de": r"**Richtig: (d)**<br>Log-Transformation: $P(X < 12000) = P(\ln X < \ln 12000)$. $\ln(12000) \approx 9.39$.<br>$Z = \frac{9.39 - 8}{2} \approx 0.70$. $\Phi(0.70) \approx 0.758$.",
+            "en": r"**Correct: (d)**<br>Log-Transformation: $P(X < 12000) = P(\ln X < \ln 12000)$. $\ln(12000) \approx 9.39$.<br>$Z = \frac{9.39 - 8}{2} \approx 0.70$. $\Phi(0.70) \approx 0.758$."
+        }
+    },
     "uebung2_mc13": {
         "source": "Übung 2, MC13",
         "question": {
@@ -1215,19 +1620,6 @@ QUESTIONS_4_7 = {
         "solution": {
             "de": r"**Richtig: 0.00135**<br>$Z = \frac{21-30}{3} = -3$. $P(Z < -3) \approx 0.00135$",
             "en": r"**Correct: 0.00135**<br>$Z = \frac{21-30}{3} = -3$. $P(Z < -3) \approx 0.00135$"
-        }
-    },
-    "hs2023_mc7": {
-        "source": "HS 2023 Januar, MC #7",
-        "question": {
-            "de": "Die ausführliche Analyse von Prüfungsergebnissen eines Statistik Kurses hat ergeben, dass Studenten durchschnittlich 20 Punkte erreichen. Die Punkte sind mit einer Varianz von neun Punkten Normalverteilt. Wie groß ist die Wahrscheinlichkeit, dass ein Student weniger als 25 Punkte erreicht?",
-            "en": "Analysis of statistics exam results shows students score on average 20 points. With variance of 9 and normal distribution. What is the probability a student scores less than 25 points?"
-        },
-        "options": ["0.952", "0.841", "0.500", "0.159"],
-        "correct_idx": 0,
-        "solution": {
-            "de": "**Richtig: 0.952**<br>X ~ N(20, 9), σ = 3.<br>Z = (25-20)/3 = 5/3 ≈ 1.67.<br>P(X < 25) = Φ(1.67) ≈ 0.952.",
-            "en": "**Correct: 0.952**<br>X ~ N(20, 9), σ = 3.<br>Z = (25-20)/3 = 5/3 ≈ 1.67.<br>P(X < 25) = Φ(1.67) ≈ 0.952."
         }
     },
     "hs2022_mc3": {
@@ -1294,6 +1686,154 @@ QUESTIONS_4_8 = {
     }
 }
 
+# 4.9 Additional Questions (Distributions)
+QUESTIONS_4_9 = {
+    "hs2023_prob3": {
+        "source": "HS 2023 Januar, Problem 3",
+        "type": "problem",
+        "question": {
+            "de": r"Schweinerennen. Max V. braucht 10s. 4 andere Schweine $Y \sim N(13, 2.5^2)$.<br>1. $P(\text{Max V. gewinnt})$.<br>2. $P(\text{Max V. mindestens Dritter})$.<br>3. CLT Approximation für N Rennen.",
+            "en": r"Pig racing. Max V. takes 10s. 4 other pigs $Y \sim N(13, 2.5^2)$.<br>1. $P(\text{Max V. wins})$.<br>2. $P(\text{Max V. at least 3rd})$.<br>3. CLT Approximation."
+        },
+        "solution": {
+            "de": r"**Lösung:**<br>1. $P(Y > 10) = P(Z > -1.2) \approx 0.885$. Sieg gegen alle 4: $0.885^4 \approx 0.613$.<br>2. Binomialverteilung.",
+            "en": r"**Solution:**<br>1. $P(Y > 10) = P(Z > -1.2) \approx 0.885$. Win against all 4: $0.885^4 \approx 0.613$.<br>2. Binomial distribution."
+        }
+    },
+    "uebung2_mc9": {
+        "source": "Übung 2, MC #9",
+        "type": "mc",
+        "question": {
+            "de": r"Die Binomialverteilung beschreibt:",
+            "en": r"The Binomial distribution describes:"
+        },
+        "options": [
+            r"Anzahl Erfolge bei n unabhängigen Versuchen (mit Zurücklegen).",
+            r"Anzahl Versuche bis zum ersten Erfolg.",
+            r"Anzahl Erfolge in einem festen Zeitintervall.",
+            r"Anzahl Erfolge ohne Zurücklegen."
+        ],
+        "correct_idx": 0,
+        "solution": {
+            "de": r"**Richtig: (a)**<br>x Erfolge in n Versuchen. (b)=Geometrisch, (c)=Poisson, (d)=Hypergeometrisch.",
+            "en": r"**Correct: (a)**<br>x successes in n trials. (b)=Geometric, (c)=Poisson, (d)=Hypergeometric."
+        }
+    },
+    "uebung2_mc10": {
+        "source": "Übung 2, MC #10",
+        "type": "mc",
+        "question": {
+            "de": r"Wann ist die Normalverteilung eine gute Approximation für die Binomialverteilung?",
+            "en": r"When is the Normal distribution a good approximation for the Binomial distribution?"
+        },
+        "options": [
+            r"Wenn n > 30 und p < 0.1",
+            r"Wenn die Varianz groß genug ist ($np(1-p) > 9$).",
+            r"Wenn n < 30.",
+            r"Wenn p = 0.5 exakt."
+        ],
+        "correct_idx": 1,
+        "solution": {
+            "de": r"**Richtig: (b)**<br>Faustregel (Moivre-Laplace): Varianz $> 9$.",
+            "en": r"**Correct: (b)**<br>Rule of thumb: Variance $> 9$."
+        }
+    },
+    "uebung2_mc14": {
+        "source": "Übung 2, MC #14",
+        "type": "mc",
+        "question": {
+            "de": r"$X \sim N(30, 9)$. Finde $t$ so dass $P(X \ge t) = 0.0668$.",
+            "en": r"$X \sim N(30, 9)$. Find $t$ s.t. $P(X \ge t) = 0.0668$."
+        },
+        "options": [
+            r"34.5",
+            r"33.0",
+            r"31.5",
+            r"30.0"
+        ],
+        "correct_idx": 0,
+        "solution": {
+            "de": r"**Richtig: (a)**<br>Fläche rechts = 0.0668 $\implies$ Fläche links = 0.9332.<br>Tabelle: $z \approx 1.5$.<br>$x = 30 + 1.5 \cdot 3 = 34.5$.",
+            "en": r"**Correct: (a)**<br>Area right = 0.0668 $\implies$ Area left = 0.9332.<br>Table: $z \approx 1.5$.<br>$x = 30 + 1.5 \cdot 3 = 34.5$."
+        }
+    },
+    "uebung2_mc15": {
+        "source": "Übung 2, MC #15",
+        "type": "mc",
+        "question": {
+            "de": r"$X \sim N(30, 9)$. Zentrales 95% Intervall?",
+            "en": r"$X \sim N(30, 9)$. Central 95% interval?"
+        },
+        "options": [
+            r"[29.05, 30.95]",
+            r"[24.12, 35.88]",
+            r"[27.00, 33.00]",
+            r"[25.05, 34.95]"
+        ],
+        "correct_idx": 1,
+        "solution": {
+            "de": r"**Richtig: (b)**<br>$\mu \pm 1.96\sigma = 30 \pm 1.96 \cdot 3 = 30 \pm 5.88 = [24.12, 35.88]$.",
+            "en": r"**Correct: (b)**<br>$\mu \pm 1.96\sigma = 30 \pm 1.96 \cdot 3 = 30 \pm 5.88 = [24.12, 35.88]$."
+        }
+    },
+    "uebung2_mc11": {
+        "source": "Übung 2, MC #11",
+        "type": "mc",
+        "question": {
+            "de": r"Miguel gewinnt Giro d'Italia mit $p=0.3$. 5 Teilnahmen. Wahrscheinlichkeit mind. 2 Siege?",
+            "en": r"Win prob 0.3. 5 attempts. Prob of at least 2 wins?"
+        },
+        "options": [r"0.6398", r"0.4718", r"0.6", r"0.3602", r"0.5282"],
+        "correct_idx": 1,
+        "solution": {
+            "de": r"**Richtig: (b)**<br>Gegenwahrscheinlichkeit: $1 - (P(0)+P(1)) = 1 - (0.168 + 0.360) = 0.472$.",
+            "en": r"**Correct: (b)**<br>Complement: $1 - (P(0)+P(1)) = 1 - (0.168 + 0.360) = 0.472$."
+        }
+    },
+    "hs2022_mc6": {
+        "source": "HS 2022 Januar, MC #6",
+        "type": "mc",
+        "question": {
+            "de": r"7 Tage Hamburg, Regenwahrscheinlichkeit pro Tag 70%. Wahrscheinlichkeit für mind. 5 Regentage?",
+            "en": r"7 days Hamburg, 70% rain chance per day. Probability of at least 5 rainy days?"
+        },
+        "options": [r"65%", r"66%", r"67%", r"68%"],
+        "correct_idx": 0,
+        "solution": {
+            "de": r"**Richtig: 65%**<br>Binomial $n=7, p=0.7$. $P(5)+P(6)+P(7) \approx 0.318+0.247+0.082 = 0.647$.",
+            "en": r"**Correct: 65%**<br>Binomial $n=7, p=0.7$. $P(5)+P(6)+P(7) \approx 0.318+0.247+0.082 = 0.647$."
+        }
+    },
+    "test4_mc1": {
+        "source": "Test 4, Q1",
+        "type": "mc",
+        "question": {
+            "de": r"$X \sim Pois(10), Z=2X$. Welche Aussage trifft NICHT zu?",
+            "en": r"$X \sim Pois(10), Z=2X$. Which is FALSE?"
+        },
+        "options": [r"$Z \sim Pois(20)$", r"$Var(Z) = 40$", r"Corr(X, Z) = 1$", r"$E[Z] = 20$"],
+        "correct_idx": 0,
+        "solution": {
+            "de": r"**Richtig: (a)**<br>$Z$ nimmt nur gerade Werte an, Poisson muss alle ganzen Zahlen können.",
+            "en": r"**Correct: (a)**<br>$Z$ only takes even values, Poisson requires all integers."
+        }
+    },
+    "test5_mc1": {
+        "source": "Test 5, Q1",
+        "type": "mc",
+        "question": {
+            "de": r"1000 Leute (700 Smart, 300 Gewöhnlich). Stichprobe 200. $P(X=10)$ gewöhnliche?",
+            "en": r"1000 ppl (700 smart, 300 ordinary). Sample 200. $P(X=10)$ ordinary?"
+        },
+        "options": [r"Additiv", r"Multiplikativ", r"Hypergeometrisch", r"Unbekannt"],
+        "correct_idx": 2,
+        "solution": {
+            "de": r"**Richtig: Hypergeometrisch**<br>Ziehen ohne Zurücklegen aus zwei Gruppen.",
+            "en": r"**Correct: Hypergeometric**<br>Sampling without replacement from two groups."
+        }
+    }
+}
+
 # 5.1 Erwartungswert
 QUESTIONS_5_1 = {
     "test3_q4": {
@@ -1333,11 +1873,78 @@ QUESTIONS_5_1 = {
             "de": r"**Lösung:**<br>1. Integral über Bereich muss 1 geben.<br>2. $f_X(x) = \frac{x+2c}{2+4c}$.<br>3. $\text{Var}(X) \approx 0.32$.<br>5. Integral über Dreieck/Bereich $\approx 0.085$.",
             "en": r"**Solution:**<br>1. Integral over domain must be 1.<br>2. $f_X(x) = \frac{x+2c}{2+4c}$.<br>3. $\text{Var}(X) \approx 0.32$.<br>5. Integral over triangle/domain $\approx 0.085$."
         }
+    },
+    "uebung3_prob1": {
+        "source": "Übung 3, Probe #1",
+        "type": "problem",
+        "question": {
+            "de": r"Gemeinsame Massenfunktion (Tabelle). X (10, 20, 30), Y (2, 3, 4).<br>(a) Randverteilungen.<br>(c) V(X), V(Y).<br>(d) Cov, Rho.<br>(e) Unabhängig?",
+            "en": r"Joint PMF table.<br>(a) Marginals.<br>(c) Variances.<br>(d) Cov, Rho.<br>(e) Indep?"
+        },
+        "solution": {
+            "de": r"**Lösung:**<br>(a) Marginale $1/3$.<br>(d) Cov=0 (unkorreliert).<br>(e) Abhängig ($f(x,y) \neq f(x)f(y)$).",
+            "en": r"**Solution:**<br>(a) Marginals $1/3$.<br>(d) Cov=0 (uncorrelated).<br>(e) Dependent."
+        }
+    },
+    "uebung3_prob2": {
+        "source": "Übung 3, Probe #2",
+        "type": "problem",
+        "question": {
+            "de": r"Tabelle mit $x_1..x_4, y_1..y_3$.<br>(a) $f_X(x_3), f_Y(y_2)$.<br>(b) Bedingte W'keiten.",
+            "en": r"Joint PMF.<br>(a) Marginals.<br>(b) Conditionals."
+        },
+        "solution": {
+            "de": r"**Lösung:**<br>(a) Zeilensummen/Spaltensummen.<br>(b) Zelle / Randsumme.",
+            "en": r"**Solution:**<br>(a) Row/Col sums.<br>(b) Cell / Marginal."
+        }
+    },
+    "uebung3_prob4": {
+        "source": "Übung 3, Probe #4",
+        "type": "problem",
+        "question": {
+            "de": r"$f(x,y) = 24xy$ für $x+y \le 1$.<br>(a) Zeige Dichte.<br>(b) Unabhängig?",
+            "en": r"$f(x,y) = 24xy$ on simplex.<br>(a) Verify PDF.<br>(b) Indep?"
+        },
+        "solution": {
+            "de": r"**Lösung:**<br>(b) Abhängig, da Definitionsbereich (Dreieck) kein Rechteck ist.",
+            "en": r"**Solution:**<br>(b) Dependent, because support (triangle) is not a rectangle."
+        }
+    },
+    "uebung3_prob5": {
+        "source": "Übung 3, Probe #5",
+        "type": "problem",
+        "question": {
+            "de": r"$f(x,y) = 2x e^{-y}$ auf Rechteck $0<x<1, y>0$.<br>(a) Zeige Dichte.<br>(b) Unabhängig?",
+            "en": r"$f(x,y) = 2x e^{-y}$.<br>(a) Verify PDF.<br>(b) Indep?"
+        },
+        "solution": {
+            "de": r"**Lösung:**<br>(b) Unabhängig (Rechteck + Faktorisierung).",
+            "en": r"**Solution:**<br>(b) Independent (Rectangle + Factorization)."
+        }
     }
 }
 
 # 5.2 Varianz
 QUESTIONS_5_2 = {
+    "hs2023_mc9": {
+        "source": "HS 2023 Januar, MC #9",
+        "type": "mc",
+        "question": {
+            "de": r"Seien $X \sim N(4, 2)$ und $Y \sim N(0, 3)$. $E[XY] = E[X]E[Y]$. Sei $Z = 3 - 2X + 3Y$. Was ist $Cov(Y, Z)$?",
+            "en": r"Let $X \sim N(4, 2)$ and $Y \sim N(0, 3)$. $E[XY] = E[X]E[Y]$. Let $Z = 3 - 2X + 3Y$. What is $Cov(Y, Z)$?"
+        },
+        "options": [
+            r"27",
+            r"9",
+            r"12",
+            r"Keine der obigen."
+        ],
+        "correct_idx": 1,
+        "solution": {
+            "de": r"**Richtig: (b)**<br>$Cov(Y, 3-2X+3Y) = Cov(Y,3) - 2Cov(Y,X) + 3Cov(Y,Y)$.<br>$= 0 - 0 + 3Var(Y) = 3 \cdot 3 = 9$.",
+            "en": r"**Correct: (b)**<br>$Cov(Y, 3-2X+3Y) = Cov(Y,3) - 2Cov(Y,X) + 3Cov(Y,Y)$.<br>$= 0 - 0 + 3Var(Y) = 3 \cdot 3 = 9$."
+        }
+    },
     "test3_q5": {
         "source": "Test 3, Frage 5",
         "question": {
@@ -1363,11 +1970,54 @@ QUESTIONS_5_2 = {
             "de": r"**Richtig: $a^2 \text{Var}(X)$**<br>Verschiebung $b$ ändert Varianz nicht. Skalierung $a$ geht quadratisch ein.",
             "en": r"**Correct: $a^2 \text{Var}(X)$**<br>Shift $b$ does not change variance. Scaling $a$ enters quadratically."
         }
+    },
+    "uebung3_prob3": {
+        "source": "Übung 3, Probe #3",
+        "type": "problem",
+        "question": {
+            "de": r"X, Y Tabelle (0, 0.5, 1 vs 0, 1).<br>(a) Unabhängig?<br>(b) Cov?<br>(c) Varianz von X-Y?",
+            "en": r"Table.<br>(a) Indep?<br>(b) Cov?<br>(c) V(X-Y)?"
+        },
+        "solution": {
+            "de": r"**Lösung:**<br>(a) Abhängig.<br>(b) Cov=0.<br>(c) $V(X)+V(Y)$ (da unkorreliert).",
+            "en": r"**Solution:**<br>(a) Dependent.<br>(b) Cov=0.<br>(c) $V(X)+V(Y)$ (since uncorr)."
+        }
+    },
+    "uebung3_prob7": {
+        "source": "Übung 3, Probe #7",
+        "type": "problem",
+        "question": {
+            "de": r"X, Y, Z unabhängig. Diskrete Verteilungen gegeben.<br>(a) Mittelwert/Varianz X, Y, X-Y.<br>(b) Verteilung Summen.<br>(c) Wahrscheinlichkeiten.",
+            "en": r"X, Y, Z indep discrete.<br>(a) Moments.<br>(b) Sum dists.<br>(c) Probs."
+        },
+        "solution": {
+            "de": r"**Lösung:**<br>(a) Additivität.<br>(b) Faltung.",
+            "en": r"**Solution:**<br>(a) Additivity.<br>(b) Convolution."
+        }
     }
 }
 
 # 5.3 Kovarianz
 QUESTIONS_5_3 = {
+    "hs2024_mc2": {
+        "source": "HS 2024 Januar, MC #2",
+        "type": "mc",
+        "question": {
+            "de": r"Seien $E[X^2] = E[Y] = 1/3$, $E[X]=0$ und $\rho_{X^2, Y} > 0$. Welche Aussage über $\rho_{X,Y}$ ist immer wahr?",
+            "en": r"Let $E[X^2] = E[Y] = 1/3$, $E[X]=0$ and $\rho_{X^2, Y} > 0$. Which statement about $\rho_{X,Y}$ is always true?"
+        },
+        "options": [
+            r"$-1 \le \rho_{X,Y} < 0$",
+            r"$\rho_{X,Y} = 0$",
+            r"$0 < \rho_{X,Y} \le 1$",
+            r"Keine der obigen Aussagen ist immer wahr."
+        ],
+        "correct_idx": 3,
+        "solution": {
+            "de": r"**Richtig: (d)**<br>Korrelation misst lineare Abhängigkeit. $X$ könnte symmetrisch sein ($Y=X^2 \implies \rho=0$) oder nicht ($Y=X+X^2 \implies \rho \neq 0$). Nichts ist *immer* wahr.",
+            "en": r"**Correct: (d)**<br>Correlation measures linear dependence. $X$ could be symmetric ($Y=X^2 \implies \rho=0$) or not ($Y=X+X^2 \implies \rho \neq 0$). Nothing is *always* true."
+        }
+    },
     "uebung3_mc1": {
         "source": "Übung 3, MC1",
         "question": {
@@ -1516,10 +2166,318 @@ QUESTIONS_5_4 = {
             "de": r"**Richtig: (b)**<br>Gleichung 1 (Bienaymé) gilt, wenn die Variablen **unabhängig** (oder zumindest unkorreliert) sind.<br>Gleichung 2 gilt, wenn alle Varianzen gleich sind, also wenn sie **identisch verteilt** sind.",
             "en": r"**Correct: (b)**<br>Equation 1 (Bienaymé) holds if variables are **independent** (or at least uncorrelated).<br>Equation 2 holds if all variances are equal, i.e., if they are **identically distributed**."
         }
+    },
+    "uebung3_prob6": {
+        "source": "Übung 3, Probe #6",
+        "type": "problem",
+        "question": {
+            "de": r"Notenverteilung Mathe (X) Englisch (Y). Tabelle.<br>(a) Momente zeigen.<br>(b) Cov, Rho.<br>(c) $Z = (X+Y)/2$.",
+            "en": r"Grades Math/Eng. Table.<br>(a) Moments.<br>(b) Cov/Rho.<br>(c) Average Z."
+        },
+        "solution": {
+            "de": r"**Lösung:**<br>(b) Cov 0.29, Rho 0.36.<br>(c) Diversifikationseffekt (kleinere Varianz).",
+            "en": r"**Solution:**<br>(b) Cov 0.29, Rho 0.36.<br>(c) Diversification (lower variance)."
+        }
     }
 }
 
 
+
+
+# 5.5 Additional Questions (Multidimensional)
+QUESTIONS_5_5 = {
+    "uebung3_mc2": {
+        "source": "Übung 3, MC #2",
+        "type": "mc",
+        "question": {
+            "de": r"Der Korrelationskoeffizient $\rho$:",
+            "en": r"Correlation coefficient $\rho$:"
+        },
+        "options": [
+            r"misst nur die Stärke.",
+            r"misst nur die Richtung.",
+            r"misst Stärke und Richtung des linearen Zusammenhangs.",
+            r"hat keine Aussagekraft."
+        ],
+        "correct_idx": 2,
+        "solution": {
+            "de": r"**Richtig: (c)**<br>Korrelation ist normiert (-1 bis 1) und misst linearen Zusammenhang.",
+            "en": r"**Correct: (c)**<br>Correlation is normalized (-1 to 1) and measures linear relationship."
+        }
+    },
+    "uebung3_mc3": {
+        "source": "Übung 3, MC #3",
+        "type": "mc",
+        "question": {
+            "de": r"Zwei Variablen sind unabhängig, wenn:",
+            "en": r"Two variables are independent if:"
+        },
+        "options": [
+            r"$\rho = 0$.",
+            r"$f(x,y) = f_X(x) \cdot f_Y(y)$.",
+            r"$f(x,y) = f_X(x) + f_Y(y)$.",
+            r"Cov = 1."
+        ],
+        "correct_idx": 1,
+        "solution": {
+            "de": r"**Richtig: (b)**<br>Unabhängigkeit bedeutet Faktorisierung der Dichte.",
+            "en": r"**Correct: (b)**<br>Independence means factorization of the density."
+        }
+    },
+    "uebung3_mc4": {
+        "source": "Übung 3, MC #4",
+        "type": "mc",
+        "question": {
+            "de": r"Die Kovarianz wird errechnet mit:",
+            "en": r"Covariance is calculated as:"
+        },
+        "options": [
+            r"$E[XY] - E[X]E[Y]$",
+            r"$E[XY] - E[X^2]E[Y^2]$",
+            r"$E[XY]^2 - E[X]E[Y]$",
+            r"$E[X^2Y^2] - ...$"
+        ],
+        "correct_idx": 0,
+        "solution": {
+            "de": r"**Richtig: (a)**<br>Verschiebungssatz für Kovarianz.",
+            "en": r"**Correct: (a)**<br>Shift formula for covariance."
+        }
+    },
+    "uebung3_mc6": {
+        "source": "Übung 3, MC #6",
+        "type": "mc",
+        "question": {
+            "de": r"Wann gilt $E[XY] = E[X]E[Y]$?",
+            "en": r"When does $E[XY] = E[X]E[Y]$ hold?"
+        },
+        "options": [
+            r"Immer.",
+            r"Nie.",
+            r"Falls X und Y unkorreliert sind.",
+            r"Nur falls X und Y identisch sind."
+        ],
+        "correct_idx": 2,
+        "solution": {
+            "de": r"**Richtig: (c)**<br>Das ist die Definition von Unkorreliertheit ($Cov=0$). Unabhängigkeit impliziert dies auch.",
+            "en": r"**Correct: (c)**<br>Definition of uncorrelated ($Cov=0$). Independence implies this too."
+        }
+    },
+    "uebung3_mc8": {
+        "source": "Übung 3, MC #8",
+        "type": "mc",
+        "question": {
+            "de": r"X = Würfel, Y = Münze ('Kopf'). $P(X > 3 | Y = \text{'Kopf'})$?",
+            "en": r"X = Die, Y = Coin ('Head'). $P(X > 3 | Y = \text{'Head'})$?"
+        },
+        "options": [
+            r"1/3",
+            r"1/2",
+            r"2/3",
+            r"0"
+        ],
+        "correct_idx": 1,
+        "solution": {
+            "de": r"**Richtig: (b)**<br>Unabhängig. Münze egal. Würfel > 3 (4,5,6) ist 3/6 = 1/2.",
+            "en": r"**Correct: (b)**<br>Independent. Die prob is 3/6 = 1/2."
+        }
+    },
+    "uebung3_mc12": {
+        "source": "Übung 3, MC #12",
+        "type": "mc",
+        "question": {
+            "de": r"Dichte $f(x,y) = x/12 + y/6$ auf $[0,2]^2$. $E[X+2Y]$?",
+            "en": r"Density $f(x,y) = x/12 + y/6$ on $[0,2]^2$. $E[X+2Y]$?"
+        },
+        "options": [
+            r"33/9",
+            r"34/9",
+            r"10/3",
+            r"32/9"
+        ],
+        "correct_idx": 3,
+        "solution": {
+            "de": r"**Richtig: (d)**<br>$E[X]=10/9, E[Y]=11/9$. Summe: $32/9$.",
+            "en": r"**Correct: (d)**<br>$E[X]=10/9, E[Y]=11/9$. Sum: $32/9$."
+        }
+    },
+    "uebung3_mc13": {
+        "source": "Übung 3, MC #13",
+        "type": "mc",
+        "question": {
+            "de": r"Gleiche Dichte wie #12. $V(Y)$?",
+            "en": r"Same density. $V(Y)$?"
+        },
+        "options": [
+            r"23/81",
+            r"25/81",
+            r"26/81",
+            r"28/81"
+        ],
+        "correct_idx": 0,
+        "solution": {
+            "de": r"**Richtig: (a)**<br>$E[Y^2] - E[Y]^2 = 16/9 - 121/81 = 23/81$.",
+            "en": r"**Correct: (a)**<br>$E[Y^2] - E[Y]^2 = 16/9 - 121/81 = 23/81$."
+        }
+    },
+    "test3_mc3": {
+        "source": "Test 3, Q3",
+        "type": "mc",
+        "question": {
+            "de": r"$Corr(X,Y)=-1, Var(X)=1, SD(Y)=2$. $Var(3X+Y)$?",
+            "en": r"$Corr(X,Y)=-1, Var(X)=1, SD(Y)=2$. $Var(3X+Y)$?"
+        },
+        "options": [r"7", r"13", r"5", r"1"],
+        "correct_idx": 3,
+        "solution": {
+            "de": r"**Richtig: 1**<br>$9(1) + 4 + 2(3)(1)(-1)(1)(2) = 13 - 12 = 1$.",
+            "en": r"**Correct: 1**<br>$9(1) + 4 + 2(3)(1)(-1)(1)(2) = 13 - 12 = 1$."
+        }
+    },
+    "test3_mc4": {
+        "source": "Test 3, Q4",
+        "type": "mc",
+        "question": {
+            "de": r"X, Y unkorreliert. $E(X)=E(Y)=1, Var(X)=Var(Y)=1$. Was gilt?",
+            "en": r"X, Y uncorrelated. Moments given. True?"
+        },
+        "options": [r"$3E(X^2) + Cov(X,Y) = 2$", r"$E(XY) = 2$", r"$Cov(X, Y+2) = 2$", r"$E((X-Y)^2) = 2$"],
+        "correct_idx": 3,
+        "solution": {
+            "de": r"**Richtig: (d)**<br>$E[(X-Y)^2] = Var(X-Y) + (E[X-Y])^2 = (1+1) + 0 = 2$.",
+            "en": r"**Correct: (d)**<br>$E[(X-Y)^2] = Var(X-Y) + (E[X-Y])^2 = (1+1) + 0 = 2$."
+        }
+    },
+    "test4_mc2": {
+        "source": "Test 4, Q2",
+        "type": "mc",
+        "question": {
+            "de": r"$Z = 4X - 3Y + 2$. $Cov(X, Z)$ unter Annahme Unkorreliertheit?",
+            "en": r"$Z = 4X - 3Y + 2$. $Cov(X, Z)$ assuming uncorrelated?"
+        },
+        "options": [r"0", r"64", r"16", r"Info fehlt"],
+        "correct_idx": 2,
+        "solution": {
+            "de": r"**Richtig: 16**<br>$Cov(X, 4X) = 4 Var(X) = 16$ (wenn Var=4... Moment, Frage unvollständig im Original, Annahme Var=4 aus Kontext oder Typo $4 \cdot 1$? Staging sagt '4 Var(X) = 16'. Also Var=4).",
+            "en": r"**Correct: 16**<br>$Cov(X, 4X) = 4 Var(X) = 16$ (assuming Var=4)."
+        }
+    },
+    "test5_mc2": {
+        "source": "Test 5, Q2",
+        "type": "mc",
+        "question": {
+            "de": r"Stetige ZV X, Y. Was ist immer korrekt bzgl. Unkorreliertheit?",
+            "en": r"Continuous X, Y. What is always correct re: uncorrelatedness?"
+        },
+        "options": [r"Randdichten reichen", r"Unabh <=> Cov=0", r"$f(y|x)$...", r"$Cov=0 \iff E[XY] = E[X]E[Y]$"],
+        "correct_idx": 3,
+        "solution": {
+            "de": r"**Richtig: (d)**<br>Definition von Covariance=0.",
+            "en": r"**Correct: (d)**<br>Definition of Covariance=0."
+        }
+    }
+}
+
+
+# 6. Zentraler Grenzwertsatz (CLT)
+QUESTIONS_6_3 = {
+    "uebung4_mc1": {
+        "source": "Übung 4, MC #1",
+        "type": "mc",
+        "question": {
+            "de": r"Seien $X_1, ..., X_n$ i.i.d. mit endlichem E und Var. $S_n = \sum X_i$. Der Zentrale Grenzwertsatz besagt:",
+            "en": r"Let $X_1, ..., X_n$ be i.i.d. with finite mean/var. $S_n = \sum X_i$. CLT states:"
+        },
+        "options": [
+            r"$S_n$ ist approximativ standardnormalverteilt (n > 30).",
+            r"Die standardisierte ZV $S_n$ ist approximativ standardnormalverteilt (n > 30).",
+            r"$S_n$ ist approximativ normalverteilt (n > 30).",
+            r"Die standardisierte ZV $S_n$ ist approximativ normalverteilt (n > 30).",
+            r"Die standardisierte ZV $S_n$ ist approximativ standardnormalverteilt (n <= 30)."
+        ],
+        "correct_idx": 1,
+        "solution": {
+            "de": r"**Richtig: (b), (c), (d)**<br>Präzise (b): Standardisierte Summe konvergiert gegen $N(0,1)$.<br>Praktisch (c): Summe ist approx. $N(n\mu, n\sigma^2)$.",
+            "en": r"**Correct: (b), (c), (d)**<br>Precise (b): Standardized sum converges to $N(0,1)$.<br>Practical (c): Sum is approx. $N(n\mu, n\sigma^2)$."
+        }
+    },
+    "uebung4_mc2": {
+        "source": "Übung 4, MC #2",
+        "type": "mc",
+        "question": {
+            "de": r"Bedingungen für den Zentralen Grenzwertsatz:",
+            "en": r"Conditions for CLT:"
+        },
+        "options": [
+            r"$S_n = X_1 + ... + X_n$.",
+            r"$S_n = X_1^2 + ... + X_n^2$.",
+            r"$X_i$ sind identisch verteilt.",
+            r"$X_i$ sind gleichverteilt.",
+            r"$n > 30$."
+        ],
+        "correct_idx": 2,
+        "solution": {
+            "de": r"**Richtig: (a), (c), (e)**<br>Summe (a), i.i.d. (c), Großes n (e).",
+            "en": r"**Correct: (a), (c), (e)**<br>Sum (a), i.i.d. (c), Large n (e)."
+        }
+    },
+    "uebung4_mc3": {
+        "source": "Übung 4, MC #3",
+        "type": "mc",
+        "question": {
+            "de": r"X, Y unabhängig. Summe Z = X + Y ist:",
+            "en": r"X, Y independent. Sum Z = X + Y follows:"
+        },
+        "options": [
+            r"Binomial, wenn X, Y binomial mit selbem p.",
+            r"Normalverteilt, wenn X, Y normal mit selben Parametern.",
+            r"Standardnormal, wenn X, Y standardnormal.",
+            r"Normal, wenn X, Y standardnormal."
+        ],
+        "correct_idx": 0,
+        "solution": {
+            "de": r"**Richtig: (a), (d)**<br>(a) $B(n,p)+B(m,p) \sim B(n+m, p)$.<br>(d) $N(0,1)+N(0,1) \sim N(0, 2)$ (Normal, aber nicht Standard).",
+            "en": r"**Correct: (a), (d)**<br>(a) $B(n,p)+B(m,p) \sim B(n+m, p)$.<br>(d) $N(0,1)+N(0,1) \sim N(0, 2)$ (Normal, not Standard)."
+        }
+    },
+    "uebung4_prob3": {
+        "source": "Übung 4, Probe #3",
+        "type": "problem",
+        "question": {
+            "de": r"Produktion $n=2000$. Zurückweisung wenn $>200$ defekt. Gesucht max $p$, damit mit 95% W'keit *nicht* zurückgewiesen ($k \le 200$).",
+            "en": r"$n=2000$. Reject if $>200$. Find max $p$ s.t. $P(X \le 200) \ge 0.95$."
+        },
+        "options": [
+            r"0.080",
+            r"0.090",
+            r"0.100",
+            r"0.110"
+        ],
+        "correct_idx": 1,
+        "solution": {
+             "de": r"**Richtig: 0.090**<br>$P(X \le 200) = 0.95 \implies Z=1.645$. Auflösen nach p.",
+             "en": r"**Correct: 0.090**<br>$P(X \le 200) = 0.95 \implies Z=1.645$. Solve for p."
+        }
+    },
+    "uebung4_prob7": {
+        "source": "Übung 4, Probe #7",
+        "type": "problem",
+        "question": {
+            "de": r"Seilbahn max 4200kg. 50 Personen, $\mu=80, \sigma=10$. Wahrscheinlichkeit Überlastung?",
+            "en": r"Cable car max 4200kg. 50 ppl mean 80 SD 10. Overload prob?"
+        },
+        "options": [
+            r"0.23%",
+            r"2.3%",
+            r"0.02%",
+            r"5%"
+        ],
+        "correct_idx": 0,
+        "solution": {
+            "de": r"**Richtig: 0.23%**<br>$\mu_{sum} = 4000, \sigma_{sum} = \sqrt{50}\cdot 10 \approx 70.7$.<br>$Z = 200/70.7 \approx 2.83$. $1-\Phi(2.83) = 0.0023$.",
+            "en": r"**Correct: 0.23%**<br>$\mu_{sum} = 4000, \sigma_{sum} = \sqrt{50}\cdot 10 \approx 70.7$.<br>$Z = 200/70.7 \approx 2.83$. $1-\Phi(2.83) = 0.0023$."
+        }
+    }
+}
 
 # 7. Beschreibende Statistik (Descriptive Statistics)
 QUESTIONS_7 = {
@@ -1640,6 +2598,44 @@ QUESTIONS_6 = {
         "solution": {
             "de": r"**Lösung:**<br>1) Annahme: $P(X \le 44) \approx \mathbf{0.7434}$<br>2) Ablehnung: $P(X \ge 51) \approx \mathbf{0.040}$<br>3) Totalkontrolle: Rest $\approx \mathbf{0.1866}$",
             "en": r"**Solution:**<br>1) Accept: $P(X \le 44) \approx \mathbf{0.7434}$<br>2) Reject: $P(X \ge 51) \approx \mathbf{0.040}$<br>3) Total check: Rest $\approx \mathbf{0.1866}$"
+        }
+    },
+    "hs2023_mc2": {
+        "source": "HS 2023 Januar, MC #2",
+        "type": "mc",
+        "question": {
+            "de": r"Zwei unabhängige Zufallsvariablen $X_1$ und $X_2$ sind zwischen -1 und 1 stetig gleichverteilt ($U[-1, 1]$). Welche Aussage über den Mittelwert $\bar{X} = \frac{X_1 + X_2}{2}$ ist falsch?",
+            "en": r"Two independent random variables $X_1$ and $X_2$ are uniformly distributed between -1 and 1 ($U[-1, 1]$). Which statement about the mean $\bar{X} = \frac{X_1 + X_2}{2}$ is false?"
+        },
+        "options": [
+            r"$P(\bar{X} = 0) = 0$",
+            r"$P(|\bar{X}| > 1) = 0$",
+            r"$P(\bar{X} < -0.5) = 0.25$",
+            r"$P(\bar{X} < 0) = 0.5$"
+        ],
+        "correct_idx": 2,
+        "solution": {
+            "de": r"**Richtig: (c) ist FALSCH**<br>Die Summe zweier Gleichverteilungen ist eine Dreiecksverteilung. Die Masse konzentriert sich um 0. $P(\bar{X} < -0.5) = 0.125 \neq 0.25$.",
+            "en": r"**Correct: (c) is FALSE**<br>Sum of two uniforms is triangular. Mass concentrates around 0. $P(\bar{X} < -0.5) = 0.125 \neq 0.25$."
+        }
+    },
+    "hs2023_mc3": {
+        "source": "HS 2023 Januar, MC #3",
+        "type": "mc",
+        "question": {
+            "de": r"Öltanker Kapazität 30.000 $m^3$. Max Last 27.040 Tonnen. Gewicht pro $m^3$ hat $\mu = 0.9$. Wahrscheinlichkeit Überladung = 0.2%. Welche Varianz $\sigma^2$ wurde angenommen?",
+            "en": r"Oil tanker capacity 30,000 $m^3$. Max load 27,040 tons. Weight per $m^3$ has $\mu = 0.9$. Overload probability = 0.2%. What variance $\sigma^2$ was assumed?"
+        },
+        "options": [
+            r"0.0064",
+            r"0.0802",
+            r"193.1477",
+            r"Nicht genügend Informationen."
+        ],
+        "correct_idx": 0,
+        "solution": {
+            "de": r"**Richtig: (a)**<br>Puffer = 40. $z \approx 2.88$ (für 0.002). $40 = 2.88 \cdot \sqrt{30000}\sigma$. $\sigma \approx 0.08 \Rightarrow \sigma^2 = 0.0064$.",
+            "en": r"**Correct: (a)**<br>Buffer = 40. $z \approx 2.88$ (for 0.002). $40 = 2.88 \cdot \sqrt{30000}\sigma$. $\sigma \approx 0.08 \Rightarrow \sigma^2 = 0.0064$."
         }
     },
     "hs2022_mc3": {
@@ -1798,6 +2794,10 @@ QUESTIONS_8 = {
             "en": r"**Solution:**<br>1. $\hat{\alpha}_{MLE} = \frac{n}{\sum \ln x_i}$.<br>2. $\hat{\alpha} \approx 0.35$. (Note: Density needs $\alpha > 0$.)<br>3. $E[X] = \frac{\alpha}{\alpha-1}$. Solve for $\alpha$: $\hat{\alpha}_{MM} = \frac{\bar{x}}{\bar{x}-1}$.<br>4. $\bar{x}=17.8 \Rightarrow \hat{\alpha} \approx 1.06$.<br>5. Method of Moments only defined for $\alpha > 1$."
         }
     },
+}
+
+# 9. Konfidenzintervalle (Confidence Intervals)
+QUESTIONS_9 = {
     "hs2023_mc5": {
         "source": "HS 2023 Januar, MC #5",
         "question": {
@@ -1814,6 +2814,50 @@ QUESTIONS_8 = {
 }
 
 # 10. Hypothesentests
+
+
+QUESTIONS_10_5 = {
+    "hs2024_mc1": {
+        "source": "HS 2024 Januar, MC #1",
+        "type": "mc",
+        "question": {
+            "de": r"Wir beobachten 25 i.i.d. Zufallsvariablen aus $N(\mu, \sigma^2=0.5)$. Test $H_0: \mu=0.5$ gegen $H_1: \mu \ge 0.5$ ($\alpha=5\%$). Für welchen Wertebereich von $\bar{x}$ wird $H_0$ verworfen?",
+            "en": r"We observe 25 i.i.d. random variables from $N(\mu, \sigma^2=0.5)$. Test $H_0: \mu=0.5$ vs $H_1: \mu \ge 0.5$ ($\alpha=5\%$). For which range of $\bar{x}$ is $H_0$ rejected?"
+        },
+        "options": [
+            r"$\bar{x} > 0.66$",
+            r"$\bar{x} > 0.73$",
+            r"$\bar{x} > 0.78$",
+            r"$\bar{x} > 1.64$"
+        ],
+        "correct_idx": 1,
+        "solution": {
+            "de": r"**Richtig: (b)**<br>Standardfehler $SE = \sqrt{0.5/25} \approx 0.1414$.<br>Kritischer Wert (einseitig 5%): $z = 1.645$.<br>Grenze: $\mu_0 + 1.645 \cdot SE = 0.5 + 0.232 = 0.732$.",
+            "en": r"**Correct: (b)**<br>Standard Error $SE = \sqrt{0.5/25} \approx 0.1414$.<br>Critical value (one-sided 5%): $z = 1.645$.<br>Limit: $\mu_0 + 1.645 \cdot SE = 0.5 + 0.232 = 0.732$."
+        }
+    },
+    "hs2024_mc8": {
+        "source": "HS 2024 Januar, MC #8",
+        "type": "mc",
+        "question": {
+            "de": r"$X \sim N(\mu, 5)$. Test $H_0: \mu=8$ vs $H_1: \mu \neq 8$. $n=5$. $\hat{\mu}=4.95$. p-Wert?",
+            "en": r"$X \sim N(\mu, 5)$. Test $H_0: \mu=8$ vs $H_1: \mu \neq 8$. $n=5$. $\hat{\mu}=4.95$. p-value?"
+        },
+        "options": [
+            r"0.0011",
+            r"0.0022",
+            r"0.1738",
+            r"0.3476"
+        ],
+        "correct_idx": 1,
+        "solution": {
+            "de": r"**Richtig: (b)**<br>Teststatistik $Z = \frac{4.95 - 8}{\sqrt{5}/\sqrt{5}} = -3.05$.<br>p-Wert (zweiseitig) = $2 \cdot P(Z < -3.05) \approx 2 \cdot 0.0011 = 0.0022$.",
+            "en": r"**Correct: (b)**<br>Test Statistic $Z = \frac{4.95 - 8}{\sqrt{5}/\sqrt{5}} = -3.05$.<br>p-value (two-sided) = $2 \cdot P(Z < -3.05) \approx 2 \cdot 0.0011 = 0.0022$."
+        }
+    }
+}
+
+
 QUESTIONS_10 = {
     "uebung6_prob1": {
         "source": "Übung 6, Problem 1",
@@ -1853,11 +2897,765 @@ QUESTIONS_10 = {
     }
 }
 
+
+# 8. Punktschätzung (Point Estimation)
+QUESTIONS_8_4 = {
+    "uebung5_mc1": {
+        "source": "Übung 5, MC #1",
+        "type": "mc",
+        "question": {
+            "de": r"Eine Schätzfunktion heisst erwartungstreu, wenn sie symmetrisch um ihren Erwartungswert verteilt ist.",
+            "en": r"An estimator is unbiased if it is symmetrically distributed around its expectation."
+        },
+        "options": [
+            r"Richtig",
+            r"Falsch"
+        ],
+        "correct_idx": 1, 
+        "solution": {
+            "de": r"**Richtig: Falsch**<br>Erwartungstreue ($E[\hat{\theta}] = \theta$) hat nichts mit Symmetrie zu tun.",
+            "en": r"**Correct: False**<br>Unbiasedness ($E[\hat{\theta}] = \theta$) implies nothing about symmetry."
+        }
+    },
+    "uebung5_mc2": {
+        "source": "Übung 5, MC #2",
+        "type": "mc",
+        "question": {
+            "de": r"Effiziente Schätzungen sind im Vorlesungskontext immer auch erwartungstreu.",
+            "en": r"Efficient estimators are always unbiased (in lecture context)."
+        },
+        "options": [
+            r"Richtig",
+            r"Falsch"
+        ],
+        "correct_idx": 0,
+        "solution": {
+            "de": r"**Richtig: Richtig**<br>Effizienz bezieht sich auf MVUE (Minimum Variance Unbiased Estimator).",
+            "en": r"**Correct: True**<br>Efficiency refers to MVUE (Minimum Variance Unbiased Estimator)."
+        }
+    },
+    "uebung5_mc3": {
+        "source": "Übung 5, MC #3",
+        "type": "mc",
+        "question": {
+            "de": r"Erwartungstreue Schätzfunktionen sind konsistent.",
+            "en": r"Unbiased estimators are consistent."
+        },
+        "options": [
+            r"Richtig",
+            r"Falsch"
+        ],
+        "correct_idx": 1,
+        "solution": {
+            "de": r"**Richtig: Falsch**<br>Beispiel: $X_1$ (nur erster Wert) ist erwartungstreu aber nicht konsistent (Varianz sinkt nicht).",
+            "en": r"**Correct: False**<br>Example: $X_1$ (first value only) is unbiased but not consistent (variance doesn't shrink)."
+        }
+    },
+    "uebung5_mc4": {
+        "source": "Übung 5, MC #4",
+        "type": "mc",
+        "question": {
+            "de": r"Schätzer sind Zufallsvariablen.",
+            "en": r"Estimators are random variables."
+        },
+        "options": [
+             r"Richtig",
+             r"Falsch"
+        ],
+        "correct_idx": 0,
+        "solution": {
+             "de": r"**Richtig: Richtig**<br>Sie hängen von der zufälligen Stichprobe ab.",
+             "en": r"**Correct: True**<br>They depend on the random sample."
+        }
+    },
+    "uebung5_mc5": {
+        "source": "Übung 5, MC #5",
+        "type": "mc",
+        "question": {
+            "de": r"Ein erwartungstreuer Schätzer hat stets einen kleineren MSE als ein verzerrter Schätzer.",
+            "en": r"An unbiased estimator always has a lower MSE than a biased one."
+        },
+        "options": [
+             r"Richtig",
+             r"Falsch"
+        ],
+        "correct_idx": 1,
+        "solution": {
+             "de": r"**Richtig: Falsch**<br>$MSE = Var + Bias^2$. Ein kleiner Bias kann Varianz massiv senken (Bias-Variance Tradeoff).",
+             "en": r"**Correct: False**<br>$MSE = Var + Bias^2$. Small bias can trade for huge variance reduction."
+        }
+    },
+    "uebung5_mc6": {
+        "source": "Übung 5, MC #6",
+        "type": "mc",
+        "question": {
+            "de": r"$\bar{X}$. Welche Aussagen sind richtig?<br>(a) $Var(\bar{X}) = \sigma^2/n$.<br>(b) $\bar{X}$ konsistent.<br>(c) $\bar{X}$ standardnormalverteilt.",
+            "en": r"$\bar{X}$. True?<br>(a) $Var(\bar{X}) = \sigma^2/n$.<br>(b) Consistent.<br>(c) Standard Normal."
+        },
+        "options": [
+             r"a) und b)",
+             r"b) und c)",
+             r"a) und c)",
+             r"Nur a)"
+        ],
+        "correct_idx": 0,
+        "solution": {
+             "de": r"**Richtig: (a), (b)**<br>(c) ist falsch, sie ist normal ($N(\mu, \dots)$) aber nicht Standardnormal ($N(0,1)$).",
+             "en": r"**Correct: (a), (b)**<br>(c) is false, it's Normal ($N(\mu, \dots)$) but not Standard Normal ($N(0,1)$)."
+        }
+    },
+    "uebung5_mc10": {
+        "source": "Übung 5, MC #10",
+        "type": "mc",
+        "question": {
+            "de": r"Wann ist ein linearer Schätzer $\sum w_i X_i$ erwartungstreu?",
+            "en": r"When is a linear estimator $\sum w_i X_i$ unbiased?"
+        },
+        "options": [
+             r"Immer.",
+             r"Wenn $\sum w_i = 0$.",
+             r"Wenn $\sum w_i = 1$.",
+             r"Wenn $w_i = 1/n$."
+        ],
+        "correct_idx": 2, 
+        "solution": {
+             "de": r"**Richtig: Summe Gewichte = 1.**",
+             "en": r"**Correct: Sum of weights = 1.**"
+        }
+    },
+    "uebung5_mc11": {
+        "source": "Übung 5, MC #11",
+        "type": "mc",
+        "question": {
+            "de": r"$E[Y] = \frac{1}{3+\lambda}$. Momentenschätzer für $\lambda$?",
+            "en": r"$E[Y] = \frac{1}{3+\lambda}$. MOM estimator for $\lambda$?"
+        },
+        "options": [
+             r"$\bar{X}$",
+             r"$\frac{1}{\bar{X}} + 3$",
+             r"$\frac{1}{\bar{X}} - 3$",
+             r"$\frac{1}{3+\bar{X}}$"
+        ],
+        "correct_idx": 2,
+        "solution": {
+             "de": r"**Richtig: (c)**<br>Gleichsetzen $\bar{X} = \frac{1}{3+\lambda}$ und nach $\lambda$ auflösen.",
+             "en": r"**Correct: (c)**<br>Equate $\bar{X} = \frac{1}{3+\lambda}$ and solve for $\lambda$."
+        }
+    },
+    "uebung5_mc12": {
+        "source": "Übung 5, MC #12",
+        "type": "mc",
+        "question": {
+            "de": r"Momentenmethode und MLE liefern stets gleiche Ergebnisse?",
+            "en": r"MOM and MLE always yield same results?"
+        },
+        "options": [
+             r"Richtig",
+             r"Falsch"
+        ],
+        "correct_idx": 1,
+        "solution": {
+             "de": r"**Richtig: Falsch**<br>Gegenbeispiel: Gleichverteilung (MOM: $2\bar{X}$, MLE: $\max X_i$).",
+             "en": r"**Correct: False**<br>Counter-example: Uniform (MOM: $2\bar{X}$, MLE: $\max X_i$)."
+        }
+    },
+    "uebung5_mc13": {
+        "source": "Übung 5, MC #13",
+        "type": "mc",
+        "question": {
+            "de": r"MLE sind nie erwartungstreu?",
+            "en": r"MLE are never unbiased?"
+        },
+        "options": [
+             r"Richtig",
+             r"Falsch"
+        ],
+        "correct_idx": 1,
+        "solution": {
+             "de": r"**Richtig: Falsch**<br>$\bar{X}$ bei Normalverteilung ist MLE und erwartungstreu.",
+             "en": r"**Correct: False**<br>$\bar{X}$ in Normal dist is MLE and unbiased."
+        }
+    },
+    "uebung5_prob1": {
+        "source": "Übung 5, Probe #1",
+        "type": "problem",
+        "question": {
+            "de": r"Vergleich $\mu_1 = 0.5 X_1 + 0.5 X_2$ vs $\mu_2 = \frac{1}{3}X_1 + \frac{2}{3}X_2$. Effizienter?",
+            "en": r"Compare $\mu_1 = 0.5 X_1 + 0.5 X_2$ vs $\mu_2 = \frac{1}{3}X_1 + \frac{2}{3}X_2$. More efficient?"
+        },
+        "options": [
+             r"$\mu_1$",
+             r"$\mu_2$",
+             r"Beide gleich"
+        ],
+        "correct_idx": 0,
+        "solution": {
+             "de": r"**Richtig: $\mu_1$**<br>Summe Quadrate der Gewichte: $\mu_1 \to 0.5$, $\mu_2 \to 0.55$. Kleiner ist besser.",
+             "en": r"**Correct: $\mu_1$**<br>Sum of squared weights: $\mu_1 \to 0.5$, $\mu_2 \to 0.55$. Smaller is better."
+        }
+    },
+    "test5_mc3": {
+        "source": "Test 5, Q3",
+        "type": "mc",
+        "question": {
+            "de": r"$X_i \sim U[1, \theta]$. Schätzer $\hat{\theta} = \frac{2}{n}\sum X_i$.",
+            "en": r"$X_i \sim U[1, \theta]$. Est $\hat{\theta} = \frac{2}{n}\sum X_i$."
+        },
+        "options": [r"Varianz ist $\frac{(\theta-1)^2}{3n}$", r"Erwartungstreu", r"Konsistent", r"Bias ..."],
+        "correct_idx": 0,
+        "solution": {
+            "de": r"**Richtig: (a)**<br>$Var(2\bar{X}) = 4 Var(\bar{X}) = 4 \frac{(\theta-1)^2/12}{n} = \frac{(\theta-1)^2}{3n}$.",
+            "en": r"**Correct: (a)**<br>$Var(2\bar{X}) = 4 Var(\bar{X}) = 4 \frac{(\theta-1)^2/12}{n} = \frac{(\theta-1)^2}{3n}$."
+        }
+    },
+    "uebung5_mc7": {
+        "source": "Übung 5, MC #7",
+        "type": "mc",
+        "question": {
+            "de": r"Systematischer Fehler beim Schätzen heißt Bias.",
+            "en": r"Systematic error in estimation is called Bias."
+        },
+        "options": [r"Richtig", r"Falsch"],
+        "correct_idx": 0,
+        "solution": {
+            "de": r"**Richtig: (a)**<br>$Bias = E[\hat{\theta}] - \theta$.",
+            "en": r"**Correct: (a)**<br>$Bias = E[\hat{\theta}] - \theta$."
+        }
+    },
+    "uebung5_mc8": {
+        "source": "Übung 5, MC #8",
+        "type": "mc",
+        "question": {
+            "de": r"Ein Schätzer ist positiv verzerrt (Bias > 0). Überschätzt oder unterschätzt er im Mittel?",
+            "en": r"Positive bias (Bias > 0). Does it over- or underestimate on average?"
+        },
+        "options": [r"Überschätzt", r"Unterschätzt"],
+        "correct_idx": 0,
+        "solution": {
+            "de": r"**Richtig: (a)**<br>$E[\hat{\theta}] > \theta$.",
+            "en": r"**Correct: (a)**<br>$E[\hat{\theta}] > \theta$."
+        }
+    },
+    "uebung5_mc9": {
+        "source": "Übung 5, MC #9",
+        "type": "mc",
+        "question": {
+            "de": r"Wichtigstes Ziel beim Schätzen ist es, Schätzer mit kleinen Varianzen zu finden.",
+            "en": r"Main goal is finding estimators with small variances."
+        },
+        "options": [r"Richtig", r"Falsch"],
+        "correct_idx": 1,
+        "solution": {
+            "de": r"**Richtig: (b)**<br>Wir wollen kleinen MSE (Varianz + Bias).",
+            "en": r"**Correct: (b)**<br>We want small MSE (Variance + Bias)."
+        }
+    },
+    "uebung5_mc14": {
+        "source": "Übung 5, MC #14",
+        "type": "mc",
+        "question": {
+            "de": r"Maximierung der Loglikelihood und Likelihood führt zum selben Ergebnis (Schätzer).",
+            "en": r"Maximizing Loglikelihood vs Likelihood yields the same estimator."
+        },
+        "options": [r"Richtig", r"Falsch"],
+        "correct_idx": 0,
+        "solution": {
+            "de": r"**Richtig: (a)**<br>Log ist monoton steigend. Maximum ist an der gleichen Stelle.",
+            "en": r"**Correct: (a)**<br>Log is monotonic. Max location is identical."
+        }
+    },
+    "uebung5_mc15": {
+        "source": "Übung 5, MC #15",
+        "type": "mc",
+        "question": {
+            "de": r"Exponential $Y$. Stichprobe (1, 2, 3, 1). Likelihood $L(\theta)$?",
+            "en": r"Exp $Y$. Sample (1, 2, 3, 1). Likelihood $L(\theta)$?"
+        },
+        "options": [
+            r"$(1 \cdot e^{-\theta})^2 ...$",
+            r"$(\theta \cdot e^{-\theta})^1 ...$",
+            r"$(\theta \cdot e^{-1\theta})^2 (\theta \cdot e^{-2\theta})^1 (\theta \cdot e^{-3\theta})^1$",
+            r"..."
+        ],
+        "correct_idx": 2,
+        "solution": {
+            "de": r"**Richtig: (c)**<br>Produkt der Dichten: $f(1)f(2)f(3)f(1)$.",
+            "en": r"**Correct: (c)**<br>Product of densities: $f(1)f(2)f(3)f(1)$."
+        }
+    },
+    "uebung5_prob3": {
+        "source": "Übung 5, Probe #3",
+        "type": "problem",
+        "question": {
+            "de": r"Rechteckverteilung $[\theta, \theta+1]$.<br>(a) $E[X]$, $Var[X]$.<br>(b) Bias von $\bar{X}$?",
+            "en": r"Uniform $[\theta, \theta+1]$. (a) Moments. (b) Bias of mean?"
+        },
+        "solution": {
+            "de": r"**Lösung:**<br>(a) $E[X] = \theta+0.5$.<br>(b) $Bias = 0.5$. Korrektur: $\bar{X}-0.5$.",
+            "en": r"**Solution:**<br>(a) $E[X] = \theta+0.5$.<br>(b) $Bias = 0.5$. Correction: $\bar{X}-0.5$."
+        }
+    },
+    "uebung5_prob5": {
+        "source": "Übung 5, Probe #5",
+        "type": "problem",
+        "question": {
+            "de": r"Bernoulli $\pi$. Schätzer $\hat{\pi}$ vs Laplace Smoothing $T = \frac{\sum X + 1}{n+2}$.",
+            "en": r"Bernoulli. MLE vs Laplace Smoothing."
+        },
+        "solution": {
+            "de": r"**Lösung:** Laplace hat Bias, aber geringeren MSE bei kleinen Stichproben (Bias-Variance Tradeoff).",
+            "en": r"**Solution:** Laplace has bias, but lower MSE for small samples (Bias-Variance Tradeoff)."
+        }
+    },
+    "uebung5_prob6": {
+        "source": "Übung 5, Probe #6",
+        "type": "problem",
+        "question": {
+            "de": r"Momentenschätzer herleiten für:<br>(a) Exponential<br>(b) Rechteck $[\theta-0.5, \theta+0.5]$",
+            "en": r"MOM for (a) Exp (b) Uniform."
+        },
+        "solution": {
+            "de": r"**Lösung:**<br>(a) $E[X]=1/\lambda \implies \hat{\lambda} = 1/\bar{X}$.<br>(b) $E[X]=\theta \implies \hat{\theta} = \bar{X}$.",
+            "en": r"**Solution:**<br>(a) $\hat{\lambda} = 1/\bar{X}$.<br>(b) $\hat{\theta} = \bar{X}$."
+        }
+    },
+    "uebung5_prob8": {
+        "source": "Übung 5, Probe #8",
+        "type": "problem",
+        "question": {
+            "de": r"Binomial $B(n,p)$. n,p unbekannt. Momentenschätzer?",
+            "en": r"Binomial $B(n,p)$. n,p unknown. MOM?"
+        },
+        "solution": {
+            "de": r"**Lösung:** Zwei Gleichungen nötig.<br>1) $np = \bar{X}$<br>2) $np(1-p) = S^2$.<br>Lösen nach n und p.",
+            "en": r"**Solution:** Two equations.<br>1) $np = \bar{X}$<br>2) $np(1-p) = S^2$."
+        }
+    }
+}
+
+# 9. Konfidenzintervalle (Confidence Intervals)
+QUESTIONS_9_4 = {
+    "uebung5_mc16": {
+        "source": "Übung 5, MC #16",
+        "type": "mc",
+        "question": {
+            "de": r"Zusammenhang Konfidenzniveau und Intervallbreite?",
+            "en": r"Relation confidence level and interval width?"
+        },
+        "options": [
+             r"Niveau größer -> Intervall kleiner",
+             r"Niveau größer -> Intervall größer",
+             r"Keine Beziehung"
+        ],
+        "correct_idx": 1,
+        "solution": {
+             "de": r"**Richtig: Niveau größer -> Intervall größer**<br>Mehr Sicherheit braucht breiteres Netz.",
+             "en": r"**Correct: Higher level -> Wider interval**<br>More confidence needs wider net."
+        }
+    },
+    "uebung5_mc17": {
+        "source": "Übung 5, MC #17",
+        "type": "mc",
+        "question": {
+            "de": r"Grenzen von Konfidenzintervallen sind zufällig.",
+            "en": r"CI boundaries are random."
+        },
+        "options": [
+             r"Richtig",
+             r"Falsch"
+        ],
+        "correct_idx": 0,
+        "solution": {
+             "de": r"**Richtig: Richtig**<br>Sie hängen von der Stichprobe ab. Der Parameter ist fest.",
+             "en": r"**Correct: True**<br>They depend on the sample. The parameter is fixed."
+        }
+    },
+    "uebung5_mc18": {
+        "source": "Übung 5, MC #18",
+        "type": "mc",
+        "question": {
+            "de": r"Länge des KI ist größer, je größer der Parameter ist.",
+            "en": r"Length of CI increases with parameter magnitude."
+        },
+        "options": [
+             r"Richtig",
+             r"Falsch"
+        ],
+        "correct_idx": 1,
+        "solution": {
+             "de": r"**Richtig: Falsch**<br>Hängt von Varianz ab, nicht vom Mittelwert.",
+             "en": r"**Correct: False**<br>Depends on variance, not mean."
+        }
+    },
+    "uebung5_prob9": {
+        "source": "Übung 5, Probe #9",
+        "type": "problem",
+        "question": {
+             "de": r"$n=300, \sigma=5, \bar{x}=50$. 95% KI?",
+             "en": r"$n=300, \sigma=5, \bar{x}=50$. 95% CI?"
+        },
+        "options": [
+             r"$50 \pm 0.57$",
+             r"$50 \pm 0.28$",
+             r"$50 \pm 1.96$",
+             r"$50 \pm 0.03$"
+        ],
+        "correct_idx": 0,
+        "solution": {
+             "de": r"**Richtig: $50 \pm 0.57$**<br>$1.96 \cdot 5 / \sqrt{300} \approx 0.565$.",
+             "en": r"**Correct: $50 \pm 0.57$**<br>$1.96 \cdot 5 / \sqrt{300} \approx 0.565$."
+        }
+    },
+    "test5_mc4": {
+        "source": "Test 5, Q4",
+        "type": "mc",
+        "question": {
+            "de": r"Normalverteilt $\mu=400, \sigma^2=25$ ($\sigma=5$). 95% Intervall?",
+            "en": r"Normal $\mu=400, \sigma=5$. 95% interval?"
+        },
+        "options": [r"[391.8, 408.2]", r"[390.2, 409.8]", r"[393.6, 406.4]", r"[351.0, 449.0]"],
+        "correct_idx": 1,
+        "solution": {
+            "de": r"**Richtig: [390.2, 409.8]**<br>$400 \pm 1.96(5) = 400 \pm 9.8$.",
+            "en": r"**Correct: [390.2, 409.8]**<br>$400 \pm 1.96(5) = 400 \pm 9.8$."
+        }
+    }
+}
+
+
+# 10. Hypothesentests (Hypothesis Testing)
+QUESTIONS_10_5 = {
+    "uebung6_prob1": {
+        "source": "Übung 6, Probe #1",
+        "type": "problem",
+        "question": {
+             "de": r"Steak braten. $\mu \sim N(\mu, 225)$. $n=9, \bar{x}=218$. Teste $H_0: \mu = 210$ vs $\mu \ne 210$ ($\alpha=0.1$).",
+             "en": r"Steak frying. $N(\mu, 225)$. $n=9, \bar{x}=218$. Test $H_0: \mu = 210$ vs $\mu \ne 210$ ($\alpha=0.1$)."
+        },
+        "options": [
+             r"Verwerfen",
+             r"Nicht verwerfen"
+        ],
+        "correct_idx": 1,
+        "solution": {
+             "de": r"**Richtig: Nicht verwerfen**<br>$Z = (218-210)/5 = 1.6$. Kritisch $1.645$. $|1.6| < 1.645$.",
+             "en": r"**Correct: Do not reject**<br>$Z = (218-210)/5 = 1.6$. Critical $1.645$. $|1.6| < 1.645$."
+        }
+    },
+    "uebung6_prob2": {
+        "source": "Übung 6, Probe #2",
+        "type": "problem",
+        "question": {
+             "de": r"Schrittlänge. $\sigma=0.2, n=7, \bar{x}=85.186$. Teste $H_0: \mu \le 85$ ($\alpha=0.01$).",
+             "en": r"Step length. $\sigma=0.2, n=7, \bar{x}=85.186$. Test $H_0: \mu \le 85$ ($\alpha=0.01$)."
+        },
+        "options": [
+             r"Verwerfen",
+             r"Nicht verwerfen"
+        ],
+        "correct_idx": 0,
+        "solution": {
+             "de": r"**Richtig: Verwerfen**<br>$Z = 2.46$. Kritisch $2.33$. $2.46 > 2.33$.",
+             "en": r"**Correct: Reject**<br>$Z = 2.46$. Critical $2.33$. $2.46 > 2.33$."
+        }
+    },
+    "uebung6_prob3": {
+        "source": "Übung 6, Probe #3",
+        "type": "problem",
+        "question": {
+             "de": r"Internetsessions. $\bar{x}=140.5$. Ist Dauer signifikant < 148? ($\alpha=0.01$).",
+             "en": r"Internet sessions. $\bar{x}=140.5$. Is duration sig. < 148? ($\alpha=0.01$)."
+        },
+        "options": [
+             r"Ja (Verwerfen)",
+             r"Nein (Nicht verwerfen)"
+        ],
+        "correct_idx": 0,
+        "solution": {
+             "de": r"**Richtig: Ja**<br>$Z = -2.39$. Kritisch $-2.33$. $-2.39 < -2.33$.",
+             "en": r"**Correct: Yes**<br>$Z = -2.39$. Critical $-2.33$. $-2.39 < -2.33$."
+        }
+    },
+    "uebung6_prob4": {
+        "source": "Übung 6, Probe #4",
+        "type": "problem",
+        "question": {
+             "de": r"Mobilfunk. $\bar{x}=0.91$. Nachweis Grenzwert 1.0 eingehalten (< 1.0)?",
+             "en": r"Mobile radiation. $\bar{x}=0.91$. Proof limit 1.0 complied (< 1.0)?"
+        },
+        "options": [
+             r"Ja",
+             r"Nein"
+        ],
+        "correct_idx": 0,
+        "solution": {
+             "de": r"**Richtig: Ja**<br>$H_1: \mu < 1.0$. $Z = -2.58$. Kritisch -2.33. Signifikant.",
+             "en": r"**Correct: Yes**<br>$H_1: \mu < 1.0$. $Z = -2.58$. Critical -2.33. Significant."
+        }
+    }
+}
+
 # 11. Fachübergreifende Aufgaben
 QUESTIONS_11_1 = {}
 
 # Additional Question Stubs
 QUESTIONS_1_11 = {
+    "hs2024_mc10": {
+        "source": "HS 2024 Januar, MC #10",
+        "type": "mc",
+        "question": {
+            "de": r"Ruben wartet auf Sequenz (1, 1). Jochen wartet auf (1, 2). Wer braucht im Durchschnitt länger?",
+            "en": r"Ruben waits for sequence (1, 1). Jochen waits for (1, 2). Who takes longer on average?"
+        },
+        "options": [
+            r"Ruben braucht länger.",
+            r"Jochen braucht länger.",
+            r"Beide gleich.",
+            r"Nicht bestimmbar."
+        ],
+        "correct_idx": 0,
+        "solution": {
+            "de": r"**Richtig: (a)**<br>'Überlappungs-Penalty': Wenn Ruben (1,1) sucht und nach einer 1 eine 2 würfelt, muss er ganz von vorne anfangen. Wenn Jochen (1,2) nach einer 1 eine 1 würfelt, hat er immer noch den Anfang seiner Sequenz. Ruben braucht länger ($42$ Würfe vs $36$).",
+            "en": r"**Correct: (a)**<br>'Overlap Penalty': If Ruben (targets 1,1) rolls a 2 after a 1, he restarts completely. If Jochen (targets 1,2) rolls a 1 after a 1, he keeps the start of his sequence. Ruben takes longer ($42$ throws vs $36$)."
+        }
+    },
+    "test1_mc1": {
+        "source": "Test 1, Q1",
+        "type": "mc",
+        "question": {
+            "de": r"Statistik-Vorlesung: VWL (42m, 93w), BWL (78m, 87w). Eine Hörerin wird gewählt. Wahrscheinlichkeit, dass sie BWLerin ist?",
+            "en": r"Stats class: Econ (42m, 93f), Bus (78m, 87f). A female student is chosen. Probability she is Business?"
+        },
+        "options": [r"0.31", r"0.29", r"0.71", r"0.48"],
+        "correct_idx": 3,
+        "solution": {
+            "de": r"**Richtig: 0.48**<br>Bedingt auf Frauen: Total $93+87=180$. BWL-Frauen $87$. $P = 87/180 \approx 0.48$.",
+            "en": r"**Correct: 0.48**<br>Conditioned on women: Total $93+87=180$. Bus-Women $87$. $P = 87/180 \approx 0.48$."
+        }
+    },
+    "test1_mc2": {
+        "source": "Test 1, Q2",
+        "type": "mc",
+        "question": {
+            "de": r"$P(A)=0.6, P(B)=0.7, P(\bar{A} \cap B)=0.1$. Berechne $P(A \cap \bar{B})$.",
+            "en": r"$P(A)=0.6, P(B)=0.7, P(\bar{A} \cap B)=0.1$. Find $P(A \cap \bar{B})$."
+        },
+        "options": [r"0", r"0.1", r"0.2", r"0.3"],
+        "correct_idx": 0,
+        "solution": {
+            "de": r"**Richtig: 0**<br>$P(A \cap B) = P(B) - P(\bar{A} \cap B) = 0.7 - 0.1 = 0.6$.<br>$P(A \cap \bar{B}) = P(A) - P(A \cap B) = 0.6 - 0.6 = 0$.",
+            "en": r"**Correct: 0**<br>$P(A \cap B) = P(B) - P(\bar{A} \cap B) = 0.7 - 0.1 = 0.6$.<br>$P(A \cap \bar{B}) = P(A) - P(A \cap B) = 0.6 - 0.6 = 0$."
+        }
+    },
+    "test3_mc1": {
+        "source": "Test 3, Q1",
+        "type": "mc",
+        "question": {
+            "de": r"A, B disjunkt, P(A), P(B)>0. Welche Aussage trifft zu?",
+            "en": r"A, B disjoint. Which is true?"
+        },
+        "options": [
+            r"$P(\bar{A} \cap \bar{B}) ...$",
+            r"$P(A \cap B) > ...$",
+            r"$P(A|B) = P(B|A)$",
+            r"$P(A \cup B) < ...$"
+        ],
+        "correct_idx": 2,
+        "solution": {
+            "de": r"**Richtig: (c)**<br>Disjunkt $\implies$ Keine Schnittmenge. $P(A|B)=0$ und $P(B|A)=0$.",
+            "en": r"**Correct: (c)**<br>Disjoint $\implies$ No intersection. $P(A|B)=0$ and $P(B|A)=0$."
+        }
+    },
+    "uebung1_mc3": {
+        "source": "Übung 1, MC #3",
+        "type": "mc",
+        "question": {
+            "de": r"$P(A) = 0.5$ und $P(B | A) = 0.6$. Dann gilt:",
+            "en": r"$P(A) = 0.5$ and $P(B | A) = 0.6$. Then:"
+        },
+        "options": [
+            r"$P(B \cap A) = 0.3$",
+            r"$P(B \cap A) = 0.83$",
+            r"$P(B \cap A) = 0.5$",
+            r"$P(B \cap A) = 0.6$"
+        ],
+        "correct_idx": 0,
+        "solution": {
+            "de": r"**Richtig: (a)**<br>$P(B \cap A) = P(B|A) \cdot P(A) = 0.6 \cdot 0.5 = 0.3$.",
+            "en": r"**Correct: (a)**<br>$P(B \cap A) = P(B|A) \cdot P(A) = 0.6 \cdot 0.5 = 0.3$."
+        }
+    },
+    "uebung1_mc4": {
+        "source": "Übung 1, MC #4",
+        "type": "mc",
+        "question": {
+            "de": r"$P(B | A) = 0$. Dann gilt:",
+            "en": r"$P(B | A) = 0$. Then:"
+        },
+        "options": [
+            r"$P(B \cap A) = 0$",
+            r"$P(B \cap A) = P(A) \cdot P(B)$",
+            r"$P(B \cap A) = 1$",
+            r"$P(B \cup A) = 1$"
+        ],
+        "correct_idx": 0,
+        "solution": {
+            "de": r"**Richtig: (a)**<br>Wenn $P(B|A)=0$, ist der Schnitt leer ($P(A \cap B)=0$). Das ist 'praktisch' disjunkt (innerhalb A).",
+            "en": r"**Correct: (a)**<br>If $P(B|A)=0$, the intersection is empty ($P(A \cap B)=0$)."
+        }
+    },
+    "uebung1_mc6": {
+        "source": "Übung 1, MC #6",
+        "type": "mc",
+        "question": {
+            "de": r"A und B sind zwei Ereignisse, wobei B eine Teilmenge von A ist ($B \subset A$). Dann gilt:",
+            "en": r"A and B are events, where B is a subset of A ($B \subset A$). Then:"
+        },
+        "options": [
+            r"$P(A | B) = 1$",
+            r"$P(A | B) = P(A)/P(B)$",
+            r"$P(A | B) = 0$",
+            r"Nicht genügend Informationen."
+        ],
+        "correct_idx": 0,
+        "solution": {
+            "de": r"**Richtig: (a)**<br>Wenn wir 'in B' (Insel) sind, und B Teil von A (Land) ist, sind wir zu 100% 'in A'.",
+            "en": r"**Correct: (a)**<br>If we are 'in B' (island), and B is part of A (country), we are 100% 'in A'."
+        }
+    },
+    "uebung1_mc7": {
+        "source": "Übung 1, MC #7",
+        "type": "mc",
+        "question": {
+            "de": r"A und B sind zwei Ereignisse, die sich gegenseitig ausschliessen (disjunkt). Dann gilt:",
+            "en": r"A and B are mutually exclusive (disjoint) events. Then:"
+        },
+        "options": [
+            r"$P(A | B) = 1$",
+            r"$P(A | B) = P(A)/P(B)$",
+            r"$P(A | B) = 0$",
+            r"Nicht genügend Informationen."
+        ],
+        "correct_idx": 2,
+        "solution": {
+            "de": r"**Richtig: (c)**<br>Disjunkt = kein Überlapp = $0$ Wahrscheinlichkeit.",
+            "en": r"**Correct: (c)**<br>Disjoint = no overlap = $0$ probability."
+        }
+    },
+    "uebung1_mc9": {
+        "source": "Übung 1, MC #9",
+        "type": "mc",
+        "question": {
+            "de": r"Aus 'A impliziert B' ($A \subseteq B$) folgt ($P(A)>0$):",
+            "en": r"From 'A implies B' ($A \subseteq B$) follows ($P(A)>0$):"
+        },
+        "options": [
+            r"$P(A | B) \ge P(A)$",
+            r"$P(A | B) < P(A)$",
+            r"$P(A | B) \ge P(B)$",
+            r"$P(B | A) > 0$"
+        ],
+        "correct_idx": 0,
+        "solution": {
+            "de": r"**Richtig: (a)**<br>Wenn das Universum auf B schrumpft, wird der relative Anteil von A (Teilmenge) größer.",
+            "en": r"**Correct: (a)**<br>If the universe shrinks to B, the relative share of A (subset) increases."
+        }
+    },
+    "uebung1_mc10": {
+        "source": "Übung 1, MC #10",
+        "type": "mc",
+        "question": {
+            "de": r"Aus 'A und B sind unvereinbar' folgt ($P(A)>0$):",
+            "en": r"From 'A and B are mutually exclusive' follows ($P(A)>0$):"
+        },
+        "options": [
+            r"$P(A \cap B) = P(A)P(B)$",
+            r"$P(A \cup B) = P(A) + P(B)$",
+            r"$P(A \cap B) = 0$",
+            r"$P(A | B) = P(A)$"
+        ],
+        "correct_idx": 2,
+        "solution": {
+            "de": r"**Richtig: (c) (und b)**<br>Disjunkt $\implies$ Schnitt ist leer (c) und Wahrscheinlichkeit additiv (b).",
+            "en": r"**Correct: (c) (and b)**<br>Disjoint $\implies$ empty intersection (c) and additive probability (b)."
+        }
+    },
+    "uebung1_mc12": {
+        "source": "Übung 1, MC #12",
+        "type": "mc",
+        "question": {
+            "de": r"$P(A)=0.6, P(B)=0.8, P(A \cap B)=0.4, P(C)=0.3, C \subset A$. Dann gilt:",
+            "en": r"$P(A)=0.6, P(B)=0.8, P(A \cap B)=0.4, P(C)=0.3, C \subset A$. Then:"
+        },
+        "options": [
+            r"A und B sind unvereinbar.",
+            r"A und B sind abhängig.",
+            r"$A \cup B = S$",
+            r"$P(C | A) = 2/3$"
+        ],
+        "correct_idx": 1,
+        "solution": {
+            "de": r"**Richtig: (b)**<br>Unabhängigkeitstest: $0.6 \cdot 0.8 = 0.48 \ne 0.4$. Also abhängig.",
+            "en": r"**Correct: (b)**<br>Check independence: $0.6 \cdot 0.8 = 0.48 \ne 0.4$. So dependent."
+        }
+    },
+    "uebung1_mc14": {
+        "source": "Übung 1, MC #14",
+        "type": "mc",
+        "question": {
+            "de": r"$P(A)=0.1, P(B)=0.5$. Dann gilt:",
+            "en": r"$P(A)=0.1, P(B)=0.5$. Then:"
+        },
+        "options": [
+            r"$P(A \cap B) = 0.05$",
+            r"$P(A \cap B) = 0.6$",
+            r"$P(A \cap B) = P(A | B)$",
+            r"Nicht genügend Informationen."
+        ],
+        "correct_idx": 3,
+        "solution": {
+            "de": r"**Richtig: (d)**<br>Wir wissen nichts über die Abhängigkeit. Schnitt könnte alles sein.",
+            "en": r"**Correct: (d)**<br>We know nothing about dependence. Intersection could be anything."
+        }
+    },
+    "uebung1_mc15": {
+        "source": "Übung 1, MC #15",
+        "type": "mc",
+        "question": {
+            "de": r"$P(A)=1/3, P(B)=1/2, P(B|A)=1/3$. Dann gilt:",
+            "en": r"$P(A)=1/3, P(B)=1/2, P(B|A)=1/3$. Then:"
+        },
+        "options": [
+            r"$P(A | B) = 1/6$",
+            r"$P(A | B) = 1/9$",
+            r"$P(A | B) = 2/9$",
+            r"$P(A | B) = 1/2$"
+        ],
+        "correct_idx": 2,
+        "solution": {
+            "de": r"**Richtig: (c)**<br>$P(A \cap B) = 1/3 \cdot 1/3 = 1/9$.<br>$P(A|B) = (1/9) / (1/2) = 2/9$.",
+            "en": r"**Correct: (c)**<br>$P(A \cap B) = 1/3 \cdot 1/3 = 1/9$.<br>$P(A|B) = (1/9) / (1/2) = 2/9$."
+        }
+    },
+    "uebung1_mc16": {
+        "source": "Übung 1, MC #16",
+        "type": "mc",
+        "question": {
+            "de": r"$P(A \cap B \cap C) = P(A)P(B)P(C)$. Dann gilt:",
+            "en": r"$P(A \cap B \cap C) = P(A)P(B)P(C)$. Then:"
+        },
+        "options": [
+            r"A, B, C sind unabhängig.",
+            r"A und C sind unabhängig.",
+            r"A, B, C sind nicht unabhängig.",
+            r"Nicht genügend Informationen für Unabhängigkeit."
+        ],
+        "correct_idx": 3,
+        "solution": {
+            "de": r"**Richtig: (d)**<br>Das 3er-Produkt reicht nicht. Paarweise Unabhängigkeit ist auch nötig.",
+            "en": r"**Correct: (d)**<br>Triple product is necessary but not sufficient (need pairwise independence)."
+        }
+    },
     "hs2022_prob3": {
         "source": "HS 2022 Januar, Problem 3 (15 Punkte)",
         "type": "multi_stage",
@@ -1976,9 +3774,53 @@ QUESTIONS_2_6 = {
         ]
     }
 }
-QUESTIONS_3_7 = {}
+QUESTIONS_3_7 = {
+    "hs2024_mc11": {
+        "source": "HS 2024 Januar, MC #11",
+        "type": "mc",
+        "question": {
+            "de": r"Münzwurf n Runden. X: Rubens Gewinn. Y: Jochens Gewinn. (X = -Y). Welche Aussage ist wahr?",
+            "en": r"Coin toss n rounds. X: Ruben's gain. Y: Jochen's gain (X = -Y). Which is true?"
+        },
+        "options": [
+            r"X und Y haben dieselbe Verteilung.",
+            r"X = Y",
+            r"X und Y sind unabhängig.",
+            r"Keine der obigen."
+        ],
+        "correct_idx": 0,
+        "solution": {
+            "de": r"**Richtig: (a)**<br>Die Verteilung der Gewinne beim fairen Münzwurf ist symmetrisch um 0. Daher ist die Verteilung von $X$ identisch mit der von $-X$ ($=Y$).",
+            "en": r"**Correct: (a)**<br>The distribution of gains in a fair coin toss is symmetric around 0. Thus the distribution of $X$ is identical to that of $-X$ ($=Y$)."
+        }
+    }
+}
 QUESTIONS_4_9 = {}
 QUESTIONS_5_5 = {
+    "hs2023_prob2": {
+        "source": "HS 2023 Januar, Problem 2 (15 Punkte)",
+        "type": "problem",
+        "question": {
+            "de": r"Nachhaltigkeit und Kredite. A: Kredit bewilligt. B: Grüner Sachbearbeiter. $P(B)=0.5$. $P(A)=0.7$. $P(A|B)=0.8$.<br>1. Kontingenztabelle ausfüllen.<br>2. Berechne $P(A \cap B)$, $P(A|B)$, $P(A \cup B)$.<br>3. Sind A und B unabhängig?<br>4. Interview mit 8 Sachbearbeitern. Wahrscheinlichkeit, dass nur der erste 'Braun' ist? Wahrscheinlichkeit 4 Grün, 4 Braun?",
+            "en": r"Sustainability and Loans. A: Loan approved. B: Green officer. $P(B)=0.5$. $P(A)=0.7$. $P(A|B)=0.8$.<br>1. Fill contingency table.<br>2. Calc $P(A \cap B)$, $P(A|B)$, $P(A \cup B)$.<br>3. Independence?<br>4. Interview 8 officers. Prob only first is Brown? Prob 4 Green, 4 Brown?"
+        },
+        "solution": {
+            "de": r"**Lösung:**<br>1. $P(A \cap B) = 0.4$.<br>2. Abhängig ($0.8 \neq 0.7$).<br>3. $P(\text{1 Braun}) = 0.5^8 \approx 0.0039$.<br>4. $P(\text{4G, 4B}) = \binom{8}{4} 0.5^8 \approx 0.273$.",
+            "en": r"**Solution:**<br>1. $P(A \cap B) = 0.4$.<br>2. Dependent ($0.8 \neq 0.7$).<br>3. $P(\text{1 Brown}) = 0.5^8 \approx 0.0039$.<br>4. $P(\text{4G, 4B}) = \binom{8}{4} 0.5^8 \approx 0.273$."
+        }
+    },
+    "hs2023_prob4": {
+        "source": "HS 2023 Januar, Problem 4 (15 Punkte)",
+        "type": "problem",
+        "question": {
+            "de": r"Vektor $(X,Y)$. $f_X(x) = (4a e^{ax})^{-1}$ für $x \ge 0$. <br>1. Bestimme $a$.<br>2. Bestimme $b$ aus $F_Y$.<br>3. Gemeinsame Dichte.<br>4. Erwartungswert $Z = XY$.",
+            "en": r"Vector $(X,Y)$. $f_X(x) = (4a e^{ax})^{-1}$. <br>1. Find $a$.<br>2. Find $b$ from $F_Y$.<br>3. Joint density.<br>4. Expectation $Z = XY$."
+        },
+        "solution": {
+            "de": r"**Lösung:**<br>1. $a = 1/2$.<br>4. Unabhängigkeit angenommen (Produkt von Randdichten): $E[XY] = E[X]E[Y] = 2 \cdot 3 = 6$.",
+            "en": r"**Solution:**<br>1. $a = 1/2$.<br>4. Assuming independence: $E[XY] = E[X]E[Y] = 2 \cdot 3 = 6$."
+        }
+    },
     "hs2022_prob4": {
         "source": "HS 2022 Januar, Problem 4 (15 Punkte)",
         "type": "multi_stage",
@@ -2017,8 +3859,8 @@ QUESTIONS_5_5 = {
                 "id": "part3",
                 "type": "open",
                 "question": {
-                    "de": "Teil 4B: Berechnen Sie $P(X \le Y)$.",
-                    "en": "Part 4B: Calculate $P(X \le Y)$."
+                    "de": r"Teil 4B: Berechnen Sie $P(X \le Y)$.",
+                    "en": r"Part 4B: Calculate $P(X \le Y)$."
                 },
                 "solution": {
                     "de": r"**Lösung: 1**<br>Der Definitionsbereich ist $0 \le x \le 1$ und $1 \le y \le e$. Da $x$ immer maximal 1 und $y$ immer mindestens 1 ist, gilt $x \le y$ immer.",
@@ -2042,6 +3884,18 @@ QUESTIONS_5_5 = {
 }
 QUESTIONS_6_3 = {}
 QUESTIONS_7_6 = {
+    "hs2023_prob1": {
+        "source": "HS 2023 Januar, Problem 1 (12 Punkte)",
+        "type": "problem",
+        "question": {
+            "de": r"**Teil 1A:** Ordnen Sie Verteilungen Diagrammen zu.<br>F1: Poisson(50), n=200<br>F2: Uniform[14, 26], n=200<br>F3: Normal(20, 4), n=200<br>F4: Binomial(200, 0.2), n=200<br><br>**Teil 1B:** Höchstgeschwindigkeit von 10 Autos: 180, 195, 240, 185, 230, 300, 290, 180, 235, 280.<br>1. Berechne Mittelwert, Modus, IQR.<br>2. Zeichne Histogramm.",
+            "en": r"**Part 1A:** Match distributions to diagrams.<br>F1: Poisson(50)<br>F2: Uniform[14, 26]<br>F3: Normal(20, 4)<br>F4: Binomial(200, 0.2)<br><br>**Part 1B:** Top speeds of 10 cars: 180, 195, 240, 185, 230, 300, 290, 180, 235, 280.<br>1. Mean, Mode, IQR.<br>2. Histogram."
+        },
+        "solution": {
+            "de": r"**Lösung 1A:**<br>F1: 50 (Mittel), F4: 40 (Mittel), F3: 20 (Mittel), F2: Flach.<br>**Lösung 1B:**<br>Sortiert: 180, 180, 185, 195, 230, 235, 240, 280, 290, 300.<br>Mittelwert: 231.5. Modus: 180.<br>IQR: $Q_3 - Q_1 = 280 - 185 = 95$.",
+            "en": r"**Solution 1A:**<br>F1: 50 (Mean), F4: 40 (Mean), F3: 20 (Mean), F2: Flat.<br>**Solution 1B:**<br>Mean: 231.5. Mode: 180.<br>IQR: $280 - 185 = 95$."
+        }
+    },
     "hs2022_prob1": {
         "source": "HS 2022 Januar, Problem 1 (12 Punkte)",
         "type": "multi_stage",
@@ -2090,6 +3944,18 @@ QUESTIONS_7_6 = {
     }
 }
 QUESTIONS_8_4 = {
+    "hs2023_prob5": {
+        "source": "HS 2023 Januar, Problem 5 (15 Punkte)",
+        "type": "problem",
+        "question": {
+            "de": r"5A: $f(x) = \frac{2x}{\lambda^2} e^{-(x/\lambda)^2}$. MLE für $\lambda$.<br>5B: Diskrete Verteilung $1/\theta$. Daten: 1, 4, 3, 4, 2.<br>1. Momentenschätzer für $\theta$.<br>2. MLE für $\theta$.<br>3. Werte berechnen.",
+            "en": r"5A: MLE for $\lambda$ given density.<br>5B: Discrete uniform $1/\theta$. Data: 1, 4, 3, 4, 2.<br>1. MME for $\theta$.<br>2. MLE for $\theta$.<br>3. Calculate values."
+        },
+        "solution": {
+            "de": r"**Lösung:**<br>5A: $\hat{\lambda} = \sqrt{\frac{1}{n} \sum x_i^2}$.<br>5B: MME $\hat{\theta} = 2\bar{X} - 1 = 4.6$. MLE $\hat{\theta} = \max(x_i) = 4$.",
+            "en": r"**Solution:**<br>5A: $\hat{\lambda} = \sqrt{\frac{1}{n} \sum x_i^2}$.<br>5B: MME $\hat{\theta} = 2\bar{X} - 1 = 4.6$. MLE $\hat{\theta} = \max(x_i) = 4$."
+        }
+    },
     "hs2022_prob5": {
         "source": "HS 2022 Januar, Problem 5 (15 Punkte)",
         "type": "multi_stage",
@@ -2102,8 +3968,8 @@ QUESTIONS_8_4 = {
                 "id": "part1",
                 "type": "open",
                 "question": {
-                    "de": "Berechnen Sie den Momentenschätzer $\hat{\lambda}_{MM}$.",
-                    "en": "Calculate the Method of Moments estimator $\hat{\lambda}_{MM}$."
+                    "de": r"Berechnen Sie den Momentenschätzer $\hat{\lambda}_{MM}$.",
+                    "en": r"Calculate the Method of Moments estimator $\hat{\lambda}_{MM}$."
                 },
                 "solution": {
                     "de": r"**Lösung:** $\hat{\lambda}_{MM} = \bar{X}$.<br>Bei Poisson ist $E[X] = \lambda$. Wir setzen $E[X] = \bar{X}$.",
@@ -2114,8 +3980,8 @@ QUESTIONS_8_4 = {
                 "id": "part2",
                 "type": "open",
                 "question": {
-                    "de": "Berechnen Sie den Maximum-Likelihood-Schätzer $\hat{\lambda}_{MLE}$.",
-                    "en": "Calculate the Maximum Likelihood Estimator $\hat{\lambda}_{MLE}$."
+                    "de": r"Berechnen Sie den Maximum-Likelihood-Schätzer $\hat{\lambda}_{MLE}$.",
+                    "en": r"Calculate the Maximum Likelihood Estimator $\hat{\lambda}_{MLE}$."
                 },
                 "solution": {
                     "de": r"**Lösung:** $\hat{\lambda}_{MLE} = \bar{X}$.<br>Likelihood ableiten und Null setzen führt ebenfalls zum Mittelwert.",
@@ -2137,7 +4003,27 @@ QUESTIONS_8_4 = {
         ]
     }
 }
-QUESTIONS_9_4 = {}
+QUESTIONS_9_4 = {
+    "hs2024_mc4": {
+        "source": "HS 2024 Januar, MC #4",
+        "type": "mc",
+        "question": {
+            "de": r"Nudeln. $X \sim N(500, 40)$. Symmetrisches 99% Konfidenzintervall für das Gewicht einer einzelnen Packung?",
+            "en": r"Pasta. $X \sim N(500, 40)$. Symmetric 99% confidence interval for the weight of a single package?"
+        },
+        "options": [
+            r"[396.97 ; 603.03]",
+            r"[483.71 ; 516.29]",
+            r"[485.29 ; 514.71]",
+            r"[487.60 ; 512.40]"
+        ],
+        "correct_idx": 1,
+        "solution": {
+            "de": r"**Richtig: (b)**<br>Gesucht ist das Schwankungsintervall für einen *Einzelwert* $X$ (nicht Mittelwert).<br>$500 \pm z_{0.995} \cdot \sigma = 500 \pm 2.576 \cdot \sqrt{40} \approx 500 \pm 16.29$.",
+            "en": r"**Correct: (b)**<br>Prediction interval for a *single value* $X$ (not mean).<br>$500 \pm z_{0.995} \cdot \sigma = 500 \pm 2.576 \cdot \sqrt{40} \approx 500 \pm 16.29$."
+        }
+    }
+}
 QUESTIONS_10_5 = {}
 
 # Aliases for export

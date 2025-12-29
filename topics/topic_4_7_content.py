@@ -136,3 +136,36 @@ def render_subtopic_4_7(model):
                 subtopic_id="4.7",
                 question_id="4_7_tanker"
             )
+            
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+    # MCQ 5: hs2024_mc9 (Lognormal)
+    q5 = get_question("4.7", "hs2024_mc9")
+    if q5:
+        with st.container(border=True):
+            st.caption(q5.get("source", ""))
+            opts = q5.get("options", [])
+            if opts and isinstance(opts[0], dict):
+                option_labels = [t(o) for o in opts]
+            else:
+                option_labels = opts
+            
+            render_mcq(
+                key_suffix="4_7_lognormal",
+                question_text=t(q5["question"]),
+                options=option_labels,
+                correct_idx=q5["correct_idx"],
+                solution_text_dict=q5["solution"],
+                success_msg_dict={"de": "Korrekt!", "en": "Correct!"},
+                error_msg_dict={"de": "Nicht ganz.", "en": "Not quite."},
+                client=model,
+                ai_context="Lognormal probability log-transform",
+                course_id="vwl",
+                topic_id="4",
+                subtopic_id="4.7",
+                question_id="4_7_lognormal"
+            )
+            
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+

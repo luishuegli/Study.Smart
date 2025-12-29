@@ -1,0 +1,72 @@
+HSG, VWL                                                                                    HS 2025
+Prof. Tobias Sutter                                                                   Statistik 3,220
+
+                                          Musterlösungen
+
+                                 Übung 6: Hypothesentests
+
+  1. X̄ = 218
+                √
+       (a) Z = 9 218−210
+                    √
+                      225
+                           = 1, 6 und q1−α/2 = q0,95 = 1, 645. D.h. die Zielhypothese kann
+           nich verworfen werden, da |Z| < q1−α/2
+      (b) Um H0 zu akzeptieren muss −q0,95 ≤ Z ≤ q0,95 :
+
+                                                            X̄ − 210
+                                                  −q0,95 ≤ 3 √       ≤ q0,95
+                                                                225
+                                              √                        √
+                                                225                     225
+                                  210 − q0,95       ≤ X̄ ≤ 210 + q0,95
+                                                3                        3
+                                                    201, 775 ≤ X̄ ≤ 218, 225
+                             √ 85,186−85
+  2. X̄ = 85, 186 ⇒ Z =       7 0,2      = 2, 461
+
+       (a) H0 wird verworfen wenn Z gross genug ist. H0 wird verworfen da Z = 2, 461 >
+           2, 326 = q0,99 .
+      (b)        α = 0, 4: H0 wird verworfen: Z = 2, 461 > 0, 253 = q0,6
+                 α = 0, 0005: H0 wird nicht verworfen: Z = 2, 461 < 3, 27 = q0,9995
+       (c) P (Z ∗ ≤ 2, 461) = 0, 993, es folgt Z = q0,993 = q1−α , i.e. α = 0, 007.
+      (d) Die Hypothese wird verworfen falls Z > 2, 326, d.h.
+
+                                              X̄ − 85 √
+                                                        7 > 2, 326
+                                                0, 2
+                                                     X̄ > 85, 176.
+
+            Gesucht ist die Wahrscheinlichkeit, dass
+
+                   P (X̄ ≥ 85, 176|µ = 85, 1) = 1 − P (X̄ > 85, 176|µ = 85, 1)
+                                                         X̄ − 85, 1 √    85, 176 − 85, 1 √
+                                                                                            
+                                              =1−P                    7<                   7
+                                                            0, 2               0, 2
+                                              = 1 − P (Z < 1, 0054)
+                                              = 1 − 0, 8413
+                                              = 0, 1587
+            √
+  3. Z =        125 140,5−148
+                        35    = −2, 396
+
+       (a) H0 : µ ≥ 148 wird verworfen, da Z ≤ q0,01 = −2, 326
+
+                                                  1
+    (b) H0 : µ ≤ 148 wird nicht verworfen, da Z ≤ q0,99 = 2, 326
+        √
+4. Z = 40 0,91−0,9
+              0,22 = 0, 287
+
+   (a)     i. H0 : µ = 0, 9 wird nicht verworfen, da |Z| ≤ q0,995 = 2, 576
+          ii. H0 : µ ≤ 0, 9 wird nicht verworfen, da Z ≤ q0,99 = 2, 326
+         iii. H0 : µ ≥ 0, 9 wird nicht verworfen, da Z ≥ q0,01 = −2, 326
+   (b) H0 : µ ≥ 1, 0
+       H1 : µ < 1, 0
+
+
+
+
+                                            2
+

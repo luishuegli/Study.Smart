@@ -89,7 +89,7 @@ def lesson_view():
     # --- SIDEBAR NAVIGATION ---
     with st.sidebar:
         # 1. Back Button at Field Top
-        if st.button(f"← {loc.t({'de': 'Zurück zum Dashboard', 'en': 'Back to Dashboard'})}", use_container_width=True):
+        if st.button(f"← {loc.t({'de': 'Zurück zum Dashboard', 'en': 'Back to Dashboard'})}", use_container_width=True, type="primary"):
             st.session_state.current_page = "dashboard"
             st.session_state.selected_topic = None
             st.session_state.selected_subtopic = None
@@ -329,6 +329,12 @@ def render_topic_content(client, topic_id, subtopic_id):
         try:
             from topics.topic_10_content import render_topic_10_content
             render_topic_10_content(client, subtopic_id)
+        except ImportError as e:
+            st.error(f"Interactive content not available: {str(e)}")
+    elif topic_id == "topic_11":
+        try:
+            from topics.topic_11_content import render_topic_11_content
+            render_topic_11_content(client, subtopic_id)
         except ImportError as e:
             st.error(f"Interactive content not available: {str(e)}")
     else:

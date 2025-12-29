@@ -1,0 +1,360 @@
+HSG, VWL                                                              HS 2025
+Prof. Tobias Sutter                                             Statistik 3,220
+
+                           Musterlösungen
+ Übung 1: Grundlagen der Wahrscheinlichkeitstheorie
+Teil A: Kontrollfragen
+
+  1. Man bezeichnet mit S die Menge der Elementarereignisse (Ereignis-
+     raum) und mit E(S) die Menge aller Teilmengen von S, welche auch
+     Ereignismenge genannt wird.
+     Für den einfachen Würfelwurf gilt S = {1, 2, 3, 4, 5, 6}. Die Ereignis-
+     menge hingegen enthält alle Ereignisse (z.B. das Ereignis A = {1, 3, 5} ∈
+     E(S)).
+     Bemerke:
+
+         Jedes Elementarereignis ist auch ein Ereignis, aber nicht jedes
+          Ereignis ist gleichzeitig ein Elementarereignis
+         Der Ereignisraum S ist ein Element der Ereignismenge E(S) (S ∈
+          E(S))
+
+  2. komplementär⇒ disjunkt
+     disjunkt ̸⇒ komplementär
+
+  3. klassische (Laplace), statistische (frequent.), subjektive Wahrschein-
+     lichkeit
+
+  4. Eine Zufallsvariable heisst diskret, wenn die Wertemenge der Abbil-
+     dung abzähbar viele Werte enthält.
+
+  5. A ⇒ B, d.h. A ⊆ B
+                  A⊆B    unabh.
+     P (A ∩ B) = P (A) = P (A)P (B)
+     ja, falls P (B) = 1
+
+  6. Man nehme an A und B seien unabhängig, i.e., P (A∩B) = P (A)P (B).
+     Für disjunkte Ereignisse muss nun zusätzlich gelten: P (A ∩ B) = 0.
+     ⇒ P (A) = 0 oder P (B) = 0
+     A, B disjunkt falls 0 = P (A ∩ B). Diese sind gleichzeititg unabhängig
+     falls 0 = P (A∩B) = P (A)P (B), i.e., nur falls P (A) = 0 oder P (B) = 0.
+
+                                      1
+  7. Wir definieren die folgenden Ereignisse: L: steigende Löhne, K: steigende
+     Konjunktur, A: sinkende Arbeitslosigkeit. Es gilt
+                         
+      P (K|L) > P (K)
+                            abhängig
+      P (A|K) < P (A)
+  8. K: “Prämie”, S: “Jahre ohne Schaden”
+     Ereignisse: K|S = x → P (S|K)!
+
+  9. Satz von Bayes: Umkehrung von Ursache und Wirkung. Die durch
+     die Beobachtung modifizierte Wahrscheinlichkeit ist die sogenannte a
+     posteriori-Wahrscheinlichkeit.
+
+Teil B: Multiple Choice
+Kreuzen Sie bitte in den folgenden Mehrfachwahl-Aufgaben die richtigen Aus-
+sagen an. Dabei kann es sein, dass von den zu einer Aufgabe vorgeschlagenen
+Lösungsmöglichkeiten keine, eine, mehrere oder alle richtig sind.
+
+  1. A und B sind zwei unabhängige Ereignisse. Dann gilt
+
+       O P [B | A] = 0
+       X P [B | A] = P [B]
+       O P [B | A] = P [A]
+       O Wir haben nicht genügend Informationen um P [B | A] anzugeben
+
+  2. A und B sind zwei disjunkte Ereignisse. Dann gilt
+
+       X P [B | A] = 0
+       O P [B | A] = P [B]
+       O P [B | A] = P [A]
+       O Wir haben nicht genügend Informationen um P [B | A] anzugeben
+
+  3. A und B sind zwei Ereignisse mit P [A] = 0.5 und P [B | A] = 0.6.
+     Dann gilt
+
+       X P [B ∩ A] = 0.3
+       O P [B ∩ A] = 0.83
+       O P [B ∩ A] = 0.5
+
+                                     2
+    O P [B ∩ A] = 0.6
+
+4. A und B sind zwei Ereignisse mit P [B | A] = 0. Dann gilt
+
+    X P [B ∩ A] = 0
+    O P [B ∩ A] = P [A] · P [B]
+    O P [B ∩ A] = 1
+    O P [B ∪ A] = 1
+
+5. A und B seien zwei Ereignisse und A eine Teilmenge von B. Dann gilt
+
+    O P [A | B] = 1
+    X P [A | B] = P [A]/P [B]
+    O P [A | B] = 0
+    O Wir haben nicht genügend Informationen um P [A | B] anzugeben
+
+6. A und B sind zwei Ereignisse, wobei B eine Teilmenge von A ist. Dann
+   gilt
+
+    X P [A | B] = 1
+    O P [A | B] = P [A]/P [B]
+    O P [A | B] = 0
+    O Wir haben nicht genügend Informationen um P [A | B] anzugeben
+
+7. A und B sind zwei Ereignisse, wobei A und B sich gegenseitig auss-
+   chliessen. Dann gilt
+
+    O P [A | B] = 1
+    O P [A | B] = P [A]/P [B]
+    X P [A | B] = 0
+    O Wir haben nicht genügend Informationen um P [A | B] anzugeben
+
+8. A und B sind zwei unvereinbare Ereignisse, für deren Wahrschein-
+   lichkeiten wir P [A] > 0 und P [B] > 0 voraussetzen. Dann gilt
+
+    O A und B sind unabhängig
+    X A und B sind abhängig
+
+                                  3
+      O Wir haben nicht genügend Elemente um etwas über die Abhängigkeit
+        von A und B zu sagen
+
+ 9. Aus “A impliziert B” folgt, P [A] > 0 vorausgesetzt,
+
+      X P [A | B] ≥ P [A]
+      O P [A | B] < P [A]
+      O P [A | B] ≥ P [B]
+      X P [B | A] > 0
+
+10. Aus “A und B sind unvereinbar” folgt, P [A] > 0 vorausgesetzt,
+
+      O P [A ∩ B] = P [A] · P [B]
+      X P [A ∪ B] = P [A] + P [B]
+      X P [A ∩ B] = 0
+      O P [A | B] = P [A]
+
+11. Von zwei Ereignissen A und B sind folgende Wahrscheinlichkeiten bekannt:
+    P [A] = 0.5, P [B] = 0.4 und die Wahrscheinlichkeit, dass weder A noch
+    B eintritt, sei 0.2. Dann gilt
+
+      O A und B sind unvereinbar
+      X A und B sind nicht unvereinbar
+      O A und B sind unabhängig
+      X A und B sind nicht unabhängig
+
+12. A, B und C seien Ereignisse mit den Eigenschaften:
+    P [A] = 0.6, P [B] = 0.8, P [A ∩ B] = 0.4, P [C] = 0.3 und C ⊂ A. Dann
+    gilt
+
+      O A und B sind unvereinbar
+      X A und B sind abhängig
+      X A ∪ B = S, wobei S den Ereignisraum bezeichnet
+      O P [C | A] = 2/3
+      X P [C | A] = 1/2
+      X P [A | C] = 1
+
+                                    4
+                                                                    h     i
+ 13. A und B sind zwei unabhängige Ereignisse mit P [A] = 0.9 und P A ∪ B =
+     0.5. Dann gilt
+
+       O P [B] = 0.05
+       X P [B] = 0.44
+       O P [B] = 0.55
+       O Wir haben nicht genügend Informationen um P [B] zu berechnen
+
+ 14. A und B sind zwei Ereignisse mit P [A] = 0.1 und P [B] = 0.5. Dann
+     gilt
+
+       O P [A ∩ B] = 0.1 · 0.5
+       O P [A ∩ B] = 0.1 + 0.5
+       O P [A ∩ B] = P [A | B]
+       X Wir haben nicht genügend Informationen um P [A ∩ B] anzugeben
+
+ 15. A und B sind zwei Ereignisse mit P [A] = 1/3, P [B] = 1/2 und P [B |
+     A] = 1/3. Dann gilt
+
+       O P [A | B] = 1/6
+       O P [A | B] = 1/9
+       X P [A | B] = 2/9
+       O P [A | B] = 1/2
+
+ 16. A, B und C sind drei Ereignisse mit P [A ∩ B ∩ C] = P [A] · P [B] · P [C].
+     Dann gilt
+
+       O A, B und C sind unabhängig
+       O A und C sind unabhängig
+       O A, B und C sind nicht unabhängig
+       X Wir haben nicht genügend Elemente um etwas über die Abhängigkeit
+         von A, B und C zu sagen
+
+Teil C: Aufgaben
+
+  1. (a) {11, 12, ..., 16, 21, ..., 66}
+
+                                          5
+        #günstige Fälle
+    (b) #mögliche Fälle
+                          = 62 = 31
+        #günstige Fälle   3
+    (c) #mögliche Fälle
+                          = 11
+
+
+2. (a) X = # Würfe bis erstmals 6: P [X = 4] = ( 65 )3 · 16 = 0.0964
+    (b) P [X ≥ 2] = 1 − P [X = 1] = 1 − 16 = 65
+    (c) P [X ≤ 4] = 4i=1 P [X = i] = 16 + 56 · 16 + ( 56 )2 · 61 + ( 56 )3 · 61 = 0.518
+                    P
+
+
+3. (a) P [A ∪ B] = P [A] + P [B] − P [A ∩ B] = 0.6
+    (b) P [A|B] = P P[A∩B]
+                       [B]
+                           = 23
+    (c) P [A ∩ B] = 1 − P [A ∩ B] = 0.8
+    (d) P [A ∩ B] = 1 − P [A ∪ B] = 0.4
+    (e) P [A ∪ B] = 1 − P [A ∪ B] = 0.4
+    (f) P [A ∪ B] = 1 − P [A ∩ B] = 0.8
+
+
+4. Inkonsistent!
+   P [“Annahme durch A oder B”] =
+   P [A ∪ B] = P [A] + P [B] − P [A ∩ B] = 0.3 + 0.4 − 0.2 = 0.5
+   Aber: P [“keine”] = 1 − P [A ∪ B] = 0.3 Widerspruch!
+
+
+
+5. A: “Maschine A”; P [A] = 0.7
+   B: “Maschine B”; P [B] = 0.3
+   SF: “Stück fehlerhaft”; P [SF |A] = 0.08; P [SF |B] = 0.06
+                         P [SF |A]·P [A]
+   ⇝ P [A|SF ] = P [SF |A]·P [A]+P [SF |B]·P [B]
+                                                 = 0.7568 (Bayes)
+
+
+6. M: “Matura bestanden”; P [M ] = 0.6
+   NM: “Matura nicht bestanden”; P [N M ] = 0.4
+   TP: “Aufnahmetest bestanden”;
+   TN: “Aufnahmetest nicht bestanden”;
+   P [T N |N M ] = 0.9 ⇒ P [T P |N M ] = 0.1;
+   P [T N |M ] = 0.01 ⇒ P [T P |M ] = 0.99
+
+
+                                        6
+    (a) Baumdiagramm
+
+                                                                              T
+                                                                              ; P
+                                                             0.99
+
+                                                               0.01 /
+                                                        9M                    TN
+                                          0.6
+
+
+                               Schüler
+                                              0.4
+                                                    %
+                                                        NM
+                                                               0.1        / TP
+                                                                    0.9
+                                                                          #
+                                                                              TN
+
+   (b) P [T N ] = P [T N |M ] · P [M ] + P [T N |N M ] · P [N M ] = 0.366
+    (c) P [N M |T N ] = P [T N |N  M ]·P [N M ]
+                                P [T N ]
+                                                = 0.9836
+
+7. A: “Werk A”; P [A] = 0.7
+   B: “Werk B”; P [B] = 0.3
+   N: “Lampe normgerecht”; P [N |A] = 0.83, P [N |B] = 0.63
+                         P [N |B]·P [B]
+   =⇒ P [B|N ] = P [N |B]·P [B]+P [N |A]·P [A]
+                                               = 0.24545
+
+
+8. (a) 0: P [A] = 1;
+                  (2)(50−2)
+       2: P [A] = 0 50 5 = 0.8082;
+                     (5)
+                  ( )(50−5)
+                   5
+       5: P [A] = 0 50 5 = 0.5766;
+                     (5)
+                   (100)(50−10
+                            5 )
+       10: P [A] =       50     = 0.3106
+                        (5)
+                (50−k)!45!
+   (b) P [A] = (50−k−5)!50! ,k≥1
+
+
+
+
+                                          7
+ 9. (a) ( 12 )4 = 16
+                  1
+
+     (b) ( 12 )4 = 16
+                   1
+
+     (c) ( 12 )4 = 16
+                   1
+
+                   1
+     (d) ( 12 )4 = 16
+         JJM M M JJM
+                        #günstige Fälle   6
+     (e) JM JM M JM J = #mögliche Fälle
+                                          = 16 = 38
+         JM M J M M JJ
+
+         JJM M M JJM
+         JM JM M JM J
+         JM M J M M JJ   #günstige Fälle   6
+     (f)               = #mögliche Fälle
+                                           = 11
+         JJJM JM JJ
+         M JJJ JJM J
+          JJJJ
+
+10. (a) 0.2
+     (b) 0.8
+     (c) 0.83 = 0.512
+
+                                  8
+    (d) 0.23 = 0.008
+     (e) SWW, WSW, WWS: 3 · 0.82 · 0.2 = 0.384
+
+
+11. (a) Arbeitslosenquote: 0.8 · 0.033 + 0.2 · 0.093 = 0.045
+    (b) P [Schw.|Arbeitslos] = P [Arbeitslos|Schw.]·P
+                                           0.045
+                                                      [Schw.]
+                                                              = 0.033·0.8
+                                                                  0.045
+                                                                          = 0.586667
+
+
+12. HIV; P [HIV] = 0.01%
+    TP: “Test positiv”; P [TP|HIV] = 0.9995; P [TN|nicht HIV] = 0.998
+
+                                     P [TP|HIV]·P [HIV]
+     (a) P [HIV|TP] = P [TP|HIV]·P [HIV]+P [TP|nicht HIV]·P [nicht HIV]
+                                                                        = 0.0474
+    (b) P [nicht HIV|TN] = · · · ≈ 1
+
+
+                       11
+13. (a) P [“Gewinn”] = 36
+    (b) E[“Gewinn”] = 11 · 1 + 25 · 0 = 11 ∼ 30 Rappen
+                      36       36       36 =
+
+
+
+
+                                        9
+

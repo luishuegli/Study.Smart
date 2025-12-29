@@ -50,7 +50,7 @@ def render_cassette(text, color, is_empty=False, slot_label="", options_left=0):
     if is_empty:
         # Ghost State (The Receptacle)
         label = t({"de": f"Wähle 1 aus {options_left}", "en": f"Pick 1 of {options_left}"})
-        return f"""<div style="height: 54px; border: 2px dashed #d1d5db; border-radius: 12px; background: #f9fafb; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; color: #9ca3af; font-family: 'Inter', sans-serif; margin-bottom: 12px; transition: all 0.3s ease;"><span style="font-weight:600; font-size: 0.85em; text-transform:uppercase; letter-spacing: 0.5px;">{slot_label}</span><span style="background:#e5e7eb; padding: 4px 10px; border-radius: 6px; font-size: 0.8em; color: #6b7280;">{label}</span></div>"""
+        return f"""<div style="height: 54px; border: 2px solid #e5e7eb; border-radius: 12px; background: #f9fafb; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; color: #9ca3af; font-family: 'Inter', sans-serif; margin-bottom: 12px; transition: all 0.3s ease;"><span style="font-weight:600; font-size: 0.85em; text-transform:uppercase; letter-spacing: 0.5px;">{slot_label}</span><span style="background:#e5e7eb; padding: 4px 10px; border-radius: 6px; font-size: 0.8em; color: #6b7280;">{label}</span></div>"""
     else:
         # Filled State (The Physical Media) - Jony Ive Style (Clean, Depth)
         return f"""<div style="height: 54px; border-left: 6px solid {color}; border-radius: 8px; background: white; color: #1f2937; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; margin-bottom: 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02); font-family: 'Inter', sans-serif; font-weight: 500; border: 1px solid #e5e7eb; border-left-width: 6px; animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);"><span style="font-size: 1em;">{text}</span><div style="width: 12px; height: 12px; background: {color}; border-radius: 50%; opacity: 0.8; box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);"></div></div>"""
@@ -81,31 +81,28 @@ def render_subtopic_2_3(client):
 [data-testid="stHorizontalBlock"] { align-items: stretch; }
 [data-testid="column"] { display: flex; flex-direction: column; }
 
-/* Button Styling - HIGH CONTRAST (Rule 1.6) */
-.stButton button { 
-width: 100%; 
-border-radius: 10px; 
-height: 54px; 
-font-weight: 500;
-background: #ffffff !important; /* Force white background */
-border: 1px solid #d1d5db !important;
-color: #1f2937 !important; /* Force dark text */
-transition: all 0.2s ease;
-}
-.stButton button span {
-color: #1f2937 !important; /* Force dark text on inner span too */
-}
-.stButton button:hover {
-border-color: #9ca3af !important;
-background-color: #f3f4f6 !important;
-transform: translateY(-1px);
-color: #111827 !important;
-}
-.stButton button:hover span {
-color: #111827 !important;
-}
+/* Button Styling - Reverted to Global Styles (views/styles.py) for consistency */
+/* The previous local override forced 54px height and white background, which conflicted with the "Show Solution" buttons elsewhere. */
 
 @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Fix: Nuclear Option for Crate Buttons - Force Black Text */
+.stApp [data-testid="stButton"] button {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border: 1px solid #d1d5db !important;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+.stApp [data-testid="stButton"] button p,
+.stApp [data-testid="stButton"] button div, 
+.stApp [data-testid="stButton"] button span {
+    color: #000000 !important; /* Force Black specifically on text nodes */
+}
+.stApp [data-testid="stButton"] button:hover {
+    background-color: #f3f4f6 !important;
+    color: #000000 !important;
+    border-color: #9ca3af !important;
+}
 </style>
 """, unsafe_allow_html=True)
 

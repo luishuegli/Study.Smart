@@ -1,0 +1,47 @@
+                           Statistik (VWL): Übungen
+                                        Quiz
+Nachname, Vorname:
+
+Übung 2
+  1. In einem Verein mit 10 Mitgliedern (4 Frauen und 6 Herren) soll nun ein Vor-
+     stand bestehend aus zwei Damen und zwei Herren gebildet werden. Wie viele
+     Möglichkeiten gibt es, den Vorstand zu bilden?
+     (a) 89
+     (b) 210
+     (c) 90
+     (d) 75
+
+  2. Die Zufallsvariable X sei gleichverteilt auf [−4, 4] (Rechtecksverteilung). Wie
+     gross ist P(X 2 ≤ 9).
+     (a) 79
+     (b) 49
+     (c) 23
+     (d) 34
+                                                               1     x
+  3. Sei X eine Zufallsvariable auf [0, 10] mit Dichte f (x) = 20 + 100 . Was gilt für
+     P(2 ≤ X ≤ 6)?
+         9
+     (a) 25
+         2
+     (b) 50
+     (c) 12
+         25
+         3
+     (d) 50
+
+  4. Es sei X eine diskrete Zufallsvariable mit einer Wahrscheinlichkeitsmassenfunk-
+     tion der Form                   (
+                                        x+4
+                                          c
+                                             für x = 1, . . . , 5
+                             f (x) =
+                                        0    sonst.
+    Für welchen Wert von c ist f (x) eine Wahrscheinlichkeitsmassenfunktion?
+     (a) c = 20
+     (b) c = 25
+     (c) c = 30
+     (d) c = 35
+
+
+                                          1
+

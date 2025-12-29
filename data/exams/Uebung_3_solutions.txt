@@ -1,0 +1,330 @@
+HSG, VWL                                                                HS 2025
+Prof. Tobias Sutter                                               Statistik 3,220
+
+                              Musterlösungen
+
+          Übung 3: Mehrdimensionale Zufallsvariablen
+
+Teil B: Multiple Choice
+Kreuzen Sie bitte in den folgenden Mehrfachwahl-Aufgaben die richtigen Aus-
+sagen an. Dabei kann es sein, dass von den zu einer Aufgabe vorgeschlagenen
+Lösungsmöglichkeiten keine, eine, mehrere oder alle richtig sind.
+
+  1. Die Kovarianz
+
+        O misst nur die Stärke des Zusammenhangs zwischen zwei Variablen.
+        X misst nur die Richtung des Zusammenhangs zwischen zwei Variablen.
+        O misst die Stärke und die Richtung des Zusammenhangs zwischen zwei
+          Variablen.
+        O hat keinerlei Aussagekraft über den Zusammenhang zwischen zwei Vari-
+          ablen.
+        O nimmt immer Werte zwischen −1 und +1 an.
+
+  2. Der Korrelationskoeffizient ρ
+
+        O misst nur die Stärke des Zusammenhangs zwischen zwei Variablen.
+        O misst nur die Richtung des Zusammenhangs zwischen zwei Variablen.
+        X misst die Stärke und die Richtung des Zusammenhangs zwischen zwei
+          Variablen.
+        O hat keinerlei Aussagekreft über den Zusammenhang zwischen zwei Vari-
+          ablen.
+        X nimmt immer Werte zwischen −1 und +1 an.
+
+  3. Zwei Variablen sind unabhängig, wenn
+
+        O der Korrelationskoeffizient ρ = 0 ist.
+        X das Produkt der Randverteilungen und die zweidimensionale Wahrschein-
+          lichkeitsverteilung übereinstimmen.
+        O die Summe der Randverteilungen und die zweidimensionale Wahrschein-
+          lichkeitsverteilung übereinstimmen.
+
+                                        1
+     O die Kovarianz Cov = 1 und der Korrelationskoeffizient ρ = 0 ist.
+     O die Kovarianz Cov = 0 ist.
+
+4. Die Kovarianz wird errechnet mit:
+
+     X Cov(X, Y ) = E[XY ] − E[X]E[Y ].
+     O Cov(X, Y ) = E[XY ] − E[X 2 ]E[Y 2 ].
+     O Cov(X, Y ) = E[X 2 Y 2 ] − E[X]E[Y ].
+     O Cov(X, Y ) = E[X 2 Y 2 ] − E[X 2 ]E[Y 2 ].
+     O Cov(X, Y ) = E[XY ]2 − E[X]E[Y ].
+
+5. Welche der folgenden Aussagen sind wahr?
+
+     X X, Y unabhängig =⇒ X, Y unkorreliert.
+     O X, Y unkorreliert =⇒ X, Y unabhängig.
+     X E[X + Y ] = E[X] + E[Y ].
+     O V (X + Y ) = V (X) + V (Y ).
+     X ρXY = −1 bedeutet: Je grösser X desto kleiner Y .
+     X Falls Y = cX, c > 0, ist ρXY = 1.
+
+6. Welche der folgenden Aussagen sind wahr, welche falsch? E[XY ] = E[X]E[Y ]
+
+     O immer,
+     O nie,
+     X falls X und Y unkorreliert sind,
+     X falls X und Y unabhängig sind,
+     O falls E[X] = E[Y ] = 0.
+
+7. Korrekte Zuteilung der Korrelationskeoffizienten:
+
+      Oben links: ρ = 0.6
+      Oben rechts: ρ = 0.9
+      Unten links: ρ = −0.7
+      Unten rechts: ρ = 0
+
+8. Sei X die Augenzahl beim einmaligen Werfen eines Würfels und Y das Ergeb-
+   nis eines einmaligen Münzwurf. Dann ist P [X > 3 | Y = “Kopf”]:
+
+
+                                       2
+      O P [X > 3 | Y = “Kopf”] = 1/3
+      X P [X > 3 | Y = “Kopf”] = 1/2
+      O P [X > 3 | Y = “Kopf”] = 2/3
+      O P [X > 3 | Y = “Kopf”] = 0
+      O P [X > 3 | Y = “Kopf”] = 1
+
+ 9. In einem Experiment werden aus einer Urne mit 5 unterschiedlichen Kugeln
+    (numeriert von 1-5) zwei Kugeln ohne Zurücklegen gezogen. Dabei gelte:
+    X =“Kugelnummer der ersten Ziehung” und Y =“Kugelnummer der zweiten
+    Ziehung”. Das Experiment wird eine Million Mal wiederholt. Es gilt:
+
+      O X und Y sind unabhängig.
+      O Die Kovarianz Cov(X, Y ) = 0.
+      O Der Korrelationskoeffizient ρXY = 0.
+      X Der Korrelationskoeffizient ρXY = −0.25.
+      O Der Korrelationskoeffizient ρXY = −0.5.
+
+10. Folgende Dichtefunktion sei gegeben: fX,Y (x, y) = 21 x + y für 0 ≤ x ≤ a und
+    0 ≤ y ≤ 1. Berechnen Sie den Parameter a.
+
+      X a = 1.236068
+      O a=2
+      O a = 3.236068
+      O a=3
+      O a=1
+                                                         1
+11. Folgende Dichtefunktion sei gegeben: fX,Y (x, y) = 12  x + 16 y für 0 ≤ x, y ≤ 2.
+    Berechnen Sie die bedingte Dichte fY |X (y) für 0 ≤ x, y ≤ 2.
+
+      O fY |X (y) = x+2y
+                    2+4y
+
+      X fY |X (y) = x+2y
+                    2x+4
+                    2+4y
+      O fY |X (y) = x+2y
+                    2x+4
+      O fY |X (y) = x+2y
+                    x+2
+      O fY |X (y) = 1+2y
+                                                       1
+12. Folgende Dichtefunktion sei gegeben: fX,Y (x, y) = 12 x + 16 y für 0 ≤ x, y ≤ 2.
+    Berechnen Sie E[X + 2Y ].
+
+                                         3
+          O E[X + 2Y ] = 33
+          O E[X + 2Y ] = 34
+                         9
+          O E[X + 2Y ] = 10
+                         3
+          X E[X + 2Y ] = 32
+                         9
+                         3
+          O E[X + 2Y ] = 10
+                                                          1
+   13. Folgende Dichtefunktion sei gegeben: fX,Y (x, y) = 12 x + 16 y für 0 ≤ x, y ≤ 2.
+       Berechnen Sie V (Y ).
+                     23
+          X V (Y ) = 81
+          O V (Y ) = 25
+                     81
+          O V (Y ) = 26
+                     81
+          O V (Y ) = 28
+                     81
+          O V (Y ) = 29
+                     81
+
+ Teil C1: Aufgaben zu Zufallsvariablen
+    1. (a) Man berechne die die Zeilensummen und Kolonnensummen und erhält:
+           fX (10) = fX (20) = fX (30) = 1/3 und fY (2) = fY (3) = fY (4) = 1/3.
+                                               1                        1
+                              fX,Y (10,4)
+        (b) fX/Y =4 (10) =      fY (4)
+                                            = 91 = 13 ; fX/Y =4 (20) = 61 = 12 ; fX/Y =4 (30) =
+                                               3                        3
+              1
+             18
+              1   = 61
+              3
+
+        (c) E[X] = 31 · (10 + 20 + 30) = 20; E[X 2 ] = 13 · (102 + 202 + 302 ) = 1400
+                                                                                   3
+                                                                                      →
+                      1400      2
+            V (X) = 3 − 20 = 66.67
+            E[Y ] = 13 · (2 + 3 + 4) = 3; E[Y 2 ] = 13 · (22 + 32 + 42 ) = 29
+                                                                           3
+                                                                              → V (X) =
+            29    2
+            3
+               − 3 = 0.6667.
+        (d) E[XY ] = 20
+                     9
+                        + 30
+                          9
+                             + 40
+                               9
+                                  + 40
+                                    6
+                                       + 80
+                                          6
+                                            + 60
+                                              18
+                                                 + 180
+                                                    9
+                                                       + 120
+                                                         18
+                                                             = 10 + 20 + 10 + 20 =
+            60 → Cov(X, Y ) = 60 − 20 · 3 = 0, ρX,Y = 0
+                                 1
+        (e) Nein: fX,Y (30, 4) = 18 ̸= fX (30) · fY (4) = 13 · 31 = 19 Widerspruch!
+                              fX,Y (x2 ,y3 )
+    2. (b) fY /X=X2 (y3 ) =     fX (x2 )
+                                             = 0.17
+                                               0.17
+                                                    = 1; fX/Y =Y3 (x3 ) = 0.12
+                                                                          0.29
+                                                                               = 0.4138;
+             fY /X=X4 (y1 ) = 0
+                               3
+    3. (a) Nein: fX,Y (0, 0) = 24 ̸= fX (0) · fY (0) = 21 · 24
+                                                            5
+                                                               Widerspruch!
+(b) und (c) E[X] = 21 ; E[X 2 ] = 21 → V (X) = E(X 2 ) − E(X)2 41
+            E[Y ] = 23 ; E[Y 2 ] = 29
+                                   48
+                                                                  23
+                                      → V (Y ) = E(Y 2 ) − E(Y )2 144  = 0.1597
+                         1                  1   1 2
+            E[XY ] = 3 → Cov(X, Y ) = 3 − 2 · 3 = 0
+            V (X − Y ) = V (X) + V (Y ) − 2 · Cov(X, Y ) = 14 + 144  23
+                                                                        − 2 · 0 = 0.4097
+
+                                                   4
+                                                                     R 1 R 1−y
+4. (a) Die erste Bedingung (fX,Y (x, y) ≥ 0) ist erfüllt. Zudem muss 0 0 24xy dx dy =
+       1 sein. Wir erhalten
+       R1 1−y             R1     2          R1            2
+              24xy dx dy = 24y x2 |1−y         24y (1−y)
+           R
+                                   0   dy =            2
+                                                            dy
+        0    0                     0                          0
+             R1                              R1                                    2   3   4
+       12 y(1 − 2y + y 2 ) dy = 12 (y − 2y 2 + y 3 ) dy = 12[ y2 − 2y3 + y4 ]|10 =
+             0                               0
+       12( 21 − 23 + 14 ) = 12( 6−8+3
+                                  12
+                                              1
+                                      ) = 12( 12 )=1
+   (b) Wir berechnen die Randdichten:
+                1−x                   2
+                    24xy dy = 24x · y2 |1−x
+                 R
+       fX (x) =                         0   = 12x(1 − x)2 , x ∈ [0, 1]
+                       0
+                      1−y
+                       R
+       fY (y) =             24xy dx = · · · = 12y(1 − y)2 , y ∈ [0, 1]
+                       0
+       Sind X und Y unabhängig?
+
+                  24xy = fx,y (x, y) ̸= fX (x) · fY (y) = 122 · xy(1 − x)2 (1 − y)2 ,
+
+       für alle x ≥ 0, y ≥ 0 mit x + y ≤ 1. Daraus folgt, dass X und Y
+       abhängig sind.
+                    R∞ R1                             R∞                 2
+5. (a) Es gilt              2x exp(−y) dx dy =             2 exp(−y) · x2 |10 dy
+                    0 0                               0
+        R∞
+             exp(−y) dy = −exp(−y)|∞
+                                   0 = 1
+        0
+       Zudem ist fX,Y (x, y) ≥ 0 für alle x, y. Somit ist fX,Y (x, y) eine gemein-
+       same Dichtefunktion von zwei Zufallsvariablen X und Y .
+   (b) Wir berechnen die Randdichten:
+               R∞
+       fX (x) = 2x exp(−y) dy = 2x, x ∈ [0, 1]
+                      0
+                     R1
+       fY (y) =            2x exp(−y) dy = exp(−y), y ∈ ]0, ∞[
+                      0
+       Sind X und Y unabhängig?
+       Es gilt fX,Y (x, y) = fX (x)fY (y) für alle x, y und somit folgt, dass X
+       und Y unabhängig sind.
+
+6. (a) µX = E[X] = 1 · 0.2 + 2 · 0.4 + 3 · 0.3 + 4 · 0.1 = 2.3
+       µY = E[Y ] = 1 · 0.1 + 2 · 0.3 + 3 · 0.4 + 4 · 0.2 = 2.7
+       E[X 2 ] = 6.1 → Var(X) = σX    2
+                                        = 6.1 − 2.32 = 0.81, σX = 0.9 E[Y 2 ] =
+       8.1 → Var(Y ) = σY2 = 8.1 − 2.72 = 0.81, σY = 0.9
+
+                                                  5
+   (b) E[XY ] = 1 · 1 · 0.05 + 1 · 2 · 0.1 + 1 · 3 · 0.05 + · · · = 6.5 → Cov(X, Y ) =
+       6.5 − 2.3 · 2.7 = 0.29
+       ρXY = 0.29
+               0.92
+                    = 0.358
+   (c) Wahrscheinlichkeitsfunktion:
+                    3             5           7
+        z    1      2
+                           2      2
+                                       3      2
+                                                     4
+        fZ 0.05 0.13 0.17 0.28 0.19 0.15 0.03
+                                    
+                      E[Z] = 2.5
+                                      ⇒ σZ2 = 6.8 − 2.52 = 0.55
+                      E[Z 2 ] = 6.8
+
+7. (a) µX = 34 ; µY = 0;
+       E[X 2 ] = 43 → V (X) = 16 3
+                                   = 0.1875
+       E[Y 2 ] = 32 → V (Y ) = 23 = 0.6667
+       ⇒ E[X − Y ] = 34 ; V (X − Y ) |{z}
+                                        = V (X) + V (Y ) = 0.8542
+                                                  unabh.
+
+          u    −1    0     1     2
+   (b)          1    1     1       1
+                                       P
+          fU    12   3     3       4
+                                             =1
+          v     0     1        2       3      4        5   6
+                3    16        30  24   34  10     3
+          fV   120   120       120 120 120 120    120
+
+   (c)   P [X = 0, Y = −1, Z = 4] = 41 · 13 · 10
+                                               1
+                                                 = 1201
+
+                           = P [X = 0] = 14
+         P [X = 0|Y = 1] |{z}
+                         unabh.
+                                                                   3 1
+                                                                    ·
+         P [X = 1|X + Y = 2] = P [X=1,X+Y  =2]
+                                  P [X+Y =2]
+                                               = P [X=1,Y  =1]
+                                                    P [U =2]
+                                                               = 413 = 1
+                                                                    4
+
+
+
+
+                                                  6
+

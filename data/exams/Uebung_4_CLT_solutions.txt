@@ -1,0 +1,160 @@
+HSG, VWL                                                                HS 2025
+Prof. Tobias Sutter                                               Statistik 3,220
+
+                              Musterlösungen
+
+              Übung 4a: Zentraler Grenzwertsatz
+
+Teil B: Multiple Choice
+
+  1. Seien X1 , X2 , . . . , Xn unabhängige Zufallsvariablen mit endlichen Werten
+     sowohl für den Erwartungswert als auch für die Varianz und Sn =
+     X1 + X2 + . . . + Xn . Dann besagt der Zentrale Grenzwertsatz, dass
+
+        O Sn approximativ standardnormalverteilt ist, wenn X1 , X2 , . . . , Xn
+          identisch verteilt sind und n > 30.
+        X die standardisierte Zufallsvariable Sn approximativ standardnor-
+          malverteilt ist, wenn X1 , X2 , . . . , Xn identisch verteilt sind und
+          n > 30.
+        X Sn approximativ normalverteilt ist, wenn X1 , X2 , . . . , Xn identisch
+          verteilt sind und n > 30.
+        X die standardisierte Zufallsvariable Sn approximativ normalverteilt
+          ist, wenn X1 , X2 , . . . , Xn identisch verteilt sind und n > 30.
+        O die standardisierte Zufallsvariable Sn approximativ standardnor-
+          malverteilt ist, wenn X1 , X2 , . . . , Xn identisch verteilt sind und
+          n ≤ 30.
+
+  2. Welche Bedingungen müssen erfüllt sein, damit der Zentrale Grenzw-
+     ertsatz angewendet werden kann?
+
+        X Sn = X1 + X2 + . . . + Xn .
+        O Sn = X12 + X22 + . . . + Xn2 .
+        X X1 , X2 , . . . , Xn sind identisch verteilt.
+        O X1 , X2 , . . . , Xn sind gleichverteilt.
+        X n > 30.
+
+  3. X und Y seien unabhängig. Die Summe Z = X + Y ist
+
+                                           1
+X binomialverteilt, wenn X und Y binomialverteilt sind mit demsel-
+  ben p.
+X normalverteilt, wenn X und Y normalverteilt sind mit denselben
+  Parametern.
+O standardnormalverteilt, wenn X und Y standardnormalverteilt
+  sind.
+X normalverteilt, wenn X und Y standardnormalverteilt sind.
+
+
+
+
+                            2
+Teil C: Aufgaben zur beschreibenden Statistik
+                 400
+                       Xi ≤ 44] ∼
+                                = P [Z ≤ 44+0.5−40 ] = Φ( 34 ) = 0.7734
+                 P
+  1.    1) P [                            √
+                                            40·0.9
+                 i=1
+
+        2) P [ Xi ≥ 51] ∼
+              P
+                          = 1 − Φ(1.75) = 0.040
+                   400
+                   P
+        3) P [45 ≤     Xi ≤ 50] = 1 − 0.7734 − 0.040 = 0.1866
+                         i=1
+
+  2. (a) P [X 400 > 32000] ∼
+                           = P [Z > 32000−32600
+                                        6200
+                                        √
+                                                ] = P [Z > −1.9355] =
+                                                                 400
+            0.9732
+       (b) P [32100 ≤ X 400 < 33100] ∼
+                                     = Φ( 10000
+                                          6200
+                                                ) − Φ(− 10000
+                                                        6200
+                                                              ) = Φ(1.6129) −
+           Φ(−1.6129) = 0.893
+       (c) P [32350 ≤ X 400 < 32950] ∼
+                                     = Φ(1.129) − Φ(−0.8065) = 0.8708 −
+           (1 − 0.791) = 0.6618
+      (d) Im Intervall (3) da dieses das mittlere Jahreseinkommen enthält.
+                                      2000                          
+                                        P
+                                            x   −2000·p
+       2000         
+                                              i
+             xi > 200 = 0.05 ⇔ P  √                    > √200−2000p  ∼
+         P                             i=1
+  3. P                                                                 = P [Z >
+          i=1                                       2000·p(1−p)             2000p(1−p)
+
+       √200−2000p ] = 0.05 ⇔ √200−2000p = 1.6449 → p = 0.090
+         2000p(1−p)                  2000p(1−p)
+
+       Bemerkung:Hier müsste man eine Stetigkeitskorrektur machen. In
+       diesem Fall ist der Unterschied (mit und ohne diese Korrektur) sehr
+       klein.
+       Mit Stetigkeitskorrektur: 200−2000p−0.5
+                                  √            = 1.6449 → p = 0.0893
+                                          2000p(1−p)
+
+
+                                            32+0.5−180· 16                 28+0.5−180· 61
+  4. (a) P [28 < S180 ≤ 32] = Φ( √                                    ) − Φ( √                ) = Φ( 21 ) −
+                                                  180· 61 · 56                 180· 16 · 65
+            Φ(−0.3) = 0.6915 − 0.3821 = 0.3094
+       (b) P [31 ≤ S180 < 36] = P [31 ≤ S180 ≤ 35] = · · · = Φ(1.1) − Φ(0.1) =
+           0.8643 − 0.5398 = 0.3245
+        (c) P [S180 = 30] = P [29.5 ≤ S180 ≤ 30.5] = Φ(0.1) − Φ(−0.1) =
+            0.5398 − 0.4602 = 0.0796
+                                        −µ   0.01 ∼
+  5. (a) P [X 16 > µ + 0.01] = P [ X 16
+                                     √σ
+                                           > 0.025
+                                             √
+                                                   ] = 1 − Φ(1.6) = 0.0548
+                                             n                   16
+
+
+
+
+                                             3
+    (b) 1−P [−0.012 ≤ X 16 −µ ≤ +0.012] = 1−(1−2·Φ(−1.92)) = 0.0548
+                  √
+    (c) kleiner (→ n wird grösser)
+
+6. (a) Bin (1000, 0.001)
+    (b) P [2 < S1000 < 6] ∼
+                          = Φ( 6−0.5−1
+                                √
+                                  0.999
+                                         ) − Φ( √2.5−1
+                                                  0.999
+                                                        ) ≈ 1 − Φ(1.50) = 0.0668
+        Der Kontinuitäts-Korrektur Faktor wird für P [S < k] abgezogen
+        (−0.5), während er für P [S ≤ k] addiert werden würde (+0.5).
+    (c) 1 − P [S1000 = 0] ∼
+                          = 1 − e−1 = 0.6321 (Poisson Approx.)
+                                           
+                                    1000
+        1 − P [S1000 = 0] = 1 −               · 0.0010 · 0.9991000 = 0.6323
+                                       0
+         50
+              Xi > 4200] ∼
+                         = P [Z > 4200−4000
+         P
+7. P [                              √
+                                      50·10
+                                            ] = 1 − Φ(2.8284) = 0.0023
+     i=1
+
+
+
+
+                                       4
+

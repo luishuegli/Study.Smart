@@ -1,0 +1,55 @@
+                         Statistik (VWL): Übungen. Quiz
+Nachname, Vorname:
+
+Seminar 5
+ 1. In einer Gruppe von 1000 Leuten haben 70% ein Smartphone und 30% ein
+    gewöhnliches Mobiltelefon. Wir wählen nun zufällig 200 Leute aus. Darunter
+    befindet sich eine Anzahl X Leute, die ein gewöhnliches Mobiltelefon besitzen.
+    Berechnen Sie P (X = 10).
+        (300
+          10 )      (700
+                     190)
+    (a)  1000 + 1000
+        ( 200 ) ( 200 )
+        (300
+          10 )     (700)
+    (b) 200    + 190
+        ( 10 ) (200 190)
+         300   700
+        ( )( )
+    (c) 101000190
+          ( 200 )
+    (d) Diese Wahrscheinlichkeit kann mit den vorhandenen Angaben nicht berech-
+        net werden.
+
+ 2. Es seien X und Y zwei stetige Zufallsvariablen. Welche der folgenden Aussagen
+    ist immer korrekt?
+    (a) Wenn die Randdichten fX (x) und fY (y) bekannt sind, können wir daraus
+        die gemeinsame Dichte fX,Y (x, y) berechnen.
+    (b) X und Y sind unabhängig dann und nur dann wenn Cov(X, Y ) = 0.
+    (c) fY |X (y|x) = fX|Y (x|y).
+    (d) Cov(X, Y ) = 0 dann und nur dann wenn E[XY ] = E[X]E[Y ].
+
+ 3. Für θ > 1 sei X1 , X2 , . . . , Xn eine unabhängige Folge in [1, θ] gleichverteilter Zu-
+    fallsvariablen, Xi ∼ U [1, θ]. Wir betrachten den Schätzer θ̂ = n2 (x1 + x2 + . . . + xn )
+    für den Parameter θ. Welche der folgenden Aussagen über θ̂ trifft zu?
+                                               2
+    (a) Die Varianz des Schätzers ist (θ−1)
+                                         3n
+                                             .
+    (b) Der Schätzer ist erwartungstreu, aber nicht konsistent.
+    (c) Der Schätzer ist konsistent, aber nicht erwartungstreu.
+                                    θ2
+    (d) Der Bias des Schätzers ist 3n .
+
+ 4. Nüsse werden in Packungen zu ca. 400g abgepackt. Das wahre Gewicht ist
+    normalverteilt mit Erwartungswert 400g und Varianz 25g. Das Gewicht von
+    95% aller Säcke liegt im Intervall
+    (a) [391.8, 408.2]
+    (b) [390.2, 409.8]
+    (c) [393.6, 406.4]
+    (d) [351.0, 449.0]
+
+
+                                           1
+

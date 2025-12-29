@@ -411,6 +411,72 @@ pip install firebase-admin
 
 ---
 
+## ⚠️ TODO: Before Scaling
+
+### Rate Limiting (CRITICAL)
+- [ ] Implement API call rate limiting (20 requests/day per user)
+- [ ] Add "Bring Your Own Key" (BYOK) option for power users
+- [ ] Track API usage per user in Firebase
+- [ ] Show remaining requests in UI
+
+### Cost Control
+- [ ] Monitor Gemini API costs monthly
+- [ ] Set up billing alerts
+- [ ] Consider upgrading to paid tier if >1000 users
+
+---
+
+## 🚀 Business Vision: Course-Specific Learning at Scale
+
+### The Core Insight
+
+> **Brilliant teaches concepts. Study.Smart teaches YOUR exam.**
+
+Unlike general platforms (Brilliant, Khan Academy), Study.Smart is **hyper-targeted** to specific university courses. Students don't want to "learn statistics" — they want to **pass Statistik für VWL with confidence**.
+
+### Competitive Moat
+
+| Factor | Brilliant/Khan | Eco Reps/UniSeminar | Study.Smart |
+|--------|----------------|---------------------|-------------|
+| Course alignment | Generic | Partial | **Exact syllabus** |
+| Availability | 24/7 | Scheduled | 24/7 |
+| Format | Video + Quiz | Lectures | **Interactive app** |
+| Price | $24/month | CHF 70-150 | **CHF 39-49** |
+| Exam prep | None | ❌ | **HS question patterns** |
+
+### Scaling Roadmap
+
+**Phase 1: HSG Domination (2025)**
+- Statistik für VWL (300 students) ← *You are here*
+- Math A (2000 students)
+- Math B (2000 students)
+- Microeconomics (1500 students)
+
+**Phase 2: Swiss Universities (2026)**
+- UZH Economics
+- ETH Basisjahr
+- Uni Bern Law
+
+**Phase 3: DACH Region (2027)**
+- German universities (TUM, LMU, Mannheim)
+- Austrian universities (WU Wien)
+
+### Business Model Options
+
+1. **Per-Course Purchase**: CHF 39-49 one-time
+2. **Semester Pass**: CHF 79 for all courses
+3. **Freemium**: Topics 1-3 free, rest paid
+4. **B2B**: University licenses (bulk discount)
+
+### Why This Works
+
+1. **Zero competition** for specific courses
+2. **Students WILL pay** for exam confidence
+3. **Template is reusable** — each new course is just content, not code
+4. **Network effects** — students recommend to next cohort
+
+---
+
 ## 💻 Setup & Installation
 
 ### Prerequisites

@@ -143,7 +143,7 @@ def render_subtopic_2_2(client):
     with st.container(border=True):
         # --- ROW 1: THE KEY INSIGHT ---
         st.markdown(f"""
-<div style="background: #f4f4f5; border: 1px solid #e4e4e7; border-radius: 12px; padding: 20px; border-left: 4px solid #71717a; margin-bottom: 16px;">
+<div style="background: #f4f4f5; border: 1px solid #e4e4e7; border-radius: 12px; padding: 20px; margin-bottom: 16px;">
     <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
         <div style="background: #e4e4e7; padding: 6px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">{render_icon('zap', size=18, color='#3f3f46')}</div>
         <div style="font-size: 0.85em; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; color: #3f3f46;">{t({'de': 'Die goldene Regel', 'en': 'The Golden Rule'})}</div>
@@ -257,85 +257,53 @@ def render_subtopic_2_2(client):
 """
         st.markdown(tree_svg, unsafe_allow_html=True)
     
-    # --- ROW 3: THE TRAP ---
-    st.markdown("<br>", unsafe_allow_html=True)
+    # --- FORMULA COMPASS (Decision Guide) ---
+    st.markdown("<hr style='margin: 20px 0; border: 0; border-top: 1.5px solid #f3f4f6;'>", unsafe_allow_html=True)
+    st.markdown(f"### {t({'de': 'Formel-Kompass', 'en': 'Formula Compass'})}")
+    
+    # Define the 4 formulas with intuitions, examples, and pro tips
+    formulas = [
+        {
+            "title": {"de": "Multiplikationsprinzip", "en": "Multiplication Principle"},
+            "latex": r"N = n_1 \cdot n_2",
+            "intuition": {"de": "UND = Multiplizieren. Jede Wahl öffnet neue Pfade.", "en": "AND = Multiply. Each choice opens new paths."},
+            "example": {"de": "3 Hauptgerichte UND 4 Desserts = 12 Menüs", "en": "3 mains AND 4 desserts = 12 meals"},
+            "pro_tip": {"de": "Zeichne einen Baum. Wenn er sich verzweigt → multiplizieren.", "en": "Draw a tree. If it branches out → multiply."}
+        },
+        {
+            "title": {"de": "Kombination (ohne Reihenfolge)", "en": "Combination (No Order)"},
+            "latex": r"\binom{n}{k} = \frac{n!}{k! \cdot (n - k)!}",
+            "intuition": {"de": "Teamfoto: Egal wer wo steht.", "en": "Team photo: nobody cares who stands where."},
+            "example": {"de": "Lotto: 6 aus 49 Zahlen wählen", "en": "Lottery: Pick 6 from 49 numbers"},
+            "pro_tip": {"de": "Würde Tauschen das Ergebnis ändern? NEIN → Teile durch k!", "en": "Would swapping names change the outcome? NO → Divide by k!"}
+        },
+        {
+            "title": {"de": "Permutation (mit Reihenfolge)", "en": "Permutation (Order Matters)"},
+            "latex": r"P(n, k) = \frac{n!}{(n - k)!}",
+            "intuition": {"de": "Podium: Gold ≠ Silber ≠ Bronze.", "en": "Podium: Gold ≠ Silver ≠ Bronze."},
+            "example": {"de": "8 Läufer: Wie viele Gold-Silber-Bronze Vergaben?", "en": "8 runners: How many ways to award Gold, Silver, Bronze?"},
+            "pro_tip": {"de": "Wärst du sauer, wenn 1. und 3. tauschen? JA → Nicht teilen.", "en": "Would you be upset if 1st and 3rd switched? YES → Don't divide."}
+        },
+        {
+            "title": {"de": "Mit Wiederholung", "en": "With Repetition"},
+            "latex": r"n^{k}",
+            "intuition": {"de": "Unbegrenzter Vorrat. Nichts wird 'verbraucht'.", "en": "Infinite supply. Nothing gets 'used up'."},
+            "example": {"de": "iPhone-PIN: 4 Ziffern, je 0-9", "en": "iPhone passcode: 4 digits, each 0-9"},
+            "pro_tip": {"de": "Kannst du dasselbe zweimal wählen? JA → n^k", "en": "Can you pick the same thing twice? YES → n^k"}
+        }
+    ]
+    
+    # Render in a single container (swimlane style)
     with st.container(border=True):
-        st.markdown(f"""
-<div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-{render_icon('info', size=18, color='#d97706')} 
-<span style="font-weight: 600; color: #92400e;">{t({'de': 'Die Falle: Unabhängigkeit prüfen!', 'en': 'The Trap: Check Independence!'})}</span>
-</div>
-""", unsafe_allow_html=True)
-
-        st.markdown(t({
-            'de': 'Das Multiplikationsprinzip gilt <b>nur für unabhängige Entscheidungen</b>.', 
-            'en': 'The multiplication principle <b>only works for independent choices</b>.'}), unsafe_allow_html=True)
-        
-        st.markdown("<br>", unsafe_allow_html=True)
-
-        st.markdown(t({
-            'de': '<b>Unabhängig:</b> Hemd wählen UND Hose wählen (Hemd beeinflusst Hosen-Optionen nicht)', 
-            'en': "<b>Independent:</b> Choose shirt AND choose pants (shirt doesn't affect pants options)"}), unsafe_allow_html=True)
-        
-        st.markdown("<br>", unsafe_allow_html=True)
-
-        st.markdown(t({
-            'de': '<b>NICHT unabhängig:</b> "Wähle 2 Personen aus 5" ≠ 5 × 4 (das wäre Overcounting!)', 
-            'en': '<b>NOT independent:</b> "Choose 2 people from 5" ≠ 5 × 4 (that\'s overcounting!)'}), unsafe_allow_html=True)
-        
-        st.markdown("<br>", unsafe_allow_html=True)
-
-        st.markdown("<br>", unsafe_allow_html=True)
-
-        st.markdown(f"**{t({'de': 'Faustregel:', 'en': 'Rule of thumb:'})}** " + t({'de': 'Wenn die erste Wahl die zweite beeinflusst → prüfe genau!', 'en': 'If the first choice affects the second → check carefully!'}))
-
-        # --- DECISION GUIDE (Swimlane Layout like 1.10) ---
-        st.markdown("<hr style='margin: 20px 0; border: 0; border-top: 1.5px solid #f3f4f6;'>", unsafe_allow_html=True)
-        st.markdown(f"### {t({'de': 'Formel-Kompass', 'en': 'Formula Compass'})}")
-        
-        # Define the 4 formulas with intuitions, examples, and pro tips
-        formulas = [
-            {
-                "title": {"de": "Multiplikationsprinzip", "en": "Multiplication Principle"},
-                "latex": r"N = n_1 \cdot n_2",
-                "intuition": {"de": "UND = Multiplizieren. Jede Wahl öffnet neue Pfade.", "en": "AND = Multiply. Each choice opens new paths."},
-                "example": {"de": "3 Hauptgerichte UND 4 Desserts = 12 Menüs", "en": "3 mains AND 4 desserts = 12 meals"},
-                "pro_tip": {"de": "Zeichne einen Baum. Wenn er sich verzweigt → multiplizieren.", "en": "Draw a tree. If it branches out → multiply."}
-            },
-            {
-                "title": {"de": "Kombination (ohne Reihenfolge)", "en": "Combination (No Order)"},
-                "latex": r"\binom{n}{k} = \frac{n!}{k! \cdot (n - k)!}",
-                "intuition": {"de": "Teamfoto: Egal wer wo steht.", "en": "Team photo: nobody cares who stands where."},
-                "example": {"de": "Lotto: 6 aus 49 Zahlen wählen", "en": "Lottery: Pick 6 from 49 numbers"},
-                "pro_tip": {"de": "Würde Tauschen das Ergebnis ändern? NEIN → Teile durch k!", "en": "Would swapping names change the outcome? NO → Divide by k!"}
-            },
-            {
-                "title": {"de": "Permutation (mit Reihenfolge)", "en": "Permutation (Order Matters)"},
-                "latex": r"P(n, k) = \frac{n!}{(n - k)!}",
-                "intuition": {"de": "Podium: Gold ≠ Silber ≠ Bronze.", "en": "Podium: Gold ≠ Silver ≠ Bronze."},
-                "example": {"de": "8 Läufer: Wie viele Gold-Silber-Bronze Vergaben?", "en": "8 runners: How many ways to award Gold, Silver, Bronze?"},
-                "pro_tip": {"de": "Wärst du sauer, wenn 1. und 3. tauschen? JA → Nicht teilen.", "en": "Would you be upset if 1st and 3rd switched? YES → Don't divide."}
-            },
-            {
-                "title": {"de": "Mit Wiederholung", "en": "With Repetition"},
-                "latex": r"n^{k}",
-                "intuition": {"de": "Unbegrenzter Vorrat. Nichts wird 'verbraucht'.", "en": "Infinite supply. Nothing gets 'used up'."},
-                "example": {"de": "iPhone-PIN: 4 Ziffern, je 0-9", "en": "iPhone passcode: 4 digits, each 0-9"},
-                "pro_tip": {"de": "Kannst du dasselbe zweimal wählen? JA → n^k", "en": "Can you pick the same thing twice? YES → n^k"}
-            }
-        ]
-        
-        # Render in a single container (swimlane style)
-        with st.container(border=True):
-            for i, f in enumerate(formulas):
-                col_formula, col_explain = st.columns([1, 1.2], gap="medium")
-                
-                with col_formula:
-                    st.markdown(f"**{t(f['title'])}**")
-                    st.latex(f['latex'])
-                
-                with col_explain:
-                    st.markdown(f"""
+        for i, f in enumerate(formulas):
+            col_formula, col_explain = st.columns([1, 1.2], gap="medium")
+            
+            with col_formula:
+                st.markdown(f"**{t(f['title'])}**")
+                st.latex(f['latex'])
+            
+            with col_explain:
+                st.markdown(f"""
 <div style="font-size: 0.95rem; color: #333; margin-bottom: 8px; display: flex; align-items: start; gap: 8px;">
     <span style="color: #666; margin-top: 2px;">{render_icon('lightbulb', size=16)}</span>
     <span>{t(f['intuition'])}</span>
@@ -343,25 +311,78 @@ def render_subtopic_2_2(client):
 <div style="font-size: 0.85rem; color: #666; padding-left: 26px; font-style: italic; margin-bottom: 12px;">
     Ex: {t(f['example'])}
 </div>
-<div style="background: #f4f4f5; border-left: 3px solid #71717a; padding: 8px 12px; border-radius: 6px; font-size: 0.85rem; color: #3f3f46;">
+<div style="background: #f4f4f5; padding: 24px 20px; border-radius: 6px; font-size: 0.9rem; color: #3f3f46;">
     <strong>Pro Tip:</strong> {t(f['pro_tip'])}
 </div>
-                    """, unsafe_allow_html=True)
-                
-                # Separator (not after last item)
-                if i < len(formulas) - 1:
-                    st.markdown("<hr style='margin: 24px 0; border: 0; border-top: 1.5px solid #f3f4f6;'>", unsafe_allow_html=True)
+                """, unsafe_allow_html=True)
             
-            # Safety margin for last pro tip
-            st.markdown("<div style='margin-bottom: 12px;'></div>", unsafe_allow_html=True)
-    
+            # Separator (not after last item)
+            if i < len(formulas) - 1:
+                st.markdown("<hr style='margin: 24px 0; border: 0; border-top: 1.5px solid #f3f4f6;'>", unsafe_allow_html=True)
+        
+        # Safety margin for last pro tip
+        st.markdown("<div style='margin-bottom: 12px;'></div>", unsafe_allow_html=True)
+
+    # --- ROW 3: THE TRAP (Now after Formula Compass) ---
+    # --- STAGE 2: THE TRAP (Unified Card Layout) ---
+    st.markdown("<br>", unsafe_allow_html=True)
+    st.markdown(f"### {t({'de': 'Die Falle: Unabhängigkeit prüfen!', 'en': 'The Trap: Check Independence!'})}")
+
+    st.markdown(t({
+        'de': 'Das Multiplikationsprinzip gilt <b>nur für unabhängige Entscheidungen</b>.', 
+        'en': 'The multiplication principle <b>only works for independent choices</b>.'}), unsafe_allow_html=True)
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    # --- SINGLE OUTER BORDER WRAPPING BOTH COLUMNS ---
+    with st.container(border=True):
+        c_indep, c_dep = st.columns(2, gap="medium")
+
+        with c_indep:
+            # Gray Box 1
+            st.markdown(f"""
+            <div style="background: #f8f9fa; border-radius: 8px; padding: 16px; height: 100%; display: flex; flex-direction: column;">
+                <div style="color: #334155; font-weight: 600; font-size: 1.1em; margin-bottom: 12px;">
+                    {t({'de': 'Unabhängig', 'en': 'Independent'})}
+                </div>
+                <div style="font-size: 0.9em; color: #334155; flex-grow: 1;">
+                    {t({'de': 'Hemd wählen UND Hose wählen', 'en': 'Choose shirt AND choose pants'})}
+                    <br><span style="color: #64748b; font-size: 0.85em;">({t({'de': 'Hemd beeinflusst Hosen nicht', 'en': "Shirt doesn't affect pants"})})</span>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+
+        with c_dep:
+            # Gray Box 2
+            st.markdown(f"""
+            <div style="background: #f8f9fa; border-radius: 8px; padding: 16px; height: 100%; display: flex; flex-direction: column;">
+                <div style="color: #334155; font-weight: 600; font-size: 1.1em; margin-bottom: 12px;">
+                    {t({'de': 'NICHT Unabhängig', 'en': 'NOT Independent'})}
+                </div>
+                <div style="font-size: 0.9em; color: #334155; flex-grow: 1;">
+                    {t({'de': '"Wähle 2 Personen aus 5"', 'en': '"Choose 2 people from 5"'})}
+                    <br><span style="color: #64748b; font-size: 0.85em;">(≠ 5 × 4 → Overcounting!)</span>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+
+        st.markdown("<br>", unsafe_allow_html=True)
+
+        # Unified Rule of Thumb Footer (Inside Border)
+        st.markdown(f"""
+        <div style="background: #f8f9fa; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; text-align: center;">
+            <span style="font-weight: 600; color: #334155;">{t({'de': 'Faustregel:', 'en': 'Rule of thumb:'})}</span>
+            <span style="color: #475569;">{t({'de': 'Wenn die erste Wahl die zweite beeinflusst → prüfe genau!', 'en': 'If the first choice affects the second → check carefully!'})}</span>
+        </div>
+        <!-- Spacer to Extend Bottom Border -->
+        <div style="height: 24px;"></div>
+        """, unsafe_allow_html=True)
+    st.markdown("<br>", unsafe_allow_html=True)
+
     st.markdown("<br>", unsafe_allow_html=True)
 
     # --- THE INTERACTIVE MATRIX ---
+    st.markdown(f"### {t({'de': 'Der Outfit-Konfigurator', 'en': 'The Outfit Configurator'})}")
     with st.container(border=True):
-        col_head, _ = st.columns([2, 1])
-        with col_head:
-            st.markdown(f"### {t({'de': 'Der Outfit-Konfigurator', 'en': 'The Outfit Configurator'})}")
         
         # 1. Split Layout: Inputs (Builder) | Visual (Matrix)
         col_inp, col_vis = st.columns([1, 2], gap="large")
@@ -437,11 +458,7 @@ Total (N) = <span style="color:#007AFF;">n₁</span> · <span style="color:#FF4B
             if total > 0:
                 relate_msg = t(c["relate"])
                 # Use columns to ensure Markdown renders correctly (HTML block kills Markdown parsing)
-                c_ico, c_txt = st.columns([0.15, 0.85], gap="small")
-                with c_ico:
-                    st.markdown(f"<div style='margin-top:2px;'>{render_icon('lightbulb')}</div>", unsafe_allow_html=True)
-                with c_txt:
-                    st.markdown(relate_msg)
+                st.markdown(f"<div style='margin-top: 24px; font-size: 1.05em; line-height: 1.6; color: #334155;'>{relate_msg}</div>", unsafe_allow_html=True)
 
         with col_vis:
             # --- THE VISUAL GRID (Proof) ---
@@ -492,7 +509,7 @@ border-color: #3B82F6;
                 st.caption(t(c["math_reveal"]))
             else:
                 # Empty State
-                st.info(t({"de": "Wähle mindestens ein Hemd und eine Hose.", "en": "Select at least one shirt and pants."}))
+                st.info(t({"de": "Wähle mindestens ein Hemd und eine Hose.", "en": "Select at least one shirt and one pair of pants."}))
 
     # --- EXAM SECTION ---
     st.markdown("<br><br>", unsafe_allow_html=True)

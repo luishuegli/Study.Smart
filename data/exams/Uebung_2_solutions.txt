@@ -1,0 +1,613 @@
+HSG, VWL                                                            HS 2025
+Prof. Tobias Sutter                                           Statistik 3,220
+
+                           Musterlösungen
+
+ Übung 2: Zufallsvariablen und spezielle Verteilungen
+
+Teil B: Multiple Choice
+Kreuzen Sie bitte in den folgenden Mehrfachwahl-Aufgaben die richtigen Aus-
+sagen an. Dabei kann es sein, dass von den zu einer Aufgabe vorgeschlagenen
+Lösungsmöglichkeiten keine, eine, mehrere oder alle richtig sind.
+
+  1. Diskret ist eine Zufallsvariable, wenn
+
+        X die Zufallsvariable nur abzählbar viele Werte annehmen kann.
+        O die Zufallsvariable überabzählbar viele Werte annehmen kann.
+        X die Zufallsvariable nur endlich viele Werte annehmen kann.
+        O die Zufallsvariable unendlich viele Werte annehmen kann.
+        X ihre Verteilungsfunktion nur als Treppenfunktion gezeichnet wer-
+          den kann.
+
+  2. Stetig ist eine Zufallsvariable, wenn
+
+        O die Zufallsvariable nur abzählbar viele Werte annehmen kann.
+        X die Zufallsvariable überabzählbar viele Werte annehmen kann.
+        O die Zufallsvariable nur endlich viele Werte annehmen kann.
+        X die Zufallsvariable unendlich viele Werte annehmen kann.
+        O ihre Verteilungsfunktion nur als Treppenfunktion gezeichnet wer-
+          den kann.
+
+  3. Der Erwartungswert einer Verteilung
+
+        O ist der Wert, unter dem 50% der Wahrscheinlichkeitsmasse liegt.
+        X ist der erwartete Wert einer Zufallsvariable vor Durchführung des
+          Zufallsexperimentes.
+
+
+                                     1
+     O ist bei stetigen Verteilungen der Wert, an dem die Dichtefunktion
+       maximal ist.
+     X ist der Schwerpunkt einer Verteilung.
+     O bei diskreten Verteilungen der Wert mit der grössten Wahrschein-
+       lichkeit.
+
+4. Die Varianz einer diskreten Zufallsvariable X ist
+        n
+           x2i f (xi ) − E[X]2 .
+        P
+     X
+         i=1
+     X ein Mass für die Streuung einer Verteilung.
+     O ein Mass für den Schwerpunkt einer Verteilung.
+     X die quadrierte Standardabweichung.
+        n
+          x2i f (xi ) − E[X 2 ].
+       P
+     O
+         i=1
+
+5. X sei diskret verteilt. Die Wahrscheinlichkeit P [1 ≤ X < 2]ist dann:
+
+     O F (2) − F (1)
+     O F (2) − F (1) − P [X = 2]
+     O F (2) − F (1) + P [X = 1]
+     X F (2) − F (1) − P [X = 2] + P [X = 1]
+     O F (2) − F (1) + P [X = 2]
+
+6. Eine Funktion f (x) ≥ 0 ist eine Dichtefunktion, wenn
+         n
+         P
+     O         f (xi ) = 1.
+         i=1
+         +∞
+         R
+     X         f (x)dx = 1.
+         −∞
+
+     X die Fläche unterhalb der Dichtefunktion gleich 1 ist.
+     O F (−∞) = 1 und F (+∞) = +∞.
+     X F (−∞) = 0 und F (+∞) = 1.
+
+7. Sei f (x) = 12 x2 − b für 1 ≤ x ≤ 2 und = 0 sonst. Bestimme b so, dass
+   f (x) eine Dichtefunktion ist.
+
+                                   2
+      O b = 1/2
+      O b = 1/3
+      X b = 1/6
+      O b=1
+      O f (x) ist keine Dichtefunktion
+                                                           1
+ 8. Eine Zufallsvariable X habe die Dichtefunktion f (x) = 18 x im Intervall
+    [0, 6]. Die Varianz V (X) ist dann
+
+      O V (X) = 3
+      O V (X) = 18
+      O V (X) = 9
+      O V (X) = 14/3
+      X V (X) = 2
+
+ 9. Eine Binomialverteilung liegt vor, wenn nach der Wahrscheinlichkeit
+    gefragt ist,
+
+      O beim x-ten Versuch “Erfolg” zu haben.
+      X bei n Versuchen x-mal “Erfolg” zu haben (mit Zurücklegen).
+      O innerhalb eines bestimmten Intervalls x-mal “Erfolg” zu haben.
+      O bei n Versuchen x-mal “Erfolg” zu haben (ohne Zurücklegen).
+      O bei x Versuchen n-mal “Erfolg” zu haben.
+
+10. Eine Binomialverteilung kann approximiert werden durch
+
+      O eine Exponentialverteilung wenn n > 30 und p ≤ 0.10.
+      X eine Normalverteilung wenn np(1 − p) > 9.
+      O eine Normalverteilung wenn n > 30 und p ≤ 0.10.
+      O eine Poissonverteilung wenn np(1 − p) > 9.
+      X eine Poissonverteilung wenn n > 30 und p ≤ 0.10.
+
+11. Die Wahrscheinlichkeit, dass Miguel I. die “Giro d’Italia” gewinnt, liege
+    konstant bei 30%. Wie gross ist die Wahrscheinlichkeit, dass er bei fünf
+    Giroteilnahmen mindestens zweimal die “Giro d’Italia” gewinnt?
+
+                                     3
+     O 0.63985
+     X 0.47178
+     O 0.6
+     O 0.36015
+     O 0.52822
+
+12. Karl kauft eine neue Autobatterie, deren erwartete Lebensdauer mit
+    10000 km angegeben wird. Wie gross ist die Wahrscheinlichkeit, dass
+    die Autobatterie länger als 20000 km läuft?
+
+     O 0.864665
+     O 0.606531
+     O 0.5
+     O 0.393469
+     X 0.135335
+
+13. Die Zufallsvariable X sei normalverteilt mit den Parametern (µ =
+    30, σ 2 = 9). Wie gross ist P [X < 21]?
+
+     O P [X < 21] = 0.99865
+     O P [X < 21] = 0.84134
+     O P [X < 21] = 0.15866
+     X P [X < 21] = 0.00135
+
+14. Die Zufallsvariable X sei normalverteilt mit den Parametern (µ =
+    30, σ 2 = 9). Für welchen Wert t gilt P [X ≥ t] = 0.06681.
+
+     X t = 34.5
+     O t = 33
+     O t = 31.5
+     O t = 30
+
+15. Die Zufallsvariable X sei normalverteilt mit den Parametern (µ =
+    30, σ 2 = 9). Geben Sie die Grenzen des zentralen Schwankungsin-
+    tervalls an, in dem 95 Prozent aller Werte liegen.
+
+                                  4
+       O 29.05 und 30.95
+       O 27.00 und 33.00
+       O 25.05 und 34.95
+       X 24.12 und 35.88
+
+Teil C1: Aufgaben zu Zufallsvariablen
+
+  1. (a) P [X = 0] + P [X = 1] + P [X = 2]
+                                            !
+         1(a − 21 ) + (a − 14 ) + (a − 18 ) = 1 ⇔ 3a = 15
+                                                       8
+                                                          ⇔ a = 58
+     (b) Grafik
+                                      Massenfunktion
+                    0.6
+                    0.5
+                    0.4
+            f(x)
+
+                    0.3
+                    0.2
+                    0.1
+                    0.0
+
+
+
+
+                          0.0   0.5        1.0         1.5       2.0
+
+                                            x
+
+
+
+
+      (c) 12 ; 12
+     (d) 1
+                   E[X] = 0 · 18 + 1 · 83 + 2 · 48 = 11
+                                                                       
+      (e)                                               8                  V (X) = 19 − 121 = 31
+                   E[X 2 ] = 02 · 81 + 12 · 83 + 22 · 48 = 19
+                                                           8
+                                                                                   8    64    64
+
+            R∞                         !                     !
+  2. (a)         f (x) dx = 1 ⇒ 3·2a
+                   −∞              2
+                                      = 1 ⇔ a = 31 . Zudem gilt f (x) ≥ 0 für
+            alle x falls a ≥ 0. Daher ist die Lösung a = 1/3.
+     (b) Grafik
+
+
+
+
+                                                                 5
+                                    Dreieckverteilung
+
+
+
+
+               1.0
+               0.5
+        f(x)
+
+               0.0
+               −0.5
+
+
+
+
+                           0             1           2       3
+
+                                             x
+
+
+
+
+   (c) P [X = 1] = 0;
+       P [0.5 < x < 2] = 1 − 0.5+2a·0.5
+                                 2
+                                        − 1·a
+                                           2
+                                                    1
+                                              = 1 − 12 − 16 = 12
+                                                              9
+                                                                 = 34
+                        1   5
+       P [X < 2] = 1 − 6 = 6 .
+   (d) 1.
+
+3. (a) Grafik
+                                    Verteilungsfunktion
+               1.0
+               0.8
+               0.6
+        F(x)
+
+               0.4
+               0.2
+               0.0
+
+
+
+
+                      −2       −1    0           1       2   3   4
+
+                                                 x
+
+
+
+
+   (b) f (−1) = 41 ; f (1) = 41 ; f (2) = 16 ; f (3) = 31
+   (c) P [X ≤ 1] = f (−1) + f (1) = 12
+       P [X = 1] = f (1) = 14
+       P [X = 1.5 ≤ X < 2.7] = f (2) = 16
+
+4. (a) Grafik
+
+
+
+
+                                                                 6
+                          Dichtefunktion
+
+
+
+
+                0.5
+                0.4
+                0.3
+         f(x)
+
+                0.2
+                0.1
+                0.0
+
+
+
+
+                      0   1             2   3
+
+                                x
+
+
+
+
+                      R2                      2    3 2
+    (b) P [X ≤ 2] = 29 (3x − x2 )dx = 29 [ 3x2 − x3 0 ] = 29 · [6 − 83 ] = 27
+                                                                           20
+                                    0
+
+    (c) Aus Symmetriegründen: 1.5
+                            R3
+        → aber auch: E[X] = x · 29 x(3 − x)dx = 1.5
+                                                0
+
+5. (a) E[X] = a+b
+               2
+                  = 1.5
+
+    (b) E[g(X)] = E[4x + 2] = 4 · E(X) + 2 = 8
+        g(E[X]) = 4 · E[X] + 2 = 8
+        → nein, Linearität des Erwartungswertes
+
+6. S = {1, 2, 3, 4, 6, 8, 9, 12, 16}
+
+                          1 2 2 3 2 2 1 2 1
+                                                             P
+   Massenfunktion f (·) : 16 16 16 16 16 16 16 16 16
+                                                     ;           =1
+
+   Verteilungsfunktion
+                                       
+                                       
+                                        0              für x < 1
+                                         1/16           für 1 ≤ x < 2
+                                       
+                                       
+                                       
+                                       
+                                         3/16           für 2 ≤ x < 3
+                                       
+                                       
+                                       
+                                       
+                                         5/16           für 3 ≤ x < 4
+                                       
+                                       
+                                       
+                                       
+                                         8/16           für 4 ≤ x < 6
+                                       
+                              FX (x) =
+                                       
+                                        10/16          für 6 ≤ x < 8
+                                         12/16          für 8 ≤ x < 9
+                                       
+                                       
+                                       
+                                       
+                                         13/16          für 9 ≤ x < 12
+                                       
+                                       
+                                       
+                                       
+                                         15/16          für 12 ≤ x < 16
+                                       
+                                       
+                                       
+                                       
+                                         1              für x ≥ 16
+                                       
+
+
+                                                    7
+                             Massenfunktion                             Verteilungsfunktion
+
+
+
+
+                                                             1.0
+             0.15
+
+
+
+
+                                                             0.8
+                                                             0.6
+             0.10
+
+
+
+
+                                                     F(x)
+      f(x)
+
+
+
+
+                                                             0.4
+             0.05
+
+
+
+
+                                                             0.2
+             0.00
+
+
+
+
+                                                             0.0
+                     1   3     6   8    12      16                  0       5        10   15
+
+                                   x                                             x
+
+
+
+
+                 1
+  7. E[X] = 20 · 10 + 60 · 31 + 80 · 21 + 120 · 15
+                                                1
+                                                   = 70 Minuten
+
+  8. (a) S = {2, 22 , 23 , 24 , · · · }
+         f (·) : 12 14 81 214 · · ·
+                                                                                          ∞
+       (b) E[G] = 2 · 12 + 22 · 14 + 23 · 18 + · · · + 2n · 21n =
+                                                                                          P
+                                                                                                1 = +∞, existiert
+                                                                                          i=1
+                    nicht
+        (c) ⋄
+
+Teil C2: Aufgaben zu speziellen diskreten Verteilungen
+  1. (a) Binomial (4, 12 );
+       (b) E[X] = np = 2, V (X) = np(1 − p) = 1 ...
+                2                       2         8
+  2. (a) E[X] = 10 · 16 = 3.2; Var(X) = 10 · 16 · 10 = 2.56
+                          16
+                             P [ Xi = u] ∼
+              P           P     P
+       (b) P [ Xi > 10] =                =0
+                                              k=11
+
+                                                            5              k
+                                                                   e−8 · 8k! = 1 − 0.1912 = 0.8088
+                                                            P
+  3. (a) Poisson: P [X ≥ 6] = 1 −
+                                                            k=0
+                                                  13
+                                         −8
+     (b) P [X = 13] = e                       · 813! = 0.0296
+                                                          1
+              P
+  4. (a) X =             am Sonntag” ∼Bin(5, 7 )
+                 “Geburtstag
+                          5
+         ⇒ P [X = 2] =       · ( 71 )2 · ( 76 )3 = 0.1285
+                          2
+       (b) 1 · 67 · 75 · 47 · 37 = 0.1499
+
+                                                             8
+                                                500
+                                                                  1
+                                                P
+    (c) Xi =“i-te Person Geburtstag am 24.12.”,     Xi ∼Bin(500, 365 )
+           P                 P                  i=1
+        P [ Xi ≥ 1] = 1 − P [ Xi = 0] = 0.7463 (≈ mit Poisson 0.7459)
+                                                                                        10
+                                10
+5. Mit Poisson-Verteilung: λ = 10000                 = 0} ] = 1−e− 10000 ·100 ≃
+                                     ·100, 1−P [ |X {z
+                                                                kein Defekt
+   0.0952                                   R 100
+   Mit Exponential-Verteilung: λ = 1000010
+                                           , 0 λe−λx dx = 1 − e−100λ =
+           1
+   1 − e−( 10 ) ≃ 0.0952
+       5
+                                                  
+      P                 5     2    3                  1, i-te Kugel weiss p = 0.2
+6. P [ Xi = 2] =          ·0.2 ·0.8 = 0.2048 ← Xi =
+      i=1               2                             0, sonst
+                                       98·97·96·95· ··· ·89
+7. (a) P [X > 0] = 1 − P [X = 0] = 1 − 100·99·98·97· ··· ·91
+                                                             = 0.1909,
+       X = # defekte Klammern in der Stichprobe
+                                                 
+                                              10
+   (b) i. P [X > 0] = 1−P [X = 0] = 1−                ·0.020 ·0.9810 = 0.1829
+                                               0
+
+         ii. Approx: P [X > 0] = 1 − P [X = 0] = 1 − e−0.2 = 0.1813
+                                                           ∆a
+             mit ∆a = 0.1829−0.1813 = 0.0016 und ∆r = 0.1829   = 0.875%
+
+8. (a) X = # Ausfälle
+                                                           4
+                                                                         
+               200·500 = 100000                                     500
+                                                                              pi (1 − p)500−i
+                                                           P
+          i.         20000
+                                = 5; P [X < 5] =
+                                                          i=0        i
+                                  5
+                                                   
+                                              500
+                                                        pi (1 − p)500−i
+                                  P
+         ii. P [X > 5] = 1 −
+                                  i=0          i
+    (b) Approx. Poisson:
+                                  4
+          i. → P [X < 5] ∼
+                           P −2 2i
+                         =  e ( i! ) = 0.9473
+                                 i=0
+                                         5
+         ii. → P [X > 5] ∼
+                             P −2 2i
+                         =1−  e ( i! ) = 0.01656
+                                        i=0
+                                 k
+                             ∼             i
+                                   e−2 ( 2i! ) ≥ 0.90 ⇒ k ≥ 4 ⇒ 4 Geräte. (mit
+                                 P
+    (c) P [X ≤ k] ≥ 0.90 ⇔
+                                 i=0
+        3 → 0.8571)
+
+9. (a) P [X = 5] ∼
+                           5
+                 = e−3 · 35! = 0.1008;
+    (b) |{z}
+         3 Fehler;
+         =np
+
+
+                                              9
+     (c) P [X = 0] = e−0.3 = 0.7408
+                            
+            3    0       3      3
+ 10. (a)        p (1 − p) =         p · (1 − p)2 ⇔ (1 − p)3 = 3p     2
+                                                                 (1−p)⇔
+            0                   1
+         4p = 1 ⇔ p = 41 oder p = 1!
+                            
+            3                   3
+     (b)         0       3
+                p (1 − p) =         p3 · (1 − p)0 ⇔ (1 − p)3 = p3 ⇔ p = 12
+            0                   3
+      (c) Offensichtlich kann dies nicht für beide gleichzeitig gelten, da keine
+          der Lösungen aus (a) mit einer Lösung von (b) übereinstimmt.
+
+ 11. λ = 3 ⇒ E[X] = V (X) = λ = 3
+                         3
+     P [X = 3] = e−3 · 33! = 0.2240
+
+Teil C3: Aufgaben zur Normalverteilung
+Hinweis zur Notation: Φ in nachfolgender Musterlösung entspricht Fst. im
+Lehrbuch Schira.
+
+  1. (a) P [X ≥ 1 kg] = 1 − P [ X−µ
+                                 σ
+                                        0.01
+                                    < − 0.02 ] = 1 − Φ(− 12 ) = 0.6915
+      (b) P [X ≥ q] = 0.06 ⇔ q−µ
+                              σ
+                                 = 1.555 ⇔ q = µ + 1.555 · σ = 1.0411 kg
+      (c) P [X ≥ 1.02 kg] = · · · = 1 − P [Z < 12 ] = 0.3085
+      (d) 70% der Pakete wiegen mehr als 1 kg.
+
+  2. (a) Tabelle: 0.6826
+      (b) −1 · 4 + 18 = 14 ; +1 · 4 + 18 = 22
+      (c) P [10 < X ≤ 26] = P [µ − 2 · σ < X ≤ µ + 2 · σ] = 0.9544
+
+  3. (a) (−1.282, 1.282); (−1.645, 1.645); (−1.96, 1.96); (−∞, +∞)
+                   1             1
+     (b) (−1.282 · − 5, 1.282 · − 5), . . .
+          |    {z 2 } |        {z2 }
+                −5.641         −4.395
+
+  4. (a) 0
+      (b) P [120 ≤ X ≤ 130] = P [−1 ≤ Z ≤ +1] = 0.6826
+      (c) P [X ≤ 110] = P [Z ≤ −3] = 0.0013
+      (d) P [X ≤ q] = 0.05 ⇔ q−µ
+                              σ
+                                 = −1.645 ⇔ q = −1.645 · 5 + 125 =
+          116.775 g
+
+                                        10
+5. (a) 95.44%
+   (b) 95.44%
+   (c) µ = np = 1.6
+       2σ = 2 · np(1 − p) ∼
+               p
+                          = 2.263 → P [0 ≤ X ≤ 3] = 94.37% (Tabelle)
+   (d) µ = 8
+       2σ = 4
+       → P [4 ≤ X ≤ 12] = 95.10% (Tabelle)
+
+6. → Tabelle!
+
+7. P [X > 176.4] = 0.14 ⇔ P [Z > 176.4−171
+                                     σ
+                                                          5.4
+                                           ] = 0.14 ⇔ σ = 1.08 =5
+
+
+
+
+                                 11
+

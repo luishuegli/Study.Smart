@@ -117,14 +117,9 @@ def render_subtopic_2_1(client):
     st.markdown(f"### {t({'de': 'Theorie', 'en': 'Theory'})}")
     
     # --- ROW 1: THE BIG QUESTION ---
+    # --- ROW 1: THE BIG QUESTION ---
+    st.markdown(f"### {t({'de': 'Zählt die Reihenfolge oder nicht?', 'en': 'Does the order matter or not?'})}")
     with st.container(border=True):
-        st.markdown(f"""
-<div style="display: flex; align-items: center; gap: 12px; margin-bottom: 2px;">
-<div style="background: #f4f4f5; padding: 6px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">{render_icon('help-circle', size=18, color='#111111')}</div>
-<div style="font-size: 0.85em; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; color: #111111;">{t({'de': 'Die zentrale Frage', 'en': 'The Central Question'})}</div>
-</div>
-<h3 style="margin-top: 8px; font-weight: 600; color: #111111;">{t({'de': 'Zählt die Reihenfolge oder nicht?', 'en': 'Does the order matter or not?'})}</h3>
-""", unsafe_allow_html=True)
         
         # --- ROW 2: MENTAL MODEL - PODIUM VS LOTTERY ---
         st.markdown(f"**{t({'de': 'Gedächtnisstütze: Podium vs. Lotterie', 'en': 'Memory Hook: Podium vs. Lottery'})}**")
@@ -186,22 +181,12 @@ But the permutation formula counts each order separately! For 3 people, there ar
         }))
         
         # --- PRO TIP (Rule 5.4) ---
-        st.markdown("<br>", unsafe_allow_html=True)
-        st.markdown(f"""
-<div style="background: #f4f4f5; border-left: 3px solid #71717a; padding: 12px 16px; border-radius: 6px; font-size: 0.9rem; color: #3f3f46;">
-    <strong>Pro Tip:</strong> {t({'de': 'Signalwörter in der Klausur: "Team", "Gruppe", "Auswahl" → Kombination. "Rangliste", "Reihenfolge", "Position" → Permutation.', 'en': 'Exam signal words: "Team", "Group", "Select" → Combination. "Rank", "Order", "Position" → Permutation.'})}
-</div>
-""", unsafe_allow_html=True)
+
     
     # --- ROW 5: THE TRAP (COMMON MISTAKE) ---
     st.markdown("<br>", unsafe_allow_html=True)
+    st.markdown(f"### {t({'de': 'Die Falle: Variation vs. Permutation', 'en': 'The Trap: Variation vs. Permutation'})}")
     with st.container(border=True):
-        st.markdown(f"""
-<div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-{render_icon('info', size=18, color='#3b82f6')} 
-<span style="font-weight: 600; color: #1e293b;">{t({'de': 'Die Falle: Variation vs. Permutation', 'en': 'The Trap: Variation vs. Permutation'})}</span>
-</div>
-""", unsafe_allow_html=True)
         
         st.markdown(t({
             'de': '<b>Variation mit Wiederholung</b> ($n^k$): Jede Position kann jeden Wert haben (z.B. PIN-Code 1-1-1-1 erlaubt).', 
@@ -229,26 +214,24 @@ But the permutation formula counts each order separately! For 3 people, there ar
             return "".join([f'<div style="background: #fafafa; border-radius: 6px; padding: 4px 10px; margin-bottom: 4px; font-size: 0.85em; color: #475569; border-left: 3px solid {color};">{w}</div>' for w in words])
 
         p_words = t({
-            'de': ['Rangliste, Platz 1/2/3', 'Anordnen, Reihenfolge', 'Passwort, PIN-Code', 'Wer kommt zuerst?'],
-            'en': ['Ranking, 1st/2nd/3rd place', 'Arrange, sequence', 'Password, PIN code', 'Who comes first?']
+            'de': ['Rangliste, Platz 1/2/3', 'Anordnen, Reihenfolge', 'Passwort, PIN-Code, Code', 'Wer kommt zuerst (Warteschlange)?', 'Planen, Position'],
+            'en': ['Ranking, 1st/2nd/3rd place', 'Arrange, sequence', 'Password, PIN code, Code', 'Who comes first (Queue)?', 'Schedule, Position']
         })
         c_words = t({
-            'de': ['Auswählen, Team bilden', 'Menge, Gruppe', 'Lotto, Ziehung', 'Wer ist dabei?'],
-            'en': ['Select, form a team', 'Set, group', 'Lottery, draw', 'Who is included?']
+            'de': ['Auswählen, Team bilden', 'Menge, Gruppe', 'Lotto, Ziehung', 'Wer ist dabei? (Auswahl)'],
+            'en': ['Select, form a team', 'Set, group', 'Lottery, draw', 'Who is included? (Choose)']
         })
 
         st.markdown(f"""
-<div style="display: flex; gap: 24px; margin-top: 16px; align-items: flex-start;">
+<div style="display: flex; gap: 24px; margin-top: 16px; align-items: flex-start; padding-bottom: 16px;">
 <div style="flex: 1;">
-<div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px; height: 24px;">
-{render_icon('arrow-down-0-9', size=18, color='#007AFF')}
+<div style="margin-bottom: 12px; height: 24px;">
 <span style="font-weight: 700; color: #1e293b; font-size: 0.95em;">{t({'de': 'Permutation', 'en': 'Permutation'})}</span>
 </div>
 {get_signal_rows(p_words, '#007AFF')}
 </div>
 <div style="flex: 1;">
-<div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px; height: 24px;">
-{render_icon('users', size=18, color='#FF4B4B')}
+<div style="margin-bottom: 12px; height: 24px;">
 <span style="font-weight: 700; color: #1e293b; font-size: 0.95em;">{t({'de': 'Kombination', 'en': 'Combination'})}</span>
 </div>
 {get_signal_rows(c_words, '#FF4B4B')}
@@ -331,12 +314,12 @@ But the permutation formula counts each order separately! For 3 people, there ar
             k = 2
             
             if is_comb:
-                # Combination
-                st.latex(r"\left( \begin{smallmatrix} \color{#007AFF}{4} \\ \color{#FF4B4B}{2} \end{smallmatrix} \right) = \frac{\color{#007AFF}{4}!}{\color{#FF4B4B}{2}! \cdot \left( \color{#007AFF}{4} - \color{#FF4B4B}{2} \right)!} = 6")
+                # Combination - Clean, No Colors, Consistent Sizing
+                st.latex(r"\binom{4}{2} = \frac{4!}{2! \cdot (4 - 2)!} = 6")
                 st.caption(t({"de": "Wir teilen durch 2! (die Ghosts).", "en": "We divide by 2! (the Ghosts)."}))
             else:
-                # Permutation
-                st.latex(r"P(\color{#007AFF}{4}, \color{#FF4B4B}{2}) = \frac{\color{#007AFF}{4}!}{\left( \color{#007AFF}{4} - \color{#FF4B4B}{2} \right)!}")
+                # Permutation - Clean, No Colors
+                st.latex(r"P(4, 2) = \frac{4!}{(4 - 2)!} = 12")
                 st.caption(t({"de": "Jede Variante zählt.", "en": "Every variation counts."}))
 
         st.markdown("---")
@@ -422,8 +405,4 @@ But the permutation formula counts each order separately! For 3 people, there ar
                 question_id="q_2_1_scenario_mastery"
             )
         
-        # Cheat Sheet Expander
-        # Note: st.expander titles do not support HTML/SVG, so we use text only.
-        with st.expander(t(c['cheat_sheet']['title'])):
-            st.markdown(f"**Permutation**: {c['cheat_sheet']['perm'][st.session_state.lang]}")
-            st.markdown(f"**Combination**: {c['cheat_sheet']['comb'][st.session_state.lang]}")
+

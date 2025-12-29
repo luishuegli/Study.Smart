@@ -1,0 +1,54 @@
+HSG, VWL                                                                                           HS 2025
+Prof. Tobias Sutter                                                                          Statistik 3,220
+
+
+                            Übung 6: Hypothesentests
+
+In Übung voraussichtlich besprochen: 1,2,4. Es gibt keine Kontrollfragen.
+
+  1. Ein Steak medium zu braten braucht drei bis vier Minuten. Die Bratdauer sei eine
+     Zufallsgrösse und unterliegt einer Normalverteilung N (µ; 225) in Sekunden. Folgende
+     Stichprobe wurde gezogen:
+
+                        235       229    217   210        223    214    210    211     213
+
+       (a) Testen Sie zum Niveau α = 0, 1 die Zielhypothese
+           H0 : µ = 210 gegen H1 : µ ̸= 210
+      (b) Innerhalb welcher Grenzen muss der beobachtete Mittelwert liegen, damit die
+          Zielhypothese akzeptiert wird?
+
+  2. Die Schrittlänge bei der Hosenproduktion sei in Zentimeter N (µ; 0, 04) verteilt. Es
+     wurden gleichartige Hosen vermessen.
+
+                              85,1      85,4   85,3       85,0   84,9   85,2    85,4
+
+       (a) Testen Sie zum Niveau α = 0, 01 die Hypothese H0 : µ ≤ 85cm.
+      (b) Wie ist zu den Niveaus α = 0, 4 (bzw. α = 0, 0005) zu entscheiden?
+       (c) Zu welchem Signifikanzniveau gehört der realisierte Mittelwert, d.h. für welches
+           α ist dieser die Grenze des kritischen Bereichs für den Mittelwert?
+      (d) Der wahre Erwartungswert µwahr sei nun 85, 1, die Zielhypothese ist also offen-
+          sichtlich falsch. Mit welcher Wahrscheinlichkeit wird dann die H − 0 abgelehnt,
+          d.h. erkennt der Test die H0 als falsch?
+
+  3. Die Dauer von Internetsessions (in Minuten) wird als normalverteilte Zufallsgrösse
+     mit einer Standardabweichung von σ = 35 betrachtet. Bei 125 Sessions wurde ei-
+     ne mittlere Dauer von 140, 5 Minuten ermittelt. Lässt sich damit eine der beiden
+     Behauptungen signifikant (Niveau α = 0, 01) bestätigen?
+
+       (a) Die Mittlere Dauer von Internetsessions beträgt über 148 Minuten.
+      (b) Die Mittlere Dauer von Internetsessions beträgt unter 148 Minuten.
+
+  4. Man hat aus 40 Messungen von Mobinfunkstrahlung, die zu verschiedenen Zeiten an
+     einer sehr belebten Stelle durchgeführt wurden, einen Mittelwert von 0, 91 mW/m2
+     errechnet. Die Standardabweichung von 0, 22 mW/m2 is bekannt.
+
+       (a) Teste follgende Hypothesen auf dem Signifikanzniveau α = 0, 01:
+              i. H1 : µ ̸= 0, 9
+             ii. H1 : µ > 0, 9
+            iii. H1 : µ < 0, 9
+           Ziel- und Gegehypothese zu wählen, wenn er nachweisen”will, dass ein Grenzwert
+           von 1, 0 mW/m2 eingehalten wird?
+
+
+HS 2025                                               1                                            Übung 6
+

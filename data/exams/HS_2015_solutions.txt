@@ -1,0 +1,306 @@
+             Musterlösung
+          Herbstsemester 2014
+Teil A: Multiple Choice (40 Punkte)
+ 1. D)
+
+ 2. A)
+
+ 3. C)
+
+ 4. C)
+
+ 5. D)
+
+ 6. B)
+
+ 7. B)
+
+ 8. D)
+
+ 9. B)
+
+10. A)
+
+
+
+
+                        1
+Aufgabe 1 (12 Punkte)
+
+Teil 1A (4 Punkte):
+
+
+  • A ⇔ V2
+
+  • B ⇔ V3
+
+  • C ⇔ V1
+
+  • D ⇔ V4
+
+Teil 1B (8 Punkte):
+
+
+  1.   • Mittelwert: 3.79
+       • Modus: 5
+
+  2.   • Quartile:
+           – 25%: 3
+           – 50%: 4
+           – 75%: 4.7
+       • IQA: 1.7
+           – Oberer Ausläufer: 5
+           – Unterer Ausläufer: 0.7
+           – Keine Ausreisser
+
+
+
+
+                     0.7   1           2       3   4   4.7   5
+
+
+
+
+                                           2
+Aufgabe 2 (10 Punkte)
+Teil 2A (6 Punkte)
+
+
+
+  1. Baum:
+
+
+                                                      Start
+                                            2/3               1/3
+
+
+                                     Rot                            Schwarz
+                               1/2         1/2
+                                                                      1
+
+                           Rot             Schwarz                   Rot
+                           1                 1                        1
+
+                        Schwarz             Rot                      Rot
+
+  2. Prob(“rote Kugel im zweiten Zug”)= 23
+
+  3. Prob(“rote Kugel im ersten Zug”|“rote Kugel im zweiten Zug”)= 21
+
+
+
+Teil 2B (4 Punkte)
+
+
+
+  1. Prob(“12 oder mehr Fragen richtig”) =
+     1 − Prob(“11 oder weniger Fragen richtig”) =
+     = 1 − FBin (11; 20, 31 ) = 0.013
+
+  2. λ = np = 100 · 0.013 = 1.3
+     Prob(“3 oder mehr Studenten bestehen”) =
+     1 − Prob(“2 oder weniger Studenten bestehen”) =
+     1 − FP oi (2; 1.3) = 0.1429
+
+    (Ersatzergebnis: λ = 0.015, Prob = 0.1912)
+
+
+
+
+                                                  3
+Aufgabe 3 (18 Punkte)
+
+
+      Rx 1         t
+               − 500           t    x          x                     x
+ 1.       500 e      dt = −e− 500       = −e− 500 + 1 = 1 − e− 500
+      0                             0
+
+                                                                 1
+ 2. P (X > 500) = 1 − P (X ≤ 500) = 1 − 1 + e− 500 ·500 = e−1 ∼ 0.367879
+               x              x
+ 3. 1 − e− 500 = 0.8; e− 500 = 0.2; − 500
+                                       x
+                                          = log 0.2, x = −500 · log 0.2 ∼ 804.719
+
+ 4. X = min(X1 , X2 )
+    P (X > a) = 1 − P (X ≤ a)
+    X > a iff X1 > a und X2 > a.
+    Da X1 und X2 iid sind,
+
+                                    P (X > a) = P (X1 > a) · P (X2 > a)
+                                                   = e−λ1 ·a · e−λ2 ·a = e(−λ1 −λ2 )·a
+
+                                            P (X ≤ a) = 1 − e−(λ1 +λ2 )·a
+             P8
+ 5. S =
+                                 · 250; Var (S) = 8 · 2502
+               i=1 Xi ; E (S) = 8 
+                 √ ≤ 6·365−8·250
+             S−8·250
+      P      250· 8
+                              √
+                          250· 8
+                                     = P (Z ≤ 0.268006) = 0.60599199
+
+      P(S > 6 · 365) = 1 − 0.60599199 = 0.3940801
+
+                            1
+      (Ersatzergebnis: λ = 220 ; 1 − (Z ≤ 0.6910362) = 1 − 0.7552286 = 0.2447714)
+
+
+
+
+                                                          4
+                                                  2.0
+                                                  1.5
+                                                  1.0
+                                              y
+
+                                                  0.5
+                                                  0.0
+                                                        0.0         0.5            1.0            1.5        2.0
+
+                                                                                      x
+
+
+
+
+                                              Abbildung 1: Integrationsgrenzen
+
+
+Aufgabe 4 (20 Punkte)
+
+
+      R1 R2
+ 1.           f (x)dxdy = 1
+      0 0
+       R1 R2       1                   1
+                                                              R1  x2 y        2
+                                                                                        1
+                                                                                            R1
+                  1+2c (xy + c)dxdy = 1+2c                          2     + cx    dy = 1+2c
+                                                                                              0
+                                                                                               (2y + 2c) dy
+       0 0                                                    0                                                    0
+
+                                    1
+           1           2y 2                  1
+          1+2c          2 + 2cy       0
+                                          = 1+2c (1 + 2c) = 1
+
+
+
+     1
+                  R1                  1
+                                                  
+                                                        xy 2
+                                                                      1
+                                                                                     1                x
+                                                                                                                 = x+2c
+                                                                                                             
+ 2. 1+2c               (xy + c) dy = 1+2c                2 + cy                   = 1+2c              2 +c         2+4c
+                  0                                                           0
+
+
+ 3. Var (X) = E X 2 − E (X)2
+                    
+
+    R2 2 x+2        1
+                       R1 3              
+                                2 dx = 1 x4 + 2 x3
+                                                    2
+                                                       = 16                                                             16  16
+                                                                                                                                       = 14
+                                                                                                                                  
+      x    6   dx =  6    x + 2x       6   4    3                                                                       4 + 3            9
+       0                              0                                                                  0
+
+
+       R2                      R2                    3       2
+                                                                 2
+            x x+2     1
+                                     x2 + 2x dx = 61 x3 + 2x2       = 16                                     8   8
+                                                                                                                            = 10
+                                                                                                                       
+               6 dx = 6                                                                           0          3 + 2            9
+       0                        0
+
+                                                                              10 2
+       Var (X) = E X 2 − E (X)2 = 14                                               = 26
+                                                                               
+                                  9 −                                         9      81 ∼ 0.32
+
+
+
+     1
+                  R1 6/5−y
+                       R
+ 4. 1+2c                     (xy + c) dxdy
+                  0     0
+
+      R1 6/5−y                            R1 x2 y 6/5−y                   R1 (6/5−y)2                            h
+                                                                                                                       6 2 y2  12y 3 y4
+                                                                                                                                              i 1
+                                                                                                  ydy = 12                                          = 12   18   4   1
+           R                                                                                                                                                           
+ 5.                    (xy) dxdy =            2   0
+                                                                  dy =                    2                            5   2 − 5·3 + 4          0          25 − 5 + 4       ∼
+      0       0                           0                               0
+      0.085
+
+
+
+
+                                                                                  5
+Aufgabe 5 (20 Punkte)
+
+
+                                     Qn    α       n
+                                                     Qn    −(α+1)
+ 1. L (x1 , x2 , . . . , xn ; α) =    i=1 xα+1 = α    i=1 xi
+                                              i
+
+                                                                 Pn
+    log L (x1 , x2 , . . . , xn ; α) = n · log α − (α + 1) ·       i=1 log xi
+
+     ∂ log L(x1 ,x2 ,...,xn ;α)
+               ∂α               =0
+
+     n   Pn
+     α −                   b = Pn nlog xi
+          i=1 log xi = 0 ⇒ α    i=1
+
+
+ 2. Pn nlog xi = log 11+log 16.4+log
+                                  4
+                                     +27.9+log 15.9
+       i=1
+
+
+              4
+     2.40+2.80+3.33+2.77 ∼ 0.35
+
+                +∞                    +∞                  +∞                    +∞
+                                               x·α             α          x−α+1           α      α
+                R                     R                   R
+ 3. E(X) =           x · f (x)dx =            xα+1
+                                                   dx =        x α dx = α −α+1 1   = 0 − −α+1 = α−1
+                 1                        1               1
+
+      α       1 Pn                x
+     b−1 = n         i=1 x ⇒ α = x−1
+       b
+     α
+         17.8
+ 4. α
+    b = 17.8−1 ∼ 1.06
+
+ 5. Die Dichtefunktion ist definiert für α > 0. Die Momentenmethode ist allerdings nur
+    definiert falls α > 1.
+
+
+
+
+                                                          6
+

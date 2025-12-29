@@ -164,78 +164,64 @@ def render_subtopic_1_3(model):
     st.header(t(content_1_3["title"]))
     st.markdown("---")
 
-    # --- UNIFIED CAPSULE ---
+    # === SECTION 1: THEORY (Definitions) ===
+    st.markdown(f"### {t(content_1_3['theory_header'])}")
+    
     with st.container(border=True):
-        
-        # 1. Full Width Intro (Fixes "Horizontal Width" issue)
-        st.markdown(f"### {t(content_1_3['theory_header'])}")
+        # Intro text inside container
         st.markdown(t(content_1_3["intro"]))
         st.markdown("<br>", unsafe_allow_html=True)
-
-        # 2. Columns (Left: Cards, Right: Sim)
-        # With wider page, we can balance this better: [1, 1.6]
-        col_theory, col_vis = st.columns([1, 1.6], gap="medium")
         
-        # --- LEFT: THEORY CARDS ---
-        with col_theory:
-            # Card 1: Laplace
-            with st.container(border=True):
-                c = content_1_3["definitions"]["laplace"]
-                st.markdown(f"**{t({'de': c['title_de'], 'en': c['title_en']})}**")
-                st.caption(t({'de': c['subtitle_de'], 'en': c['subtitle_en']}))
-                st.markdown(t({'de': c['text_de'], 'en': c['text_en']}))
-                
-                # Check for localized formula key
-                f_key = "formula_de" if st.session_state.lang == 'de' else "formula_en"
-                st.latex(c.get(f_key, c.get("formula", ""))) # Fallback
+        # Theory cards side-by-side for compactness
+        col_laplace, col_freq = st.columns(2, gap="medium")
+        
+        with col_laplace:
+            c = content_1_3["definitions"]["laplace"]
+            st.markdown(f"**{t({'de': c['title_de'], 'en': c['title_en']})}**")
+            st.caption(t({'de': c['subtitle_de'], 'en': c['subtitle_en']}))
+            st.markdown(t({'de': c['text_de'], 'en': c['text_en']}))
+            f_key = "formula_de" if st.session_state.lang == 'de' else "formula_en"
+            st.latex(c.get(f_key, c.get("formula", "")))
+        
+        with col_freq:
+            c = content_1_3["definitions"]["freq"]
+            st.markdown(f"**{t({'de': c['title_de'], 'en': c['title_en']})}**")
+            st.caption(t({'de': c['subtitle_de'], 'en': c['subtitle_en']}))
+            st.markdown(t({'de': c['text_de'], 'en': c['text_en']}))
+            st.latex(c["formula"])
 
-
-
-            # Card 2: Frequentist
-            with st.container(border=True):
-                c = content_1_3["definitions"]["freq"]
-                st.markdown(f"**{t({'de': c['title_de'], 'en': c['title_en']})}**")
-                st.caption(t({'de': c['subtitle_de'], 'en': c['subtitle_en']}))
-                st.markdown(t({'de': c['text_de'], 'en': c['text_en']}))
-                st.latex(c["formula"]) # No localization needed for this one
-
-        # --- RIGHT: VISUALIZATION ---
-        with col_vis:
-            # Force alignment with CSS hack to remove top margin of the header so it aligns with the card border
-            st.markdown("""
-                <style>
-                h3 { margin-top: 0 !important; padding-top: 0 !important; }
-                </style>
-            """, unsafe_allow_html=True)
-            
-            st.markdown(f"### {t(content_1_3['vis_header'])}")
-            st.caption(t(content_1_3["vis_desc"]))
-            
-            # Controls: Equal width now to prevent squeezes
-            c1, c2, c3, c4 = st.columns(4) 
-            with c1:
-                # FIX: st.button does not support SVG/HTML in label. Use text.
-                if st.button(t({"de": "Reset", "en": "Reset"}), key="reset_1_3", type="secondary", use_container_width=True):
-                    reset_rolls()
-                    st.rerun()
-            with c2:
-                if st.button("+1", key="add_1_1_3", type="primary", use_container_width=True):
-                    update_rolls(1)
-                    st.rerun()
-            with c3:
-                if st.button("+10", key="add_10_1_3", type="primary", use_container_width=True):
-                    update_rolls(10)
-                    st.rerun()
-            with c4:
-                if st.button("+100", key="add_100_1_3", type="primary", use_container_width=True):
-                    update_rolls(100)
-                    st.rerun()
-            
-            # Chart moved to after the column block to allow Note to span full width
-            fig = get_freq_chart()
-            st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False})
-            
-        # --- FULL WIDTH ELEMENTS (Outside Columns) ---
+    # === SECTION 2: EXPERIMENT (Law of Large Numbers) ===
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    st.markdown(f"### {t(content_1_3['vis_header'])}")
+    
+    with st.container(border=True):
+        # Description inside container (same color as Definitions intro)
+        st.markdown(t(content_1_3["vis_desc"]))
+        st.markdown("<br>", unsafe_allow_html=True)
+        # Controls row
+        c1, c2, c3, c4 = st.columns(4)
+        with c1:
+            if st.button(t({"de": "Reset", "en": "Reset"}), key="reset_1_3", type="secondary", use_container_width=True):
+                reset_rolls()
+                st.rerun()
+        with c2:
+            if st.button("+1", key="add_1_1_3", type="primary", use_container_width=True):
+                update_rolls(1)
+                st.rerun()
+        with c3:
+            if st.button("+10", key="add_10_1_3", type="primary", use_container_width=True):
+                update_rolls(10)
+                st.rerun()
+        with c4:
+            if st.button("+100", key="add_100_1_3", type="primary", use_container_width=True):
+                update_rolls(100)
+                st.rerun()
+        
+        # Chart
+        fig = get_freq_chart()
+        st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False})
+        
+        # Note
         st.markdown(f"""
 <div style="background: #f4f4f5; border-left: 4px solid #71717a; padding: 12px 16px; border-radius: 8px; color: #18181b;">
     {t(content_1_3["vis_note"])}

@@ -1,0 +1,668 @@
+Multiple Choice (48 Punkte)
+Markieren Sie bei folgenden Multiple-Choice-Aufgaben die korrekte Aussage.
+
+    In jedem Block von Aussagen ist genau eine Antwort korrekt.
+
+    Die eindeutig markierte korrekte Aussage wird mit 4 Punkten (pro MC-Aufgabe) bewertet.
+
+    Eine Markierung der falschen Aussage, eine Mehrfachmarkierung oder keine Markierung wird
+     mit 0 Punkten bewertet.
+
+
+  1. (4 Punkte) Drei Freunde spielen ein Spiel. Sie werfen eine faire Münze. Spieler 1 gewinnt,
+     wenn beim ersten Wurf Kopf herauskommt. Spieler zwei gewinnt, wenn beim zweiten Wurf
+     Kopf herauskommt. Spieler drei gewinnt, wenn beim dritten Wurf Kopf herauskommt. Wenn
+     bis zur dritten Runde kein Gewinner ermittelt wurde, beginnt das Spiel∑︁von neuem. Wie hoch
+                                                                             ∞           a
+     ist die Wahrscheinlichkeit, dass Spieler 3 das Spiel gewinnt? Hinweis: i=0 a·k i = 1−k , wenn
+     der absolute Wert von k kleiner als 1 ist.
+
+      (a) 16
+      (b) 17
+      (c) 15
+      (d) 13
+
+  2. (4 Punkte) Sie haben 1000 Münzen und wissen, dass es unter den 1000 Münzen genau eine
+     besondere Münze gibt, die auf beiden Seiten Zahl hat. Sie wählen eine Münze zufällig aus
+     diesen 1000 aus. Sie werfen diese eine Münze 10 Mal. Sie zeigt 10 Mal hintereinander Zahl
+     an. Wie hoch ist die Wahrscheinlichkeit, dass Sie die besondere Münze genommen haben?
+
+      (a) 50.6%
+      (b) 1.8%
+      (c) 51.9%
+      (d) 2.9%
+
+  3. (4 Punkte) Nehmen wir an, dass X1 , X2 , ..., XN unabhängige und identisch (I.I.D) gleichver-
+     teilte Zufallsvariablen zwischen 0 und 1 sind. Wie groß ist ungefähr die Wahrscheinlichkeit,
+     dass das arithmetische Mittel größer als 0.55 ist, wenn N = 100?
+
+      (a) 4.2%
+      (b) 1.2%
+      (c) 3.3%
+      (d) 3.1%
+
+
+
+
+                                                1
+4. (4 Punkte) Für welchen Wert von c ist die Funktion
+                                          {︄
+                                            ce−0.8x for x ≥ 0
+                                 f (x) =
+                                            0       for x < 0
+
+   eine Dichtefunktion?
+
+    (a) c = 45
+   (b) c = 12
+    (c) c = − 97
+   (d) c = 45
+                                                                        (︁   )︁
+5. (4 Punkte) Folgende Angaben sind gegeben: P (A) = 0.3, P (B) = 0.4, P A |B = 0.75. Wie
+   groß ist die Wahrscheinlichkeit von P (A ∪ B) ?
+
+    (a) 0.425
+   (b) 0.6
+    (c) 0.7
+   (d) Keine der obigen Angaben ist richtig.
+
+6. (4 Punkte) Im Oktober macht Nina einen einwöchigen Städtetrip nach Hamburg. Die Wet-
+   tervorhersage sagt für jeden Tag eine Regenwahrscheinlichkeit von 70% voraus. Wie hoch ist
+   in etwa die Wahrscheinlichkeit, dass es an mindestens 5 von 7 Tagen regnet?
+
+    (a) 65%
+   (b) 66%
+    (c) 67%
+   (d) 68%
+
+7. (4 Punkte) Zwei Spieler stehen sich in einem Best-of-5-Spiel gegenüber, d.h. der erste Spieler,
+   der 3 Runden gewinnt, gewinnt das Spiel. Bei jeder Runde hat Spieler A eine 60%ige Chance
+   zu gewinnen und Spieler B eine 40%ige Chance (es gibt keine Unentschieden). Nach einer
+   Runde geht Spieler B in Führung und hat nun einen Vorsprung von eins in der Best-of-
+   5-Serie. Wie hoch ist die Wahrscheinlichkeit, dass Spieler B nach dieser ersten Runde das
+   gesamte Spiel gewinnt?
+
+    (a) 52.48%
+   (b) 34.56%
+    (c) 50.05%
+   (d) 45.24%
+
+
+8. (4 Punkte) Sie beobachten eine auf dem Interval [0, b] gleichverteilte Zufallsvariable X. Im
+   Einzelnen beobachten Sie die folgenden Realisierungen: 1.1, 3.8, 4.2, 0.5, 5.2.
+   Wie lautet der Maximum-Likelihood-Schätzer für b?
+
+    (a) b̂ML = 6.23
+   (b) b̂ML = 5.20
+    (c) b̂ML = 5.92
+   (d) b̂ML = 5.75
+
+
+                                               2
+ 9. (4 Punkte) A und B sind zwei Ereignisse mit P (A) > 0 und P (B) > 0, welche Aussage muss
+    wahr sein?
+
+     (a) P (A | B) · P (A) = P (B | A) · P (B)
+     (b) P (B) > P (A ∩ B)
+     (c) P (A) > P (A | B)
+     (d) Keine der oben genannten Möglichkeiten.
+
+
+10. (4 Punkte) Beim Schach sind die Engines viel stärker als die Menschen. Sie sind so stark,
+    dass bestimmte Züge als unmenschlich angesehen werden. Natürlich ist es möglich, dass ein
+    Mensch zufällig einen Top-Engine-Zug findet, daher bedeutet das Finden eines Top-Engine-
+    Zuges nicht, dass er schummelt. Der Verdacht, dass ein Spieler betrügt, entsteht, wenn dieser
+    Spieler viele Top-Engine-Züge findet. Nehmen wir an, dass die Wahrscheinlichkeit, dass ein
+    sehr starker Spieler einen Top-Engine-Zug zufällig findet, p = 0.3 ist. Sie entwickeln einen Al-
+    gorithmus zur Erkennung von Betrügern für eine Online-Schachplattform, die Spieler sperren
+    will, die in einer Folge von 1000 Zügen mindestens 340 Top-Engine-Züge finden. Wie hoch
+    ist die Wahrscheinlichkeit, dass Ihr Algorithmus einen sehr starken Spieler fälschlicherweise
+    als Betrüger einstuft?
+
+     (a) 0.1%
+     (b) 0.3%
+     (c) 0.5%
+     (d) 0.7%
+
+
+11. (4 Punkte) Seien X, Y und Z 3 Zufallsvariablen mit E[X] = E[Y ], E[XY ] = 1 und E[X +
+    Y − 2Z] = −1. X und Y sind unabhängig. Wie groß ist der Wert von E[Z]?
+
+     (a) E[Z] = −0.5
+     (b) E[Z] = 1, 5
+     (c) E[Z] = 3
+     (d) Nicht genügend Informationen gegeben.
+
+12. (4 Punkte) Sie haben zwei Wale. Ein Wal ist mit einer Wahrscheinlichkeit von 50% männlich,
+    ansonsten weiblich. Der Tag der Geburt eines Wals ist unabhängig vom Geschlecht, mit der
+    Wahrscheinlichkeit 71 für jeden Tag. Geben Sie das Verhältnis der bedingten Wahrscheinlich-
+    keiten P (A|B) und P (A|C) an:
+
+        Ereignis A: Beide Wale sind männlich.
+        Ereignis B: Mindestens ein Wal ist männlich.
+        Ereignis C: Mindestens ein Wal ist männlich UND an einem Dienstag geboren.
+
+     (a) P (A|B) = P (A|C)
+     (b) P (A|B) > P (A|C)
+     (c) P (A|B) < P (A|C)
+     (d) Nicht genügend Informationen gegeben.
+
+
+
+
+                                                 3
+Problem 1 (12 Punkte)
+
+Teil 1A (4 Punkte)
+
+Aus jeder der vier Verteilungen F1 , F2 , F3 und F4 wird eine Zufallsstichprobe von Beobachtungen
+gezogen:
+
+ F1 ) Normalverteilung mit µ = 0 und σ = 0.5.
+      Stichprobenumfang n2 = 300
+
+ F2 ) Binomialverteilung mit n = 100 und p = 0.6.
+      Stichprobenumfang n3 = 300
+
+ F3 ) Gleichverteilung auf dem Intervall [−2, 2].
+      Stichprobenumfang n1 = 300
+
+ F4 ) Exponentialverteilung mit λ = 1/60.
+      Stichprobenumfang n4 = 300
+
+Die folgenden Diagramme zeigen die Boxplots und Histogramme der entsprechenden Stichproben
+(F1 , F2 , F3 und F4 ). Ordne jedem Diagramm die entsprechende Verteilung zu, z.B. F1 : a
+Hinweis: Jeder Graph entspricht genau einer der vier Verteilungen F1 , F2 , F3 und F4 .
+
+
+
+
+                                                    4
+Teil 1B (8 Punkte)
+
+Die Anzahl der pro Tag in einem Supermarkt verkauften Salate ist wie folgt:
+
+                      321, 321, 205, 320, 240, 450, 261, 345, 321, 276, 399
+
+  1. (3 Punkte) Berechnen Sie den Mittelwert, den Median und den Modus der Anzahl der pro
+     Tag verkauften Salate.
+
+  2. (5 Punkte) Zeichnen Sie einen Boxplot der Anzahl der pro Tag im Supermarkt verkauften
+     Salate.
+
+
+
+
+                                               5
+Verwenden Sie diese Seite für Ihre Lösung. Sie können Vorder- und Rückseite der Prüfungsblätter für Ihre Lösung benutzen.
+Falls Sie mehr Platz benötigen, machen Sie einen klaren Verweis auf dem Aufgabenblatt der Prüfung und beschriften Sie auch
+das zusätzliche Blatt klar und deutlich. Die Aufgabe wird sonst nicht gewertet.
+
+
+
+
+                                                               6
+Problem 2 (15 Punkte)
+
+Christopher verbringt seine Herbstferien als Kapitän eines Segel-
+schiffs. Er möchte schnell die Insel San Salvador erreichen, die sich
+westlich von ihm befindet (W). Er weiß, dass er bei einer guten Wind-
+richtung zwei Tage brauchen wird, um die Insel San Salvador zu er-
+reichen.
+Eine gute Windrichtung bedeutet, dass der Wind 90◦ oder weiter
+von der Zielrichtung (W) entfernt ist.
+Z.B. liegen Norden (N) und Westen (W) genau 90◦ auseinander,
+also wäre die Windrichtung N gut.
+Wenn die Windrichtung nicht gut ist, muss Christopher einen Tag
+lang warten. Die Windrichtung X kann sich zu Beginn eines jeden
+Tages einmal ändern und ist den ganzen Tag über konstant.
+Z.B. für 3 Tage könnten die Windrichtungen (x1 = W, x2 = N, x3 =
+N ) sein.
+
+Christopher geht davon aus, dass die tägliche Windrichtung entweder Norden (N), Osten (E),
+Süden (S) oder Westen (W) sein kann, wobei die Wahrscheinlichkeit für jede Richtung gleich groß
+ist. Er geht davon aus, dass es keine Abhängigkeit zwischen den Windrichtungen an verschiedenen
+Tagen gibt.
+
+  1. (4 Punkte) Angenommen, Christophers Windvorhersage trifft zu, wie groß ist die Wahr-
+     scheinlichkeit, dass das Schiff die Insel San Salvador in 2 Tagen erreicht?
+
+Christophers Assistent Diego schlägt vor, die Windrichtung mit größerer Genauigkeit zu mes-
+sen. Diego meint, dass die Windrichtung X entweder Norden (N), Nordosten (NE), Osten (E),
+Südosten (SE), Süden (S), Südwesten (SW), Westen (W) oder Nordwesten (NW) sein kann, wobei
+die Wahrscheinlichkeit für jede Richtung gleich groß ist. Er geht auch davon aus, dass es keine
+Abhängigkeit zwischen den Windrichtungen an verschiedenen Tagen gibt.
+
+  2. (3 Punkte) Angenommen, Diegos Windvorhersage trifft zu: Wie groß ist die Wahrscheinlich-
+     keit, dass das Schiff in 2 Tagen die Insel San Salvador erreicht?
+
+Rodrigo stimmt Christopher zu, dass die Messung von nur 4 Windrichtungen (N,E,S,W) ausrei-
+chend ist. Er argumentiert jedoch, dass sich die Windrichtung von einem Tag auf den anderen
+nur um maximal 90◦ ändern kann. Die Wahrscheinlichkeiten für jede mögliche Windrichtung sind
+gleich.
+Z.B. für zwei Tage ist (x1 = N, x2 = {N, E, W }) möglich, aber (x1 = N, x2 = S) ist nicht möglich.
+
+  3. (4 Punkte) Angenommen, Rodrigos Windvorhersage stimmt, wie groß ist die Wahrschein-
+     lichkeit, dass das Schiff in 2 Tagen die Insel San Salvador erreicht?
+
+Das Schiff hat nur noch Lebensmittel für 3 Tage. Da Christopher immer noch an sein eigenes
+Windvorhersagemodell glaubt (siehe 1.), möchte er wissen, wie hoch die Wahrscheinlichkeit ist,
+dass das Schiff ankommt, bevor es keine Lebensmittel mehr hat.
+
+  4. (4 Punkte) Angenommen, Christophers Windvorhersage trifft zu: Wie groß ist die Wahr-
+     scheinlichkeit, dass dem Schiff nicht die Nahrungsmittel ausgehen, bevor es die Insel San
+     Salvador erreicht?
+
+
+
+
+                                                 7
+Verwenden Sie diese Seite für Ihre Lösung. Sie können Vorder- und Rückseite der Prüfungsblätter für Ihre Lösung benutzen.
+Falls Sie mehr Platz benötigen, machen Sie einen klaren Verweis auf dem Aufgabenblatt der Prüfung und beschriften Sie auch
+das zusätzliche Blatt klar und deutlich. Die Aufgabe wird sonst nicht gewertet.
+
+
+
+
+                                                               8
+Verwenden Sie diese Seite für Ihre Lösung. Sie können Vorder- und Rückseite der Prüfungsblätter für Ihre Lösung benutzen.
+Falls Sie mehr Platz benötigen, machen Sie einen klaren Verweis auf dem Aufgabenblatt der Prüfung und beschriften Sie auch
+das zusätzliche Blatt klar und deutlich. Die Aufgabe wird sonst nicht gewertet.
+
+
+
+
+                                                               9
+Problem 3 (15 Punkte)
+Kim beobachtet die Aktie von Unternehmen X. Sie möchte eine Schätzung über die Wahrschein-
+lichkeit von hoch und runter Bewegungen der Aktie in den folgenden drei Tagen anstellen. Sie
+bezeichnet die Tage entsprechend mit Tag 1, Tag 2 und Tag 3. Auf der Grundlage ihrer Erfahrung
+im Handel schätzt sie das Folgende:
+
+    Für Tag 1 schätzt sie, dass die Aktie mit gleicher Wahrscheinlichkeit hoch oder runter gehen
+     wird.
+
+    Für Tag 2 glaubt sie, dass, wenn die Aktie an Tag 1 gestiegen ist, sie mit einer Wahrschein-
+     lichkeit von 0.55 wieder steigen wird. Wenn die Aktie am Tag 1 gesunken ist, glaubt sie, dass
+     sie mit einer Wahrscheinlichkeit von 0.55 wieder sinken wird.
+
+    Für Tag 3 glaubt sie, dass, wenn sich die Aktie an den beiden vorangegangenen Tagen
+     zweimal in die gleiche Richtung bewegt hat (aufwärts, aufwärts oder abwärts, abwärts), die
+     Wahrscheinlichkeit, dass sie sich erneut in die gleiche Richtung bewegt, 0.6 beträgt. Wenn
+     sich die Aktie in den beiden vorangegangenen Tagen in entgegengesetzte Richtungen bewegt
+     hat (aufwärts, abwärts oder abwärts, aufwärts), ist die Wahrscheinlichkeit, dass sie sich nach
+     oben bewegt, 0.5.
+
+  1. (4 Punkte) Stellen Sie das oben beschriebene Problem in einem Baumdiagramm dar.
+
+  2. (4 Punkte) Berechnen Sie die folgenden Wahrscheinlichkeiten:
+
+         Wie hoch ist die Wahrscheinlichkeit, dass sich die Aktie an allen drei Tagen aufwärts
+          bewegt?
+         Wie hoch ist die Wahrscheinlichkeit, dass sich die Aktie so bewegt, dass sich die Rich-
+          tung der Bewegung nach jedem Tag ändert?
+         Wie hoch ist die Wahrscheinlichkeit, dass sich die Aktie an Tag 3 abwärts bewegt, wenn
+          sie sich an den beiden Tagen zuvor aufwärts bewegt hat?
+
+  3. (3 Punkte) Wie hoch ist die Wahrscheinlichkeit, dass die Aktie am Tag 3 aufwärts geht?
+
+  4. (4 Punkte) Kim interessiert sich auch für die Aktie des Unternehmens Y. Da sie nicht viele
+     Informationen über diese Aktie hat, nimmt sie einfach an, dass die Wahrscheinlichkeit, dass
+     der Preis aufwärts geht, für jeden Tag 0.5 beträgt. Wie hoch ist die Wahrscheinlichkeit, dass
+     die Aktie an mindestens 4 von 5 Tagen steigt?
+
+
+
+
+                                                 10
+Verwenden Sie diese Seite für Ihre Lösung. Sie können Vorder- und Rückseite der Prüfungsblätter für Ihre Lösung benutzen.
+Falls Sie mehr Platz benötigen, machen Sie einen klaren Verweis auf dem Aufgabenblatt der Prüfung und beschriften Sie auch
+das zusätzliche Blatt klar und deutlich. Die Aufgabe wird sonst nicht gewertet.
+
+
+
+
+                                                              11
+Verwenden Sie diese Seite für Ihre Lösung. Sie können Vorder- und Rückseite der Prüfungsblätter für Ihre Lösung benutzen.
+Falls Sie mehr Platz benötigen, machen Sie einen klaren Verweis auf dem Aufgabenblatt der Prüfung und beschriften Sie auch
+das zusätzliche Blatt klar und deutlich. Die Aufgabe wird sonst nicht gewertet.
+
+
+
+
+                                                              12
+Problem 4 (15 Punkte)
+Hinweis: Stellen Sie sicher, dass Sie Ihre Berechnungen für die folgenden Fragen zeigen. Wenn Sie
+einfach die richtige Antwort ohne Herleitung schreiben, erhalten Sie nicht die volle Punktzahl.
+
+Teil 4A (8 Punkte)
+Sei a eine Konstante mit a ≥ 1 und X eine Zufallsvariable mit der Wahrscheinlichkeitsdichtefunk-
+tion
+
+                                           {︄
+                                             a · sin(x)     0≤x≤π
+                                  fX (x) =
+                                              0             sonst.
+
+  1. (3 Punkte) Für welchen Wert der Konstanten a ist fX (x) eine Dichtefunktion?
+
+Sei Y eine weitere Zufallsvariable. Die gemeinsame Dichtefunktion von X und Y ist gegeben durch
+                                 {︄
+                                    1
+                                      · sin(x) cos(y) for 0 ≤ x ≤ π, − π2 ≤ y ≤ π2
+                   fX,Y (x, y) = 4
+                                   0                  sonst.
+
+  2. (3 Punkte) Berechnen Sie die Randdichtefunktion fY (y).
+
+  3. (2 Punkte) Sind X und Y unabhängig? Erläutern Sie.
+
+Teil 4B (7 Punkte)
+Betrachten Sie eine Konstante c und zwei Zufallsvariablen X und Y mit gemeinsamer Dichtefunk-
+tion
+
+                                       {︄ (︂        )︂
+                                         c · x + xy    for 0 < x < 1, 1 < y < e
+                       fX,Y (x, y) =
+                                        0               sonst.
+
+  1. (2 Punkte) Berechnen Sie die Wahrscheinlichkeit P (X ≤ Y )
+
+  2. (5 Punkte) Zeigen Sie, dass fX,Y eine Dichtefunktion für c = 2e ist
+
+Hinweis: e = 2.718 . . . ist die Eulersche Zahl.
+
+
+
+
+                                                   13
+Verwenden Sie diese Seite für Ihre Lösung. Sie können Vorder- und Rückseite der Prüfungsblätter für Ihre Lösung benutzen.
+Falls Sie mehr Platz benötigen, machen Sie einen klaren Verweis auf dem Aufgabenblatt der Prüfung und beschriften Sie auch
+das zusätzliche Blatt klar und deutlich. Die Aufgabe wird sonst nicht gewertet.
+
+
+
+
+                                                              14
+Verwenden Sie diese Seite für Ihre Lösung. Sie können Vorder- und Rückseite der Prüfungsblätter für Ihre Lösung benutzen.
+Falls Sie mehr Platz benötigen, machen Sie einen klaren Verweis auf dem Aufgabenblatt der Prüfung und beschriften Sie auch
+das zusätzliche Blatt klar und deutlich. Die Aufgabe wird sonst nicht gewertet.
+
+
+
+
+                                                              15
+Problem 5 (15 Punkte)
+Betrachten Sie die folgende Poisson-Wahrscheinlichkeitsmassenfunktion:
+
+                                       λx e−λ
+                         P [X = x] =          ,   für    x ∈ {0, 1, 2, 3, ....},
+                                         x!
+mit λ > 0. Wir sind an einem Schätzer für λ interessiert.
+
+  1. (3 Punkte) Berechnen Sie einen Momentenschätzer für λ auf der Grundlage einer Zufalls-
+     stichprobe X1 , . . . , Xn , die aus der oben erwähnten Verteilung gezogen wurde.
+
+  2. (10 Punkte) Berechnen Sie den Maximum-Likelihood-Schätzer für λ auf der Grundlage einer
+     Zufallsstichprobe X1 , . . . , Xn , die aus der oben genannten Verteilung gezogen wurde.
+
+
+
+Nehmen wir an, dass die in der Tabelle ?? gezeigten gesammelten Daten die Realisierungen ei-
+ner Zufallsvariable X sind, die durch die oben erwähnte Poisson-Verteilung beschrieben werden
+können:
+
+  3. (2 Punkte) Berechnen Sie anhand der Beobachtungsdaten in Tabelle ?? den Wert der Mo-
+     mentenmethode und des Maximum-Likelihood-Schätzers für λ, die in den Aufgaben ?? und
+     ?? abgeleitet wurden.
+
+
+                             Datenpunktnummer i          Realisierung Xi
+                             1                           0.5
+                             2                           0.25
+                             3                           0.15
+
+                        Tabelle 1: Beobachtungen der Zufallsvariablen X
+
+
+
+
+                                                  16
+Verwenden Sie diese Seite für Ihre Lösung. Sie können Vorder- und Rückseite der Prüfungsblätter für Ihre Lösung benutzen.
+Falls Sie mehr Platz benötigen, machen Sie einen klaren Verweis auf dem Aufgabenblatt der Prüfung und beschriften Sie auch
+das zusätzliche Blatt klar und deutlich. Die Aufgabe wird sonst nicht gewertet.
+
+
+
+
+                                                              17
+Verwenden Sie diese Seite für Ihre Lösung. Sie können Vorder- und Rückseite der Prüfungsblätter für Ihre Lösung benutzen.
+Falls Sie mehr Platz benötigen, machen Sie einen klaren Verweis auf dem Aufgabenblatt der Prüfung und beschriften Sie auch
+das zusätzliche Blatt klar und deutlich. Die Aufgabe wird sonst nicht gewertet.
+
+
+
+
+                                                              18
+  Standardnormalverteilung
+           (z  0)                                              Φ(z)
+        Verteilungsfunktion
+
+
+
+
+                                                                                  z
+
+Verteilungsfunktion F Z (z ) einer standardnormalverteilten
+Zufallsvariablen Z ~ N (0, 1)
+
+ z          .00      .01      .02      .03      .04       .05      .06      .07       .08      .09
+
+ 0.00    0.5000   0.5040   0.5080   0.5120   0.5160    0.5199   0.5239   0.5279   0.5319    0.5359
+ 0.10    0.5398   0.5438   0.5478   0.5517   0.5557    0.5596   0.5636   0.5675   0.5714    0.5753
+ 0.20    0.5793   0.5832   0.5871   0.5910   0.5948    0.5987   0.6026   0.6064   0.6103    0.6141
+ 0.30    0.6179   0.6217   0.6255   0.6293   0.6331    0.6368   0.6406   0.6443   0.6480    0.6517
+ 0.40    0.6554   0.6591   0.6628   0.6664   0.6700    0.6736   0.6772   0.6808   0.6844    0.6879
+
+ 0.50    0.6915   0.6950   0.6985   0.7019   0.7054    0.7088   0.7123   0.7157   0.7190    0.7224
+ 0.60    0.7257   0.7291   0.7324   0.7357   0.7389    0.7422   0.7454   0.7486   0.7517    0.7549
+ 0.70    0.7580   0.7611   0.7642   0.7673   0.7704    0.7734   0.7764   0.7794   0.7823    0.7852
+ 0.80    0.7881   0.7910   0.7939   0.7967   0.7995    0.8023   0.8051   0.8078   0.8106    0.8133
+ 0.90    0.8159   0.8186   0.8212   0.8238   0.8264    0.8289   0.8315   0.8340   0.8365    0.8389
+
+ 1.00    0.8413   0.8438   0.8461   0.8485   0.8508    0.8531   0.8554   0.8577   0.8599    0.8621
+ 1.10    0.8643   0.8665   0.8686   0.8708   0.8729    0.8749   0.8770   0.8790   0.8810    0.8830
+ 1.20    0.8849   0.8869   0.8888   0.8907   0.8925    0.8944   0.8962   0.8980   0.8997    0.9015
+ 1.30    0.9032   0.9049   0.9066   0.9082   0.9099    0.9115   0.9131   0.9147   0.9162    0.9177
+ 1.40    0.9192   0.9207   0.9222   0.9236   0.9251    0.9265   0.9279   0.9292   0.9306    0.9319
+
+ 1.50    0.9332   0.9345   0.9357   0.9370   0.9382    0.9394   0.9406   0.9418   0.9429    0.9441
+ 1.60    0.9452   0.9463   0.9474   0.9484   0.9495    0.9505   0.9515   0.9525   0.9535    0.9545
+ 1.70    0.9554   0.9564   0.9573   0.9582   0.9591    0.9599   0.9608   0.9616   0.9625    0.9633
+ 1.80    0.9641   0.9649   0.9656   0.9664   0.9671    0.9678   0.9686   0.9693   0.9699    0.9706
+ 1.90    0.9713   0.9719   0.9726   0.9732   0.9738    0.9744   0.9750   0.9756   0.9761    0.9767
+
+ 2.00    0.9772   0.9778   0.9783   0.9788   0.9793    0.9798   0.9803   0.9808   0.9812    0.9817
+ 2.10    0.9821   0.9826   0.9830   0.9834   0.9838    0.9842   0.9846   0.9850   0.9854    0.9857
+ 2.20    0.9861   0.9864   0.9868   0.9871   0.9875    0.9878   0.9881   0.9884   0.9887    0.9890
+ 2.30    0.9893   0.9896   0.9898   0.9901   0.9904    0.9906   0.9909   0.9911   0.9913    0.9916
+ 2.40    0.9918   0.9920   0.9922   0.9925   0.9927    0.9929   0.9931   0.9932   0.9934    0.9936
+
+ 2.50    0.9938   0.9940   0.9941   0.9943   0.9945    0.9946   0.9948   0.9949   0.9951    0.9952
+ 2.60    0.9953   0.9955   0.9956   0.9957   0.9959    0.9960   0.9961   0.9962   0.9963    0.9964
+ 2.70    0.9965   0.9966   0.9967   0.9968   0.9969    0.9970   0.9971   0.9972   0.9973    0.9974
+ 2.80    0.9974   0.9975   0.9976   0.9977   0.9977    0.9978   0.9979   0.9979   0.9980    0.9981
+ 2.90    0.9981   0.9982   0.9982   0.9983   0.9984    0.9984   0.9985   0.9985   0.9986    0.9986
+
+ 3.00    0.9987   0.9987   0.9987   0.9988   0.9988    0.9989   0.9989   0.9989   0.9990    0.9990
+ 3.10    0.9990   0.9991   0.9991   0.9991   0.9992    0.9992   0.9992   0.9992   0.9993    0.9993
+ 3.20    0.9993   0.9993   0.9994   0.9994   0.9994    0.9994   0.9994   0.9995   0.9995    0.9995
+ 3.30    0.9995   0.9995   0.9995   0.9996   0.9996    0.9996   0.9996   0.9996   0.9996    0.9997
+ 3.40    0.9997   0.9997   0.9997   0.9997   0.9997    0.9997   0.9997   0.9997   0.9997    0.9998
+
+
+                                                                                                     11
+
+
+
+
+                                                  19
+                                                                                                 0.25 p  0.5
+        Binomialverteilung
+                                                                                                   1 n  9
+
+
+
+              p = 0.25              p = 0.30              p = 1/3               p = 0.40              p = 0.50
+n   x
+         f X (x )   F X (x )   f X (x )   F X (x )   f X (x )   F X (x )   f X (x )   F X (x )   f X (x )   F X (x )
+    0    0.7500     0.7500     0.7000     0.7000     0.6667     0.6667     0.6000     0.6000     0.5000     0.5000
+1
+    1    0.2500     1.0000     0.3000     1.0000     0.3333     1.0000     0.4000     1.0000     0.5000     1.0000
+    0    0.5625     0.5625     0.4900     0.4900     0.4444     0.4444     0.3600     0.3600     0.2500     0.2500
+2   1    0.3750     0.9375     0.4200     0.9100     0.4444     0.8889     0.4800     0.8400     0.5000     0.7500
+    2    0.0625     1.0000     0.0900     1.0000     0.1111     1.0000     0.1600     1.0000     0.2500     1.0000
+    0    0.4219     0.4219     0.3430     0.3430     0.2963     0.2963     0.2160     0.2160     0.1250     0.1250
+    1    0.4219     0.8438     0.4410     0.7840     0.4444     0.7407     0.4320     0.6480     0.3750     0.5000
+3
+    2    0.1406     0.9844     0.1890     0.9730     0.2222     0.9630     0.2880     0.9360     0.3750     0.8750
+    3    0.0000     0.9844     0.0270     1.0000     0.0370     1.0000     0.0640     1.0000     0.1250     1.0000
+    0    0.3164     0.3164     0.2401     0.2401     0.1975     0.1975     0.1296     0.1296     0.0625     0.0625
+    1    0.4219     0.7383     0.4116     0.6517     0.3951     0.5926     0.3456     0.4752     0.2500     0.3125
+4   2    0.2109     0.9492     0.2646     0.9163     0.2963     0.8889     0.3456     0.8208     0.3750     0.6875
+    3    0.0469     0.9961     0.0756     0.9919     0.0988     0.9877     0.1536     0.9744     0.2500     0.9375
+    4    0.0039     1.0000     0.0081     1.0000     0.0123     1.0000     0.0256     1.0000     0.0625     1.0000
+    0    0.2373     0.2373     0.1681     0.1681     0.1317     0.1317     0.0778     0.0778     0.0313     0.0313
+    1    0.3955     0.6328     0.3602     0.5282     0.3292     0.4609     0.2592     0.3370     0.1563     0.1875
+    2    0.2637     0.8965     0.3087     0.8369     0.3292     0.7901     0.3456     0.6826     0.3125     0.5000
+5
+    3    0.0879     0.9844     0.1323     0.9692     0.1646     0.9547     0.2304     0.9130     0.3125     0.8125
+    4    0.0146     0.9990     0.0284     0.9976     0.0412     0.9959     0.0768     0.9898     0.1563     0.9688
+    5    0.0010     1.0000     0.0024     1.0000     0.0041     1.0000     0.0102     1.0000     0.0313     1.0000
+    0    0.1780     0.1780     0.1176     0.1176     0.0878     0.0878     0.0467     0.0467     0.0156     0.0156
+    1    0.3560     0.5339     0.3025     0.4202     0.2634     0.3512     0.1866     0.2333     0.0938     0.1094
+    2    0.2966     0.8306     0.3241     0.7443     0.3292     0.6804     0.3110     0.5443     0.2344     0.3438
+6   3    0.1318     0.9624     0.1852     0.9295     0.2195     0.8999     0.2765     0.8208     0.3125     0.6563
+    4    0.0330     0.9954     0.0595     0.9891     0.0823     0.9822     0.1382     0.9590     0.2344     0.8906
+    5    0.0044     0.9998     0.0102     0.9993     0.0165     0.9986     0.0369     0.9959     0.0938     0.9844
+    6    0.0002     1.0000     0.0007     1.0000     0.0014     1.0000     0.0041     1.0000     0.0156     1.0000
+    0    0.1335     0.1335     0.0824     0.0824     0.0585     0.0585     0.0280     0.0280     0.0078     0.0078
+    1    0.3115     0.4449     0.2471     0.3294     0.2048     0.2634     0.1306     0.1586     0.0547     0.0625
+    2    0.3115     0.7564     0.3177     0.6471     0.3073     0.5706     0.2613     0.4199     0.1641     0.2266
+    3    0.1730     0.9294     0.2269     0.8740     0.2561     0.8267     0.2903     0.7102     0.2734     0.5000
+7
+    4    0.0577     0.9871     0.0972     0.9712     0.1280     0.9547     0.1935     0.9037     0.2734     0.7734
+    5    0.0115     0.9987     0.0250     0.9962     0.0384     0.9931     0.0774     0.9812     0.1641     0.9375
+    6    0.0013     0.9999     0.0036     0.9998     0.0064     0.9995     0.0172     0.9984     0.0547     0.9922
+    7    0.0001     1.0000     0.0002     1.0000     0.0005     1.0000     0.0016     1.0000     0.0078     1.0000
+    0    0.1001     0.1001     0.0576     0.0576     0.0390     0.0390     0.0168     0.0168     0.0039     0.0039
+    1    0.2670     0.3671     0.1977     0.2553     0.1561     0.1951     0.0896     0.1064     0.0313     0.0352
+    2    0.3115     0.6785     0.2965     0.5518     0.2731     0.4682     0.2090     0.3154     0.1094     0.1445
+    3    0.2076     0.8862     0.2541     0.8059     0.2731     0.7414     0.2787     0.5941     0.2188     0.3633
+8   4    0.0865     0.9727     0.1361     0.9420     0.1707     0.9121     0.2322     0.8263     0.2734     0.6367
+    5    0.0231     0.9958     0.0467     0.9887     0.0683     0.9803     0.1239     0.9502     0.2188     0.8555
+    6    0.0038     0.9996     0.0100     0.9987     0.0171     0.9974     0.0413     0.9915     0.1094     0.9648
+    7    0.0004     1.0000     0.0012     0.9999     0.0024     0.9998     0.0079     0.9993     0.0313     0.9961
+    8    0.0000     1.0000     0.0001     1.0000     0.0002     1.0000     0.0007     1.0000     0.0039     1.0000
+    0    0.0751     0.0751     0.0404     0.0404     0.0260     0.0260     0.0101     0.0101     0.0020     0.0020
+    1    0.2253     0.3003     0.1556     0.1960     0.1171     0.1431     0.0605     0.0705     0.0176     0.0195
+    2    0.3003     0.6007     0.2668     0.4628     0.2341     0.3772     0.1612     0.2318     0.0703     0.0898
+    3    0.2336     0.8343     0.2668     0.7297     0.2731     0.6503     0.2508     0.4826     0.1641     0.2539
+    4    0.1168     0.9511     0.1715     0.9012     0.2048     0.8552     0.2508     0.7334     0.2461     0.5000
+9
+    5    0.0389     0.9900     0.0735     0.9747     0.1024     0.9576     0.1672     0.9006     0.2461     0.7461
+    6    0.0087     0.9987     0.0210     0.9957     0.0341     0.9917     0.0743     0.9750     0.1641     0.9102
+    7    0.0012     0.9999     0.0039     0.9996     0.0073     0.9990     0.0212     0.9962     0.0703     0.9805
+    8    0.0001     1.0000     0.0004     1.0000     0.0009     0.9999     0.0035     0.9997     0.0176     0.9980
+    9    0.0000     1.0000     0.0000     1.0000     0.0001     1.0000     0.0003     1.0000     0.0020     1.0000
+
+
+
+
+                                                                                                                       5
+
+
+
+
+                                                                20
+                                                                                         0.25 p  0.5
+        Binomialverteilung
+                                                                                          15 n  30
+
+
+             p = 0.25            p = 0.30            p = 1/3             p = 0.40            p = 0.50
+n   x
+         f X (x ) F X (x )   f X (x ) F X (x )   f X (x ) F X (x )   f X (x ) F X (x )   f X (x ) F X (x )
+   0     0.0134 0.0134       0.0047 0.0047       0.0023 0.0023       0.0005 0.0005       0.0000 0.0000
+   1     0.0668 0.0802       0.0305 0.0353       0.0171 0.0194       0.0047 0.0052       0.0005 0.0005
+   2     0.1559 0.2361       0.0916 0.1268       0.0599 0.0794       0.0219 0.0271       0.0032 0.0037
+   3     0.2252 0.4613       0.1700 0.2969       0.1299 0.2092       0.0634 0.0905       0.0139 0.0176
+   4     0.2252 0.6865       0.2186 0.5155       0.1948 0.4041       0.1268 0.2173       0.0417 0.0592
+   5     0.1651 0.8516       0.2061 0.7216       0.2143 0.6184       0.1859 0.4032       0.0916 0.1509
+   6     0.0917 0.9434       0.1472 0.8689       0.1786 0.7970       0.2066 0.6098       0.1527 0.3036
+   7     0.0393 0.9827       0.0811 0.9500       0.1148 0.9118       0.1771 0.7869       0.1964 0.5000
+15
+   8     0.0131 0.9958       0.0348 0.9848       0.0574 0.9692       0.1181 0.9050       0.1964 0.6964
+   9     0.0034 0.9992       0.0116 0.9963       0.0223 0.9915       0.0612 0.9662       0.1527 0.8491
+   10    0.0007 0.9999       0.0030 0.9993       0.0067 0.9982       0.0245 0.9907       0.0916 0.9408
+   11    0.0001 1.0000       0.0006 0.9999       0.0015 0.9997       0.0074 0.9981       0.0417 0.9824
+   12    0.0000 1.0000       0.0001 1.0000       0.0003 1.0000       0.0016 0.9997       0.0139 0.9963
+   13                        0.0000 1.0000       0.0000 1.0000       0.0003 1.0000       0.0032 0.9995
+   14                                                                0.0000 1.0000       0.0005 1.0000
+   15                                                                                    0.0000 1.0000
+   0     0.0032   0.0032     0.0008   0.0008     0.0003   0.0003     0.0000   0.0000
+   1     0.0211   0.0243     0.0068   0.0076     0.0030   0.0033     0.0005   0.0005     0.0000   0.0000
+   2     0.0669   0.0913     0.0278   0.0355     0.0143   0.0176     0.0031   0.0036     0.0002   0.0002
+   3     0.1339   0.2252     0.0716   0.1071     0.0429   0.0604     0.0123   0.0160     0.0011   0.0013
+   4     0.1897   0.4148     0.1304   0.2375     0.0911   0.1515     0.0350   0.0510     0.0046   0.0059
+   5     0.2023   0.6172     0.1789   0.4164     0.1457   0.2972     0.0746   0.1256     0.0148   0.0207
+   6     0.1686   0.7858     0.1916   0.6080     0.1821   0.4793     0.1244   0.2500     0.0370   0.0577
+   7     0.1124   0.8982     0.1643   0.7723     0.1821   0.6615     0.1659   0.4159     0.0739   0.1316
+   8     0.0609   0.9591     0.1144   0.8867     0.1480   0.8095     0.1797   0.5956     0.1201   0.2517
+   9     0.0271   0.9861     0.0654   0.9520     0.0987   0.9081     0.1597   0.7553     0.1602   0.4119
+20 10    0.0099   0.9961     0.0308   0.9829     0.0543   0.9624     0.1171   0.8725     0.1762   0.5881
+   11    0.0030   0.9991     0.0120   0.9949     0.0247   0.9870     0.0710   0.9435     0.1602   0.7483
+   12    0.0008   0.9998     0.0039   0.9987     0.0092   0.9963     0.0355   0.9790     0.1201   0.8684
+   13    0.0002   1.0000     0.0010   0.9997     0.0028   0.9991     0.0146   0.9935     0.0739   0.9423
+   14    0.0000   1.0000     0.0002   1.0000     0.0007   0.9998     0.0049   0.9984     0.0370   0.9793
+   15                        0.0000   1.0000     0.0001   1.0000     0.0013   0.9997     0.0148   0.9941
+   16                                            0.0000   1.0000     0.0003   1.0000     0.0046   0.9987
+   17                                                                0.0000   1.0000     0.0011   0.9998
+   18                                                                                    0.0002   1.0000
+   19                                                                                    0.0000   1.0000
+
+   0     0.0002   0.0002     0.0000   0.0000     0.0000   0.0000
+   1     0.0018   0.0020     0.0003   0.0003     0.0001   0.0001
+   2     0.0086   0.0106     0.0018   0.0021     0.0006   0.0007     0.0000   0.0000
+   3     0.0269   0.0374     0.0072   0.0093     0.0026   0.0033     0.0003   0.0003
+   4     0.0604   0.0979     0.0208   0.0302     0.0089   0.0122     0.0012   0.0015     0.0000   0.0000
+   5     0.1047   0.2026     0.0464   0.0766     0.0232   0.0355     0.0041   0.0057     0.0001   0.0002
+   6     0.1455   0.3481     0.0829   0.1595     0.0484   0.0838     0.0115   0.0172     0.0006   0.0007
+   7     0.1662   0.5143     0.1219   0.2814     0.0829   0.1668     0.0263   0.0435     0.0019   0.0026
+   8     0.1593   0.6736     0.1501   0.4315     0.1192   0.2860     0.0505   0.0940     0.0055   0.0081
+   9     0.1298   0.8034     0.1573   0.5888     0.1457   0.4317     0.0823   0.1763     0.0133   0.0214
+   10    0.0909   0.8943     0.1416   0.7304     0.1530   0.5848     0.1152   0.2915     0.0280   0.0494
+   11    0.0551   0.9493     0.1103   0.8407     0.1391   0.7239     0.1396   0.4311     0.0509   0.1002
+   12    0.0291   0.9784     0.0749   0.9155     0.1101   0.8340     0.1474   0.5785     0.0806   0.1808
+30 13    0.0134   0.9918     0.0444   0.9599     0.0762   0.9102     0.1360   0.7145     0.1115   0.2923
+   14    0.0054   0.9973     0.0231   0.9831     0.0463   0.9565     0.1101   0.8246     0.1354   0.4278
+   15    0.0019   0.9992     0.0106   0.9936     0.0247   0.9812     0.0783   0.9029     0.1445   0.5722
+   16    0.0006   0.9998     0.0042   0.9979     0.0116   0.9928     0.0489   0.9519     0.1354   0.7077
+   17    0.0002   0.9999     0.0015   0.9994     0.0048   0.9975     0.0269   0.9788     0.1115   0.8192
+   18    0.0000   1.0000     0.0005   0.9998     0.0017   0.9993     0.0129   0.9917     0.0806   0.8998
+   19                        0.0001   1.0000     0.0005   0.9998     0.0054   0.9971     0.0509   0.9506
+   20                        0.0000   1.0000     0.0001   1.0000     0.0020   0.9991     0.0280   0.9786
+   21                                            0.0000   1.0000     0.0006   0.9998     0.0133   0.9919
+   22                                                                0.0002   0.9999     0.0055   0.9974
+   23                                                                0.0000   1.0000     0.0019   0.9993
+   24                                                                                    0.0006   0.9998
+   25                                                                                    0.0001   1.0000
+   26                                                                                    0.0000   1.0000
+
+                                                                                                             7
+
+
+
+
+                                                          21
+

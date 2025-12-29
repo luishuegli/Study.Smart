@@ -268,7 +268,7 @@ A→B, B→A, A→C, C→A, B→C, C→B = <b>6 {t({"de": "Ergebnisse", "en": "r
 <div style="font-size: 0.85rem; color: #666; padding-left: 26px; font-style: italic; margin-bottom: 12px;">
     Ex: {t(content_2_4['formula']['example'])}
 </div>
-<div style="background: #f4f4f5; border-left: 3px solid #71717a; padding: 8px 12px; border-radius: 6px; font-size: 0.85rem; color: #3f3f46;">
+<div style="background: #f4f4f5; border-left: 3px solid #71717a; padding: 24px 20px; border-radius: 6px; font-size: 0.9rem; color: #3f3f46;">
     <strong>Pro Tip:</strong> {t(content_2_4['formula']['pro_tip'])}
 </div>
             """, unsafe_allow_html=True)
@@ -281,25 +281,29 @@ A→B, B→A, A→C, C→A, B→C, C→B = <b>6 {t({"de": "Ergebnisse", "en": "r
     
     with st.container(border=True):
         q_data = get_question("2.4", "lottery")
+        # Prepare options (handle dict/string)
+        lottery_options = q_data["options"]
+        if lottery_options and isinstance(lottery_options[0], dict):
+            lottery_labels = [t(o) for o in lottery_options]
+        else:
+            lottery_labels = lottery_options
+
         render_mcq(
             key_suffix="2_4_lottery",
             question_text=t(q_data["question"]),
-            options=q_data["options"],
+            options=lottery_labels,
             correct_idx=q_data["correct_idx"],
             solution_text_dict=q_data["solution"],
             success_msg_dict={"de": "Korrekt!", "en": "Correct!"},
             error_msg_dict={"de": "Noch nicht ganz...", "en": "Not quite..."},
             client=model,
             ai_context="Combinations: Lottery problem C(49,6)",
+            hint_text_dict={"de": r"$$C(n,k) = \frac{n!}{k!(n-k)!}$$", "en": r"$$C(n,k) = \frac{n!}{k!(n-k)!}$$"},
             course_id="vwl",
             topic_id="2",
             subtopic_id="2.4",
             question_id="q_2_4_lottery"
         )
-        
-        # Formula hint (Rule 2.4: hints go AFTER the question)
-        with st.expander(t({"de": "Formel-Hinweis", "en": "Formula Hint"})):
-            st.latex(r"C(n,k) = \frac{n!}{k!(n-k)!}")
     
     # --- ADDITIONAL EXAM QUESTION ---
     st.markdown("<br><br>", unsafe_allow_html=True)

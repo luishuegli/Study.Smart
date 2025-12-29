@@ -1,0 +1,369 @@
+HSG, VWL                                                                           HS 2025
+Prof. Tobias Sutter                                                          Statistik 3,220
+
+
+      Übung 1: Grundlagen der Wahrscheinlichkeitstheorie
+Teil A: Kontrollfragen
+
+  1. Was ist der Unterschied zwischen einem Elementarereignis und einem Ereignis? Was
+     ist der Unterschied zwischen dem Ereignisraum und der Ereignismenge?
+
+  2. Sind komplementäre Ereignisse disjunkt? Sind disjunkte Ereignisse komplementär?
+
+  3. Welche drei Wahrscheinlichkeitsbegriffe kennen Sie? Auf welchem Wahrscheinlich-
+     keitsbegriff basieren die Kolmogorovschen Axiome?
+
+  4. Was ist der Unterschied zwischen stetig und diskret?
+
+  5. Ereignis A impliziere Ereignis B. Kann dann B von A unabhängig sein?
+
+  6. Können unabhängige Ereignisse disjunkt sein? Können disjunkte Ereignisse unabhängig
+     sein?
+
+  7. Manche Ökonomen glauben, dass höhere Löhne die Konjunktur beleben und somit
+     die Arbeitslosigkeit verringern. Wenn sie recht haben, sind dann diese drei Ereignisse
+     abhängig oder unabhängig?
+
+  8. In der Kfz-Haftpflichtversicherung gibt es Schadenfreiheitsklassen. Was hat das mit
+     bedingten Wahrscheinlichkeiten zu tun?
+
+  9. Verwendet man das Bayes-Theorem, um von den Wahrscheinlichkeiten der Ursachen
+     auf die Beobachtungen zu schliessen oder umgekehrt? Was bedeutet a posteriori“?
+                                                                     ”
+Teil B: Multiple Choice
+In Übung voraussichtlich besprochen: 1,2,3,4,6,8,11,13,14,16
+Kreuzen Sie bitte in den folgenden Mehrfachwahl-Aufgaben die richtigen Aussagen an.
+Dabei kann es sein, dass von den zu einer Aufgabe vorgeschlagenen Lösungsmöglichkeiten
+keine, eine, mehrere oder alle richtig sind.
+
+  1. A und B sind zwei unabhängige Ereignisse. Dann gilt
+
+       (a) P [B | A] = 0
+      (b) P [B | A] = P [B]
+       (c) P [B | A] = P [A]
+      (d) Wir haben nicht genügend Informationen um P [B | A] anzugeben
+
+  2. A und B sind zwei disjunkte Ereignisse. Dann gilt
+
+       (a) P [B | A] = 0
+      (b) P [B | A] = P [B]
+       (c) P [B | A] = P [A]
+      (d) Wir haben nicht genügend Informationen um P [B | A] anzugeben
+
+
+
+
+HS 2025                                      1                                     Übung 1
+HSG, VWL                                                                           HS 2025
+Prof. Tobias Sutter                                                          Statistik 3,220
+
+  3. A und B sind zwei Ereignisse mit P [A] = 0.5 und P [B | A] = 0.6. Dann gilt
+
+       (a) P [B ∩ A] = 0.3
+      (b) P [B ∩ A] = 0.83
+       (c) P [B ∩ A] = 0.5
+      (d) P [B ∩ A] = 0.6
+
+  4. A und B sind zwei Ereignisse mit P [B | A] = 0. Dann gilt
+
+       (a) P [B ∩ A] = 0
+      (b) P [B ∩ A] = P [A] · P [B]
+       (c) P [B ∩ A] = 1
+      (d) P [B ∪ A] = 1
+
+  5. A und B seien zwei Ereignisse und A eine Teilmenge von B. Dann gilt
+
+       (a) P [A | B] = 1
+      (b) P [A | B] = P [A]/P [B]
+       (c) P [A | B] = 0
+      (d) Wir haben nicht genügend Informationen um P [A | B] anzugeben
+
+  6. A und B sind zwei Ereignisse, wobei B eine Teilmenge von A ist. Dann gilt
+
+       (a) P [A | B] = 1
+      (b) P [A | B] = P [A]/P [B]
+       (c) P [A | B] = 0
+      (d) Wir haben nicht genügend Informationen um P [A | B] anzugeben
+
+  7. A und B sind zwei Ereignisse, wobei A und B sich gegenseitig ausschliessen. Dann
+     gilt
+
+       (a) P [A | B] = 1
+      (b) P [A | B] = P [A]/P [B]
+       (c) P [A | B] = 0
+      (d) Wir haben nicht genügend Informationen um P [A | B] anzugeben
+
+  8. A und B sind zwei unvereinbare Ereignisse, für deren Wahrscheinlichkeiten wir P [A] >
+     0 und P [B] > 0 voraussetzen. Dann gilt
+
+       (a) A und B sind unabhängig
+      (b) A und B sind abhängig
+       (c) Wir haben nicht genügend Elemente um etwas über die Abhängigkeit von A und
+           B zu sagen
+
+
+
+
+HS 2025                                     2                                      Übung 1
+HSG, VWL                                                                           HS 2025
+Prof. Tobias Sutter                                                          Statistik 3,220
+
+  9. Aus A impliziert B“ folgt, P [A] > 0 vorausgesetzt,
+          ”
+      (a) P [A | B] ≥ P [A]
+      (b) P [A | B] < P [A]
+       (c) P [A | B] ≥ P [B]
+      (d) P [B | A] > 0
+
+ 10. Aus A und B sind unvereinbar“ folgt, P [A] > 0 vorausgesetzt,
+          ”
+      (a) P [A ∩ B] = P [A] · P [B]
+      (b) P [A ∪ B] = P [A] + P [B]
+       (c) P [A ∩ B] = 0
+      (d) P [A | B] = P [A]
+
+ 11. Von zwei Ereignissen A und B sind folgende Wahrscheinlichkeiten bekannt:
+     P [A] = 0.5, P [B] = 0.4 und die Wahrscheinlichkeit, dass weder A noch B eintritt, sei
+     0.2. Dann gilt
+
+       (a) A und B sind unvereinbar
+      (b) A und B sind nicht unvereinbar
+       (c) A und B sind unabhängig
+      (d) A und B sind nicht unabhängig
+
+ 12. A, B und C seien Ereignisse mit den Eigenschaften:
+     P [A] = 0.6, P [B] = 0.8, P [A ∩ B] = 0.4, P [C] = 0.3 und C ⊂ A. Dann gilt
+
+       (a) A und B sind unvereinbar
+      (b) A und B sind abhängig
+       (c) A ∪ B = S, wobei S den Ereignisraum bezeichnet
+      (d) P [C | A] = 2/3
+       (e) P [C | A] = 1/2
+       (f) P [A | C] = 1
+                                                                    h     i
+ 13. A und B sind zwei unabhängige Ereignisse mit P [A] = 0.9 und P A ∪ B = 0.5.
+     Dann gilt
+
+       (a) P [B] = 0.05
+      (b) P [B] = 0.44
+       (c) P [B] = 0.55
+      (d) Wir haben nicht genügend Informationen um P [B] zu berechnen
+
+
+
+
+HS 2025                                     3                                      Übung 1
+HSG, VWL                                                                              HS 2025
+Prof. Tobias Sutter                                                             Statistik 3,220
+
+ 14. A und B sind zwei Ereignisse mit P [A] = 0.1 und P [B] = 0.5. Dann gilt
+
+       (a) P [A ∩ B] = 0.1 · 0.5
+      (b) P [A ∩ B] = 0.1 + 0.5
+       (c) P [A ∩ B] = P [A | B]
+      (d) Wir haben nicht genügend Informationen um P [A ∩ B] anzugeben
+
+ 15. A und B sind zwei Ereignisse mit P [A] = 1/3, P [B] = 1/2 und P [B | A] = 1/3. Dann
+     gilt
+
+       (a) P [A | B] = 1/6
+      (b) P [A | B] = 1/9
+       (c) P [A | B] = 2/9
+      (d) P [A | B] = 1/2
+
+ 16. A, B und C sind drei Ereignisse mit P [A ∩ B ∩ C] = P [A] · P [B] · P [C]. Dann gilt
+
+       (a) A, B und C sind unabhängig
+      (b) A und C sind unabhängig
+       (c) A, B und C sind nicht unabhängig
+      (d) Wir haben nicht genügend Elemente um etwas über die Abhängigkeit von A, B
+          und C zu sagen
+
+Teil C: Aufgaben
+In Übung voraussichtlich besprochen: 1,3,4,6,8,9,12,13
+
+  1. Ein fairer Würfel wird zweimal hintereinander geworfen.
+
+       (a) Geben Sie jedes Element des Ereignisraumes explizit an.
+      (b) Wie gross ist die Wahrscheinlichkeit, dass die Augensumme 10 oder grösser ist,
+          wenn beim ersten Wurf eine 5 erscheint?
+       (c) Wie gross ist die Wahrscheinlichkeit, dass die Augensumme 10 oder grösser ist,
+           wenn bei mindestens einem Wurf eine 5 erscheint?
+
+                                                                           [ (b) 1/3; (c) 3/11 ]
+
+
+  2. Ein fairer Würfel wird geworfen, bis erstmals die Augenzahl 6 erscheint. Gesucht ist
+     die Wahrscheinlichkeit, dass
+
+       (a) genau 4 Mal
+      (b) mindestens 2 Mal
+       (c) höchstens 4 Mal
+
+      geworfen werden muss.
+
+                                                                [ (a) 0.096; (b) 5/6; (c) 0.518 ]
+
+
+
+
+HS 2025                                      4                                        Übung 1
+HSG, VWL                                                                                       HS 2025
+Prof. Tobias Sutter                                                                      Statistik 3,220
+
+  3. Für die Ereignisse A und B seien die Wahrscheinlichkeiten gegeben:
+
+                           P [A] = 0.5, P [B] = 0.3 und P [A ∩ B] = 0.2.
+
+      Geben Sie - wenn möglich - die folgenden Wahrscheinlichkeiten zahlenmässig an:
+
+                         (a) P [A ∪ B]                           (b) P [A | B]
+                         (c) P [A ∩ B]                           (d) P [A ∩ B]
+                         (e) P [A ∪ B]                           (f) P [A ∪ B]
+
+                                                   [ (a) 0.6; (b) 2/3; (c) 0.8; (d) 0.4; (e) 0.4; (f) 0.8 ]
+
+
+  4. Ein Student bewirbt sich bei zwei Universitäten A und B um ein Stipendium. Er
+     schätzt seine Erfolgschancen wie folgt ein:
+
+                      Aufnahme an A:                                               0.3
+                      Aufnahme an B:                                               0.4
+                      Aufnahme an beiden Unis:                                     0.2
+                      Aufnahme an keiner der beiden Unis:                          0.3
+
+
+      Wie beurteilen Sie diese Schätzungen?
+
+  5. Zwei Maschinen A und B produzieren denselben Artikel in einer Fabrik. Maschine
+     A produziert 70% der Stücke und B 30%. 8% der von A hergestellten Stücke sind
+     fehlerhaft, aber nur 6% der von Maschine B produzierten Stücke.
+      Wie gross ist die Wahrscheinlichkeit, dass ein zufällig aus der Tagesproduktion gezo-
+      genes fehlerhaftes Stück von Maschine A hergestellt wurde?
+
+                                                                                                [ 0.7568 ]
+
+
+  6. In einem Gymnasium werden zwar alle sich bewerbenden Schüler aufgenommen, aber
+     ihre Eignung wird durch einen psychologischen Test geprüft. Langjährige Statistiken
+     haben dabei ergeben:
+      40% der Schüler bestehen die Matura nicht;
+      90% dieser Schüler hatten bei der Aufnahme ein negatives Testergebnis.
+      Von den Schülern mit bestandener Matura hatte 1% bei dem Aufnahmetest versagt.
+
+       (a) Veraunschaulichen Sie die obige Problemstellung in einem Baumdiagramm. Je-
+           der Ast ist dabei mit der entsprechenden Wahrscheinlichkeit zu versehen.
+      (b) Zeigen Sie: Die Wahrscheinlichkeit, dass ein Schüler ein negatives Testergebnis
+          aufweist, beträgt 36.6%.
+       (c) Wie gross ist die Wahrscheinlichkeit, dass ein Schüler die Matura nicht besteht,
+           falls er ein negatives Testergebnis aufweist?
+
+                                                                                            [ (c) 0.9836 ]
+
+
+
+
+HS 2025                                        5                                                Übung 1
+HSG, VWL                                                                                     HS 2025
+Prof. Tobias Sutter                                                                    Statistik 3,220
+
+  7. In zwei Werken werden Glühlampen hergestellt. Werk A liefert 70% und Werk B 30%
+     der Gesamtproduktion. Im Mittel sind von je 100 Lampen des Werks A 83 und von
+     Werk B 63 normgerecht.
+      Mit welcher Wahrscheinlichkeit stammt eine normgerechte Lampe aus Werk B?
+
+                                                                                             [ 0.24545 ]
+
+
+  8. Qualitätskontrolle. Eine Firma erhält als Zulieferung regelmässig ein bestimmtes Pro-
+     dukt in Sendungen zu 50 Stück. Die Annahmekontrolle verläuft nach dem folgenden
+      Inspektionsplan“ Ip5 :
+     ”
+     Man entnimmt zufällig ein Stück und prüft es. Ist es in Ordnung entnimmt man - ohne
+     das schon Geprüfte zurückzulegen - ein Zweites usw. Sobald ein schadhaftes Stück
+     gefunden wird weist man die Sendung zurück. Sind jedoch die ersten fünf Stücke in
+     Ordnung wird die Sendung angenommen (Ereignis A).
+
+       (a) Wie gross ist die Annahmewahrscheinlichkeit P [A], falls 0, 2, 5 oder 10 Stücke
+           in einer Sendung schadhaft sind?
+      (b) Zeichen Sie die Operationscharakteristik“ des Inspektionsplanes Ip5 (Annahme-
+                         ”
+          wahrscheinlichkeit in Abhängigkeit von den tatsächlich schadhaften Stücken).
+
+                                                                       [ (a) 1; 0.8082; 0.5766; 0.3106 ]
+
+
+  9. Familienplanung. Wie gross ist die Wahrscheinlichkeit, dass von vier Geschwistern
+
+       (a) alle vier Jungen sind
+      (b) alle vier Mädchen sind
+       (c) nur das älteste Kind ein Junge ist
+      (d) nur das jüngste Kind ein Mädchen ist
+       (e) zwei Jungen und zwei Mädchen sind
+       (f) die verbleibenden zwei Mädchen sind, wenn wir wissen, dass mindestens zwei
+           der Geschwister Jungen sind?
+
+                                           [ (a) 1/16; (b) 1/16; (c) 1/16; (d) 1/16; (e) 3/8; (f) 6/11 ]
+
+
+ 10. In einer Urne befindet sich eine grosse Zahl von Kugeln. 80% der Kugeln sind weiss,
+     20% sind schwarz.
+
+       (a) Wie gross ist die Wahrscheinlichkeit, eine schwarze Kugel bei blindem Hinein-
+           greifen zufällig zu ziehen?
+      (b) Wie gross ist die Wahrscheinlichkeit, zufällig eine weisse Kugel zu ziehen?
+       (c) Wie gross ist die Wahrscheinlichkeit, bei drei zufälligen Stichproben mit Zurücklegen,
+           genau drei weisse Kugeln zu finden?
+      (d) Wie gross die Wahrscheinlichkeit, genau drei schwarze Kugeln zu finden?
+       (e) Wie gross die Wahrscheinlichkeit, eine schwarze und zwei weisse Kugeln zu fin-
+           den?
+
+
+HS 2025                                        6                                              Übung 1
+HSG, VWL                                                                                     HS 2025
+Prof. Tobias Sutter                                                                    Statistik 3,220
+
+                                                    [ (a) 0.2; (b) 0.8; (c) 0.512; (d) 0.008; (e) 0.384 ]
+
+
+ 11. 1996 lebten in der Schweiz 80% Schweizer Bürger und 20% Ausländer. Die Arbeits-
+     losigkeit betrug 3.3% unter den Schweizern und 9.3% unter Ausländern.
+
+       (a) Wie hoch war die Arbeitslosenquote 1996 in der Schweiz?
+      (b) Wie gross ist die Wahrscheinlichkeit, dass ein beliebig ausgewählter Arbeitsloser
+          Schweizer ist?
+
+                                                                                 [ (a) 0.045; (b) 0.59 ]
+
+
+ 12. Der ELISA-Test zum Nachweis von HIV-Antikörpern fällt mit 99.8%-iger Wahr-
+     scheinlichkeit negativ aus, wenn eine Person nicht HIV-infiziert ist (Spezifität eines
+     medizinischen Tests). Der Test fällt mit 99.95%-iger Wahrscheinlichkeit positiv aus,
+     wenn eine Person HIV-infiziert ist (Sensitivität eines medizinischen Tests). Es sei be-
+     kannt, dass die Anzahl der HIV-positiven Personen 0.01% in einer Bevölkerungsgruppe
+     beträgt.
+
+       (a) Wie gross ist die Wahrscheinlichkeit, dass jemand tatsächlich HIV-infiziert ist,
+           wenn der ELISA-Test positiv ausfällt?
+      (b) Wie gross ist die Wahrscheinlichkeit, dass jemand tatsächlich nicht HIV-infiziert
+          ist, wenn der ELISA-Test negativ ausfällt?
+       (c) Was ist wichtiger für ein solchen Test: Die Spezifität oder die Sensitivität?
+
+                                                                                 [ (a) 0.0474; (b) ≈ 1 ]
+
+
+ 13. Würfelspiel. Man bietet Ihnen das folgende Glücksspiel an: Sie bezahlen einen Ein-
+     satz von x Rappen und dürfen dann zweimal mit einem Würfel würfeln. Werfen Sie
+     mindestens einmal eine Sechs erhalten Sie als Gewinn 1 CHF.
+
+       (a) Wie gross ist die Wahrscheinlichkeit, dass Sie bei diesem Spiel gewinnen?
+      (b) Sie dürfen das Spiel hinreichend oft wiederholen. Welchen Einsatz x wären Sie
+          höchstens bereit zu zahlen, um langfristig zu gewinnen?
+
+                                                                          [ (a) 11/36; (b) 30 Rappen ]
+
+
+
+
+HS 2025                                        7                                              Übung 1
+

@@ -1,5 +1,6 @@
 import streamlit as st
 import utils.localization as loc
+from utils.localization import t
 from data import COURSES
 from utils.progress_tracker import get_user_progress
 
@@ -11,58 +12,70 @@ SUBTOPIC_QUESTION_COUNTS = {
     "1.4": 1,  # 1_4_exam
     "1.5": 2,  # 1_5_exam + Market Analyst Mission
     "1.6": 2,  # p_single_point, 1_6_dart_mission
-    "1.7": 7,  # Existing + test1_q1, uebung1_mc5, uebung1_mc8
+    "1.7": 8,  # Existing + test1_q1, uebung1_mc5, uebung1_mc8, hs2015_prob2
     "1.8": 4,  # 1_8_factory, 1_8_mission, 1_8_bayes_coins, 1_8_game_theory
     "1.9": 3,  # 1_9_prisoners, 1_9_medical_mission, 1_9_search_mission
     "1.10": 6, # exam_l1 to exam_l6
+    "1.11": 1, # Additional Questions
     "2.1": 1,  # q_2_1_scenario_mastery
     "2.2": 1,  # q_2_2_club
     "2.3": 3,  # q_2_3_dvd, 2_3_test1_q3, 2_3_hs2015_mc4
     "2.4": 2,  # q_2_4_lottery, 2_4_test2_q1
     "2.5": 1,  # q_2_5_coin
+    "2.6": 3,  # Additional Questions
     # Topic 3: Random Variables
     "3.1": 1,  # uebung2_mc6
-    "3.2": 2,  # uebung2_mc5, test2_q4
+    "3.2": 3,  # uebung2_mc5, test2_q4, hs2015_mc5
     "3.3": 1,  # test2_q3
-    "3.4": 0,  # No MCQs (problems only)
+    "3.4": 1,  # hs2022_mc11 added
     "3.5": 1,  # uebung2_mc8
     "3.6": 1,  # test3_q2
+    "3.7": 0,  # Additional Questions
     # Topic 4: Stochastic Models and Distributions
     "4.1": 0,  # No MCQs
     "4.2": 0,  # Problems only
     "4.3": 3,  # uebung2_giro, hs2022_mc7, hs2023_mc12
     "4.4": 1,  # test4_q1
     "4.5": 1,  # test2_q2
-    "4.6": 1,  # uebung2_mc12
-    "4.7": 4,  # uebung2_mc13, hs2023_mc7, hs2022_mc3, hs2024_mc3_tanker
+    "4.6": 3,  # uebung2_mc12, hs2015_prob3, hs2022_mc4
+    "4.7": 5,  # uebung2_mc13, hs2023_mc7, hs2022_mc3, hs2024_mc3_tanker, hs2015_mc3 (mc9 already)
     "4.8": 1,  # hypergeom_10_5_3
+    "4.9": 0,  # Additional Questions
     # Topic 5: Multidimensional Random Variables
-    "5.1": 2,  # test3_q4, uebung3_mc5
+    "5.1": 3,  # test3_q4, uebung3_mc5, hs2015_prob4
     "5.2": 2,  # test3_q5, uebung3_mc7
-    "5.3": 4,  # uebung3_mc1, uebung3_mc9, test4_q2, test4_q4
-    "5.4": 2,  # uebung3_mc10, uebung3_mc11
+    "5.3": 6,  # uebung3_mc1, uebung3_mc9, test4_q2, test4_q4, hs2015_mc1, hs2015_mc7
+    "5.4": 3,  # uebung3_mc10, uebung3_mc11, hs2025_mc6
+    "5.5": 1,  # Additional Questions
     # Topic 6: Central Limit Theorem
-    "6.1": 0,  # No MCQs
-    "6.2": 0,  # No MCQs
+    "6.1": 1,  # hs2022_mc3
+    "6.2": 1,  # hs2022_mc10
+    "6.3": 0,  # Additional Questions
     # Topic 7: Descriptive Statistics
     "7.1": 0,  # No MCQs
-    "7.2": 5,  # test4_q3, hs2015_mc9, hs2023_mc4, test3_q3, hs2023_mc9
-    "7.3": 0,  # No MCQs
+    "7.2": 6,  # test4_q3, hs2015_mc9, hs2023_mc4, test3_q3, hs2023_mc9, hs2015_mc8
+    "7.3": 1,  # hs2015_prob1 (Boxplot)
     "7.4": 0,  # No MCQs
     "7.5": 0,  # No MCQs
+    "7.6": 1,  # Additional Questions
     # Topic 8: Point Estimation
     "8.1": 0,  # No MCQs
     "8.2": 2,  # hs2023_mc10, hs2015_mc10
-    "8.3": 1,  # hs2022_mc8
+    "8.3": 3,  # hs2022_mc8, hs2015_prob5, +1
+    "8.4": 1,  # Additional Questions
     # Topic 9: Confidence Intervals
     "9.1": 0,  # No MCQs
     "9.2": 1,  # hs2023_mc5
     "9.3": 0,  # No MCQs
+    "9.4": 0,  # Additional Questions
     # Topic 10: Hypothesis Tests
     "10.1": 0,  # No MCQs
     "10.2": 0,  # No MCQs
     "10.3": 0,  # No MCQs
     "10.4": 0,  # No MCQs
+    "10.5": 0,  # Additional Questions
+    # Topic 11: Interdisciplinary
+    "11.1": 0,
 }
 
 def calculate_topic_progress(topic_data, subtopic_ids):
@@ -118,7 +131,7 @@ def course_overview_view():
         user_id = user["localId"]
         user_progress = get_user_progress(user_id, course_id)
 
-    st.title(course["title"])
+    st.title(t(course["title"]))
     
     # Calculate overall course progress
     overall_completed = 0.0

@@ -180,7 +180,7 @@ def render_mcq(
         st.session_state[sol_btn_key] = False
     
     # Styled like the other topics
-    if st.button(t({"de": "Lösung zeigen", "en": "Show Solution"}), key=f"toggle_{key_suffix}"):
+    if st.button(t({"de": "Lösung zeigen", "en": "Show Solution"}), key=f"toggle_{key_suffix}", type="primary"):
         st.session_state[sol_btn_key] = not st.session_state[sol_btn_key]
         
     if st.session_state[sol_btn_key]:

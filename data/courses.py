@@ -3,8 +3,8 @@
 
 COURSES = {
     "vwl": {
-        "title": "Statistik für VWL",
-        "description": "Grundlagen der Statistik für Volkswirte.",
+        "title": {"de": "Statistik für VWL", "en": "Statistics for Economics"},
+        "description": {"de": "Grundlagen der Statistik für VWL-Studierende.", "en": "Fundamentals of Statistics for Economics Students."},
         "progress": 0.0,
         "color": "#10b981",
         "topics": [
@@ -23,7 +23,7 @@ COURSES = {
                     {"id": "1.7", "title": {"de": "1.7 Bedingte Wahrscheinlichkeit und stochastische Unabhängigkeit", "en": "1.7 Conditional Probability and Independence"}, "slide_start": 64},
                     {"id": "1.8", "title": {"de": "1.8 Totale Wahrscheinlichkeit", "en": "1.8 Total Probability"}, "slide_start": 77},
                     {"id": "1.9", "title": {"de": "1.9 Das Bayes-Theorem", "en": "1.9 Bayes' Theorem"}, "slide_start": 85},
-                    {"id": "1.10", "title": {"de": "1.10 Zusammenfassung & Prüfung", "en": "1.10 Summary & Exam"}, "slide_start": 92},
+                    {"id": "1.11", "title": {"de": "1.11 Zusätzliche Prüfungsaufgaben", "en": "1.11 Additional Exam Questions"}, "slide_start": 92},
                 ]
             },
             {
@@ -37,6 +37,7 @@ COURSES = {
                     {"id": "2.3", "title": {"de": "2.3 Permutationen", "en": "2.3 Permutations"}, "slide_start": 99},
                     {"id": "2.4", "title": {"de": "2.4 Kombinationen", "en": "2.4 Combinations"}, "slide_start": 101},
                     {"id": "2.5", "title": {"de": "2.5 Variationen", "en": "2.5 Variations"}, "slide_start": 103},
+                    {"id": "2.6", "title": {"de": "2.6 Zusätzliche Prüfungsaufgaben", "en": "2.6 Additional Exam Questions"}, "slide_start": 104},
                 ]
             },
             {
@@ -51,6 +52,7 @@ COURSES = {
                     {"id": "3.4", "title": {"de": "3.4 Erwartungswerte von Zufallsvariablen", "en": "3.4 Expected Values"}, "slide_start": 138},
                     {"id": "3.5", "title": {"de": "3.5 Varianz", "en": "3.5 Variance"}, "slide_start": 156},
                     {"id": "3.6", "title": {"de": "3.6 Standardisieren", "en": "3.6 Standardization"}, "slide_start": 169},
+                    {"id": "3.7", "title": {"de": "3.7 Zusätzliche Prüfungsaufgaben", "en": "3.7 Additional Exam Questions"}, "slide_start": 172},
                 ]
             },
             {
@@ -67,6 +69,7 @@ COURSES = {
                     {"id": "4.6", "title": {"de": "4.6 Exponentialverteilung (stetig)", "en": "4.6 Exponential Distribution (continuous)"}, "slide_start": 205},
                     {"id": "4.7", "title": {"de": "4.7 Normalverteilung (stetig)", "en": "4.7 Normal Distribution (continuous)"}, "slide_start": 209},
                     {"id": "4.8", "title": {"de": "4.8 Hypergeometrische Verteilung", "en": "4.8 Hypergeometric Distribution"}, "slide_start": 215},
+                    {"id": "4.9", "title": {"de": "4.9 Zusätzliche Prüfungsaufgaben", "en": "4.9 Additional Exam Questions"}, "slide_start": 217},
                 ]
             },
             {
@@ -79,6 +82,7 @@ COURSES = {
                     {"id": "5.2", "title": {"de": "5.2 Bedingte Verteilungen und stochastische Unabhängigkeit", "en": "5.2 Conditional Distributions and Stochastic Independence"}, "slide_start": 240},
                     {"id": "5.3", "title": {"de": "5.3 Kovarianz und Korrelationskoeffizient", "en": "5.3 Covariance and Correlation Coefficient"}, "slide_start": 248},
                     {"id": "5.4", "title": {"de": "5.4 Summe von zwei oder mehreren Zufallsvariablen", "en": "5.4 Sum of Two or More Random Variables"}, "slide_start": 254},
+                    {"id": "5.5", "title": {"de": "5.5 Zusätzliche Prüfungsaufgaben", "en": "5.5 Additional Exam Questions"}, "slide_start": 260},
                 ]
             },
             {
@@ -89,6 +93,7 @@ COURSES = {
                 "subtopics": [
                     {"id": "6.1", "title": {"de": "6.1 Der zentrale Grenzwertsatz", "en": "6.1 The Central Limit Theorem"}, "slide_start": 261},
                     {"id": "6.2", "title": {"de": "6.2 Anwendungen des CLT", "en": "6.2 Applications of the CLT"}, "slide_start": 270},
+                    {"id": "6.3", "title": {"de": "6.3 Zusätzliche Prüfungsaufgaben", "en": "6.3 Additional Exam Questions"}, "slide_start": 277},
                 ]
             },
             {
@@ -102,6 +107,7 @@ COURSES = {
                     {"id": "7.3", "title": {"de": "7.3 Boxplot", "en": "7.3 Box Plot"}, "slide_start": 302},
                     {"id": "7.4", "title": {"de": "7.4 Quantile-Quantile Plot", "en": "7.4 Quantile-Quantile Plot"}, "slide_start": 305},
                     {"id": "7.5", "title": {"de": "7.5 Streudiagramm", "en": "7.5 Scatter Plot"}, "slide_start": 310},
+                    {"id": "7.6", "title": {"de": "7.6 Zusätzliche Prüfungsaufgaben", "en": "7.6 Additional Exam Questions"}, "slide_start": 312},
                 ]
             },
             {
@@ -113,6 +119,7 @@ COURSES = {
                     {"id": "8.1", "title": {"de": "8.1 Intuitiv heuristische Ansätze für Schätzfunktionen", "en": "8.1 Intuitive Heuristic Approaches for Estimating Functions"}, "slide_start": 318},
                     {"id": "8.2", "title": {"de": "8.2 Eigenschaften von Punktschätzungen", "en": "8.2 Properties of Point Estimations"}, "slide_start": 328},
                     {"id": "8.3", "title": {"de": "8.3 Methoden zur Konstruktion von Schätzfunktionen", "en": "8.3 Methods for Constructing Estimating Functions"}, "slide_start": 346},
+                    {"id": "8.4", "title": {"de": "8.4 Zusätzliche Prüfungsaufgaben", "en": "8.4 Additional Exam Questions"}, "slide_start": 360},
                 ]
             },
             {
@@ -124,6 +131,7 @@ COURSES = {
                     {"id": "9.1", "title": {"de": "9.1 Konzept des Konfidenzintervalls", "en": "9.1 Concept of the Confidence Interval"}, "slide_start": 362},
                     {"id": "9.2", "title": {"de": "9.2 Ableitung von Konfidenzintervallen (bei grossen Stichproben)", "en": "9.2 Derivation of Confidence Intervals (for large samples)"}, "slide_start": 366},
                     {"id": "9.3", "title": {"de": "9.3 Zusammenhang mit Hypothesentests", "en": "9.3 Connection with Hypothesis Tests"}, "slide_start": 370},
+                    {"id": "9.4", "title": {"de": "9.4 Zusätzliche Prüfungsaufgaben", "en": "9.4 Additional Exam Questions"}, "slide_start": 374},
                 ]
             },
             {
@@ -136,6 +144,16 @@ COURSES = {
                     {"id": "10.2", "title": {"de": "10.2 Kritischer Bereich und Teststatistik", "en": "10.2 Critical Region and Test Statistics"}, "slide_start": 379},
                     {"id": "10.3", "title": {"de": "10.3 Gütefunktion und Arten von Fehlern", "en": "10.3 Power Function and Types of Errors"}, "slide_start": 383},
                     {"id": "10.4", "title": {"de": "10.4 Der p-Wert", "en": "10.4 The p-Value"}, "slide_start": 392},
+                    {"id": "10.5", "title": {"de": "10.5 Zusätzliche Prüfungsaufgaben", "en": "10.5 Additional Exam Questions"}, "slide_start": 394},
+                ]
+            },
+            {
+                "id": "topic_11", 
+                "title": {"de": "11. Fachübergreifende Aufgaben", "en": "11. Interdisciplinary Problems"}, 
+                "status": "open",
+                "slide_range": (395, 395),
+                "subtopics": [
+                    {"id": "11.1", "title": {"de": "11.1 Gemischte Prüfungsfragen", "en": "11.1 Mixed Exam Questions"}, "slide_start": 395},
                 ]
             },
         ]

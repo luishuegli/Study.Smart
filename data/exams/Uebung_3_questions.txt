@@ -1,0 +1,418 @@
+HSG, VWL                                                                          HS 2025
+Prof. Tobias Sutter                                                         Statistik 3,220
+
+
+            Übung 3: Mehrdimensionale Zufallsvariablen
+Teil A: Kontrollfragen
+
+  1. Wofür benötigt man das Konzept der mehrdimensionalen Zufallsvariablen?
+
+  2. Was gibt die gemeinsame Massenfunktion und was die gemeinsame Dichefunktion
+     an?
+
+  3. “Aus den beiden Randverteilungen einer zweidimensionalen Zufallsvariablen lässt sich
+     die gemeinsame Verteilung berechnen.” Unter welchen Voraussetzungen ist dieser Satz
+     richtig?
+
+  4. Was ist der Unterschied zwischen einer Randverteilung und einer bedingten Vertei-
+     lung?
+
+  5. Womit berechnet man den Erwartungswert und die Varianz der Komponenten einer
+     mehrdimensionalen Zufallsvariablen? Mit der Randverteilung oder der gemeinsamen
+     Verteilung?
+
+  6. Was bedeutet “stochastische Unabhängigkeit”?
+
+  7. Weshalb folgt aus V (X) + V (Y ) = V (X + Y ) nicht die stochastische Unabhängigkeit
+     von X und Y ?
+
+  8. Warum verwendet man den Korrelationskoeffizienten und nicht nur die Kovarianz?
+
+  9. Wie kann eine Folge unabhängig und identisch verteilter Zufallsvariablen entstehen?
+
+ 10. Wie kann man empirisch oder experimentell auf die unbekannte Verteilungsfunktion
+     einer Zufallsvariablen schliessen?
+
+Teil B: Multiple Choice
+In Übung voraussichtlich besprochen: 1,2,4,6,8,12
+Kreuzen Sie bitte in den folgenden Mehrfachwahl-Aufgaben die richtigen Aussagen an.
+Dabei kann es sein, dass von den zu einer Aufgabe vorgeschlagenen Lösungsmöglichkeiten
+keine, eine, mehrere oder alle richtig sind.
+
+  1. Die Kovarianz
+
+       (a) misst nur die Stärke des Zusammenhangs zwischen zwei Variablen.
+      (b) misst nur die Richtung des Zusammenhangs zwischen zwei Variablen.
+       (c) misst die Stärke und die Richtung des Zusammenhangs zwischen zwei Variablen.
+      (d) hat keinerlei Aussagekraft über den Zusammenhang zwischen zwei Variablen.
+       (e) nimmt immer Werte zwischen −1 und +1 an.
+
+  2. Der Korrelationskoeffizient ρ
+
+       (a) misst nur die Stärke des Zusammenhangs zwischen zwei Variablen.
+      (b) misst nur die Richtung des Zusammenhangs zwischen zwei Variablen.
+       (c) misst die Stärke und die Richtung des Zusammenhangs zwischen zwei Variablen.
+      (d) hat keinerlei Aussagekreft über den Zusammenhang zwischen zwei Variablen.
+
+HS 2025                                      1                                    Übung 3
+HSG, VWL                                                                           HS 2025
+Prof. Tobias Sutter                                                          Statistik 3,220
+
+       (e) nimmt immer Werte zwischen −1 und +1 an.
+
+  3. Zwei Variablen sind unabhängig, wenn
+
+       (a) der Korrelationskoeffizient ρ = 0 ist.
+      (b) das Produkt der Randverteilungen und die zweidimensionale Wahrscheinlich-
+          keitsverteilung übereinstimmen.
+       (c) die Summe der Randverteilungen und die zweidimensionale Wahrscheinlichkeits-
+           verteilung übereinstimmen.
+      (d) die Kovarianz Cov = 1 und der Korrelationskoeffizient ρ = 0 ist.
+       (e) die Kovarianz Cov = 0 ist.
+
+  4. Die Kovarianz wird errechnet mit:
+
+       (a) Cov(X, Y ) = E[XY ] − E[X]E[Y ].
+      (b) Cov(X, Y ) = E[XY ] − E[X 2 ]E[Y 2 ].
+       (c) Cov(X, Y ) = E[X 2 Y 2 ] − E[X]E[Y ].
+      (d) Cov(X, Y ) = E[X 2 Y 2 ] − E[X 2 ]E[Y 2 ].
+       (e) Cov(X, Y ) = E[XY ]2 − E[X]E[Y ].
+
+  5. Welche der folgenden Aussagen sind wahr?
+
+       (a) X, Y unabhängig =⇒ X, Y unkorreliert.
+      (b) X, Y unkorreliert =⇒ X, Y unabhängig.
+       (c) E[X + Y ] = E[X] + E[Y ].
+      (d) V (X + Y ) = V (X) + V (Y ).
+       (e) ρXY = −1 bedeutet: Je grösser X desto kleiner Y .
+       (f) Falls Y = cX, c > 0, ist ρXY = 1.
+
+  6. Welche der folgenden Aussagen sind wahr, welche falsch? E[XY ] = E[X]E[Y ]
+
+       (a) immer,
+      (b) nie,
+       (c) falls X und Y unkorreliert sind,
+      (d) falls X und Y unabhängig sind,
+       (e) falls E[X] = E[Y ] = 0.
+
+
+
+
+HS 2025                                        2                                   Übung 3
+HSG, VWL                                                                                                                         HS 2025
+Prof. Tobias Sutter                                                                                                        Statistik 3,220
+
+  7. Gegeben sind die folgende Streudiagramme von zweidimensionalen Stichproben.
+
+
+
+
+                                                                               4
+                          3
+                          2
+
+
+
+
+                                                                               2
+                          1
+                          0
+                      Y
+
+
+
+
+                                                                           Y
+
+                                                                               0
+                          -1
+                          -2
+
+
+
+
+                                                                               -2
+                          -3
+                               -3    -2   -1           0   1       2                     -2            0       2
+
+                                               X                                                   X
+
+
+
+
+                                                                               3
+                          2
+
+
+
+
+                                                                               2
+                          1
+
+
+
+
+                                                                               1
+                          0
+
+
+
+
+                                                                               0
+                      Y
+
+
+
+
+                                                                           Y
+                          -1
+
+
+
+
+                                                                               -1
+                          -2
+
+
+
+
+                                                                               -2
+                                                                               -3
+                          -3
+
+
+
+
+                                    -2             0           2                    -2        -1   0       1       2   3
+
+                                               X                                                   X
+
+
+
+
+      Ordnen Sie die Korrelationskoeffizienten ρ = 0, ρ = −0.7, ρ = 0.6 und ρ = 0.9 den
+      entsprechenden Abbildungen zu.
+
+  8. Sei X die Augenzahl beim einmaligen Werfen eines Würfels und Y das Ergebnis eines
+     einmaligen Münzwurf. Dann ist P [X > 3 | Y = “Kopf”]:
+
+       (a) P [X > 3 | Y = “Kopf”] = 1/3
+      (b) P [X > 3 | Y = “Kopf”] = 1/2
+       (c) P [X > 3 | Y = “Kopf”] = 2/3
+      (d) P [X > 3 | Y = “Kopf”] = 0
+       (e) P [X > 3 | Y = “Kopf”] = 1
+
+  9. In einem Experiment werden aus einer Urne mit 5 unterschiedlichen Kugeln (nume-
+     riert von 1-5) zwei Kugeln ohne Zurücklegen gezogen. Dabei gelte: X =“Kugelnummer
+     der ersten Ziehung” und Y =“Kugelnummer der zweiten Ziehung”. Das Experiment
+     wird eine Million Mal wiederholt. Es gilt:
+
+       (a) X und Y sind unabhängig.
+      (b) Die Kovarianz Cov(X, Y ) = 0.
+       (c) Der Korrelationskoeffizient ρXY = 0.
+      (d) Der Korrelationskoeffizient ρXY = −0.25.
+       (e) Der Korrelationskoeffizient ρXY = −0.5.
+
+ 10. Folgende Dichtefunktion sei gegeben: fX,Y (x, y) = 12 x+y für 0 ≤ x ≤ a und 0 ≤ y ≤ 1.
+     Berechnen Sie den Parameter a.
+
+       (a) a = 1.236068
+      (b) a = 2
+       (c) a = 3.236068
+
+HS 2025                                                                3                                                         Übung 3
+HSG, VWL                                                                               HS 2025
+Prof. Tobias Sutter                                                              Statistik 3,220
+
+      (d) a = 3
+       (e) a = 1
+                                                           1
+ 11. Folgende Dichtefunktion sei gegeben: fX,Y (x, y) = 12   x + 16 y für 0 ≤ x, y ≤ 2. Berech-
+     nen Sie die bedingte Dichte fY |X (y) für 0 ≤ x, y ≤ 2.
+
+       (a) fY |X (y) = x+2y
+                       2+4y
+
+      (b) fY |X (y) = x+2y
+                      2x+4
+                       2+4y
+       (c) fY |X (y) = x+2y
+                      2x+4
+      (d) fY |X (y) = x+2y
+                       x+2
+       (e) fY |X (y) = 1+2y
+                                                        1
+ 12. Folgende Dichtefunktion sei gegeben: fX,Y (x, y) = 12 x + 16 y für 0 ≤ x, y ≤ 2. Berech-
+     nen Sie E[X + 2Y ].
+
+       (a) E[X + 2Y ] = 33
+      (b) E[X + 2Y ] = 34
+                       9
+       (c) E[X + 2Y ] = 10
+                        3
+      (d) E[X + 2Y ] = 32
+                       9
+                        3
+       (e) E[X + 2Y ] = 10
+                                                        1
+ 13. Folgende Dichtefunktion sei gegeben: fX,Y (x, y) = 12 x + 16 y für 0 ≤ x, y ≤ 2. Berech-
+     nen Sie V (Y ).
+                    23
+       (a) V (Y ) = 81
+      (b) V (Y ) = 25
+                   81
+       (c) V (Y ) = 26
+                    81
+      (d) V (Y ) = 28
+                   81
+       (e) V (Y ) = 29
+                    81
+
+
+
+
+HS 2025                                        4                                       Übung 3
+HSG, VWL                                                                                       HS 2025
+Prof. Tobias Sutter                                                                      Statistik 3,220
+
+Teil C: Aufgaben
+In Übung voraussichtlich besprochen: 1,2,5
+
+  1. Die Massenfunktion einer zweidimensionalen Zufallsvariablen (X, Y ) ist in der Tabelle
+
+                                                          Y
+                                                    2     3        4
+                                           10     1/9    1/9     1/9
+                                      X    20     1/6     0      1/6
+                                           30     1/18   2/9     1/18
+
+      dargestellt. In der Kopfzeile stehen die möglichen Ausprägungen von Y , in der Kopf-
+      spalte diejenigen von X, im Innern der Tabelle die Wahrscheinlichkeitsmassen.
+
+       (a) Berechnen Sie die beiden Randverteilungen.
+      (b) Berechnen Sie die Verteilungen für X unter der Bedingung, dass Y = 4 ist.
+       (c) Berechnen Sie V (X) und V (Y ).
+      (d) Berechnen Sie die Kovarianz und den Korrelationskoeffizienten.
+       (e) Sind X und Y stochastisch unabhängig?
+
+                                                                           [ (c) 66.67; 0.6667; (d) 0; 0 ]
+
+
+  2. Gegeben sei die folgende gemeinsame Wahrscheinlichkeitsmassenfunktion einer zwei-
+     dimensionalen Zufallsvariablen (X, Y ):
+
+                                                 y1     y2       y3
+                                          x1    0.01   0.05       0
+                                          x2     0       0      0.17
+                                          x3    0.40     0      0.12
+                                          x4     0     0.25       0
+
+      Berechnen Sie
+
+       (a) fX (x3 ) und fY (y2 );
+      (b) fY |X=x2 (y3 ), fX|Y =y3 (x3 ) und fY |X=x4 (y1 ).
+
+                                                                        [ (a) 0.52; 0.3; (b) 1; 0.4138; 0 ]
+
+
+  3. Gegeben sei die zweidimensionale Zufallsvariable (X, Y ) mit der gemeinsamen Wahr-
+     scheinlichkeitsmassenfunktion
+
+                                                           Y
+                                                 0       1/2       1
+                                           0    3/24     1/12    7/24
+                                      X    1    1/12      1/6     1/4
+
+       (a) Sind die Zufallsvariablen X und Y unabhängig voneinander?
+      (b) Man berechne die Kovarianz zwischen X und Y .
+
+HS 2025                                           5                                             Übung 3
+HSG, VWL                                                                                                HS 2025
+Prof. Tobias Sutter                                                                               Statistik 3,220
+
+       (c) Man bestimme die Varianz von X und Y sowie von X − Y .
+
+                                                                 [ (a) abhängig; (b) 0; (c) 0.25; 0.1597; 0.4097 ]
+
+
+  4. Gegeben sei die Funktion
+                                          
+                                              24xy für x ≥ 0, y ≥ 0, x + y ≤ 1
+                        fX,Y (x, y) =
+                                              0    sonst.
+
+       (a) Zeigen Sie: fX,Y (x, y) ist die gemeinsame Dichtefuntion zweier Zufallsvariablen
+           X und Y .
+      (b) Sind X und Y unabhängig?
+
+                                                                                                  [ (b) abhängig ]
+
+
+  5. Gegeben sei die Funktion
+                                      
+                                          2x exp (−y) für 0 ≤ x ≤ 1, 0 < y < ∞
+                      fX,Y (x, y) =
+                                          0           sonst.
+
+       (a) Zeigen Sie: fX,Y (x, y) ist die gemeinsame Dichtefuntion zweier Zufallsvariablen
+           X und Y .
+      (b) Sind X und Y unabhängig?
+
+                                                                                                [ (b) unabhängig ]
+
+
+  6. Im Rahmen einer umfangreichen Studie an Mittelschulen wurde folgende Verteilung
+     der Mathematik- und Englischnoten gefunden:
+
+                        X : Mathematiknoten                                  xi = 1, 2, 3, 4
+                        Y : Englischnoten                                     yi = 1, 2, 3, 4
+
+      mit der gemeinsamen Wahrscheinlichkeitsfunktion
+
+                                                Y
+                                                 1          2         3       4
+                                  X       1    0.05        0.1      0.05      0
+                                          2    0.03        0.1       0.2    0.07
+                                          3    0.02       0.08       0.1     0.1
+                                          4      0        0.02      0.05    0.03
+
+       (a) Man zeige: µX = 2.3, σX = 0.9, µY = 2.7, σY = 0.9.
+      (b) Bestimmen Sie Cov(X, Y ) und ρXY . Interpretieren Sie dieses Resultat.
+       (c) Ferner sei Z = 12 (X + Y ). Bestimmen Sie E[Z] und V (Z). Vergleichen Sie σZ
+           mit σX und σY . Wie interpretieren Sie dieses Resultat?
+
+                                                                                   [ (b) 0.29; 0.36; (c) 2.5; 0.55 ]
+
+
+
+HS 2025                                               6                                                  Übung 3
+HSG, VWL                                                                                         HS 2025
+Prof. Tobias Sutter                                                                        Statistik 3,220
+
+  7. X, Y und Z seien unabhängige Zufallsvariablen mit folgenden Wahrscheinlichkeits-
+     funktionen:
+
+                                            X          0     1
+                                            fX        1/4   3/4
+
+                                       Y      −1         0         1
+                                       fY     1/3       1/3       1/3
+
+                                     Z       1         2     3       4
+                                     fZ     0.3       0.4   0.2     0.1
+
+       (a) Bestimmen Sie den Mittelwert und die Varianz von X, Y und X − Y .
+      (b) Bestimmen Sie die Wahrscheinlichkeitsfunktionen von U = X + Y und V =
+          X + Y + Z. Es ist eine Tabelle in derselben Form wie oben für X, Y und Z
+          anzugeben.
+       (c) Bestimmen Sie die Wahrscheinlichkeiten: P [X = 0, Y = −1, Z = 4], P [X = 0 |
+           Y = 1] und P [X = 1 | X + Y = 2].
+
+                      [ (a) E[X] = 0.75; E[Y ] = 0; E[X − Y ] = 0.75; V (X) = 0.1875; V (Y ) = 0.6667;
+                                                                   V (X − Y ) = 0.8542; (c) 1/120; 0.25; 1 ]
+
+
+
+
+HS 2025                                           7                                               Übung 3
+

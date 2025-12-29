@@ -1,0 +1,151 @@
+HSG, VWL                                                                               HS 2025
+Prof. Tobias Sutter                                                              Statistik 3,220
+
+
+                      Übung 4a: Zentraler Grenzwertsatz
+Teil B: Multiple Choice
+In Übung voraussichtlich besprochen: 2
+Kreuzen Sie bitte in den folgenden Mehrfachwahl-Aufgaben die richtigen Aussagen an.
+Dabei kann es sein, dass von den zu einer Aufgabe vorgeschlagenen Lösungsmöglichkeiten
+keine, eine, mehrere oder alle richtig sind.
+
+  1. Seien X1 , X2 , . . . , Xn unabhängige Zufallsvariablen mit endlichen Werten sowohl für
+     den Erwartungswert als auch für die Varianz und Sn = X1 + X2 + . . . + Xn . Dann
+     besagt der Zentrale Grenzwertsatz, dass
+
+       (a) Sn approximativ standardnormalverteilt ist, wenn X1 , X2 , . . . , Xn identisch ver-
+           teilt sind und n > 30.
+      (b) die standardisierte Zufallsvariable Sn approximativ standardnormalverteilt ist,
+          wenn X1 , X2 , . . . , Xn identisch verteilt sind und n > 30.
+       (c) Sn approximativ normalverteilt ist, wenn X1 , X2 , . . . , Xn identisch verteilt sind
+           und n > 30.
+      (d) die standardisierte Zufallsvariable Sn approximativ normalverteilt ist, wenn
+          X1 , X2 , . . . , Xn identisch verteilt sind und n > 30.
+       (e) die standardisierte Zufallsvariable Sn approximativ standardnormalverteilt ist,
+           wenn X1 , X2 , . . . , Xn identisch verteilt sind und n ≤ 30.
+
+  2. Welche Bedingungen müssen erfüllt sein, damit der Zentrale Grenzwertsatz angewen-
+     det werden kann?
+
+       (a) Sn = X1 + X2 + . . . + Xn .
+      (b) Sn = X12 + X22 + . . . + Xn2 .
+       (c) X1 , X2 , . . . , Xn sind identisch verteilt.
+      (d) X1 , X2 , . . . , Xn sind gleichverteilt.
+       (e) n > 30.
+
+  3. X und Y seien unabhängig. Die Summe Z = X + Y ist
+
+       (a) binomialverteilt, wenn X und Y binomialverteilt sind mit demselben p.
+      (b) normalverteilt, wenn X und Y normalverteilt sind mit denselben Parametern.
+       (c) standardnormalverteilt, wenn X und Y standardnormalverteilt sind.
+      (d) normalverteilt, wenn X und Y standardnormalverteilt sind.
+
+
+
+
+HS 2025                                            1                                  Übung 4a
+HSG, VWL                                                                                      HS 2025
+Prof. Tobias Sutter                                                                     Statistik 3,220
+
+Teil C: Aufgaben
+In Übung voraussichtlich besprochen: 3
+
+  1. Eine Zulieferung von 100′ 000 Speicherchips wird mit Hilfe des folgenden statistischen
+     Prüfplans geprüft. Man zieht eine Zufallsstichprobe vom Umfang n = 400 und handelt
+     wie folgt:
+        1) Befinden sich 44 oder weniger schlechte Stücke in der Stichprobe, so wird die
+           Lieferung angenommen.
+        2) Befinden sich 51 oder mehr schlechte Stücke in der Stichprobe, so wird die ganze
+           Lieferung abgelehnt und zurückgesandt.
+        3) Liegt die Anzahl der schlechten Stücke in der Stichprobe zwischen 45 einschlies-
+           slich und 50 einschliesslich, so wird die ganze Lieferung überprüft (Totalkontrol-
+           le)
+      Berechnen Sie die Wahrscheinlichkeit für das Eintreten jeder dieser drei Fälle für eine
+      Lieferung, die genau 10% defekte Chips enthält.
+
+                                                                      [ 1) 0.7434; 2) 0.040; 3) 0.1866 ]
+
+  2. Das mittlere Jahreseinkommen aller Haushalte in einer Grossstadt beträgt 32600
+     Euro bei einer Standardabweichung von 6200 Euro. Eine Zufallsstichprobe mit 400
+     Haushalten wird entnommen.
+       (a) Wie hoch ist die Wahrscheinlichkeit, in der Stichprobe ein mittleres Jahresein-
+           kommen von über 32000 Euro vorzufinden?
+      (b) Mit welcher Wahrscheinlichkeit liegt der Stichprobenmittelwert zwischen 32100
+          und 33100 Euro?
+       (c) Mit welcher Wahrscheinlichkeit liegt der Stichprobenmittelwert zwischen 32350
+           und 32950 Euro?
+      (d) Geben Sie an, ohne zu rechnen oder statistiche Tafeln zu benutzen, in welchem
+          der folgenden drei Intervalle (in Euro)
+
+                        (1) 32100 − 32300   (2) 32300 − 32500       (3) 32500 − 32700
+
+           der Stichprobenmittelwert mit grösster Wahrscheinlichkeit liegen wird.
+
+                                                [ (a) 0.973; (b) 0.893; (c) 0.662; (d) im Intervall (3) ]
+
+
+  3. Eine Maschine produziert defekte Teile mit einer konstanten Wahrscheinlichkeit p.
+     Der Verkauf erfolgt in Serien zu 2000 Stück. Ein bestimmter Käufer kontrolliert die
+     gesamte Serie und weist sie zurück, falls mehr als 200 defekte Teile darin enthalten
+     sind. Wie gross darf p höchstens sein, damit die Lieferung mit einer Wahrscheinlichkeit
+     von 95% nicht zurückgewiesen wird?
+
+                                                                                                [ 0.090 ]
+
+  4. Ein symmetrischer Würfel wird 180 Mal geworfen. X sei die Anzahl geworfener 6er.
+     Bestimmen Sie:
+
+                      (a) P [28 < X ≤ 32]   (b) P [31 ≤ X < 36]      (c) P [X = 30].
+
+HS 2025                                        2                                             Übung 4a
+HSG, VWL                                                                                    HS 2025
+Prof. Tobias Sutter                                                                   Statistik 3,220
+
+                                                                [ (a) 0.3094; (b) 0.3245; (c) 0.0796 ]
+
+
+  5. Die Dividendenerträge (Dividende/Kurs) der Aktiengesellschaften in DAX folgten im
+     vergangenen Jahr recht gut einer Normalverteilung mit einer Standardabweichung
+     von 2.5%. Eine Zufallsstichprobe von 16 Gesellschaften wurde entnommen, um den
+     Mittelwert der Dividendenerträge zu schätzen.
+
+       (a) Wie gross ist die Wahrscheinlichkeit, dass der Stichprobenmittelwert den mitt-
+           leren Dividendenertrag im DAX um mehr als 1% übersteigt?
+      (b) Mit welcher Wahrscheinlichkeit unterscheidet sich der Stichprobenmittelwert
+          vom mittleren Dividendenertrag im DAX um mehr als 1.2%?
+       (c) Unabhängig von der ersten Stichprobe werde nun eine zweite Stichprobe vom
+           Umfang 40 entnommen. Entscheiden Sie ohne erneute Berechnungen, ob die
+           Wahrscheinlichkeiten von (a) und (b) kleiner oder grösser sind als bei der ersten
+           Stichprobe.
+
+                                                                [ (a) 0.0548; (b) 0.0548; (c) kleiner ]
+
+
+  6. Ein Funkgerät besteht aus 1000 Elementen. Die Wahrscheinlichkeit für den Ausfall
+     eines Elementes beträgt 0.001 und hängt nicht vom Zustand der anderen Elemente
+     ab.
+
+       (a) Geben Sie mit einer Formel die exakte Wahrscheinlichkeit an, dass genau 2
+           Elemente ausfallen
+      (b) Berechnen Sie mit Hilfe einer geeigneten Verteilung approximativ die Wahr-
+          scheinlichkeit, dass mehr als 2 aber weniger als 6 Elemente ausfallen.
+       (c) Das Funkgerät ist nicht mehr funktionstüchtig, falls von den 1000 Elementen
+           mindestens eines ausfällt. Berechnen Sie die Wahrscheinlichkeit für den Ausfall
+           des Funkgerätes exakt und approximativ.
+
+                                            [ (b) 0.0668; (c) 0.6323 (exakt); 0.6321 (approximativ) ]
+
+
+  7. Eine Seilbahn, die 50 Personen fasst, darf mit maximal 4200 kg belastet werden.
+     Das Gewicht der Benützer (inkl. Skiausrüstung) ist im Mittel 80 kg mit einer Stan-
+     dardabweichung von σ = 10 kg (nicht notwendigerweise normalverteilt). Mit welcher
+     Wahrscheinlichkeit übersteigt das Gesamtgewicht einer Zufallsgruppe von 50 Perso-
+     nen das zulässige Gewicht?
+
+                                                                                             [ 0.0023 ]
+
+
+
+
+HS 2025                                      3                                             Übung 4a
+

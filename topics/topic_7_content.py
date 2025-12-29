@@ -19,5 +19,8 @@ def render_topic_7_content(client, subtopic_id):
     elif subtopic_id == "7.5":
         from topics.topic_7_5_content import render_subtopic_7_5
         render_subtopic_7_5(client)
+    elif subtopic_id == "7.6":
+        from topics.topic_7_6_content import render_subtopic_7_6
+        render_subtopic_7_6(client)
     else:
         st.warning(f"Subtopic {subtopic_id} not found.")

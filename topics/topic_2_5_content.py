@@ -265,7 +265,7 @@ def render_subtopic_2_5(model):
         st.markdown("<br>", unsafe_allow_html=True)
         
         st.markdown(f"""
-<div style="background: #f4f4f5; border-left: 3px solid #71717a; padding: 12px; border-radius: 6px; color: #3f3f46;">
+<div style="background: #f4f4f5; border-left: 3px solid #71717a; padding: 24px 20px; border-radius: 6px; font-size: 0.9rem; color: #3f3f46;">
 <strong>Pro Tip:</strong> {t({
     "de": "Banken nutzen MIT Wiederholung (10⁴ = 10'000) weil es SICHERER ist als ohne (5'040)!",
     "en": "Banks use WITH replacement (10⁴ = 10,000) because it's MORE SECURE than without (5,040)!"
@@ -294,7 +294,7 @@ def render_subtopic_2_5(model):
 <div style="font-size: 0.85rem; color: #666; padding-left: 26px; font-style: italic; margin-bottom: 12px;">
     Ex: {t(content_2_5['formula']['example'])}
 </div>
-<div style="background: #f4f4f5; border-left: 3px solid #71717a; padding: 8px 12px; border-radius: 6px; font-size: 0.85rem; color: #3f3f46;">
+<div style="background: #f4f4f5; border-left: 3px solid #71717a; padding: 24px 20px; border-radius: 6px; font-size: 0.9rem; color: #3f3f46;">
     <strong>Pro Tip:</strong> {t(content_2_5['formula']['pro_tip'])}
 </div>
             """, unsafe_allow_html=True)
@@ -317,13 +317,10 @@ def render_subtopic_2_5(model):
             error_msg_dict={"de": "Noch nicht ganz...", "en": "Not quite..."},
             client=model,
             ai_context="Variations with Replacement: Coin flip 2^4",
+            hint_text_dict={"de": r"$$n^k$$", "en": r"$$n^k$$"},
             course_id="vwl",
             topic_id="2",
             subtopic_id="2.5",
             question_id="q_2_5_coin"
         )
-        
-        # Formula hint (Rule 2.4: hints go AFTER the question)
-        with st.expander(t({"de": "Formel-Hinweis", "en": "Formula Hint"})):
-            st.latex(r"n^k")
 

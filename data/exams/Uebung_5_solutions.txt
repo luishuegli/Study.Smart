@@ -1,0 +1,364 @@
+HSG, VWL                                                                HS 2025
+Prof. Tobias Sutter                                               Statistik 3,220
+
+                                    Musterlösungen
+
+      Übung 5: Punkt- und Intervallschätzungen und Hypothesentests
+
+Teil A: Multiple Choice
+
+  1. b)
+
+  2. a)
+
+  3. b)
+
+  4. a)
+
+  5. b)
+
+  6. a) und b)
+
+  7. a)
+
+  8. b)
+
+  9. b)
+
+ 10. d)
+
+ 11. c)
+
+ 12. b)
+
+ 13. b)
+
+ 14. b)
+
+ 15. c)
+
+ 16. b)
+
+ 17. a)
+
+ 18. b)
+
+Teil B: Aufgaben: Punkt- und Intervallschätzung
+
+  1. (a) E[µ1 ] = E X21 + X22 = 12 E[X1 ] + 21 E[X2 ] = 2µ
+                             
+                                                          2 =µ
+         ⇒ µ1 ist erwartungstreu.
+
+         E[µ2 ] = E X31 + 2X     = 3 E[X1 ] + 32 E[X2 ] = 2µ
+                                1
+                                                           2 =µ
+                              2
+                            3
+         ⇒ µ2 ist erwartungstreu.
+
+
+                                              1
+                                             = 4 V ar[X1 ] + 41 V ar[X2 ] = V ar[X]
+                                X       X2
+                                             1
+    (b) V ar[µ1 ] = V ar             1
+                                     2 + 2                                     2
+
+
+                                              = 9 V ar[X1 ] + 49 V ar[X2 ] = 5V ar[X]
+                                X       2X2
+                                              1
+          V ar[µ2 ] = V ar           1
+                                     3 +  3                                      9
+
+        V ar[µ1 ] < V ar[µ2 ] ⇒ µ1 ist effizienter.
+       h              i
+          1 P500            1 P500                V [X]
+2. V ar 500   i=1 i = 5002
+                   X             i=1 V ar[Xi ] = 500
+
+          h                i
+               1 P320             1      P320              V [X]
+   V ar       320 i=1 Xi       = 3202      i=1 V ar[Xi ] = 320
+
+   Beide Schätzer sind erwartungstreu aber die Varianz des Schätzer ist grösser wenn nur
+   ein Teil der Stichprobe verwendet wird. Diese Differenz beschreibt den Effizienzverlust.
+
+3. (a)
+                                          Z θ+1
+                                                     (θ + 1)2 − θ2    2θ + 1
+                               E[X] =             x · 1dx =         =
+                                      θ                    2             2
+                                     Z θ+1                   3     3
+                                                      (θ + 1) − θ      3θ2 + 3θ + 1
+                           E[X 2 ] =       x2 · 1dx =                =
+                                      θ                     3                3
+                                                        1
+                            V ar = E[X 2 ] − E[X]2 =
+                                                       12
+
+    (b) E n1 ni=1 Xi = n1 ni=1 E[Xi ] = n·E[X]
+          P            P
+                                          n    = θ + 0.5
+
+        ⇒ X ist verzerrt. X − 0.5 ist erwartungstreu.
+    (c) V ar n1 ni=1 Xi = n12 ni=1 V ar[Xi ] = n·V nar[X]    1
+             P             P
+                                                     2    = 12·n
+
+4. (a)
+                          5           5
+                     "         #
+                       1X          1X             5 · E[X]
+          E[T1 ] = E         Xi =        E[Xi ] =          =µ
+                       5           5                  5
+                         i=1         i=1
+                     " 3       #      3
+                       1X          1X             3 · E[X]
+          E[T2 ] = E         Xi =        E[Xi ] =          =µ
+                       3           3                  3
+                         i=1         i=1
+                                                          4
+                       (X1 + X2 + X3 + X4 ) 1            1X            1         8 · E[X]
+          E[T3 ] = E                        + X5 =             E[Xi ] + E[X5 ] =          =µ
+                                 8              2        8             2             8
+                                                           i=1
+                     " 2       #      2
+                       1X          1X             2 · E[X]
+          E[T4 ] = E         Xi =        E[Xi ] =          =µ
+                       2           2                  2
+                               i=2              i=1
+          E[T5 ] = E[X1 ] = µ
+
+
+
+
+                                                        2
+                               5           5
+                         "          #
+                            1X          1 X                5 · V ar[X]     σ2
+         V ar[T1 ] = V ar         Xi = 2      V ar[Xi ] =               =
+                            5           5                       52          5
+                              i=1         i=1
+                          " 3       #      3
+                            1X          1 X                3 · V ar[X]     σ2
+         V ar[T2 ] = V ar         Xi = 2      V ar[Xi ] =               =
+                            3           3                       32          3
+                              i=1         i=1
+                                                                    4
+                                                                                                 5 · σ2
+                                                        
+                            (X1 + X2 + X3 + X4 ) 1              1 X                1
+         V ar[T3 ] = V ar                        + X5 = 2              V ar[Xi ] + 2 V ar[X5 ] =
+                                      8             2          8                  2                16
+                                                                   i=1
+                          " 2       #      2
+                            1X          1 X                2 · V ar[X]     σ2
+         V ar[T4 ] = V ar         Xi = 2      V ar[Xi ] =               =
+                            2           2                       22          2
+                             i=2            i=1
+         V ar[T5 ] = V ar[X1 ] = σ 2
+
+   (b)
+
+                                                       σ2
+                                            MSE[T1 ] =
+                                                        5
+                                                       σ2
+                                            MSE[T2 ] =
+                                                        3
+                                                       5 · σ2
+                                            MSE[T3 ] =
+                                                         16
+                                                       σ2
+                                            MSE[T4 ] =
+                                                        2
+                                            MSE[T5 ] = σ 2
+
+         V ar[T1 ] ist am kleinsten ⇒ T1 ist am effizientesten.
+
+5. X ist eine Bernoulli Zufallsvariable mit E[X] = π und V ar[X] = π(1 − π)
+   E[π̂] = E n1 ni=1 Xi = n1 ni=1 E[Xi ] = E[X] = π
+              P             P
+
+   V ar[π̂] = V ar n1 ni=1 Xi = n12 ni=1 V ar[Xi ] = V ar[X] = π(1−π)
+                   P              P
+                                                        n         n
+
+   (a)      für π = 0 E[X] = 0 und V ar[X] = 0 ⇒ E[π̂] = 0 und V ar[π̂] = 0.
+            für π = 0.25     E[X] = 0.25 und V ar[X] = 0.1875 ⇒ E[π̂] = 0.25 und
+             V ar[π̂] = 0.1875/n.
+            für π = 0.5    E[X] = 0.5 und V ar[X] = 0.25 ⇒ E[π̂] = 0.5 und V ar[π̂] =
+             0.25/n.
+            für π = 0.75     E[X] = 0.75 und V ar[X] = 0.1875 ⇒ E[π̂] = 0.75 und
+             V ar[π̂] = 0.1875/n.
+            für π = 1 E[X] = 1 und V ar[X] = 0 ⇒ E[π̂] = 1 und V ar[π̂] = 0.
+             Den M SE(π̂) erhält man nun mit der folgenden Formel:
+
+                         M SE(π̂) = bias(π̂)2 + V ar(π̂) = (E(π̂) − π)2 + V ar(π̂).
+
+             Da unser Schätzer jedoch erwartungstreu ist (bias = 0) erhalten wir M SE(π̂) =
+             V ar(π̂).
+
+                                              3
+   (b)
+                               Pn                                Pn
+                                      i=1 Xi + 1E[Xi ] + 1    nE[X] + 1   nπ + 1
+               E[T ] = E                  = i=1            =            =
+                               n+2             n+2              n+2        n+2
+                              Pn           Pn
+                                i=1 Xi + 1         V ar[Xi ]   nV ar[X]   nπ(1 − π)
+             V ar[T ] = V ar                = i=1            =          =
+                                  n+2           (n + 2)2       (n + 2)2    (n + 2)2
+
+         bias[T ] = E[T ] − E[X] = nE[X]+1−(n+2)E[X]
+                                          n+2         = −2E[X]+1
+                                                           n+2
+                                                                 2
+                                                         −2E[X]+1
+         ⇒ MSE(π̂) = V ar[T ] + bias[T ]2 = nV ar[X]
+                                             (n+2)2
+                                                     +     n+2
+
+         bias[T ] ̸= 0 ⇒ T ist nicht erwartungstreu. Da bias[T ] → 0 wenn n → ∞ ⇒ T ist
+         asymptotisch erwartungstreu.
+
+         Konsistenz: Da T asymptotisch erwartungstreu ist und V ar[T ] → 0 wenn n →
+         ∞ ⇒ T ist konsistent.
+   (c) E[π̂] = π und E[T ] = 12π+1
+                               14
+       bias(π̂) = 0 und bias(T ) = 1−2π
+                                    14
+       V ar[π̂] = 12 und V ar[T ] = 12π(1−π)
+                  π(1−π)
+                                        142
+
+
+                                            MSE1
+                              0.020
+
+
+
+
+                                            MSE2
+                              0.015
+                        MSE
+
+                              0.010
+                              0.005
+                              0.000
+
+
+
+
+                                      0.0          0.2       0.4        0.6   0.8   1.0
+
+                                                                   pi
+
+
+
+
+       Die Grafik zeigt den M SE für den Schätzer π (M SE1) und für T (M SE2) für
+       verschiedene Werte π. Die beiden Kurven schneiden sich in den Punkten π ≈ 0.14
+       und π ≈ 0.86. Falls wir den M SE als Bewertungskriterium für die Güte des
+       Schätzers heranziehen bevorzugen wir also T für 0.14 ≤ π ≤ 0.86 und π̂ sonst.
+
+6. (a) E[X] = λ1 ⇒ ein Momentenschätzer wäre 1 = n1 ni=1 Xi ⇒ λ̂M M = Pn n Xi
+                                                            P
+                                                 λ̂M M                           i=1
+                θ−0.5+θ+0.5                                        1 Pn
+   (b) E[X] =        2      ⇒ ein Momentenschätzer wäre θ̂M M = n i=1 Xi .
+   (c) E[X] = µ ⇒ ein Momentenschätzer für µ wäre µ̂M M = n1 ni=1 Xi .
+                                                                 P
+       V ar[X] = σ 2 ⇒ ein Momentenschätzer für σ 2 wäre
+                                         2
+       σˆ2 M M = n1 ni=1 Xi2 − n1 ni=1 Xi .
+                   P              P
+
+
+                                                                   4
+7. Für eine poissonverteilte Zufallsvariable X gilt µ = E(X) = λ. Daher werden wir in
+   der Folge den unbekannten Verteilungsparameter λ schätzen.
+
+     (a) Likelihood Funktion:
+                                                   n                       n                           Pn
+                                                   Y                       Y λ xi           −λ     λ i=1 xi −nλ
+                        L(λ, x1 , . . . , xn ) =         f (λ, xi ) =                   e        = Qn        e
+                                                                                 xi !               i=1 xi !
+                                                   i=1                     i=1
+
+           Loglikelihood Funktion:
+                                                                                                 n              n
+                                                          Pn               !                                            !
+                                                     λ i=1 xi −λ                                 X              Y
+           l(λ, x1 , . . . , xn ) = ln L(λ) = ln     Qn        e                 = ln(λ)               xi −ln         xi ! −nλ ln(e)
+                                                      i=1 xi !                                   i=1            i=1
+
+           Bilde die erste Ableitung und setzt diese Null:
+                                                             Pn
+                               ∂l(λ, x1 , . . . , xn )           xi
+                                                       = 0 ⇐⇒ i=1 − n = 0
+                                      ∂λ                       λ
+                          Pn
+                            i=1 xi
+           ⇒ λ̂M LE =        n
+
+
+     (b) E[λ̂M LE ] = λ ⇒ erwartungstreu.
+                                                                                                                         Pn
+8. (a) X binomialvereteilt E[X] = np ⇒ ein Momentenschätzer wäre np̂M M = n1                                              i=1 Xi ,
+       oder pMˆM = n12 ni=1 Xi
+                      P
+
+     (b)
+                                                                     n
+                                                      1 X
+                                               0.25 ≤ 2   Xi ≤ 0.75
+                                                     n
+                                                                     i=1
+
+     (c) Da n und p unbekannt sind, brauchen wir zwei Momenten z.B. E[X] = np und
+         V ar[X] = np(1 − p). Wir erhalten
+                                                               n
+                                                          1X
+                                               n̂p̂ =        Xi
+                                                          n
+                                                               i=1
+                                                               n                        n
+                                                                                                  !2
+                                                    1X 2                         1X
+                                     n̂p̂(1 − p̂) =   Xi −                          Xi                  .
+                                                    n                            n
+                                                               i=1                      i=1
+
+           Die Schätzer n̂ und p̂ ergeben sich dann aus der Lösung dieses Gleichungssystems.
+
+9.
+                                             Xn − µ         
+                                 P − q1− α2 ≤   σ    ≤ q1− 2 ⋍ 1 − α
+                                                           α
+                                                           √
+                                                               n
+                                                        50 − µ                  
+                                 P − q1− α2 ≤                        ≤ q1− α2        ⋍ 0.95
+                                                          √5
+                                                           300
+                                                         50 − µ
+                                         −1.96 ≤                     ≤ 1.96
+                                                          √5
+                                                           300
+
+
+                                                           5
+Man erhält
+                                                       
+                                    S               S
+        KON F0.95 (µ) = X̄ − q0.975 √ , X̄ + q0.975 √     = [49.4342, 50.5658].
+                                     n                n
+
+
+
+
+                                       6
+

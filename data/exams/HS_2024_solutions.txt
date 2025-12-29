@@ -1,0 +1,769 @@
+Multiple Choice (48 Punkte)
+Markieren Sie bei folgenden Multiple-Choice-Aufgaben die korrekte Aussage.
+
+    In jedem Block von Aussagen ist genau eine Antwort korrekt.
+
+    Die eindeutig markierte korrekte Aussage wird mit 4 Punkten (pro MC-Aufgabe) bewertet.
+
+    Eine Markierung der falschen Aussage, eine Mehrfachmarkierung oder keine Markierung wird
+     mit 0 Punkten bewertet.
+
+
+  1. (4 Punkte) Wir beobachten die Realisierungen von 25 Zufallsvariablen, die jeweils unabhängig
+     voneinander aus derselben Normalverteilung mit unbekanntem Erwartungswert µ und be-
+     kannter Varianz σ 2 = 0.5 gezogen werden. Wir möchten folgenden Hypothesentest durchführen:
+     H0 : µ = 0.5 gegen H1 : µ ≥ 0.5 mit einem Signifikanzniveau von α = 5%. Für welchen Wer-
+     tebereich des Stichprobenmittelwertes x̄ wird die Hypothese H0 verworfen?
+     Geben Sie den größtmöglichen Bereich an.
+
+      (a) x̄ > 0.66.
+      (b) x̄ > 0.73.
+      (c) x̄ > 0.78.
+      (d) x̄ > 1.64.
+
+     Lösung: (b)
+     Der Hypothesentest ist einseitig. Berechnen Sie den kleinsten möglichen Stichprobenmit-
+     telwert (bezeichnet als x̄∗ ), für den H0 , d.h., µ = µ0 = 0.5, verworfen würde. Die Inverse
+     der kumulativen Verteilungsfunktion (CDF) der Standardnormalverteilung wird mit ϕ−1
+     bezeichnet.
+                                           x̄∗ − µ0
+                             ϕ−1 (1 − α) = √     √
+                                             σ2/ n
+                                            x̄∗ − 0.5
+                                         =√       √
+                                             0.5/ 25
+                                                         (︂√       √ )︂
+                                  ↔ x̄∗ = ϕ−1 (0.95) ·         0.5/ 25 + 0.5
+                                         = 0.7326
+
+
+  2. (4 Punkte) Seien X und Y zwei Zufallsvariablen. Es ist bekannt, dass E[X 2 ] = E[Y ] = 31 ,
+     E[X] = 0 und ρX 2 ,Y > 0 (ρ bezeichnet den Korrelationskoeffizienten nach Pearson).
+     Welche der folgenden Aussagen ist immer wahr?
+
+      (a) −1 ≤ ρX,Y < 0
+      (b) ρX,Y = 0
+      (c) 0 < ρX,Y ≤ 1
+      (d) Keine der obigen Aussagen ist immer wahr.
+
+     Lösung: (d)
+     Intuitiv impliziert eine positive lineare Beziehung (Korrelation) zwischen X 2 und Y nichts
+     über eine lineare Beziehung zwischen X und Y .
+     Ein möglicher Lösungsweg besteht darin, zwei Beispiele zu finden, welche die Bedingungen
+     erfüllen, aber unterschiedliche Implikationen für ρX,Y liefern:
+
+
+                                                1
+      Y = X 2 wobei X kontinuierlich gleichverteilt ist zwischen −1 und 1. Offensichtlich gilt
+       ρX 2 ,Y > 0, aber ρX,Y = 0.
+      Y = X 2 + X wobei X kontinuierlich gleichverteilt ist zwischen −1 und 1. Offensichtlich
+       gilt ρX 2 ,Y > 0 und ρX,Y > 0.
+
+3. (4 Punkte) A und B sind Ereignisse. Es sei P(A) = 12 , P(B) = 23 und P(A ∩ B) = 41 . B̄
+   bezeichnet das Komplement von B. Wie groß ist der Wert von P(A | B̄)?
+
+   (a) 14
+   (b) 13
+   (c) 34
+   (d) 56
+
+  Lösung: (c)
+
+                                               P(A ∩ B̄)
+                                 P(A | B̄) =
+                                                 P(B̄)
+                                               P(A) − P(A ∩ B)
+                                             =
+                                                   1 − P(B)
+                                               1/4
+                                             =
+                                               1/3
+                                               3
+                                             =
+                                               4
+
+4. (4 Punkte) Das tatsächliche Gewicht einer Packung Nudeln ist normalverteilt mit dem Er-
+   wartungswert µ = 500 und der Varianz σ 2 = 40. Finden Sie das korrekte symmetrische
+   Konfidenzintervall um den wahren Parameter für das Gewicht einer einzelnen Packung: das
+   Konfidenzintervall muss um das mittlere Gewicht zentriert sein und 99% aller Nudelpackun-
+   gen enthalten.
+
+   (a) [396.967 ; 603.033]
+   (b) [483.709 ; 516.291]
+   (c) [485.287 ; 514.713]
+   (d) [487.604 ; 512.396]
+
+  Lösung: (b)
+  Das Konfidenzintervall wird konstruiert als:
+
+                                            √                         √
+                         [µ + ϕ−1 (α/2) ·    σ 2 ; µ + ϕ−1 (1 − α/2) · σ 2 ],
+
+  wobei ϕ−1 die Inverse der kumulativen Verteilungsfunktion (CDF) der Standardnormalver-
+  teilung bezeichnet.
+  Aufgrund der Symmetrie der Normalverteilung gilt −ϕ−1 (α/2) = ϕ−1 (1 − α/2).
+                                          √                     √
+                         [500 − 2.575829 · 40 ; 500 + 2.575829 · 40]
+                                       [483.709 ; 516.291]
+
+
+5. (4 Punkte) Es werden zufällig 4 Zahlen aus den ersten 12 Primzahlen ohne Zurücklegen
+   ausgewählt. Definieren Sie zwei Ereignisse:
+
+      A: Die Summe der 4 ausgewählten Zahlen ist ungerade.
+
+                                               2
+      B: Alle vier ausgewählten Zahlen sind ungerade.
+
+   Welche der folgenden Aussagen ist richtig in Bezug auf die Ereignisse A und B?
+
+    (a) A und B sind unabhängig und disjunkt.
+   (b) A und B sind unabhängig, aber nicht disjunkt.
+    (c) A und B sind abhängig und disjunkt.
+   (d) A und B sind abhängig und nicht disjunkt.
+
+   Lösung: (c)
+   Die Summe der vier Zahlen ist genau dann ungerade, wenn die Zahl 2 ausgewählt wurde.
+   In diesem Fall kann Ereignis B nicht eintreten. Somit sind die Ereignisse A und B disjunkt.
+   Weiterhin sind A und B abhängig, da die Kenntnis des Ausgangs von A Informationen über
+   den Ausgang von B liefert.
+
+6. (4 Punkte) In einem Bewerbungsverfahren beträgt die Wahrscheinlichkeit, zu einem Vor-
+   stellungsgespräch eingeladen zu werden, 10%. Von denjenigen, die eingeladen werden, haben
+   90% in ihrer Statistikprüfung eine bessere Note als 5 erreicht. Umgekehrt haben von den
+   Bewerbern, die nicht zu einem Vorstellungsgespräch eingeladen wurden, nur 20% eine bes-
+   sere Note als 5 erreicht. Wie hoch ist die Wahrscheinlichkeit, dass ein zufällig ausgewählter
+   Bewerber eine bessere Note als 5 in Statistik hat?
+
+    (a) 18%.
+   (b) 25%.
+    (c) 27%.
+   (d) 50%.
+
+   Lösung: (c)
+   Sei I das Ereignis, dass ein Bewerber zu einem Vorstellungsgespräch eingeladen wird, und
+   sei G das Ereignis, dass die Statistiknote besser als 5 ist.
+
+                               P(G) = P(G|I) · P(I) + P(G|Ī) · P(Ī)
+
+
+
+                                P(G) = (0.90 · 0.10) + (0.20 · 0.90)
+                                      = 0.09 + 0.18
+                                      = 0.27
+
+   Die Wahrscheinlichkeit, dass ein zufällig ausgewählter Bewerber eine bessere Note als 5 in
+   Statistik hat, beträgt somit 27%.
+
+7. (4 Punkte) Sei Y eine stetige Zufallsvariable mit Dichtefunktion
+                                        {︄
+                                           1
+                                             sin(y) für 0 < y < π,
+                               fY (y) = 2
+                                          0          sonst.
+
+   Wie groß ist der Erwartungswert von Y ?
+
+    (a) ln(π)
+   (b) π2
+       √
+   (c) 2π
+   (d) 3π
+        2
+
+
+                                               3
+    Lösung: (b) π2
+    Die Lösung kann wie folgt geschrieben werden:
+                 ∫︂ π                  [︃               ∫︂ π         ]︃
+                      1              1             ⃓π                   1 [︁           ⃓π ]︁ π
+         E[Y ] =        y sin(y)dy =      −y cos(y)⃓0 +      cos(y)dy =      π + sin(y)⃓0 =
+                   0 2               2                    0             2                    2
+
+
+ 8. (4 Punkte) Angenommen, X ∼ N (µ, σ 2 ) mit σ 2 = 5. Wir wollen die Hypothese H0 : µ = 8
+    gegen H1 : µ ̸= 8 mit nur 5 Beobachtungen testen. Ein MLE-Schätzwert von µ steht uns zur
+    Verfügung und beträgt µ̂ = 4.95. Wie groß ist der p-Wert des obigen Tests?
+
+     (a) 0.0011
+     (b) 0.0022
+     (c) 0.1738
+     (d) 0.3476
+
+    Lösung: (b) 0.0022
+    Die Lösung kann wie folgt berechnet werden:
+                   √ |4.95 − 8|
+                (︃              )︃
+                                                           α
+              Φ     5 √            = Φ(3.05) = 0.9989 ⇒ 1 − = 0.9989 ⇒ α = 0.0022.
+                           5                               2
+
+
+ 9. (4 Punkte) Das Einkommen X der Bürger einer Stadt ist lognormal verteilt (d.h. ln(X) ∼
+    N (µ, σ 2 )) mit µ = 8 und σ 2 = 4. Wie hoch ist die Wahrscheinlichkeit, dass das Einkommen
+    eines Bürgers unter 12000 CHF liegt?
+
+     (a) 0.242
+     (b) 0.363
+     (c) 0.637
+     (d) 0.758
+
+    Lösung: (d) 0.758
+    Die Lösung kann wie folgt geschrieben werden:
+                                                            [︃                           ]︃
+                                                           ln(X) − 8    ln(12000) − 8
+              P [X < 12000] = P [ln(X) < ln(12000)] = P              <
+                                                               2              2
+                                (︃               )︃
+                                   ln(12000) − 8
+                            =Φ                      = Φ(0.696) = 0.758.
+                                         2
+
+
+10. (4 Punkte) Ruben und Jochen spielen das folgende Spiel. Ruben würfelt so lange mit einem
+    fairen Würfel, bis er die Sequenz (1, 1) in zwei aufeinanderfolgenden Würfen erhält. Jochen
+    würfelt so lange, bis er die Sequenz (1, 2) in zwei aufeinanderfolgenden Würfen erhält. Welche
+    der folgenden Aussagen ist wahr?
+    Hinweis: Versuchen Sie nicht, die erwartete Anzahl an Würfen zu berechnen! Ein bisschen
+    gesunder Menschenverstand und Statistik helfen hier weiter.
+
+     (a) Im Durchschnitt benötigt Ruben mehr Würfe, um zu gewinnen.
+     (b) Im Durchschnitt benötigt Jochen mehr Würfe, um zu gewinnen.
+     (c) Im Durchschnitt benötigen beide die gleiche Anzahl an Würfen, um zu gewinnen.
+     (d) Im Durchschnitt gibt es nicht genügend Informationen, um den Gewinner zu bestimmen.
+
+
+
+
+                                                 4
+   Lösung: (a)
+   Ohne Berechnungen können wir argumentieren, dass Ruben, wenn er eine 1 würfelt, aber die
+   Sequenz nicht vervollständigt, vollständig neu beginnen muss. Jochen hingegen kann, wenn
+   er eine 1 würfelt und die Sequenz nicht vervollständigt, möglicherweise dennoch die Sequenz
+   in drei Würfen vervollständigen (z. B. 1, 1, 2), was für Ruben nicht möglich ist, wenn er die
+   zweite 1 nicht würfelt (im besten Fall vier Würfe).
+
+   Sei X die Anzahl der Würfe, die Ruben benötigt, um seine Sequenz zu erhalten, und Y die
+   Anzahl der Würfe, die Jochen benötigt. Wir berechnen dann
+                                         5           1 1     1 5
+                                 EX =      (1 + EX) + · · 2 + · (2 + EX)
+                                        ⏞6 ⏟⏟     ⏞ ⏞6 ⏟⏟
+                                                        6 ⏞ ⏞6 6 ⏟⏟    ⏞
+                                          Würfe 2−6       Würfe 1,1         Würfe 1,2−6
+                                      5 5         2   10  5
+                                 EX =   + EX +      +    + EX
+                                      6 6         36 36 36
+                     36 − 30 − 5      30 + 2 + 10
+                                 EX =
+                         36               36
+                                 EX = 42.
+
+   Für die erwartete Anzahl der Würfe von Jochen führen wir Z als Anzahl der Würfe ein, die
+   benötigt werden, um die Sequenz zu vervollständigen, nachdem die erste 1 geworfen wurde.
+   Wir berechnen
+                                        1      1            4
+                                EZ =      · 1 + · (1 + EZ) + (1 + EY )
+                                        6
+                                        ⏞⏟⏟⏞   6
+                                               ⏞    ⏟⏟   ⏞ ⏞6 ⏟⏟     ⏞
+                                       Würfe 2        Würfe 1           Würfe 3−6
+                                   1 1 1    4 4
+                               EZ = + + EZ + + EY
+                                   6 6 6    6 6
+                           6−1     6 4
+                               EZ = + EY
+                            6      6 6
+                                   6 4
+                               EZ = + EY.
+                                   5 5
+   Nun berechnen wir die erwartete Anzahl der Würfe für Jochen:
+                                                   5            1
+                                       EY =          (1 + EY ) + (1 + EZ)
+                                                  ⏞6 ⏟⏟      ⏞ ⏞6 ⏟⏟    ⏞
+                                                   Würfe 2−6           Würfe 1
+                                            5 5        1 1 4
+                                       EY = + EY + + + EY
+                                            6 6        6 5 30
+                           30 − 25 − 4      25 + 5 + 6
+                                       EY =
+                               30               30
+                                       EY = 36.
+
+   Daraus ergibt sich
+                                        EX = 42 > 36 = EY
+   und Ruben benötigt im Durchschnitt mehr Würfe als Jochen.
+
+11. (4 Punkte) Ruben und Jochen spielen das folgende Spiel. Eine faire Münze wird geworfen.
+    Wenn Kopf fällt, zahlt Jochen 1 CHF an Ruben. Wenn Zahl fällt, zahlt Ruben 1 CHF an
+    Jochen. Sie spielen das Spiel für eine feste Anzahl an Runden n. Sei X Rubens Gesamtge-
+    winn nach n Runden und Y Jochens Gesamtgewinn nach n Runden. Welche der folgenden
+    Aussagen ist wahr?
+    Hinweis: Beachten Sie, dass Gewinne auch negativ sein können. Sie bezieht sich auf den
+    Betrag, den der Spieler verdient oder verloren hat (wenn negativ).
+
+                                                   5
+     (a) X und Y haben dieselbe Verteilung.
+    (b) X = Y
+     (c) X und Y sind unabhängig.
+    (d) Keine der obigen Aussagen ist wahr.
+
+    Lösung: (a)
+    Der Gewinn von Ruben ist der negative Gewinn von Jochen, also X = −Y . Da für alle
+    Gewinne −n ≤ x ≤ n Ruben dieselbe Wahrscheinlichkeit hat, am Ende mit(︁ x und   )︁ −x CHF
+    zu enden, ist X symmetrisch um Null verteilt (tatsächlich ist X + n ∼ Bin n, 12 , was um n2
+    symmetrisch ist) und daher muss dies auch für Y gelten.
+    Da X = −Y , gilt
+
+                        P(Y = x) = P(−X = x) = P(X = −x) = P(X = x)
+
+    und daher sind die Verteilungen von X und Y identisch.
+
+12. (4 Punkte) Ein Brunnen enthält 10 Liter Wasser. Jeden Tag wird eine zufällige Menge Wasser
+    aus dem Brunnen gepumpt. Die täglich gepumpte Wassermenge ist i.i.d. und gleichverteilt
+    zwischen 0 und 1 Litern. Wie viele Tage dauert es im Durchschnitt, bis der Brunnen leer ist?
+
+     (a) 12.5
+    (b) 15
+     (c) 17.5
+    (d) 20
+
+    Lösung: (d)
+    Sei X die Menge des täglich gepumpten Wassers. Wir suchen nach n Tagen, sodass E[nX] =
+    10. Dies kann leicht gelöst werden, indem wir die Konstante außerhalb des Erwartungswerts
+    ziehen und nach n auflösen, d.h.,
+                                                    10   10
+                              nEX = 10 ⇐⇒ n =          =     = 20.
+                                                    EX   0.5
+
+
+
+
+                                              6
+Aufgabe 1 (12 Punkte)
+
+Teil 1A (4 Punkte)
+
+(F1:b);(F2:d);(F3:c);(F4:a)
+
+Teil 1B (8 Punkte)
+
+M odus = 55, M edian = 58.5, 10% − Quantil = 55
+
+
+
+
+                                            7
+Aufgabe 2 (15 Punkte)
+Lösung:
+
+
+  1. Sei D das Ereignis, dass ein Fahrrad defekt ist, und T − das Ereignis, dass der Test negativ
+     ist. Wir verwenden das Gesetz der totalen Wahrscheinlichkeit, um P(T − ) zu berechnen:
+
+                                P(T − ) = P(T − |D)P(D) + P(T − |D̄)P(D̄)
+
+     Gegeben:
+
+      P(D) = 0.02,     P(D̄) = 0.98,   P(T − |D) = 0.94,    P(T + |D̄) = 0.96 ⇒   P(T − |D̄) = 0.04
+
+     Einsetzen der Werte ergibt:
+
+                     P(T − ) = (0.94 · 0.02) + (0.04 · 0.98) = 0.0188 + 0.0392 = 0.058
+
+     Somit beträgt die Wahrscheinlichkeit, dass der Test negativ ist, P(T − ) = 0.058 oder 5,8%.
+
+  2. Wir verwenden den Satz von Bayes, um P(D|T − ) zu berechnen:
+
+                                                      P(T − |D)P(D)
+                                       P(D|T − ) =
+                                                          P(T − )
+
+     Einsetzen der bekannten Werte:
+                                              0.94 · 0.02   0.0188
+                                P(D|T − ) =               =        ≈ 0.324
+                                                0.058       0.058
+
+  3. Zwei Ereignisse A und B sind unabhängig, wenn gilt:
+
+                                         P(A ∩ B) = P(A)P(B)
+
+     Wir wissen:
+                                    P(T − |D) = 0.94,     P(D) = 0.02
+     Die Wahrscheinlichkeit, dass beide Ereignisse T − und D auftreten, beträgt:
+
+                           P(T − ∩ D) = P(T − |D)P(D) = 0.94 · 0.02 = 0.0188
+
+     Andererseits ist das Produkt der Einzelwahrscheinlichkeiten:
+
+                                 P(T − ) · P(D) = 0.058 · 0.02 = 0.00116
+
+     Da:
+                            P(T − ∩ D) = 0.0188 ̸= 0.00116 = P(T − ) · P(D)
+     sind die Ereignisse nicht unabhängig.
+
+  4. Damit die Lieferung angenommen wird, müssen alle 4 getesteten Fahrräder nicht defekt sein.
+     Die Wahrscheinlichkeit, nur nicht defekte Fahrräder auszuwählen, ist:
+                                              37 36 35 34
+                                   P(D̄) =      ·  ·  ·   = 0.7223
+                                              40 39 38 37
+     Somit beträgt die Wahrscheinlichkeit für eine abgelehnte Lieferung: 1 − 0.7223 = 0.2773.
+
+
+
+
+                                                  8
+5. Wahrscheinlichkeit für eine nicht abgelehnte Lieferung
+  Sei Xi eine Indikator-Zufallsvariable, die angibt, ob das i-te
+                                                            ∑︁ Fahrrad in der Stichprobe defekt
+  ist, wobei Xi = 1 falls defekt, und Xi = 0 sonst. S = 100    i=1 Xi notiert die Gesamtzahl der
+  defekten Fahrräder in der Stichprobe.
+  Gemäß dem Zentralen Grenzwertsatz kann die Verteilung von S durch eine Normalverteilung
+  angenähert werden:
+                                 µ = np = 100 · 0.02 = 2
+                             √︁            √
+                         σ = np(1 − p) = 100 · 0.02 · 0.98 ≈ 1.4
+
+      Mit Kontinuitätskorrektur:
+                                                 (︃                    )︃
+                                                      3 + 0.5 − 2
+                    P(S < 4) = P(S ≤ 3) ≈ Φ                                 = Φ(1.071) = 0.858
+                                                          1.4
+
+      Ohne Kontinuitätskorrektur:
+                                                      (︃          )︃
+                                                           3−2
+                       P(S < 4) = P(S ≤ 3) ≈ Φ                         = Φ(0.714) = 0.761
+                                                            1.4
+
+      Poisson-Annäherung:
+                                            3
+                                           ∑︂ 2i                      4
+                   P(S < 4) = P(S ≤ 3) ≈            e−2 = (1 + 2 + 2 + )e−2 = 0.857
+                                                 i!                   3
+                                           i=0
+
+  Daher beträgt die Wahrscheinlichkeit, dass die Lieferung nicht abgelehnt wird, ungefähr
+  0.858.
+
+
+
+
+                                             9
+Aufgabe 3 (15 Punkte)
+Lösung:
+
+
+  1.
+                                                                              1
+                                                                {︄
+                                         (︃           )︃             1     − 60 x
+                                     f        x;
+                                                  1
+                                                           =         60 · e             x≥0
+                                                 60               0                     x<0
+
+       Notiz: Vergessen sie nicht, den Wertebereich von X zu notieren (der zweite Teil der Defini-
+       tion für X < 0).
+  2. Die kumulierte Wahrscheinlichkeitsfunktion der Exponentialverteilung ist F (x; λ) = 1 −
+     exp(−λx) for x ≥ 0, sonst F (x; λ) = 0.
+                                 P(X > 30) = 1 − P(X ≤ 30)
+                                                 (︃      (︃     )︃)︃
+                                                             1
+                                           = 1 − 1 − exp − · 30
+                                                             60
+                                                 (︃       )︃
+                                                    1
+                                           = exp − · 30
+                                                    60
+                                           = 0.607
+
+  3.
+                                                                  P(X > 75, X > 45)
+                             P(X > 75 | X > 45) =
+                                                                       P(X > 45)
+                                                                                      1
+                                                                      (︁                      )︁
+                                                                  1 − 1 − exp(− 60      · 75)
+                                                                =     (︁              1
+                                                                                              )︁
+                                                                  1 − 1 − exp(− 60      · 45)
+                                                                      (︁ 1       )︁
+                                                                  exp − 60  · 75
+                                                                =     (︁ 1       )︁
+                                                                  exp − 60  · 45
+                                                                      (︃           )︃
+                                                                          1
+                                                                = exp − · 30
+                                                                         60
+                                                                = 0.607
+       Die bedingende Information is nicht relevant. Die Ereignisse niemand hat den Raum in den
+       letzten 45 Sekunden betreten und niemand wird den Raum in den nächsten 30 Sekunden
+       betreten sind unabhängig.
+  4. Der Erwartungswert der Exponentialverteilung mit Parameter λ ist:
+
+                                               ∫︂ ∞
+                                  E[X] =               x · f (x, λ) dx
+                                                 −∞
+                                               ∫︂ 0                          ∫︂ ∞
+                                         =             x · 0 dx +                   x · λe−λx dx
+                                                −∞                            0
+
+          Partielle Integration: Mit u = x, du = dx, und dv = λe−λx dx, v = −e−λx .
+           Mithilfe partieller Integration:
+                                             [︂      ]︂∞ ∫︂ ∞
+                                      E[X] = −xe−λx     −     −e−λx dx
+                                                                         0          0
+
+          Der erste Teil ist 0. Das Integral ist:
+                                                           ∫︂ ∞
+                                                                                        1
+                                                      −              −e−λx dx =
+                                                            0                           λ
+
+                                                            10
+      Der Erwartungswert ist daher E[X] = λ1
+
+5. Zur Berechnung der Varianz wird noch E[X 2 ] benötigt, da E[X] = λ1 in der obigen Teilaufgabe
+   berechnet wurde.
+
+                                                      ∫︂ ∞
+                                             2
+                                     E[X ] =           x2 · f (x, λ) dx
+                                                   −∞
+                                                     ∫︂ ∞
+                                                 =0+       x2 λe−λx dx
+                                                                 0
+
+
+   Zur Berechnung verwenden wir zwei mal partielle Integration:
+
+      Erste partielle Integration:
+       Mit u = x2 , du = 2x dx, und dv = λe−λx dx, v = −e−λx .
+                                                 [︂                  ]︂∞       ∫︂ ∞
+                                                           2 −λx
+                                         2
+                                   E[X ] = −x e                            +          2xe−λx dx
+                                                                      0         0
+                         ]︁∞
+        Der Term −x2 e−λx 0 ist 0.
+                [︁
+
+      Zweite partielle Integration Das restliche Integral ist
+                                                          ∫︂ ∞
+                                                                 2xe−λx dx
+                                                           0
+
+        Mit u = 2x, du = 2 dx, und dv = e−λx dx, v = − λ1 e−λx .
+
+                                                     2x −λx ∞
+                            ∫︂ ∞                           [︃
+                                                           ]︃     ∫︂ ∞
+                                         −λx                           2 −λx
+                                   2xe         dx = − e         +        e   dx
+                             0                       λ        0     0  λ
+
+        Der Term − 2x  −λx ∞ ist 0, und das restliche Integral ist:
+                [︁        ]︁
+                   λ e       0
+                                                  ∫︂ ∞
+                                                                2 −λx      2
+                                                                  e   dx = 2
+                                                      0         λ         λ
+      Daher erhalten wir:
+
+                                                                           2
+                                                           E[X 2 ] =
+                                                                           λ2
+      Die Varianz kann nun berechnet werden als:
+
+                                             Var(X) = E[X 2 ] − E[X]2
+                                                             (︃ )︃2
+                                                       2       1
+                                                    = 2−
+                                                      λ        λ
+                                                       1
+                                                    = 2.
+                                                      λ
+6. Die Populations-Varianz
+                       √︂ und der Parameter der Exponentialverteilung λ hängen wie folgt
+                           1
+   voneinander ab: λ = Var(X) .
+   Durch Ersetzen der Populations-Varianz
+                                       √︂ durch
+                                              √︂ die Stichproben-Varianz erhalten wir einen
+                                                          1           1     1
+   Schätzer der Momentenmethode: λ̂ =                    s2
+                                                             =       2500 = 50 = 0.02
+
+
+
+
+                                                           11
+Aufgabe 4 (15 Punkte)
+Lösung:
+
+
+  1.
+                                      ∫︂ 2 ln(c) ∫︂ ∞
+                                                        1 y−x           !
+                                                           e     dx dy = 1
+                                       −∞        0     3c
+                                      ∫︂ 2 ln(c) ∫︂ ∞
+                                    1                                   !
+                                                 ey         e−x dx dy = 1
+                                    3c −∞              0
+                                      ∫︂ 2 ln(c)
+                                                 ey e0 − e−∞ dy = 3c
+                                                    (︁            )︁
+                                        −∞          ⏞       ⏟⏟    ⏞
+                                                            =1
+                                                   (︂                )︂
+                                                      e2 ln(c) − e−∞ = 3c
+                                                                      c2 = 3c
+                                                                       c = 3.
+
+       Da c = 3 auch fX,Y (x, y) > 0 impliziert, ist c = 3 die passende Konstante.
+
+  2. fX,Y (x, y) ist monoton fallend in x und monoton steigend in y. Daher ist der Modus das
+     Paar (x, y) welches x minimiert und y maximiert: (x, y) = (0, 2 ln(3)).
+
+  3.
+                                                    ∫︂ ∞
+                                       fY (y) =            fX,Y (x, y) dx
+                                                     0
+                                                    ∫︂ ∞
+                                                     1 y−x
+                                                =       e  dx
+                                                  0  3c
+                                                 1 (︁
+                                                = ey e0 − e−∞
+                                                              )︁
+                                                 3c
+                                                 1
+                                                = ey
+                                                 3c
+
+
+                                                ∫︂ 2 ln(c)
+                                     fX (x) =                fX,Y (x, y) dy
+                                                  −∞
+                                                ∫︂ 2 ln(c)
+                                                     1 y−x
+                                            =          e    dy
+                                              −∞    3c
+                                             1    (︂             )︂
+                                            = e−x e2 ln(c) − e−∞
+                                             3c
+                                             1           c
+                                            = e−x · c2 = e−x
+                                             3c          3
+
+
+                                                    c     1
+                                   fX (x) · fY (y) = e−x · ey
+                                                    3     3c
+                                                    1
+                                                   = ey−x = fX,Y (x, y).
+                                                    9
+
+       Daher sind X und Y unabhängig.
+
+
+
+
+                                                    12
+4. Mithilfe der obigen Ergebnisse für fX (x) erhalten wir
+                                       ∫︂ ∞
+                              E[X] =         xfX (x) dx
+                                       ∫︂0 ∞
+                                                  c
+                                     =       x · e−x dx
+                                         0        3
+                                        c ∞ −x
+                                          ∫︂
+                                     =           xe dx
+                                        3 0
+                                          (︃         ⃓∞ ∫︂ ∞      )︃
+                                        c         −x ⃓
+                                                     ⃓        −x
+                                     =       −xe ⃓ −         e dx
+                                        3             0   0
+                                        c −x ⃓⃓∞
+                                              ⃓
+                                     = e ⃓
+                                        3       0
+                                        c
+                                     = .
+                                        3
+
+
+
+
+                                             13
+Aufgabe 5 (15 Punkte)
+
+
+ 1. Der Maximum-Likelihood-Schätzer kann geschrieben werden als:
+                                               N
+                                               ∏︂
+                                 LF (p; x) =     (1 − p)xi −1 p                     (1)
+                                               i=1
+                                                N
+                                               ∑︂
+                               LLF (p; x) =          (xi − 1) log(1 − p) + log(p)   (2)
+                                               i=1
+                                                     N
+                                            ∑︂ xi − 1 N !
+                           ∂LLF (p; x) !
+                                       =0⇔−          +   =0                         (3)
+                              ∂p               1−p     p
+                                                   i=1
+                                             N
+                                       N    ∑︂   xi     N
+                                          =          −                              (4)
+                                       p̂      1 − p̂ 1 − p̂
+                                               i=1
+                                                     N
+                                1 − p̂     1 ∑︂
+                                       +1=      xi                                  (5)
+                                  p̂       N
+                                                     i=1
+                                                 1
+                                        p̂ = 1 ∑︁N                                  (6)
+                                               N         i=1 xi
+
+
+ 2. Für p ∈ (0, 1) gilt
+
+                                       d 1−p   p−2
+                                             =     < 0,
+                                       dp p2    p3
+
+    und es folgt 1−p
+                  p2
+                     . Mit dem Invarianzprinzip folgt:
+
+                                               1 − p̂
+                                      Vˆ︂
+                                       ar(X) =
+                                                 p̂2
+                                               1 − 1 ∑︁1N
+                                                          xi
+                                             = (︃ N i=1)︃2
+                                                               1
+                                                           1 ∑︁N
+                                                           N   i=1 xi
+
+
+
+ 3. Das arithmetische Mittel ist x̄ = 2. Deshalb:
+                                 1                             1/2
+                             p̂ = ,     und          Vˆ︂
+                                                      ar(X) =        = 2.
+                                 2                            (1/2)2
+
+
+
+
+                                                14
+

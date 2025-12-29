@@ -61,15 +61,32 @@ def load_design_system():
     <style>
         /* --- 1. VARIABLES (The Purge: Strict Light Mode) --- */
         :root {
-            /* Apple Pro Palette */
-            --bg-void: #FFFFFF;           /* The Pure White Void */
-            --bg-card: #F5F5F7;           /* The 'Surface' (Soft Grey) */
-            --text-primary: #1D1D1F;      /* Near Black for Text */
-            --text-secondary: #86868b;
-            --border-color: rgba(0,0,0,0.08);
-            --accent-fill: #000000;       /* Pure Black for Action */
-            --accent-text: #FFFFFF;       /* White Text on Black */
+            /* === COLORS === */
+            --bg-void: #FFFFFF;           /* Page background */
+            --bg-card: #FFFFFF;           /* Container background */
+            --text-primary: #1D1D1F;      /* Main text */
+            --text-secondary: #86868b;    /* Secondary text */
+            --accent-fill: #000000;       /* Primary button fill */
+            --accent-text: #FFFFFF;       /* Button text */
             --highlight: rgba(0,0,0,0.04);
+            
+            /* === BORDERS === */
+            --border-color: rgba(0,0,0,0.20);
+            --border-width: 1px;
+            --shadow-card: 0 1px 2px rgba(0,0,0,0.12);
+            
+            /* === 8PT SPACING SCALE === */
+            --space-xs: 8px;    /* Tight gaps */
+            --space-sm: 16px;   /* Small elements */
+            --space-md: 24px;   /* Medium spacing */
+            --space-lg: 32px;   /* Standard card padding */
+            --space-xl: 32px;   /* Generous padding */
+            --space-2xl: 48px;  /* Extra spacious */
+            
+            /* === RADIUS === */
+            --radius-sm: 8px;   /* Buttons, inputs */
+            --radius-md: 12px;  /* Cards, modals */
+            --radius-lg: 20px;  /* Large containers */
         }
 
         /* --- 2. GLOBAL RESET --- */
@@ -80,14 +97,15 @@ def load_design_system():
         }
         
         /* --- 3. THE BENTO CARD & NATIVE CONTAINERS --- */
-        /* Target the main vertical blocks & Native Containers */
+        /* Target bordered containers via stLayoutWrapper (Streamlit's actual structure) */
         div[data-testid="stVerticalBlock"] > div[style*="flex-direction: column;"] > div[data-testid="stVerticalBlock"],
-        div[data-testid="stVerticalBlockBorderWrapper"] {
+        div[data-testid="stVerticalBlockBorderWrapper"],
+        div[data-testid="stLayoutWrapper"] > div[data-testid="stVerticalBlock"] {
             background-color: var(--bg-card) !important;
-            border: 1px solid var(--border-color) !important;
-            border-radius: 20px !important;
-            padding: 40px !important; /* Increased from 24px for more breathability */
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important; /* Subtle shadow */
+            border: var(--border-width) solid var(--border-color) !important;
+            border-radius: var(--radius-lg) !important;
+            padding: var(--space-xl) !important; /* Breathing Room */
+            box-shadow: var(--shadow-card) !important;
             gap: 24px;
         }
 
@@ -114,8 +132,8 @@ def load_design_system():
             width: 100%;
             background-color: var(--accent-fill) !important; /* Pure Black */
             color: #FFFFFF !important; /* Force Pure White for Icon */
-            border: 1px solid var(--border-color) !important;
-            border-radius: 24px !important; /* MATCH INPUT ROUNDEDNESS */
+            border: var(--border-width) solid var(--border-color) !important;
+            border-radius: var(--space-md) !important; /* Pill shape */
             font-weight: 600 !important;
             padding: 8px 24px !important; /* Reduced padding to match input height */
             line-height: normal !important; /* Use normal line height for button */
@@ -141,7 +159,7 @@ def load_design_system():
         .stButton > button:hover {
             opacity: 0.85;
             transform: scale(0.99);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow-card);
             color: #FFFFFF !important;
         }
         
@@ -149,7 +167,7 @@ def load_design_system():
         .stButton > button[kind="secondary"] {
             background-color: transparent !important;
             color: var(--text-primary) !important;
-            border: 1px solid var(--border-color) !important;
+            border: var(--border-width) solid var(--border-color) !important;
         }
          .stButton > button[kind="secondary"]:hover {
             background-color: rgba(0,0,0,0.05) !important;
@@ -176,7 +194,18 @@ def load_design_system():
             background-color: transparent !important;
             color: var(--text-primary) !important;
             font-weight: 600;
-            border-bottom: 1px solid var(--border-color);
+        }
+        
+        /* Target the actual details element inside the expander wrapper */
+        div[data-testid="stExpander"] details {
+            border: var(--border-width) solid var(--border-color) !important;
+            border-radius: var(--radius-md) !important;
+            background-color: var(--bg-card) !important;
+        }
+        
+        div[data-testid="stExpander"] details summary {
+            padding: 12px 16px !important;
+            border-bottom: none !important;
         }
         
         /* --- 7. RADIO BUTTONS (Border Selection Logic) --- */
@@ -206,8 +235,8 @@ def load_design_system():
         /* Container Style - Force full width */
         div[class*="stRadio"] > div[role="radiogroup"] > label {
             background-color: var(--bg-void); /* White background for options */
-            border: 1px solid var(--border-color) !important;
-            border-radius: 12px !important;
+            border: var(--border-width) solid var(--border-color) !important;
+            border-radius: var(--radius-md) !important;
             padding: 12px 16px !important;
             margin-bottom: 8px !important;
             transition: all 0.1s ease-in-out;
@@ -230,12 +259,21 @@ def load_design_system():
             background-color: #FAFAFA;
         }
         
-        /* Selected State: Thick Black Border */
+        /* Selected State: Designer's Choice (Clean & Bold) */
         div[class*="stRadio"] > div[role="radiogroup"] > label:has(input:checked) {
-            border: 2px solid var(--text-primary) !important; /* Black Border */
-            background-color: var(--bg-void) !important;
-            font-weight: 600;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border: 2px solid var(--accent-fill) !important; /* Thick Black Border */
+            background-color: #F8F9FA !important; /* Very subtle grey to show depth */
+            color: var(--text-primary) !important; /* Keep text Black */
+            font-weight: 700; /* Extra Bold */
+            transform: scale(1.005); /* Micro-pop */
+            box-shadow: var(--shadow-card);
+        }
+        
+        /* Reset text color to standard black */
+        div[class*="stRadio"] > div[role="radiogroup"] > label:has(input:checked) p,
+        div[class*="stRadio"] > div[role="radiogroup"] > label:has(input:checked) div,
+        div[class*="stRadio"] > div[role="radiogroup"] > label:has(input:checked) span {
+            color: var(--text-primary) !important;
         }
         
         /* Fix text alignment */

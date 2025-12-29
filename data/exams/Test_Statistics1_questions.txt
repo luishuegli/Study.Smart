@@ -1,0 +1,42 @@
+                             Statistik (VWL): Übungen
+
+                                        Quiz
+
+Nachname, Vorname:
+
+Übung 1
+  1. Die 300 Hörer einer Statistik-Vorlesung setzen sich wie folgt zusammen:
+
+                männlich   weiblich
+      VWL          42         93
+      BWL          78         87
+    Es wurde eine Hörerin ausgewählt. Wie gross ist die Wahrscheinlichkeit, dass sie
+    BWLerin ist?
+     (a) 0.31
+     (b) 0.29
+     (c) 0.71
+     (d) 0.48
+
+  2. Es seien A und B zwei beliebige Mengen mit P(A) = 0.6, P(B) = 0.7 und
+     P(Ā ∩ B) = 0.1. Es gilt:
+
+     (a) P(A ∩ B̄) = 0
+     (b) P(A ∩ B̄) = 0.1
+     (c) P(A ∩ B̄) = 0.2
+     (d) P(A ∩ B̄) = 0.3
+
+  3. Sie besitzen 50 verschiedene DVDs und ihre zugehörigen Hüllen (cases). Ihr
+     Neffe, der bei Ihnen zu Besuch war, hat die DVDs zufällig in Hüllen verteilt. Auf
+     wieviele Arten können die DVDs auf Hüllen verteilt werden?
+     (a) 50!
+     (b) (50!)2
+     (c) 50! · 49!
+     (d) 100
+             
+           2
+
+
+
+
+                                           1
+

@@ -1,0 +1,302 @@
+HSG, VWL                                                                             HS 2025
+Prof. Tobias Sutter                                                            Statistik 3,220
+
+
+              Übung 5: Punkt- und Intervallschätzungen
+
+Teil A: Multiple Choice
+In Übung voraussichtlich besprochen: 3,6,8,11,12,16,17
+
+  1. Eine Schätzfunktion heisst erwartungstreu, wenn sie symmetrisch um ihren Erwar-
+     tungswert verteilt ist.
+
+        a) richtig
+       b) falsch
+
+  2. Effiziente Schätzungen sind immer auch erwartungstreu.
+
+        a) richtig
+       b) falsch
+
+  3. Erwartungstreue Schätzfunktionen sind konsistent.
+
+        a) richtig
+       b) falsch
+
+  4. Schätzer werden gewöhnlich als von der Stichprobe abhängige Funktionen (Statisti-
+     ken) aufgefasst und sind damit selbst wiederum Zufallsvariablen.
+
+        a) richtig
+       b) falsch
+
+  5. Ein erwartungstreuer Schätzer hat stets einen kleineren MSE als ein verzerrter Schätzer.
+
+        a) richtig
+       b) falsch
+
+  6. Seien X1 , X2 , . . . , Xn unabhängige Wiederholungen einer Zufallsvariablen X mit Er-
+                                                             2                 1 Pn
+     wartungswert E[X] = µ und Varianz V ar[X] = σ . Es sei X = n i=1 Xi das
+     arithmetische Mittel. Welche Aussagen sind richtig?
+                             2
+       a) V ar X = σn .
+                
+
+       b) X ist ein konsistenter Schätzer für µ .
+        c) X ist für grosse n approximativ standardnormalverteilt.
+
+  7. Erwartungstreue Schätzer sind trivialerweise auch asymptotisch erwartungstreu.
+
+        a) richtig
+       b) falsch
+
+  8. Ein verzerrter Schätzer führt stets zu einer Schätzung, die sich vom zu schätzenden
+     Wert unterscheidet.
+
+        a) richtig
+       b) falsch
+
+
+HS 2025                                       1                                      Übung 5
+HSG, VWL                                                                               HS 2025
+Prof. Tobias Sutter                                                              Statistik 3,220
+
+  9. Wichtigstes Ziel beim Schätzen ist es, Schätzer mit kleinen Varianzen zu finden
+
+        a) richtig
+       b) falsch
+
+ 10. Die Zufallsvariablen X1 , . . . , X5 seien stochastisch unabhängig und identisch verteilt
+     mit (unbekanntem) Erwartungswert E[X] = µ ∈ R und Varianz V ar[X] = σ 2 < ∞.
+     Betrachten Sie die folgenden Schätzfunktionen für den Parameter µ:
+                                            3      1      1        1
+                                µ̂1 = X1 + X2 − X3 − X4 − X5                                (1)
+                                            5      5      5        5
+                                      (X1 + X2 )
+                                µ̂2 =
+                                           2
+                                      (X12 + X22 + X32 + X42 + X52 )
+                                µ̂3 =
+                                                    5
+                                µ̂4 = X1 X2 X3 X4 X5
+                                          (X1 + X2 + X3 + X4 + X5 )
+                                µ̂5 = 1 +
+                                                       5
+                                      (X1 + X2 + X3 + X4 + X5 )
+                                µ̂6 =
+                                                   5
+
+
+      Welche der Schätzer sind erwartungstreu für µ?
+
+        a) Nur Schätzer µ̂1 und µ̂2 ,
+       b) alle ausser µ̂3 und µ̂4 ,
+        c) nur die Schätzer µ̂2 und µ̂6 ,
+       d) nur die Schätzer µ̂1 , µ̂2 und µ̂6 .
+
+ 11. Sei Y eine Zufallsvariable, deren Verteilung nur vom Parameter λ abhängt und für
+                    1
+     die E(Y ) = 3+λ    gilt. Es seien X1 , X2 , . . . , Xn n unabhängige Realisationen der Zu-
+     fallsvariablen Y . Welcher Schätzer entspricht einem Momentenmethodenschätzer für
+     λ? Methode der Momente
+                      Pn
+                       i=1 Xi
+        a) λ̂M M =         n
+                      Pn
+                       i=1 Xi
+       b) λ̂M M =       n       +3
+        c) λ̂M M =    P n
+                       n        −3
+                       i=1 Xi
+                            1
+       d) λ̂M M =          Pn
+                                X
+                      3+    i=1 i
+                              n
+
+ 12. Obwohl sich der Rechenweg aufgrund der unterschiedlichen Ansätze unter Umständen
+     stark unterscheidet, liefern die Momentenmethode und die Maximum-Likelihood-
+     Methode stets die gleichen Schätzfunktionen.
+
+        a) richtig
+       b) falsch
+
+ 13. Maximum-Likelihood-Schätzungen sind nie erwartungstreu.
+
+        a) richtig
+
+
+HS 2025                                           2                                    Übung 5
+HSG, VWL                                                                             HS 2025
+Prof. Tobias Sutter                                                            Statistik 3,220
+
+          b) falsch
+
+ 14. Maximierung der Loglikelihoodfunktion und der Likelihoodfunktion führt stets zu
+     demselben Ergebnis, da diese Funktionen immer gleiche Werte annehmen.
+
+          a) richtig
+          b) falsch
+
+ 15. Der Parameter a > 0 einer exponentialverteilten Zufallsvariable Y soll mit Hilfe
+     der Maximum-Likelihood-Methode geschätzt werden. Eine einfache Stichprobe vom
+     Umfang 4 ist (1, 2, 3, 1). Die für die ML-Methode zu maximierende Likelihoodfunktion
+     lautet dann:
+
+          a) L(θ) = (1 · e−1·θ )2 (2 · e−2·θ )1 (3 · e−3·θ )1
+          b) L(θ) = (θ · e−θ )1 (θ · e−θ )2 (θ · e−θ )3 (θ · e−θ )1
+          c) L(θ) = (θ · e−1·θ )2 (θ · e−2·θ )1 (θ · e−3·θ )1
+          d) L(θ) = (1 · e−1·x )2 (2 · e−2·x )1 (3 · e−3·x )1
+
+ 16. Welche Aussage ist richtig?
+
+          a) Wenn die Überdeckungswahrscheinlichkeit (auch Konfidenzniveau genannt) ei-
+             nes Konfidenzintervalls grösser wird, so wird das Konfidenzintervall kleiner.
+          b) Wenn die Überdeckungswahrscheinlichkeit (auch Konfidenzniveau genannt) ei-
+             nes Konfidenzintervalls grösser wird, so wird das Konfidenzintervall grösser.
+          c) Das Konfidenzniveau und die Grösse des Konfidenzintervalls haben keine direkte
+             Beziehung zueinander.
+
+ 17. Die Grenzen von Konfidenzintervallen sind zufällig, da sie von der Stichprobenreali-
+     sation abhängen.
+
+          a) richtig
+          b) falsch
+
+ 18. Die Länge eines Konfidenzintervalls ist umso grösser, je grösser der zu schätzende
+     Parameter ist.
+
+          a) richtig
+          b) falsch
+
+Teil B1: Aufgaben: Punkt- und Intervallschätzung
+In Übung voraussichtlich besprochen: 1,3,6ab,7,9
+
+  1. Eine Stichprobe besteht aus zwei unabhängigen Beobachtungen X1 und X2 . Um den
+     Mittelwert der Grundgesamtheit zu schätzen, verwenden wir
+
+                                     1    1                         1    2
+                                 µ1 = X1 + X2 bzw.              µ2 = X1 + X2
+                                     2    2                         3    3
+      .
+
+          a) Sind die Schätzungen erwartungstreu?
+
+
+HS 2025                                                3                             Übung 5
+HSG, VWL                                                                                HS 2025
+Prof. Tobias Sutter                                                               Statistik 3,220
+
+       b) Welche Schätzfunktion ist effizienter? Um wie viel?
+
+  2. Ein Statistiker hat 500 Beobachtungen vorgenommen, aber die Aufzeichnungen der
+     letzten 180 Beobachtungen verloren. So benützt er für die Schätzung des Mittelwertes
+     µ nur die verbleibenden 320 Werte. Welchen Effizienzverlust muss er hinnehmen?
+
+  3. Die n unabhängigen Zufallsvariablen X1 , X2 , . . . , Xn stellen eine Zufallsstichprobe aus
+     einer über dem Intervall [θ, θ + 1] rechteckverteilten Grundgesamtheit mit der Dichte
+     f dar.                              
+                                            1 für θ ≤ x ≤ θ + 1
+                                 f (x) =                                                      (2)
+                                            0, sonst.
+
+        a) Zeigen Sie, dass für Zufallsvariablen X mit der obigen Dichte gilt:
+
+                                   E[X] = θ + 0.5,     V ar[X] = 1/12
+
+       b) Sei X = n1 ni=1 Xi . Ist X eine erwartungstreue Schätzfunktion für θ? Wenn
+                      P
+          nein, bestimmen Sie eine erwartungstreue Schätzung für θ?
+        c) Bestimmen Sie die Varianz der obigen Schätzfunktion X.
+
+  4. Eine Grundgesamtheit besitze den Mittelwert µ und die Varianz σ 2 . Die Stichproben-
+     variablen X1 , X2 , . . . , X5 seien unabhängige Ziehungen aus dieser Grundgesamtheit.
+     Man betrachtet als Schätzfunktionen für µ die Stichprobenfunktionen
+                                                   5
+                                        1X
+                              T1   = X=    Xi                                                (3)
+                                        5
+                                               i=1
+                                     (X1 + X2 + X3 )
+                              T2 =
+                                           3
+                                     (X1 + X2 + X3 + X4 ) 1
+                              T3   =                     + X5
+                                               8          2
+                                     (X1 + X2 )
+                              T4   =
+                                         2
+                              T5   = X1
+
+
+        a) Berechnen Sie den Erwartungwert und die Varianz jedes Schätzers.
+       b) Berechnen Sie den MSE jedes Schätzers. Welche Schätzfunktion ist am effizien-
+          testen?
+
+  5. X1 , X2 , . . . , X5 seien unabhängige Wiederholungen der Zufallsvariablen X mit P (X =
+     1) = π und P (X = 0) = 1 − π.
+     π̂ = n1 ni=1 Xi bezeichne den Schätzer, der den Parameter π durch die relative
+               P
+     Häufigkeit schätzt.
+
+        a) Bestimmen Sie den Erwartungswert, die Varianz und den MSE von π̂ fur π =
+           0, 0.25, 0.5, 0.75, 1
+       b) Ein alternativer Schätzer sei gegeben durch
+                                               Pn
+                                                    Xi + 1
+                                           T = i=1
+                                                  n+2
+
+HS 2025                                        4                                        Übung 5
+HSG, VWL                                                                               HS 2025
+Prof. Tobias Sutter                                                              Statistik 3,220
+
+           Bestimmen Sie Erwartungswert, Varianz und MSE von T .
+           Ist T erwartungstreu? Ist T asymptotisch erwartungstreu? Ist der Schätzer T
+           konsistent?
+        c) Bestimmen Sie für n = 12, welcher der beiden Schätzer besser ist.
+
+  6. X1 , X2 , . . . , Xn seien unabhängige Wiederholungen der Zufallsvariablen X. Leiten Sie
+     jeweils Momenten-Schätzer für die Verteilungsparameter her, falls
+
+        a) X exponentialverteilt ist mit Parameter λ (X ∼ Exp(λ)).
+       b) X gleichförmigverteilt ist auf dem Intervall [θ−0.5 θ+0.5] (Rechtecksverteilung).
+        c) X normalverteilt ist mit Parametern µ und σ 2 (X ∼ N (µ, σ 2 )).
+
+  7. In einer Telefonzentrale wird zu zehn zufällig ausgewählten Zeitpunkten jeweils fest-
+     gestellt, wie viele Verbindungen innerhalb der nächsten Minute hergestellt werden.
+     Dabei ergibt sich folgende Stichprobe:
+
+                               1   0   2   1   1   0   2   3   1   0
+
+      X sei die Zufallsgrösse Anzahl Anrufe innerhalb einer Minute“. Man nimmt an, dass
+                              ”
+      X poissonveteilt ist mit unbekanntem Erwartungswert µ. Die Dichte von X ist dann
+      gegeben durch:                   λx −λ
+                              f (x) =   x! e  , für x = 0, 1, 2, . . .
+                                                                                     (4)
+                                        0,           sonst.
+
+        a) Bestimmen Sie eine Maximum-Likelihood Schätzung für µ.
+       b) Ist diese Schätzung erwartungstreu?
+
+  8. X1 , X2 , . . . , Xm sei eine Stichprobe der Grösse m einer Zufallsvariablen X mit einer
+     Binomialverteilung B(n, p) und p ∈ (0, 1). Der Parameter n sei bekannt.
+
+        a) Leiten Sie Momentenschätzer für p her.
+       b) Ändern sich die Momentenschätzer, falls der Parameterraum von p auf [0.25,
+          0.75] eingeschränkt wird?
+        c) Wie lautet der Momentenschätzer für p und n, falls auch n unbekannt ist?
+
+  9. Damit der Dozent einer Vorlesung die geeignete Länge der Abschlussklausur bes-
+     ser abschätzen kann, wirft er einen Blick auf die Ergebnisse der vergangenen Jahre.
+     Zur Lösung der Klausur benötigten die 300 Bachelor-Studenten im Durchschnitt 50
+     Minuten mit einer Standardabweichung von 5 Minuten. Berechnen Sie ein 95% Kon-
+     fidenzintervall für die mittlere Lösungszeit aller Studenten des Semesters unter der
+     Annahme, dass die Lösungszeit normalverteilt ist.
+
+
+
+
+HS 2025                                        5                                       Übung 5
+

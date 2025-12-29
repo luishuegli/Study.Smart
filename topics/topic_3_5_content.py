@@ -14,8 +14,8 @@ def render_subtopic_3_5(model):
     with st.container(border=True):
         st.markdown(f"### {t({'de': 'Theorie', 'en': 'Theory'})}")
         st.info(t({
-            "de": "📚 **Theorie-Inhalte kommen bald!**\n\nDieser Abschnitt wird theoretische Erklärungen zur Varianz enthalten.",
-            "en": "📚 **Theory content coming soon!**\n\nThis section will contain theoretical explanations of variance."
+            "de": "**Theorie-Inhalte kommen bald!**\n\nDieser Abschnitt wird theoretische Erklärungen zur Varianz enthalten.",
+            "en": "**Theory content coming soon!**\n\nThis section will contain theoretical explanations of variance."
         }))
     
     st.markdown("<br><br>", unsafe_allow_html=True)

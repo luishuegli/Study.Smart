@@ -1,0 +1,43 @@
+                             Statistik (VWL): Übungen
+
+                                        Quiz
+
+Nachname, Vorname:
+
+Übung 4
+  1. Die Ereignisse A und B seien disjunkt und P (B) > 0 sowie P (A) > 0. Welche
+     der folgenden Aussagen trifft zu?
+     (a) P (Ā ∩ B̄) + P (B) > 1 − P (A)
+     (b) P (A ∩ B) > P (A)
+     (c) P (A|B) = P (B|A)
+     (d) P (A ∪ B) < P (A)
+
+  2. Sei X eine Normal-verteilte Zufallsvariable mit endlicher Erwartung µ und endlicher
+     Standardabweichung σ > 0. Für Y = Xσ gilt
+     (a) E(Y 2 ) = 1
+                         2
+     (b) E(Y 2 ) = 1 − σµ2
+                         2
+     (c) E(Y 2 ) = 1 + σµ2
+     (d) Dies kann mit den genannten Angaben nicht beantwortet werden.
+
+  3. Seien X und Y zwei Zufallsvariablen mit Korrelation
+                                             p           Corr(X, Y ) = −1, Vari-
+     anz Var(X) = 1 und Standardabweichung Var(Y ) = 2. Wie gross ist dann
+     Var(3X + Y )?
+     (a) 7
+     (b) 13
+     (c) 5
+     (d) 1
+
+  4. Es seien X und Y zwei unkorrelierte Zufallsvariablen mit E(X) = E(Y ) = 1 und
+     Var(X) = Var(Y ) = 1. Es gilt:
+     (a) 3E(X 2 ) + Cov(X, Y ) = 2
+     (b) E(XY ) = 2
+     (c) Cov(X, Y + 2) = 2
+     (d) E((X − Y )2 ) = 2
+
+
+
+                                           1
+

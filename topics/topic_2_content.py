@@ -23,6 +23,9 @@ def render_topic_2_content(client, subtopic_id=None):
     elif subtopic_id == "2.5":
         from topics.topic_2_5_content import render_subtopic_2_5
         render_subtopic_2_5(client)
+    elif subtopic_id == "2.6":
+        from topics.topic_2_6_content import render_subtopic_2_6
+        render_subtopic_2_6(client)
     else:
         st.info(t({
             "de": "Dieser Abschnitt ist noch in Entwicklung. Schau bald wieder vorbei!",

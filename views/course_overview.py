@@ -35,11 +35,34 @@ SUBTOPIC_QUESTION_COUNTS = {
     "4.5": 1,  # test2_q2
     "4.6": 1,  # uebung2_mc12
     "4.7": 4,  # uebung2_mc13, hs2023_mc7, hs2022_mc3, hs2024_mc3_tanker
+    "4.8": 1,  # hypergeom_10_5_3
     # Topic 5: Multidimensional Random Variables
     "5.1": 2,  # test3_q4, uebung3_mc5
     "5.2": 2,  # test3_q5, uebung3_mc7
     "5.3": 4,  # uebung3_mc1, uebung3_mc9, test4_q2, test4_q4
     "5.4": 2,  # uebung3_mc10, uebung3_mc11
+    # Topic 6: Central Limit Theorem
+    "6.1": 0,  # No MCQs
+    "6.2": 0,  # No MCQs
+    # Topic 7: Descriptive Statistics
+    "7.1": 0,  # No MCQs
+    "7.2": 5,  # test4_q3, hs2015_mc9, hs2023_mc4, test3_q3, hs2023_mc9
+    "7.3": 0,  # No MCQs
+    "7.4": 0,  # No MCQs
+    "7.5": 0,  # No MCQs
+    # Topic 8: Point Estimation
+    "8.1": 0,  # No MCQs
+    "8.2": 2,  # hs2023_mc10, hs2015_mc10
+    "8.3": 1,  # hs2022_mc8
+    # Topic 9: Confidence Intervals
+    "9.1": 0,  # No MCQs
+    "9.2": 1,  # hs2023_mc5
+    "9.3": 0,  # No MCQs
+    # Topic 10: Hypothesis Tests
+    "10.1": 0,  # No MCQs
+    "10.2": 0,  # No MCQs
+    "10.3": 0,  # No MCQs
+    "10.4": 0,  # No MCQs
 }
 
 def calculate_topic_progress(topic_data, subtopic_ids):

@@ -85,7 +85,10 @@ COURSES = {
                 "title": {"de": "6. Der zentrale Grenzwertsatz", "en": "6. Central Limit Theorem"}, 
                 "status": "open",
                 "slide_range": (261, 277),
-                "subtopics": []
+                "subtopics": [
+                    {"id": "6.1", "title": {"de": "6.1 Der zentrale Grenzwertsatz", "en": "6.1 The Central Limit Theorem"}, "slide_start": 261},
+                    {"id": "6.2", "title": {"de": "6.2 Anwendungen des CLT", "en": "6.2 Applications of the CLT"}, "slide_start": 270},
+                ]
             },
             {
                 "id": "topic_7", 

@@ -66,6 +66,7 @@ COURSES = {
                     {"id": "4.5", "title": {"de": "4.5 Rechteckverteilung (stetig)", "en": "4.5 Uniform Distribution (continuous)"}, "slide_start": 201},
                     {"id": "4.6", "title": {"de": "4.6 Exponentialverteilung (stetig)", "en": "4.6 Exponential Distribution (continuous)"}, "slide_start": 205},
                     {"id": "4.7", "title": {"de": "4.7 Normalverteilung (stetig)", "en": "4.7 Normal Distribution (continuous)"}, "slide_start": 209},
+                    {"id": "4.8", "title": {"de": "4.8 Hypergeometrische Verteilung", "en": "4.8 Hypergeometric Distribution"}, "slide_start": 215},
                 ]
             },
             {
@@ -85,7 +86,10 @@ COURSES = {
                 "title": {"de": "6. Der zentrale Grenzwertsatz", "en": "6. Central Limit Theorem"}, 
                 "status": "open",
                 "slide_range": (261, 277),
-                "subtopics": []
+                "subtopics": [
+                    {"id": "6.1", "title": {"de": "6.1 Der zentrale Grenzwertsatz", "en": "6.1 The Central Limit Theorem"}, "slide_start": 261},
+                    {"id": "6.2", "title": {"de": "6.2 Anwendungen des CLT", "en": "6.2 Applications of the CLT"}, "slide_start": 270},
+                ]
             },
             {
                 "id": "topic_7", 

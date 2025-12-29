@@ -301,6 +301,36 @@ def render_topic_content(client, topic_id, subtopic_id):
             render_topic_5_content(client, subtopic_id)
         except ImportError as e:
             st.error(f"Interactive content not available: {str(e)}")
+    elif topic_id == "topic_6":
+        try:
+            from topics.topic_6_content import render_topic_6_content
+            render_topic_6_content(client, subtopic_id)
+        except ImportError as e:
+            st.error(f"Interactive content not available: {str(e)}")
+    elif topic_id == "topic_7":
+        try:
+            from topics.topic_7_content import render_topic_7_content
+            render_topic_7_content(client, subtopic_id)
+        except ImportError as e:
+            st.error(f"Interactive content not available: {str(e)}")
+    elif topic_id == "topic_8":
+        try:
+            from topics.topic_8_content import render_topic_8_content
+            render_topic_8_content(client, subtopic_id)
+        except ImportError as e:
+            st.error(f"Interactive content not available: {str(e)}")
+    elif topic_id == "topic_9":
+        try:
+            from topics.topic_9_content import render_topic_9_content
+            render_topic_9_content(client, subtopic_id)
+        except ImportError as e:
+            st.error(f"Interactive content not available: {str(e)}")
+    elif topic_id == "topic_10":
+        try:
+            from topics.topic_10_content import render_topic_10_content
+            render_topic_10_content(client, subtopic_id)
+        except ImportError as e:
+            st.error(f"Interactive content not available: {str(e)}")
     else:
         # Other topics: Show practice questions only
         st.subheader("Exam Questions")

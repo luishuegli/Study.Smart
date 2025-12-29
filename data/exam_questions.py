@@ -1175,66 +1175,66 @@ QUESTIONS_7 = {
     "test4_q3": {
         "source": "Test 4, Frage 3",
         "question": {
-            "de": "Welche Zahl ist KEINER dieser Maße (Mean, Median, Mode)? Datensatz: {4, 4, 7, 7, 7, 8, 11, 13, 13, 14, 22}",
-            "en": "Which number is NONE of these measures (Mean, Median, Mode)? Dataset: {4, 4, 7, 7, 7, 8, 11, 13, 13, 14, 22}"
+            "de": r"Welche Zahl ist KEINER dieser Maße (Mean, Median, Mode)? Datensatz: $\{4, 4, 7, 7, 7, 8, 11, 13, 13, 14, 22\}$",
+            "en": r"Which number is NONE of these measures (Mean, Median, Mode)? Dataset: $\{4, 4, 7, 7, 7, 8, 11, 13, 13, 14, 22\}$"
         },
         "options": ["7", "8", "9.8", "11"],
         "correct_idx": 3,
         "solution": {
-            "de": "**Richtig: 11**<br>Mean ≈ 9.8, Median = 8, Mode = 7.<br>11 ist keines davon.",
-            "en": "**Correct: 11**<br>Mean ≈ 9.8, Median = 8, Mode = 7.<br>11 is none of these."
+            "de": r"**Richtig: 11**<br>Mean $\approx 9.8$, Median $= 8$, Mode $= 7$.<br>11 ist keines davon.",
+            "en": r"**Correct: 11**<br>Mean $\approx 9.8$, Median $= 8$, Mode $= 7$.<br>11 is none of these."
         }
     },
     "hs2015_mc9": {
         "source": "HS 2015 Januar, MC #9",
         "question": {
-            "de": "Zu Kontrollzwecken werden 1000 Packungen Reis aus der Produktion entnommen und gewogen. Dabei stellt sich heraus, dass das Gewicht der Packungen annähernd normalverteilt ist. Wenn 800 der Packungen zwischen 343.2 und 356.8 Gramm wiegen, was ist dann die ungefähre Varianz des Gewichtes?",
-            "en": "For quality control, 1000 packages of rice are sampled and weighed. The weight is approximately normally distributed. If 800 of the packages weigh between 343.2 and 356.8 grams, what is the approximate variance of the weight?"
+            "de": r"Zu Kontrollzwecken werden 1000 Packungen Reis aus der Produktion entnommen und gewogen. Dabei stellt sich heraus, dass das Gewicht der Packungen annähernd normalverteilt ist. Wenn 800 der Packungen zwischen 343.2 und 356.8 Gramm wiegen, was ist dann die ungefähre Varianz des Gewichtes?",
+            "en": r"For quality control, 1000 packages of rice are sampled and weighed. The weight is approximately normally distributed. If 800 of the packages weigh between 343.2 and 356.8 grams, what is the approximate variance of the weight?"
         },
         "options": ["9", "25", "36", "49"],
         "correct_idx": 2,
         "solution": {
-            "de": "**Richtig: 36**<br>800/1000 = 80% liegt im inneren Bereich.<br>Für 80%: μ ± 1.28σ.<br>2·1.28σ = 356.8 - 343.2 = 13.6.<br>σ ≈ 5.3, also σ² ≈ 28 → Nächster Wert: 36.",
-            "en": "**Correct: 36**<br>800/1000 = 80% is in the inner region.<br>For 80%: μ ± 1.28σ.<br>2·1.28σ = 356.8 - 343.2 = 13.6.<br>σ ≈ 5.3, so σ² ≈ 28 → Closest: 36."
+            "de": r"**Richtig: 36**<br>$800/1000 = 80\%$ liegt im inneren Bereich.<br>Für 80%: $\mu \pm 1.28\sigma$.<br>$2 \cdot 1.28\sigma = 356.8 - 343.2 = 13.6$.<br>$\sigma \approx 5.3$, also $\sigma^2 \approx 28$ → Nächster Wert: 36.",
+            "en": r"**Correct: 36**<br>$800/1000 = 80\%$ is in the inner region.<br>For 80%: $\mu \pm 1.28\sigma$.<br>$2 \cdot 1.28\sigma = 356.8 - 343.2 = 13.6$.<br>$\sigma \approx 5.3$, so $\sigma^2 \approx 28$ → Closest: 36."
         }
     },
     "hs2023_mc4": {
         "source": "HS 2023 Januar, MC #4",
         "question": {
-            "de": "Gegeben sei eine Zufallsvariable Y mit einer Wahrscheinlichkeitsdichtefunktion f_Y(y) = 2y für 0 ≤ y ≤ 1, 0 sonst. Wie groß ist die Varianz von Y?",
-            "en": "Given a random variable Y with probability density function f_Y(y) = 2y for 0 ≤ y ≤ 1, 0 otherwise. What is the variance of Y?"
+            "de": r"Gegeben sei eine Zufallsvariable $Y$ mit einer Wahrscheinlichkeitsdichtefunktion $f_Y(y) = 2y$ für $0 \le y \le 1$, 0 sonst. Wie gross ist die Varianz von $Y$?",
+            "en": r"Given a random variable $Y$ with probability density function $f_Y(y) = 2y$ for $0 \le y \le 1$, 0 otherwise. What is the variance of $Y$?"
         },
-        "options": ["1/3", "1/18", "1/6", "2/9"],
+        "options": [r"$\frac{1}{3}$", r"$\frac{1}{18}$", r"$\frac{1}{6}$", r"$\frac{2}{9}$"],
         "correct_idx": 1,
         "solution": {
-            "de": "**Richtig: 1/18**<br>E[Y] = ∫₀¹ 2y² dy = 2/3.<br>E[Y²] = ∫₀¹ 2y³ dy = 1/2.<br>Var(Y) = E[Y²] - E[Y]² = 1/2 - 4/9 = 1/18.",
-            "en": "**Correct: 1/18**<br>E[Y] = ∫₀¹ 2y² dy = 2/3.<br>E[Y²] = ∫₀¹ 2y³ dy = 1/2.<br>Var(Y) = E[Y²] - E[Y]² = 1/2 - 4/9 = 1/18."
+            "de": r"**Richtig: $\frac{1}{18}$**<br>$E[Y] = \int_0^1 2y^2 \, dy = \frac{2}{3}$.<br>$E[Y^2] = \int_0^1 2y^3 \, dy = \frac{1}{2}$.<br>$\text{Var}(Y) = E[Y^2] - E[Y]^2 = \frac{1}{2} - \frac{4}{9} = \frac{1}{18}$.",
+            "en": r"**Correct: $\frac{1}{18}$**<br>$E[Y] = \int_0^1 2y^2 \, dy = \frac{2}{3}$.<br>$E[Y^2] = \int_0^1 2y^3 \, dy = \frac{1}{2}$.<br>$\text{Var}(Y) = E[Y^2] - E[Y]^2 = \frac{1}{2} - \frac{4}{9} = \frac{1}{18}$."
         }
     },
     "test3_q3": {
         "source": "Test 3, Frage 3",
         "question": {
-            "de": "Var(3X + Y) = ? bei Corr(X,Y) = -1, Var(X) = 1, σ_Y = 2",
-            "en": "Var(3X + Y) = ? given Corr(X,Y) = -1, Var(X) = 1, σ_Y = 2"
+            "de": r"$\text{Var}(3X + Y) = ?$ bei $\text{Corr}(X,Y) = -1$, $\text{Var}(X) = 1$, $\sigma_Y = 2$",
+            "en": r"$\text{Var}(3X + Y) = ?$ given $\text{Corr}(X,Y) = -1$, $\text{Var}(X) = 1$, $\sigma_Y = 2$"
         },
         "options": ["13", "5", "4", "1"],
         "correct_idx": 3,
         "solution": {
-            "de": "**Richtig: 1**<br>Var(3X+Y) = 9·Var(X) + Var(Y) + 2·3·1·(-1)·σ_X·σ_Y<br>= 9 + 4 - 12 = 1.",
-            "en": "**Correct: 1**<br>Var(3X+Y) = 9·Var(X) + Var(Y) + 2·3·1·(-1)·σ_X·σ_Y<br>= 9 + 4 - 12 = 1."
+            "de": r"**Richtig: 1**<br>$\text{Var}(3X+Y) = 9 \cdot \text{Var}(X) + \text{Var}(Y) + 2 \cdot 3 \cdot 1 \cdot (-1) \cdot \sigma_X \cdot \sigma_Y$<br>$= 9 + 4 - 12 = 1$.",
+            "en": r"**Correct: 1**<br>$\text{Var}(3X+Y) = 9 \cdot \text{Var}(X) + \text{Var}(Y) + 2 \cdot 3 \cdot 1 \cdot (-1) \cdot \sigma_X \cdot \sigma_Y$<br>$= 9 + 4 - 12 = 1$."
         }
     },
     "hs2023_mc9": {
         "source": "HS 2023 Januar, MC #9",
         "question": {
-            "de": "Seien X und Y zwei Zufallsvariablen mit Verteilungen X ~ N(4, 4) und Y ~ N(0, 9). Des Weiteren gilt E[XY] = E[X]E[Y]. Sei Z eine Zufallsvariable welche als Z = 3 + 2X - 3Y definiert ist. Wie lautet die Kovarianz Cov(Y, Z)?",
-            "en": "Let X and Y be two random variables with distributions X ~ N(4, 4) and Y ~ N(0, 9). Furthermore E[XY] = E[X]E[Y]. Let Z = 3 + 2X - 3Y. What is Cov(Y, Z)?"
+            "de": r"Seien $X$ und $Y$ zwei Zufallsvariablen mit Verteilungen $X \sim N(4, 4)$ und $Y \sim N(0, 9)$. Des Weiteren gilt $E[XY] = E[X]E[Y]$. Sei $Z$ eine Zufallsvariable welche als $Z = 3 + 2X - 3Y$ definiert ist. Wie lautet die Kovarianz $\text{Cov}(Y, Z)$?",
+            "en": r"Let $X$ and $Y$ be two random variables with distributions $X \sim N(4, 4)$ and $Y \sim N(0, 9)$. Furthermore $E[XY] = E[X]E[Y]$. Let $Z = 3 + 2X - 3Y$. What is $\text{Cov}(Y, Z)$?"
         },
         "options": ["-27", "-9", "0", "27"],
         "correct_idx": 0,
         "solution": {
-            "de": "**Richtig: -27**<br>E[XY] = E[X]E[Y] ⟹ Cov(X,Y) = 0.<br>Cov(Y, Z) = Cov(Y, 3 + 2X - 3Y) = 2·Cov(Y,X) - 3·Var(Y)<br>= 0 - 3·9 = -27.",
-            "en": "**Correct: -27**<br>E[XY] = E[X]E[Y] ⟹ Cov(X,Y) = 0.<br>Cov(Y, Z) = Cov(Y, 3 + 2X - 3Y) = 2·Cov(Y,X) - 3·Var(Y)<br>= 0 - 3·9 = -27."
+            "de": r"**Richtig: -27**<br>$E[XY] = E[X]E[Y] \Rightarrow \text{Cov}(X,Y) = 0$.<br>$\text{Cov}(Y, Z) = \text{Cov}(Y, 3 + 2X - 3Y) = 2 \cdot \text{Cov}(Y,X) - 3 \cdot \text{Var}(Y)$<br>$= 0 - 3 \cdot 9 = -27$.",
+            "en": r"**Correct: -27**<br>$E[XY] = E[X]E[Y] \Rightarrow \text{Cov}(X,Y) = 0$.<br>$\text{Cov}(Y, Z) = \text{Cov}(Y, 3 + 2X - 3Y) = 2 \cdot \text{Cov}(Y,X) - 3 \cdot \text{Var}(Y)$<br>$= 0 - 3 \cdot 9 = -27$."
         }
     }
 }
@@ -1308,34 +1308,34 @@ QUESTIONS_8 = {
     "hs2022_mc8": {
         "source": "HS 2022 Januar, MC #8",
         "question": {
-            "de": "Sie beobachten eine auf dem Intervall [0, b] gleichverteilte Zufallsvariable X. Beobachtungen: {1.1, 3.8, 4.2, 0.5, 5.2}. Wie lautet der Maximum-Likelihood-Schätzer für b?",
-            "en": "You observe a uniformly distributed random variable X on [0, b]. Observations: {1.1, 3.8, 4.2, 0.5, 5.2}. What is the maximum likelihood estimator for b?"
+            "de": r"Sie beobachten eine auf dem Intervall $[0, b]$ gleichverteilte Zufallsvariable $X$. Beobachtungen: $\{1.1, 3.8, 4.2, 0.5, 5.2\}$. Wie lautet der Maximum-Likelihood-Schätzer für $b$?",
+            "en": r"You observe a uniformly distributed random variable $X$ on $[0, b]$. Observations: $\{1.1, 3.8, 4.2, 0.5, 5.2\}$. What is the maximum likelihood estimator for $b$?"
         },
         "options": ["4.2", "5.2", "2.96", "5.0"],
         "correct_idx": 1,
         "solution": {
-            "de": "**Richtig: 5.2**<br>Die Likelihood L(b) = 1/b^n ist fallend in b.<br>Aber alle x_i müssen ≤ b sein.<br>Das kleinste erlaubte b = max{x_i} = 5.2.",
-            "en": "**Correct: 5.2**<br>The likelihood L(b) = 1/b^n is decreasing in b.<br>But all x_i must be ≤ b.<br>The smallest allowed b = max{x_i} = 5.2."
+            "de": r"**Richtig: 5.2**<br>Die Likelihood $L(b) = \frac{1}{b^n}$ ist fallend in $b$.<br>Aber alle $x_i$ müssen $\le b$ sein.<br>Das kleinste erlaubte $b = \max\{x_i\} = 5.2$.",
+            "en": r"**Correct: 5.2**<br>The likelihood $L(b) = \frac{1}{b^n}$ is decreasing in $b$.<br>But all $x_i$ must be $\le b$.<br>The smallest allowed $b = \max\{x_i\} = 5.2$."
         }
     },
     "hs2023_mc10": {
         "source": "HS 2023 Januar, MC #10",
         "question": {
-            "de": "Sei x₁, x₂, ..., xₙ eine Stichprobe unabhängiger und identischer I.I.D Zufallsvariablen X. Welcher der folgenden Schätzer des Erwartungswerts von X ist erwartungstreu?",
-            "en": "Let x₁, x₂, ..., xₙ be a sample of i.i.d. random variables X. Which of the following estimators of the expected value of X is unbiased?"
+            "de": r"Sei $x_1, x_2, \ldots, x_n$ eine Stichprobe unabhängiger und identischer I.I.D Zufallsvariablen $X$. Welcher der folgenden Schätzer des Erwartungswerts von $X$ ist erwartungstreu?",
+            "en": r"Let $x_1, x_2, \ldots, x_n$ be a sample of i.i.d. random variables $X$. Which of the following estimators of the expected value of $X$ is unbiased?"
         },
-        "options": [{"de": "x₁", "en": "x₁"}, {"de": "(x₁ + xₙ)/3", "en": "(x₁ + xₙ)/3"}, {"de": "x₁²", "en": "x₁²"}, {"de": "x_bar/2", "en": "x_bar/2"}],
+        "options": [{"de": r"$x_1$", "en": r"$x_1$"}, {"de": r"$\frac{x_1 + x_n}{3}$", "en": r"$\frac{x_1 + x_n}{3}$"}, {"de": r"$x_1^2$", "en": r"$x_1^2$"}, {"de": r"$\frac{\bar{x}}{2}$", "en": r"$\frac{\bar{x}}{2}$"}],
         "correct_idx": 0,
         "solution": {
-            "de": "**Richtig: x₁**<br>E[x₁] = E[X] = μ.<br>Alle anderen Schätzer sind entweder gewichtet oder nichtlinear und führen zu Bias.",
-            "en": "**Correct: x₁**<br>E[x₁] = E[X] = μ.<br>All other estimators are either weighted or nonlinear and lead to bias."
+            "de": r"**Richtig: $x_1$**<br>$E[x_1] = E[X] = \mu$.<br>Alle anderen Schätzer sind entweder gewichtet oder nichtlinear und führen zu Bias.",
+            "en": r"**Correct: $x_1$**<br>$E[x_1] = E[X] = \mu$.<br>All other estimators are either weighted or nonlinear and lead to bias."
         }
     },
     "hs2015_mc10": {
         "source": "HS 2015 Januar, MC #10",
         "question": {
-            "de": "Für θ > 1 sei X₁, X₂, ..., Xₙ eine unabhängige Folge in [1, θ] gleichverteilter Zufallsvariablen. Wir betrachten den Schätzer θ̂ = (2/n)·Σxᵢ für den Parameter θ. Welche der folgenden Aussagen über θ̂ trifft zu?",
-            "en": "For θ > 1, let X₁, X₂, ..., Xₙ be i.i.d. uniformly distributed on [1, θ]. We consider the estimator θ̂ = (2/n)·Σxᵢ for θ. Which statement about θ̂ is true?"
+            "de": r"Für $\theta > 1$ sei $X_1, X_2, \ldots, X_n$ eine unabhängige Folge in $[1, \theta]$ gleichverteilter Zufallsvariablen. Wir betrachten den Schätzer $\hat{\theta} = \frac{2}{n} \sum x_i$ für den Parameter $\theta$. Welche der folgenden Aussagen über $\hat{\theta}$ trifft zu?",
+            "en": r"For $\theta > 1$, let $X_1, X_2, \ldots, X_n$ be i.i.d. uniformly distributed on $[1, \theta]$. We consider the estimator $\hat{\theta} = \frac{2}{n} \sum x_i$ for $\theta$. Which statement about $\hat{\theta}$ is true?"
         },
         "options": [
             {"de": "Erwartungstreu und konsistent", "en": "Unbiased and consistent"},
@@ -1345,8 +1345,8 @@ QUESTIONS_8 = {
         ],
         "correct_idx": 2,
         "solution": {
-            "de": "**Richtig: (c)**<br>E[θ̂] = 2·E[X] = 2·(1+θ)/2 = 1+θ ≠ θ.<br>Also nicht erwartungstreu.<br>Aber für n→∞ konvergiert θ̂ → θ (konsistent).",
-            "en": "**Correct: (c)**<br>E[θ̂] = 2·E[X] = 2·(1+θ)/2 = 1+θ ≠ θ.<br>So not unbiased.<br>But as n→∞, θ̂ → θ (consistent)."
+            "de": r"**Richtig: (c)**<br>$E[\hat{\theta}] = 2 \cdot E[X] = 2 \cdot \frac{1+\theta}{2} = 1+\theta \neq \theta$.<br>Also nicht erwartungstreu.<br>Aber für $n \to \infty$ konvergiert $\hat{\theta} \to \theta$ (konsistent).",
+            "en": r"**Correct: (c)**<br>$E[\hat{\theta}] = 2 \cdot E[X] = 2 \cdot \frac{1+\theta}{2} = 1+\theta \neq \theta$.<br>So not unbiased.<br>But as $n \to \infty$, $\hat{\theta} \to \theta$ (consistent)."
         }
     },
     "hs2023_mc5": {

@@ -2,6 +2,8 @@ import streamlit as st
 from math import factorial
 from utils.localization import t
 from utils.quiz_helper import render_mcq
+from data.exam_questions import get_question
+from data.exam_questions import get_question
 from views.styles import render_icon
 
 # --- CONTENT DICTIONARY (BILINGUAL) ---
@@ -38,7 +40,7 @@ This is the essence of **Combinations**: The order of selection doesn't matter."
     
     "formula": {
         "title": {"de": "Kombinationsformel", "en": "Combination Formula"},
-        "latex": r"C(\color{#007AFF}{n}, \color{#FF4B4B}{k}) = \binom{\color{#007AFF}{n}}{\color{#FF4B4B}{k}} = \frac{\color{#007AFF}{n}!}{\color{#FF4B4B}{k}! \cdot (\color{#007AFF}{n} - \color{#FF4B4B}{k})!}",
+        "latex": r"C(n, k) = \binom{n}{k} = \frac{n!}{k! \cdot (n - k)!}",
         "intuition": {"de": "Teamfoto: Egal wer wo steht.", "en": "Team photo: nobody cares who stands where."},
         "example": {"de": "Lotto: 6 aus 49 Zahlen", "en": "Lottery: Pick 6 from 49 numbers"},
         "pro_tip": {"de": "Würde Tauschen das Ergebnis ändern? NEIN → Teile durch k!", "en": "Would swapping change the outcome? NO → Divide by k!"}
@@ -53,23 +55,8 @@ This is the essence of **Combinations**: The order of selection doesn't matter."
     "contrast_title": {"de": "Kontrast: Permutation vs. Kombination", "en": "Contrast: Permutation vs. Combination"},
     
     "exam": {
-        "title": {"de": "Prüfungsfrage", "en": "Exam Question"},
-        "source": "Kombinatorik Grundlagen",
-        "question": {
-            "de": "Beim Schweizer Lotto '6 aus 49' wählt man 6 Zahlen aus 49. Wie viele verschiedene Tipps sind möglich?",
-            "en": "In the Swiss Lotto '6 out of 49', you pick 6 numbers from 49. How many different tickets are possible?"
-        },
-        "options": [
-            {"de": "49! (alle Anordnungen)", "en": "49! (all arrangements)"},
-            {"de": "C(49,6) = 13'983'816", "en": "C(49,6) = 13,983,816"},
-            {"de": "49^6 (mit Zurücklegen)", "en": "49^6 (with replacement)"},
-            {"de": "P(49,6) = 49!/43!", "en": "P(49,6) = 49!/43!"}
-        ],
-        "correct_id": 1,
-        "solution": {
-            "de": "<b>Richtig: C(49,6)</b><br><br>Beim Lotto zählt nur WELCHE Zahlen du hast, nicht in welcher Reihenfolge du sie angekreuzt hast. {1,2,3,4,5,6} = {6,5,4,3,2,1} = derselbe Tipp! Daher: Kombination, nicht Permutation.",
-            "en": "<b>Correct: C(49,6)</b><br><br>In the lottery, only WHICH numbers you have matters, not the order you picked them. {1,2,3,4,5,6} = {6,5,4,3,2,1} = same ticket! Therefore: Combination, not Permutation."
-        }
+        "title": {"de": "Prüfungstraining", "en": "Exam Practice"},
+        "source": "Combination Practice"
     }
 }
 
@@ -96,11 +83,11 @@ def render_subtopic_2_4(model):
         with col_scenario:
             st.markdown(f"**{t({'de': 'Schritt 1: Wenn Reihenfolge zählen würde', 'en': 'Step 1: If order mattered'})}**")
             st.markdown(f"""
-<div style="background: #fef3c7; border-left: 3px solid #d97706; padding: 12px; border-radius: 6px; color: #92400e;">
+<div style="background: #f4f4f5; border-left: 3px solid #71717a; padding: 12px; border-radius: 6px; color: #3f3f46;">
 {t({"de": "Wähle 2 aus {{A, B, C}}. Mit Reihenfolge wären das:",
     "en": "Pick 2 from {{A, B, C}}. With order, these would be:"})}
 <br><br>
-A→B, B→A, A→C, C→A, B→C, C→B = <b>6 Ergebnisse</b>
+A→B, B→A, A→C, C→A, B→C, C→B = <b>6 {t({"de": "Ergebnisse", "en": "results"})}</b>
 <br><br>
 {t({"de": "Formel: P(3,2) = 3 × 2 = 6", "en": "Formula: P(3,2) = 3 × 2 = 6"})}
 </div>
@@ -110,7 +97,7 @@ A→B, B→A, A→C, C→A, B→C, C→B = <b>6 Ergebnisse</b>
             
             st.markdown(f"**{t({'de': 'Schritt 2: Bemerke die Duplikate', 'en': 'Step 2: Notice the duplicates'})}**")
             st.markdown(f"""
-<div style="background: #fee2e2; border-left: 3px solid #ef4444; padding: 12px; border-radius: 6px; color: #991b1b;">
+<div style="background: #f4f4f5; border-left: 3px solid #71717a; padding: 12px; border-radius: 6px; color: #3f3f46;">
 {t({"de": "Aber für ein KOMITEE sind diese GLEICH:", "en": "But for a COMMITTEE, these are THE SAME:"})}
 <br><br>
 {{A, B}} = {{B, A}} → {t({"de": "Beide beschreiben dieselbe 2er-Gruppe!", "en": "Both describe the same 2-person group!"})}
@@ -123,7 +110,7 @@ A→B, B→A, A→C, C→A, B→C, C→B = <b>6 Ergebnisse</b>
             
             st.markdown(f"**{t({'de': 'Schritt 3: Teile durch k!', 'en': 'Step 3: Divide by k!'})}**")
             st.markdown(f"""
-<div style="background: #d1fae5; border-left: 3px solid #10b981; padding: 12px; border-radius: 6px; color: #065f46;">
+<div style="background: #f4f4f5; border-left: 3px solid #71717a; padding: 12px; border-radius: 6px; color: #3f3f46;">
 6 ÷ 2! = 6 ÷ 2 = <b>3</b> {t({"de": "einzigartige Komitees", "en": "unique committees"})}
 <br><br>
 {{A, B}}, {{A, C}}, {{B, C}}
@@ -131,22 +118,22 @@ A→B, B→A, A→C, C→A, B→C, C→B = <b>6 Ergebnisse</b>
 """, unsafe_allow_html=True)
         
         with col_math:
-            st.latex(r"\text{Schritt 1: Mit Reihenfolge}")
+            st.markdown(f"**{t({'de': 'Schritt 1', 'en': 'Step 1'})}**")
             st.latex(r"P(3,2) = \frac{3!}{(3-2)!} = \frac{6}{1} = 6")
             
             st.markdown("<br>", unsafe_allow_html=True)
             
-            st.latex(r"\text{Schritt 2: Duplikate}")
-            st.latex(r"\text{Jedes Paar } k! = 2! = 2 \text{ mal}")
+            st.markdown(f"**{t({'de': 'Schritt 2', 'en': 'Step 2'})}**")
+            st.latex(r"k! = 2! = 2")
             
             st.markdown("<br>", unsafe_allow_html=True)
             
-            st.latex(r"\text{Schritt 3: Kombination}")
+            st.markdown(f"**{t({'de': 'Schritt 3', 'en': 'Step 3'})}**")
             st.latex(r"C(3,2) = \frac{P(3,2)}{k!} = \frac{6}{2} = 3")
             
             st.markdown("<br>", unsafe_allow_html=True)
             
-            st.latex(r"\boxed{C(n,k) = \frac{n!}{k!(n-k)!}}")
+            st.latex(r"C(n,k) = \frac{n!}{k!(n-k)!}")
     
     st.markdown("<br><br>", unsafe_allow_html=True)
     
@@ -237,12 +224,12 @@ A→B, B→A, A→C, C→A, B→C, C→B = <b>6 Ergebnisse</b>
         with col_perm:
             st.markdown(f"**{t({'de': 'Permutation (2.3)', 'en': 'Permutation (2.3)'})}**")
             st.markdown(f"""
-<div style="background: #fef3c7; border-radius: 8px; padding: 16px;">
+<div style="background: #f4f4f5; border-radius: 8px; padding: 16px;">
 <b>{t({"de": "Reihenfolge ZÄHLT", "en": "Order MATTERS"})}</b><br><br>
 {t({"de": "Beispiel: Podiumsplätze", "en": "Example: Podium places"})}<br>
 {t({"de": "Gold-Silber-Bronze ≠ Bronze-Silber-Gold", "en": "Gold-Silver-Bronze ≠ Bronze-Silver-Gold"})}<br><br>
 <b>{t({"de": "Test:", "en": "Test:"})}</b> {t({"de": "Wärst du sauer, wenn getauscht wird?", "en": "Would you be upset if positions swap?"})}<br>
-<span style="color: #059669;">→ JA = Permutation</span>
+→ {t({"de": "JA", "en": "YES"})} = Permutation
 </div>
 """, unsafe_allow_html=True)
             st.latex(r"P(n,k) = \frac{n!}{(n-k)!}")
@@ -250,12 +237,12 @@ A→B, B→A, A→C, C→A, B→C, C→B = <b>6 Ergebnisse</b>
         with col_comb:
             st.markdown(f"**{t({'de': 'Kombination (2.4)', 'en': 'Combination (2.4)'})}**")
             st.markdown(f"""
-<div style="background: #d1fae5; border-radius: 8px; padding: 16px;">
+<div style="background: #f4f4f5; border-radius: 8px; padding: 16px;">
 <b>{t({"de": "Reihenfolge EGAL", "en": "Order DOESN'T MATTER"})}</b><br><br>
 {t({"de": "Beispiel: Teamauswahl", "en": "Example: Team selection"})}<br>
 {{Alice, Bob}} = {{Bob, Alice}}<br><br>
 <b>{t({"de": "Test:", "en": "Test:"})}</b> {t({"de": "Würde Tauschen etwas ändern?", "en": "Would swapping change anything?"})}<br>
-<span style="color: #059669;">→ NEIN = Kombination</span>
+→ {t({"de": "NEIN", "en": "NO"})} = {t({"de": "Kombination", "en": "Combination"})}
 </div>
 """, unsafe_allow_html=True)
             st.latex(r"C(n,k) = \frac{n!}{k!(n-k)!}")
@@ -290,18 +277,16 @@ A→B, B→A, A→C, C→A, B→C, C→B = <b>6 Ergebnisse</b>
     
     # --- EXAM SECTION ---
     st.markdown(f"### {t(content_2_4['exam']['title'])}")
-    st.caption(content_2_4['exam']['source'])
+    st.caption(t(content_2_4['exam']['source']))
     
     with st.container(border=True):
-        opts = content_2_4["exam"]["options"]
-        opt_labels = [t(opt) for opt in opts]
-        
+        q_data = get_question("2.4", "lottery")
         render_mcq(
             key_suffix="2_4_lottery",
-            question_text=t(content_2_4["exam"]["question"]),
-            options=opt_labels,
-            correct_idx=content_2_4["exam"]["correct_id"],
-            solution_text_dict=content_2_4["exam"]["solution"],
+            question_text=t(q_data["question"]),
+            options=q_data["options"],
+            correct_idx=q_data["correct_idx"],
+            solution_text_dict=q_data["solution"],
             success_msg_dict={"de": "Korrekt!", "en": "Correct!"},
             error_msg_dict={"de": "Noch nicht ganz...", "en": "Not quite..."},
             client=model,
@@ -311,3 +296,37 @@ A→B, B→A, A→C, C→A, B→C, C→B = <b>6 Ergebnisse</b>
             subtopic_id="2.4",
             question_id="q_2_4_lottery"
         )
+        
+        # Formula hint (Rule 2.4: hints go AFTER the question)
+        with st.expander(t({"de": "Formel-Hinweis", "en": "Formula Hint"})):
+            st.latex(r"C(n,k) = \frac{n!}{k!(n-k)!}")
+    
+    # --- ADDITIONAL EXAM QUESTION ---
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    st.markdown(f"### {t({'de': 'Weitere Prüfungsaufgabe', 'en': 'Additional Exam Question'})}")
+    
+    with st.container(border=True):
+        st.caption("Test 2, Frage 1 (Vorstand)")
+        q_data_2 = get_question("2.4", "test2_q1")
+        if q_data_2:
+            opts = q_data_2.get("options", [])
+            if opts and isinstance(opts[0], dict):
+                option_labels = [t(o) for o in opts]
+            else:
+                option_labels = opts
+            
+            render_mcq(
+                key_suffix="2_4_test2_q1",
+                question_text=t(q_data_2["question"]),
+                options=option_labels,
+                correct_idx=q_data_2["correct_idx"],
+                solution_text_dict=q_data_2["solution"],
+                success_msg_dict={"de": "Richtig!", "en": "Correct!"},
+                error_msg_dict={"de": "Falsch.", "en": "Incorrect."},
+                client=model,
+                ai_context="Combinations: Club board selection problem",
+                course_id="vwl",
+                topic_id="2",
+                subtopic_id="2.4",
+                question_id="2_4_test2_q1"
+            )

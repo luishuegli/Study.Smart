@@ -6,6 +6,7 @@ from views.styles import render_icon
 from utils.localization import t
 from utils.ai_helper import render_ai_tutor
 from utils.quiz_helper import render_mcq
+from data.exam_questions import get_question
 import random
 
 # 1. THE CONTENT DICTIONARY (Rosetta Stone Protocol)
@@ -46,25 +47,6 @@ content_1_3 = {
     "vis_note": {
         "de": "**Beachte:** Bei wenigen Würfen schwanken die Balken stark. Erst bei sehr vielen Würfen ($n \\to \\infty$) stabilisiert sich die Verteilung.",
         "en": "**Note:** With few rolls, the bars fluctuate wildly. Only with many rolls ($n \\to \\infty$) does the distribution stabilize."
-    },
-    "exam": {
-        "title": {"de": "Konzept-Check", "en": "Concept Check"},
-        "source": "Selbst erstellt / Self-created",
-        "question": {
-            "de": r"**$\text{Wann darf man die Laplace-Formel } P(A) = \frac{g}{m} \text{ verwenden?}$**",
-            "en": r"**$\text{When are you allowed to use the Laplace formula } P(A) = \frac{g}{m}?$**"
-        },
-        "options": [
-            {"id": "a", "de": "Immer.", "en": "Always."},
-            {"id": "b", "de": "Nur bei unendlich vielen Ergebnissen.", "en": "Only with infinite outcomes."},
-            {"id": "c", "de": "Nur wenn der Ereignisraum endlich ist und alle Elementarereignisse gleich wahrscheinlich sind.", "en": "Only if the sample space is finite and all elementary events are equally likely."},
-            {"id": "d", "de": "Nur wenn man empirische Daten hat.", "en": "Only if you have empirical data."}
-        ],
-        "correct_id": "c",
-        "solution": {
-            "de": "**Richtig! (c)**<br>Das 'Indifferenzprinzip' ist entscheidend. Bei einem gezinkten Würfel (ungleiche Wahrscheinlichkeiten) funktioniert Laplace nicht.",
-            "en": "**Correct (c)**<br>The 'Principle of Indifference' is crucial. Laplace does not work for loaded dice (unequal probabilities)."
-        }
     }
 }
 
@@ -262,31 +244,38 @@ def render_subtopic_1_3(model):
 
     # --- EXAM WORKBENCH ---
     st.markdown("<br><br>", unsafe_allow_html=True)
-    st.markdown(f"### {t(content_1_3['exam']['title'])}")
-    st.caption(content_1_3['exam']['source'])
+    # --- EXAM WORKBENCH ---
+    st.markdown("<br><br>", unsafe_allow_html=True)
     
-    with st.container(border=True):
-        # Prepare Options
-        opts = content_1_3["exam"]["options"]
-        opt_labels = [t({"de": o["de"], "en": o["en"]}) for o in opts]
+    q_id = "q_1_3_concept"
+    q_data = get_question("1.3", q_id)
+    
+    if q_data:
+        st.markdown(f"### {t({'de': 'Konzept-Check', 'en': 'Concept Check'})}")
+        st.caption(t({'de': 'Selbst erstellt', 'en': 'Self-created'}))
         
-        # Calculate correct index
-        correct_id = content_1_3["exam"]["correct_id"]
-        correct_idx = next((i for i, o in enumerate(opts) if o["id"] == correct_id), 0)
-        
-        render_mcq(
-            key_suffix="1_3_exam",
-            question_text=t(content_1_3["exam"]["question"]),
-            options=opt_labels,
-            correct_idx=correct_idx,
-            solution_text_dict=content_1_3["exam"]["solution"],
-            success_msg_dict={"de": "Korrekt", "en": "Correct"},
-            error_msg_dict={"de": "Das stimmt nicht ganz.", "en": "That is not quite right."},
-            client=model,
-            ai_context="Context: Probability definitions (Laplace vs Frequentist).",
-            allow_retry=False,
-            course_id="vwl",
-            topic_id="1",
-            subtopic_id="1.3",
-            question_id="1_3_exam"
-        )
+        with st.container(border=True):
+            # Format options (dicts with id/de/en)
+            opt_labels = []
+            for o in q_data["options"]:
+                if isinstance(o, dict) and "id" in o:
+                     opt_labels.append(f"**{o['id']}**: {t({'de': o['de'], 'en': o['en']})}")
+                else:
+                     opt_labels.append(t(o))
+            
+            render_mcq(
+                key_suffix="1_3_exam",
+                question_text=t(q_data["question"]),
+                options=opt_labels,
+                correct_idx=q_data["correct_idx"],
+                solution_text_dict=q_data["solution"],
+                success_msg_dict={"de": "Korrekt", "en": "Correct"},
+                error_msg_dict={"de": "Das stimmt nicht ganz.", "en": "That is not quite right."},
+                client=model,
+                ai_context="Context: Probability definitions (Laplace vs Frequentist).",
+                allow_retry=False,
+                course_id="vwl",
+                topic_id="1",
+                subtopic_id="1.3",
+                question_id="q_1_3_concept"
+            )

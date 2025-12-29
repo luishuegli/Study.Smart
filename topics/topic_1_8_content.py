@@ -5,6 +5,7 @@ from views.styles import render_icon
 from utils.localization import t
 from utils.quiz_helper import render_mcq
 from utils.progress_tracker import track_question_answer
+from data.exam_questions import get_question
 
 # --- CONTENT DICTIONARY ---
 content_1_8 = {
@@ -44,36 +45,7 @@ content_1_8 = {
         }
     },
     "quiz": {
-        "question": {
-            "de": "Eine Maschine A produziert 20% aller Teile mit 5% Fehler. Maschine B produziert 80% mit 1% Fehler. Wie hoch ist die totale Fehlerrate?",
-            "en": "Machine A produces 20% of all parts with 5% defects. Machine B produces 80% with 1% defects. What is the total defect rate?"
-        },
-        "options": ["3%", "1.8%", "6%", "2.5%"],
-        "correct_idx": 1,
-        "solution": {
-            "de": """
-            **Antwort: 1.8%**
-            
-            Wir nutzen den Satz der totalen Wahrscheinlichkeit:
-            
-            $P(D) = P(D|A)P(A) + P(D|B)P(B)$
-            
-            $P(D) = 0.05 \\cdot 0.20 + 0.01 \\cdot 0.80$
-            
-            $P(D) = 0.01 + 0.008 = 0.018 = 1.8\%$
-            """,
-            "en": """
-            **Answer: 1.8%**
-            
-            We use the Law of Total Probability:
-            
-            $P(D) = P(D|A)P(A) + P(D|B)P(B)$
-            
-            $P(D) = 0.05 \\cdot 0.20 + 0.01 \\cdot 0.80$
-            
-            $P(D) = 0.01 + 0.008 = 0.018 = 1.8\%$
-            """
-        }
+        "title": {"de": "Konzept-Check", "en": "Concept Check"}
     }
 }
 
@@ -462,24 +434,39 @@ def render_subtopic_1_8(model):
             st.caption(t({"de": "Oberer Pfad (1-3) und unterer Pfad (2-4) sind parallel.", "en": "Top path (1-3) and bottom path (2-4) are in parallel."}))
 
     st.markdown("<br>", unsafe_allow_html=True)
-
-    # --- PART 3: CONCEPT CHECK ---
-    # --- PART 3: CONCEPT CHECK ---
-    st.markdown("<br>", unsafe_allow_html=True)
-    # --- PART 3: CONCEPT CHECK ---
-    st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown(f"### {t({'de': 'Konzept-Check', 'en': 'Concept Check'})}")
+    # --- PART 3: EXAM WORKBENCH ---
+    st.markdown(f"### {t({'de': 'Prüfungstraining', 'en': 'Exam Practice'})}")
     
-    with st.container(border=True):
-        render_mcq(
-            key_suffix="1_8_mcq",
-            question_text=t(content_1_8["quiz"]["question"]),
-            options=content_1_8["quiz"]["options"],
-            correct_idx=content_1_8["quiz"]["correct_idx"],
-            solution_text_dict=content_1_8["quiz"]["solution"],
-            success_msg_dict={"de": "Korrekt! Weighted Sum angewendet.", "en": "Correct! Weighted Sum applied."},
-            error_msg_dict={"de": "Falsch. Hast du die Basisraten (20% vs 80%) berücksichtigt?", "en": "Incorrect. Did you account for the base rates (20% vs 80%)?"},
-            client=model,
-            ai_context="Total Probability Law",
-            course_id="vwl", topic_id="1", subtopic_id="1.8", question_id="1_8_factory"
-        )
+    def render_exam_q(q_id, key_suffix, question_key, source_caption):
+        q_data = get_question("1.8", q_id)
+        if not q_data:
+            st.warning(f"Question {q_id} not found in QUESTIONS_1_8")
+            return
+        
+        opts = q_data.get("options", [])
+        # Handle both string lists and dict lists
+        if opts and isinstance(opts[0], dict):
+            option_labels = [t(o) for o in opts]
+        else:
+            option_labels = opts
+        
+        with st.container(border=True):
+            st.caption(source_caption)
+            render_mcq(
+                key_suffix=key_suffix,
+                question_text=t(q_data['question']),
+                options=option_labels,
+                correct_idx=q_data['correct_idx'],
+                solution_text_dict=q_data['solution'],
+                success_msg_dict={"de": "Korrekt!", "en": "Correct!"},
+                error_msg_dict={"de": "Falsch.", "en": "Incorrect."},
+                client=model,
+                ai_context=f"Topic 1.8: Total Probability & Bayes. Question: {q_id}",
+                course_id="vwl", topic_id="1", subtopic_id="1.8", question_id=question_key
+            )
+    
+    render_exam_q("uebung1_prob_factory", "1_8_factory", "1_8_factory", t({"de": "Fabrik-Frage", "en": "Factory Question"}))
+    st.markdown("<br>", unsafe_allow_html=True)
+    render_exam_q("hs2022_mc2", "1_8_bayes_coins", "1_8_bayes_coins", "HS 2022 Januar, MC #2 (Bayes)")
+    st.markdown("<br>", unsafe_allow_html=True)
+    render_exam_q("hs2022_mc1", "1_8_game_theory", "1_8_game_theory", "HS 2022 Januar, MC #1 (Geometric Series)")

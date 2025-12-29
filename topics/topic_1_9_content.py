@@ -4,8 +4,10 @@ import numpy as np
 import pandas as pd
 from views.styles import render_icon
 from utils.localization import t
+from utils.localization import t
 from utils.quiz_helper import render_mcq
 from utils.progress_tracker import track_question_answer
+from data.exam_questions import get_question
 
 # --- CONTENT DICTIONARY ---
 content_1_9 = {
@@ -109,28 +111,7 @@ content_1_9 = {
         }
     },
     "quiz": {
-        "title": {"de": "4. Logik-Check: 3 Gefangene", "en": "4. Logic Check: 3 Prisoners"},
-        "question": {
-            "de": "Drei Gefangene (A, B, C). Einer wird begnadigt. Wärter nennt B als Todeskandidat. Steigt As Chance?",
-            "en": "Three prisoners (A, B, C). One is pardoned. Warden names B as executed. Does A's chance increase?"
-        },
-        "options": {
-            "de": ["Ja, auf 50%", "Nein, bleibt 1/3", "Ja, auf 66%", "Nein, sinkt"],
-            "en": ["Yes, to 50%", "No, stays 1/3", "Yes, to 66%", "No, decreases"]
-        },
-        "correct_idx": 1,
-        "solution": {
-            "de": """
-            **Antwort: Nein, bleibt 1/3**
-            
-            Der Wärter musste einen Namen nennen (B oder C). Dass er B nennt, gibt A keine spezifische Information über sich selbst, da er dies in (fast) jedem Fall tun könnte. Die 'überschüssige' Wahrscheinlichkeit wandert zu C (2/3).
-            """,
-            "en": """
-            **Answer: No, stays 1/3**
-            
-            The warden had to name someone (B or C). Naming B gives A no specific information about himself, as he could do this in (almost) any case. The 'surplus' probability shifts to C (2/3).
-            """
-        }
+        "title": {"de": "4. Logik-Check: 3 Gefangene", "en": "4. Logic Check: 3 Prisoners"}
     }
 }
 
@@ -772,12 +753,21 @@ def render_subtopic_1_9(model):
     st.markdown(f"### {t(content_1_9['quiz']['title'])}")
     
     with st.container(border=True):
+        q_data = get_question("1.9", "three_prisoners")
+        
+        # Handle bilingual options
+        opts = q_data.get("options", [])
+        if opts and isinstance(opts[0], dict) and ('de' in opts[0] or 'en' in opts[0]):
+            option_labels = [t(o) for o in opts]
+        else:
+            option_labels = opts
+        
         render_mcq(
             key_suffix="1_9_mcq",
-            question_text=t(content_1_9["quiz"]["question"]),
-            options=t(content_1_9["quiz"]["options"]),
-            correct_idx=content_1_9["quiz"]["correct_idx"],
-            solution_text_dict=content_1_9["quiz"]["solution"],
+            question_text=t(q_data["question"]),
+            options=option_labels,
+            correct_idx=q_data["correct_idx"],
+            solution_text_dict=q_data["solution"],
             success_msg_dict={"de": "Exakt.", "en": "Exactly."},
             error_msg_dict={"de": "Überlege: Hat der Wärter eine Wahl?", "en": "Think: Did the warden have a choice?"},
             client=model,

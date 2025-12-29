@@ -4,6 +4,7 @@ import numpy as np
 from views.styles import render_icon
 from utils.localization import t
 from utils.quiz_helper import render_mcq
+from data.exam_questions import get_question
 
 # --- CONTENT DICTIONARY ---
 content_1_6 = {
@@ -55,50 +56,6 @@ content_1_6 = {
         "pro_trick": {
             "de": "**Pro-Trick:** In stetigen Räumen haben nur Intervalle (Bereiche) eine Wahrscheinlichkeit > 0. Einzelne Punkte haben immer P = 0.",
             "en": "**Pro Trick:** In continuous spaces, only intervals (regions) have probability > 0. Individual points always have P = 0."
-        }
-    },
-    "quiz": {
-        "question": {
-            "de": "In einem stetigen Raum (Wartezeit $X \\in [0, 60]$ Min.), wie groß ist $P(X = 15.000...)$?",
-            "en": "In a continuous space (waiting time $X \\in [0, 60]$ min), what is $P(X = 15.000...)$?"
-        },
-        "options": ["0", "1/60", "1", "0.15"],
-        "correct_idx": 0,
-        "solution": {
-            "de": """
-**Antwort: 0**
-
-In stetigen Räumen hat ein einzelner Punkt keine 'Fläche' (Masse). 
-
-Die Wahrscheinlichkeit für einen exakten Wert ist daher:
-
-$P(X = x) = 0$
-
-**Aber:** Intervalle haben Wahrscheinlichkeit > 0:
-
-$P(14 \\leq X \\leq 16) > 0$
-            """,
-            "en": """
-**Answer: 0**
-
-In continuous spaces, a single point has no 'area' (mass).
-
-The probability of an exact value is therefore:
-
-$P(X = x) = 0$
-
-**However:** Intervals have probability > 0:
-
-$P(14 \\leq X \\leq 16) > 0$
-            """
-        },
-        "success_msg": {
-            "de": "Richtig! In stetigen Räumen ist die Wahrscheinlichkeit für exakte Punkte immer 0.",
-            "en": "Correct! In continuous spaces, the probability of exact points is always 0."
-        },
-        "error_msg": {
-            "de": "Nicht ganz. Denke an die Dartscheibe: Ein einzelner Punkt hat keine Fläche.",
-            "en": "Not quite. Think of the dartboard: A single point has no area."
         }
     }
 }
@@ -321,20 +278,24 @@ def render_subtopic_1_6(model):
         """
     }
 
-    with st.container(border=True):
-        render_mcq(
-            key_suffix="1_6_mcq",
-            question_text=t(q_text),
-            options=["0", f"1/{curr_r if curr_r>0 else 100}", "1", f"{r_float:.2f}"],
-            correct_idx=0,
-            solution_text_dict=sol_text,
-            success_msg_dict=content_1_6["quiz"]["success_msg"],
-            error_msg_dict=content_1_6["quiz"]["error_msg"],
-            client=model,
-            ai_context=ai_context,
-            allow_retry=False,
-            course_id="vwl",
-            topic_id="1",
-            subtopic_id="1.6",
-            question_id="p_single_point"
-        )
+    q_dart_id = "q_1_6_dart"
+    q_data_dart = get_question("1.6", q_dart_id)
+    
+    if q_data_dart:
+        with st.container(border=True):
+            render_mcq(
+                key_suffix="1_6_mcq",
+                question_text=t(q_text),
+                options=["0", f"1/{curr_r if curr_r>0 else 100}", "1", f"{r_float:.2f}"],
+                correct_idx=0,
+                solution_text_dict=sol_text,
+                success_msg_dict={"de": "Richtig! In stetigen Räumen ist die Wahrscheinlichkeit für exakte Punkte immer 0.", "en": "Correct! In continuous spaces, the probability of exact points is always 0."},
+                error_msg_dict={"de": "Nicht ganz. Denke an die Dartscheibe: Ein einzelner Punkt hat keine Fläche.", "en": "Not quite. Think of the dartboard: A single point has no area."},
+                client=model,
+                ai_context="Topic 1.6: Continuous probability spaces - dartboard problem",
+                allow_retry=False,
+                course_id="vwl",
+                topic_id="1",
+                subtopic_id="1.6",
+                question_id="p_single_point"
+            )

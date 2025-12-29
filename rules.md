@@ -56,6 +56,14 @@ This document contains **MUST-FOLLOW** rules for all agentic work. These rules a
 - **3.3 No Breaking Symbols**: Never break a term like $P(A|B)$ across lines.
     - **Arrow Protocol**: For steps ($A \to B$), place the arrow and result on a **new line** (use `\n\n` or separate `st.latex` calls) to prevent horizontal scroll/overflow.
 - **3.4 Contextual Text**: Text inside formulas ("if", "then") must be wrapped in `\text{}`.
+- **3.5 LaTeX in Question/Option Text (MANDATORY)**: Any of the following in question text or MCQ options MUST be wrapped in `$...$`:
+    - **Probability notation**: `P(A)`, `P(A|B)`, `P(e1)=0.3` → `$P(A)$`, `$P(A|B)$`, `$P(e_1)=0.3$`
+    - **Set notation**: `S = {1,2,3}`, `{e1, e2, e3}` → `$S = \{1,2,3\}$`, `$\{e_1, e_2, e_3\}$`
+    - **Variables**: `x`, `n`, `k` → `$x$`, `$n$`, `$k$`
+    - **Fractions**: `g/m` → `$\frac{g}{m}$`
+    - **Comparisons**: `P(A) > 0.5` → `$P(A) > 0.5$`
+    - **Subscripts**: `e1`, `P1` → `$e_1$`, `$P_1$`
+    - *Rule of thumb*: If it looks like math, it IS math. Wrap it in LaTeX.
 
 ---
 

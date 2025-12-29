@@ -10,6 +10,8 @@ from views.styles import render_icon
 from utils.localization import t
 from utils.ai_helper import render_ai_tutor
 from utils.quiz_helper import render_mcq
+from data.exam_questions import get_question
+from data.exam_questions import get_question
 
 def get_dice_svg(number, size=48):
     """Generate SVG for dice faces 1-6 with dark mode support"""
@@ -254,96 +256,66 @@ def render_subtopic_1_1(model):
     st.markdown(f"### {t({'de': 'Konzept-Check', 'en': 'Concept Check'})}")
     
     q_key = "q_1_1_stetig"
-    
-    question_text = t({'de': '**Welcher der folgenden Ereignisräume $S$ ist stetig?**', 'en': '**Which of the following sample spaces $S$ is continuous?**'})
-    
-    # Options setup
-    opts_raw = [
-        {"id": "A", "de": r"$S = \{1, 2, 3, 4, 5, 6\} \text{ (Würfelwurf)}$", "en": r"$S = \{1, 2, 3, 4, 5, 6\} \text{ (Die Roll)}$"},
-        {"id": "B", "de": r"$S = \{\text{Kopf}, \text{Zahl}\} \text{ (Münzwurf)}$", "en": r"$S = \{\text{Heads}, \text{Tails}\} \text{ (Coin Toss)}$"},
-        {"id": "C", "de": r"$S = [0, \infty) \text{ (Wartezeit an der Haltestelle)}$", "en": r"$S = [0, \infty) \text{ (Waiting time at bus stop)}$"},
-        {"id": "D", "de": r"$S = \{0, 1, 2, \dots\} \text{ (Anzahl Kunden pro Tag)}$", "en": r"$S = \{0, 1, 2, \dots\} \text{ (Number of customers per day)}$"}
-    ]
-    
-    # Format options for display
-    options_display = [t(opt) for opt in opts_raw]
-    
-    # Messages
-    success_msg = {
-        "de": "**Richtig!** Stetige Räume beschreiben Messgrößen wie Zeit, Länge oder Temperatur.",
-        "en": "**Correct** Continuous spaces describe measurements like time, length, or temperature."
-    }
-    error_msg = {
-        "de": "**Nicht ganz.** Stetige Räume sind Intervalle (z.B. $[0, \\infty)$), keine diskreten Punkte.",
-        "en": "**Not quite.** Continuous spaces are intervals (e.g. $[0, \\infty)$), not discrete points."
-    }
-    
-    solution_text = {
-        "de": """
-        **Antwort: (C)**
+    q_data = get_question("1.1", q_key)
+
+    if q_data:
+        # Context
+        current_lang_full = "German" if st.session_state.lang == 'de' else "English"
+        theory_context = f"""
+        You are a helpful statistics tutor.
+
+        --- STUDENT IS LEARNING THIS THEORY ---
+        Topic: Ereignisse, Ereignisraum und Ereignismenge (Events, Event Space, Event Sets)
         
-        Stetige Räume beschreiben **Messgrößen** wie:
-        - Zeit (Wartezeit)
-        - Länge
-        - Temperatur
+        Key Concepts:
+        - Elementarereignis (ω): The smallest possible outcome (e.g., rolling a "3")
+        - Ereignisraum (S or Ω): The set of all possible outcomes
+        - Ereignis (A): A subset of the event space (collection of outcomes we care about)
         
-        Diskrete Räume beschreiben **Zählgrößen** oder Kategorien:
-        - Würfelergebnisse (1, 2, 3...)
-        - Anzahl Kunden (0, 1, 2...)
-        - Münzwurf (Kopf/Zahl)
-        """,
-        "en": """
-        **Answer: (C)**
+        Types of Event Spaces:
+        - **Discrete**: Countable points (coin flip, dice roll)
+        - **Continuous**: Intervals, uncountable (waiting time, temperature)
         
-        Continuous spaces describe **measurements** like:
-        - Time (Waiting time)
-        - Length
-        - Temperature
-        
-        Discrete spaces describe **counts** or categories:
-        - Die results (1, 2, 3...)
-        - Number of customers (0, 1, 2...)
-        - Coin toss (Heads/Tails)
+        Please answer in {current_lang_full}, concisely and clearly, relating back to the concepts above.
         """
-    }
-    
-    # Context
-    current_lang_full = "German" if st.session_state.lang == 'de' else "English"
-    theory_context = f"""
-    You are a helpful statistics tutor.
+        
+        # Prepare options (localize)
+        # In central repo, options are dicts: {"id": "A", "de":..., "en":...}
+        # Render_mcq expects list of strings if options are strings.
+        # But here options are dicts with 'de'/'en'.
+        # Let's see get_question logic for 1.1 in Step 2830.
+        # Options: [{"id": "A", "de": ..., "en": ...}]
+        # I need to format them.
+        
+        formatted_options = []
+        for opt in q_data["options"]:
+            # Localize
+            text = t(opt) 
+            formatted_options.append(text)
 
-    --- STUDENT IS LEARNING THIS THEORY ---
-    Topic: Ereignisse, Ereignisraum und Ereignismenge (Events, Event Space, Event Sets)
-    
-    Key Concepts:
-    - Elementarereignis (ω): The smallest possible outcome (e.g., rolling a "3")
-    - Ereignisraum (S or Ω): The set of all possible outcomes
-    - Ereignis (A): A subset of the event space (collection of outcomes we care about)
-    
-    Types of Event Spaces:
-    - **Discrete**: Countable points (coin flip, dice roll)
-    - **Continuous**: Intervals, uncountable (waiting time, temperature)
-    
-    Please answer in {current_lang_full}, concisely and clearly, relating back to the concepts above.
-    """
-
-    with st.container(border=True):
-        render_mcq(
-            key_suffix=q_key,
-            question_text=question_text,
-            options=options_display,
-            correct_idx=2, # C
-            solution_text_dict=solution_text,
-            success_msg_dict=success_msg,
-            error_msg_dict=error_msg,
-            client=model,
-            ai_context=theory_context,
-            allow_retry=False,
-            course_id="vwl",
-            topic_id="1",
-            subtopic_id="1.1",
-            question_id="q_1_1_stetig"
-        )
+        with st.container(border=True):
+            render_mcq(
+                key_suffix=q_key,
+                question_text=t(q_data["question"]),
+                options=formatted_options,
+                correct_idx=q_data["correct_idx"],
+                solution_text_dict=q_data["solution"],
+                success_msg_dict={
+                    "de": "**Richtig!** Stetige Räume beschreiben Messgrößen wie Zeit, Länge oder Temperatur.",
+                    "en": "**Correct** Continuous spaces describe measurements like time, length, or temperature."
+                },
+                error_msg_dict={
+                    "de": "**Nicht ganz.** Stetige Räume sind Intervalle (z.B. $[0, \\infty)$), keine diskreten Punkte.",
+                    "en": "**Not quite.** Continuous spaces are intervals (e.g. $[0, \\infty)$), not discrete points."
+                },
+                client=model,
+                ai_context=theory_context,
+                allow_retry=False,
+                course_id="vwl",
+                topic_id="1",
+                subtopic_id="1.1",
+                question_id="q_1_1_stetig"
+            )
 
 
 # Main render function for Topic 1

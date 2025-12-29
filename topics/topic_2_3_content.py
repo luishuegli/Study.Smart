@@ -2,6 +2,7 @@ import streamlit as st
 from views.styles import render_icon
 from utils.localization import t
 from utils.quiz_helper import render_mcq
+from data.exam_questions import get_question
 
 # ==============================================================================
 # 1. CONTENT DICTIONARY (2.3 ONLY)
@@ -30,16 +31,7 @@ content_2_3 = {
     },
     "exam": {
         "title": {"de": "Prüfungstraining: DVD-Sammlung", "en": "Exam Practice: DVD Collection"},
-        "source": "Statistik I, Aufgabe 3",
-        "question": {
-            "de": "Sie besitzen **50 verschiedene DVDs** und die dazugehörigen 50 Hüllen. Auf wie viele Arten können die DVDs in die Hüllen einsortiert werden?",
-            "en": "You own **50 different DVDs** and their 50 cases. In how many ways can the DVDs be sorted into the cases?"
-        },
-        "options": ["50!", "50^50", "1", "Binom(50, 50)"],
-        "solution": {
-            "de": "**Richtig! (50!)**<br>Formel: $P(n, n) = \\frac{n!}{(n-n)!} = \\frac{n!}{0!} = \\frac{n!}{1} = n!$<br>Für die erste Hülle haben Sie 50 Optionen, für die zweite 49, usw. Da die Reihenfolge zählt (welche DVD in welcher Hülle) und jede DVD nur einmal existiert (ohne Zurücklegen), ist es eine Permutation.",
-            "en": "**Correct! (50!)**<br>Formula: $P(n, n) = \\frac{n!}{(n-n)!} = \\frac{n!}{0!} = \\frac{n!}{1} = n!$<br>For the first case you have 50 options, for the second 49, etc. Since order matters (which DVD in which case) and each DVD exists only once (no replacement), it is a permutation."
-        },
+        "source": "Permutation Practice",
         "scale_viz": {
             "de": "Das Ergebnis $3.04 \\cdot 10^{64}$ ist größer als die Anzahl der Atome in der Milchstraße.",
             "en": "The result $3.04 \\cdot 10^{64}$ is larger than the number of atoms in the Milky Way."
@@ -89,20 +81,27 @@ def render_subtopic_2_3(client):
 [data-testid="stHorizontalBlock"] { align-items: stretch; }
 [data-testid="column"] { display: flex; flex-direction: column; }
 
-/* Button Styling to match Cassette height */
+/* Button Styling - HIGH CONTRAST (Rule 1.6) */
 .stButton button { 
 width: 100%; 
 border-radius: 10px; 
 height: 54px; 
 font-weight: 500;
-border: 1px solid #e5e7eb !important;
+background: #ffffff !important; /* Force white background */
+border: 1px solid #d1d5db !important;
+color: #1f2937 !important; /* Force dark text */
 transition: all 0.2s ease;
-color: #1f2937 !important; /* Dark text for visibility */
+}
+.stButton button span {
+color: #1f2937 !important; /* Force dark text on inner span too */
 }
 .stButton button:hover {
-border-color: #d1d5db !important;
-background-color: #f9fafb !important;
+border-color: #9ca3af !important;
+background-color: #f3f4f6 !important;
 transform: translateY(-1px);
+color: #111827 !important;
+}
+.stButton button:hover span {
 color: #111827 !important;
 }
 
@@ -240,12 +239,13 @@ color: #111827 !important;
     st.caption(c["exam"]["source"])
     
     with st.container(border=True):
+        q_data = get_question("2.3", "dvd_collection")
         render_mcq(
             key_suffix="2_3_dvd",
-            question_text=t(c["exam"]["question"]),
-            options=c["exam"]["options"],
-            correct_idx=0, # 50!
-            solution_text_dict=c["exam"]["solution"],
+            question_text=t(q_data["question"]),
+            options=q_data["options"],
+            correct_idx=q_data["correct_idx"],
+            solution_text_dict=q_data["solution"],
             success_msg_dict={"de": "Korrekt!", "en": "Correct!"},
             error_msg_dict={"de": "Falsch.", "en": "Incorrect."},
             client=client,
@@ -283,3 +283,38 @@ Result: <b>3.04 × 10⁶⁴</b> <span style="color: #6b7280; font-style: italic;
 </div>
 </div>
 """, unsafe_allow_html=True)
+
+    # --- ADDITIONAL EXAM QUESTIONS ---
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    st.markdown(f"### {t({'de': 'Weitere Prüfungsaufgaben', 'en': 'Additional Exam Questions'})}")
+    
+    def render_perm_q(q_id, key_suffix, question_key, source_caption):
+        q_data = get_question("2.3", q_id)
+        if not q_data:
+            st.warning(f"Question {q_id} not found")
+            return
+        
+        opts = q_data.get("options", [])
+        if opts and isinstance(opts[0], dict):
+            option_labels = [t(o) for o in opts]
+        else:
+            option_labels = opts
+        
+        with st.container(border=True):
+            st.caption(source_caption)
+            render_mcq(
+                key_suffix=key_suffix,
+                question_text=t(q_data['question']),
+                options=option_labels,
+                correct_idx=q_data['correct_idx'],
+                solution_text_dict=q_data['solution'],
+                success_msg_dict={"de": "Richtig!", "en": "Correct!"},
+                error_msg_dict={"de": "Falsch.", "en": "Incorrect."},
+                client=client,
+                ai_context=f"Topic 2.3: Permutations. Question: {q_id}",
+                course_id="vwl", topic_id="2", subtopic_id="2.3", question_id=question_key
+            )
+    
+    render_perm_q("test1_q3", "2_3_test1_q3", "2_3_test1_q3", "Test 1, Frage 3")
+    st.markdown("<br>", unsafe_allow_html=True)
+    render_perm_q("hs2015_mc4", "2_3_hs2015_mc4", "2_3_hs2015_mc4", "HS 2015 Januar, MC #4 (Schliessfach)")

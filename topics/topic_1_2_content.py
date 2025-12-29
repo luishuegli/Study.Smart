@@ -5,6 +5,7 @@ from views.styles import render_icon
 from utils.localization import t
 from utils.ai_helper import render_ai_tutor
 from utils.quiz_helper import render_mcq, render_tab_progress_css
+from data.exam_questions import get_question
 
 # 1. DATA STRUCTURE: BALANCED CONTENT
 content_1_2 = {
@@ -52,41 +53,7 @@ content_1_2 = {
             "example_en": r"$\text{If } S = \{1, 2, 3\} \text{ and } A = \{1\}$" + "\n\n" + r"$\rightarrow \bar{A} = \{2, 3\}$"
         }
     },
-    "interactive_header": {"de": "Interaktive Visualisierung", "en": "Interactive Visualization"},
-    "exam": {
-        "title": {"de": "Prüfungstraining: Aufgabe 1.2.1", "en": "Exam Practice: Problem 1.2.1"},
-        "source": "Statistikskript Aufgabe 1.2.1 (4)",
-        "question": {
-            "de": r"Werfen von zwei Würfeln ($|S|=36$). Berechnen Sie die Wahrscheinlichkeit der folgenden Ereignisse:",
-            "en": r"Throwing two dice ($|S|=36$). Calculate the probability of the following events:"
-        },
-        "events": {
-            "A": {
-                "text_de": "A: 'Mindestens ein Würfel zeigt eine Sechs'",
-                "text_en": "A: 'At least one die shows a six'",
-                "sol_de": r"Die Menge der günstigen Fälle ist $\{(1,6), (2,6), ..., (5,6), (6,6), (6,5), ..., (6,1)\}$. Das sind $6+5=11$ Ergebnisse. $$P(A) = \frac{11}{36}$$",
-                "sol_en": r"The set of favorable cases is $\{(1,6), (2,6), ..., (5,6), (6,6), (6,5), ..., (6,1)\}$. These are $6+5=11$ outcomes. $$P(A) = \frac{11}{36}$$",
-                "options": [r"$\frac{1}{6}$", r"$\frac{11}{36}$", r"$\frac{5}{18}$", r"$\frac{1}{2}$"],
-                "correct_opt": r"$\frac{11}{36}$"
-            },
-            "B": {
-                "text_de": "B: 'Die Augenzahl beider Würfel ist gleich'",
-                "text_en": "B: 'The number of spots on both dice is the same'",
-                "sol_de": r"Die Paare sind $\{(1,1), (2,2), (3,3), (4,4), (5,5), (6,6)\}$. Das sind 6 Ergebnisse. $$P(B) = \frac{6}{36} = \frac{1}{6}$$",
-                "sol_en": r"The pairs are $\{(1,1), (2,2), (3,3), (4,4), (5,5), (6,6)\}$. These are 6 outcomes. $$P(B) = \frac{6}{36} = \frac{1}{6}$$",
-                "options": [r"$\frac{1}{36}$", r"$\frac{1}{6}$", r"$\frac{1}{12}$", r"$\frac{1}{2}$"],
-                "correct_opt": r"$\frac{1}{6}$"
-            },
-            "C": {
-                "text_de": "C: 'Beide Würfel zeigen ungerade Zahlen'",
-                "text_en": "C: 'Both dice show odd numbers'",
-                "sol_de": r"Ungerade Zahlen sind $\{1, 3, 5\}$. Es gibt 3 Möglichkeiten für Würfel 1 und 3 Möglichkeiten für Würfel 2. $3 \times 3 = 9$ Ergebnisse. $$P(C) = \frac{9}{36} = \frac{1}{4}$$",
-                "sol_en": r"Odd numbers are $\{1, 3, 5\}$. There are 3 possibilities for die 1 and 3 possibilities for die 2. $3 \times 3 = 9$ outcomes. $$P(C) = \frac{9}{36} = \frac{1}{4}$$",
-                "options": [r"$\frac{1}{6}$", r"$\frac{1}{4}$", r"$\frac{1}{3}$", r"$\frac{1}{2}$"],
-                "correct_opt": r"$\frac{1}{4}$"
-            }
-        }
-    }
+    "interactive_header": {"de": "Interaktive Visualisierung", "en": "Interactive Visualization"}
 }
 
 def get_venn_figure(selection):
@@ -306,52 +273,60 @@ def render_subtopic_1_2(model):
 
     # --- THE EXAM WORKBENCH ---
     st.markdown("<br><br>", unsafe_allow_html=True)
-    st.markdown(f"### {t(content_1_2['exam']['title'])}")
-    st.markdown(f"*{content_1_2['exam']['source']}*")
+    st.markdown(f"### {t({'de': 'Prüfungstraining: Aufgabe 1.2.1', 'en': 'Exam Practice: Problem 1.2.1'})}")
+    st.markdown(f"*{t({'de': 'Statistikskript Aufgabe 1.2.1 (4)', 'en': 'Statistikskript Aufgabe 1.2.1 (4)'})}*")
     st.markdown("")
     
     with st.container(border=True):
-        st.markdown(t(content_1_2["exam"]["question"]))
+        st.markdown(t({'de': r"Werfen von zwei Würfeln ($|S|=36$). Berechnen Sie die Wahrscheinlichkeit der folgenden Ereignisse:", 'en': r"Throwing two dice ($|S|=36$). Calculate the probability of the following events:"}))
         st.markdown("")
         
-        # Apply green indicators for answered tabs
+        # Apply green indicators for answered tabs (only A, B, C for dice problem)
         tab_css = render_tab_progress_css(["A", "B", "C"], "1_2", topic_id="1", subtopic_id="1.2")
         st.markdown(tab_css, unsafe_allow_html=True)
         
         tab_a, tab_b, tab_c = st.tabs(["Event A", "Event B", "Event C"])
         
-        def render_exam_workbench(event_key):
-            e_data = content_1_2["exam"]["events"][event_key]
-            st.markdown(f"**{t({'de': e_data['text_de'], 'en': e_data['text_en']})}**")
-            st.markdown("")
+        def render_exam_workbench(label, q_id, ai_ctx="Topic 1.2: Set operations"):
+            q_data = get_question("1.2", q_id)
+            if not q_data: return
             
-            # Prepare data for render_mcq
-            opts = e_data["options"]
-            try:
-                correct_idx = opts.index(e_data["correct_opt"])
-            except ValueError:
-                correct_idx = 0 # Fallback
-                
-            # Render MCQ
-            ctx = f"Explain this statistics solution: {e_data['sol_en']}"
+            # Handle bilingual options (dicts with de/en keys)
+            opts = q_data.get('options', [])
+            if opts and isinstance(opts[0], dict) and ('de' in opts[0] or 'en' in opts[0]):
+                option_labels = [t(o) for o in opts]
+            else:
+                option_labels = opts
             
             render_mcq(
-                key_suffix=f"1_2_{event_key}",
-                question_text=t({"de": "**Wähle:**", "en": "**Select:**"}),
-                options=opts,
-                correct_idx=correct_idx,
-                solution_text_dict={'de': e_data['sol_de'], 'en': e_data['sol_en']},
+                key_suffix=f"1_2_{label}",
+                question_text=t(q_data['question']),
+                options=option_labels,
+                correct_idx=q_data['correct_idx'],
+                solution_text_dict=q_data['solution'],
                 success_msg_dict={"de": "Richtig", "en": "Correct"},
-                error_msg_dict={"de": "Falsch.", "en": "Incorrect."},
+                error_msg_dict={"de": "Falsch", "en": "Incorrect"},
                 client=model,
-                ai_context=ctx,
-                allow_retry=False,
-                course_id="vwl",
-                topic_id="1",
-                subtopic_id="1.2",
-                question_id=f"1_2_{event_key}"
+                ai_context=f"{ai_ctx}. Question: {q_id}",
+                course_id="vwl", topic_id="1", subtopic_id="1.2", question_id=f"1_2_{label}"
             )
 
-        with tab_a: render_exam_workbench("A")
-        with tab_b: render_exam_workbench("B")
-        with tab_c: render_exam_workbench("C")
+        with tab_a: render_exam_workbench("A", "q_1_2_1_a")
+        with tab_b: render_exam_workbench("B", "q_1_2_1_b")
+        with tab_c: render_exam_workbench("C", "q_1_2_1_c")
+
+    # --- ADDITIONAL EXAM QUESTIONS (Separate Elements) ---
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    st.markdown(f"### {t({'de': 'Weitere Prüfungsaufgaben', 'en': 'Additional Exam Questions'})}")
+    
+    # Test 1, Question 2
+    with st.container(border=True):
+        st.caption("Test 1, Frage 2")
+        render_exam_workbench("D", "test1_q2", "Topic 1.2: Set Operations & Probability")
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+    # Test 3, Question 1
+    with st.container(border=True):
+        st.caption("Test 3, Frage 1")
+        render_exam_workbench("E", "test3_q1", "Topic 1.2: Complement Rule")

@@ -6,19 +6,40 @@ from utils.progress_tracker import get_user_progress
 # Define total questions per subtopic for progress calculation
 SUBTOPIC_QUESTION_COUNTS = {
     "1.1": 1,  # q_1_1_stetig
-    "1.2": 3,  # 1_2_A, 1_2_B, 1_2_C (Mission removed)
+    "1.2": 5,  # 1_2_A, 1_2_B, 1_2_C, 1_2_D (test1_q2), 1_2_E (test3_q1)
     "1.3": 1,  # 1_3_exam
     "1.4": 1,  # 1_4_exam
     "1.5": 2,  # 1_5_exam + Market Analyst Mission
     "1.6": 2,  # p_single_point, 1_6_dart_mission
-    "1.7": 4,  # 1_7_q1_narrative, 1_7_q2_narrative, 1_7_narrative_mission, 1_7_balance_mission
-    "1.8": 2,  # 1_8_factory, 1_8_mission
+    "1.7": 7,  # Existing + test1_q1, uebung1_mc5, uebung1_mc8
+    "1.8": 4,  # 1_8_factory, 1_8_mission, 1_8_bayes_coins, 1_8_game_theory
     "1.9": 3,  # 1_9_prisoners, 1_9_medical_mission, 1_9_search_mission
     "1.10": 6, # exam_l1 to exam_l6
     "2.1": 1,  # q_2_1_scenario_mastery
     "2.2": 1,  # q_2_2_club
-    "2.4": 1,  # q_2_4_lottery
+    "2.3": 3,  # q_2_3_dvd, 2_3_test1_q3, 2_3_hs2015_mc4
+    "2.4": 2,  # q_2_4_lottery, 2_4_test2_q1
     "2.5": 1,  # q_2_5_coin
+    # Topic 3: Random Variables
+    "3.1": 1,  # uebung2_mc6
+    "3.2": 2,  # uebung2_mc5, test2_q4
+    "3.3": 1,  # test2_q3
+    "3.4": 0,  # No MCQs (problems only)
+    "3.5": 1,  # uebung2_mc8
+    "3.6": 1,  # test3_q2
+    # Topic 4: Stochastic Models and Distributions
+    "4.1": 0,  # No MCQs
+    "4.2": 0,  # Problems only
+    "4.3": 3,  # uebung2_giro, hs2022_mc7, hs2023_mc12
+    "4.4": 1,  # test4_q1
+    "4.5": 1,  # test2_q2
+    "4.6": 1,  # uebung2_mc12
+    "4.7": 4,  # uebung2_mc13, hs2023_mc7, hs2022_mc3, hs2024_mc3_tanker
+    # Topic 5: Multidimensional Random Variables
+    "5.1": 2,  # test3_q4, uebung3_mc5
+    "5.2": 2,  # test3_q5, uebung3_mc7
+    "5.3": 4,  # uebung3_mc1, uebung3_mc9, test4_q2, test4_q4
+    "5.4": 2,  # uebung3_mc10, uebung3_mc11
 }
 
 def calculate_topic_progress(topic_data, subtopic_ids):

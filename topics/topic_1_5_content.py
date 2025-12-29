@@ -5,6 +5,7 @@ from views.styles import render_icon
 from utils.localization import t
 from utils.ai_helper import render_ai_tutor
 from utils.quiz_helper import render_mcq
+from data.exam_questions import get_question
 
 # 1. DATA STRUCTURE
 content_1_5 = {
@@ -35,45 +36,6 @@ content_1_5 = {
         "mission_text": {
             "de": "Wir wissen: **60%** haben ein iPhone ($P(A)$) und **40%** ein MacBook ($P(B)$). Die Marktforschung sagt, dass **80%** der Leute *mindestens eines* der Geräte besitzen ($A \\cup B$).\n\n**Aufgabe:** Stelle die Slider für A und B ein. Finde dann die **Schnittmenge**, damit die Gesamtreichweite genau **0.80** beträgt.",
             "en": "We know: **60%** have an iPhone ($P(A)$) and **40%** a MacBook ($P(B)$). Market research says **80%** own *at least one* device ($A \\cup B$).\n\n**Task:** Set sliders A and B. Then find the correct **Overlap** so the Total Reach equals exactly **0.80**."
-        }
-    },
-    "exam": {
-        "title": {"de": "Prüfungstraining: HS2022 (MC 5)", "en": "Exam Practice: HS2022 (MC 5)"},
-        "question": {
-            "de": r"**Gegeben sind:** $P(A)=0.3, P(B)=0.4, P(\overline{A}|B)=0.75$.\n\n**Gesucht ist:** $P(A \cup B)$.",
-            "en": r"**Given:** $P(A)=0.3, P(B)=0.4, P(\overline{A}|B)=0.75$.\n\n**Find:** $P(A \cup B)$."
-        },
-        "hint": {
-            "de": "Hinweis: Nutze zuerst das Komplement $P(A|B) = 1 - P(\\overline{A}|B)$. Verwende dann die Multiplikationsregel: $P(A \\cap B) = P(A|B) \\cdot P(B)$.", 
-            "en": "Hint: First find $P(A|B) = 1 - P(\\overline{A}|B)$. Then use the multiplication rule: $P(A \\cap B) = P(A|B) \\cdot P(B)$."
-        },
-        "options": ["0.55", "0.60", "0.70", "0.25"],
-        "correct_opt": "0.60",
-        "solution": {
-            "de": r"""
-            **Schritt 1: Bedingte Wahrscheinlichkeit auflösen**
-            Wir wissen $P(\bar{A}|B) = 0.75$. Das bedeutet, 75% von B sind *nicht* A.
-            Daraus folgt: $P(A|B) = 1 - 0.75 = 0.25$.
-            
-            **Schritt 2: Schnittmenge berechnen**
-            $P(A \cap B) = P(A|B) \cdot P(B) = 0.25 \cdot 0.4 = 0.1$.
-            
-            **Schritt 3: Additionssatz anwenden**
-            $P(A \cup B) = P(A) + P(B) - P(A \cap B)$
-            $P(A \cup B) = 0.3 + 0.4 - 0.1 = \mathbf{0.6}$.
-            """,
-            "en": r"""
-            **Step 1: Resolve Conditional Probability**
-            We know $P(\bar{A}|B) = 0.75$. This means 75% of B is *not* A.
-            Therefore: $P(A|B) = 1 - 0.75 = 0.25$.
-            
-            **Step 2: Calculate Intersection**
-            $P(A \cap B) = P(A|B) \cdot P(B) = 0.25 \cdot 0.4 = 0.1$.
-            
-            **Step 3: Apply Addition Rule**
-            $P(A \cup B) = P(A) + P(B) - P(A \cap B)$
-            $P(A \cup B) = 0.3 + 0.4 - 0.1 = \mathbf{0.6}$.
-            """
         }
     }
 }
@@ -167,29 +129,32 @@ def render_subtopic_1_5(model):
     render_simulator_1_5()
 
     # EXAM SECTION
+    # EXAM SECTION
     st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown(f"### {t(content_1_5['exam']['title'])}")
     
-    with st.container(border=True):
-        opts = content_1_5["exam"]["options"]
-        correct_idx = opts.index(content_1_5["exam"]["correct_opt"])
+    q_id = "q_1_5_add"
+    q_data = get_question("1.5", q_id)
+    
+    if q_data:
+        st.markdown(f"### {t({'de': 'Prüfungstraining: HS2022 (MC 5)', 'en': 'Exam Practice: HS2022 (MC 5)'})}")
         
-        render_mcq(
-            key_suffix="1_5_q1",
-            question_text=t(content_1_5["exam"]["question"]),
-            options=opts,
-            correct_idx=correct_idx,
-            solution_text_dict=content_1_5["exam"]["solution"],
-            success_msg_dict={"de": "Korrekt!", "en": "Correct!"},
-            error_msg_dict={"de": "Falsch. Schau dir den Lösungsweg an.", "en": "Incorrect. Check the solution steps."},
-            client=model,
-            hint_text_dict=content_1_5["exam"]["hint"],
-            ai_context="Addition rule and conditional probability calculation.",
-            course_id="vwl",
-            topic_id="1",
-            subtopic_id="1.5",
-            question_id="1_5_q1"
-        )
+        with st.container(border=True):
+             render_mcq(
+                key_suffix="1_5_q1",
+                question_text=t(q_data["question"]),
+                options=q_data["options"],
+                correct_idx=q_data["correct_idx"],
+                solution_text_dict=q_data["solution"],
+                success_msg_dict={"de": "Korrekt!", "en": "Correct!"},
+                error_msg_dict={"de": "Falsch. Schau dir den Lösungsweg an.", "en": "Incorrect. Check the solution steps."},
+                client=model,
+                hint_text_dict=q_data.get("hint"),
+                ai_context="Addition rule and conditional probability calculation.",
+                course_id="vwl",
+                topic_id="1",
+                subtopic_id="1.5",
+                question_id="1_5_q1"
+            )
 
 def render_simulator_1_5():
     """

@@ -3,6 +3,7 @@ import itertools
 from views.styles import render_icon
 from utils.localization import t
 from utils.quiz_helper import render_mcq
+from data.exam_questions import get_question
 
 # --- CONTENT DICTIONARY ---
 content_2_1 = {
@@ -33,17 +34,6 @@ content_2_1 = {
         "title": {"de": "Klausur-Hack: Signalwörter", "en": "Exam Hack: Signal Words"},
         "perm": {"de": "Rangliste, Planen, Code, Anordnen, Warteschlange", "en": "Rank, Schedule, Code, Arrange, Queue"},
         "comb": {"de": "Auswählen, Team, Menge, Gezogen, Lottoprozahl", "en": "Select, Choose, Set, Drawn, Lottery"}
-    },
-    "exam": {
-        "question": {"de": "Warum teilen wir beim Binomialkoeffizienten durch k!?", "en": "Why do we divide by k! in the Binomial Coefficient?"},
-        "options": [
-            {"de": "Um die Permutationen (Reihenfolgen) innerhalb einer Gruppe zu löschen", "en": "To delete the permutations (orders) within a group"},
-            {"de": "Weil n! immer zu groß ist", "en": "Because n! is always too large"}
-        ],
-        "solution": {
-            "de": "**Richtig!** Wir entfernen die Mehrfachzählungen ('Ghosts'), die entstehen, wenn wir die Reihenfolge ignorieren.",
-            "en": "**Correct!** We remove the multiple countings ('Ghosts') that arise when we ignore the order."
-        }
     }
 }
 
@@ -159,10 +149,10 @@ def render_subtopic_2_1(client):
         # ROW 2: Formulas (Split-Row Grid Protocol - Rule 2.7)
         c_perm_f, c_comb_f = st.columns(2, gap="medium")
         with c_perm_f:
-            st.latex(r"P(\color{#007AFF}{n}, \color{#FF4B4B}{k}) = \frac{\color{#007AFF}{n}!}{\left( \color{#007AFF}{n} - \color{#FF4B4B}{k} \right)!}")
+            st.latex(r"P(n, k) = \frac{n!}{\left( n - k \right)!}")
             st.caption(t({"de": "Reihenfolge ist wichtig.", "en": "Order is important."}))
         with c_comb_f:
-            st.latex(r"\binom{\color{#007AFF}{n}}{\color{#FF4B4B}{k}} = \frac{\color{#007AFF}{n}!}{\color{#FF4B4B}{k}! \left( \color{#007AFF}{n} - \color{#FF4B4B}{k} \right)!}")
+            st.latex(r"\binom{n}{k} = \frac{n!}{k! \left( n - k \right)!}")
             st.caption(t({"de": "Reihenfolge egal.", "en": "Order irrelevant."}))
         
         st.markdown("<br>", unsafe_allow_html=True)
@@ -177,10 +167,10 @@ def render_subtopic_2_1(client):
                 st.markdown(f"<div style='text-align: center; font-size: 0.85em; color: #444; margin-top: -12px;'>{t(desc_dict)}</div>", unsafe_allow_html=True)
 
         c1, c2, c3, c4 = st.columns(4)
-        notation_card(c1, r"\color{#007AFF}{n}", "not_n", {"de": "Gesamtpool", "en": "Total Pool"})
-        notation_card(c2, r"\color{#FF4B4B}{k}", "not_k", {"de": "Auswahl", "en": "Selection"})
-        notation_card(c3, r"\color{#007AFF}{n!}", "not_nfac", {"de": "Alle Anordnungen", "en": "Total Arragements"})
-        notation_card(c4, r"\color{#FF4B4B}{k!}", "not_kfac", {"de": "Auswahl Anordnungen", "en": "Selection Arrangements"})
+        notation_card(c1, r"n", "not_n", {"de": "Gesamtpool", "en": "Total Pool"})
+        notation_card(c2, r"k", "not_k", {"de": "Auswahl", "en": "Selection"})
+        notation_card(c3, r"n!", "not_nfac", {"de": "Alle Anordnungen", "en": "Total Arragements"})
+        notation_card(c4, r"k!", "not_kfac", {"de": "Auswahl Anordnungen", "en": "Selection Arrangements"})
         
         st.markdown("<br>", unsafe_allow_html=True)
         
@@ -402,22 +392,35 @@ But the permutation formula counts each order separately! For 3 people, there ar
     st.markdown("<br><br>", unsafe_allow_html=True)
     st.markdown(f"### {t({'de': 'Prüfungssimulation', 'en': 'Exam Simulation'})}")
     
-    with st.container(border=True):
-        render_mcq(
-            key_suffix="q_2_1_scen_check",
-            question_text=t(c["exam"]["question"]),
-            options=[o["de"] if st.session_state.lang == "de" else o["en"] for o in c["exam"]["options"]],
-            correct_idx=0,
-            solution_text_dict=c["exam"]["solution"],
-            success_msg_dict={"de": "Richtig!", "en": "Correct!"},
-            error_msg_dict={"de": "Falsch.", "en": "Incorrect."},
-            client=client,
-            ai_context="The student is checking their understanding of the scenario-based learning (Abstract vs Podium vs Lotto) and why removing order requires dividing by k!.",
-            course_id="vwl",
-            topic_id="2",
-            subtopic_id="2.1",
-            question_id="q_2_1_scenario_mastery"
-        )
+    # Fetch from Central Repo
+    q_id = "q_2_1_scenario_mastery"
+    q_data = get_question("2.1", q_id)
+    
+    if q_data:
+        with st.container(border=True):
+            # Transform Options (dict list to strings)
+            formatted_opts = []
+            for o in q_data["options"]:
+                if isinstance(o, dict):
+                    formatted_opts.append(t(o)) # Localize
+                else:
+                    formatted_opts.append(str(o))
+
+            render_mcq(
+                key_suffix="q_2_1_scen_check",
+                question_text=t(q_data["question"]),
+                options=formatted_opts,
+                correct_idx=q_data["correct_idx"],
+                solution_text_dict=q_data["solution"],
+                success_msg_dict={"de": "Richtig!", "en": "Correct!"},
+                error_msg_dict={"de": "Falsch.", "en": "Incorrect."},
+                client=client,
+                ai_context="The student is checking their understanding of the scenario-based learning (Abstract vs Podium vs Lotto) and why removing order requires dividing by k!.",
+                course_id="vwl",
+                topic_id="2",
+                subtopic_id="2.1",
+                question_id="q_2_1_scenario_mastery"
+            )
         
         # Cheat Sheet Expander
         # Note: st.expander titles do not support HTML/SVG, so we use text only.

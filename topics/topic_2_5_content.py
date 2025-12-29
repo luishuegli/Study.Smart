@@ -2,6 +2,7 @@ import streamlit as st
 from math import factorial
 from utils.localization import t
 from utils.quiz_helper import render_mcq
+from data.exam_questions import get_question
 from views.styles import render_icon
 
 # --- CONTENT DICTIONARY (BILINGUAL) ---
@@ -63,7 +64,7 @@ This is **WITH REPLACEMENT**."""
     
     "formula": {
         "title": {"de": "Variationen mit Wiederholung", "en": "Variations With Replacement"},
-        "latex": r"\color{#007AFF}{n}^{\color{#FF4B4B}{k}}",
+        "latex": r"n^{k}",
         "intuition": {"de": "Unbegrenzter Vorrat. Nichts wird 'verbraucht'.", "en": "Infinite supply. Nothing gets 'used up'."},
         "example": {"de": "iPhone-PIN: 4 Ziffern, je 0-9", "en": "iPhone passcode: 4 digits, each 0-9"},
         "pro_tip": {"de": "Kannst du dasselbe zweimal wählen? JA → n^k", "en": "Can you pick the same thing twice? YES → n^k"}
@@ -78,23 +79,8 @@ This is **WITH REPLACEMENT**."""
     "security_title": {"de": "Praxisanwendung: PIN-Sicherheit", "en": "Real-World Application: PIN Security"},
     
     "exam": {
-        "title": {"de": "Prüfungsfrage", "en": "Exam Question"},
-        "source": "Kombinatorik Grundlagen",
-        "question": {
-            "de": "Du wirfst eine faire Münze 4 mal. Wie viele verschiedene Ergebnisfolgen sind möglich (z.B. K-Z-K-K)?",
-            "en": "You flip a fair coin 4 times. How many different outcome sequences are possible (e.g. H-T-H-H)?"
-        },
-        "options": [
-            {"de": "8", "en": "8"},
-            {"de": "16", "en": "16"},
-            {"de": "32", "en": "32"},
-            {"de": "4", "en": "4"}
-        ],
-        "correct_id": 1,
-        "solution": {
-            "de": "<b>Richtig: 16</b><br><br>Jeder Wurf: 2 Möglichkeiten (Kopf oder Zahl).<br>4 unabhängige Würfe: 2 × 2 × 2 × 2 = 2⁴ = 16.<br><br>Der Pool (2 Seiten) schrumpft nie – jeder Wurf ist unabhängig!",
-            "en": "<b>Correct: 16</b><br><br>Each flip: 2 options (Heads or Tails).<br>4 independent flips: 2 × 2 × 2 × 2 = 2⁴ = 16.<br><br>The pool (2 sides) never shrinks – each flip is independent!"
-        }
+        "title": {"de": "Prüfungstraining", "en": "Exam Practice"},
+        "source": "Variation with Replacement Practice"
     }
 }
 
@@ -113,7 +99,7 @@ def render_subtopic_2_5(model):
         st.markdown("<hr style='margin: 16px 0; border: 0; border-top: 1.5px solid #f3f4f6;'>", unsafe_allow_html=True)
         
         st.markdown(f"""
-<div style="background: #dbeafe; border-left: 3px solid #3b82f6; padding: 12px; border-radius: 6px; color: #1e40af;">
+<div style="background: #f4f4f5; border-left: 3px solid #71717a; padding: 12px; border-radius: 6px; color: #3f3f46;">
 {t(content_2_5["key_insight"])}
 </div>
 """, unsafe_allow_html=True)
@@ -129,14 +115,14 @@ def render_subtopic_2_5(model):
         with col_23:
             st.markdown(f"**2.3: {t({'de': 'OHNE Wiederholung', 'en': 'WITHOUT Replacement'})}**")
             st.markdown(f"""
-<div style="background: #fef3c7; border-radius: 8px; padding: 16px;">
+<div style="background: #f4f4f5; border-radius: 8px; padding: 16px;">
 <b>{t({"de": "Szenario:", "en": "Scenario:"})}</b> {t({"de": "Playlist aus 3 Songs", "en": "Playlist of 3 songs"})}<br>
 <b>{t({"de": "Songs:", "en": "Songs:"})}</b> {{A, B, C}}<br><br>
-{t({"de": "Kann Song A zweimal vorkommen?", "en": "Can song A appear twice?"})} <b style="color:#dc2626;">NEIN</b><br><br>
-• Position 1: 3 Optionen<br>
-• Position 2: 2 Optionen (einer weg!)<br>
-• Position 3: 1 Option (zwei weg!)<br><br>
-<b>Pool schrumpft: 3→2→1</b>
+{t({"de": "Kann Song A zweimal vorkommen?", "en": "Can song A appear twice?"})} <b>{t({"de": "NEIN", "en": "NO"})}</b><br><br>
+• {t({"de": "Position 1: 3 Optionen", "en": "Position 1: 3 options"})}<br>
+• {t({"de": "Position 2: 2 Optionen (einer weg!)", "en": "Position 2: 2 options (one gone!)"})}<br>
+• {t({"de": "Position 3: 1 Option (zwei weg!)", "en": "Position 3: 1 option (two gone!)"})}<br><br>
+<b>{t({"de": "Pool schrumpft: 3→2→1", "en": "Pool shrinks: 3→2→1"})}</b>
 </div>
 """, unsafe_allow_html=True)
             st.latex(r"P(n,k) = \frac{n!}{(n-k)!}")
@@ -145,14 +131,14 @@ def render_subtopic_2_5(model):
         with col_25:
             st.markdown(f"**2.5: {t({'de': 'MIT Wiederholung', 'en': 'WITH Replacement'})}**")
             st.markdown(f"""
-<div style="background: #d1fae5; border-radius: 8px; padding: 16px;">
+<div style="background: #f4f4f5; border-radius: 8px; padding: 16px;">
 <b>{t({"de": "Szenario:", "en": "Scenario:"})}</b> {t({"de": "3-stelliger PIN", "en": "3-digit PIN"})}<br>
 <b>{t({"de": "Ziffern:", "en": "Digits:"})}</b> {{0-9}}<br><br>
-{t({"de": "Kann Ziffer 5 zweimal vorkommen?", "en": "Can digit 5 appear twice?"})} <b style="color:#059669;">JA</b><br><br>
-• Position 1: 10 Optionen<br>
-• Position 2: 10 Optionen (nichts weg!)<br>
-• Position 3: 10 Optionen (nichts weg!)<br><br>
-<b>Pool bleibt: 10→10→10</b>
+{t({"de": "Kann Ziffer 5 zweimal vorkommen?", "en": "Can digit 5 appear twice?"})} <b>{t({"de": "JA", "en": "YES"})}</b><br><br>
+• {t({"de": "Position 1: 10 Optionen", "en": "Position 1: 10 options"})}<br>
+• {t({"de": "Position 2: 10 Optionen (nichts weg!)", "en": "Position 2: 10 options (nothing gone!)"})}<br>
+• {t({"de": "Position 3: 10 Optionen (nichts weg!)", "en": "Position 3: 10 options (nothing gone!)"})}<br><br>
+<b>{t({"de": "Pool bleibt: 10→10→10", "en": "Pool stays: 10→10→10"})}</b>
 </div>
 """, unsafe_allow_html=True)
             st.latex(r"n^k")
@@ -239,7 +225,7 @@ def render_subtopic_2_5(model):
                 without_replacement = 1
                 for i in range(k):
                     without_replacement *= (10 - i)
-                st.latex(rf"\text{{Ohne Wdh.: }} 10 \times 9 \times ... = {without_replacement:,}".replace(",", "'"))
+                st.latex(rf"10 \times 9 \times ... = {without_replacement:,}".replace(",", "'"))
                 st.caption(t({
                     "de": f"Ohne Wiederholung wären es nur {without_replacement:,}".replace(",", "'"),
                     "en": f"Without replacement it would be only {without_replacement:,}"
@@ -261,14 +247,14 @@ def render_subtopic_2_5(model):
         
         with col_calc:
             st.markdown(f"**{t({'de': 'Dein 4-stelliger PIN:', 'en': 'Your 4-digit PIN:'})}**")
-            st.latex(r"10^4 = 10'000 \text{ Möglichkeiten}")
-            st.latex(r"\text{Durchschnittl. Versuche (50\%): } 5'000")
-            st.latex(r"\text{Bei 1 Versuch/Sek: } 83 \text{ Minuten}")
+            st.latex(r"10^4 = 10'000")
+            st.markdown(t({"de": "Durchschnittl. Versuche (50%): 5'000", "en": "Average attempts (50%): 5,000"}))
+            st.markdown(t({"de": "Bei 1 Versuch/Sek: **83 Minuten**", "en": "At 1 try/sec: **83 minutes**"}))
         
         with col_insight:
             st.markdown(f"**{t({'de': 'Was, wenn Ziffern einzigartig sein müssten?', 'en': 'What if digits had to be unique?'})}**")
             st.markdown(f"""
-<div style="background: #fee2e2; border-radius: 8px; padding: 16px; color: #991b1b;">
+<div style="background: #f4f4f5; border-radius: 8px; padding: 16px;">
 <b>P(10,4) = 10 × 9 × 8 × 7 = 5'040</b><br><br>
 {t({"de": "50% Chance: 2'520 Versuche", "en": "50% chance: 2,520 tries"})}<br>
 {t({"de": "Bei 1/Sek: 42 Minuten", "en": "At 1/sec: 42 minutes"})}<br><br>
@@ -279,7 +265,7 @@ def render_subtopic_2_5(model):
         st.markdown("<br>", unsafe_allow_html=True)
         
         st.markdown(f"""
-<div style="background: #f4f4f5; border-left: 3px solid #71717a; padding: 12px; border-radius: 6px;">
+<div style="background: #f4f4f5; border-left: 3px solid #71717a; padding: 12px; border-radius: 6px; color: #3f3f46;">
 <strong>Pro Tip:</strong> {t({
     "de": "Banken nutzen MIT Wiederholung (10⁴ = 10'000) weil es SICHERER ist als ohne (5'040)!",
     "en": "Banks use WITH replacement (10⁴ = 10,000) because it's MORE SECURE than without (5,040)!"
@@ -317,18 +303,16 @@ def render_subtopic_2_5(model):
     
     # --- EXAM SECTION ---
     st.markdown(f"### {t(content_2_5['exam']['title'])}")
-    st.caption(content_2_5['exam']['source'])
+    st.caption(t(content_2_5['exam']['source']))
     
     with st.container(border=True):
-        opts = content_2_5["exam"]["options"]
-        opt_labels = [t(opt) for opt in opts]
-        
+        q_data = get_question("2.5", "coin_toss_seq")
         render_mcq(
             key_suffix="2_5_coin",
-            question_text=t(content_2_5["exam"]["question"]),
-            options=opt_labels,
-            correct_idx=content_2_5["exam"]["correct_id"],
-            solution_text_dict=content_2_5["exam"]["solution"],
+            question_text=t(q_data["question"]),
+            options=q_data["options"],
+            correct_idx=q_data["correct_idx"],
+            solution_text_dict=q_data["solution"],
             success_msg_dict={"de": "Korrekt!", "en": "Correct!"},
             error_msg_dict={"de": "Noch nicht ganz...", "en": "Not quite..."},
             client=model,
@@ -338,3 +322,8 @@ def render_subtopic_2_5(model):
             subtopic_id="2.5",
             question_id="q_2_5_coin"
         )
+        
+        # Formula hint (Rule 2.4: hints go AFTER the question)
+        with st.expander(t({"de": "Formel-Hinweis", "en": "Formula Hint"})):
+            st.latex(r"n^k")
+

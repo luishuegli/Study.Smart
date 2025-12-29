@@ -3,6 +3,7 @@ import re
 from views.styles import render_icon
 from utils.localization import t
 from utils.quiz_helper import render_mcq
+from data.exam_questions import get_question
 
 # --- CONTENT DICTIONARY ---
 content_2_2 = {
@@ -24,13 +25,6 @@ content_2_2 = {
     "relate": {
         "de": "Das ist das **Fundamentalprinzip**: Unabhängige Entscheidungen werden **multipliziert**.",
         "en": "This is the **Fundamental Principle**: Independent choices are **multiplied**."
-    },
-    "exam_q": {
-        "q": {"de": "In einem Verein mit 10 Mitgliedern (4 Frauen und 6 Herren) soll nun ein Vorstand bestehend aus zwei Damen und zwei Herren gebildet werden. Wie viele Möglichkeiten gibt es?", 
-              "en": "In a club with 10 members (4 women and 6 men), a board consisting of two women and two men is to be formed. How many possibilities are there?"},
-        "opts": ["90", "25", "210", "60"],
-        "sol": {"de": "<div style='margin-bottom:16px;'>Formel: $\\binom{n}{k} = \\frac{n!}{k!(n-k)!}$</div><div style='margin-bottom:12px;'>Frauen: $\\binom{4}{2} = 6$<br>Männer: $\\binom{6}{2} = 15$</div><div>Fundamentalprinzip: $6 \\cdot 15 = 90$</div>", 
-                "en": "<div style='margin-bottom:16px;'>Formula: $\\binom{n}{k} = \\frac{n!}{k!(n-k)!}$</div><div style='margin-bottom:12px;'>Women: $\\binom{4}{2} = 6$<br>Men: $\\binom{6}{2} = 15$</div><div>Principle: $6 \\cdot 15 = 90$</div>"}
     }
 }
 
@@ -149,18 +143,18 @@ def render_subtopic_2_2(client):
     with st.container(border=True):
         # --- ROW 1: THE KEY INSIGHT ---
         st.markdown(f"""
-<div style="background: #fef3c7; border: 1px solid #fde68a; border-radius: 12px; padding: 20px; border-left: 4px solid #d97706; margin-bottom: 16px;">
+<div style="background: #f4f4f5; border: 1px solid #e4e4e7; border-radius: 12px; padding: 20px; border-left: 4px solid #71717a; margin-bottom: 16px;">
     <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-        <div style="background: #fef3c7; padding: 6px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">{render_icon('zap', size=18, color='#d97706')}</div>
-        <div style="font-size: 0.85em; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; color: #92400e;">{t({'de': 'Die goldene Regel', 'en': 'The Golden Rule'})}</div>
+        <div style="background: #e4e4e7; padding: 6px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">{render_icon('zap', size=18, color='#3f3f46')}</div>
+        <div style="font-size: 0.85em; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; color: #3f3f46;">{t({'de': 'Die goldene Regel', 'en': 'The Golden Rule'})}</div>
     </div>
     <div style="display: flex; gap: 40px; align-items: center;">
         <div>
             <div style="font-size: 1.2em; font-weight: 700; color: #1e293b;">{t({'de': 'UND', 'en': 'AND'})}</div>
             <div style="font-size: 0.9em; color: #64748b;">{t({'de': 'Entscheidungs-Kette', 'en': 'Choice Chain'})}</div>
-            <div style="font-size: 1.5em; font-weight: 800; color: #92400e; margin-top: 4px;">&times;</div>
+            <div style="font-size: 1.5em; font-weight: 800; color: #3f3f46; margin-top: 4px;">&times;</div>
         </div>
-        <div style="width: 1px; height: 40px; background: #e2e8f0;"></div>
+        <div style="width: 1px; height: 40px; background: #d4d4d8;"></div>
         <div>
             <div style="font-size: 1.2em; font-weight: 700; color: #1e293b;">{t({'de': 'ODER', 'en': 'OR'})}</div>
             <div style="font-size: 0.9em; color: #64748b;">{t({'de': 'Alternativen', 'en': 'Alternatives'})}</div>
@@ -195,7 +189,7 @@ def render_subtopic_2_2(client):
             
             # Use a container to match the height and styling of the left side
             with st.container(border=True):
-                st.latex(r"N = \color{#007AFF}{n}_1 \cdot \color{#FF4B4B}{n}_2 \cdot \dots \cdot n_k")
+                st.latex(r"N = n_1 \cdot n_2 \cdot \dots \cdot n_k")
                 
                 # --- PARAMETER SPEC LIST (Native Streamlit for LaTeX rendering) ---
                 st.markdown("<hr style='margin: 12px 0; border: 0; border-top: 1.5px solid #f3f4f6;'>", unsafe_allow_html=True)
@@ -209,8 +203,8 @@ def render_subtopic_2_2(client):
                         st.markdown(f"<div style='display:flex; align-items:center; height:100%; padding:8px 0; font-size:0.9em; color:{text_color};'>{desc}</div>", unsafe_allow_html=True)
                 
                 render_param_row(r"k", t({"de": "Anzahl Entscheidungen", "en": "Number of selection steps"}))
-                render_param_row(r"\color{#007AFF}{n_1}", t({"de": "Optionen bei Schritt 1", "en": "Options at step 1"}))
-                render_param_row(r"\color{#FF4B4B}{n_2}", t({"de": "Optionen bei Schritt 2", "en": "Options at step 2"}))
+                render_param_row(r"n_1", t({"de": "Optionen bei Schritt 1", "en": "Options at step 1"}))
+                render_param_row(r"n_2", t({"de": "Optionen bei Schritt 2", "en": "Options at step 2"}))
                 
                 # Result row (highlighted) - Using native Streamlit for proper LaTeX
                 c_n, c_result = st.columns([0.15, 0.85], gap="small")
@@ -303,28 +297,28 @@ def render_subtopic_2_2(client):
         formulas = [
             {
                 "title": {"de": "Multiplikationsprinzip", "en": "Multiplication Principle"},
-                "latex": r"N = \color{#007AFF}{n_1} \cdot \color{#FF4B4B}{n_2}",
+                "latex": r"N = n_1 \cdot n_2",
                 "intuition": {"de": "UND = Multiplizieren. Jede Wahl öffnet neue Pfade.", "en": "AND = Multiply. Each choice opens new paths."},
                 "example": {"de": "3 Hauptgerichte UND 4 Desserts = 12 Menüs", "en": "3 mains AND 4 desserts = 12 meals"},
                 "pro_tip": {"de": "Zeichne einen Baum. Wenn er sich verzweigt → multiplizieren.", "en": "Draw a tree. If it branches out → multiply."}
             },
             {
                 "title": {"de": "Kombination (ohne Reihenfolge)", "en": "Combination (No Order)"},
-                "latex": r"\binom{\color{#007AFF}{n}}{\color{#FF4B4B}{k}} = \frac{\color{#007AFF}{n}!}{\color{#FF4B4B}{k}! \cdot (\color{#007AFF}{n} - \color{#FF4B4B}{k})!}",
+                "latex": r"\binom{n}{k} = \frac{n!}{k! \cdot (n - k)!}",
                 "intuition": {"de": "Teamfoto: Egal wer wo steht.", "en": "Team photo: nobody cares who stands where."},
                 "example": {"de": "Lotto: 6 aus 49 Zahlen wählen", "en": "Lottery: Pick 6 from 49 numbers"},
                 "pro_tip": {"de": "Würde Tauschen das Ergebnis ändern? NEIN → Teile durch k!", "en": "Would swapping names change the outcome? NO → Divide by k!"}
             },
             {
                 "title": {"de": "Permutation (mit Reihenfolge)", "en": "Permutation (Order Matters)"},
-                "latex": r"P(\color{#007AFF}{n}, \color{#FF4B4B}{k}) = \frac{\color{#007AFF}{n}!}{(\color{#007AFF}{n} - \color{#FF4B4B}{k})!}",
+                "latex": r"P(n, k) = \frac{n!}{(n - k)!}",
                 "intuition": {"de": "Podium: Gold ≠ Silber ≠ Bronze.", "en": "Podium: Gold ≠ Silver ≠ Bronze."},
                 "example": {"de": "8 Läufer: Wie viele Gold-Silber-Bronze Vergaben?", "en": "8 runners: How many ways to award Gold, Silver, Bronze?"},
                 "pro_tip": {"de": "Wärst du sauer, wenn 1. und 3. tauschen? JA → Nicht teilen.", "en": "Would you be upset if 1st and 3rd switched? YES → Don't divide."}
             },
             {
                 "title": {"de": "Mit Wiederholung", "en": "With Repetition"},
-                "latex": r"\color{#007AFF}{n}^{\color{#FF4B4B}{k}}",
+                "latex": r"n^{k}",
                 "intuition": {"de": "Unbegrenzter Vorrat. Nichts wird 'verbraucht'.", "en": "Infinite supply. Nothing gets 'used up'."},
                 "example": {"de": "iPhone-PIN: 4 Ziffern, je 0-9", "en": "iPhone passcode: 4 digits, each 0-9"},
                 "pro_tip": {"de": "Kannst du dasselbe zweimal wählen? JA → n^k", "en": "Can you pick the same thing twice? YES → n^k"}
@@ -504,19 +498,23 @@ border-color: #3B82F6;
     st.markdown("<br><br>", unsafe_allow_html=True)
     st.markdown(f"### {t({'de': 'Prüfungstraining', 'en': 'Exam Practice'})}")
     
-    with st.container(border=True):
-        render_mcq(
-            key_suffix="2_2_exam", 
-            question_text=t(c["exam_q"]["q"]), 
-            options=c["exam_q"]["opts"], 
-            correct_idx=0, # 90
-            solution_text_dict=c["exam_q"]["sol"], 
-            success_msg_dict={"de": "Korrekt!", "en": "Correct!"},
-            error_msg_dict={"de": "Falsch.", "en": "Incorrect."}, 
-            client=client, 
-            ai_context="The user is learning the Fundamental Counting Principle. The problem involves combining choices (women, men) using multiplication.",
-            course_id="vwl", topic_id="2", subtopic_id="2.2", question_id="q_2_2_club"
-        )
+    q_id = "q_2_2_club"
+    q_data = get_question("2.2", q_id)
+    
+    if q_data:
+        with st.container(border=True):
+            render_mcq(
+                key_suffix="2_2_exam", 
+                question_text=t(q_data["question"]), 
+                options=q_data["options"], 
+                correct_idx=q_data["correct_idx"], 
+                solution_text_dict=q_data["solution"], 
+                success_msg_dict={"de": "Korrekt!", "en": "Correct!"},
+                error_msg_dict={"de": "Falsch.", "en": "Incorrect."}, 
+                client=client, 
+                ai_context="The user is learning the Fundamental Counting Principle. The problem involves combining choices (women, men) using multiplication.",
+                course_id="vwl", topic_id="2", subtopic_id="2.2", question_id="q_2_2_club"
+            )
         
         # Visual Solution: The "Slot Machine"
         if st.toggle(t({"de": "Lösung visualisieren", "en": "Visualize Solution"})):

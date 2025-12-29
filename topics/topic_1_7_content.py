@@ -4,6 +4,7 @@ import math
 from views.styles import render_icon
 from utils.localization import t
 from utils.quiz_helper import render_mcq
+from data.exam_questions import get_question
 
 # --- 0. SAFETY CHECK ---
 try:
@@ -43,86 +44,8 @@ content_1_7 = {
         }
     },
     "exam": {
-        "q1": {
-            "title": {"de": "Prüfungstraining: HS2024 (MC 3)", "en": "Exam Practice: HS2024 (MC 3)"},
-            "question": {"de": "**Gegeben:** $\\mathbb{P}(A)=\\frac{1}{2}$, $\\mathbb{P}(B)=\\frac{2}{3}$ und $\\mathbb{P}(A\\cap B)=\\frac{1}{4}$.\n\n**Gesucht:** $\\mathbb{P}(A|\\overline{B})$.", "en": "**Given:** $\\mathbb{P}(A)=\\frac{1}{2}$, $\\mathbb{P}(B)=\\frac{2}{3}$ and $\\mathbb{P}(A\\cap B)=\\frac{1}{4}$.\n\n**Find:** $\\mathbb{P}(A|\\overline{B})$."},
-            "options": ["0.25", "0.50", "0.75", "0.33"],
-            "correct_opt": "0.75",
-            "solution": {
-                "de": r"""
-**Schritt 1: Formel aufstellen**
-$P(A|\overline{B}) = \frac{P(A \cap \overline{B})}{P(\overline{B})}$
-
-**Schritt 2: Nenner berechnen**
-$P(\overline{B}) = 1 - P(B) = 1 - \frac{2}{3} = \frac{1}{3}$.
-
-**Schritt 3: Zähler berechnen**
-$P(A \cap \overline{B})$ ist 'A ohne B'.
-$P(A \cap \overline{B}) = P(A) - P(A \cap B) = \frac{1}{2} - \frac{1}{4} = \frac{1}{4}$.
-
-**Schritt 4: Einsetzen**
-$\frac{1/4}{1/3} = \frac{1}{4} \cdot \frac{3}{1} = \frac{3}{4} = \mathbf{0.75}$.
-                """,
-                "en": r"""
-**Step 1: Setup Formula**
-$P(A|\overline{B}) = \frac{P(A \cap \overline{B})}{P(\overline{B})}$
-
-**Step 2: Calculate Denominator**
-$P(\overline{B}) = 1 - P(B) = 1 - \frac{2}{3} = \frac{1}{3}$.
-
-**Step 3: Calculate Numerator**
-$P(A \cap \overline{B})$ is 'A without B'.
-$P(A \cap \overline{B}) = P(A) - P(A \cap B) = \frac{1}{2} - \frac{1}{4} = \frac{1}{4}$.
-
-**Step 4: Solve**
-$\frac{1/4}{1/3} = \frac{1}{4} \cdot \frac{3}{1} = \frac{3}{4} = \mathbf{0.75}$.
-                """
-            },
-            "hint": {
-                "de": "Hinweis: Nutze die Formel $P(A|\\overline{B}) = \\frac{P(A \\cap \\overline{B})}{P(\\overline{B})}$.",
-                "en": "Hint: Use the formula $P(A|\\overline{B}) = \\frac{P(A \\cap \\overline{B})}{P(\\overline{B})}$."
-            }
-        },
-        "q2": {
-            "title": {"de": "Logik-Check: Unabhängigkeit (MC 5)", "en": "Logic Check: Independence (MC 5)"},
-            "question": {
-                "de": "**Zufallsexperiment:** Ziehen von 4 Zahlen aus den ersten 12 Primzahlen (ohne Zurücklegen).\n\n$A$: Summe ist ungerade.\n$B$: Alle 4 Zahlen sind ungerade.\n\n**Sind $A$ und $B$ unabhängig oder disjunkt?**",
-                "en": "**Experiment:** Draw 4 numbers from the first 12 primes (without replacement).\n\n$A$: Sum is odd.\n$B$: All 4 numbers are odd.\n\n**Are $A$ and $B$ independent or disjoint?**"
-            },
-            "options": [
-                "Unabhängig und Disjunkt",
-                "Abhängig und Disjunkt",
-                "Unabhängig und Nicht-Disjunkt",
-                "Abhängig und Nicht-Disjunkt"
-            ],
-            "correct_opt": "Abhängig und Disjunkt",
-            "solution": {
-                "de": r"""
-**Analyse:**
-Es gibt nur *eine* gerade Primzahl (2).
-$A$ (Summe Ungerade) braucht die 2 (3 ungerade + 1 gerade).
-$B$ (Alle Ungerade) verbietet die 2.
-$\Rightarrow$ Disjunkt.
-
-**Abhängigkeit:**
-Disjunkt impliziert Abhängigkeit (wenn $P>0$), da das Eintreten von A das Eintreten von B ausschließt.
-                """,
-                "en": r"""
-**Analysis:**
-There is only *one* even prime (2).
-$A$ (Odd Sum) requires 2 (3 odd + 1 even).
-$B$ (All Odd) forbids 2.
-$\Rightarrow$ Disjoint.
-
-**Dependency:**
-Disjoint implies dependency (if $P>0$), because A occurring prevents B from occurring.
-                """
-            },
-            "hint": {
-                "de": "Hinweis: Wie viele gerade Primzahlen gibt es?",
-                "en": "Hint: How many even prime numbers are there?"
-            }
-        }
+        "q1": {"title": {"de": "Prüfungstraining: HS2024 (MC 3)", "en": "Exam Practice: HS2024 (MC 3)"}},
+        "q2": {"title": {"de": "Logik-Check: Unabhängigkeit (MC 5)", "en": "Logic Check: Independence (MC 5)"}}
     },
     "feedback": {
         "success": {
@@ -421,17 +344,18 @@ def render_subtopic_1_7(model):
     # Q1
     with st.container(border=True):
         st.markdown(f"**{t(content_1_7['exam']['q1']['title'])}**")
+        q1_data = get_question("1.7", "hs2024_mc3")
         render_mcq(
             key_suffix="1_7_q1_narrative",
-            question_text=t(content_1_7["exam"]["q1"]["question"]),
-            options=content_1_7["exam"]["q1"]["options"],
-            correct_idx=content_1_7["exam"]["q1"]["options"].index(content_1_7["exam"]["q1"]["correct_opt"]),
-            solution_text_dict=content_1_7["exam"]["q1"]["solution"],
+            question_text=t(q1_data["question"]),
+            options=q1_data["options"],
+            correct_idx=q1_data["correct_idx"],
+            solution_text_dict=q1_data["solution"],
             success_msg_dict={"de": "Korrekt", "en": "Correct"},
             error_msg_dict={"de": "Falsch", "en": "Incorrect"},
             client=model,
             ai_context="Conditional probability", 
-            hint_text_dict=content_1_7["exam"]["q1"]["hint"],
+            hint_text_dict=q1_data.get("hint"),
             course_id="vwl", topic_id="1", subtopic_id="1.7", question_id="1_7_q1_narrative"
         )
     
@@ -440,17 +364,26 @@ def render_subtopic_1_7(model):
     # Q2
     with st.container(border=True):
         st.markdown(f"**{t(content_1_7['exam']['q2']['title'])}**")
+        q2_data = get_question("1.7", "uebung1_mc5")
+        
+        # Handle bilingual options
+        q2_opts = q2_data.get("options", [])
+        if q2_opts and isinstance(q2_opts[0], dict) and ('de' in q2_opts[0] or 'en' in q2_opts[0]):
+            q2_option_labels = [t(o) for o in q2_opts]
+        else:
+            q2_option_labels = q2_opts
+        
         render_mcq(
             key_suffix="1_7_q2_narrative",
-            question_text=t(content_1_7["exam"]["q2"]["question"]),
-            options=content_1_7["exam"]["q2"]["options"],
-            correct_idx=content_1_7["exam"]["q2"]["options"].index(content_1_7["exam"]["q2"]["correct_opt"]),
-            solution_text_dict=content_1_7["exam"]["q2"]["solution"],
+            question_text=t(q2_data["question"]),
+            options=q2_option_labels,
+            correct_idx=q2_data["correct_idx"],
+            solution_text_dict=q2_data["solution"],
             success_msg_dict={"de": "Korrekt", "en": "Correct"},
             error_msg_dict={"de": "Falsch", "en": "Incorrect"},
             client=model,
             ai_context="Independence logic",
-            hint_text_dict=content_1_7["exam"]["q2"]["hint"],
+            hint_text_dict=q2_data.get("hint"),
             course_id="vwl", topic_id="1", subtopic_id="1.7", question_id="1_7_q2_narrative"
         )
     
@@ -643,3 +576,41 @@ def render_subtopic_1_7(model):
             {"color": "red", "shape": "circle"},
         ]
         st.rerun()
+    
+    # --- EXAM WORKBENCH: Additional MCQ Questions ---
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    st.markdown(f"### {t({'de': 'Prüfungstraining: Weitere Aufgaben', 'en': 'Exam Practice: Additional Problems'})}")
+    
+    def render_exam_q(label, q_id, key_suffix, source_caption):
+        q_data = get_question("1.7", q_id)
+        if not q_data:
+            st.warning(f"Question {q_id} not found")
+            return
+        
+        opts = q_data.get("options", [])
+        # Handle both string lists and dict lists
+        if opts and isinstance(opts[0], dict):
+            option_labels = [t(o) for o in opts]
+        else:
+            option_labels = opts
+        
+        with st.container(border=True):
+            st.caption(source_caption)
+            render_mcq(
+                key_suffix=key_suffix,
+                question_text=t(q_data['question']),
+                options=option_labels,
+                correct_idx=q_data['correct_idx'],
+                solution_text_dict=q_data['solution'],
+                success_msg_dict={"de": "Richtig", "en": "Correct"},
+                error_msg_dict={"de": "Falsch", "en": "Incorrect"},
+                client=model,
+                ai_context=f"Topic 1.7: Conditional Probability. Question: {q_id}",
+                course_id="vwl", topic_id="1", subtopic_id="1.7", question_id=f"1_7_{label}"
+            )
+    
+    render_exam_q("Q1", "test1_q1", "1_7_test1_q1", "Test 1, Frage 1")
+    st.markdown("<br>", unsafe_allow_html=True)
+    render_exam_q("Q2", "uebung1_mc5", "1_7_uebung1_mc5", "Übung 1, MC 5")
+    st.markdown("<br>", unsafe_allow_html=True)
+    render_exam_q("Q3", "uebung1_mc8", "1_7_uebung1_mc8", "Übung 1, MC 8")

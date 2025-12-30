@@ -237,10 +237,10 @@ def render_simulator_3_3():
                     fixedrange=True, showgrid=False
                 ),
                 yaxis2=dict(
-                    range=[0, 1.1], title="Cumul. Prob F(x)",
+                    range=[0, 1.1], 
+                    title=dict(text="Cumul. Prob F(x)", font=dict(color="#AF52DE")),
                     overlaying="y", side="right",
                     fixedrange=True, showgrid=False,
-                    titlefont=dict(color="#AF52DE"),
                     tickfont=dict(color="#AF52DE")
                 ),
                 height=350,

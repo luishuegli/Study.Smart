@@ -1,34 +1,211 @@
-# Topic 3.3: Continuous Random Variables
 import streamlit as st
+import plotly.graph_objects as go
+import numpy as np
+from math import erf, sqrt
+from views.styles import render_icon
 from utils.localization import t
 from utils.quiz_helper import render_mcq
 from data.exam_questions import get_question
+from utils.progress_tracker import track_question_answer, update_local_progress
+
+# --- CONTENT DICTIONARY ---
+content_3_3 = {
+    "title": {"de": "3.3 Stetige Zufallsvariablen", "en": "3.3 Continuous Random Variables"},
+    "anchor": {"de": "Warum ist die Wahrscheinlichkeit für GENAU diesen Punkt Null?", "en": "Why is the probability of EXACTLY this point zero?"},
+    "intro": {
+        "text": {
+            "de": "Stell dir vor, du hast einen Fruchtsalat (diskret). Du kannst jedes Stück einzeln aufpicken (P > 0). Jetzt wirfst du alles in den Mixer (stetig). Du hast einen Smoothie. Du kannst nicht mehr ein einzelnes 'Apfel-Atom' herausfischen (P=0). Aber du kannst einen Schluck nehmen (Intervall).",
+            "en": "Imagine a fruit salad (discrete). You can pick up each piece (P > 0). Now throw it in a blender (continuous). You have a smoothie. You can't fish out a single 'apple atom' anymore (P=0). But you can take a sip (Interval)."
+        }
+    },
+    "playground": {
+        "title": {"de": "Der Smoothie-Scanner", "en": "The Smoothie Scanner"},
+        "desc": {
+            "de": "Verschiebe das Intervall. Die Wahrscheinlichkeit ist die FLÄCHE unter der Kurve (das Integral). Ein einzelner Strich hat keine Breite, also keine Fläche.",
+            "en": "Move the interval. Probability is the AREA under the curve (the integral). A single line has no width, thus no area."
+        },
+        "metric_area": {"de": "Wahrscheinlichkeit (Fläche)", "en": "Probability (Area)"}
+    },
+    "theory": {
+        "def_title": {"de": "Dichtefunktion (PDF)", "en": "Density Function (PDF)"},
+        "def_text": {
+            "de": "Bei stetigen Variablen reden wir nicht von Wahrscheinlichkeit an einem Punkt, sondern von **Dichte** $f(x)$. Wahrscheinlichkeit entsteht erst durch Integration über eine Breite.",
+            "en": "For continuous variables, we don't speak of probability at a point, but of **density** $f(x)$. Probability only exists by integrating over a width."
+        },
+        "prop_title": {"de": "Eigenschaften", "en": "Properties"},
+        "prop_text": {
+            "de": "1. Gesamte Fläche = 1 (100%)\n2. $P(X=x) = 0$ (Einzelpunkte sind unmöglich)",
+            "en": "1. Total Area = 1 (100%)\n2. $P(X=x) = 0$ (Single points are impossible)"
+        }
+    },
+    "mission": {
+        "title": {"de": "Mission: Der Fabrik-Tycoon", "en": "Mission: The Factory Tycoon"},
+        "briefing": {
+            "de": r"Du produzierst High-Tech-Bolzen. Kunden zahlen **$10** pro gutem Bolzen (9.8-10.2mm). Jeder Ausschuss (zu klein/groß) kostet dich **$5** Strafe.",
+            "en": r"You produce high-tech bolts. Clients pay **$10** per good bolt (9.8-10.2mm). Any defect (too small/big) costs you **$5** in penalty."
+        },
+        "task": {
+            "de": r"Die Maschine streut mit $\sigma=0.2$. Stelle den Mittelwert $\mu$ so ein, dass dein Profit maximiert wird.",
+            "en": r"The machine varies with $\sigma=0.2$. Adjust the mean $\mu$ to maximize your profit."
+        },
+        "sim_btn": {"de": "Produktionslauf starten (100 Bolzen)", "en": "Start Production Run (100 Bolts)"},
+        "success": {
+            "de": "Profit Maximiert! Du hast die perfekte Einstellung gefunden.",
+            "en": "Profit Maximized! You found the perfect setting."
+        }
+    },
+    "pro_tip": {
+        "text": {
+            "de": "Lass dich nicht täuschen: $f(x)$ kann größer als 1 sein! Nur die Fläche darf nicht größer als 1 sein. Dichte ist wie 'Konzentration', nicht wie Wahrscheinlichkeit.",
+            "en": "Don't be fooled: $f(x)$ can be greater than 1! Only the area cannot exceed 1. Density is like 'concentration', not probability."
+        }
+    }
+}
 
 def render_subtopic_3_3(model):
-    """3.3 Stetige Zufallsvariablen - Continuous Random Variables"""
+    """3.3 Continuous Random Variables - The Factory Tycoon"""
+
+    # --- CSS INJECTION ---
+    st.markdown("""
+    <style>
+    [data-testid="stHorizontalBlock"] { align-items: stretch !important; }
     
-    st.header(t({"de": "3.3 Stetige Zufallsvariablen", "en": "3.3 Continuous Random Variables"}))
+    /* Slider Colors for Factory */
+    .stSlider:has([aria-label*="Mean"]) div[data-baseweb="slider"] > div:first-child > div:first-child { background-color: #34C759 !important; }
+    .stSlider:has([aria-label*="Mean"]) div[role="slider"] { border: 2px solid #34C759 !important; }
+    </style>
+    """, unsafe_allow_html=True)
+
+    st.header(t(content_3_3["title"]))
+    st.markdown(f"**{t(content_3_3['anchor'])}**")
     st.markdown("---")
-    
-    # --- THEORY PLACEHOLDER ---
+
+    # --- INTUITION ---
     with st.container(border=True):
-        st.markdown(f"### {t({'de': 'Theorie', 'en': 'Theory'})}")
-        st.info(t({
-            "de": "**Theorie-Inhalte kommen bald!**\n\nDieser Abschnitt wird theoretische Erklärungen zu stetigen Zufallsvariablen enthalten.",
-            "en": "**Theory content coming soon!**\n\nThis section will contain theoretical explanations of continuous random variables."
-        }))
+        st.markdown(f"### {render_icon('lightbulb', '#F59E0B')} {t({'de': 'Die Intuition', 'en': 'The Intuition'})}", unsafe_allow_html=True)
+        st.markdown(t(content_3_3["intro"]["text"]))
     
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    # --- PLAYGROUND: SMOOTHIE SCANNER ---
+    st.markdown(f"### {t(content_3_3['playground']['title'])}")
+    with st.container(border=True):
+        st.caption(t(content_3_3["playground"]["desc"]))
+
+        c_ctrl, c_vis = st.columns([1, 2], gap="large")
+
+        with c_ctrl:
+            interval = st.slider(t({"de": "Intervall (a bis b)", "en": "Interval (a to b)"}), -3.0, 3.0, (-0.5, 0.5), 0.1)
+            a, b = interval
+
+            p_area = 0.5 * (erf(b/sqrt(2)) - erf(a/sqrt(2)))
+            st.metric(t(content_3_3["playground"]["metric_area"]), f"{p_area:.1%}")
+
+            if abs(a - b) < 0.01:
+                st.warning(t({"de": "Breite ≈ 0 → Wahrscheinlichkeit ≈ 0", "en": "Width ≈ 0 → Probability ≈ 0"}))
+
+        with c_vis:
+            fig = get_pdf_area_chart(a, b)
+            st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False})
+
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    # --- THEORY ---
+    c1, c2 = st.columns(2, gap="medium")
+    with c1:
+        with st.container(border=True):
+            st.markdown(f"**{t(content_3_3['theory']['def_title'])}**")
+            st.markdown(t(content_3_3["theory"]["def_text"]))
+            st.latex(r"P(a \le X \le b) = \int_a^b f(x) \, dx")
+    with c2:
+        with st.container(border=True):
+            st.markdown(f"**{t(content_3_3['theory']['prop_title'])}**")
+            st.markdown(t(content_3_3["theory"]["prop_text"]))
+            st.latex(r"\int_{-\infty}^{\infty} f(x) \, dx = 1")
+
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    # --- MISSION: FACTORY TYCOON ---
+    st.markdown(f"### {t(content_3_3['mission']['title'])}")
+    with st.container(border=True):
+        st.markdown(t(content_3_3["mission"]["briefing"]))
+        st.markdown(f"**{t(content_3_3['mission']['task'])}**")
+
+        if "eng_mu" not in st.session_state: st.session_state.eng_mu = 9.0
+        if "mission_3_3_done" not in st.session_state: st.session_state.mission_3_3_done = False
+        if "factory_profit" not in st.session_state: st.session_state.factory_profit = None
+
+        mu = st.slider(
+            t({"de": "Maschinen-Einstellung (µ)", "en": "Machine Setting (µ)"}),
+            9.0, 11.0, st.session_state.eng_mu, 0.05,
+            key="eng_mu_slider"
+        )
+        st.session_state.eng_mu = mu
+
+        sigma = 0.2
+        lower, upper = 9.8, 10.2
+
+        z1 = (lower - mu) / sigma
+        z2 = (upper - mu) / sigma
+        yield_rate = 0.5 * (erf(z2/sqrt(2)) - erf(z1/sqrt(2)))
+
+        col_m_vis, col_m_res = st.columns([2, 1])
+
+        with col_m_vis:
+            fig_eng = get_engineer_chart(mu, sigma, lower, upper)
+            st.plotly_chart(fig_eng, use_container_width=True, config={'displayModeBar': False})
+
+        with col_m_res:
+            st.metric(t({"de": "Theoretische Ausbeute", "en": "Theoretical Yield"}), f"{yield_rate:.1%}")
+
+            # Simulation
+            if st.button(t(content_3_3["mission"]["sim_btn"])):
+                rng = np.random.default_rng()
+                bolts = rng.normal(mu, sigma, 100)
+                good = np.sum((bolts >= lower) & (bolts <= upper))
+                bad = 100 - good
+                profit = (good * 10) - (bad * 5)
+                st.session_state.factory_profit = profit
+
+            if st.session_state.factory_profit is not None:
+                st.metric(t({"de": "Profit (Letzter Lauf)", "en": "Last Run Profit"}), f"${st.session_state.factory_profit}")
+
+            # Win Condition: Target mu=10.0 (+/- 0.06)
+            target_mu = 10.0
+            if abs(mu - target_mu) < 0.06:
+                if not st.session_state.mission_3_3_done:
+                    st.balloons()
+                    st.session_state.mission_3_3_done = True
+                    user = st.session_state.get("user")
+                    if user:
+                        track_question_answer(user["localId"], "vwl", "3", "3.3", "3_3_mission", True)
+                        update_local_progress("3", "3.3", "3_3_mission", True)
+                        st.rerun()
+                st.success(t(content_3_3["mission"]["success"]))
+            else:
+                 st.session_state.mission_3_3_done = False
+                 if mu < target_mu:
+                     st.info(t({"de": "Zu weit links!", "en": "Too far left!"}))
+                 else:
+                     st.info(t({"de": "Zu weit rechts!", "en": "Too far right!"}))
+
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+    # --- PRO TIP ---
+    st.markdown(f"""
+    <div style="background-color: #fef3c7; border-radius: 8px; padding: 12px; color: #92400e;">
+        <strong>Pro Tip:</strong> {t(content_3_3['pro_tip']['text'])}
+    </div>
+    """, unsafe_allow_html=True)
+
     st.markdown("<br><br>", unsafe_allow_html=True)
     
-    # --- EXAM SECTION ---
+    # --- EXAM PRACTICE ---
     st.markdown(f"### {t({'de': 'Prüfungstraining', 'en': 'Exam Practice'})}")
-    
-    # MCQ 1: test2_q3
     q_data = get_question("3.3", "test2_q3")
     if q_data:
         with st.container(border=True):
             st.caption(q_data.get("source", ""))
-            
             opts = q_data.get("options", [])
             if opts and isinstance(opts[0], dict) and ('de' in opts[0] or 'en' in opts[0]):
                 option_labels = [t(o) for o in opts]
@@ -45,8 +222,38 @@ def render_subtopic_3_3(model):
                 error_msg_dict={"de": "Nicht ganz.", "en": "Not quite."},
                 client=model,
                 ai_context="Continuous PDF integration",
-                course_id="vwl",
-                topic_id="3",
-                subtopic_id="3.3",
-                question_id="3_3_q3"
+                course_id="vwl", topic_id="3", subtopic_id="3.3", question_id="3_3_q3"
             )
+
+def get_pdf_area_chart(a, b):
+    x = np.linspace(-3.5, 3.5, 200)
+    y = (1 / np.sqrt(2 * np.pi)) * np.exp(-0.5 * x**2)
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=x, y=y, mode='lines', line=dict(color='black', width=2), hoverinfo='skip'))
+    mask = (x >= a) & (x <= b)
+    if np.any(mask):
+        fig.add_trace(go.Scatter(
+            x=np.concatenate(([x[mask][0]], x[mask], [x[mask][-1]])),
+            y=np.concatenate(([0], y[mask], [0])),
+            fill='toself', fillcolor='rgba(0, 122, 255, 0.3)', line=dict(width=0), hoverinfo='skip'
+        ))
+    fig.update_layout(xaxis=dict(title="x", range=[-3.5, 3.5], fixedrange=True), yaxis=dict(title="f(x)", range=[0, 0.45], fixedrange=True), margin=dict(t=20, b=20), height=250, showlegend=False)
+    return fig
+
+def get_engineer_chart(mu, sigma, lower, upper):
+    x = np.linspace(9.0, 11.0, 300)
+    y = (1 / (sigma * np.sqrt(2 * np.pi))) * np.exp(-0.5 * ((x - mu) / sigma)**2)
+    fig = go.Figure()
+    fig.add_vrect(x0=lower, x1=upper, fillcolor="rgba(52, 199, 89, 0.1)", layer="below", line_width=0)
+    fig.add_vline(x=lower, line_dash="dash", line_color="green")
+    fig.add_vline(x=upper, line_dash="dash", line_color="green")
+    fig.add_trace(go.Scatter(x=x, y=y, mode='lines', line=dict(color='#34C759', width=3)))
+    mask = (x >= lower) & (x <= upper)
+    if np.any(mask):
+        fig.add_trace(go.Scatter(
+            x=np.concatenate(([x[mask][0]], x[mask], [x[mask][-1]])),
+            y=np.concatenate(([0], y[mask], [0])),
+            fill='toself', fillcolor='rgba(52, 199, 89, 0.4)', line=dict(width=0), hoverinfo='skip'
+        ))
+    fig.update_layout(xaxis=dict(title="Diameter (mm)", range=[9.0, 11.0], fixedrange=True), yaxis=dict(visible=False, fixedrange=True), margin=dict(t=20, b=20), height=250, showlegend=False)
+    return fig

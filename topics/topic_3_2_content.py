@@ -202,13 +202,28 @@ def render_simulator_3_2():
             x_vals = [1, 2, 3, 4, 5, 6]
             y_vals = [p_others]*5 + [p6]
             colors = ["#007AFF"]*5 + ["#AF52DE"]
-            
-            fig = go.Figure(data=[go.Bar(
+
+            fig = go.Figure()
+
+            # Theoretical
+            fig.add_trace(go.Bar(
                 x=x_vals, y=y_vals,
                 marker_color=colors,
-                text=[f"{v:.3f}" for v in y_vals],
-                textposition='auto'
-            )])
+                text=[f"{v:.2f}" for v in y_vals],
+                textposition='auto',
+                name="Theoretical"
+            ))
+
+            # Empirical (if active)
+            if "rolls_3_2" in st.session_state and st.session_state.total_rolls_3_2 > 0:
+                counts = [st.session_state.rolls_3_2.get(i,0) for i in x_vals]
+                freqs = [c / st.session_state.total_rolls_3_2 for c in counts]
+
+                fig.add_trace(go.Scatter(
+                    x=x_vals, y=freqs,
+                    mode='markers', marker=dict(color='orange', size=10, symbol='diamond'),
+                    name=f"Empirical (n={st.session_state.total_rolls_3_2})"
+                ))
 
             fig.update_layout(
                 title=dict(text=f"Total Mass: {total_prob:.2f}", x=0.5),
@@ -218,8 +233,36 @@ def render_simulator_3_2():
                 margin=dict(l=20, r=20, t=40, b=20),
                 paper_bgcolor="rgba(0,0,0,0)",
                 plot_bgcolor="rgba(0,0,0,0)",
+                showlegend=True,
+                legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
             )
             st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False})
+
+            # Simulation Controls (Below Chart)
+            st.markdown("---")
+            st.caption(t({"de": "Experiment: Würfle den gezinkten Würfel!", "en": "Experiment: Roll the loaded die!"}))
+
+            # Init State if needed
+            if "rolls_3_2" not in st.session_state: st.session_state.rolls_3_2 = {i:0 for i in range(1,7)}
+            if "total_rolls_3_2" not in st.session_state: st.session_state.total_rolls_3_2 = 0
+
+            sc1, sc2 = st.columns(2)
+            with sc1:
+                if st.button(t({"de": "100x Würfeln", "en": "Roll 100x"})):
+                    # Normalize probs
+                    s = sum(y_vals)
+                    if s > 0:
+                        probs = [y/s for y in y_vals]
+                        new_rolls = np.random.choice(x_vals, size=100, p=probs)
+                        for r in new_rolls:
+                            st.session_state.rolls_3_2[r] += 1
+                        st.session_state.total_rolls_3_2 += 100
+                        st.rerun()
+            with sc2:
+                if st.button(t({"de": "Reset Daten", "en": "Reset Data"})):
+                    st.session_state.rolls_3_2 = {i:0 for i in range(1,7)}
+                    st.session_state.total_rolls_3_2 = 0
+                    st.rerun()
 
     # PRO TIP
     st.markdown("<br>", unsafe_allow_html=True)

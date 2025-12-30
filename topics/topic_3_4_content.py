@@ -132,16 +132,19 @@ def render_simulator_3_4():
         if "miss_3_4_pos" not in st.session_state: st.session_state.miss_3_4_pos = 0.0
         if "miss_3_4_done" not in st.session_state: st.session_state.miss_3_4_done = False
 
+        # State for weight 2
+        if "miss_3_4_w2" not in st.session_state: st.session_state.miss_3_4_w2 = 2.0
+
         # Logic:
         # m1 = 1 at x1 = -4.
-        # m2 = 2 at x2 = ?
-        # Mean = (1*-4 + 2*x2) / (1+2) = 0
-        # -4 + 2x2 = 0 => 2x2 = 4 => x2 = 2.
+        # m2 = w2 at x2 = ?
+        # Mean = (1*-4 + w2*x2) / (1+w2) = 0
+        # -4 + w2*x2 = 0 => x2 = 4 / w2.
 
         c1, c2 = st.columns([1, 2], gap="large")
 
         with c1:
-            st.markdown(f"**{t({'de': 'Position wählen', 'en': 'Select Position'})}**")
+            st.markdown(f"**{t({'de': 'Einstellungen', 'en': 'Settings'})}**")
 
             pos_x = st.slider(
                 "Position (Mass 2)", -5.0, 5.0,
@@ -150,10 +153,17 @@ def render_simulator_3_4():
                 disabled=st.session_state.miss_3_4_done
             )
             
+            w2 = st.slider(
+                "Weight (Mass 2)", 0.5, 4.0,
+                st.session_state.miss_3_4_w2, 0.5,
+                key="miss_3_4_w2",
+                disabled=st.session_state.miss_3_4_done
+            )
+
             # Calc Mean
             # Mass 1: weight 1, pos -4
-            # Mass 2: weight 2, pos pos_x
-            mean_val = (1 * (-4) + 2 * pos_x) / 3.0
+            mean_val = (1 * (-4) + w2 * pos_x) / (1 + w2)
+            torque = 1 * (-4) + w2 * pos_x # Around 0
 
             if abs(mean_val - 0.0) < 0.1:
                 st.success(t({"de": "Im Gleichgewicht!", "en": "Balanced!"}))
@@ -195,9 +205,9 @@ def render_simulator_3_4():
 
             # Mass 2 (Movable)
             fig.add_trace(go.Scatter(
-                x=[pos_x], y=[0.4], # Higher to show it's heavier? Or larger size
-                mode='markers+text', marker=dict(size=30, color='#AF52DE'), # Bigger
-                text=["2kg"], textposition="top center",
+                x=[pos_x], y=[0.2 + w2*0.1],
+                mode='markers+text', marker=dict(size=20 + w2*5, color='#AF52DE'),
+                text=[f"{w2}kg"], textposition="top center",
                 name="Mass 2"
             ))
 
@@ -208,10 +218,18 @@ def render_simulator_3_4():
                 name="Mean"
             ))
 
+            # Torque Annotation
+            fig.add_annotation(
+                text=f"Torque: (1kg × -4) + ({w2}kg × {pos_x}) = {torque:.1f}",
+                xref="paper", yref="paper",
+                x=0.5, y=0.9, showarrow=False,
+                font=dict(size=14, color="black" if abs(torque) < 0.5 else "red")
+            )
+
             fig.update_layout(
                 xaxis=dict(range=[-6, 6], title="Position", fixedrange=True),
                 yaxis=dict(range=[-0.5, 1], visible=False, fixedrange=True),
-                height=250,
+                height=300,
                 margin=dict(l=20, r=20, t=20, b=20),
                 showlegend=False,
                 paper_bgcolor="rgba(0,0,0,0)",

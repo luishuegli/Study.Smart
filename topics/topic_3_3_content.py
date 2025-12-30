@@ -165,7 +165,7 @@ def render_simulator_3_3():
 
             a, b = val_range
             curr_prob = (b**2 - a**2) / 100.0
-            
+
             if abs(curr_prob - target_prob) < 0.01:
                 st.success(t({"de": "Treffer! Genau 36%.", "en": "Hit! Exactly 36%."}))
                 if not st.session_state.miss_3_3_done:
@@ -186,24 +186,24 @@ def render_simulator_3_3():
                 st.metric("Probability (Area)", f"{curr_prob:.2%}", delta=f"{curr_prob-target_prob:.1%}")
 
         with c2:
-            # Visualization
+            # Dual Visualization: PDF (Top) and CDF (Bottom)
             x = np.linspace(0, 10, 100)
-            y = x / 50.0
+            y_pdf = x / 50.0
+            y_cdf = (x**2) / 100.0
 
             fig = go.Figure()
 
-            # Full PDF
+            # 1. PDF Trace (Left Axis)
             fig.add_trace(go.Scatter(
-                x=x, y=y,
+                x=x, y=y_pdf,
                 mode='lines', line=dict(color='#E5E5EA', width=2),
                 fill='tozeroy', fillcolor='rgba(0,0,0,0)',
-                hoverinfo='skip'
+                name="PDF f(x)"
             ))
-            
-            # Highlighted Area
+
+            # Highlight Area
             x_fill = np.linspace(a, b, 50)
             y_fill = x_fill / 50.0
-            # Close polygon
             x_poly = np.concatenate(([a], x_fill, [b]))
             y_poly = np.concatenate(([0], y_fill, [0]))
 
@@ -211,19 +211,54 @@ def render_simulator_3_3():
                 x=x_poly, y=y_poly,
                 fill='toself', fillcolor='rgba(0, 122, 255, 0.3)',
                 line=dict(color='#007AFF', width=0),
-                hoverinfo='skip'
+                showlegend=False, hoverinfo='skip'
+            ))
+
+            # 2. CDF Trace (Right Axis)
+            fig.add_trace(go.Scatter(
+                x=x, y=y_cdf,
+                mode='lines', line=dict(color='#AF52DE', width=3),
+                name="CDF F(x)",
+                yaxis="y2"
+            ))
+
+            # CDF Markers
+            fig.add_trace(go.Scatter(
+                x=[a, b], y=[a**2/100, b**2/100],
+                mode='markers', marker=dict(color='#AF52DE', size=10, symbol='circle'),
+                showlegend=False, yaxis="y2"
             ))
 
             fig.update_layout(
                 title=dict(text=f"Area = {curr_prob:.2f}", x=0.5),
                 xaxis=dict(range=[0, 10], title="Time (min)", fixedrange=True),
-                yaxis=dict(range=[0, 0.25], title="Density f(x)", fixedrange=True),
-                height=300,
-                margin=dict(l=20, r=20, t=40, b=20),
-                showlegend=False,
+                yaxis=dict(
+                    range=[0, 0.25], title="Density f(x)",
+                    fixedrange=True, showgrid=False
+                ),
+                yaxis2=dict(
+                    range=[0, 1.1], title="Cumul. Prob F(x)",
+                    overlaying="y", side="right",
+                    fixedrange=True, showgrid=False,
+                    titlefont=dict(color="#AF52DE"),
+                    tickfont=dict(color="#AF52DE")
+                ),
+                height=350,
+                margin=dict(l=50, r=50, t=40, b=30),
+                showlegend=True,
+                legend=dict(x=0, y=1.1, orientation="h"),
                 paper_bgcolor="rgba(0,0,0,0)",
                 plot_bgcolor="rgba(0,0,0,0)",
             )
+
+            # Add annotation for calculation
+            fig.add_annotation(
+                text=f"F({b:.1f}) - F({a:.1f})",
+                xref="paper", yref="paper",
+                x=0.5, y=-0.25, showarrow=False,
+                font=dict(size=12, color="#555")
+            )
+
             st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False})
 
     # PRO TIP

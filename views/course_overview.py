@@ -25,7 +25,7 @@ SUBTOPIC_QUESTION_COUNTS = {
     "2.6": 3,  # Additional Questions
     # Topic 3: Random Variables
     "3.1": 2,  # uebung2_mc6 + 3_1_mission
-    "3.2": 3,  # uebung2_mc5, test2_q4, hs2015_mc5
+    "3.2": 4,  # uebung2_mc5, test2_q4, hs2015_mc5 + 3_2_mission
     "3.3": 1,  # test2_q3
     "3.4": 6,  # + hs2024_mc7, mc12
     "3.5": 1,  # uebung2_mc8

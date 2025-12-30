@@ -26,9 +26,9 @@ SUBTOPIC_QUESTION_COUNTS = {
     # Topic 3: Random Variables
     "3.1": 2,  # uebung2_mc6, 3_1_mission
     "3.2": 3,  # uebung2_mc5, test2_q4, 3_2_mission
-    "3.3": 1,  # test2_q3
-    "3.4": 6,  # + hs2024_mc7, mc12
-    "3.5": 1,  # uebung2_mc8
+    "3.3": 5,  # test2_q3, hs2015_mc2, uebung2_mc2, uebung2_mc7, 3_3_mission
+    "3.4": 7,  # 6 MCQs + 3_4_mission
+    "3.5": 5,  # uebung2_mc8, uebung2_mc4, hs2023_mc4, test3_mc2, 3_5_mission
     "3.6": 1,  # test3_q2
     "3.7": 10,  # hs2024_mc11, hs2023_mc6 + 4 uebung2 + 4 Test
     # Topic 4: Stochastic Models and Distributions

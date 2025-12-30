@@ -19,8 +19,8 @@ QUESTIONS_1_1 = {
         "source": "Übung 1, Kontrollfrage",
         "type": "theory",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Was ist der Unterschied zwischen einem Elementarereignis und einem Ereignis? Was ist der Unterschied zwischen dem Ereignisraum und der Ereignismenge?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>What is the difference between an elementary event and an event? What is the difference between the sample space and the event set?</span>"""
+            "de": r"""Was ist der Unterschied zwischen einem Elementarereignis und einem Ereignis? Was ist der Unterschied zwischen dem Ereignisraum und der Ereignismenge?""",
+            "en": r"""What is the difference between an elementary event and an event? What is the difference between the sample space and the event set?"""
         },
         "solution": {
             "de": "**Antwort:**<br>• Jedes Elementarereignis ist auch ein Ereignis, aber nicht jedes Ereignis ist gleichzeitig ein Elementarereignis.<br>• Der Ereignisraum S ist ein Element der Ereignismenge E(S).",
@@ -31,8 +31,8 @@ QUESTIONS_1_1 = {
         "source": "Konzept-Check 1.1",
         "type": "theory",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>**Welcher der folgenden Ereignisräume S ist stetig?**</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>**Which of the following sample spaces S is continuous?**</span>"""
+            "de": r"""**Welcher der folgenden Ereignisräume S ist stetig?**""",
+            "en": r"""**Which of the following sample spaces S is continuous?**"""
         },
         "options": [
             {"id": "A", "de": r"$S = \{1, 2, 3, 4, 5, 6\}$ (Würfelwurf)", "en": r"$S = \{1, 2, 3, 4, 5, 6\}$ (Die Roll)"},
@@ -54,8 +54,8 @@ QUESTIONS_1_2 = {
         "source": "Übung 1, Kontrollfrage",
         "type": "theory",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Sind komplementäre Ereignisse disjunkt? Sind disjunkte Ereignisse komplementär?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Are complementary events disjoint? Are disjoint events complementary?</span>"""
+            "de": r"""Sind komplementäre Ereignisse disjunkt? Sind disjunkte Ereignisse komplementär?""",
+            "en": r"""Are complementary events disjoint? Are disjoint events complementary?"""
         },
         "solution": {
             "de": "**Antwort:**<br>• Komplementär ⇒ disjunkt (Ja)<br>• Disjunkt ⇒ nicht unbedingt komplementär (Nein)",
@@ -65,8 +65,8 @@ QUESTIONS_1_2 = {
     "q_1_2_1_a": {
         "source": "Prüfungstraining 1.2.1 (A)",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Werfen von zwei Würfeln ($|S|=36$). Ereignis $A$: 'Mindestens ein Würfel zeigt eine Sechs'. $P(A) = ?$</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Throwing two dice ($|S|=36$). Event $A$: 'At least one die shows a six'. $P(A) = ?$</span>"""
+            "de": r"""Werfen von zwei Würfeln ($|S|=36$). Ereignis $A$: 'Mindestens ein Würfel zeigt eine Sechs'. $P(A) = ?$""",
+            "en": r"""Throwing two dice ($|S|=36$). Event $A$: 'At least one die shows a six'. $P(A) = ?$"""
         },
         "options": [
             {"de": r"$\frac{10}{36}$", "en": r"$\frac{10}{36}$"},
@@ -83,8 +83,8 @@ QUESTIONS_1_2 = {
     "q_1_2_1_b": {
         "source": "Prüfungstraining 1.2.1 (B)",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Werfen von zwei Würfeln. Ereignis $B$: 'Die Augensumme ist 9'. $P(B) = ?$</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Throwing two dice. Event $B$: 'The sum of dots is 9'. $P(B) = ?$</span>"""
+            "de": r"""Werfen von zwei Würfeln. Ereignis $B$: 'Die Augensumme ist 9'. $P(B) = ?$""",
+            "en": r"""Throwing two dice. Event $B$: 'The sum of dots is 9'. $P(B) = ?$"""
         },
         "options": [
             {"de": r"$\frac{3}{36}$", "en": r"$\frac{3}{36}$"},
@@ -101,8 +101,8 @@ QUESTIONS_1_2 = {
     "q_1_2_1_c": {
         "source": "Prüfungstraining 1.2.1 (C)",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Werfen von zwei Würfeln. Ereignis $C$: 'Die Augensumme ist kleiner als 4'. $P(C) = ?$</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Throwing two dice. Event $C$: 'The sum of dots is less than 4'. $P(C) = ?$</span>"""
+            "de": r"""Werfen von zwei Würfeln. Ereignis $C$: 'Die Augensumme ist kleiner als 4'. $P(C) = ?$""",
+            "en": r"""Throwing two dice. Event $C$: 'The sum of dots is less than 4'. $P(C) = ?$"""
         },
         "options": [
             {"de": r"$\frac{3}{36}$", "en": r"$\frac{3}{36}$"},
@@ -119,8 +119,8 @@ QUESTIONS_1_2 = {
     "test1_q2": {
         "source": "Test 1, Frage 2",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Es seien $A$ und $B$ zwei beliebige Ereignisse mit $P(A) = 0.6$, $P(B) = 0.7$ und $P(\overline{A} \cap B) = 0.1$. Berechnen Sie $P(A \cap \overline{B})$.</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Let $A$ and $B$ be two arbitrary events with $P(A) = 0.6$, $P(B) = 0.7$ and $P(\overline{A} \cap B) = 0.1$. Calculate $P(A \cap \overline{B})$.</span>"""
+            "de": r"""Es seien $A$ und $B$ zwei beliebige Ereignisse mit $P(A) = 0.6$, $P(B) = 0.7$ und $P(\overline{A} \cap B) = 0.1$. Berechnen Sie $P(A \cap \overline{B})$.""",
+            "en": r"""Let $A$ and $B$ be two arbitrary events with $P(A) = 0.6$, $P(B) = 0.7$ and $P(\overline{A} \cap B) = 0.1$. Calculate $P(A \cap \overline{B})$."""
         },
         "options": [
             {"de": r"$0$", "en": r"$0$"},
@@ -137,8 +137,8 @@ QUESTIONS_1_2 = {
     "test3_q1": {
         "source": "Test 3, Frage 1",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Die Ereignisse $A$ und $B$ sind disjunkt mit $P(A)>0, P(B)>0$. Welche Aussage stimmt?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Events $A$ and $B$ are disjoint with $P(A)>0, P(B)>0$. Which statement is true?</span>"""
+            "de": r"""Die Ereignisse $A$ und $B$ sind disjunkt mit $P(A)>0, P(B)>0$. Welche Aussage stimmt?""",
+            "en": r"""Events $A$ and $B$ are disjoint with $P(A)>0, P(B)>0$. Which statement is true?"""
         },
         "options": [
             {"de": r"$P(\overline{A} \cap \overline{B}) + P(B) > 1 - P(A)$", "en": r"$P(\overline{A} \cap \overline{B}) + P(B) > 1 - P(A)$"},
@@ -159,8 +159,8 @@ QUESTIONS_1_3 = {
     "q_1_3_concept": {
         "source": "Konzept-Check 1.3",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>**Wann darf man die Laplace-Formel $P(A) = \frac{g}{m}$ verwenden?**</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>**When are you allowed to use the Laplace formula $P(A) = \frac{g}{m}$?**</span>"""
+            "de": r"""**Wann darf man die Laplace-Formel $P(A) = \frac{g}{m}$ verwenden?**""",
+            "en": r"""**When are you allowed to use the Laplace formula $P(A) = \frac{g}{m}$?**"""
         },
         "options": [
              {"id": "a", "de": "Immer wenn es eine endliche Anzahl Ereignisse gibt", "en": "Always when there is a finite number of events"},
@@ -180,8 +180,8 @@ QUESTIONS_1_4 = {
     "q_1_4_logic": {
         "source": "Logik-Check 1.4",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>**Welche der folgenden Wahrscheinlichkeitszuweisungen ist ungültig?** ($S = \{e_1, e_2, e_3\}$)</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>**Which of the following probability assignments is invalid?** ($S = \{e_1, e_2, e_3\}$)</span>"""
+            "de": r"""**Welche der folgenden Wahrscheinlichkeitszuweisungen ist ungültig?** ($S = \{e_1, e_2, e_3\}$)""",
+            "en": r"""**Which of the following probability assignments is invalid?** ($S = \{e_1, e_2, e_3\}$)"""
         },
         "options": [
             {"id": "a", "text": r"$P(e_1)=0.3, \; P(e_2)=0.3, \; P(e_3)=0.4$"},
@@ -201,8 +201,8 @@ QUESTIONS_1_5 = {
     "q_1_5_add": {
         "source": "HS2022, MC 5",
         "question": {
-             "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>**Gegeben sind:** $P(A)=0.3, P(B)=0.4, P(\overline{A}|B)=0.75$.\n\n**Gesucht ist:** $P(A \cup B)$.</span>""",
-             "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>**Given:** $P(A)=0.3, P(B)=0.4, P(\overline{A}|B)=0.75$.\n\n**Find:** $P(A \cup B)$.</span>"""
+             "de": r"""**Gegeben sind:** $P(A)=0.3, P(B)=0.4, P(\overline{A}|B)=0.75$.\n\n**Gesucht ist:** $P(A \cup B)$.""",
+             "en": r"""**Given:** $P(A)=0.3, P(B)=0.4, P(\overline{A}|B)=0.75$.\n\n**Find:** $P(A \cup B)$."""
         },
         "hint": {
              "de": r"Hinweis: Nutze zuerst das Komplement $P(A|B) = 1 - P(\overline{A}|B)$. Verwende dann die Multiplikationsregel: $P(A \cap B) = P(A|B) \cdot P(B)$.", 
@@ -224,23 +224,23 @@ QUESTIONS_1_5 = {
         "source": "HS 2022 Januar, MC #5",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>5. (4 Punkte) Folgende Angaben sind gegeben: P (A) = 0.3, P (B) = 0.4, P A |B = 0.75. Wie
+            "de": r"""Folgende Angaben sind gegeben: P (A) = 0.3, P (B) = 0.4, P A |B = 0.75. Wie
 groß ist die Wahrscheinlichkeit von P (A ∪ B) ?
 (a) 0.425
 (b) 0.6
 (c) 0.7
-(d) Keine der obigen Angaben ist richtig.</span>""",
-"en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>5. (4 Points) The following information is given: $P(A) = 0.3$, $P(B) = 0.4$, $P(A | B) = 0.75$. What is the probability of $P(A \cup B)$?
+(d) Keine der obigen Angaben ist richtig.""",
+"en": r"""The following information is given: $P(A) = 0.3$, $P(B) = 0.4$, $P(A | B) = 0.75$. What is the probability of $P(A \cup B)$?
 (a) 0.425
 (b) 0.6
 (c) 0.7
-(d) None of the above.</span>"""
+(d) None of the above."""
         },
         "options": [
             {"de": "0.425", "en": "0.425"},
             {"de": "0.6", "en": "0.6"},
             {"de": "0.7", "en": "0.7"},
-            {"de": "Keine der obigen", "en": "Keine der obigen"}
+            {"de": "Keine der obigen", "en": "None of the above"}
         ],
         "correct_idx": 1,
         "solution": {
@@ -252,14 +252,14 @@ groß ist die Wahrscheinlichkeit von P (A ∪ B) ?
         "source": "Übung 1, MC #11",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$P(A)=0.5, P(B)=0.4, P(\overline{A \cup B}) = 0.2$. Dann gilt:</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$P(A)=0.5, P(B)=0.4, P(\text{neither A nor B}) = 0.2$. Then:</span>"""
+            "de": r"""$P(A)=0.5, P(B)=0.4, P(\overline{A \cup B}) = 0.2$. Dann gilt:""",
+            "en": r"""$P(A)=0.5, P(B)=0.4, P(\text{neither A nor B}) = 0.2$. Then:"""
         },
         "options": [
-            {"de": "A und B sind unvereinbar.", "en": "A und B sind unvereinbar."},
-            {"de": "A und B sind nicht unvereinbar.", "en": "A und B sind nicht unvereinbar."},
-            {"de": "A und B sind unabhängig.", "en": "A und B sind unabhängig."},
-            {"de": "A und B sind nicht unabhängig.", "en": "A und B sind nicht unabhängig."}
+            {"de": "A und B sind unvereinbar.", "en": "A and B are mutually exclusive."},
+            {"de": "A und B sind nicht unvereinbar.", "en": "A and B are not mutually exclusive."},
+            {"de": "A und B sind unabhängig.", "en": "A and B are independent."},
+            {"de": "A und B sind nicht unabhängig.", "en": "A and B are not independent."}
         ],
         "correct_idx": 1,
         "solution": {
@@ -300,14 +300,14 @@ $P(A \cup B) = 0.8$. $P(A \cap B) = 0.1$.<br>Not disjoint ($0.1 \neq 0$). Not in
         "source": "Übung 1, MC #13",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>A, B unabhängig. $P(A)=0.9, P(A \cup B)=0.5$. Dann gilt:</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>A, B independent. $P(A)=0.9, P(A \cup B)=0.5$. Then:</span>"""
+            "de": r"""A, B unabhängig. $P(A)=0.9, P(A \cup B)=0.5$. Dann gilt:""",
+            "en": r"""A, B independent. $P(A)=0.9, P(A \cup B)=0.5$. Then:"""
         },
         "options": [
             {"de": r"$P(B) = 0.05$", "en": r"$P(B) = 0.05$"},
             {"de": r"$P(B) = 0.44$", "en": r"$P(B) = 0.44$"},
             {"de": r"$P(B) = 0.55$", "en": r"$P(B) = 0.55$"},
-            {"de": "Nicht genügend Informationen.", "en": "Nicht genügend Informationen."}
+            {"de": "Nicht genügend Informationen.", "en": "Not enough information."}
         ],
         "correct_idx": 1,
         "solution": {
@@ -349,14 +349,14 @@ QUESTIONS_1_6 = {
     "q_1_6_dart": {
         "source": "Das Dart-Paradoxon",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>In einem stetigen Raum (z.B. Dartscheibe), wie groß ist die Wahrscheinlichkeit, einen exakten Punkt zu treffen?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>In a continuous space (e.g. dartboard), what is the probability of hitting an exact point?</span>"""
+            "de": r"""In einem stetigen Raum (z.B. Dartscheibe), wie groß ist die Wahrscheinlichkeit, einen exakten Punkt zu treffen?""",
+            "en": r"""In a continuous space (e.g. dartboard), what is the probability of hitting an exact point?"""
         },
         "options": [
             {"de": r"$0$", "en": r"$0$"},
-            {"de": "Unendlich klein, aber > 0", "en": "Unendlich klein, aber > 0"},
+            {"de": "Unendlich klein, aber > 0", "en": "Infinitely small, but > 0"},
             {"de": r"$1$", "en": r"$1$"},
-            {"de": "Abhängig vom Radius", "en": "Abhängig vom Radius"}
+            {"de": "Abhängig vom Radius", "en": "Depends on the radius"}
         ],
         "correct_idx": 0,
         "solution": {
@@ -372,14 +372,14 @@ QUESTIONS_1_7 = {
         "source": "HS 2024 Januar, MC #5",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>5. (4 Punkte) Es werden zufällig 4 Zahlen aus den ersten 12 Primzahlen ohne Zurücklegen ausgewählt. Betrachten Sie die beiden Ereignisse:<br>^ A: Die Summe der 4 ausgewählten Zahlen ist ungerade.<br>^ B: Alle vier ausgewählten Zahlen sind ungerade.<br>Welche der folgenden Aussagen ist richtig in Bezug auf die Ereignisse A und B?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>5. (4 Points) 4 numbers are randomly chosen from the first 12 prime numbers without replacement. Consider the two events:<br><br>- A: The sum of the 4 chosen numbers is odd.<br>- B: All four chosen numbers are odd.<br><br>Which of the following statements is true regarding events A and B?</span>"""
+            "de": r"""Es werden zufällig 4 Zahlen aus den ersten 12 Primzahlen ohne Zurücklegen ausgewählt. Betrachten Sie die beiden Ereignisse:<br>^ A: Die Summe der 4 ausgewählten Zahlen ist ungerade.<br>^ B: Alle vier ausgewählten Zahlen sind ungerade.<br>Welche der folgenden Aussagen ist richtig in Bezug auf die Ereignisse A und B?""",
+            "en": r"""4 numbers are randomly chosen from the first 12 prime numbers without replacement. Consider the two events:<br><br>- A: The sum of the 4 chosen numbers is odd.<br>- B: All four chosen numbers are odd.<br><br>Which of the following statements is true regarding events A and B?"""
         },
         "options": [
-            {"de": "Unabhängig und disjunkt.", "en": "Unabhängig und disjunkt."},
-            {"de": "Unabhängig, aber nicht disjunkt.", "en": "Unabhängig, aber nicht disjunkt."},
-            {"de": "Abhängig und disjunkt.", "en": "Abhängig und disjunkt."},
-            {"de": "Abhängig und nicht disjunkt.", "en": "Abhängig und nicht disjunkt."}
+            {"de": "Unabhängig und disjunkt.", "en": "Independent and disjoint."},
+            {"de": "Unabhängig, aber nicht disjunkt.", "en": "Independent, but not disjoint."},
+            {"de": "Abhängig und disjunkt.", "en": "Dependent and disjoint."},
+            {"de": "Abhängig und nicht disjunkt.", "en": "Dependent and not disjoint."}
         ],
         "correct_idx": 2,
         "solution": {
@@ -390,8 +390,8 @@ QUESTIONS_1_7 = {
     "uebung1_mc1": {
         "source": "Übung 1, MC1",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$A$ und $B$ sind zwei unabhängige Ereignisse. Dann gilt:</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$A$ and $B$ are two independent events. Then:</span>"""
+            "de": r"""$A$ und $B$ sind zwei unabhängige Ereignisse. Dann gilt:""",
+            "en": r"""$A$ and $B$ are two independent events. Then:"""
         },
         "options": [
             {"de": r"$P[B | A] = 0$", "en": r"$P[B | A] = 0$"},
@@ -408,8 +408,8 @@ QUESTIONS_1_7 = {
     "uebung1_mc2": {
         "source": "Übung 1, MC2",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$A$ und $B$ sind zwei disjunkte Ereignisse ($P(A)>0$). Dann gilt:</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$A$ and $B$ are two disjoint events ($P(A)>0$). Then:</span>"""
+            "de": r"""$A$ und $B$ sind zwei disjunkte Ereignisse ($P(A)>0$). Dann gilt:""",
+            "en": r"""$A$ and $B$ are two disjoint events ($P(A)>0$). Then:"""
         },
         "options": [
             {"de": r"$P[B | A] = 0$", "en": r"$P[B | A] = 0$"},
@@ -426,8 +426,8 @@ QUESTIONS_1_7 = {
     "uebung1_mc8": {
         "source": "Übung 1, MC8",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$A$ und $B$ sind zwei unvereinbare (disjunkte) Ereignisse mit $P(A) > 0$ und $P(B) > 0$. Dann gilt:</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$A$ and $B$ are two mutually exclusive (disjoint) events with $P(A) > 0$ and $P(B) > 0$. Then:</span>"""
+            "de": r"""$A$ und $B$ sind zwei unvereinbare (disjunkte) Ereignisse mit $P(A) > 0$ und $P(B) > 0$. Dann gilt:""",
+            "en": r"""$A$ and $B$ are two mutually exclusive (disjoint) events with $P(A) > 0$ and $P(B) > 0$. Then:"""
         },
         "options": [
             {"de": r"$A$ und $B$ sind unabhängig", "en": r"$A$ and $B$ are independent"},
@@ -444,8 +444,8 @@ QUESTIONS_1_7 = {
         "source": "Übung 1, Problem 3",
         "type": "problem",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Gegeben: $P(A) = 0.5$, $P(B) = 0.3$, $P(A \cap B) = 0.2$.<br>Berechnen Sie:<br>(a) $P(A \cup B)$<br>(b) $P(A | B)$<br>(c) $P(A \cap \overline{B})$</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Given: $P(A) = 0.5$, $P(B) = 0.3$, $P(A \cap B) = 0.2$.<br>Calculate:<br>(a) $P(A \cup B)$<br>(b) $P(A | B)$<br>(c) $P(A \cap \overline{B})$</span>"""
+            "de": r"""Gegeben: $P(A) = 0.5$, $P(B) = 0.3$, $P(A \cap B) = 0.2$.<br>Berechnen Sie:<br>(a) $P(A \cup B)$<br>(b) $P(A | B)$<br>(c) $P(A \cap \overline{B})$""",
+            "en": r"""Given: $P(A) = 0.5$, $P(B) = 0.3$, $P(A \cap B) = 0.2$.<br>Calculate:<br>(a) $P(A \cup B)$<br>(b) $P(A | B)$<br>(c) $P(A \cap \overline{B})$"""
         },
         "solution": {
             "de": r"**Lösung:**<br>(a) $P(A \cup B) = 0.5 + 0.3 - 0.2 = \mathbf{0.6}$<br>(b) $P(A | B) = 0.2 / 0.3 = \mathbf{2/3}$<br>(c) $P(A \cap \overline{B}) = P(A) - P(A \cap B) = 0.5 - 0.2 = \mathbf{0.3}$",
@@ -455,9 +455,9 @@ QUESTIONS_1_7 = {
     "hs2023_mc1": {
         "source": "HS2023, MC1 (4 Punkte)",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>1. Folgende Informationen sind gegeben: P (A) = 0, 5, P (B) = 0, 3, P (A ∪ B) = 0, 4.
-Welche der folgenden Aussagen ist wahr?</span>""",
-"en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>1. The following information is given: $P(A) = 0.5$, $P(B) = 0.3$, $P(A \cup B) = 0.4$. Which of the following statements is true?</span>"""
+            "de": r"""Folgende Informationen sind gegeben: P (A) = 0, 5, P (B) = 0, 3, P (A ∪ B) = 0, 4.
+Welche der folgenden Aussagen ist wahr?""",
+"en": r"""The following information is given: $P(A) = 0.5$, $P(B) = 0.3$, $P(A \cup B) = 0.4$. Which of the following statements is true?"""
         },
         "options": [
             {"de": r"$A$ und $B$ sind disjunkt", "en": r"$A$ and $B$ are disjoint"},
@@ -474,8 +474,8 @@ Welche der folgenden Aussagen ist wahr?</span>""",
     "hs2024_mc3": {
         "source": "HS2024, MC3",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$A$ und $B$ sind Ereignisse. Es sei $P(A) = 1/2$, $P(B) = 2/3$ und $P(A \cap B) = 1/4$. $\bar{B}$ bezeichnet das Komplement von $B$. Wie gross ist der Wert von $P(A | \bar{B})$?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$A$ and $B$ are events. Let $P(A) = 1/2$, $P(B) = 2/3$ and $P(A \cap B) = 1/4$. $\bar{B}$ denotes the complement of $B$. What is the value of $P(A | \bar{B})$?</span>"""
+            "de": r"""$A$ und $B$ sind Ereignisse. Es sei $P(A) = 1/2$, $P(B) = 2/3$ und $P(A \cap B) = 1/4$. $\bar{B}$ bezeichnet das Komplement von $B$. Wie gross ist der Wert von $P(A | \bar{B})$?""",
+            "en": r"""$A$ and $B$ are events. Let $P(A) = 1/2$, $P(B) = 2/3$ and $P(A \cap B) = 1/4$. $\bar{B}$ denotes the complement of $B$. What is the value of $P(A | \bar{B})$?"""
         },
         "options": [
             {"de": "0.25", "en": "0.25"},
@@ -496,8 +496,8 @@ Welche der folgenden Aussagen ist wahr?</span>""",
     "uebung1_mc5": {
         "source": "Übung 1, MC5 (Logik-Check)",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>**Zufallsexperiment:** Ziehen von 4 Zahlen aus den ersten 12 Primzahlen (ohne Zurücklegen).\n\n$A$: Summe ist ungerade.\n$B$: Alle 4 Zahlen sind ungerade.\n\n**Sind $A$ und $B$ unabhängig oder disjunkt?**</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>**Experiment:** Draw 4 numbers from the first 12 primes (without replacement).\n\n$A$: Sum is odd.\n$B$: All 4 numbers are odd.\n\n**Are $A$ and $B$ independent or disjoint?**</span>"""
+            "de": r"""**Zufallsexperiment:** Ziehen von 4 Zahlen aus den ersten 12 Primzahlen (ohne Zurücklegen).<br><br>$A$: Summe ist ungerade.<br>$B$: Alle 4 Zahlen sind ungerade.<br><br>**Sind $A$ und $B$ unabhängig oder disjunkt?**""",
+            "en": r"""**Experiment:** Draw 4 numbers from the first 12 primes (without replacement).<br><br>$A$: Sum is odd.<br>$B$: All 4 numbers are odd.<br><br>**Are $A$ and $B$ independent or disjoint?**"""
         },
         "options": [
             {"de": "Unabhängig und Disjunkt", "en": "Independent and Disjoint"},
@@ -519,23 +519,23 @@ Welche der folgenden Aussagen ist wahr?</span>""",
         "source": "HS 2023 Januar, MC #8",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>8. (4 Punkte) Seien A, B und C drei Ereignisse mit P(A) > 0, P(B) > 0 und P(C) > 0. Welche
+            "de": r"""Seien A, B und C drei Ereignisse mit P(A) > 0, P(B) > 0 und P(C) > 0. Welche
 der folgenden Aussagen ist wahr?
 (a) Falls A unabhängig von B, und B unabhängig von C ist, dann ist A auch unabhängig von C.
 (b) P(A|B) > P(A) ⇐⇒ P(A|B) < P(A)
 (c) Wenn sich A und B gegenseitig ausschliessen, dann sind sie auch unabhängig.
-(d) Keine der obigen Angaben ist richtig.</span>""",
-"en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>8. (4 Points) Let A, B, and C be three events with P(A) > 0, P(B) > 0, and P(C) > 0. Which of the following statements is true?
+(d) Keine der obigen Angaben ist richtig.""",
+"en": r"""Let A, B, and C be three events with P(A) > 0, P(B) > 0, and P(C) > 0. Which of the following statements is true?
 (a) If A is independent of B, and B is independent of C, then A is also independent of C.
 (b) P(A|B) > P(A) ⇐⇒ P(A|B^c) < P(A)
 (c) If A and B are mutually exclusive, then they are also independent.
-(d) None of the above statements is correct.</span>"""
+(d) None of the above statements is correct."""
         },
         "options": [
-            {"de": "Falls A perp B und B perp C, dann A perp C.", "en": "Falls A perp B und B perp C, dann A perp C."},
+            {"de": "Falls A perp B und B perp C, dann A perp C.", "en": "If A indep B and B indep C, then A indep C."},
             {"de": r"$P(A|B) > P(A) \iff P(A|B^c) < P(A)$", "en": r"$P(A|B) > P(A) \iff P(A|B^c) < P(A)$"},
-            {"de": "Wenn A, B disjunkt, dann unabhängig.", "en": "Wenn A, B disjunkt, dann unabhängig."},
-            {"de": "Keine der obigen.", "en": "Keine der obigen."}
+            {"de": "Wenn A, B disjunkt, dann unabhängig.", "en": "If A, B disjoint, then independent."},
+            {"de": "Keine der obigen.", "en": "None of the above."}
         ],
         "correct_idx": 1,
         "solution": {
@@ -547,23 +547,23 @@ der folgenden Aussagen ist wahr?
         "source": "HS 2022 Januar, MC #9",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>9. (4 Punkte) A und B sind zwei Ereignisse mit P (A) > 0 und P (B) > 0, welche Aussage muss
+            "de": r"""A und B sind zwei Ereignisse mit P (A) > 0 und P (B) > 0, welche Aussage muss
 wahr sein?
 (a) P (A | B) · P (A) = P (B | A) · P (B)
 (b) P (B) > P (A ∩ B)
 (c) P (A) > P (A | B)
-(d) Keine der oben genannten Möglichkeiten.</span>""",
-"en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>9. (4 Points) A and B are two events with $P(A) > 0$ and $P(B) > 0$. Which statement must be true?
+(d) Keine der oben genannten Möglichkeiten.""",
+"en": r"""A and B are two events with $P(A) > 0$ and $P(B) > 0$. Which statement must be true?
 (a) $P(A | B) \cdot P(A) = P(B | A) \cdot P(B)$
 (b) $P(B) > P(A \cap B)$
 (c) $P(A) > P(A | B)$
-(d) None of the above options.</span>"""
+(d) None of the above options."""
         },
         "options": [
             {"de": r"$P(A|B) \cdot P(A) = P(B|A) \cdot P(B)$", "en": r"$P(A|B) \cdot P(A) = P(B|A) \cdot P(B)$"},
             {"de": r"$P(B) > P(A \cap B)$", "en": r"$P(B) > P(A \cap B)$"},
             {"de": r"$P(A) > P(A|B)$", "en": r"$P(A) > P(A|B)$"},
-            {"de": "Keine der oben genannten.", "en": "Keine der oben genannten."}
+            {"de": "Keine der oben genannten.", "en": "None of the above."}
         ],
         "correct_idx": 3,
         "solution": {
@@ -575,7 +575,7 @@ wahr sein?
         "source": "HS 2022 Januar, MC #12",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>12. (4 Punkte) Sie haben zwei Wale. Ein Wal ist mit einer Wahrscheinlichkeit von 50% männlich,
+            "de": r"""Sie haben zwei Wale. Ein Wal ist mit einer Wahrscheinlichkeit von 50% männlich,
 ansonsten weiblich. Der Tag der Geburt eines Wals ist unabhängig vom Geschlecht, mit der
 Wahrscheinlichkeit 71 für jeden Tag. Geben Sie das Verhältnis der bedingten Wahrscheinlichkeiten P (A|B) und P (A|C) an:
  Ereignis A: Beide Wale sind männlich.
@@ -584,21 +584,21 @@ Wahrscheinlichkeit 71 für jeden Tag. Geben Sie das Verhältnis der bedingten 
 (a) P (A|B) = P (A|C)
 (b) P (A|B) > P (A|C)
 (c) P (A|B) < P (A|C)
-(d) Nicht genügend Informationen gegeben.</span>""",
-"en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>12. (4 Points) You have two whales. A whale is male with a probability of 50%, otherwise female. The day of birth of a whale is independent of gender, with probability 1/7 for each day. State the relationship between the conditional probabilities P(A|B) and P(A|C):
+(d) Nicht genügend Informationen gegeben.""",
+"en": r"""You have two whales. A whale is male with a probability of 50%, otherwise female. The day of birth of a whale is independent of gender, with probability 1/7 for each day. State the relationship between the conditional probabilities P(A|B) and P(A|C):
 - Event A: Both whales are male.
 - Event B: At least one whale is male.
 - Event C: At least one whale is male AND born on a Tuesday.
 (a) P(A|B) = P(A|C)
 (b) P(A|B) > P(A|C)
 (c) P(A|B) < P(A|C)
-(d) Not enough information given.</span>"""
+(d) Not enough information given."""
         },
         "options": [
             {"de": r"$P(A|B) = P(A|C)$", "en": r"$P(A|B) = P(A|C)$"},
             {"de": r"$P(A|B) > P(A|C)$", "en": r"$P(A|B) > P(A|C)$"},
             {"de": r"$P(A|B) < P(A|C)$", "en": r"$P(A|B) < P(A|C)$"},
-            {"de": "Nicht genügend Infos.", "en": "Nicht genügend Infos."}
+            {"de": "Nicht genügend Infos.", "en": "Not enough information."}
         ],
         "correct_idx": 2,
         "solution": {
@@ -609,8 +609,8 @@ Wahrscheinlichkeit 71 für jeden Tag. Geben Sie das Verhältnis der bedingten 
     "test1_q1": {
         "source": "Test 1, Frage 1",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>300 Hörer einer Statistik-Vorlesung:<br>VWL: $42$ m, $93$ w<br>BWL: $78$ m, $87$ w<br>Eine Hörerin wird gewählt. Wahrscheinlichkeit, dass sie BWL studiert?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>300 students in a stats lecture:<br>Econ: $42$ m, $93$ f<br>Bus: $78$ m, $87$ f<br>A female student is chosen. Probability she studies Business?</span>"""
+            "de": r"""In einer Statistik-Vorlesung mit 300 Studierenden studieren 42 männliche und 93 weibliche VWL, sowie 78 männliche und 87 weibliche BWL. Eine weibliche Hörerin wird zufällig gewählt. Wie hoch ist die Wahrscheinlichkeit, dass sie BWL studiert?""",
+            "en": r"""In a statistics lecture with 300 students, 42 male and 93 female study Economics, while 78 male and 87 female study Business. A female student is randomly chosen. What is the probability that she studies Business?"""
         },
         "options": [
             {"de": r"$0.31$", "en": r"$0.31$"},
@@ -632,8 +632,8 @@ QUESTIONS_1_8 = {
         "source": "Übung 1, Problem 5",
         "type": "problem",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Maschine $A$ produziert $70\%$ der Stücke ($8\%$ Fehlerquote). Maschine $B$ produziert $30\%$ ($6\%$ Fehlerquote). Ein zufällig gezogenes Stück ist fehlerhaft. Wie gross ist die Wahrscheinlichkeit, dass es von $A$ kommt?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Machine $A$ produces $70\%$ of parts ($8\%$ defect rate). Machine $B$ produces $30\%$ ($6\%$ defect rate). A randomly chosen part is defective. What is the probability it came from $A$?</span>"""
+            "de": r"""Maschine $A$ produziert $70\%$ der Stücke ($8\%$ Fehlerquote). Maschine $B$ produziert $30\%$ ($6\%$ Fehlerquote). Ein zufällig gezogenes Stück ist fehlerhaft. Wie gross ist die Wahrscheinlichkeit, dass es von $A$ kommt?""",
+            "en": r"""Machine $A$ produces $70\%$ of parts ($8\%$ defect rate). Machine $B$ produces $30\%$ ($6\%$ defect rate). A randomly chosen part is defective. What is the probability it came from $A$?"""
         },
         "solution": {
             "de": r"**Lösung:**<br>$P(A|F) = (0.08 \cdot 0.7) / (0.08 \cdot 0.7 + 0.06 \cdot 0.3) = 0.056 / 0.074 \approx \mathbf{75.68\%}$",
@@ -644,8 +644,8 @@ QUESTIONS_1_8 = {
         "source": "Übung 1, Problem 6",
         "type": "problem",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Gymnasium-Statistik:<br>• $40\%$ bestehen die Matura nicht ($NM$)<br>• $90\%$ von $NM$ hatten negativen Aufnahmetest ($T-$)<br>• $1\%$ von Bestandenen ($M$) hatten negativen Test ($T-$)<br>Wie gross ist $P(T-)$?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>High School Statistics:<br>• $40\%$ fail the Matura ($NM$)<br>• $90\%$ of $NM$ had a negative admission test ($T-$)<br>• $1\%$ of those who passed ($M$) had a negative test ($T-$)<br>What is $P(T-)$?</span>"""
+            "de": r"""Gymnasium-Statistik:<br>• $40\%$ bestehen die Matura nicht ($NM$)<br>• $90\%$ von $NM$ hatten negativen Aufnahmetest ($T-$)<br>• $1\%$ von Bestandenen ($M$) hatten negativen Test ($T-$)<br>Wie gross ist $P(T-)$?""",
+            "en": r"""High School Statistics:<br>• $40\%$ fail the Matura ($NM$)<br>• $90\%$ of $NM$ had a negative admission test ($T-$)<br>• $1\%$ of those who passed ($M$) had a negative test ($T-$)<br>What is $P(T-)$?"""
         },
         "solution": {
             "de": r"**Lösung:**<br>$P(T-) = P(T-|NM)P(NM) + P(T-|M)P(M)$<br>$= 0.9\cdot 0.4 + 0.01\cdot 0.6 = 0.36 + 0.006 = \mathbf{36.6\%}$",
@@ -656,8 +656,8 @@ QUESTIONS_1_8 = {
         "source": "Interactive Mission: The Factory",
         "type": "problem",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Eine Maschine $A$ produziert $20\%$ aller Teile mit $5\%$ Fehler. Maschine $B$ produziert $80\%$ mit $1\%$ Fehler. Wie hoch ist die totale Fehlerrate?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Machine $A$ produces $20\%$ of all parts with $5\%$ defects. Machine $B$ produces $80\%$ with $1\%$ defects. What is the total defect rate?</span>"""
+            "de": r"""Eine Maschine $A$ produziert $20\%$ aller Teile mit $5\%$ Fehler. Maschine $B$ produziert $80\%$ mit $1\%$ Fehler. Wie hoch ist die totale Fehlerrate?""",
+            "en": r"""Machine $A$ produces $20\%$ of all parts with $5\%$ defects. Machine $B$ produces $80\%$ with $1\%$ defects. What is the total defect rate?"""
         },
         "options": [
             {"de": r"$3\%$", "en": r"$3\%$"},
@@ -674,15 +674,15 @@ QUESTIONS_1_8 = {
     "hs2022_mc2": {
         "source": "HS 2022 Januar, MC #2",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>2. (4 Punkte) Sie haben 1000 Münzen und wissen, dass es unter den 1000 Münzen genau eine
+            "de": r"""Sie haben 1000 Münzen und wissen, dass es unter den 1000 Münzen genau eine
 besondere Münze gibt, die auf beiden Seiten Zahl hat. Sie wählen eine Münze zufällig aus
 diesen 1000 aus. Sie werfen diese eine Münze 10 Mal. Sie zeigt 10 Mal hintereinander Zahl
 an. Wie hoch ist die Wahrscheinlichkeit, dass Sie die besondere Münze genommen haben?
 (a) 50.6%
 (b) 1.8%
 (c) 51.9%
-(d) 2.9%</span>""",
-"en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>2. (4 Points) You have $1000$ coins and know that among them there is exactly one special coin with tails on both sides. You randomly pick one coin and flip it $10$ times. It shows tails $10$ times in a row. What is the probability that you picked the special coin?</span>"""
+(d) 2.9%""",
+"en": r"""You have $1000$ coins and know that among them there is exactly one special coin with tails on both sides. You randomly pick one coin and flip it $10$ times. It shows tails $10$ times in a row. What is the probability that you picked the special coin?"""
         },
         "options": [
             {"de": r"$50.6\%$", "en": r"$50.6\%$"},
@@ -699,7 +699,7 @@ an. Wie hoch ist die Wahrscheinlichkeit, dass Sie die besondere Münze genommen
     "hs2022_mc1": {
         "source": "HS 2022 Januar, MC #1",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>1. (4 Punkte) Drei Freunde spielen ein Spiel. Sie werfen eine faire Münze. Spieler 1 gewinnt,
+            "de": r"""Drei Freunde spielen ein Spiel. Sie werfen eine faire Münze. Spieler 1 gewinnt,
 wenn beim ersten Wurf Kopf herauskommt. Spieler zwei gewinnt, wenn beim zweiten Wurf
 Kopf herauskommt. Spieler drei gewinnt, wenn beim dritten Wurf Kopf herauskommt. Wenn
 bis zur dritten Runde kein Gewinner ermittelt wurde, beginnt das Spiel∑︁von neuem. Wie hoch
@@ -709,8 +709,8 @@ der absolute Wert von k kleiner als 1 ist.
 (a) 1/6
 (b) 1/7
 (c) 1/5
-(d) 1/3</span>""",
-"en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>1. (4 Points) Three friends play a game. They flip a fair coin. Player 1 wins on first flip heads. Player 2 wins on second flip heads. Player 3 wins on third flip heads. If no winner by round 3, game restarts. What is P(Player 3 wins)?</span>"""
+(d) 1/3""",
+"en": r"""Three friends play a game. They flip a fair coin. Player 1 wins on first flip heads. Player 2 wins on second flip heads. Player 3 wins on third flip heads. If no winner by round 3, game restarts. What is P(Player 3 wins)?"""
         },
         "options": [
             {"de": "2/7", "en": "2/7"},
@@ -728,29 +728,29 @@ der absolute Wert von k kleiner als 1 ist.
         "source": "HS 2015, Aufgabe 2 (10 Punkte)",
         "type": "problem",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Aufgabe 2 (10 Punkte)
+            "de": r"""Aufgabe 2 (10 Punkte)
 Teil 2A (6 Punkte)
 Gegeben sei eine Urne mit einer schwarzen und zwei roten Kugeln. Wir betrachten die Ereignisse
 • R: “Es wird eine rote Kugel gezogen” und
 • S: “Es wird eine schwarze Kugel gezogen”.
 Es werde nun dreimal aus dieser Urne ohne Zurücklegen gezogen - die Urne ist also nach dem letzten
 Zug leer.
-1. (1 Punkte) Zeichnen Sie hierzu ein Baumdiagramm und zeichnen Sie die zugehörigen Wahrscheinlichkeiten ein.
-2. (2 Punkte) Wie gross ist die Wahrscheinlichkeit, im zweiten Zug eine rote Kugel zu ziehen?
-3. (3 Punkte) Nehmen Sie an, es wurde im zweiten Zug eine rote Kugel gezogen. Mit welcher Wahrscheinlichkeit wurde im ersten Zug ebenfalls eine rote Kugel gezogen?
+1. Zeichnen Sie hierzu ein Baumdiagramm und zeichnen Sie die zugehörigen Wahrscheinlichkeiten ein.
+2. Wie gross ist die Wahrscheinlichkeit, im zweiten Zug eine rote Kugel zu ziehen?
+3. Nehmen Sie an, es wurde im zweiten Zug eine rote Kugel gezogen. Mit welcher Wahrscheinlichkeit wurde im ersten Zug ebenfalls eine rote Kugel gezogen?
 Teil 2B (4 Punkte)
 Bei einer Klausur werden 20 Multiple-Choice-Fragen mit jeweils vier angebotenen Antworten gestellt,
 von denen genau eine richtig ist. Zum Bestehen der Klausur sind mindestens 12 richtige Antworten
 notwendig.
-1. (2 Punkte) Mit welcher Wahrscheinlichkeit p besteht ein Student die Prüfung, der bei jeder Frage
+1. Mit welcher Wahrscheinlichkeit p besteht ein Student die Prüfung, der bei jeder Frage
 eine der vier Antwortmöglichkeiten als falsch erkennt und rein zufällig eine der restlichen drei
 Antworten ankreuzt? (Ersatzergebnis: p = 0.015)
-2. (2 Punkte) Die Klausur wird von 100 Studenten geschrieben, welche alle wie in der vorigen
+2. Die Klausur wird von 100 Studenten geschrieben, welche alle wie in der vorigen
 Aufgabe beschrieben vorgehen. Was ist die Wahrscheinlichkeit, dass mindestens drei Studenten
 die Klausur bestehen? Approximieren Sie die gegebene Wahrscheinlichkeit mittels der Poisson
 Verteilung.
 mehr Platz benötigen, machen Sie einen klaren Verweis auf dem Aufgabenblatt der Prüfung und beschriften Sie auch das zusätzliche
-Blatt klar und deutlich. Die Aufgabe wird sonst nicht gewertet.</span>""",            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>**Part 2A (6 Points):** Urn with 1 black, 2 red balls. Draw without replacement (3 times).<br>1. Draw tree diagram.<br>2. P(red ball in 2nd draw)?<br>3. P(red in 1st | red in 2nd)?<br><br>**Part 2B (4 Points):** Multiple Choice Exam (20 questions, 4 answers, 12 needed).<br>1. Probability guesser passes (exclude 1 false, then guess)?<br>2. Poisson approximation for 100 students (at least 3 pass)?</span>"""
+Blatt klar und deutlich. Die Aufgabe wird sonst nicht gewertet.""",            "en": r"""**Part 2A (6 Points):** Urn with 1 black, 2 red balls. Draw without replacement (3 times).<br>1. Draw tree diagram.<br>2. P(red ball in 2nd draw)?<br>3. P(red in 1st | red in 2nd)?<br><br>**Part 2B (4 Points):** Multiple Choice Exam (20 questions, 4 answers, 12 needed).<br>1. Probability guesser passes (exclude 1 false, then guess)?<br>2. Poisson approximation for 100 students (at least 3 pass)?</span>"""
         },
         "solution": {
             "de": r"**Lösung 2A:**<br>2. P(Rot 2) = 2/3.<br>3. P(R1|R2) = 1/2.<br><br>**Lösung 2B:**<br>1. Binomial(n=20, p=1/3). P(X $\ge$ 12) $\approx$ 0.013.<br>2. $\lambda = 100 \cdot 0.013 = 1.3$. P(Y $\ge$ 3) = 1 - P(Y $\le$ 2) $\approx$ 0.1429.",
@@ -763,8 +763,8 @@ QUESTIONS_1_9 = {
         "source": "HS 2024 Januar, MC #6",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>6. (4 Punkte) In einem Bewerbungsverfahren beträgt die Wahrscheinlichkeit, zu einem Vorstellungsgespräch eingeladen zu werden, 10%. Von denjenigen, die eingeladen werden, haben 90% in ihrer Statistikprüfung eine bessere Note als 5 erreicht. Umgekehrt haben von den Bewerbern, die nicht zu einem Vorstellungsgespräch eingeladen wurden, nur 20% eine bessere Note als 5 erreicht. Wie hoch ist die Wahrscheinlichkeit, dass ein zufällig ausgewählter Bewerber eine bessere Note als 5 in Statistik hat?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>6. (4 Points) In an application process, the probability of being invited to an interview is 10%. Of those invited, 90% achieved a grade better than 5 in their statistics exam. Conversely, of those not invited to an interview, only 20% achieved a grade better than 5. What is the probability that a randomly selected applicant has a grade better than 5 in statistics?</span>"""
+            "de": r"""In einem Bewerbungsverfahren beträgt die Wahrscheinlichkeit, zu einem Vorstellungsgespräch eingeladen zu werden, 10%. Von denjenigen, die eingeladen werden, haben 90% in ihrer Statistikprüfung eine bessere Note als 5 erreicht. Umgekehrt haben von den Bewerbern, die nicht zu einem Vorstellungsgespräch eingeladen wurden, nur 20% eine bessere Note als 5 erreicht. Wie hoch ist die Wahrscheinlichkeit, dass ein zufällig ausgewählter Bewerber eine bessere Note als 5 in Statistik hat?""",
+            "en": r"""In an application process, the probability of being invited to an interview is 10%. Of those invited, 90% achieved a grade better than 5 in their statistics exam. Conversely, of those not invited to an interview, only 20% achieved a grade better than 5. What is the probability that a randomly selected applicant has a grade better than 5 in statistics?"""
         },
         "options": [
             {"de": "18%", "en": "18%"},
@@ -783,8 +783,8 @@ QUESTIONS_1_9 = {
     "three_prisoners": {
         "source": "Logic Check: 3 Prisoners",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Drei Gefangene ($A, B, C$). Einer wird begnadigt. Wärter nennt $B$ als Todeskandidat. Steigt $A$s Chance?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Three prisoners ($A, B, C$). One is pardoned. Warden names $B$ as executed. Does $A$'s chance increase?</span>"""
+            "de": r"""Drei Gefangene ($A, B, C$). Einer wird begnadigt. Wärter nennt $B$ als Todeskandidat. Steigt $A$s Chance?""",
+            "en": r"""Three prisoners ($A, B, C$). One is pardoned. Warden names $B$ as executed. Does $A$'s chance increase?"""
         },
         "options": [
             {"de": r"Ja, auf $50\%$", "en": r"Yes, to $50\%$"},
@@ -801,8 +801,8 @@ QUESTIONS_1_9 = {
     "l2": {
         "source": "Level 2: Days of the Week (Laplace)",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Wie hoch ist die Wahrscheinlichkeit, an einem Wochenende (Sa oder So) geboren zu sein?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>What is the probability of being born on a weekend (Sat or Sun)?</span>"""
+            "de": r"""Wie hoch ist die Wahrscheinlichkeit, an einem Wochenende (Sa oder So) geboren zu sein?""",
+            "en": r"""What is the probability of being born on a weekend (Sat or Sun)?"""
         },
         "options": [
             {"de": r"$\frac{1}{7}$", "en": r"$\frac{1}{7}$"},
@@ -819,8 +819,8 @@ QUESTIONS_1_9 = {
     "l3": {
         "source": "Level 3: The Password (Combinatorics)",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Ein 4-stelliger PIN-Code besteht aus den Ziffern 0-9. Wie viele Möglichkeiten gibt es?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>A 4-digit PIN code consists of the digits 0-9. How many possibilities are there?</span>"""
+            "de": r"""Ein 4-stelliger PIN-Code besteht aus den Ziffern 0-9. Wie viele Möglichkeiten gibt es?""",
+            "en": r"""A 4-digit PIN code consists of the digits 0-9. How many possibilities are there?"""
         },
         "options": [
             {"de": r"$3024 \; (10 \times 9 \times 8 \times 7)$", "en": r"$3024 \; (10 \times 9 \times 8 \times 7)$"},
@@ -837,8 +837,8 @@ QUESTIONS_1_9 = {
     "l4": {
         "source": "Level 4: Rare Disease (Bayes)",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Krankheit ($1\%$ Prävalenz). Test ($99\%$ genau). Du testest positiv. Wie groß ist die Wahrscheinlichkeit, dass du wirklich krank bist?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Disease ($1\%$ prevalence). Test ($99\%$ accurate). You test positive. What is the probability you are actually sick?</span>"""
+            "de": r"""Krankheit ($1\%$ Prävalenz). Test ($99\%$ genau). Du testest positiv. Wie groß ist die Wahrscheinlichkeit, dass du wirklich krank bist?""",
+            "en": r"""Disease ($1\%$ prevalence). Test ($99\%$ accurate). You test positive. What is the probability you are actually sick?"""
         },
         "options": [
             {"de": r"$99\%$", "en": r"$99\%$"},
@@ -855,8 +855,8 @@ QUESTIONS_1_9 = {
     "l5": {
         "source": "Level 5: Roulette (Exp Value)",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Du setzt $10$ CHF auf Rot ($18$ rote, $18$ schwarze, $1$ grüne Zahl). Gewinn: Verdoppelung. Was ist dein erwarteter Gewinn pro Spiel?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>You bet $10$ CHF on Red ($18$ red, $18$ black, $1$ green number). Win: Double up. What is your expected gain per game?</span>"""
+            "de": r"""Du setzt $10$ CHF auf Rot ($18$ rote, $18$ schwarze, $1$ grüne Zahl). Gewinn: Verdoppelung. Was ist dein erwarteter Gewinn pro Spiel?""",
+            "en": r"""You bet $10$ CHF on Red ($18$ red, $18$ black, $1$ green number). Win: Double up. What is your expected gain per game?"""
         },
         "options": [
             {"de": r"$0$ CHF", "en": r"$0$ CHF"},
@@ -873,8 +873,8 @@ QUESTIONS_1_9 = {
     "l6": {
         "source": "Level 6: Waiting Time (Continuous)",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Der Bus kommt alle $10$ Minuten (gleichverteilt). Du kommst 'zufällig' an. Wie lange wartest du im Durchschnitt?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>The bus comes every $10$ minutes (uniformly distributed). You arrive 'randomly'. How long do you wait on average?</span>"""
+            "de": r"""Der Bus kommt alle $10$ Minuten (gleichverteilt). Du kommst 'zufällig' an. Wie lange wartest du im Durchschnitt?""",
+            "en": r"""The bus comes every $10$ minutes (uniformly distributed). You arrive 'randomly'. How long do you wait on average?"""
         },
         "options": [
             {"de": r"$10$ min", "en": r"$10$ min"},
@@ -899,8 +899,8 @@ QUESTIONS_2_1 = {
     "q_2_1_scenario_mastery": {
         "source": "Konzept-Check 2.1",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Warum teilen wir beim Binomialkoeffizienten durch k!?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Why do we divide by k! in the Binomial Coefficient?</span>"""
+            "de": r"""Warum teilen wir beim Binomialkoeffizienten durch k!?""",
+            "en": r"""Why do we divide by k! in the Binomial Coefficient?"""
         },
         "options": [
             {"de": "Um die Permutationen (Reihenfolgen) innerhalb einer Gruppe zu löschen", "en": "To delete the permutations (orders) within a group"},
@@ -919,8 +919,8 @@ QUESTIONS_2_2 = {
     "q_2_2_club": {
         "source": "Test 2, Frage 1 (Variation)",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>In einem Verein mit $10$ Mitgliedern ($4$ Frauen und $6$ Herren) soll nun ein Vorstand bestehend aus zwei Damen und zwei Herren gebildet werden. Wie viele Möglichkeiten gibt es?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>In a club with $10$ members ($4$ women and $6$ men), a board consisting of two women and two men is to be formed. How many possibilities are there?</span>"""
+            "de": r"""In einem Verein mit $10$ Mitgliedern ($4$ Frauen und $6$ Herren) soll nun ein Vorstand bestehend aus zwei Damen und zwei Herren gebildet werden. Wie viele Möglichkeiten gibt es?""",
+            "en": r"""In a club with $10$ members ($4$ women and $6$ men), a board consisting of two women and two men is to be formed. How many possibilities are there?"""
         },
         "options": [
             {"de": r"$90$", "en": r"$90$"},
@@ -939,8 +939,8 @@ QUESTIONS_2_3 = {
     "dvd_collection": {
         "source": "Statistik I, Aufgabe 3",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Sie besitzen **50 verschiedene DVDs** und die dazugehörigen 50 Hüllen. Auf wie viele Arten können die DVDs in die Hüllen einsortiert werden?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>You own **50 different DVDs** and their 50 cases. In how many ways can the DVDs be sorted into the cases?</span>"""
+            "de": r"""Sie besitzen **50 verschiedene DVDs** und die dazugehörigen 50 Hüllen. Auf wie viele Arten können die DVDs in die Hüllen einsortiert werden?""",
+            "en": r"""You own **50 different DVDs** and their 50 cases. In how many ways can the DVDs be sorted into the cases?"""
         },
         "options": [
             {"de": r"$50!$", "en": r"$50!$"},
@@ -957,8 +957,8 @@ QUESTIONS_2_3 = {
     "test1_q3": {
         "source": "Test 1, Frage 3",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Sie besitzen $50$ verschiedene DVDs und $50$ Hüllen. Ihr Neffe verteilt die DVDs zufällig. Wie viele Arten der Verteilung gibt es?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>You have $50$ different DVDs and $50$ cases. Your nephew distributes them randomly. How many arrangements are possible?</span>"""
+            "de": r"""Sie besitzen $50$ verschiedene DVDs und $50$ Hüllen. Ihr Neffe verteilt die DVDs zufällig. Wie viele Arten der Verteilung gibt es?""",
+            "en": r"""You have $50$ different DVDs and $50$ cases. Your nephew distributes them randomly. How many arrangements are possible?"""
         },
         "options": [
             {"de": r"$50!$", "en": r"$50!$"},
@@ -976,8 +976,8 @@ QUESTIONS_2_3 = {
         "source": "HS 2015 Januar, MC #4 (4 Punkte)",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>4. Herr Meyer hat seinen Schlüssel für das Schliessfach verloren. Die Schliessfachnummer leider vergessen. Er erinnert sich allerdings daran, dass es sich um eine vierstellige Zahl handelt, bei der zwei Ziffern gleich sind und dass als Ziffern die 3, 5 und 7 vorkommen. Wieviele Schliessfächer erfüllen diese Kriterien?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>4. Mr. Meyer has lost his locker key. Unfortunately, he has forgotten the locker number. However, he remembers that it is a four-digit number where two digits are the same and that the digits 3, 5, and 7 appear. How many lockers meet these criteria?</span>"""
+            "de": r"""Herr Meyer hat seinen Schlüssel für das Schliessfach verloren. Die Schliessfachnummer leider vergessen. Er erinnert sich allerdings daran, dass es sich um eine vierstellige Zahl handelt, bei der zwei Ziffern gleich sind und dass als Ziffern die 3, 5 und 7 vorkommen. Wieviele Schliessfächer erfüllen diese Kriterien?""",
+            "en": r"""4. Mr. Meyer has lost his locker key. Unfortunately, he has forgotten the locker number. However, he remembers that it is a four-digit number where two digits are the same and that the digits 3, 5, and 7 appear. How many lockers meet these criteria?"""
         },
         "options": [
             {"de": "12", "en": "12"},
@@ -997,8 +997,8 @@ QUESTIONS_2_4 = {
     "lottery": {
         "source": "Kombinatorik Grundlagen",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Beim Schweizer Lotto '6 aus 49' wählt man 6 Zahlen aus 49. Wie viele verschiedene Tipps sind möglich?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>In Swiss Lotto '6 out of 49', you pick 6 numbers from 49. How many different tickets are possible?</span>"""
+            "de": r"""Beim Schweizer Lotto '6 aus 49' wählt man 6 Zahlen aus 49. Wie viele verschiedene Tipps sind möglich?""",
+            "en": r"""In Swiss Lotto '6 out of 49', you pick 6 numbers from 49. How many different tickets are possible?"""
         },
         "options": [
             {"de": r"$49!$", "en": r"$49!$"},
@@ -1015,8 +1015,8 @@ QUESTIONS_2_4 = {
     "test2_q1": {
         "source": "Test 2, Frage 1",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Verein mit $10$ Mitgliedern ($4$ Frauen, $6$ Männer). Vorstand ($2$ Frauen, $2$ Männer) soll gebildet werden. Wie viele Möglichkeiten?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Club with $10$ members ($4$ women, $6$ men). Board ($2$ women, $2$ men) to be formed. How many possibilities?</span>"""
+            "de": r"""Verein mit $10$ Mitgliedern ($4$ Frauen, $6$ Männer). Vorstand ($2$ Frauen, $2$ Männer) soll gebildet werden. Wie viele Möglichkeiten?""",
+            "en": r"""Club with $10$ members ($4$ women, $6$ men). Board ($2$ women, $2$ men) to be formed. How many possibilities?"""
         },
         "options": [
             {"de": r"$89$", "en": r"$89$"},
@@ -1036,8 +1036,8 @@ QUESTIONS_2_5 = {
     "coin_toss_seq": {
         "source": "Kombinatorik",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Eine Münze wird $4$ Mal geworfen. Wie viele Ergebnisfolgen?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>A coin is tossed $4$ times. How many outcome sequences?</span>"""
+            "de": r"""Eine Münze wird $4$ Mal geworfen. Wie viele Ergebnisfolgen?""",
+            "en": r"""A coin is tossed $4$ times. How many outcome sequences?"""
         },
         "options": [
             {"de": r"$24$", "en": r"$24$"},
@@ -1058,8 +1058,8 @@ QUESTIONS_2_6 = {
         "source": "Test 1, Q3",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>50 DVDs und 50 Hüllen. Zufällige Verteilung. Wie viele Möglichkeiten?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>50 DVDs, 50 cases. Random arrangement. How many possibilities?</span>"""
+            "de": r"""50 DVDs und 50 Hüllen. Zufällige Verteilung. Wie viele Möglichkeiten?""",
+            "en": r"""50 DVDs, 50 cases. Random arrangement. How many possibilities?"""
         },
         "options": [
             {"de": r"$50!$", "en": r"$50!$"},
@@ -1077,8 +1077,8 @@ QUESTIONS_2_6 = {
         "source": "Test 2, Q1",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>10 Mitglieder (4F, 6M). Vorstand: 2 Damen, 2 Herren. Anzahl Möglichkeiten?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>10 members (4 women, 6 men). Executive Board: 2 women, 2 men. Number of possibilities?</span>"""
+            "de": r"""10 Mitglieder (4F, 6M). Vorstand: 2 Damen, 2 Herren. Anzahl Möglichkeiten?""",
+            "en": r"""10 members (4 women, 6 men). Executive Board: 2 women, 2 men. Number of possibilities?"""
         },
         "options": [
             {"de": "89", "en": "89"},
@@ -1124,8 +1124,8 @@ QUESTIONS_3_1 = {
         "source": "Übung 2, Problem 2",
         "type": "problem",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Dreiecksverteilung: $f(x) = 2ax$ für $0<x<1$, $f(x) = 3a-ax$ für $1 \le x < 3$.<br>Bestimmen Sie $a$.</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Triangle distribution: $f(x) = 2ax$ for $0<x<1$, $f(x) = 3a-ax$ for $1 \le x < 3$.<br>Determine $a$.</span>"""
+            "de": r"""Dreiecksverteilung: $f(x) = 2ax$ für $0<x<1$, $f(x) = 3a-ax$ für $1 \le x < 3$.<br>Bestimmen Sie $a$.""",
+            "en": r"""Triangle distribution: $f(x) = 2ax$ for $0<x<1$, $f(x) = 3a-ax$ for $1 \le x < 3$.<br>Determine $a$."""
         },
         "solution": {
             "de": r"**Lösung: $a = \frac{1}{3}$**<br>Fläche unter dem Dreieck muss 1 sein.",
@@ -1135,9 +1135,9 @@ QUESTIONS_3_1 = {
     "hs2015_mc2": {
         "source": "HS 2015 Januar, MC #2 (4 Punkte)",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>2. Sei X eine stetige Zufallsvariable mit kumulativer Verteilungsfunktion F (x). Welche
-der folgenden Aussagen ist FALSCH?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>2. (4 Points) Let X be a continuous random variable with cumulative distribution function F(x). Which of the following statements is FALSCH (FALSE)?</span>"""
+            "de": r"""Sei X eine stetige Zufallsvariable mit kumulativer Verteilungsfunktion F (x). Welche
+der folgenden Aussagen ist FALSCH?""",
+            "en": r"""Let X be a continuous random variable with cumulative distribution function F(x). Which of the following statements is FALSCH (FALSE)?"""
         },
         "options": [
             {"de": r"$P(a \le X \le b) = \int_a^b F(x)\,dx$", "en": r"$P(a \le X \le b) = \int_a^b F(x)\,dx$"},
@@ -1178,8 +1178,8 @@ QUESTIONS_3_2 = {
     "test2_q4": {
         "source": "Test 2, Frage 4",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$X$ diskret. PMF $f(x) = \frac{x+4}{c}$ für $x=1,\dots,5$. Für welches $c$ ist $f(x)$ eine PMF?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$X$ discrete. PMF $f(x) = \frac{x+4}{c}$ for $x=1,\dots,5$. For which $c$ is $f(x)$ a PMF?</span>"""
+            "de": r"""$X$ diskret. PMF $f(x) = \frac{x+4}{c}$ für $x=1,\dots,5$. Für welches $c$ ist $f(x)$ eine PMF?""",
+            "en": r"""$X$ discrete. PMF $f(x) = \frac{x+4}{c}$ for $x=1,\dots,5$. For which $c$ is $f(x)$ a PMF?"""
         },
         "options": [
             {"de": r"$c = 20$", "en": r"$c = 20$"},
@@ -1197,11 +1197,11 @@ QUESTIONS_3_2 = {
         "source": "HS 2015, MC 5 (4 Punkte)",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>5. Es sei X eine diskrete Zufallsvariable mit einer Wahrscheinlichkeitsmassenfunktion
+            "de": r"""Es sei X eine diskrete Zufallsvariable mit einer Wahrscheinlichkeitsmassenfunktion
 der Form
 $$f(x) = \begin{cases} \frac{x+4}{c} & \text{für x = 1, . . . , 5} \\ 0 & \text{sonst.} \end{cases}$$
-Für welchen Wert von c ist f (x) eine Wahrscheinlichkeitsmassenfunktion?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>5. Let $X$ be a discrete random variable with a probability mass function of the form $f(x) = \frac{x+4}{c}$ for $x = 1, \dots, 5$ and $0$ otherwise. For which value of $c$ is $f(x)$ a valid probability mass function?</span>"""
+Für welchen Wert von c ist f (x) eine Wahrscheinlichkeitsmassenfunktion?""",
+            "en": r"""Let $X$ be a discrete random variable with a probability mass function of the form $f(x) = \frac{x+4}{c}$ for $x = 1, \dots, 5$ and $0$ otherwise. For which value of $c$ is $f(x)$ a valid probability mass function?"""
         },
         "options": [
             {"de": "c = 20", "en": "c = 20"},
@@ -1219,12 +1219,12 @@ Für welchen Wert von c ist f (x) eine Wahrscheinlichkeitsmassenfunktion?</span
         "source": "HS 2023 Januar, MC #4 (4 Punkte)",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>4. Gegeben sei eine Zufallsvariable Y mit einer Wahrscheinlichkeitsdichtefunktion
+            "de": r"""Gegeben sei eine Zufallsvariable Y mit einer Wahrscheinlichkeitsdichtefunktion
 $$f_Y(y) = \begin{cases} 2y & \text{for } 0 < y < 1 \\ 0 & \text{sonst.} \end{cases}$$
-Wie gross ist die Varianz von Y ?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>4. (4 Points) Let Y be a random variable with a probability density function
+Wie gross ist die Varianz von Y ?""",
+            "en": r"""Let Y be a random variable with a probability density function
 $$f_Y(y) = \begin{cases} 2y & \text{for } 0 < y < 1 \\ 0 & \text{otherwise} \end{cases}$$
-What is the variance of Y?</span>"""
+What is the variance of Y?"""
         },
         "options": [
             {"de": r"$\frac{1}{2}$", "en": r"$\frac{1}{2}$"},
@@ -1245,8 +1245,8 @@ QUESTIONS_3_3 = {
     "test2_q3": {
         "source": "Test 2, Frage 3",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$X$ stetig auf $[0, 10]$ mit Dichte $f(x) = \frac{1}{20} + \frac{x}{100}$. Berechnen Sie $P(2 \le X \le 6)$.</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$X$ continuous on $[0, 10]$ with density $f(x) = \frac{1}{20} + \frac{x}{100}$. Calculate $P(2 \le X \le 6)$.</span>"""
+            "de": r"""$X$ stetig auf $[0, 10]$ mit Dichte $f(x) = \frac{1}{20} + \frac{x}{100}$. Berechnen Sie $P(2 \le X \le 6)$.""",
+            "en": r"""$X$ continuous on $[0, 10]$ with density $f(x) = \frac{1}{20} + \frac{x}{100}$. Calculate $P(2 \le X \le 6)$."""
         },
         "options": [
             {"de": r"$\frac{9}{25} \; (0.36)$", "en": r"$\frac{9}{25} \; (0.36)$"},
@@ -1268,12 +1268,12 @@ QUESTIONS_3_4 = {
         "source": "HS 2024 Januar, MC #7 (4 Punkte)",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>7. Sei Y eine stetige Zufallsvariable mit Dichtefunktion
+            "de": r"""Sei Y eine stetige Zufallsvariable mit Dichtefunktion
 $$f_Y(y) = \begin{cases} \frac{1}{2}\sin(y) & \text{für } 0 < y < \pi \\ 0 & \text{sonst.} \end{cases}$$
-Wie gross ist der Erwartungswert von Y ?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>7. (4 Points) Let $Y$ be a continuous random variable with probability density function
+Wie gross ist der Erwartungswert von Y ?""",
+            "en": r"""Let $Y$ be a continuous random variable with probability density function
 $$f_Y(y) = \begin{cases} \frac{1}{2}\sin(y) & \text{for } 0 < y < \pi \\ 0 & \text{otherwise} \end{cases}$$
-What is the expected value of $Y$?</span>"""
+What is the expected value of $Y$?"""
         },
         "options": [
             {"de": r"$\ln(\pi)$", "en": r"$\ln(\pi)$"},
@@ -1291,8 +1291,8 @@ What is the expected value of $Y$?</span>"""
         "source": "HS 2024 Januar, MC #12 (4 Punkte)",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>12. Ein Brunnen enthält 10 Liter Wasser. Jeden Tag wird eine zufällige Menge Wasser aus dem Brunnen gepumpt. Die täglich gepumpte Wassermenge ist i.i.d. und gleichverteilt zwischen 0 und 1 Litern. Wie viele Tage dauert es im Durchschnitt, bis der Brunnen leer ist?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>12. (4 Points) A well contains 10 liters of water. Every day a random amount of water is pumped out of the well. The daily pumped amount is i.i.d. and uniformly distributed between 0 and 1 liters. How many days does it take on average until the well is empty?</span>"""
+            "de": r"""Ein Brunnen enthält 10 Liter Wasser. Jeden Tag wird eine zufällige Menge Wasser aus dem Brunnen gepumpt. Die täglich gepumpte Wassermenge ist i.i.d. und gleichverteilt zwischen 0 und 1 Litern. Wie viele Tage dauert es im Durchschnitt, bis der Brunnen leer ist?""",
+            "en": r"""A well contains 10 liters of water. Every day a random amount of water is pumped out of the well. The daily pumped amount is i.i.d. and uniformly distributed between 0 and 1 liters. How many days does it take on average until the well is empty?"""
         },
         "options": [
             {"de": "12.5", "en": "12.5"},
@@ -1310,10 +1310,10 @@ What is the expected value of $Y$?</span>"""
         "source": "HS 2023 Januar, MC #11 (4 Punkte)",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>11. Angenommen Sie würfeln. Für jeden Wurf erhalten Sie die Augenzahl als
+            "de": r"""11. Angenommen Sie würfeln. Für jeden Wurf erhalten Sie die Augenzahl als
 Auszahlung. Erscheint die 4, 5 oder 6 so können Sie erneut würfeln. Sobald Sie 1, 2, oder
-3 würfeln, endet das Spiel. Wie hoch ist der zu erwartende Gewinn dieses Spiels?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>11. (4 Points) Suppose you roll a die. For each roll, you receive the number of dots as a payoff. If 4, 5, or 6 appears, you can roll again. As soon as you roll 1, 2, or 3, the game ends. What is the expected payoff of this game?</span>"""
+3 würfeln, endet das Spiel. Wie hoch ist der zu erwartende Gewinn dieses Spiels?""",
+            "en": r"""Suppose you roll a die. For each roll, you receive the number of dots as a payoff. If 4, 5, or 6 appears, you can roll again. As soon as you roll 1, 2, or 3, the game ends. What is the expected payoff of this game?"""
         },
         "options": [
             {"de": "3.5", "en": "3.5"},
@@ -1331,8 +1331,8 @@ Auszahlung. Erscheint die 4, 5 oder 6 so können Sie erneut würfeln. Sobald Sie
         "source": "Übung 2, Problem 5",
         "type": "problem",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$X$ ist gleichförmig verteilt auf $[0, 3]$ (Dichte $1/3$).<br>a) $E[X]$<br>b) $E[4X + 2]$</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$X$ is uniformly distributed on $[0, 3]$ (density $1/3$).<br>a) $E[X]$<br>b) $E[4X + 2]$</span>"""
+            "de": r"""$X$ ist gleichförmig verteilt auf $[0, 3]$ (Dichte $1/3$).<br>a) $E[X]$<br>b) $E[4X + 2]$""",
+            "en": r"""$X$ is uniformly distributed on $[0, 3]$ (density $1/3$).<br>a) $E[X]$<br>b) $E[4X + 2]$"""
         },
         "solution": {
             "de": r"**Lösung:**<br>a) Mitte des Intervalls: $\mathbf{1.5}$<br>b) Linearität: $4 \cdot 1.5 + 2 = \mathbf{8}$",
@@ -1343,8 +1343,8 @@ Auszahlung. Erscheint die 4, 5 oder 6 so können Sie erneut würfeln. Sobald Sie
         "source": "Übung 2, Problem 7 (Xenia)",
         "type": "problem",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Lernzeit Xenia:<br>• Schön ($1/10$): $20$ min<br>• Bewölkt ($1/3$): $60$ min<br>• Regen ($1/2$): $80$ min<br>• Schnee ($1/15$): $120$ min<br>Berechnen Sie den Erwartungswert.</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Xenia's study time:<br>• Sunny ($1/10$): $20$ min<br>• Cloudy ($1/3$): $60$ min<br>• Rain ($1/2$): $80$ min<br>• Snow ($1/15$): $120$ min<br>Calculate the expected value.</span>"""
+            "de": r"""Lernzeit Xenia:<br>• Schön ($1/10$): $20$ min<br>• Bewölkt ($1/3$): $60$ min<br>• Regen ($1/2$): $80$ min<br>• Schnee ($1/15$): $120$ min<br>Berechnen Sie den Erwartungswert.""",
+            "en": r"""Xenia's study time:<br>• Sunny ($1/10$): $20$ min<br>• Cloudy ($1/3$): $60$ min<br>• Rain ($1/2$): $80$ min<br>• Snow ($1/15$): $120$ min<br>Calculate the expected value."""
         },
         "solution": {
             "de": r"**Lösung: $70$ Minuten**<br>$E[X] = 1/10 \cdot 20 + 1/3 \cdot 60 + 1/2 \cdot 80 + 1/15 \cdot 120 = 2 + 20 + 40 + 8 = 70$",
@@ -1355,9 +1355,9 @@ Auszahlung. Erscheint die 4, 5 oder 6 so können Sie erneut würfeln. Sobald Sie
         "source": "HS 2022 Januar, MC #11 (4 Punkte)",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>11. Seien X, Y und Z 3 Zufallsvariablen mit E[X] = E[Y ], E[XY ] = 1 und E[X +
-Y - 2Z] = -1. X und Y sind unabhängig. Wie groß ist der Wert von E[Z]?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>11. Let $X, Y$ and $Z$ be 3 random variables with $E[X] = E[Y]$, $E[XY] = 1$ and $E[X + Y - 2Z] = -1$. $X$ and $Y$ are independent. What is the value of $E[Z]$?</span>"""
+            "de": r"""Seien X, Y und Z 3 Zufallsvariablen mit E[X] = E[Y ], E[XY ] = 1 und E[X +
+Y - 2Z] = -1. X und Y sind unabhängig. Wie groß ist der Wert von E[Z]?""",
+            "en": r"""Let $X, Y$ and $Z$ be 3 random variables with $E[X] = E[Y]$, $E[XY] = 1$ and $E[X + Y - 2Z] = -1$. $X$ and $Y$ are independent. What is the value of $E[Z]$?"""
         },
         "options": [
             {"de": "-0.5", "en": "-0.5"},
@@ -1499,8 +1499,8 @@ QUESTIONS_3_5 = {
         "source": "Test 2, Q2",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$X \sim U[-4, 4]$. $P(X^2 \le 9)$?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$X \sim U[-4, 4]$. $P(X^2 \le 9)$?</span>"""
+            "de": r"""$X \sim U[-4, 4]$. $P(X^2 \le 9)$?""",
+            "en": r"""$X \sim U[-4, 4]$. $P(X^2 \le 9)$?"""
         },
         "options": [
             {"de": "7/9", "en": "7/9"},
@@ -1518,8 +1518,8 @@ QUESTIONS_3_5 = {
         "source": "Test 2, Q3",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$X$ auf $[0, 10]$ mit Dichte $f(x) = \frac{x}{100} + \frac{1}{20}$. $P(2 \le X \le 6)$?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$X$ on $[0, 10]$ with pdf $f(x) = x/100 + 1/20$. $P(2 \le X \le 6)$?</span>"""
+            "de": r"""$X$ auf $[0, 10]$ mit Dichte $f(x) = \frac{x}{100} + \frac{1}{20}$. $P(2 \le X \le 6)$?""",
+            "en": r"""$X$ on $[0, 10]$ with pdf $f(x) = x/100 + 1/20$. $P(2 \le X \le 6)$?"""
         },
         "options": [
             {"de": "9/25", "en": "9/25"},
@@ -1537,8 +1537,8 @@ QUESTIONS_3_5 = {
         "source": "Test 2, Q4",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Diskrete ZV $f(x) = \frac{x+4}{c}$ für $x=1,..,5$. Bestimme c.</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Discrete RV $f(x) = (x+4)/c$ for $x=1..5$. Find c.</span>"""
+            "de": r"""Diskrete ZV $f(x) = \frac{x+4}{c}$ für $x=1,..,5$. Bestimme c.""",
+            "en": r"""Discrete RV $f(x) = (x+4)/c$ for $x=1..5$. Find c."""
         },
         "options": [
             {"de": "20", "en": "20"},
@@ -1556,8 +1556,8 @@ QUESTIONS_3_5 = {
         "source": "Test 3, Q2",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$Y = X/\sigma$. $E(Y^2)$?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$Y = X/\sigma$. $E(Y^2)$?</span>"""
+            "de": r"""$Y = X/\sigma$. $E(Y^2)$?""",
+            "en": r"""$Y = X/\sigma$. $E(Y^2)$?"""
         },
         "options": [
             {"de": "1", "en": "1"},
@@ -1586,8 +1586,8 @@ QUESTIONS_4_2 = {
         "source": "Übung 2, Problem 1 (Basketball)",
         "type": "problem",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Basketball: Trefferquote $p = 1/2$. Vier Würfe.<br>Berechnen Sie $E[X]$ und $V(X)$.</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Basketball: Hit rate $p = 1/2$. Four shots.<br>Calculate $E[X]$ and $V(X)$.</span>"""
+            "de": r"""Basketball: Trefferquote $p = 1/2$. Vier Würfe.<br>Berechnen Sie $E[X]$ und $V(X)$.""",
+            "en": r"""Basketball: Hit rate $p = 1/2$. Four shots.<br>Calculate $E[X]$ and $V(X)$."""
         },
         "solution": {
             "de": r"**Lösung:**<br>Binomialverteilung $n=4, p=0.5$.<br>$E[X] = n \cdot p = 2$<br>$V(X) = n \cdot p \cdot (1-p) = 4 \cdot 0.25 = 1$",
@@ -1601,8 +1601,8 @@ QUESTIONS_4_3 = {
     "uebung2_giro": {
         "source": "Übung 2, MC11",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Miguel gewinnt Giro d'Italia mit $30\%$. Wahrscheinlichkeit bei $5$ Teilnahmen mind. $2$ mal zu gewinnen?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Miguel wins Giro d'Italia with $30\%$. Probability to win at least $2$ times in $5$ participations?</span>"""
+            "de": r"""Miguel gewinnt Giro d'Italia mit $30\%$. Wahrscheinlichkeit bei $5$ Teilnahmen mind. $2$ mal zu gewinnen?""",
+            "en": r"""Miguel wins Giro d'Italia with $30\%$. Probability to win at least $2$ times in $5$ participations?"""
         },
         "options": [
             {"de": r"$0.639$", "en": r"$0.639$"},
@@ -1620,8 +1620,8 @@ QUESTIONS_4_3 = {
         "source": "Übung 2, Problem 2 (Versicherung)",
         "type": "problem",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Herr Kaiser verkauft bei $20\%$ ($2$ von $10$) eine Versicherung. Er macht $16$ Besuche pro Tag.<br>Berechnen Sie $E[X]$ und $Var(X)$.</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Mr. Kaiser sells insurance in $20\%$ ($2$ of $10$) of visits. He makes $16$ visits per day.<br>Calculate $E[X]$ and $Var(X)$.</span>"""
+            "de": r"""Herr Kaiser verkauft bei $20\%$ ($2$ von $10$) eine Versicherung. Er macht $16$ Besuche pro Tag.<br>Berechnen Sie $E[X]$ und $Var(X)$.""",
+            "en": r"""Mr. Kaiser sells insurance in $20\%$ ($2$ of $10$) of visits. He makes $16$ visits per day.<br>Calculate $E[X]$ and $Var(X)$."""
         },
         "solution": {
             "de": r"**Lösung:**<br>$E[X] = 16 \cdot 0.2 = \mathbf{3.2}$<br>$Var(X) = 16 \cdot 0.2 \cdot 0.8 = \mathbf{2.56}$",
@@ -1631,13 +1631,13 @@ QUESTIONS_4_3 = {
     "hs2022_mc7": {
         "source": "HS 2022 Januar, MC #7 (4 Punkte)",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>7. Zwei Spieler stehen sich in einem Best-of-5-Spiel gegenüber, d.h. der erste Spieler,
+            "de": r"""Zwei Spieler stehen sich in einem Best-of-5-Spiel gegenüber, d.h. der erste Spieler,
 der 3 Runden gewinnt, gewinnt das Spiel. Bei jeder Runde hat Spieler A eine 60%ige Chance
 zu gewinnen und Spieler B eine 40%ige Chance (es gibt keine Unentschieden). Nach einer
 Runde geht Spieler B in Führung und hat nun einen Vorsprung von eins in der Best-of-
 5-Serie. Wie hoch ist die Wahrscheinlichkeit, dass Spieler B nach dieser ersten Runde das
-gesamte Spiel gewinnt?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>7. Two players face each other in a Best-of-5 game, i.e., the first player to win 3 rounds wins the game. In each round, Player A has a 60% chance of winning and Player B has a 40% chance (there are no draws). After one round, Player B takes the lead and now has a lead of one in the Best-of-5 series. What is the probability that Player B wins the entire game after this first round?</span>"""
+gesamte Spiel gewinnt?""",
+            "en": r"""Two players face each other in a Best-of-5 game, i.e., the first player to win 3 rounds wins the game. In each round, Player A has a 60% chance of winning and Player B has a 40% chance (there are no draws). After one round, Player B takes the lead and now has a lead of one in the Best-of-5 series. What is the probability that Player B wins the entire game after this first round?"""
         },
         "options": [
             {"de": r"$65\%$", "en": r"$65\%$"},
@@ -1654,8 +1654,8 @@ gesamte Spiel gewinnt?</span>""",
     "hs2023_mc12": {
         "source": "HS 2023 Januar, MC #12 (4 Punkte)",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>12. Jacob möchte sein Wissen, das er während des Statistikunterrichts erworben hat, nutzen, um im Casino etwas Geld zu gewinnen. In seinem Lieblingscasino in Paris gibt es 100 Spielautomaten. Das Casino kann die Gewinnwahrscheinlichkeit an einem Spielautomaten beeinflussen und fixiert diese bei 20%. Jacob möchte wissen: Wie groß ist die Wahrscheinlichkeit, an mindestens 4 der 100 Spielautomaten mehr als zweimal zu gewinnen, wenn er an jedem Automaten fünf Spiele spielt?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>12. Jacob wants to use the knowledge he acquired during statistics class to win some money at the casino. In his favorite casino in Paris, there are 100 slot machines. The casino can influence the winning probability at a slot machine and fixes it at 20%. Jacob wants to know: What is the probability of winning more than twice at at least 4 of the 100 slot machines if he plays five games at each machine?</span>"""
+            "de": r"""Jacob möchte sein Wissen, das er während des Statistikunterrichts erworben hat, nutzen, um im Casino etwas Geld zu gewinnen. In seinem Lieblingscasino in Paris gibt es 100 Spielautomaten. Das Casino kann die Gewinnwahrscheinlichkeit an einem Spielautomaten beeinflussen und fixiert diese bei 20%. Jacob möchte wissen: Wie groß ist die Wahrscheinlichkeit, an mindestens 4 der 100 Spielautomaten mehr als zweimal zu gewinnen, wenn er an jedem Automaten fünf Spiele spielt?""",
+            "en": r"""Jacob wants to use the knowledge he acquired during statistics class to win some money at the casino. In his favorite casino in Paris, there are 100 slot machines. The casino can influence the winning probability at a slot machine and fixes it at 20%. Jacob wants to know: What is the probability of winning more than twice at at least 4 of the 100 slot machines if he plays five games at each machine?"""
         },
         "options": [
             {"de": r"0.0579", "en": r"0.0579"},
@@ -1677,8 +1677,8 @@ QUESTIONS_4_4 = {
         "source": "Übung 2, Problem 3 (Druckfehler)",
         "type": "problem",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Buch hat im Mittel $\mu = 8$ Druckfehler (Poisson).<br>a) $P(X \ge 6)$?<br>b) $P(X = 13)$?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Book has on average $\mu = 8$ typos (Poisson).<br>a) $P(X \ge 6)$?<br>b) $P(X = 13)$?</span>"""
+            "de": r"""Buch hat im Mittel $\mu = 8$ Druckfehler (Poisson).<br>a) $P(X \ge 6)$?<br>b) $P(X = 13)$?""",
+            "en": r"""Book has on average $\mu = 8$ typos (Poisson).<br>a) $P(X \ge 6)$?<br>b) $P(X = 13)$?"""
         },
         "solution": {
             "de": r"**Lösung:**<br>a) $1 - P(X \le 5) \approx \mathbf{0.8088}$<br>b) $(8^{13} \cdot e^{-8}) / 13! \approx \mathbf{0.0296}$",
@@ -1688,8 +1688,8 @@ QUESTIONS_4_4 = {
     "test4_q1": {
         "source": "Test 4, Frage 1",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Sei $X \sim \text{Poisson}(10)$ und $Z = 2X$. Welche Aussage trifft NICHT zu?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Let $X \sim \text{Poisson}(10)$ and $Z = 2X$. Which statement is FALSE?</span>"""
+            "de": r"""Sei $X \sim \text{Poisson}(10)$ und $Z = 2X$. Welche Aussage trifft NICHT zu?""",
+            "en": r"""Let $X \sim \text{Poisson}(10)$ and $Z = 2X$. Which statement is FALSE?"""
         },
         "options": [
             {"de": r"$Z \sim \text{Poisson}(20)$", "en": r"$Z \sim \text{Poisson}(20)$"},
@@ -1710,8 +1710,8 @@ QUESTIONS_4_5 = {
     "test2_q2": {
         "source": "Test 2, Frage 2",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$X$ gleichverteilt auf $[-4, 4]$. Wie gross ist $P(X^2 \le 9)$?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$X$ uniformly distributed on $[-4, 4]$. What is $P(X^2 \le 9)$?</span>"""
+            "de": r"""$X$ gleichverteilt auf $[-4, 4]$. Wie gross ist $P(X^2 \le 9)$?""",
+            "en": r"""$X$ uniformly distributed on $[-4, 4]$. What is $P(X^2 \le 9)$?"""
         },
         "options": [
             {"de": r"$\frac{7}{9}$", "en": r"$\frac{7}{9}$"},
@@ -1753,12 +1753,12 @@ QUESTIONS_4_6 = {
         "source": "HS 2022 Januar, MC #4 (4 Punkte)",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>4. Für welchen Wert von c ist die Funktion
+            "de": r"""4. Für welchen Wert von c ist die Funktion
 $$f(x) = \begin{cases} ce^{-0.8x} & \text{for } x \ge 0 \\ 0 & \text{for } x < 0 \end{cases}$$
-eine Dichtefunktion?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>4. (4 Points) For which value of $c$ is the function
+eine Dichtefunktion?""",
+            "en": r"""For which value of $c$ is the function
 $$f(x) = \begin{cases} ce^{-0.8x} & \text{for } x \ge 0 \\ 0 & \text{for } x < 0 \end{cases}$$
-a density function?</span>"""
+a density function?"""
         },
         "options": [
             {"de": r"$c = \frac{5}{4}$", "en": r"$c = \frac{5}{4}$"},
@@ -1776,16 +1776,16 @@ a density function?</span>"""
         "source": "HS 2015, Aufgabe 3 (18 Punkte)",
         "type": "problem",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Aufgabe 3 (18 Punkte)
+            "de": r"""Aufgabe 3 (18 Punkte)
 Davide hat sich ein neues Motorrad gekauft und fährt damit nun täglich. Da er häufig auf Kieswegen
 fährt, hat Davide oft einen platten Reifen. Die Zufallsvariable T1 beschreibt die Lebensdauer eines
 Reifens in Tagen (d.h. die Zeit bis er platt ist). Nehmen Sie an T1 ist exponential verteilt mit der
 folgenden Wahrscheinlichkeitsdichtefunktion
 $$f(t) = \begin{cases} \frac{1}{500} \exp\left(-\frac{t}{500}\right) & \text{für } t \ge 0 \\ 0 & \text{sonst.} \end{cases}$$
-1. (2 Punkte) Berechnen Sie die kumulative Verteilungsfunktion F (t).
-2. (2 Punkte) Wie gross ist die Wahrscheinlichkeit, dass der vordere Reifen länger als 500 Tage keine
+1. Berechnen Sie die kumulative Verteilungsfunktion F (t).
+2. Wie gross ist die Wahrscheinlichkeit, dass der vordere Reifen länger als 500 Tage keine
 Reifenpanne aufweist?
-3. (2 Punkte) Welche Lebensdauer wird von dem vorderen Reifen mit einer Wahrscheinlichkeit von
+3. Welche Lebensdauer wird von dem vorderen Reifen mit einer Wahrscheinlichkeit von
 0.2 überschritten?
 Wir betrachten nun zusätzlich die Zufallsvariable T2 , welche die Lebensdauer (in Tagen) des hinteren
 Reifens beschreibt. Wir nehmen an, dass T1 und T2 unabhängige und identisch verteilte Zufallsvariablen
@@ -1793,9 +1793,9 @@ sind.
 Sobald ein Reifen platt ist, ersetzt Davide beide Reifen durch neue. Die Zufallsvariable T bezeichnet die
 Anzahl Tage zwischen dem Ersetzen der beiden Reifen bis zum nächsten Mal, dass die Reifen gewechselt
 werden müssen. (Hinweis: Es gilt T = min(T1 , T2 ))
-4. (6 Punkte) Berechnen Sie die kumulative Verteilungsfunktion von T . (Ersatzergebnis: T ∼ Exp(λ)
+4. Berechnen Sie die kumulative Verteilungsfunktion von T . (Ersatzergebnis: T ∼ Exp(λ)
 mit λ = 220 ).
-5. (6 Punkte) Davide besitzt 20 Paar Reifen. Sobald ein Reifen platt ist, ersetzt er das alte Paar
+5. Davide besitzt 20 Paar Reifen. Sobald ein Reifen platt ist, ersetzt er das alte Paar
 Reifen durch ein neues Paar. Sobald er keine Reifen mehr übrig hat, will er sich ein Auto kaufen.
 Nehmen Sie an, dass die Lebenszeiten aller Reifenpaare identisch und unabhängig verteilt sind.
 Nehmen Sie ausserdem an, dass die Verteilung für jedes Reifenpaar derjenigen aus der vorigen
@@ -1803,18 +1803,18 @@ Teilaufgabe entspricht.
 Berechnen Sie die ungefähre Wahrscheinlichkeit, dass Davide mit dieser Vorgehensweise nach
 frühestens 15 Jahren ein Auto kauft (1 Jahr = 365 Tage).
 mehr Platz benötigen, machen Sie einen klaren Verweis auf dem Aufgabenblatt der Prüfung und beschriften Sie auch das zusätzliche
-Blatt klar und deutlich. Die Aufgabe wird sonst nicht gewertet.</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Problem 3 (18 Points)
+Blatt klar und deutlich. Die Aufgabe wird sonst nicht gewertet.""",
+            "en": r"""Problem 3 (18 Points)
 Davide bought a new motorcycle and rides it daily. Since he often rides on gravel paths, Davide often gets a flat tire. The random variable $T_1$ describes the lifespan of a tire in days (i.e., the time until it is flat). Assume $T_1$ is exponentially distributed with the following probability density function:
 $$f(t) = \begin{cases} \frac{1}{500} \exp\left(-\frac{t}{500}\right) & \text{for } t \ge 0 \\ 0 & \text{otherwise} \end{cases}$$
-1. (2 Points) Calculate the cumulative distribution function $F(t)$.
-2. (2 Points) What is the probability that the front tire has no flat tire for longer than 500 days?
-3. (2 Points) Which lifespan is exceeded by the front tire with a probability of 0.2?
+1. Calculate the cumulative distribution function $F(t)$.
+2. What is the probability that the front tire has no flat tire for longer than 500 days?
+3. Which lifespan is exceeded by the front tire with a probability of 0.2?
 We now additionally consider the random variable $T_2$, which describes the lifespan (in days) of the rear tire. We assume that $T_1$ and $T_2$ are independent and identically distributed random variables.
 As soon as a tire is flat, Davide replaces both tires with new ones. The random variable T describes the number of days between the replacing of the two tires until the next time the tires must be changed. (Hint: $T = \min(T_1, T_2)$)
-4. (6 Points) Calculate the cumulative distribution function of T. (Alternative result: $T \sim \text{Exp}(\lambda)$ with $\lambda = \frac{1}{220}$).
-5. (6 Points) Davide owns 20 pairs of tires. As soon as a tire is flat, he replaces the old pair of tires with a new pair. As soon as he has no tires left, he wants to buy a car. Assume that the lifespans of all tire pairs are identically and independently distributed. Also assume that the distribution for each tire pair corresponds to that from the previous question.
-Calculate the probability that he can ride his motorcycle for more than 15 years (1 year = 365 days) before he has to buy a car. (Hint: Use the Central Limit Theorem).</span>"""
+4. Calculate the cumulative distribution function of T. (Alternative result: $T \sim \text{Exp}(\lambda)$ with $\lambda = \frac{1}{220}$).
+5. Davide owns 20 pairs of tires. As soon as a tire is flat, he replaces the old pair of tires with a new pair. As soon as he has no tires left, he wants to buy a car. Assume that the lifespans of all tire pairs are identically and independently distributed. Also assume that the distribution for each tire pair corresponds to that from the previous question.
+Calculate the probability that he can ride his motorcycle for more than 15 years (1 year = 365 days) before he has to buy a car. (Hint: Use the Central Limit Theorem)."""
         },
         "solution": {
             "de": r"**Lösung:**<br>1. $F(t) = 1 - e^{-t/500}$.<br>2. $e^{-1} \approx 0.368$.<br>3. $x \approx 805$ Tage.<br>4. $T \sim \text{Exp}(1/250)$.<br>5. Summe von 20 Exp-Variablen $\to$ Näherung durch Normalverteilung (CLT). $P(S > 5475) \approx 0.39$.",
@@ -1830,10 +1830,10 @@ QUESTIONS_4_7 = {
         "source": "HS 2023 Januar, MC #7 (4 Punkte)",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>7. Die ausführliche Analyse von Prüfungsergebnissen eines Statistik Kurses an
+            "de": r"""Die ausführliche Analyse von Prüfungsergebnissen eines Statistik Kurses an
 einer Schweizer Universität hat ergeben, dass Studenten durchschnittlich 20 Punkte erreichen. Die Punkte sind mit einer Varianz von neun Punkten Normalverteilt. Wie gross ist die
-Wahrscheinlichkeit, dass ein Student weniger als 25 Punkte erreicht?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>7. (4 Points) Detailed analysis of exam results from a statistics course at a Swiss university has shown that students achieve an average of 20 points. The points are normally distributed with a variance of nine points. What is the probability that a student achieves fewer than 25 points?</span>"""
+Wahrscheinlichkeit, dass ein Student weniger als 25 Punkte erreicht?""",
+            "en": r"""Detailed analysis of exam results from a statistics course at a Swiss university has shown that students achieve an average of 20 points. The points are normally distributed with a variance of nine points. What is the probability that a student achieves fewer than 25 points?"""
         },
         "options": [
             {"de": "0.952", "en": "0.952"},
@@ -1851,10 +1851,8 @@ Wahrscheinlichkeit, dass ein Student weniger als 25 Punkte erreicht?</span>""",
         "source": "HS 2024 Januar, MC #9 (4 Punkte)",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>9. Das Einkommen X der Bürger einer Stadt ist lognormal verteilt (d.h. ln(X) ∼
-N (µ, σ 2 )) mit µ = 8 und σ 2 = 4. Wie hoch ist die Wahrscheinlichkeit, dass das Einkommen
-eines Bürgers unter 12000 CHF liegt?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>9. (4 Points) The income $X$ of the citizens of a city is log-normally distributed (i.e. $\ln(X) \sim N(\mu, \sigma^2)$) with $\mu = 8$ and $\sigma^2 = 4. What is the probability that a citizen's income is below 12000 CHF?</span>"""
+            "de": r"""Das Einkommen $X$ der Bürger einer Stadt ist lognormal verteilt (d.h. $\ln(X) \sim N(\mu, \sigma^2)$) mit $\mu = 8$ und $\sigma^2 = 4$. Wie hoch ist die Wahrscheinlichkeit, dass das Einkommen eines Bürgers unter 12000 CHF liegt?""",
+            "en": r"""The income $X$ of the citizens of a city is log-normally distributed (d.h. $\ln(X) \sim N(\mu, \sigma^2)$) with $\mu = 8$ and $\sigma^2 = 4$. What is the probability that a citizen's income is below 12000 CHF?"""
         },
         "options": [
             {"de": "0.242", "en": "0.242"},
@@ -1890,9 +1888,9 @@ eines Bürgers unter 12000 CHF liegt?</span>""",
     "hs2022_mc3": {
         "source": "HS 2022 Januar, MC #3 (4 Punkte)",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>3. Nehmen wir an, dass X1 , X2 , ..., XN unabhängige und identisch (I.I.D) gleichverteilte Zufallsvariablen zwischen 0 und 1 sind. Wie groß ist ungefähr die Wahrscheinlichkeit,
-dass das arithmetische Mittel größer als 0.55 ist, wenn N = 100?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>3. Assume that $X_1, X_2, \ldots, X_N$ are independent and identically (i.i.d.) uniformly distributed random variables between 0 and 1. What is approximately the probability that the arithmetic mean is greater than 0.55 if N = 100?</span>"""
+            "de": r"""Nehmen wir an, dass X1 , X2 , ..., XN unabhängige und identisch (I.I.D) gleichverteilte Zufallsvariablen zwischen 0 und 1 sind. Wie groß ist ungefähr die Wahrscheinlichkeit,
+dass das arithmetische Mittel größer als 0.55 ist, wenn N = 100?""",
+            "en": r"""3. Assume that $X_1, X_2, \ldots, X_N$ are independent and identically (i.i.d.) uniformly distributed random variables between 0 and 1. What is approximately the probability that the arithmetic mean is greater than 0.55 if N = 100?"""
         },
         "options": [
             {"de": "4.2%", "en": "4.2%"},
@@ -1911,9 +1909,9 @@ dass das arithmetische Mittel größer als 0.55 ist, wenn N = 100?</span>""",
         "source": "HS 2015, MC 3 (4 Punkte)",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>3. Es seien X und Y zwei normal verteilte Zufallsvariablen mit $\mu_X = 1, \sigma_X^2 = 4, \mu_Y = 0$ und $\sigma_Y^2 = 1$. Let $\Phi(\cdot)$ denote the CDF of the standard normal distribution.
-Welche der folgenden Aussagen ist FALSCH?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>3. (4 Points) Let $X$ and $Y$ be two normally distributed random variables with $\mu_X = 1, \sigma_X^2 = 4, \mu_Y = 0$ and $\sigma_Y^2 = 1$. Let $\Phi(\cdot)$ denote the CDF of the standard normal distribution. Which of the following statements is FALSE?</span>"""
+            "de": r"""Es seien X und Y zwei normal verteilte Zufallsvariablen mit $\mu_X = 1, \sigma_X^2 = 4, \mu_Y = 0$ und $\sigma_Y^2 = 1$. Let $\Phi(\cdot)$ denote the CDF of the standard normal distribution.
+Welche der folgenden Aussagen ist FALSCH?""",
+            "en": r"""Let $X$ and $Y$ be two normally distributed random variables with $\mu_X = 1, \sigma_X^2 = 4, \mu_Y = 0$ and $\sigma_Y^2 = 1$. Let $\Phi(\cdot)$ denote the CDF of the standard normal distribution. Which of the following statements is FALSE?"""
         },
         "options": [
             {"de": r"$P(\frac{X-1}{2} \le y) = \Phi(y)$", "en": r"$P(\frac{X-1}{2} \le y) = \Phi(y)$"},
@@ -1934,8 +1932,8 @@ QUESTIONS_4_8 = {
     "hypergeom_10_5_3": {
         "source": "Test 5, Frage 1",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Urne mit $N=10$ Kugeln, davon $M=5$ rot. Ziehe $n=3$ ohne Zurücklegen. $X = \text{Anzahl rote Kugeln}$. $P(X=2)$?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Urn with $N=10$ balls, $M=5$ red. Draw $n=3$ without replacement. $X = \text{number of red balls}$. $P(X=2)$?</span>"""
+            "de": r"""Urne mit $N=10$ Kugeln, davon $M=5$ rot. Ziehe $n=3$ ohne Zurücklegen. $X = \text{Anzahl rote Kugeln}$. $P(X=2)$?""",
+            "en": r"""Urn with $N=10$ balls, $M=5$ red. Draw $n=3$ without replacement. $X = \text{number of red balls}$. $P(X=2)$?"""
         },
         "options": [
             {"de": r"$5/12$", "en": r"$5/12$"},
@@ -1957,20 +1955,20 @@ QUESTIONS_4_9 = {
         "source": "HS 2023 Januar, Problem 3",
         "type": "problem",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Problem 3 (15 Punkte)
+            "de": r"""Problem 3 (15 Punkte)
 An der Olma-Messe in St. Gallen gibt es eine lange Tradition des Schweinerennens: Fünf namentlich genannte Schweine treten gegeneinander an, um als erste an der Futterstation anzukommen.
 Das teilnehmende Star-Schwein Max V. beendet das Rennen immer in genau 10 Sekunden. Für
 die anderen 4 Schweine ist die Rennzeit unabhängig normalverteilt mit einem Mittelwert von
 µ = 13 Sekunden und einer Standardabweichung von σ = 2, 5 Sekunden.
-1. (5 Punkte) Wie hoch ist die Wahrscheinlichkeit, dass Max V. das Rennen gewinnt?
-2. (5 Punkte) Wie hoch ist die Wahrscheinlichkeit, dass Max V. nicht schlechter als Dritter
+1. Wie hoch ist die Wahrscheinlichkeit, dass Max V. das Rennen gewinnt?
+2. Wie hoch ist die Wahrscheinlichkeit, dass Max V. nicht schlechter als Dritter
 wird?
 Sie interessieren sich nun für die Rennplatzierung X (1., 2., 3., 4., 5.) von Max V.. Um eine Reihe
 von Wetten abzuschlieÃen, möchten Sie sehr sicher sein, dass die durchschnittliche Platzierung
 $\bar{X}_N$ über N unabhängige Rennen hinweg mindestens Zweiter ist ($\bar{X}_N \le 2$).
-3. (5 Punkte) Verwenden Sie die Näherung des zentralen Grenzwertsatzes: Was ist die niedrigste Anzahl von Rennen N, so dass $P(\bar{X}_N \le 2) \ge 0.999$?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Problem 3 (15 Points)
-Pig racing. Max V. takes 10s. 4 other pigs $Y \sim N(13, 2.5^2)$.<br>1. $P(\text{Max V. wins})$.<br>2. $P(\text{Max V. at least 3rd})$.<br>3. CLT Approximation.</span>"""
+3. Verwenden Sie die Näherung des zentralen Grenzwertsatzes: Was ist die niedrigste Anzahl von Rennen N, so dass $P(\bar{X}_N \le 2) \ge 0.999$?""",
+            "en": r"""Problem 3 (15 Points)
+Pig racing. Max V. takes 10s. 4 other pigs $Y \sim N(13, 2.5^2)$.<br>1. $P(\text{Max V. wins})$.<br>2. $P(\text{Max V. at least 3rd})$.<br>3. CLT Approximation."""
         },
         "solution": {
             "de": r"**Lösung:**<br>1. $P(Y > 10) = P(Z > -1.2) \approx 0.885$. Sieg gegen alle 4: $0.885^4 \approx 0.613$.<br>2. Binomialverteilung.",
@@ -2079,9 +2077,9 @@ Pig racing. Max V. takes 10s. 4 other pigs $Y \sim N(13, 2.5^2)$.<br>1. $P(\text
         "source": "HS 2022 Januar, MC #6 (4 Punkte)",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>6. Im Oktober macht Nina einen einwöchigen Städtetrip nach Hamburg. Die Wettervorhersage sagt für jeden Tag eine Regenwahrscheinlichkeit von 70% voraus. Wie hoch ist
-in etwa die Wahrscheinlichkeit, dass es an mindestens 5 von 7 Tagen regnet?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>6. (4 Points) In October, Nina takes a one-week city trip to Hamburg. The weather forecast predicts a 70% rain probability for each day. What is approximately the probability that it rains on at least 5 of 7 days?</span>"""
+            "de": r"""Im Oktober macht Nina einen einwöchigen Städtetrip nach Hamburg. Die Wettervorhersage sagt für jeden Tag eine Regenwahrscheinlichkeit von 70% voraus. Wie hoch ist
+in etwa die Wahrscheinlichkeit, dass es an mindestens 5 von 7 Tagen regnet?""",
+            "en": r"""In October, Nina takes a one-week city trip to Hamburg. The weather forecast predicts a 70% rain probability for each day. What is approximately the probability that it rains on at least 5 of 7 days?"""
         },
         "options": [
             {"de": "65%", "en": "65%"},
@@ -2099,8 +2097,8 @@ in etwa die Wahrscheinlichkeit, dass es an mindestens 5 von 7 Tagen regnet?</spa
         "source": "Test 4, Q1",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$X \sim Pois(10), Z=2X$. Welche Aussage trifft NICHT zu?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$X \sim Pois(10), Z=2X$. Which is FALSE?</span>"""
+            "de": r"""$X \sim Pois(10), Z=2X$. Welche Aussage trifft NICHT zu?""",
+            "en": r"""$X \sim Pois(10), Z=2X$. Which is FALSE?"""
         },
         "options": [
             {"de": r"$Z \sim Pois(20)$", "en": r"$Z \sim Pois(20)$"},
@@ -2118,8 +2116,8 @@ in etwa die Wahrscheinlichkeit, dass es an mindestens 5 von 7 Tagen regnet?</spa
         "source": "Test 5, Q1",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>1000 Leute (700 Smart, 300 Gewöhnlich). Stichprobe 200. $P(X=10)$ gewöhnliche?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>1000 ppl (700 smart, 300 ordinary). Sample 200. $P(X=10)$ ordinary?</span>"""
+            "de": r"""1000 Leute (700 Smart, 300 Gewöhnlich). Stichprobe 200. $P(X=10)$ gewöhnliche?""",
+            "en": r"""1000 ppl (700 smart, 300 ordinary). Sample 200. $P(X=10)$ ordinary?"""
         },
         "options": [
             {"de": "Additiv", "en": "Additiv"},
@@ -2140,8 +2138,8 @@ QUESTIONS_5_1 = {
     "test3_q4": {
         "source": "Test 3, Frage 4",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Sei $E[X] = 2$ und $E[Y] = 3$. Was ist $E[X + Y]$?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Let $E[X] = 2$ and $E[Y] = 3$. What is $E[X + Y]$?</span>"""
+            "de": r"""Sei $E[X] = 2$ und $E[Y] = 3$. Was ist $E[X + Y]$?""",
+            "en": r"""Let $E[X] = 2$ and $E[Y] = 3$. What is $E[X + Y]$?"""
         },
         "options": [{"de": r"$5$", "en": r"$5$"}, {"de": r"$6$", "en": r"$6$"}, {"de": r"$1$", "en": r"$1$"}, {"de": "Unbekannt", "en": "Unknown"}],
         "correct_idx": 0,
@@ -2153,8 +2151,8 @@ QUESTIONS_5_1 = {
     "uebung3_mc5": {
         "source": "Übung 3, MC5",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Der Erwartungswert-Operator $E[\cdot]$ ist...</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>The expectation operator $E[\cdot]$ is...</span>"""
+            "de": r"""Der Erwartungswert-Operator $E[\cdot]$ ist...""",
+            "en": r"""The expectation operator $E[\cdot]$ is..."""
         },
         "options": [{"de": "Linear", "en": "Linear"}, {"de": "Quadratisch", "en": "Quadratic"}, {"de": "Logarithmisch", "en": "Logarithmic"}, {"de": "Exponentiell", "en": "Exponential"}],
         "correct_idx": 0,
@@ -2167,27 +2165,27 @@ QUESTIONS_5_1 = {
         "source": "HS 2015, Aufgabe 4 (20 Punkte)",
         "type": "problem",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Aufgabe 4 (20 Punkte)
+            "de": r"""Aufgabe 4 (20 Punkte)
 Wir betrachten die beiden Zufallsvariablen X und Y mit gemeinsamer Dichte
 $$f_{X,Y}(x, y) = \begin{cases} \lambda(xy + c) & \text{für } 0 \le x \le 2 \text{ und } 0 \le y \le 1 \\ 0 & \text{sonst,} \end{cases}$$
 für die Parameter $\lambda \in \mathbb{R}$ und $c \ge 0$.
-1. (3 Punkte) Zeigen Sie, dass fX,Y für $\lambda = 1/(1 + 2c)$ eine Dichtefunktion ist.
-2. (2 Punkte) Zeigen Sie, dass für die Randdichte fX (x) gilt:
+1. Zeigen Sie, dass fX,Y für $\lambda = 1/(1 + 2c)$ eine Dichtefunktion ist.
+2. Zeigen Sie, dass für die Randdichte fX (x) gilt:
 $$f_X(x) = \begin{cases} \frac{x+2c}{2+4c} & \text{für } 0 \le x \le 2 \\ 0 & \text{sonst.} \end{cases}$$
-3. (5 Punkte) Berechnen Sie die Varianz von X für c = 1.
-4. (5 Punkte) Geben Sie den Ansatz zur Berechnung der Wahrscheinlichkeit P(X + Y < 6/5).
+3. Berechnen Sie die Varianz von X für c = 1.
+4. Geben Sie den Ansatz zur Berechnung der Wahrscheinlichkeit P(X + Y < 6/5).
 Fertigen Sie hierfür zuerst eine Skizze in der xy-Ebene an.
-5. (5 Punkte) Berechnen Sie die Wahrscheinlichkeit P(X + Y < 6/5) für c = 0.</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Problem 4 (20 Points)
+5. Berechnen Sie die Wahrscheinlichkeit P(X + Y < 6/5) für c = 0.""",
+            "en": r"""Problem 4 (20 Points)
 We consider the two random variables X and Y with joint density
 $$f_{X,Y}(x, y) = \begin{cases} \lambda(xy + c) & \text{for } 0 \le x \le 2 \text{ and } 0 \le y \le 1 \\ 0 & \text{otherwise} \end{cases}$$
 for parameters $\lambda \in \mathbb{R}$ and $c \ge 0$.
-1. (3 Points) Show that for $\lambda = 1/(1 + 2c)$, $f_{X,Y}$ is a density function.
-2. (2 Points) Show that for the marginal density $f_X(x)$:
+1. Show that for $\lambda = 1/(1 + 2c)$, $f_{X,Y}$ is a density function.
+2. Show that for the marginal density $f_X(x)$:
 $$f_X(x) = \begin{cases} \frac{x+2c}{2+4c} & \text{for } 0 \le x \le 2 \\ 0 & \text{otherwise} \end{cases}$$
-3. (5 Points) Calculate the variance of X for c = 1.
-4. (5 Points) State the approach for calculating the probability $P(X + Y < 6/5)$. First, make a sketch in the xy-plane for this.
-5. (5 Points) Calculate the probability $P(X + Y < 6/5)$ for c = 0.</span>"""
+3. Calculate the variance of X for c = 1.
+4. State the approach for calculating the probability $P(X + Y < 6/5)$. First, make a sketch in the xy-plane for this.
+5. Calculate the probability $P(X + Y < 6/5)$ for c = 0."""
         },
         "solution": {
             "de": r"**Lösung:**<br>1. Integral über Bereich muss 1 geben.<br>2. $f_X(x) = \frac{x+2c}{2+4c}$.<br>3. $\text{Var}(X) \approx 0.32$.<br>5. Integral über Dreieck/Bereich $\approx 0.085$.",
@@ -2198,8 +2196,8 @@ $$f_X(x) = \begin{cases} \frac{x+2c}{2+4c} & \text{for } 0 \le x \le 2 \\ 0 & \t
         "source": "Übung 3, Probe #1",
         "type": "problem",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Gemeinsame Massenfunktion (Tabelle). X (10, 20, 30), Y (2, 3, 4).<br>(a) Randverteilungen.<br>(c) V(X), V(Y).<br>(d) Cov, Rho.<br>(e) Unabhängig?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Consider the joint probability mass function given in the table below for random variables X (taking values 10, 20, 30) and Y (taking values 2, 3, 4).<br>(a) Determine the marginal distributions of X and Y.<br>(c) Calculate the variances V(X) and V(Y).<br>(d) Calculate the Covariance and Correlation Coefficient.<br>(e) Are X and Y independent?</span>"""
+            "de": r"""Gemeinsame Massenfunktion (Tabelle). X (10, 20, 30), Y (2, 3, 4).<br>(a) Randverteilungen.<br>(c) V(X), V(Y).<br>(d) Cov, Rho.<br>(e) Unabhängig?""",
+            "en": r"""Consider the joint probability mass function given in the table below for random variables X (taking values 10, 20, 30) and Y (taking values 2, 3, 4).<br>(a) Determine the marginal distributions of X and Y.<br>(c) Calculate the variances V(X) and V(Y).<br>(d) Calculate the Covariance and Correlation Coefficient.<br>(e) Are X and Y independent?"""
         },
         "solution": {
             "de": r"**Lösung:**<br>(a) Marginale $1/3$.<br>(d) Cov=0 (unkorreliert).<br>(e) Abhängig ($f(x,y) \neq f(x)f(y)$).",
@@ -2210,8 +2208,8 @@ $$f_X(x) = \begin{cases} \frac{x+2c}{2+4c} & \text{for } 0 \le x \le 2 \\ 0 & \t
         "source": "Übung 3, Probe #2",
         "type": "problem",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Tabelle mit $x_1..x_4, y_1..y_3$.<br>(a) $f_X(x_3), f_Y(y_2)$.<br>(b) Bedingte W'keiten.</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Consider a joint distribution table with values $x_1, \dots, x_4$ and $y_1, \dots, y_3$.<br>(a) Calculate the marginal probabilities $f_X(x_3)$ and $f_Y(y_2)$.<br>(b) Calculate the conditional probabilities.</span>"""
+            "de": r"""Tabelle mit $x_1..x_4, y_1..y_3$.<br>(a) $f_X(x_3), f_Y(y_2)$.<br>(b) Bedingte W'keiten.""",
+            "en": r"""Consider a joint distribution table with values $x_1, \dots, x_4$ and $y_1, \dots, y_3$.<br>(a) Calculate the marginal probabilities $f_X(x_3)$ and $f_Y(y_2)$.<br>(b) Calculate the conditional probabilities."""
         },
         "solution": {
             "de": r"**Lösung:**<br>(a) Zeilensummen/Spaltensummen.<br>(b) Zelle / Randsumme.",
@@ -2222,8 +2220,8 @@ $$f_X(x) = \begin{cases} \frac{x+2c}{2+4c} & \text{for } 0 \le x \le 2 \\ 0 & \t
         "source": "Übung 3, Probe #4",
         "type": "problem",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$f(x,y) = 24xy$ für $x+y \le 1$.<br>(a) Zeige Dichte.<br>(b) Unabhängig?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$f(x,y) = 24xy$ on simplex.<br>(a) Verify PDF.<br>(b) Indep?</span>"""
+            "de": r"""$f(x,y) = 24xy$ für $x+y \le 1$.<br>(a) Zeige Dichte.<br>(b) Unabhängig?""",
+            "en": r"""$f(x,y) = 24xy$ on simplex.<br>(a) Verify PDF.<br>(b) Indep?"""
         },
         "solution": {
             "de": r"**Lösung:**<br>(b) Abhängig, da Definitionsbereich (Dreieck) kein Rechteck ist.",
@@ -2234,8 +2232,8 @@ $$f_X(x) = \begin{cases} \frac{x+2c}{2+4c} & \text{for } 0 \le x \le 2 \\ 0 & \t
         "source": "Übung 3, Probe #5",
         "type": "problem",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$f(x,y) = 2x e^{-y}$ auf Rechteck $0<x<1, y>0$.<br>(a) Zeige Dichte.<br>(b) Unabhängig?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$f(x,y) = 2x e^{-y}$ on the rectangle $0 < x < 1, y > 0$.<br>(a) Verify that it is a PDF.<br>(b) Are they independent?</span>"""
+            "de": r"""$f(x,y) = 2x e^{-y}$ auf Rechteck $0<x<1, y>0$.<br>(a) Zeige Dichte.<br>(b) Unabhängig?""",
+            "en": r"""$f(x,y) = 2x e^{-y}$ on the rectangle $0 < x < 1, y > 0$.<br>(a) Verify that it is a PDF.<br>(b) Are they independent?"""
         },
         "solution": {
             "de": r"**Lösung:**<br>(b) Unabhängig (Rechteck + Faktorisierung).",
@@ -2250,10 +2248,10 @@ QUESTIONS_5_2 = {
         "source": "HS 2023 Januar, MC #9",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>9. Seien X und Y zwei Zufallsvariablen mit Verteilungen X ∼ N (µ = 4, σ 2 = 2)
+            "de": r"""Seien X und Y zwei Zufallsvariablen mit Verteilungen X ∼ N (µ = 4, σ 2 = 2)
 und Y ∼ N (µ = 0, σ 2 = 3). Des Weiteren gilt E[XY ] = E[X]E[Y ]. Sei Z eine Zufallsvariable
-welche als Z = 3 - 2X + 3Y definiert ist. Wie lautet die Kovarianz Cov(Y, Z)?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>9. (4 Points) Let X and Y be two random variables with distributions X ~ N(mu = 4, sigma^2 = 2) and Y ~ N(mu = 0, sigma^2 = 3). Furthermore, E[XY] = E[X]E[Y] holds. Let Z be a random variable defined as Z = 3 - 2X + 3Y. What is the covariance Cov(Y, Z)?</span>"""
+welche als Z = 3 - 2X + 3Y definiert ist. Wie lautet die Kovarianz Cov(Y, Z)?""",
+            "en": r"""Let X and Y be two random variables with distributions X ~ N(mu = 4, sigma^2 = 2) and Y ~ N(mu = 0, sigma^2 = 3). Furthermore, E[XY] = E[X]E[Y] holds. Let Z be a random variable defined as Z = 3 - 2X + 3Y. What is the covariance Cov(Y, Z)?"""
         },
         "options": [
             {"de": "27", "en": "27"},
@@ -2270,8 +2268,8 @@ welche als Z = 3 - 2X + 3Y definiert ist. Wie lautet die Kovarianz Cov(Y, Z)?</s
     "test3_q5": {
         "source": "Test 3, Frage 5",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$X, Y$ unabhängig. $\text{Var}(X)=2$, $\text{Var}(Y)=3$. Was ist $\text{Var}(X - Y)$?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$X, Y$ independent. $\text{Var}(X)=2$, $\text{Var}(Y)=3$. What is $\text{Var}(X - Y)$?</span>"""
+            "de": r"""$X, Y$ unabhängig. $\text{Var}(X)=2$, $\text{Var}(Y)=3$. Was ist $\text{Var}(X - Y)$?""",
+            "en": r"""$X, Y$ independent. $\text{Var}(X)=2$, $\text{Var}(Y)=3$. What is $\text{Var}(X - Y)$?"""
         },
         "options": [
             {"de": r"$5$", "en": r"$5$"},
@@ -2288,8 +2286,8 @@ welche als Z = 3 - 2X + 3Y definiert ist. Wie lautet die Kovarianz Cov(Y, Z)?</s
     "uebung3_mc7": {
         "source": "Übung 3, MC7",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Was gilt allgemein für $\text{Var}(aX + b)$?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>What holds generally for $\text{Var}(aX + b)$?</span>"""
+            "de": r"""Was gilt allgemein für $\text{Var}(aX + b)$?""",
+            "en": r"""What holds generally for $\text{Var}(aX + b)$?"""
         },
         "options": [
             {"de": r"$a^2 \text{Var}(X)$", "en": r"$a^2 \text{Var}(X)$"},
@@ -2307,8 +2305,8 @@ welche als Z = 3 - 2X + 3Y definiert ist. Wie lautet die Kovarianz Cov(Y, Z)?</s
         "source": "Übung 3, Probe #3",
         "type": "problem",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>X, Y Tabelle (0, 0.5, 1 vs 0, 1).<br>(a) Unabhängig?<br>(b) Cov?<br>(c) Varianz von X-Y?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Given a joint distribution table for X (values 0, 0.5, 1) and Y (values 0, 1).<br>(a) Are X and Y independent?<br>(b) Calculate the Covariance.<br>(c) Calculate the variance of X - Y.</span>"""
+            "de": r"""X, Y Tabelle (0, 0.5, 1 vs 0, 1).<br>(a) Unabhängig?<br>(b) Cov?<br>(c) Varianz von X-Y?""",
+            "en": r"""Given a joint distribution table for X (values 0, 0.5, 1) and Y (values 0, 1).<br>(a) Are X and Y independent?<br>(b) Calculate the Covariance.<br>(c) Calculate the variance of X - Y."""
         },
         "solution": {
             "de": r"**Lösung:**<br>(a) Abhängig.<br>(b) Cov=0.<br>(c) $V(X)+V(Y)$ (da unkorreliert).",
@@ -2319,8 +2317,8 @@ welche als Z = 3 - 2X + 3Y definiert ist. Wie lautet die Kovarianz Cov(Y, Z)?</s
         "source": "Übung 3, Probe #7",
         "type": "problem",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>X, Y, Z unabhängig. Diskrete Verteilungen gegeben.<br>(a) Mittelwert/Varianz X, Y, X-Y.<br>(b) Verteilung Summen.<br>(c) Wahrscheinlichkeiten.</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Let X, Y, and Z be independent discrete random variables with given distributions.<br>(a) Calculate the mean and variance for X, Y, and X - Y.<br>(b) Determine the distribution of the sums.<br>(c) Calculate specific probabilities.</span>"""
+            "de": r"""X, Y, Z unabhängig. Diskrete Verteilungen gegeben.<br>(a) Mittelwert/Varianz X, Y, X-Y.<br>(b) Verteilung Summen.<br>(c) Wahrscheinlichkeiten.""",
+            "en": r"""Let X, Y, and Z be independent discrete random variables with given distributions.<br>(a) Calculate the mean and variance for X, Y, and X - Y.<br>(b) Determine the distribution of the sums.<br>(c) Calculate specific probabilities."""
         },
         "solution": {
             "de": r"**Lösung:**<br>(a) Additivität.<br>(b) Faltung.",
@@ -2335,22 +2333,22 @@ QUESTIONS_5_3 = {
         "source": "HS 2015, MC 6 (4 Punkte)",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>6. Es seien Xi , i = 1, . . . , n Zufallsvariablen, die jedoch nicht notwendigerweise unabhängig oder identisch verteilt sind. Nehmen Sie an, folgende Gleichungen sind erfüllt:
+            "de": r"""Es seien Xi , i = 1, . . . , n Zufallsvariablen, die jedoch nicht notwendigerweise unabhängig oder identisch verteilt sind. Nehmen Sie an, folgende Gleichungen sind erfüllt:
 E[Xi ] = µ,
 Var(Xi ) = σ 2 ,
 Cov(Xi , Xj ) = 0, für i ̸= j.
-Sei X̄n = n1 ni=1 Xi das Stichprobenmittel. Welche der folgenden Aussagen ist falsch?</span>""",
-"en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>6. Let $X_i, i = 1, \dots, n$ be random variables, which are not necessarily independent or identically distributed. Assume the following equations hold:
+Sei X̄n = n1 ni=1 Xi das Stichprobenmittel. Welche der folgenden Aussagen ist falsch?""",
+"en": r"""Let $X_i, i = 1, \dots, n$ be random variables, which are not necessarily independent or identically distributed. Assume the following equations hold:
 $E[X_i] = \mu$,
 $Var(X_i) = \sigma^2$,
 $Cov(X_i, X_j) = 0$, for $i \neq j$.
-Let $\bar{X}_n = \frac{1}{n} \sum_{i=1}^n X_i$ be the sample mean. Which of the following statements is false?</span>"""
+Let $\bar{X}_n = \frac{1}{n} \sum_{i=1}^n X_i$ be the sample mean. Which of the following statements is false?"""
         },
         "options": [
             {"de": r"$-1 \le \rho_{X,Y} < 0$", "en": r"$-1 \le \rho_{X,Y} < 0$"},
             {"de": r"$\rho_{X,Y} = 0$", "en": r"$\rho_{X,Y} = 0$"},
             {"de": r"$0 < \rho_{X,Y} \le 1$", "en": r"$0 < \rho_{X,Y} \le 1$"},
-            {"de": "Keine der obigen Aussagen ist immer wahr.", "en": "Keine der obigen Aussagen ist immer wahr."}
+            {"de": "Keine der obigen Aussagen ist immer wahr.", "en": "None of the above statements is always true."}
         ],
         "correct_idx": 3,
         "solution": {
@@ -2361,8 +2359,8 @@ Let $\bar{X}_n = \frac{1}{n} \sum_{i=1}^n X_i$ be the sample mean. Which of the 
     "uebung3_mc1": {
         "source": "Übung 3, MC1",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Die Kovarianz misst...</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>The covariance measures...</span>"""
+            "de": r"""Die Kovarianz misst...""",
+            "en": r"""The covariance measures..."""
         },
         "options": [
             {"de": "nur die Stärke", "en": "only the strength"},
@@ -2378,8 +2376,8 @@ Let $\bar{X}_n = \frac{1}{n} \sum_{i=1}^n X_i$ be the sample mean. Which of the 
     "uebung3_mc9": {
         "source": "Übung 3, MC9",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Urne mit $5$ Kugeln ($1-5$). Ziehen ohne Zurücklegen. $X = 1$. Kugel, $Y = 2$. Kugel. Korrelation?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Urn with $5$ balls ($1-5$). Draw without replacement. $X = 1$st ball, $Y = 2$nd ball. Correlation?</span>"""
+            "de": r"""Urne mit $5$ Kugeln ($1-5$). Ziehen ohne Zurücklegen. $X = 1$. Kugel, $Y = 2$. Kugel. Korrelation?""",
+            "en": r"""Urn with $5$ balls ($1-5$). Draw without replacement. $X = 1$st ball, $Y = 2$nd ball. Correlation?"""
         },
         "options": [
             {"de": r"$0$", "en": r"$0$"},
@@ -2395,8 +2393,8 @@ Let $\bar{X}_n = \frac{1}{n} \sum_{i=1}^n X_i$ be the sample mean. Which of the 
     "test4_q2": {
         "source": "Test 4, Frage 2",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$\text{Cov}(X,Y) = 3$, $\text{Var}(X) = 4$, $\text{Var}(Y) = 9$. Berechnen Sie $\text{Cor}(X,Y)$.</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$\text{Cov}(X,Y) = 3$, $\text{Var}(X) = 4$, $\text{Var}(Y) = 9$. Calculate $\text{Cor}(X,Y)$.</span>"""
+            "de": r"""$\text{Cov}(X,Y) = 3$, $\text{Var}(X) = 4$, $\text{Var}(Y) = 9$. Berechnen Sie $\text{Cor}(X,Y)$.""",
+            "en": r"""$\text{Cov}(X,Y) = 3$, $\text{Var}(X) = 4$, $\text{Var}(Y) = 9$. Calculate $\text{Cor}(X,Y)$."""
         },
         "options": [
             {"de": r"$0.5$", "en": r"$0.5$"},
@@ -2413,8 +2411,8 @@ Let $\bar{X}_n = \frac{1}{n} \sum_{i=1}^n X_i$ be the sample mean. Which of the 
     "test4_q4": {
         "source": "Test 4, Frage 4",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Wenn $X$ und $Y$ unabhängig sind, dann ist die Kovarianz...</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>If $X$ and $Y$ are independent, then the covariance is...</span>"""
+            "de": r"""Wenn $X$ und $Y$ unabhängig sind, dann ist die Kovarianz...""",
+            "en": r"""If $X$ and $Y$ are independent, then the covariance is..."""
         },
         "options": [{"de": "0", "en": "0"}, {"de": "1", "en": "1"}, {"de": "-1", "en": "-1"}, {"de": "Unbestimmt", "en": "Undefined"}],
         "correct_idx": 0,
@@ -2427,9 +2425,9 @@ Let $\bar{X}_n = \frac{1}{n} \sum_{i=1}^n X_i$ be the sample mean. Which of the 
         "source": "HS 2015, MC 1 (4 Punkte)",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>1. Es seien X, Y zwei stetige Zufallsvariablen. Welche der folgenden Aussagen ist immer
-korrekt?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>1. Let $X, Y$ be two continuous random variables. Which of the following statements is always correct?</span>"""
+            "de": r"""Es seien X, Y zwei stetige Zufallsvariablen. Welche der folgenden Aussagen ist immer
+korrekt?""",
+            "en": r"""Let $X, Y$ be two continuous random variables. Which of the following statements is always correct?"""
         },
         "options": [
             {"de": r"Wenn die Randdichten $f_X(x)$ und $f_Y(y)$ bekannt sind, können wir daraus die gemeinsame Dichte $f_{X,Y}(x, y)$ berechnen.", "en": r"If the marginal densities $f_X(x)$ and $f_Y(y)$ are known, we can calculate the joint density $f_{X,Y}(x, y)$."},
@@ -2447,9 +2445,9 @@ korrekt?</span>""",
         "source": "HS 2015, MC 7 (4 Punkte)",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>7. Es seien X, Y und Z drei Zufallsvariablen wobei Y = 3X + 2 und Z = 2X - 3. Welche
-der folgenden Aussagen ist richtig?</span>""",
-"en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>7. Let $X, Y$ and $Z$ be three random variables where $Y = 3X + 2$ and $Z = 2X - 3$. Which of the following statements is correct?</span>"""
+            "de": r"""Es seien X, Y und Z drei Zufallsvariablen wobei Y = 3X + 2 und Z = 2X - 3. Welche
+der folgenden Aussagen ist richtig?""",
+"en": r"""Let $X, Y$ and $Z$ be three random variables where $Y = 3X + 2$ and $Z = 2X - 3$. Which of the following statements is correct?"""
         },
         "options": [
             {"de": r"$\text{Corr}(X, Y) > \text{Corr}(X, Z)$", "en": r"$\text{Corr}(X, Y) > \text{Corr}(X, Z)$"},
@@ -2471,8 +2469,8 @@ QUESTIONS_5_4 = {
     "uebung3_mc10": {
         "source": "Übung 3, MC10",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Der Korrelationskoeffizient liegt immer zwischen...</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>The correlation coefficient is always between...</span>"""
+            "de": r"""Der Korrelationskoeffizient liegt immer zwischen...""",
+            "en": r"""The correlation coefficient is always between..."""
         },
         "options": [
             {"de": r"$-1$ und $1$", "en": r"$-1$ und $1$"},
@@ -2489,8 +2487,8 @@ QUESTIONS_5_4 = {
     "uebung3_mc11": {
         "source": "Übung 3, MC11",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$\text{Corr}(X,Y) = 0.8$ bedeutet...</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$\text{Corr}(X,Y) = 0.8$ means...</span>"""
+            "de": r"""$\text{Corr}(X,Y) = 0.8$ bedeutet...""",
+            "en": r"""$\text{Corr}(X,Y) = 0.8$ means..."""
         },
         "options": [
             {"de": "Starker positiver linearer Zusammenhang", "en": "Strong positive linear relationship"},
@@ -2508,18 +2506,18 @@ QUESTIONS_5_4 = {
         "source": "HS 2015, MC 6 (4 Punkte)",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>6. Es seien Xi , i = 1, . . . , n Zufallsvariablen, die jedoch nicht notwendigerweise unabhängig oder identisch verteilt sind. Nehmen Sie an, folgende Gleichungen sind erfüllt:
+            "de": r"""Es seien Xi , i = 1, . . . , n Zufallsvariablen, die jedoch nicht notwendigerweise unabhängig oder identisch verteilt sind. Nehmen Sie an, folgende Gleichungen sind erfüllt:
 n            n
 !
 1                2
 X            X
 V ar       Xi =         V ar (Xi ) = n · V ar (Xj ) , ∀j = 1, . . . , n
 i=1        i=1
-Welche der folgenden Aussagen ist korrekt?</span>""",
-"en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>6. Let $X_i, i = 1, \dots, n$ be random variables, which are not necessarily independent or identically distributed. Assume the following equations hold:
+Welche der folgenden Aussagen ist korrekt?""",
+"en": r"""Let $X_i, i = 1, \dots, n$ be random variables, which are not necessarily independent or identically distributed. Assume the following equations hold:
 (1) $\text{Var}(\sum_{i=1}^n X_i) = \sum_{i=1}^n \text{Var}(X_i)$
 (2) $\text{Var}(\sum_{i=1}^n X_i) = n \cdot \text{Var}(X_j), \forall j = 1, \dots, n$
-Which of the following statements is correct?</span>"""
+Which of the following statements is correct?"""
         },
         "options": [
             {"de": "Hinreichend für 1: Identisch verteilt. Hinreichend für 2: Unabhängig.", "en": "Hinreichend für 1: Identisch verteilt. Hinreichend für 2: Unabhängig."},
@@ -2537,8 +2535,8 @@ Which of the following statements is correct?</span>"""
         "source": "Übung 3, Probe #6",
         "type": "problem",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Notenverteilung Mathe (X) Englisch (Y). Tabelle.<br>(a) Momente zeigen.<br>(b) Cov, Rho.<br>(c) $Z = (X+Y)/2$.</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Grade distribution Math (X) and English (Y). Table given.<br>(a) Show moments.<br>(b) Calculate Covariance and Correlation.<br>(c) Consider $Z = (X+Y)/2$.</span>"""
+            "de": r"""Notenverteilung Mathe (X) Englisch (Y). Tabelle.<br>(a) Momente zeigen.<br>(b) Cov, Rho.<br>(c) $Z = (X+Y)/2$.""",
+            "en": r"""Grade distribution Math (X) and English (Y). Table given.<br>(a) Show moments.<br>(b) Calculate Covariance and Correlation.<br>(c) Consider $Z = (X+Y)/2$."""
         },
         "solution": {
             "de": r"**Lösung:**<br>(b) Cov 0.29, Rho 0.36.<br>(c) Diversifikationseffekt (kleinere Varianz).",
@@ -2556,14 +2554,14 @@ QUESTIONS_5_5 = {
         "source": "Übung 3, MC #2",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Der Korrelationskoeffizient $\rho$:</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Correlation coefficient $\rho$:</span>"""
+            "de": r"""Der Korrelationskoeffizient $\rho$:""",
+            "en": r"""Correlation coefficient $\rho$:"""
         },
         "options": [
-            {"de": "misst nur die Stärke.", "en": "misst nur die Stärke."},
-            {"de": "misst nur die Richtung.", "en": "misst nur die Richtung."},
-            {"de": "misst Stärke und Richtung des linearen Zusammenhangs.", "en": "misst Stärke und Richtung des linearen Zusammenhangs."},
-            {"de": "hat keine Aussagekraft.", "en": "hat keine Aussagekraft."}
+            {"de": "misst nur die Stärke.", "en": "measures only strength."},
+            {"de": "misst nur die Richtung.", "en": "measures only direction."},
+            {"de": "misst Stärke und Richtung des linearen Zusammenhangs.", "en": "measures strength and direction of the linear relationship."},
+            {"de": "hat keine Aussagekraft.", "en": "has no explanatory power."}
         ],
         "correct_idx": 2,
         "solution": {
@@ -2575,8 +2573,8 @@ QUESTIONS_5_5 = {
         "source": "Übung 3, MC #3",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Zwei Variablen sind unabhängig, wenn:</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Two variables are independent if:</span>"""
+            "de": r"""Zwei Variablen sind unabhängig, wenn:""",
+            "en": r"""Two variables are independent if:"""
         },
         "options": [
             {"de": r"$\rho = 0$.", "en": r"$\rho = 0$."},
@@ -2594,8 +2592,8 @@ QUESTIONS_5_5 = {
         "source": "Übung 3, MC #4",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Die Kovarianz wird errechnet mit:</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Covariance is calculated as:</span>"""
+            "de": r"""Die Kovarianz wird errechnet mit:""",
+            "en": r"""Covariance is calculated as:"""
         },
         "options": [
             {"de": r"$E[XY] - E[X]E[Y]$", "en": r"$E[XY] - E[X]E[Y]$"},
@@ -2613,14 +2611,14 @@ QUESTIONS_5_5 = {
         "source": "Übung 3, MC #6",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Wann gilt $E[XY] = E[X]E[Y]$?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>When does $E[XY] = E[X]E[Y]$ hold?</span>"""
+            "de": r"""Wann gilt $E[XY] = E[X]E[Y]$?""",
+            "en": r"""When does $E[XY] = E[X]E[Y]$ hold?"""
         },
         "options": [
-            {"de": "Immer.", "en": "Immer."},
-            {"de": "Nie.", "en": "Nie."},
-            {"de": "Falls X und Y unkorreliert sind.", "en": "Falls X und Y unkorreliert sind."},
-            {"de": "Nur falls X und Y identisch sind.", "en": "Nur falls X und Y identisch sind."}
+            {"de": "Immer.", "en": "Always."},
+            {"de": "Nie.", "en": "Never."},
+            {"de": "Falls X und Y unkorreliert sind.", "en": "If X and Y are uncorrelated."},
+            {"de": "Nur falls X und Y identisch sind.", "en": "Only if X and Y are identical."}
         ],
         "correct_idx": 2,
         "solution": {
@@ -2632,8 +2630,8 @@ QUESTIONS_5_5 = {
         "source": "Übung 3, MC #8",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>X = Würfel, Y = Münze ('Kopf'). $P(X > 3 | Y = \text{'Kopf'})$?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>X = Die, Y = Coin ('Head'). $P(X > 3 | Y = \text{'Head'})$?</span>"""
+            "de": r"""X = Würfel, Y = Münze ('Kopf'). $P(X > 3 | Y = \text{'Kopf'})$?""",
+            "en": r"""X = Die, Y = Coin ('Head'). $P(X > 3 | Y = \text{'Head'})$?"""
         },
         "options": [
             {"de": "1/3", "en": "1/3"},
@@ -2651,8 +2649,8 @@ QUESTIONS_5_5 = {
         "source": "Übung 3, MC #12",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Dichte $f(x,y) = x/12 + y/6$ auf $[0,2]^2$. $E[X+2Y]$?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Density $f(x,y) = x/12 + y/6$ on $[0,2]^2$. $E[X+2Y]$?</span>"""
+            "de": r"""Dichte $f(x,y) = x/12 + y/6$ auf $[0,2]^2$. $E[X+2Y]$?""",
+            "en": r"""Density $f(x,y) = x/12 + y/6$ on $[0,2]^2$. $E[X+2Y]$?"""
         },
         "options": [
             {"de": "33/9", "en": "33/9"},
@@ -2670,8 +2668,8 @@ QUESTIONS_5_5 = {
         "source": "Übung 3, MC #13",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Gleiche Dichte wie #12. $V(Y)$?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Consider the same density as in the previous question (#12). What is the variance $V(Y)$?</span>"""
+            "de": r"""Dichte $f(x,y) = x/12 + y/6$ auf $[0,2]^2$. Was ist $V(Y)$?""",
+            "en": r"""Given density $f(x,y) = x/12 + y/6$ on $[0,2]^2$. What is the variance $V(Y)$?"""
         },
         "options": [
             {"de": "23/81", "en": "23/81"},
@@ -2689,8 +2687,8 @@ QUESTIONS_5_5 = {
         "source": "Test 3, Q3",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$Corr(X,Y)=-1, Var(X)=1, SD(Y)=2$. $Var(3X+Y)$?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$Corr(X,Y)=-1, Var(X)=1, SD(Y)=2$. $Var(3X+Y)$?</span>"""
+            "de": r"""$Corr(X,Y)=-1, Var(X)=1, SD(Y)=2$. $Var(3X+Y)$?""",
+            "en": r"""$Corr(X,Y)=-1, Var(X)=1, SD(Y)=2$. $Var(3X+Y)$?"""
         },
         "options": [
             {"de": "7", "en": "7"},
@@ -2708,8 +2706,8 @@ QUESTIONS_5_5 = {
         "source": "Test 3, Q4",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>X, Y unkorreliert. $E(X)=E(Y)=1, Var(X)=Var(Y)=1$. Was gilt?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>X and Y are uncorrelated. Given $E(X)=E(Y)=1$ and $Var(X)=Var(Y)=1$. Which of the following holds?</span>"""
+            "de": r"""X, Y unkorreliert. $E(X)=E(Y)=1, Var(X)=Var(Y)=1$. Was gilt?""",
+            "en": r"""X and Y are uncorrelated. Given $E(X)=E(Y)=1$ and $Var(X)=Var(Y)=1$. Which of the following holds?"""
         },
         "options": [
             {"de": r"$3E(X^2) + Cov(X,Y) = 2$", "en": r"$3E(X^2) + Cov(X,Y) = 2$"},
@@ -2727,14 +2725,14 @@ QUESTIONS_5_5 = {
         "source": "Test 4, Q2",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$Z = 4X - 3Y + 2$. $Cov(X, Z)$ unter Annahme Unkorreliertheit?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$Z = 4X - 3Y + 2$. $Cov(X, Z)$ assuming uncorrelated?</span>"""
+            "de": r"""$Z = 4X - 3Y + 2$. $Cov(X, Z)$ unter Annahme Unkorreliertheit?""",
+            "en": r"""$Z = 4X - 3Y + 2$. $Cov(X, Z)$ assuming uncorrelated?"""
         },
         "options": [
             {"de": "0", "en": "0"},
             {"de": "64", "en": "64"},
             {"de": "16", "en": "16"},
-            {"de": "Info fehlt", "en": "Info fehlt"}
+            {"de": "Info fehlt", "en": "Info missing"}
         ],
         "correct_idx": 2,
         "solution": {
@@ -2746,12 +2744,12 @@ QUESTIONS_5_5 = {
         "source": "Test 5, Q2",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Stetige ZV X, Y. Was ist immer korrekt bzgl. Unkorreliertheit?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Continuous X, Y. What is always correct re: uncorrelatedness?</span>"""
+            "de": r"""Stetige ZV X, Y. Was ist immer korrekt bzgl. Unkorreliertheit?""",
+            "en": r"""Continuous X, Y. What is always correct re: uncorrelatedness?"""
         },
         "options": [
-            {"de": "Randdichten reichen", "en": "Randdichten reichen"},
-            {"de": "Unabh <=> Cov=0", "en": "Unabh <=> Cov=0"},
+            {"de": "Randdichten reichen", "en": "Marginal densities suffice"},
+            {"de": "Unabh <=> Cov=0", "en": "Indep <=> Cov=0"},
             {"de": r"$f(y|x)$...", "en": r"$f(y|x)$..."},
             {"de": r"$Cov=0 \iff E[XY] = E[X]E[Y]$", "en": r"$Cov=0 \iff E[XY] = E[X]E[Y]$"}
         ],
@@ -2771,15 +2769,15 @@ QUESTIONS_6_3 = {
         "source": "Übung 4, MC #1",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Seien $X_1, ..., X_n$ i.i.d. mit endlichem E und Var. $S_n = \sum X_i$. Der Zentrale Grenzwertsatz besagt:</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Let $X_1, ..., X_n$ be i.i.d. with finite mean/var. $S_n = \sum X_i$. CLT states:</span>"""
+            "de": r"""Seien $X_1, ..., X_n$ i.i.d. mit endlichem E und Var. $S_n = \sum X_i$. Der Zentrale Grenzwertsatz besagt:""",
+            "en": r"""Let $X_1, ..., X_n$ be i.i.d. with finite mean/var. $S_n = \sum X_i$. CLT states:"""
         },
         "options": [
-            {"de": r"$S_n$ ist approximativ standardnormalverteilt (n > 30).", "en": r"$S_n$ ist approximativ standardnormalverteilt (n > 30)."},
-            {"de": r"Die standardisierte ZV $S_n$ ist approximativ standardnormalverteilt (n > 30).", "en": r"Die standardisierte ZV $S_n$ ist approximativ standardnormalverteilt (n > 30)."},
-            {"de": r"$S_n$ ist approximativ normalverteilt (n > 30).", "en": r"$S_n$ ist approximativ normalverteilt (n > 30)."},
-            {"de": r"Die standardisierte ZV $S_n$ ist approximativ normalverteilt (n > 30).", "en": r"Die standardisierte ZV $S_n$ ist approximativ normalverteilt (n > 30)."},
-            {"de": r"Die standardisierte ZV $S_n$ ist approximativ standardnormalverteilt (n <= 30).", "en": r"Die standardisierte ZV $S_n$ ist approximativ standardnormalverteilt (n <= 30)."}
+            {"de": r"$S_n$ ist approximativ standardnormalverteilt (n > 30).", "en": r"$S_n$ is approximately standard normal (n > 30)."},
+            {"de": r"Die standardisierte ZV $S_n$ ist approximativ standardnormalverteilt (n > 30).", "en": r"The standardized RV $S_n$ is approximately standard normal (n > 30)."},
+            {"de": r"$S_n$ ist approximativ normalverteilt (n > 30).", "en": r"$S_n$ is approximately normal (n > 30)."},
+            {"de": r"Die standardisierte ZV $S_n$ ist approximativ normalverteilt (n > 30).", "en": r"The standardized RV $S_n$ is approximately normal (n > 30)."},
+            {"de": r"Die standardisierte ZV $S_n$ ist approximativ standardnormalverteilt (n <= 30).", "en": r"The standardized RV $S_n$ is approximately standard normal (n <= 30)."}
         ],
         "correct_idx": 1,
         "solution": {
@@ -2791,14 +2789,14 @@ QUESTIONS_6_3 = {
         "source": "Übung 4, MC #2",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Bedingungen für den Zentralen Grenzwertsatz:</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Conditions for the Central Limit Theorem:</span>"""
+            "de": r"""Bedingungen für den Zentralen Grenzwertsatz:""",
+            "en": r"""Conditions for the Central Limit Theorem:"""
         },
         "options": [
             {"de": r"$S_n = X_1 + ... + X_n$.", "en": r"$S_n = X_1 + ... + X_n$."},
             {"de": r"$S_n = X_1^2 + ... + X_n^2$.", "en": r"$S_n = X_1^2 + ... + X_n^2$."},
-            {"de": r"$X_i$ sind identisch verteilt.", "en": r"$X_i$ sind identisch verteilt."},
-            {"de": r"$X_i$ sind gleichverteilt.", "en": r"$X_i$ sind gleichverteilt."},
+            {"de": r"$X_i$ sind identisch verteilt.", "en": r"$X_i$ are identically distributed."},
+            {"de": r"$X_i$ sind gleichverteilt.", "en": r"$X_i$ are uniformly distributed."},
             {"de": r"$n > 30$.", "en": r"$n > 30$."}
         ],
         "correct_idx": 2,
@@ -2811,14 +2809,14 @@ QUESTIONS_6_3 = {
         "source": "Übung 4, MC #3",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>X, Y unabhängig. Summe Z = X + Y ist:</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>X, Y independent. Sum Z = X + Y follows:</span>"""
+            "de": r"""X, Y unabhängig. Summe Z = X + Y ist:""",
+            "en": r"""X, Y independent. Sum Z = X + Y follows:"""
         },
         "options": [
-            {"de": "Binomial, wenn X, Y binomial mit selbem p.", "en": "Binomial, wenn X, Y binomial mit selbem p."},
-            {"de": "Normalverteilt, wenn X, Y normal mit selben Parametern.", "en": "Normalverteilt, wenn X, Y normal mit selben Parametern."},
-            {"de": "Standardnormal, wenn X, Y standardnormal.", "en": "Standardnormal, wenn X, Y standardnormal."},
-            {"de": "Normal, wenn X, Y standardnormal.", "en": "Normal, wenn X, Y standardnormal."}
+            {"de": "Binomial, wenn X, Y binomial mit selbem p.", "en": "Binomial if X, Y are binomial with same p."},
+            {"de": "Normalverteilt, wenn X, Y normal mit selben Parametern.", "en": "Normal if X, Y are normal with same parameters."},
+            {"de": "Standardnormal, wenn X, Y standardnormal.", "en": "Standard normal if X, Y are standard normal."},
+            {"de": "Normal, wenn X, Y standardnormal.", "en": "Normal if X, Y are standard normal."}
         ],
         "correct_idx": 0,
         "solution": {
@@ -2828,10 +2826,10 @@ QUESTIONS_6_3 = {
     },
     "uebung4_prob3": {
         "source": "Übung 4, Probe #3",
-        "type": "problem",
+        "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Produktion $n=2000$. Zurückweisung wenn $>200$ defekt. Gesucht max $p$, damit mit 95% W'keit *nicht* zurückgewiesen ($k \le 200$).</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Production $n=2000$. Rejection if $>200$ defective. Find max $p$ such that with 95% probability it is *not* rejected ($k \le 200$).</span>"""
+            "de": r"""Produktion $n=2000$. Zurückweisung wenn $>200$ defekt. Gesucht max $p$, damit mit 95% W'keit *nicht* zurückgewiesen ($k \le 200$).""",
+            "en": r"""Production $n=2000$. Rejection if $>200$ defective. Find max $p$ such that with 95% probability it is *not* rejected ($k \le 200$)."""
         },
         "options": [
             {"de": "0.080", "en": "0.080"},
@@ -2847,10 +2845,10 @@ QUESTIONS_6_3 = {
     },
     "uebung4_prob7": {
         "source": "Übung 4, Probe #7",
-        "type": "problem",
+        "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Seilbahn max 4200kg. 50 Personen, $\mu=80, \sigma=10$. Wahrscheinlichkeit Überlastung?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Cable car max 4200kg. 50 ppl mean 80 SD 10. Overload prob?</span>"""
+            "de": r"""Seilbahn max 4200kg. 50 Personen, $\mu=80, \sigma=10$. Wahrscheinlichkeit Überlastung?""",
+            "en": r"""Cable car max 4200kg. 50 ppl mean 80 SD 10. Overload prob?"""
         },
         "options": [
             {"de": "0.23%", "en": "0.23%"},
@@ -2871,8 +2869,8 @@ QUESTIONS_7 = {
     "test4_q3": {
         "source": "Test 4, Frage 3",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Welche Zahl ist KEINER dieser Maße (Mean, Median, Mode)? Datensatz: $\{4, 4, 7, 7, 7, 8, 11, 13, 13, 14, 22\}$</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Which number is NONE of these measures (Mean, Median, Mode)? Dataset: $\{4, 4, 7, 7, 7, 8, 11, 13, 13, 14, 22\}$</span>"""
+            "de": r"""Welche Zahl ist KEINER dieser Maße (Mean, Median, Mode)? Datensatz: $\{4, 4, 7, 7, 7, 8, 11, 13, 13, 14, 22\}$""",
+            "en": r"""Which number is NONE of these measures (Mean, Median, Mode)? Dataset: $\{4, 4, 7, 7, 7, 8, 11, 13, 13, 14, 22\}$"""
         },
         "options": [
             {"de": r"$7$", "en": r"$7$"},
@@ -2890,11 +2888,11 @@ QUESTIONS_7 = {
         "source": "HS 2015 Januar, MC #9 (4 Punkte)",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>9. Zu Kontrollzwecken werden 1000 Packungen Reis aus der Produktion entnommen und
+            "de": r"""Zu Kontrollzwecken werden 1000 Packungen Reis aus der Produktion entnommen und
 gewogen. Es stellt sich heraus, dass das Gewicht der Packungen ungefähr normalverteilt ist.
 Falls 800 der Packungen zwischen 343.2 Gramm und 356.8 Gramm wiegen, was ist ungefähr
-die Varianz des Gewichts?</span>""",
-"en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>9. For control purposes, 1000 packages of rice are taken from production and weighed. It turns out that the weight of the packages is approximately normally distributed. If 800 of the packages weigh between 343.2 and 356.8 grams, what is the approximate variance of the weight?</span>"""
+die Varianz des Gewichts?""",
+"en": r"""For control purposes, 1000 packages of rice are taken from production and weighed. It turns out that the weight of the packages is approximately normally distributed. If 800 of the packages weigh between 343.2 and 356.8 grams, what is the approximate variance of the weight?"""
         },
         "options": [
             {"de": r"$\sigma^2 \approx 16$", "en": r"$\sigma^2 \approx 16$"},
@@ -2912,10 +2910,10 @@ die Varianz des Gewichts?</span>""",
         "source": "HS 2015, MC 8 (4 Punkte)",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>8. Aus einer Stichprobe von 3 Werten berechnet man den Mittelwert (x = 5.5) und die
+            "de": r"""Aus einer Stichprobe von 3 Werten berechnet man den Mittelwert (x = 5.5) und die
 empirische Varianz (s2 = 4.5; Achtung: gewichtete Varianz mit Faktor 1/n). Somit ist
-der Median der zwei Werte notwendigerweise:</span>""",
-"en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>8. From a sample of 3 values, the mean ($\bar{x} = 5.5$) and empirical variance ($s^2 = 4.5$) are calculated. The middle of the two values is then necessarily:</span>"""
+der Median der zwei Werte notwendigerweise:""",
+"en": r"""8. From a sample of 3 values, the mean ($\bar{x} = 5.5$) and empirical variance ($s^2 = 4.5$) are calculated. The middle of the two values is then necessarily:"""
         },
         "options": [
             {"de": "-1", "en": "-1"},
@@ -2933,7 +2931,7 @@ der Median der zwei Werte notwendigerweise:</span>""",
         "source": "HS 2015, Aufgabe 1 (12 Punkte)",
         "type": "problem",
         "question": {
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Problem 1 (12 Points)
+            "en": r"""Problem 1 (12 Points)
 Part 1A (4 Points)
 We have drawn random samples of 100 observations each from the following four distributions V1, V2, V3, and V4:
 V1) Normal distribution with expected value $\mu = 0$ and variance $\sigma^2 = 3$. Sample size: $n_1 = 100$.
@@ -3001,9 +2999,9 @@ Part 1B (8 Points)
 The results of the statistics exam at the University of Hawaii yielded the following frequency table:
 Grade    0.7   1.0   1.3   2.0   2.3   3.0   3.7   4.0   4.3   4.7   5.0
 ni       1     0     0     0     5     6     6     4     6     4     7
-1. (2 Points) Calculate the mean and mode of the sample.
-2. (6 Points) Draw a boxplot, calculate the corresponding measures, and draw them in.
-If you need more space, make a clear reference on the exam sheet and label the additional sheet clearly as well. Otherwise, the task will not be graded.</span>"""
+1. Calculate the mean and mode of the sample.
+2. Draw a boxplot, calculate the corresponding measures, and draw them in.
+If you need more space, make a clear reference on the exam sheet and label the additional sheet clearly as well. Otherwise, the task will not be graded."""
         },
         "solution": {
             "de": r"**Lösung 1A:**<br>A $\Leftrightarrow$ V2 (Asymmetrisch, viele Ausreißer)<br>B $\Leftrightarrow$ V3 (Glockenkurve)<br>C $\Leftrightarrow$ V1 (S-Kurve)<br>D $\Leftrightarrow$ V4 (QQ-Plot abweichend von Gerade an Rändern)<br><br>**Lösung 1B:**<br>1. Mittelwert = 3.79, Modus = 5.0 (7 Nennungen)<br>2. 25% Quartil = 3.0, Median = 4.0, 75% Quartil = 4.7. IQA = 1.7.",
@@ -3013,8 +3011,8 @@ If you need more space, make a clear reference on the exam sheet and label the a
     "test3_q3": {
         "source": "Test 3, Frage 3",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$\text{Var}(3X + Y) = ?$ bei $\text{Corr}(X,Y) = -1$, $\text{Var}(X) = 1$, $\sigma_Y = 2$</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$\text{Var}(3X + Y) = ?$ given $\text{Corr}(X,Y) = -1$, $\text{Var}(X) = 1$, $\sigma_Y = 2$</span>"""
+            "de": r"""$\text{Var}(3X + Y) = ?$ bei $\text{Corr}(X,Y) = -1$, $\text{Var}(X) = 1$, $\sigma_Y = 2$""",
+            "en": r"""$\text{Var}(3X + Y) = ?$ given $\text{Corr}(X,Y) = -1$, $\text{Var}(X) = 1$, $\sigma_Y = 2$"""
         },
         "options": [
             {"de": r"$13$", "en": r"$13$"},
@@ -3032,11 +3030,11 @@ If you need more space, make a clear reference on the exam sheet and label the a
         "source": "HS 2023 Januar, MC #2 (4 Punkte)",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>2. Zwei unabhängige Zufallsvariablen X1 und X2 sind zwischen -1 und 1 stetig
+            "de": r"""Zwei unabhängige Zufallsvariablen X1 und X2 sind zwischen -1 und 1 stetig
 gleichverteilt.
 Welche Aussage über den Mittelwert X̄ = X1 +X
-ist falsch?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>2. Two independent random variables $X_1$ and $X_2$ are uniformly distributed between -1 and 1 ($U[-1, 1]$). Which statement about the mean $\bar{X} = \frac{X_1 + X_2}{2}$ is false?</span>"""
+ist falsch?""",
+            "en": r"""Two independent random variables $X_1$ and $X_2$ are uniformly distributed between -1 and 1 ($U[-1, 1]$). Which statement about the mean $\bar{X} = \frac{X_1 + X_2}{2}$ is false?"""
         },
         "options": [
             {"de": r"$P(\bar{X} = 0) = 0$", "en": r"$P(\bar{X} = 0) = 0$"},
@@ -3054,7 +3052,7 @@ ist falsch?</span>""",
         "source": "HS 2023 Januar, MC #3 (4 Punkte)",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>3. Der vollbeladene Ãltanker “Ever Given II“ mit einer Gesamtkapazität von
+            "de": r"""Der vollbeladene Ãltanker “Ever Given II“ mit einer Gesamtkapazität von
 30000 m3 möchte den Nord-Ostsee-Kanal in Deutschland passieren. Wenn der Tanker mit
 mehr als 27040 Tonnen Rohöl beladen ist, würde er auf Grund laufen. Das Gewicht von 1 m3
 Rohöl ist unabhängig und identisch verteilt mit Erwartungswert µ = 0.9 und unbekannter
@@ -3063,12 +3061,12 @@ von 1 m3 Rohöl?
 (a) 0.0064
 (b) 0.0802
 (c) 193.1477
-(d) Nicht genügend Informationen gegeben.</span>""",
-"en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>3. The fully loaded oil tanker "Ever Given II" with a total capacity of 30,000 $m^3$ wants to pass through the Kiel Canal in Germany. If the tanker is loaded with more than 27,040 tons of crude oil, it would run aground. The weight of 1 $m^3$ of crude oil is independently and identically distributed with mean $\mu = 0.9$ and unknown variance $\sigma^2$. Using his statistics knowledge, the captain estimates the probability of running aground to be 0.2%. What variance $\sigma^2$ did the captain assume for the weight of 1 $m^3$?
+(d) Nicht genügend Informationen gegeben.""",
+"en": r"""The fully loaded oil tanker "Ever Given II" with a total capacity of 30,000 $m^3$ wants to pass through the Kiel Canal in Germany. If the tanker is loaded with more than 27,040 tons of crude oil, it would run aground. The weight of 1 $m^3$ of crude oil is independently and identically distributed with mean $\mu = 0.9$ and unknown variance $\sigma^2$. Using his statistics knowledge, the captain estimates the probability of running aground to be 0.2%. What variance $\sigma^2$ did the captain assume for the weight of 1 $m^3$?
 (a) 0.0064
 (b) 0.0802
 (c) 193.1477
-(d) Not enough information given.</span>"""
+(d) Not enough information given."""
         },
         "options": [
             {"de": "0.0064", "en": "0.0064"},
@@ -3086,7 +3084,7 @@ von 1 m3 Rohöl?
         "source": "HS 2023 Januar, MC #9 (4 Punkte)",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>10. Beim Schach sind die Engines viel stärker als die Menschen. Sie sind so stark,
+            "de": r"""10. Beim Schach sind die Engines viel stärker als die Menschen. Sie sind so stark,
 dass gewisse Züge als unmenschlich gelten. Natürlich ist es für einen Menschen möglich,
 durch Zufall einen Top-Engine-Zug zu finden, so dass das Finden eines Top-Engine-Zugs
 nicht bedeutet, dass sie schummeln. Ein Verdacht, dass ein Spieler schummelt, kommt
@@ -3099,12 +3097,12 @@ sehr starken Spieler als Betrüger einstuft?
 (a) 0.1%
 (b) 0.3%
 (c) 0.5%
-(d) 0.7%</span>""",
-"en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>10. In chess, engines are much stronger than humans. They are so strong that certain moves are considered inhuman. Of course, it is possible for a human to find a top engine move by chance, so finding a top engine move does not mean they are cheating. Suspicion that a player is cheating arises when this player finds many top engine moves. Let us assume that the probability that a very strong player finds a top engine move by chance is p = 0.3. You are developing an algorithm for detecting cheaters for an online chess platform that wants to ban players who find at least 340 top engine moves in a sequence of 1000 moves. What is the probability that your algorithm incorrectly classifies a very strong player as a cheater?
+(d) 0.7%""",
+"en": r"""In chess, engines are much stronger than humans. They are so strong that certain moves are considered inhuman. Of course, it is possible for a human to find a top engine move by chance, so finding a top engine move does not mean they are cheating. Suspicion that a player is cheating arises when this player finds many top engine moves. Let us assume that the probability that a very strong player finds a top engine move by chance is p = 0.3. You are developing an algorithm for detecting cheaters for an online chess platform that wants to ban players who find at least 340 top engine moves in a sequence of 1000 moves. What is the probability that your algorithm incorrectly classifies a very strong player as a cheater?
 (a) 0.1%
 (b) 0.3%
 (c) 0.5%
-(d) 0.7%</span>"""
+(d) 0.7%"""
         },
         "options": [
             {"de": "0.1%", "en": "0.1%"},
@@ -3126,8 +3124,8 @@ QUESTIONS_8 = {
         "source": "Übung 5, Problem 1",
         "type": "problem",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Schätzer für $\mu$:<br>1) $(X_1+X_2)/2$<br>2) $X_1/3 + 2X_2/3$<br>Welcher ist effizienter?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Estimators for $\mu$:<br>1) $(X_1+X_2)/2$<br>2) $X_1/3 + 2X_2/3$<br>Which is more efficient?</span>"""
+            "de": r"""Schätzer für $\mu$:<br>1) $(X_1+X_2)/2$<br>2) $X_1/3 + 2X_2/3$<br>Welcher ist effizienter?""",
+            "en": r"""Estimators for $\mu$:<br>1) $(X_1+X_2)/2$<br>2) $X_1/3 + 2X_2/3$<br>Which is more efficient?"""
         },
         "solution": {
             "de": r"**Lösung:** Schätzer 1 ist effizienter (kleinere Varianz: $Var/2$ vs $5Var/9$).",
@@ -3138,19 +3136,19 @@ QUESTIONS_8 = {
         "source": "HS 2022 Januar, MC #8 (4 Punkte)",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>8. Sie beobachten eine auf dem Interval [0, b] gleichverteilte Zufallsvariable X. Im
+            "de": r"""Sie beobachten eine auf dem Interval [0, b] gleichverteilte Zufallsvariable X. Im
 Konkreten beobachten Sie folgende Realisierungen: 1.1, 3.8, 4.2, 0.5, 5.2.
 Welche der folgenden Aussagen ist korrekt?
 Wie lautet der Maximum-Likelihood-Schätzer für b?
 (a) b̂ML = 6.23
 (b) b̂ML = 5.20
 (c) b̂ML = 5.92
-(d) b̂ML = 5.75</span>""",
-"en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>8. You observe a random variable X uniformly distributed on the interval $[0, b]$. Specifically, you observe the following realizations: 1.1, 3.8, 4.2, 0.5, 5.2. What is the Maximum-Likelihood Estimator for b?
+(d) b̂ML = 5.75""",
+"en": r"""You observe a random variable X uniformly distributed on the interval $[0, b]$. Specifically, you observe the following realizations: 1.1, 3.8, 4.2, 0.5, 5.2. What is the Maximum-Likelihood Estimator for b?
 (a) $\hat{b}_{ML} = 6.23$
 (b) $\hat{b}_{ML} = 5.20$
 (c) $\hat{b}_{ML} = 5.92$
-(d) $\hat{b}_{ML} = 5.75$</span>"""
+(d) $\hat{b}_{ML} = 5.75$"""
         },
         "options": [
             {"de": r"$\hat{b}_{ML} = 6.23$", "en": r"$\hat{b}_{ML} = 6.23$"},
@@ -3168,8 +3166,8 @@ Wie lautet der Maximum-Likelihood-Schätzer für b?
         "source": "Übung 5, Problem 7",
         "type": "problem",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Poisson $X$, $\mu=\lambda$. ML-Schätzer für $\lambda$?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Poisson $X$, $\mu=\lambda$. ML estimator for $\lambda$?</span>"""
+            "de": r"""Poisson $X$, $\mu=\lambda$. ML-Schätzer für $\lambda$?""",
+            "en": r"""Poisson $X$, $\mu=\lambda$. ML estimator for $\lambda$?"""
         },
         "solution": {
             "de": "**Lösung:** Das arithmetische Mittel (Sample Mean).",
@@ -3180,8 +3178,8 @@ Wie lautet der Maximum-Likelihood-Schätzer für b?
         "source": "Übung 5, Problem 2",
         "type": "problem",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$n=100$, $\bar{x}=10$, $\sigma=2$ known. $95\%$ KI für $\mu$?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$n=100$, $\bar{x}=10$, $\sigma=2$ known. $95\%$ CI for $\mu$?</span>"""
+            "de": r"""$n=100$, $\bar{x}=10$, $\sigma=2$ known. $95\%$ KI für $\mu$?""",
+            "en": r"""$n=100$, $\bar{x}=10$, $\sigma=2$ known. $95\%$ CI for $\mu$?"""
         },
         "solution": {
             "de": r"**Lösung:** $10 \pm 1.96 \cdot 2/10 = [9.608, 10.392]$",
@@ -3192,8 +3190,8 @@ Wie lautet der Maximum-Likelihood-Schätzer für b?
         "source": "Übung 5, Problem 4",
         "type": "problem",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Anteil $p$. $n=400$, $k=80$ ($20\%$). $95\%$ KI für $p$?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Proportion $p$. $n=400$, $k=80$ ($20\%$). $95\%$ CI for $p$?</span>"""
+            "de": r"""Anteil $p$. $n=400$, $k=80$ ($20\%$). $95\%$ KI für $p$?""",
+            "en": r"""Proportion $p$. $n=400$, $k=80$ ($20\%$). $95\%$ CI for $p$?"""
         },
         "solution": {
             "de": r"**Lösung:** $0.2 \pm 1.96 \cdot \sqrt{0.2 \cdot 0.8/400} = 0.2 \pm 0.0392 = [0.1608, 0.2392]$",
@@ -3204,9 +3202,9 @@ Wie lautet der Maximum-Likelihood-Schätzer für b?
         "source": "HS 2023 Januar, MC #10 (4 Punkte)",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>10. Sei x1 , x2 , ..., xn eine Stichprobe unabhängiger und identischer (I.I.D) Zufallsvariablen X.
-Welcher der folgenden Schätzer des Erwartungswerts von X ist erwartungstreu?</span>""",
-"en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>10. Let $x_1, x_2, \ldots, x_n$ be a sample of independent and identically distributed (i.i.d.) random variables $X$. Which of the following estimators of the expected value of $X$ is unbiased?</span>"""
+            "de": r"""Sei x1 , x2 , ..., xn eine Stichprobe unabhängiger und identischer (I.I.D) Zufallsvariablen X.
+Welcher der folgenden Schätzer des Erwartungswerts von X ist erwartungstreu?""",
+"en": r"""Let $x_1, x_2, \ldots, x_n$ be a sample of independent and identically distributed (i.i.d.) random variables $X$. Which of the following estimators of the expected value of $X$ is unbiased?"""
         },
         "options": [{"de": r"$x_1$", "en": r"$x_1$"}, {"de": r"$\frac{x_1 + x_n}{3}$", "en": r"$\frac{x_1 + x_n}{3}$"}, {"de": r"$x_1^2$", "en": r"$x_1^2$"}, {"de": r"$\frac{\bar{x}}{2}$", "en": r"$\frac{\bar{x}}{2}$"}],
         "correct_idx": 0,
@@ -3219,9 +3217,9 @@ Welcher der folgenden Schätzer des Erwartungswerts von X ist erwartungstreu?</s
         "source": "HS 2015 Januar, MC #10 (4 Punkte)",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>10. Für θ > 1 sei X1 , X2 , . . . , Xn eine unabhängige Folge in [1, θ] gleichverteilter Zufallsvariablen, Xi ∼ U [1, θ]. Wir betrachten den Schätzer θ̂ = n2 (x1 + x2 + . . . + xn ) für den Parameter
-θ. Welche der folgenden Aussagen über θ̂ trifft zu?</span>""",
-"en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>10. For $\theta > 1$, let $X_1, X_2, \ldots, X_n$ be an independent sequence of random variables uniformly distributed on $[1, \theta]$, $X_i \sim U[1, \theta]$. We consider the estimator $\hat{\theta} = \frac{2}{n} (x_1 + x_2 + \ldots + x_n)$ for the parameter $\theta$. Which of the following statements about $\hat{\theta}$ is true?</span>"""
+            "de": r"""10. Für θ > 1 sei X1 , X2 , . . . , Xn eine unabhängige Folge in [1, θ] gleichverteilter Zufallsvariablen, Xi ∼ U [1, θ]. Wir betrachten den Schätzer θ̂ = n2 (x1 + x2 + . . . + xn ) für den Parameter
+θ. Welche der folgenden Aussagen über θ̂ trifft zu?""",
+"en": r"""For $\theta > 1$, let $X_1, X_2, \ldots, X_n$ be an independent sequence of random variables uniformly distributed on $[1, \theta]$, $X_i \sim U[1, \theta]$. We consider the estimator $\hat{\theta} = \frac{2}{n} (x_1 + x_2 + \ldots + x_n)$ for the parameter $\theta$. Which of the following statements about $\hat{\theta}$ is true?"""
         },
         "options": [
             {"de": r"Die Varianz des Schätzers ist $\frac{(\theta-1)^2}{3n}$.", "en": r"The variance of the estimator is $\frac{(\theta-1)^2}{3n}$."},
@@ -3239,26 +3237,26 @@ Welcher der folgenden Schätzer des Erwartungswerts von X ist erwartungstreu?</s
         "source": "HS 2015, Aufgabe 5 (20 Punkte)",
         "type": "problem",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Aufgabe 5 (20 Punkte)
+            "de": r"""Aufgabe 5 (20 Punkte)
 Wir betrachten eine stetige Verteilung mit folgender Dichtefunktion:
 $$f(x) = \begin{cases} \frac{\alpha}{x^{\alpha+1}} & \text{für } x \ge 1 \\ 0 & \text{sonst} \end{cases}$$
 wobei $\alpha > 0$ ein unbekannter Parameter ist. Wir wollen einen Schätzer für den Parameter $\alpha$ finden.
-1. (7 Punkte) Bestimmen Sie den Maximum Likelihood Schätzer für $\alpha$ basierend auf $n$ unabhängigen identisch verteilten Beobachtungen $X_1, \dots, X_n$ einer Zufallsvariablen mit der obigen Dichtefunktion $f$.
-2. (2 Punkte) Berechnen Sie den Maximum Likelihood Schätzer für die folgende konkrete Stichprobe:
+1. Bestimmen Sie den Maximum Likelihood Schätzer für $\alpha$ basierend auf $n$ unabhängigen identisch verteilten Beobachtungen $X_1, \dots, X_n$ einer Zufallsvariablen mit der obigen Dichtefunktion $f$.
+2. Berechnen Sie den Maximum Likelihood Schätzer für die folgende konkrete Stichprobe:
 $x_1=11.0, x_2=16.4, x_3=27.9, x_4=15.9$
-3. (7 Punkte) Bestimmen Sie einen Momentenmethodeschätzer für $\alpha > 1$ basierend auf $n$ unabhängigen identisch verteilten Beobachtungen $X_1, \dots, X_n$. Sie müssen für diese Teilaufgabe annehmen, dass $\alpha > 1$ ist, da ansonsten der Erwartungswert nicht definiert (unendlich) ist.
-4. (2 Punkte) Berechnen Sie den Momentenmethodeschätzer für die obige Stichprobe.
-5. (2 Punkte) Vergleichen Sie den Maximum Likelihood Schätzer und den Momentenmethodeschätzer für die obige Stichprobe. Ist der Momentenschätzer hier sinnvoll?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Problem 5 (20 Points)
+3. Bestimmen Sie einen Momentenmethodeschätzer für $\alpha > 1$ basierend auf $n$ unabhängigen identisch verteilten Beobachtungen $X_1, \dots, X_n$. Sie müssen für diese Teilaufgabe annehmen, dass $\alpha > 1$ ist, da ansonsten der Erwartungswert nicht definiert (unendlich) ist.
+4. Berechnen Sie den Momentenmethodeschätzer für die obige Stichprobe.
+5. Vergleichen Sie den Maximum Likelihood Schätzer und den Momentenmethodeschätzer für die obige Stichprobe. Ist der Momentenschätzer hier sinnvoll?""",
+            "en": r"""Problem 5 (20 Points)
 We consider a continuous distribution with the following density function:
 $$f(x) = \begin{cases} \frac{\alpha}{x^{\alpha+1}} & \text{for } x \ge 1 \\ 0 & \text{otherwise} \end{cases}$$
 where $\alpha > 0$ is an unknown parameter. We want to find an estimator for the parameter $\alpha$.
-1. (7 Points) Determine the Maximum Likelihood Estimator (MLE) for $\alpha$ based on $n$ independent identically distributed observations $X_1, \dots, X_n$ of a random variable with the above density function $f$.
-2. (2 Points) Calculate the MLE for the following specific sample:
+1. Determine the Maximum Likelihood Estimator (MLE) for $\alpha$ based on $n$ independent identically distributed observations $X_1, \dots, X_n$ of a random variable with the above density function $f$.
+2. Calculate the MLE for the following specific sample:
 $x_1=11.0, x_2=16.4, x_3=27.9, x_4=15.9$
-3. (7 Points) Determine a Method of Moments estimator for $\alpha > 1$ based on $n$ independent identically distributed observations $X_1, \dots, X_n$. You must assume for this part that $\alpha > 1$, as otherwise the expected value is undefined (infinite).
-4. (2 Points) Calculate the Method of Moments estimator for the above sample.
-5. (2 Points) Compare the MLE and the Method of Moments estimator for the above sample. Is the Method of Moments estimator sensible here?</span>"""
+3. Determine a Method of Moments estimator for $\alpha > 1$ based on $n$ independent identically distributed observations $X_1, \dots, X_n$. You must assume for this part that $\alpha > 1$, as otherwise the expected value is undefined (infinite).
+4. Calculate the Method of Moments estimator for the above sample.
+5. Compare the MLE and the Method of Moments estimator for the above sample. Is the Method of Moments estimator sensible here?"""
         },
         "solution": {
             "de": r"**Lösung:**<br>1. $\hat{\alpha}_{MLE} = \frac{n}{\sum \ln x_i}$.<br>2. $\hat{\alpha} \approx 0.35$. (Achtung: Dichte braucht $\alpha > 0$.)<br>3. $E[X] = \frac{\alpha}{\alpha-1}$. Auflösen nach $\alpha$: $\hat{\alpha}_{MM} = \frac{\bar{x}}{\bar{x}-1}$.<br>4. $\bar{x}=17.8 \Rightarrow \hat{\alpha} \approx 1.06$.<br>5. Momentenmethode nur für $\alpha > 1$ definiert.",
@@ -3272,8 +3270,8 @@ QUESTIONS_9 = {
         "source": "HS 2023 Januar, MC #5 (4 Punkte)",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Konfidenzintervall für Durchschnittliche Füllmenge. $Var=10$. Stichprobe ($n=10$): 501, 495, 503, 498, 500, 498, 497, 503, 497, 501. Gesucht: 95% KI (symmetrisch).</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Confidence Interval for mean fill amount. $Var=10$. Sample ($n=10$): 501, 495, 503, 498, 500, 498, 497, 503, 497, 501. Find symmetric 95% CI.</span>"""
+            "de": r"""Konfidenzintervall für Durchschnittliche Füllmenge. $Var=10$. Stichprobe ($n=10$): 501, 495, 503, 498, 500, 498, 497, 503, 497, 501. Gesucht: 95% KI (symmetrisch).""",
+            "en": r"""Confidence Interval for mean fill amount. $Var=10$. Sample ($n=10$): 501, 495, 503, 498, 500, 498, 497, 503, 497, 501. Find symmetric 95% CI."""
         },
         "options": [
             {"de": r"$[495.0, 503.6]$", "en": r"$[495.0, 503.6]$"},
@@ -3297,11 +3295,11 @@ QUESTIONS_10_5 = {
         "source": "HS 2024 Januar, MC #1 (4 Punkte)",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>1. Wir beobachten die Realisierungen von 25 Zufallsvariablen, die jeweils unabhängig
+            "de": r"""Wir beobachten die Realisierungen von 25 Zufallsvariablen, die jeweils unabhängig
 voneinander aus derselben Normalverteilung mit unbekanntem Erwartungswert µ und bekannter Varianz σ 2 = 0.5 gezogen werden. Wir möchten folgenden Hypothesentest durchführen:
 $H_0: \mu = 0.5$ gegen $H_1: \mu \ge 0.5$ mit einem Signifikanzniveau von $\alpha = 5\%$. Für welchen Wertebereich des Stichprobenmittelwertes $\bar{x}$ wird die Hypothese $H_0$ verworfen?
-Geben Sie den grösstmöglichen Bereich an.</span>""",
-"en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>1. We observe the realizations of 25 random variables, which are each drawn independently from the same normal distribution with unknown expectation $\mu$ and known variance $\sigma^2 = 0.5$. We want to perform the following hypothesis test: $H_0: \mu = 0.5$ against $H_1: \mu \ge 0.5$ with a significance level of $\alpha = 5\%$. For which range of values of the sample mean $\bar{x}$ is the hypothesis $H_0$ rejected? State the largest possible range.</span>"""
+Geben Sie den grösstmöglichen Bereich an.""",
+"en": r"""We observe the realizations of 25 random variables, which are each drawn independently from the same normal distribution with unknown expectation $\mu$ and known variance $\sigma^2 = 0.5$. We want to perform the following hypothesis test: $H_0: \mu = 0.5$ against $H_1: \mu \ge 0.5$ with a significance level of $\alpha = 5\%$. For which range of values of the sample mean $\bar{x}$ is the hypothesis $H_0$ rejected? State the largest possible range."""
         },
         "options": [
             {"de": r"$\bar{x} > 0.66$", "en": r"$\bar{x} > 0.66$"},
@@ -3319,10 +3317,10 @@ Geben Sie den grösstmöglichen Bereich an.</span>""",
         "source": "HS 2024 Januar, MC #8 (4 Punkte)",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>8. Angenommen, X ∼ N (µ, σ 2 ) mit σ 2 = 5. Wir wollen die Hypothese H0 : µ = 8
+            "de": r"""8. Angenommen, X ∼ N (µ, σ 2 ) mit σ 2 = 5. Wir wollen die Hypothese H0 : µ = 8
 gegen H1 : µ ̸= 8 mit nur 5 Beobachtungen testen. Ein MLE-Schätzwert von µ steht uns zur
-Verfügung und beträgt µ̂ = 4.95. Wie gross ist der p-Wert des obigen Tests?</span>""",
-"en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>8. Assume $X \sim N(\mu, 5)$ ($ \sigma^2=5 $). We want to test the hypothesis $H_0: \mu = 8$ against $H_1: \mu \neq 8$ with only 5 observations. An MLE estimate of $\mu$ is available and is $\hat{\mu} = 4.95$. What is the p-value of the above test?</span>"""
+Verfügung und beträgt µ̂ = 4.95. Wie gross ist der p-Wert des obigen Tests?""",
+"en": r"""8. Assume $X \sim N(\mu, 5)$ ($ \sigma^2=5 $). We want to test the hypothesis $H_0: \mu = 8$ against $H_1: \mu \neq 8$ with only 5 observations. An MLE estimate of $\mu$ is available and is $\hat{\mu} = 4.95$. What is the p-value of the above test?"""
         },
         "options": [
             {"de": "0.0011", "en": "0.0011"},
@@ -3344,8 +3342,8 @@ QUESTIONS_10 = {
         "source": "Übung 6, Problem 1",
         "type": "problem",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$\bar{x} = 218$. $H_0: \mu=210$. $n=225$ ($\sigma^2$ bekannt -> Z-Test).</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$\bar{x} = 218$. $H_0: \mu=210$. $n=225$ ($\sigma^2$ known -> Z-test).</span>"""
+            "de": r"""$\bar{x} = 218$. $H_0: \mu=210$. $n=225$ ($\sigma^2$ bekannt -> Z-Test).""",
+            "en": r"""$\bar{x} = 218$. $H_0: \mu=210$. $n=225$ ($\sigma^2$ known -> Z-test)."""
         },
         "solution": {
             "de": r"**Lösung:** $Z = 1.6$. Bei $5\%$ Level ($1.645$) NICHT verwerfen.",
@@ -3356,8 +3354,8 @@ QUESTIONS_10 = {
         "source": "Übung 6, Problem 4",
         "type": "problem",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>t-Test. $n=16$, $\bar{x}=10$, $s=2$. $H_0: \mu=12$. Teststatistik?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>t-Test. $n=16$, $\bar{x}=10$, $s=2$. $H_0: \mu=12$. Test statistic?</span>"""
+            "de": r"""t-Test. $n=16$, $\bar{x}=10$, $s=2$. $H_0: \mu=12$. Teststatistik?""",
+            "en": r"""t-Test. $n=16$, $\bar{x}=10$, $s=2$. $H_0: \mu=12$. Test statistic?"""
         },
         "solution": {
             "de": r"**Lösung:** $t = (10-12)/(2/4) = -4$. Verwerfen.",
@@ -3368,8 +3366,8 @@ QUESTIONS_10 = {
         "source": "Übung 6, Problem 8",
         "type": "problem",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$p$-Wert $= 0.03$. $\alpha = 0.05$. Entscheidung?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$p$-value $= 0.03$. $\alpha = 0.05$. Decision?</span>"""
+            "de": r"""$p$-Wert $= 0.03$. $\alpha = 0.05$. Entscheidung?""",
+            "en": r"""$p$-value $= 0.03$. $\alpha = 0.05$. Decision?"""
         },
         "solution": {
             "de": r"**Lösung:** $H_0$ verwerfen (da $p < \alpha$).",
@@ -3385,8 +3383,8 @@ QUESTIONS_8_4 = {
         "source": "Übung 5, MC #1",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Eine Schätzfunktion heisst erwartungstreu, wenn sie symmetrisch um ihren Erwartungswert verteilt ist.</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>An estimator is unbiased if it is symmetrically distributed around its expectation.</span>"""
+            "de": r"""Eine Schätzfunktion heisst erwartungstreu, wenn sie symmetrisch um ihren Erwartungswert verteilt ist.""",
+            "en": r"""An estimator is unbiased if it is symmetrically distributed around its expectation."""
         },
         "options": [
             {"de": "Richtig", "en": "Richtig"},
@@ -3402,8 +3400,8 @@ QUESTIONS_8_4 = {
         "source": "Übung 5, MC #2",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Effiziente Schätzungen sind im Vorlesungskontext immer auch erwartungstreu.</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Efficient estimators are always unbiased (in lecture context).</span>"""
+            "de": r"""Effiziente Schätzungen sind im Vorlesungskontext immer auch erwartungstreu.""",
+            "en": r"""Efficient estimators are always unbiased (in lecture context)."""
         },
         "options": [
             {"de": "Richtig", "en": "Richtig"},
@@ -3419,8 +3417,8 @@ QUESTIONS_8_4 = {
         "source": "Übung 5, MC #3",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Erwartungstreue Schätzfunktionen sind konsistent.</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Unbiased estimators are consistent.</span>"""
+            "de": r"""Erwartungstreue Schätzfunktionen sind konsistent.""",
+            "en": r"""Unbiased estimators are consistent."""
         },
         "options": [
             {"de": "Richtig", "en": "Richtig"},
@@ -3436,8 +3434,8 @@ QUESTIONS_8_4 = {
         "source": "Übung 5, MC #4",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Schätzer sind Zufallsvariablen.</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Estimators are random variables.</span>"""
+            "de": r"""Schätzer sind Zufallsvariablen.""",
+            "en": r"""Estimators are random variables."""
         },
         "options": [
             {"de": "Richtig", "en": "Richtig"},
@@ -3453,8 +3451,8 @@ QUESTIONS_8_4 = {
         "source": "Übung 5, MC #5",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Ein erwartungstreuer Schätzer hat stets einen kleineren MSE als ein verzerrter Schätzer.</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>An unbiased estimator always has a lower MSE than a biased one.</span>"""
+            "de": r"""Ein erwartungstreuer Schätzer hat stets einen kleineren MSE als ein verzerrter Schätzer.""",
+            "en": r"""An unbiased estimator always has a lower MSE than a biased one."""
         },
         "options": [
             {"de": "Richtig", "en": "Richtig"},
@@ -3470,8 +3468,8 @@ QUESTIONS_8_4 = {
         "source": "Übung 5, MC #6",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$\bar{X}$. Welche Aussagen sind richtig?<br>(a) $Var(\bar{X}) = \sigma^2/n$.<br>(b) $\bar{X}$ konsistent.<br>(c) $\bar{X}$ standardnormalverteilt.</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$\bar{X}$. True?<br>(a) $Var(\bar{X}) = \sigma^2/n$.<br>(b) Consistent.<br>(c) Standard Normal.</span>"""
+            "de": r"""$\bar{X}$. Welche Aussagen sind richtig?<br>(a) $Var(\bar{X}) = \sigma^2/n$.<br>(b) $\bar{X}$ konsistent.<br>(c) $\bar{X}$ standardnormalverteilt.""",
+            "en": r"""$\bar{X}$. True?<br>(a) $Var(\bar{X}) = \sigma^2/n$.<br>(b) Consistent.<br>(c) Standard Normal."""
         },
         "options": [
             {"de": "a) und b)", "en": "a) und b)"},
@@ -3489,14 +3487,14 @@ QUESTIONS_8_4 = {
         "source": "Übung 5, MC #10",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Wann ist ein linearer Schätzer $\sum w_i X_i$ erwartungstreu?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>When is a linear estimator $\sum w_i X_i$ unbiased?</span>"""
+            "de": r"""Wann ist ein linearer Schätzer $\sum w_i X_i$ erwartungstreu?""",
+            "en": r"""When is a linear estimator $\sum w_i X_i$ unbiased?"""
         },
         "options": [
-            {"de": "Immer.", "en": "Immer."},
-            {"de": r"Wenn $\sum w_i = 0$.", "en": r"Wenn $\sum w_i = 0$."},
-            {"de": r"Wenn $\sum w_i = 1$.", "en": r"Wenn $\sum w_i = 1$."},
-            {"de": r"Wenn $w_i = 1/n$.", "en": r"Wenn $w_i = 1/n$."}
+            {"de": "Immer.", "en": "Always."},
+            {"de": r"Wenn $\sum w_i = 0$.", "en": r"If $\sum w_i = 0$."},
+            {"de": r"Wenn $\sum w_i = 1$.", "en": r"If $\sum w_i = 1$."},
+            {"de": r"Wenn $w_i = 1/n$.", "en": r"If $w_i = 1/n$."}
         ],
         "correct_idx": 2, 
         "solution": {
@@ -3508,8 +3506,8 @@ QUESTIONS_8_4 = {
         "source": "Übung 5, MC #11",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$E[Y] = \frac{1}{3+\lambda}$. Momentenschätzer für $\lambda$?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$E[Y] = \frac{1}{3+\lambda}$. MOM estimator for $\lambda$?</span>"""
+            "de": r"""$E[Y] = \frac{1}{3+\lambda}$. Momentenschätzer für $\lambda$?""",
+            "en": r"""$E[Y] = \frac{1}{3+\lambda}$. MOM estimator for $\lambda$?"""
         },
         "options": [
             {"de": r"$\bar{X}$", "en": r"$\bar{X}$"},
@@ -3527,8 +3525,8 @@ QUESTIONS_8_4 = {
         "source": "Übung 5, MC #12",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Momentenmethode und MLE liefern stets gleiche Ergebnisse?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>MOM and MLE always yield same results?</span>"""
+            "de": r"""Momentenmethode und MLE liefern stets gleiche Ergebnisse?""",
+            "en": r"""MOM and MLE always yield same results?"""
         },
         "options": [
             {"de": "Richtig", "en": "Richtig"},
@@ -3544,8 +3542,8 @@ QUESTIONS_8_4 = {
         "source": "Übung 5, MC #13",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>MLE sind nie erwartungstreu?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>MLE are never unbiased?</span>"""
+            "de": r"""MLE sind nie erwartungstreu?""",
+            "en": r"""MLE are never unbiased?"""
         },
         "options": [
             {"de": "Richtig", "en": "Richtig"},
@@ -3561,8 +3559,8 @@ QUESTIONS_8_4 = {
         "source": "Test 5, Q3",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$X_i \sim U[1, \theta]$. Schätzer $\hat{\theta} = \frac{2}{n}\sum X_i$.</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$X_i \sim U[1, \theta]$. Est $\hat{\theta} = \frac{2}{n}\sum X_i$.</span>"""
+            "de": r"""$X_i \sim U[1, \theta]$. Schätzer $\hat{\theta} = \frac{2}{n}\sum X_i$.""",
+            "en": r"""$X_i \sim U[1, \theta]$. Est $\hat{\theta} = \frac{2}{n}\sum X_i$."""
         },
         "options": [
             {"de": r"Varianz ist $\frac{(\theta-1)^2}{3n}$", "en": r"Varianz ist $\frac{(\theta-1)^2}{3n}$"},
@@ -3580,8 +3578,8 @@ QUESTIONS_8_4 = {
         "source": "Übung 5, MC #7",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Systematischer Fehler beim Schätzen heißt Bias.</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Systematic error in estimation is called Bias.</span>"""
+            "de": r"""Systematischer Fehler beim Schätzen heißt Bias.""",
+            "en": r"""Systematic error in estimation is called Bias."""
         },
         "options": [
             {"de": "Richtig", "en": "Richtig"},
@@ -3597,8 +3595,8 @@ QUESTIONS_8_4 = {
         "source": "Übung 5, MC #8",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Ein Schätzer ist positiv verzerrt (Bias > 0). Überschätzt oder unterschätzt er im Mittel?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Positive bias (Bias > 0). Does it over- or underestimate on average?</span>"""
+            "de": r"""Ein Schätzer ist positiv verzerrt (Bias > 0). Überschätzt oder unterschätzt er im Mittel?""",
+            "en": r"""Positive bias (Bias > 0). Does it over- or underestimate on average?"""
         },
         "options": [
             {"de": "Überschätzt", "en": "Überschätzt"},
@@ -3614,8 +3612,8 @@ QUESTIONS_8_4 = {
         "source": "Übung 5, MC #9",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Wichtigstes Ziel beim Schätzen ist es, Schätzer mit kleinen Varianzen zu finden.</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Main goal is finding estimators with small variances.</span>"""
+            "de": r"""Wichtigstes Ziel beim Schätzen ist es, Schätzer mit kleinen Varianzen zu finden.""",
+            "en": r"""Main goal is finding estimators with small variances."""
         },
         "options": [
             {"de": "Richtig", "en": "Richtig"},
@@ -3631,8 +3629,8 @@ QUESTIONS_8_4 = {
         "source": "Übung 5, MC #14",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Maximierung der Loglikelihood und Likelihood führt zum selben Ergebnis (Schätzer).</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Maximizing Loglikelihood vs Likelihood yields the same estimator.</span>"""
+            "de": r"""Maximierung der Loglikelihood und Likelihood führt zum selben Ergebnis (Schätzer).""",
+            "en": r"""Maximizing Loglikelihood vs Likelihood yields the same estimator."""
         },
         "options": [
             {"de": "Richtig", "en": "Richtig"},
@@ -3648,8 +3646,8 @@ QUESTIONS_8_4 = {
         "source": "Übung 5, MC #15",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Exponential $Y$. Stichprobe (1, 2, 3, 1). Likelihood $L(\theta)$?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Exp $Y$. Sample (1, 2, 3, 1). Likelihood $L(\theta)$?</span>"""
+            "de": r"""Exponential $Y$. Stichprobe (1, 2, 3, 1). Likelihood $L(\theta)$?""",
+            "en": r"""Exp $Y$. Sample (1, 2, 3, 1). Likelihood $L(\theta)$?"""
         },
         "options": [
             {"de": r"$(1 \cdot e^{-\theta})^2 ...$", "en": r"$(1 \cdot e^{-\theta})^2 ...$"},
@@ -3667,8 +3665,8 @@ QUESTIONS_8_4 = {
         "source": "Übung 5, Probe #3",
         "type": "problem",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Rechteckverteilung $[\theta, \theta+1]$.<br>(a) $E[X]$, $Var[X]$.<br>(b) Bias von $\bar{X}$?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Uniform $[\theta, \theta+1]$. (a) Moments. (b) Bias of mean?</span>"""
+            "de": r"""Rechteckverteilung $[\theta, \theta+1]$.<br>(a) $E[X]$, $Var[X]$.<br>(b) Bias von $\bar{X}$?""",
+            "en": r"""Uniform $[\theta, \theta+1]$. (a) Moments. (b) Bias of mean?"""
         },
         "solution": {
             "de": r"**Lösung:**<br>(a) $E[X] = \theta+0.5$.<br>(b) $Bias = 0.5$. Korrektur: $\bar{X}-0.5$.",
@@ -3679,8 +3677,8 @@ QUESTIONS_8_4 = {
         "source": "Übung 5, Probe #5",
         "type": "problem",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Bernoulli $\pi$. Schätzer $\hat{\pi}$ vs Laplace Smoothing $T = \frac{\sum X + 1}{n+2}$.</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Bernoulli. MLE vs Laplace Smoothing.</span>"""
+            "de": r"""Bernoulli $\pi$. Schätzer $\hat{\pi}$ vs Laplace Smoothing $T = \frac{\sum X + 1}{n+2}$.""",
+            "en": r"""Bernoulli. MLE vs Laplace Smoothing."""
         },
         "solution": {
             "de": r"**Lösung:** Laplace hat Bias, aber geringeren MSE bei kleinen Stichproben (Bias-Variance Tradeoff).",
@@ -3691,8 +3689,8 @@ QUESTIONS_8_4 = {
         "source": "Übung 5, Probe #6",
         "type": "problem",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Momentenschätzer herleiten für:<br>(a) Exponential<br>(b) Rechteck $[\theta-0.5, \theta+0.5]$</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>MOM for (a) Exp (b) Uniform.</span>"""
+            "de": r"""Momentenschätzer herleiten für:<br>(a) Exponential<br>(b) Rechteck $[\theta-0.5, \theta+0.5]$""",
+            "en": r"""MOM for (a) Exp (b) Uniform."""
         },
         "solution": {
             "de": r"**Lösung:**<br>(a) $E[X]=1/\lambda \implies \hat{\lambda} = 1/\bar{X}$.<br>(b) $E[X]=\theta \implies \hat{\theta} = \bar{X}$.",
@@ -3703,8 +3701,8 @@ QUESTIONS_8_4 = {
         "source": "Übung 5, Probe #8",
         "type": "problem",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Binomial $B(n,p)$. n,p unbekannt. Momentenschätzer?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Binomial $B(n,p)$. n,p unknown. MOM?</span>"""
+            "de": r"""Binomial $B(n,p)$. n,p unbekannt. Momentenschätzer?""",
+            "en": r"""Binomial $B(n,p)$. n,p unknown. MOM?"""
         },
         "solution": {
             "de": r"**Lösung:** Zwei Gleichungen nötig.<br>1) $np = \bar{X}$<br>2) $np(1-p) = S^2$.<br>Lösen nach n und p.",
@@ -3719,8 +3717,8 @@ QUESTIONS_9_4 = {
         "source": "Übung 5, MC #16",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Zusammenhang Konfidenzniveau und Intervallbreite?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Relation confidence level and interval width?</span>"""
+            "de": r"""Zusammenhang Konfidenzniveau und Intervallbreite?""",
+            "en": r"""Relation confidence level and interval width?"""
         },
         "options": [
             {"de": "Niveau größer -> Intervall kleiner", "en": "Niveau größer -> Intervall kleiner"},
@@ -3737,8 +3735,8 @@ QUESTIONS_9_4 = {
         "source": "Übung 5, MC #17",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Grenzen von Konfidenzintervallen sind zufällig.</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>CI boundaries are random.</span>"""
+            "de": r"""Grenzen von Konfidenzintervallen sind zufällig.""",
+            "en": r"""CI boundaries are random."""
         },
         "options": [
             {"de": "Richtig", "en": "Richtig"},
@@ -3754,8 +3752,8 @@ QUESTIONS_9_4 = {
         "source": "Übung 5, MC #18",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Länge des KI ist größer, je größer der Parameter ist.</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Length of CI increases with parameter magnitude.</span>"""
+            "de": r"""Länge des KI ist größer, je größer der Parameter ist.""",
+            "en": r"""Length of CI increases with parameter magnitude."""
         },
         "options": [
             {"de": "Richtig", "en": "Richtig"},
@@ -3771,8 +3769,8 @@ QUESTIONS_9_4 = {
         "source": "Übung 5, Probe #9",
         "type": "problem",
         "question": {
-             "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$n=300, \sigma=5, \bar{x}=50$. 95% KI?</span>""",
-             "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$n=300, \sigma=5, \bar{x}=50$. 95% CI?</span>"""
+             "de": r"""$n=300, \sigma=5, \bar{x}=50$. 95% KI?""",
+             "en": r"""$n=300, \sigma=5, \bar{x}=50$. 95% CI?"""
         },
         "options": [
             {"de": r"$50 \pm 0.57$", "en": r"$50 \pm 0.57$"},
@@ -3790,8 +3788,8 @@ QUESTIONS_9_4 = {
         "source": "Test 5, Q4",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Normalverteilt $\mu=400, \sigma^2=25$ ($\sigma=5$). 95% Intervall?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Normal $\mu=400, \sigma=5$. 95% interval?</span>"""
+            "de": r"""Normalverteilt $\mu=400, \sigma^2=25$ ($\sigma=5$). 95% Intervall?""",
+            "en": r"""Normal $\mu=400, \sigma=5$. 95% interval?"""
         },
         "options": [
             {"de": "[391.8, 408.2]", "en": "[391.8, 408.2]"},
@@ -3814,8 +3812,8 @@ QUESTIONS_10_5_EXTRA = {
         "source": "Übung 6, Probe #2",
         "type": "problem",
         "question": {
-             "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Schrittlänge. $\sigma=0.2, n=7, \bar{x}=85.186$. Teste $H_0: \mu \le 85$ ($\alpha=0.01$).</span>""",
-             "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Step length. $\sigma=0.2, n=7, \bar{x}=85.186$. Test $H_0: \mu \le 85$ ($\alpha=0.01$).</span>"""
+             "de": r"""Schrittlänge. $\sigma=0.2, n=7, \bar{x}=85.186$. Teste $H_0: \mu \le 85$ ($\alpha=0.01$).""",
+             "en": r"""Step length. $\sigma=0.2, n=7, \bar{x}=85.186$. Test $H_0: \mu \le 85$ ($\alpha=0.01$)."""
         },
         "options": [
             {"de": "Verwerfen", "en": "Verwerfen"},
@@ -3831,8 +3829,8 @@ QUESTIONS_10_5_EXTRA = {
         "source": "Übung 6, Probe #3",
         "type": "problem",
         "question": {
-             "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Internetsessions. $\bar{x}=140.5$. Ist Dauer signifikant < 148? ($\alpha=0.01$).</span>""",
-             "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Internet sessions. $\bar{x}=140.5$. Is duration sig. < 148? ($\alpha=0.01$).</span>"""
+             "de": r"""Internetsessions. $\bar{x}=140.5$. Ist Dauer signifikant < 148? ($\alpha=0.01$).""",
+             "en": r"""Internet sessions. $\bar{x}=140.5$. Is duration sig. < 148? ($\alpha=0.01$)."""
         },
         "options": [
             {"de": "Ja (Verwerfen)", "en": "Ja (Verwerfen)"},
@@ -3848,8 +3846,8 @@ QUESTIONS_10_5_EXTRA = {
         "source": "Test 1, Q1",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Statistik-Vorlesung: VWL (42m, 93w), BWL (78m, 87w). Eine Hörerin wird gewählt. Wahrscheinlichkeit, dass sie BWLerin ist?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Stats class: Econ (42m, 93f), Bus (78m, 87f). A female student is chosen. Probability she is Business?</span>"""
+            "de": r"""Statistik-Vorlesung: VWL (42m, 93w), BWL (78m, 87w). Eine Hörerin wird gewählt. Wahrscheinlichkeit, dass sie BWLerin ist?""",
+            "en": r"""Stats class: Econ (42m, 93f), Bus (78m, 87f). A female student is chosen. Probability she is Business?"""
         },
         "options": [
             {"de": "0.31", "en": "0.31"},
@@ -3867,8 +3865,8 @@ QUESTIONS_10_5_EXTRA = {
         "source": "Test 1, Q2",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$P(A)=0.6, P(B)=0.7, P(\bar{A} \cap B)=0.1$. Berechne $P(A \cap \bar{B})$.</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$P(A)=0.6, P(B)=0.7, P(\bar{A} \cap B)=0.1$. Find $P(A \cap \bar{B})$.</span>"""
+            "de": r"""$P(A)=0.6, P(B)=0.7, P(\bar{A} \cap B)=0.1$. Berechne $P(A \cap \bar{B})$.""",
+            "en": r"""$P(A)=0.6, P(B)=0.7, P(\bar{A} \cap B)=0.1$. Find $P(A \cap \bar{B})$."""
         },
         "options": [
             {"de": "0", "en": "0"},
@@ -3886,8 +3884,8 @@ QUESTIONS_10_5_EXTRA = {
         "source": "Test 3, Q1",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>A, B disjunkt, P(A), P(B)>0. Welche Aussage trifft zu?</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Let A and B be two disjoint events with $P(A) > 0$ and $P(B) > 0$. Which of the following statements is true for the conditional probability $P(A | B)$?</span>"""
+            "de": r"""A, B disjunkt, P(A), P(B)>0. Welche Aussage trifft zu?""",
+            "en": r"""Let A and B be two disjoint events with $P(A) > 0$ and $P(B) > 0$. Which of the following statements is true for the conditional probability $P(A | B)$?"""
         },
         "options": [
             {"de": r"$P(\bar{A} \cap \bar{B}) ...$", "en": r"$P(\bar{A} \cap \bar{B}) ...$"},
@@ -3905,8 +3903,8 @@ QUESTIONS_10_5_EXTRA = {
         "source": "Übung 1, MC #3",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$P(A) = 0.5$ und $P(B | A) = 0.6$. Dann gilt:</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$P(A) = 0.5$ and $P(B | A) = 0.6$. Then:</span>"""
+            "de": r"""$P(A) = 0.5$ und $P(B | A) = 0.6$. Dann gilt:""",
+            "en": r"""$P(A) = 0.5$ and $P(B | A) = 0.6$. Then:"""
         },
         "options": [
             {"de": r"$P(B \cap A) = 0.3$", "en": r"$P(B \cap A) = 0.3$"},
@@ -3924,8 +3922,8 @@ QUESTIONS_10_5_EXTRA = {
         "source": "Übung 1, MC #4",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$P(B | A) = 0$. Dann gilt:</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$P(B | A) = 0$. Then:</span>"""
+            "de": r"""$P(B | A) = 0$. Dann gilt:""",
+            "en": r"""$P(B | A) = 0$. Then:"""
         },
         "options": [
             {"de": r"$P(B \cap A) = 0$", "en": r"$P(B \cap A) = 0$"},
@@ -3943,8 +3941,8 @@ QUESTIONS_10_5_EXTRA = {
         "source": "Übung 1, MC #6",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>A und B sind zwei Ereignisse, wobei B eine Teilmenge von A ist ($B \subset A$). Dann gilt:</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>A and B are events, where B is a subset of A ($B \subset A$). Then:</span>"""
+            "de": r"""A und B sind zwei Ereignisse, wobei B eine Teilmenge von A ist ($B \subset A$). Dann gilt:""",
+            "en": r"""A and B are events, where B is a subset of A ($B \subset A$). Then:"""
         },
         "options": [
             {"de": r"$P(A | B) = 1$", "en": r"$P(A | B) = 1$"},
@@ -3962,8 +3960,8 @@ QUESTIONS_10_5_EXTRA = {
         "source": "Übung 1, MC #7",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>A und B sind zwei Ereignisse, die sich gegenseitig ausschliessen (disjunkt). Dann gilt:</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>A and B are two mutually exclusive (disjoint) events. Then the following holds:</span>"""
+            "de": r"""A und B sind zwei Ereignisse, die sich gegenseitig ausschliessen (disjunkt). Dann gilt:""",
+            "en": r"""A and B are two mutually exclusive (disjoint) events. Then the following holds:"""
         },
         "options": [
             {"de": r"$P(A | B) = 1$", "en": r"$P(A | B) = 1$"},
@@ -3981,8 +3979,8 @@ QUESTIONS_10_5_EXTRA = {
         "source": "Übung 1, MC #9",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Aus 'A impliziert B' ($A \subseteq B$) folgt ($P(A)>0$):</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>From 'A implies B' ($A \subseteq B$) follows ($P(A)>0$):</span>"""
+            "de": r"""Aus 'A impliziert B' ($A \subseteq B$) folgt ($P(A)>0$):""",
+            "en": r"""From 'A implies B' ($A \subseteq B$) follows ($P(A)>0$):"""
         },
         "options": [
             {"de": r"$P(A | B) \ge P(A)$", "en": r"$P(A | B) \ge P(A)$"},
@@ -4000,8 +3998,8 @@ QUESTIONS_10_5_EXTRA = {
         "source": "Übung 1, MC #10",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Aus 'A und B sind unvereinbar' folgt ($P(A)>0$):</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>From 'A and B are mutually exclusive' follows ($P(A)>0$):</span>"""
+            "de": r"""Aus 'A und B sind unvereinbar' folgt ($P(A)>0$):""",
+            "en": r"""From 'A and B are mutually exclusive' follows ($P(A)>0$):"""
         },
         "options": [
             {"de": r"$P(A \cap B) = P(A)P(B)$", "en": r"$P(A \cap B) = P(A)P(B)$"},
@@ -4019,8 +4017,8 @@ QUESTIONS_10_5_EXTRA = {
         "source": "Übung 1, MC #12",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$P(A)=0.6, P(B)=0.8, P(A \cap B)=0.4, P(C)=0.3, C \subset A$. Dann gilt:</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$P(A)=0.6, P(B)=0.8, P(A \cap B)=0.4, P(C)=0.3, C \subset A$. Then:</span>"""
+            "de": r"""$P(A)=0.6, P(B)=0.8, P(A \cap B)=0.4, P(C)=0.3, C \subset A$. Dann gilt:""",
+            "en": r"""$P(A)=0.6, P(B)=0.8, P(A \cap B)=0.4, P(C)=0.3, C \subset A$. Then:"""
         },
         "options": [
             {"de": "A und B sind unvereinbar.", "en": "A und B sind unvereinbar."},
@@ -4038,8 +4036,8 @@ QUESTIONS_10_5_EXTRA = {
         "source": "Übung 1, MC #14",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$P(A)=0.1, P(B)=0.5$. Dann gilt:</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$P(A)=0.1, P(B)=0.5$. Then:</span>"""
+            "de": r"""$P(A)=0.1, P(B)=0.5$. Dann gilt:""",
+            "en": r"""$P(A)=0.1, P(B)=0.5$. Then:"""
         },
         "options": [
             {"de": r"$P(A \cap B) = 0.05$", "en": r"$P(A \cap B) = 0.05$"},
@@ -4057,8 +4055,8 @@ QUESTIONS_10_5_EXTRA = {
         "source": "Übung 1, MC #15",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$P(A)=1/3, P(B)=1/2, P(B|A)=1/3$. Dann gilt:</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$P(A)=1/3, P(B)=1/2, P(B|A)=1/3$. Then:</span>"""
+            "de": r"""$P(A)=1/3, P(B)=1/2, P(B|A)=1/3$. Dann gilt:""",
+            "en": r"""$P(A)=1/3, P(B)=1/2, P(B|A)=1/3$. Then:"""
         },
         "options": [
             {"de": r"$P(A | B) = 1/6$", "en": r"$P(A | B) = 1/6$"},
@@ -4076,8 +4074,8 @@ QUESTIONS_10_5_EXTRA = {
         "source": "Übung 1, MC #16",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$P(A \cap B \cap C) = P(A)P(B)P(C)$. Dann gilt:</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>$P(A \cap B \cap C) = P(A)P(B)P(C)$. Then:</span>"""
+            "de": r"""$P(A \cap B \cap C) = P(A)P(B)P(C)$. Dann gilt:""",
+            "en": r"""$P(A \cap B \cap C) = P(A)P(B)P(C)$. Then:"""
         },
         "options": [
             {"de": "A, B, C sind unabhängig.", "en": "A, B, C sind unabhängig."},
@@ -4103,8 +4101,8 @@ QUESTIONS_10_5_EXTRA = {
                 "id": "part1",
                 "type": "open",
                 "question": {
-                    "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Zeichnen Sie das Baumdiagramm für diesen Prozess. (Für diese Online-Aufgabe: Beschreiben Sie die Wahrscheinlichkeiten für die Pfade 'UUU' und 'UUD').</span>""",
-                    "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Draw the tree diagram. (For this online task: Describe the probabilities for paths 'UUU' and 'UUD').</span>"""
+                    "de": r"""Zeichnen Sie das Baumdiagramm für diesen Prozess. (Für diese Online-Aufgabe: Beschreiben Sie die Wahrscheinlichkeiten für die Pfade 'UUU' und 'UUD').""",
+                    "en": r"""Draw the tree diagram. (For this online task: Describe the probabilities for paths 'UUU' and 'UUD')."""
                 },
                 "solution": {
                     "de": r"**Lösung:**<br>• $P(U) = 0.5$<br>• $P(U|U) = 0.55 \Rightarrow P(UU) = 0.5 \cdot 0.55 = 0.275$<br>• $P(U|UU) = 0.6 \Rightarrow P(UUU) = 0.275 \cdot 0.6 = 0.165$<br>• $P(D|UU) = 0.4 \Rightarrow P(UUD) = 0.275 \cdot 0.4 = 0.11$",
@@ -4115,8 +4113,8 @@ QUESTIONS_10_5_EXTRA = {
                  "id": "part2",
                  "type": "mc",
                  "question": {
-                     "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Berechnen Sie die Wahrscheinlichkeit für 3x Hoch (UUU).</span>""",
-                     "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Calculate the probability for 3x Up (UUU).</span>"""
+                     "de": r"""Berechnen Sie die Wahrscheinlichkeit für 3x Hoch (UUU).""",
+                     "en": r"""Calculate the probability for 3x Up (UUU)."""
                  },
                  "options": ["0.125", "0.165", "0.225", "0.333"],
                  "correct_idx": 1,
@@ -4129,8 +4127,8 @@ QUESTIONS_10_5_EXTRA = {
                 "id": "part3",
                 "type": "open",
                 "question": {
-                    "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Berechnen Sie die Wahrscheinlichkeit, dass die Aktie am 3. Tag steigt ($U_3$).</span>""",
-                    "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Calculate the probability that the stock goes up on Day 3 ($U_3$).</span>"""
+                    "de": r"""Berechnen Sie die Wahrscheinlichkeit, dass die Aktie am 3. Tag steigt ($U_3$).""",
+                    "en": r"""Calculate the probability that the stock goes up on Day 3 ($U_3$)."""
                 },
                 "solution": {
                     "de": r"**Lösung: 0.5**<br>Wir müssen alle Pfade summieren, die mit U enden:<br>• $UUU: 0.165$<br>• $UDU: 0.5 \cdot 0.45 \cdot 0.5 = 0.1125$<br>• $DUU: 0.5 \cdot 0.45 \cdot 0.5 = 0.1125$<br>• $DDU: 0.5 \cdot 0.55 \cdot 0.4 = 0.11$<br>Summe: $0.165 + 0.1125 + 0.1125 + 0.11 = 0.5$.",
@@ -4156,8 +4154,8 @@ QUESTIONS_2_6_EXTRA = {
                 "id": "part1",
                 "type": "open",
                 "question": {
-                    "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Modell Christopher: 4 Richtungen (N, E, S, W) gleichwahrscheinlich. Berechne die Wahrscheinlichkeit bei 2 Schritten, die Distanz nach Westen zu verringern (oder anzukommen?). (Annahme: Er muss 'Westen' treffen oder Distanz verringern? Lösung impliziert 9/16).</span>""",
-                    "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Christopher's model: 4 directions (N, E, S, W) equally likely. Calculate probability to make progress West in 2 steps.</span>"""
+                    "de": r"""Modell Christopher: 4 Richtungen (N, E, S, W) gleichwahrscheinlich. Berechne die Wahrscheinlichkeit bei 2 Schritten, die Distanz nach Westen zu verringern (oder anzukommen?). (Annahme: Er muss 'Westen' treffen oder Distanz verringern? Lösung impliziert 9/16).""",
+                    "en": r"""Christopher's model: 4 directions (N, E, S, W) equally likely. Calculate probability to make progress West in 2 steps."""
                 },
                 "solution": {
                     "de": r"**Lösung: 9/16**<br>Interpretation unklar aus Staging-Daten, aber offizielles Ergebnis 9/16.",
@@ -4168,8 +4166,8 @@ QUESTIONS_2_6_EXTRA = {
                "id": "part2",
                 "type": "open",
                 "question": {
-                    "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Modell Diego: 8 Richtungen (N, NE, E, SE, S, SW, W, NW). Wahrscheinlichkeit?</span>""",
-                    "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Diego's model: 8 directions. Probability?</span>"""
+                    "de": r"""Modell Diego: 8 Richtungen (N, NE, E, SE, S, SW, W, NW). Wahrscheinlichkeit?""",
+                    "en": r"""Diego's model: 8 directions. Probability?"""
                 },
                 "solution": {
                     "de": "**Lösung: 25/64**",
@@ -4186,20 +4184,20 @@ QUESTIONS_3_7 = {
         "source": "HS 2024 Januar, MC #11",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>11. Ruben und Jochen spielen das folgende Spiel. Eine faire Münze wird geworfen.
+            "de": r"""Ruben und Jochen spielen das folgende Spiel. Eine faire Münze wird geworfen.
 Wenn Kopf fällt, zahlt Jochen 1 CHF an Ruben. Wenn Zahl fällt, zahlt Ruben 1 CHF
 an Jochen. Sie spielen das Spiel für eine gegebene Anzahl n an Runden. Sei X Rubens
 Gesamtgewinn nach n Runden und Y Jochens Gesamtgewinn nach n Runden. Welche der
 folgenden Aussagen ist wahr?
 Hinweis: Beachten Sie, dass Gewinne auch negativ sein können. Der Begriff bezieht sich auf
-den Betrag, den der Spieler verdient oder verloren hat (wenn negativ).</span>""",
-"en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>11. Ruben and Jochen play the following game. A fair coin is tossed. If heads, Jochen pays 1 CHF to Ruben. If tails, Ruben pays 1 CHF to Jochen. They play the game for a given number $n$ of rounds. Let $X$ be Ruben's total winnings after $n$ rounds and $Y$ Jochen's total winnings after $n$ rounds. Which of the following statements is true?<br><br><i>Note: Observe that winnings can also be negative. The term refers to the amount the player has earned or lost (if negative).</i></span>"""
+den Betrag, den der Spieler verdient oder verloren hat (wenn negativ).""",
+"en": r"""Ruben und Jochen play the following game. A fair coin is tossed. If heads, Jochen pays 1 CHF to Ruben. If tails, Ruben pays 1 CHF to Jochen. They play the game for a given number $n$ of rounds. Let $X$ be Ruben's total winnings after $n$ rounds and $Y$ Jochen's total winnings after $n$ rounds. Which of the following statements is true?<br><br><i>Note: Observe that winnings can also be negative. The term refers to the amount the player has earned or lost (if negative).</i>"""
         },
         "options": [
-            {"de": "X und Y haben dieselbe Verteilung.", "en": "X und Y haben dieselbe Verteilung."},
+            {"de": "X und Y haben dieselbe Verteilung.", "en": "X and Y have the same distribution."},
             {"de": "X = Y", "en": "X = Y"},
-            {"de": "X und Y sind unabhängig.", "en": "X und Y sind unabhängig."},
-            {"de": "Keine der obigen.", "en": "Keine der obigen."}
+            {"de": "X und Y sind unabhängig.", "en": "X and Y are independent."},
+            {"de": "Keine der obigen.", "en": "None of the above."}
         ],
         "correct_idx": 0,
         "solution": {
@@ -4214,7 +4212,7 @@ QUESTIONS_5_5_EXTRA = {
         "source": "HS 2023 Januar, Problem 2 (15 Punkte)",
         "type": "problem",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Problem 2 (15 Punkte)
+            "de": r"""Problem 2 (15 Punkte)
 “Es ist nicht schwer, Entscheidungen zu treffen, wenn du deine Werte kennst“
 In Anlehnung an Roy Disneys profunden Erkenntnissen untersucht Professor O., wie die Chance
 eines Unternehmens, einen Kredit zu erhalten, mit den persönlichen Werten der Kreditsachbearbeiter in Bezug auf Nachhaltigkeit zusammenhängt. Um dieses Ziel zu erreichen, untersucht
@@ -4230,25 +4228,25 @@ Kreditsachbearbeiter werden den Unternehmen zufällig zugewiesen, und die Wahrsc
 dass ein Sachbearbeiter ein grüner Sachbearbeiter ist, beträgt 0,5. Die restliche Sachbearbeiter werden als braune Sachbearbeiter eingestuft. Die Wahrscheinlichkeit für eine Kreditzusage
 liegt bei 0,7. Des Weiteren beträgt die Wahrscheinlichkeit einer Kreditzusage, gegeben dass der
 zuständige Sachbearbeiter ein grüner Sachbearbeiter ist, 0,8.
-1. (4 Punkte) Veranschaulichen Sie das oben beschriebene Problem, indem Sie alle Wahrscheinlichkeiten in die folgende Kontingenztabelle eintragen:
+1. Veranschaulichen Sie das oben beschriebene Problem, indem Sie alle Wahrscheinlichkeiten in die folgende Kontingenztabelle eintragen:
 B         nicht B    B ∪ nicht B
 A
 nicht A
 A ∪ nicht A
-2. (5 Punkte) Berechnen Sie die folgenden Wahrscheinlichkeiten:
+2. Berechnen Sie die folgenden Wahrscheinlichkeiten:
  P(A ∩ B)
  P(A|B)
  P(A ∪ B)
-3. (2 Punkte) Sind die Ereignisse A und B voneinander unabhängig? Begründen Sie Ihre
+3. Sind die Ereignisse A und B voneinander unabhängig? Begründen Sie Ihre
 Antwort.
-4. (4 Punkte) Um Einblicke in die Entscheidungsfindung der Sachbearbeiter zu gewinnen,
+4. Um Einblicke in die Entscheidungsfindung der Sachbearbeiter zu gewinnen,
 führt Professor O. persönliche Interviews mit 8 Kreditsachbearbeitern durch.
  Wie hoch ist die Wahrscheinlichkeit, dass von den 8 befragten Sachbearbeitern nur der
 erste ein brauner Sachbearbeiter ist?
  Wie hoch ist die Wahrscheinlichkeit, dass von den 8 befragten Sachbearbeitern 4 grüne
 Sachbearbeiter und 4 braune Sachbearbeiter sind?
-beschriften Sie auch das zusätzliche Blatt klar und deutlich. Die Aufgabe wird sonst nicht gewertet.</span>""",
-"en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Problem 2 (15 Points)
+beschriften Sie auch das zusätzliche Blatt klar und deutlich. Die Aufgabe wird sonst nicht gewertet.""",
+"en": r"""Problem 2 (15 Points)
 "It's not hard to make decisions when you know what your values are."
 Inspired by Roy Disney's profound insights, Professor O. investigates how a company's chance of receiving a loan is related to the loan officers' personal values regarding sustainability. To achieve this goal, he examines companies that are all known for their commitment to sustainability.
 He defines the following events:
@@ -4257,20 +4255,20 @@ He defines the following events:
 - B: The loan officer places great value on sustainability in their personal beliefs. (Green Officer).
 - B^c: The loan officer does not place great value on sustainability in their personal beliefs. (Brown Officer).
 Loan officers are randomly assigned to companies, and the probability that an officer is a green officer is 0.5. The remaining officers are classified as brown officers. The probability of a loan approval is 0.7. Furthermore, the probability of a loan approval, given that the responsible officer is a green officer, is 0.8.
-1. (4 Points) Illustrate the problem described above by entering all probabilities into the following contingency table:
+1. Illustrate the problem described above by entering all probabilities into the following contingency table:
 B         not B    B \cup not B
 A
 not A
 A \cup not A
-2. (5 Points) Calculate the following probabilities:
+2. Calculate the following probabilities:
 - P(A \cap B)
 - P(A|B)
 - P(A \cup B)
-3. (2 Points) Are events A and B independent? Justify your answer.
-4. (4 Points) To gain insights into the decision-making of the officers, Professor O. conducts personal interviews with 8 loan officers.
+3. Are events A and B independent? Justify your answer.
+4. To gain insights into the decision-making of the officers, Professor O. conducts personal interviews with 8 loan officers.
 - What is the probability that of the 8 interviewed officers, only the first one is a Brown Officer?
 - What is the probability that of the 8 interviewed officers, 4 are Green Officers and 4 are Brown Officers?
-Label the additional sheet clearly as well. Otherwise, the task will not be graded.</span>"""
+Label the additional sheet clearly as well. Otherwise, the task will not be graded."""
         },
         "solution": {
             "de": r"**Lösung:**<br>1. $P(A \cap B) = 0.4$.<br>2. Abhängig ($0.8 \neq 0.7$).<br>3. $P(\text{1 Braun}) = 0.5^8 \approx 0.0039$.<br>4. $P(\text{4G, 4B}) = \binom{8}{4} 0.5^8 \approx 0.273$.",
@@ -4281,7 +4279,7 @@ Label the additional sheet clearly as well. Otherwise, the task will not be grad
         "source": "HS 2023 Januar, Problem 4 (15 Punkte)",
         "type": "problem",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Problem 4 (15 Punkte)
+            "de": r"""Problem 4 (15 Punkte)
 Hinweis: Stellen Sie sicher, dass Sie Ihre Berechnungen für die folgenden Fragen im Detail angeben. Wenn Sie einfach die richtige Antwort ohne Herleitung schreiben, erhalten Sie nicht die volle
 Punktzahl.
 Seien X und Y zwei Zufallsvariablen. Folgende Informationen sind bekannt:
@@ -4296,23 +4294,23 @@ $f_X(x) =$
 FY (y) =        (︂
 $1 + b(3y^3 - 2y^2)$ für $y \ge 1$
  X und Y sind unabhängig.
-1. (3 Punkte) Bestimmen Sie die Konstante a.
-2. (3 Punkte) Bestimmen Sie die Konstante b.
-3. (3 Punkte) Bestimmen Sie die gemeinsame Wahrscheinlichkeitsdichtefunktion fX,Y (x, y).
-4. (6 Punkte) Bestimmen Sie den Erwartungswert von Z = XY .
+1. Bestimmen Sie die Konstante a.
+2. Bestimmen Sie die Konstante b.
+3. Bestimmen Sie die gemeinsame Wahrscheinlichkeitsdichtefunktion fX,Y (x, y).
+4. Bestimmen Sie den Erwartungswert von Z = XY .
 beschriften Sie auch das zusätzliche Blatt klar und deutlich. Die Aufgabe wird sonst nicht gewertet.
-beschriften Sie auch das zusätzliche Blatt klar und deutlich. Die Aufgabe wird sonst nicht gewertet.</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Problem 4 (15 Points)
+beschriften Sie auch das zusätzliche Blatt klar und deutlich. Die Aufgabe wird sonst nicht gewertet.""",
+            "en": r"""Problem 4 (15 Points)
 Hint: Make sure to provide your calculations for the following questions in detail. If you simply write the correct answer without derivation, you will not receive full points.
 Let X and Y be two random variables. The following information is known:
 - X has the following probability density function: $f_X(x) = (4ae^{ax})^{-1}$ for $x \ge 0$, 0 otherwise.
 - Y has the following continuous cumulative distribution function: $F_Y(y) = 0$ for $y < 1$, $1 + b(3y^{-3} - 2y^{-2})$ for $y \ge 1$.
 - X and Y are independent.
-1. (3 Points) Determine the constant a.
-2. (3 Points) Determine the constant b.
-3. (3 Points) Determine the joint probability density function $f_{X,Y}(x, y)$.
-4. (6 Points) Determine the expected value of $Z = XY$.
-Label the additional sheet clearly as well. Otherwise, the task will not be graded.</span>"""
+1. Determine the constant a.
+2. Determine the constant b.
+3. Determine the joint probability density function $f_{X,Y}(x, y)$.
+4. Determine the expected value of $Z = XY$.
+Label the additional sheet clearly as well. Otherwise, the task will not be graded."""
         },
         "solution": {
             "de": r"**Lösung:**<br>1. $a = 1/2$.<br>4. Unabhängigkeit angenommen (Produkt von Randdichten): $E[XY] = E[X]E[Y] = 2 \cdot 3 = 6$.",
@@ -4331,8 +4329,8 @@ Label the additional sheet clearly as well. Otherwise, the task will not be grad
                 "id": "part1",
                 "type": "open",
                 "question": {
-                    "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Teil 4A: Bestimmen Sie die Konstante $a$.</span>""",
-                    "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Part 4A: Determine the constant $a$.</span>"""
+                    "de": r"""Teil 4A: Bestimmen Sie die Konstante $a$.""",
+                    "en": r"""Part 4A: Determine the constant $a$."""
                 },
                 "solution": {
                     "de": r"**Lösung: $a=1/2$**<br>$\int_0^\pi \sin(x) dx = 2$. Damit das Integral 1 ist, muss $a=1/2$ sein.",
@@ -4343,8 +4341,8 @@ Label the additional sheet clearly as well. Otherwise, the task will not be grad
                 "id": "part2",
                 "type": "mc",
                 "question": {
-                    "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Teil 4A: Sind $X$ und $Y$ unabhängig?</span>""",
-                    "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Part 4A: Are $X$ and $Y$ independent?</span>"""
+                    "de": r"""Teil 4A: Sind $X$ und $Y$ unabhängig?""",
+                    "en": r"""Part 4A: Are $X$ and $Y$ independent?"""
                 },
                 "options": ["Ja / Yes", "Nein / No"],
                 "correct_idx": 0,
@@ -4357,8 +4355,8 @@ Label the additional sheet clearly as well. Otherwise, the task will not be grad
                 "id": "part3",
                 "type": "open",
                 "question": {
-                    "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Teil 4B: Berechnen Sie $P(X \le Y)$.</span>""",
-                    "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Part 4B: Calculate $P(X \le Y)$.</span>"""
+                    "de": r"""Teil 4B: Berechnen Sie $P(X \le Y)$.""",
+                    "en": r"""Part 4B: Calculate $P(X \le Y)$."""
                 },
                 "solution": {
                     "de": r"**Lösung: 1**<br>Der Definitionsbereich ist $0 \le x \le 1$ und $1 \le y \le e$. Da $x$ immer maximal 1 und $y$ immer mindestens 1 ist, gilt $x \le y$ immer.",
@@ -4369,8 +4367,8 @@ Label the additional sheet clearly as well. Otherwise, the task will not be grad
                 "id": "part4",
                 "type": "open",
                 "question": {
-                    "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Teil 4B: Zeigen Sie, dass $c = 2/e$.</span>""",
-                    "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Part 4B: Show that $c = 2/e$.</span>"""
+                    "de": r"""Teil 4B: Zeigen Sie, dass $c = 2/e$.""",
+                    "en": r"""Part 4B: Show that $c = 2/e$."""
                 },
                 "solution": {
                     "de": r"**Lösung:**<br>Doppelintegral berechnen.<br>$\int_1^e \int_0^1 c(x + x/y) dx dy = 1$.<br>$\int_0^1 x(1+1/y) dx = [\frac{1}{2}x^2]_0^1 (1+1/y) = \frac{1}{2}(1+1/y)$.<br>$\int_1^e \frac{c}{2}(1+1/y) dy = \frac{c}{2} [y + \ln(y)]_1^e = \frac{c}{2} (e+1 - 1 - 0) = \frac{c}{2} e$.<br>Gleich 1 setzen: $\frac{c e}{2} = 1 \Rightarrow c = 2/e$.",
@@ -4390,7 +4388,7 @@ QUESTIONS_7_6 = {
         "source": "HS 2023 Januar, Problem 1 (12 Punkte)",
         "type": "problem",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Aufgabe 1 (12 Punkte)
+            "de": r"""Aufgabe 1 (12 Punkte)
 Teil 1A (4 Punkte)
 Aus jeder der vier Verteilungen F1 , F2 , F3 und F4 wird eine Zufallsstichprobe von Beobachtungen
 gezogen:
@@ -4408,11 +4406,11 @@ Hinweis: Jeder Graph entspricht genau einer der vier Verteilungen F1 , F2 , F3 u
 Teil 1B (8 Punkte)
 Die Höchstgeschwindigkeit von zehn zufällig gewählten Autos lautet wie folgt:
 180, 195, 240, 185, 230, 300, 290, 180, 235, 280
-1. (3 Punkte) Berechnen Sie den Mittelwert, den Modus und den Interquartilsabstand für die
+1. Berechnen Sie den Mittelwert, den Modus und den Interquartilsabstand für die
 Höchstgeschwindigkeiten der Autos.
-2. (5 Punkte) Zeichne Sie ein Histogramm der Höchstgeschwindigkeiten der Autos.
-beschriften Sie auch das zusätzliche Blatt klar und deutlich. Die Aufgabe wird sonst nicht gewertet.</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Problem 1 (12 Points)
+2. Zeichne Sie ein Histogramm der Höchstgeschwindigkeiten der Autos.
+beschriften Sie auch das zusätzliche Blatt klar und deutlich. Die Aufgabe wird sonst nicht gewertet.""",
+            "en": r"""Problem 1 (12 Points)
 Part 1A (4 Points)
 A random sample of observations is drawn from each of the four distributions F1, F2, F3, and F4:
 F1) Poisson distribution with $\lambda = 50$. Sample size $n_1 = 200$.
@@ -4424,9 +4422,9 @@ Hint: Each graph corresponds to exactly one of the four distributions F1, F2, F3
 Part 1B (8 Points)
 The top speed of ten randomly chosen cars is as follows:
 180, 195, 240, 185, 230, 300, 290, 180, 235, 280
-1. (3 Points) Calculate the mean, the mode, and the interquartile range for the top speeds of the cars.
-2. (5 Points) Draw a histogram of the top speeds of the cars.
-Label the additional sheet clearly as well. Otherwise, the task will not be graded.</span>"""
+1. Calculate the mean, the mode, and the interquartile range for the top speeds of the cars.
+2. Draw a histogram of the top speeds of the cars.
+Label the additional sheet clearly as well. Otherwise, the task will not be graded."""
         },
         "solution": {
             "de": r"**Lösung 1A:**<br>F1: 50 (Mittel), F4: 40 (Mittel), F3: 20 (Mittel), F2: Flach.<br>**Lösung 1B:**<br>Sortiert: 180, 180, 185, 195, 230, 235, 240, 280, 290, 300.<br>Mittelwert: 231.5. Modus: 180.<br>IQR: $Q_3 - Q_1 = 280 - 185 = 95$.",
@@ -4445,8 +4443,8 @@ Label the additional sheet clearly as well. Otherwise, the task will not be grad
                 "id": "part1",
                 "type": "open",
                 "question": {
-                    "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Teil 1A: Beschreiben Sie die Charakteristika für die Zuordnung (z.B. Schiefe, Symmetrie).</span>""",
-                    "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Part 1A: Describe the characteristics for matching (e.g., skewness, symmetry).</span>"""
+                    "de": r"""Teil 1A: Beschreiben Sie die Charakteristika für die Zuordnung (z.B. Schiefe, Symmetrie).""",
+                    "en": r"""Part 1A: Describe the characteristics for matching (e.g., skewness, symmetry)."""
                 },
                 "solution": {
                     "de": r"**Lösung:**<br>1. Normal: Symmetrisch um 0.<br>2. Binomial: Leicht schief oder fast symmetrisch um $np=60$. Diskret.<br>3. Uniform: Kastenform (Histogramm) oder Gerade (QQ).<br>4. Exponentiell: Stark rechtsschief, fällt monoton.",
@@ -4457,8 +4455,8 @@ Label the additional sheet clearly as well. Otherwise, the task will not be grad
                 "id": "part2",
                 "type": "open",
                 "question": {
-                    "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Teil 1B: Berechnen Sie Median und Modus der Salatverkäufe.</span>""",
-                    "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Part 1B: Calculate Median and Mode of salad sales.</span>"""
+                    "de": r"""Teil 1B: Berechnen Sie Median und Modus der Salatverkäufe.""",
+                    "en": r"""Part 1B: Calculate Median and Mode of salad sales."""
                 },
                 "solution": {
                     "de": r"**Lösung:**<br>Sortierte Daten: 205, 240, 261, 276, 320, **321**, 321, 321, 345, 399, 450.<br>Median (6. Wert): **321**.<br>Modus (häufigster Wert): **321**.",
@@ -4469,8 +4467,8 @@ Label the additional sheet clearly as well. Otherwise, the task will not be grad
                 "id": "part3",
                 "type": "open",
                 "question": {
-                     "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Teil 1B: Berechnen Sie die Grenzen für den Boxplot (Q1, Q3, Whiskers).</span>""",
-                     "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Part 1B: Calculate boxplot limits (Q1, Q3, Whiskers).</span>"""
+                     "de": r"""Teil 1B: Berechnen Sie die Grenzen für den Boxplot (Q1, Q3, Whiskers).""",
+                     "en": r"""Part 1B: Calculate boxplot limits (Q1, Q3, Whiskers)."""
                 },
                 "solution": {
                     "de": r"**Lösung:**<br>Q1 (25%): 261.<br>Q3 (75%): 345.<br>IQR: $345-261 = 84$.<br>Whiskers: $[Q1 - 1.5 IQR, Q3 + 1.5 IQR] = [135, 471]$. Alle Daten liegen innerhalb.",
@@ -4480,12 +4478,12 @@ Label the additional sheet clearly as well. Otherwise, the task will not be grad
         ],
     }
 }
-QUESTIONS_8_4 = {
+QUESTIONS_8_4_EXTRA = {
     "hs2023_prob5": {
         "source": "HS 2023 Januar, Problem 5 (15 Punkte)",
         "type": "problem",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Problem 5 (15 Punkte)
+            "de": r"""Problem 5 (15 Punkte)
 Teil 5A (7 Punkte)
 Betrachten Sie die folgende Wahrscheinlichkeitsdichtefunktion:
 $$f_X(x; \lambda) = \begin{cases} \frac{2x}{\lambda^2} e^{-(x/\lambda)^2} & \text{für } x \ge 0 \\ 0 & \text{für } x < 0 \end{cases}$$
@@ -4495,14 +4493,14 @@ Berechnen Sie den Maximum-Likelihood-Schätzer für $\lambda$ auf der Grundlage 
 Teil 5B (8 Punkte)
 Nehmen wir an, dass die in der Tabelle 1 gezeigte Daten die Realisierungen einer Zufallsvariable $Y$ mit Wahrscheinlichkeitsdichtefunktion (PMF) sind:
 $$p_Y(y) = \begin{cases} \frac{1}{\theta} & \text{für } y \in \{1, \dots, \theta\} \\ 0 & \text{sonst} \end{cases}$$
-1. (4 Punkte) Berechnen Sie einen Momentenschätzer für $\theta$ auf Grundlage einer Zufallsstichprobe $Y_1, \dots, Y_n$.
+1. Berechnen Sie einen Momentenschätzer für $\theta$ auf Grundlage einer Zufallsstichprobe $Y_1, \dots, Y_n$.
 Hinweis: $\sum_{i=1}^K i = \frac{K(K+1)}{2}$.
-2. (2 Punkte) Berechnen Sie den Maximum-Likelihood-Schätzer für $\theta$ auf Grundlage einer Zufallsstichprobe $Y_1, \dots, Y_n$.
-3. (2 Punkte) Berechnen Sie anhand der Beobachtungsdaten in Tabelle 1 die Werte der Momentenschätzer und Maximum-Likelihood-Schätzer für $\theta$.
+2. Berechnen Sie den Maximum-Likelihood-Schätzer für $\theta$ auf Grundlage einer Zufallsstichprobe $Y_1, \dots, Y_n$.
+3. Berechnen Sie anhand der Beobachtungsdaten in Tabelle 1 die Werte der Momentenschätzer und Maximum-Likelihood-Schätzer für $\theta$.
 
 Tabelle 1: Beobachtungen der Zufallsvariable $Y$
-$y_1 = 1, y_2 = 4, y_3 = 3, y_4 = 4, y_5 = 2$</span>""",
-            "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Problem 5 (15 Points)
+$y_1 = 1, y_2 = 4, y_3 = 3, y_4 = 4, y_5 = 2$""",
+            "en": r"""Problem 5 (15 Points)
 Part 5A (7 Points)
 Consider the following probability density function:
 $$f_X(x; \lambda) = \begin{cases} \frac{2x}{\lambda^2} e^{-(x/\lambda)^2} & \text{for } x \ge 0 \\ 0 & \text{for } x < 0 \end{cases}$$
@@ -4512,10 +4510,10 @@ Calculate the Maximum Likelihood Estimator for $\lambda$ based on a random sampl
 Part 5B (8 Points)
 Assume the data shown in Table 1 are realizations of a random variable $Y$ with probability mass function (PMF):
 $$p_Y(y) = \begin{cases} \frac{1}{\theta} & \text{for } y \in \{1, \dots, \theta\} \\ 0 & \text{otherwise} \end{cases}$$
-1. (4 Points) Calculate a Method of Moments estimator for $\theta$ based on a random sample $Y_1, \dots, Y_n$.
+1. Calculate a Method of Moments estimator for $\theta$ based on a random sample $Y_1, \dots, Y_n$.
 Hint: $\sum_{i=1}^K i = \frac{K(K+1)}{2}$.
-2. (2 Points) Calculate the Maximum Likelihood Estimator for $\theta$ based on a random sample $Y_1, \dots, Y_n$.
-$y_1 = 1, y_2 = 4, y_3 = 3, y_4 = 4, y_5 = 2$</span>"""
+2. Calculate the Maximum Likelihood Estimator for $\theta$ based on a random sample $Y_1, \dots, Y_n$.
+$y_1 = 1, y_2 = 4, y_3 = 3, y_4 = 4, y_5 = 2$"""
         },
         "solution": {
             "de": r"**Lösung:**<br>5A: $\hat{\lambda} = \sqrt{\frac{1}{n} \sum x_i^2}$.<br>5B: MME $\hat{\theta} = 2\bar{X} - 1 = 4.6$. MLE $\hat{\theta} = \max(x_i) = 4$.",
@@ -4534,8 +4532,8 @@ $y_1 = 1, y_2 = 4, y_3 = 3, y_4 = 4, y_5 = 2$</span>"""
                 "id": "part1",
                 "type": "open",
                 "question": {
-                    "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Berechnen Sie den Momentenschätzer $\hat{\lambda}_{MM}$.</span>""",
-                    "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Calculate the Method of Moments estimator $\hat{\lambda}_{MM}$.</span>"""
+                    "de": r"""Berechnen Sie den Momentenschätzer $\hat{\lambda}_{MM}$.""",
+                    "en": r"""Calculate the Method of Moments estimator $\hat{\lambda}_{MM}$."""
                 },
                 "solution": {
                     "de": r"**Lösung:** $\hat{\lambda}_{MM} = \bar{X}$.<br>Bei Poisson ist $E[X] = \lambda$. Wir setzen $E[X] = \bar{X}$.",
@@ -4546,8 +4544,8 @@ $y_1 = 1, y_2 = 4, y_3 = 3, y_4 = 4, y_5 = 2$</span>"""
                 "id": "part2",
                 "type": "open",
                 "question": {
-                    "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Berechnen Sie den Maximum-Likelihood-Schätzer $\hat{\lambda}_{MLE}$.</span>""",
-                    "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Calculate the Maximum Likelihood Estimator $\hat{\lambda}_{MLE}$.</span>"""
+                    "de": r"""Berechnen Sie den Maximum-Likelihood-Schätzer $\hat{\lambda}_{MLE}$.""",
+                    "en": r"""Calculate the Maximum Likelihood Estimator $\hat{\lambda}_{MLE}$."""
                 },
                 "solution": {
                     "de": r"**Lösung:** $\hat{\lambda}_{MLE} = \bar{X}$.<br>Likelihood ableiten und Null setzen führt ebenfalls zum Mittelwert.",
@@ -4558,8 +4556,8 @@ $y_1 = 1, y_2 = 4, y_3 = 3, y_4 = 4, y_5 = 2$</span>"""
                 "id": "part3",
                 "type": "open",
                 "question": {
-                    "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Berechnen Sie den Schätzwert für die Daten: 0.5, 0.25, 0.15. (Hinweis: Die Daten sind nicht ganzzahlig, theoretisch problematisch für Poisson, aber hier rein rechnerisch gemeint).</span>""",
-                    "en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>Calculate the estimate for the data: 0.5, 0.25, 0.15. (Note: Data is non-integer, theoretically problematic for Poisson, but meant computationally).</span>"""
+                    "de": r"""Berechnen Sie den Schätzwert für die Daten: 0.5, 0.25, 0.15. (Hinweis: Die Daten sind nicht ganzzahlig, theoretisch problematisch für Poisson, aber hier rein rechnerisch gemeint).""",
+                    "en": r"""Calculate the estimate for the data: 0.5, 0.25, 0.15. (Note: Data is non-integer, theoretically problematic for Poisson, but meant computationally)."""
                 },
                 "solution": {
                     "de": r"**Lösung:** $\bar{X} = (0.5+0.25+0.15)/3 = 0.9/3 = 0.3$.",
@@ -4569,16 +4567,17 @@ $y_1 = 1, y_2 = 4, y_3 = 3, y_4 = 4, y_5 = 2$</span>"""
         ],
     }
 }
+QUESTIONS_8_4.update(QUESTIONS_8_4_EXTRA)
 QUESTIONS_9_4 = {
     "hs2024_mc4": {
         "source": "HS 2024 Januar, MC #4",
         "type": "mc",
         "question": {
-            "de": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>4. Das Gewicht einer Packung Nudeln ist normalverteilt mit dem Erwartungswert
+            "de": r"""Das Gewicht einer Packung Nudeln ist normalverteilt mit dem Erwartungswert
 µ = 500 und der Varianz σ 2 = 40. Finden Sie das korrekte symmetrische Konfidenzintervall
 für das erwartete Gewicht einer einzelnen Packung: das Konfidenzintervall muss um das
-mittlere Gewicht zentriert sein und 99% aller Nudelpackungen enthalten.</span>""",
-"en": r"""<span style='font-family: "Source Serif Pro", "Cambria", serif; font-size: 20px;'>4. The weight of a pack of pasta is normally distributed with expectation $\mu = 500$ and variance $\sigma^2 = 40$. Find the correct symmetric confidence interval for the expected weight of a single pack: the confidence interval must be centered around the mean weight and contain 99% of all pasta packs.</span>"""
+mittlere Gewicht zentriert sein und 99% aller Nudelpackungen enthalten.""",
+"en": r"""The weight of a pack of pasta is normally distributed with expectation $\mu = 500$ and variance $\sigma^2 = 40$. Find the correct symmetric confidence interval for the expected weight of a single pack: the confidence interval must be centered around the mean weight and contain 99% of all pasta packs."""
         },
         "options": [
             {"de": "[396.97 ; 603.03]", "en": "[396.97 ; 603.03]"},
@@ -4593,7 +4592,213 @@ mittlere Gewicht zentriert sein und 99% aller Nudelpackungen enthalten.</span>""
         }
     }
 }
-QUESTIONS_11_1 = {}
+QUESTIONS_11_1 = {
+    # Interdisciplinary Exam Problems - Full past exam problems spanning multiple chapters
+    "hs2023_full_prob1": {
+        "source": "HS 2023 Januar, Problem 1 (12 Punkte)",
+        "type": "problem",
+        "question": {
+            "de": r"""**Teil 1A (4 Punkte):**
+Aus jeder der vier Verteilungen F1, F2, F3 und F4 wird eine Zufallsstichprobe gezogen:
+- F1: Poissonverteilung mit $\lambda = 50$, $n_1 = 200$
+- F2: Gleichverteilung auf $[14, 26]$, $n_2 = 200$
+- F3: Normalverteilung mit $\mu = 20$, $\sigma^2 = 4$, $n_3 = 200$
+- F4: Binomialverteilung mit $n = 200$, $p = 0.2$, $n_4 = 200$
+
+Ordne jedem Diagramm (empirische Verteilungsfunktionen/Histogramme) die entsprechende Verteilung zu.
+
+**Teil 1B (8 Punkte):**
+Höchstgeschwindigkeiten von 10 Autos: 180, 195, 240, 185, 230, 300, 290, 180, 235, 280
+
+1. Berechnen Sie Mittelwert, Modus und Interquartilsabstand.
+2. Zeichnen Sie ein Histogramm.""",
+            "en": r"""**Part 1A (4 Points):**
+A random sample is drawn from each of four distributions:
+- F1: Poisson with $\lambda = 50$, $n_1 = 200$
+- F2: Uniform on $[14, 26]$, $n_2 = 200$
+- F3: Normal with $\mu = 20$, $\sigma^2 = 4$, $n_3 = 200$
+- F4: Binomial with $n = 200$, $p = 0.2$, $n_4 = 200$
+
+Match each diagram (empirical distribution functions/histograms) to the corresponding distribution.
+
+**Part 1B (8 Points):**
+Top speeds of 10 cars: 180, 195, 240, 185, 230, 300, 290, 180, 235, 280
+
+1. Calculate mean, mode, and interquartile range.
+2. Draw a histogram."""
+        },
+        "solution": {
+            "de": r"""**Lösung 1A:**
+- F1 (Poisson $\lambda=50$): Mittelwert bei 50, leicht schief.
+- F2 (Uniform): Flache/rechteckige Verteilung zwischen 14-26.
+- F3 (Normal): Symmetrische Glocke um 20.
+- F4 (Binomial $np=40$): Diskret, fast symmetrisch um 40.
+
+**Lösung 1B:**
+Sortiert: 180, 180, 185, 195, 230, 235, 240, 280, 290, 300
+
+- **Mittelwert:** $\frac{2315}{10} = 231.5$
+- **Modus:** 180 (einziger Wert, der zweimal vorkommt)
+- **Q1** (2.5ter Wert): $\frac{180+185}{2} = 182.5$
+- **Q3** (7.5ter Wert): $\frac{240+280}{2} = 260$
+- **IQR:** $260 - 182.5 = 77.5$""",
+            "en": r"""**Solution 1A:**
+- F1 (Poisson $\lambda=50$): Mean at 50, slightly skewed.
+- F2 (Uniform): Flat/rectangular distribution between 14-26.
+- F3 (Normal): Symmetric bell around 20.
+- F4 (Binomial $np=40$): Discrete, nearly symmetric around 40.
+
+**Solution 1B:**
+Sorted: 180, 180, 185, 195, 230, 235, 240, 280, 290, 300
+
+- **Mean:** $\frac{2315}{10} = 231.5$
+- **Mode:** 180 (only value appearing twice)
+- **Q1** (2.5th value): $\frac{180+185}{2} = 182.5$
+- **Q3** (7.5th value): $\frac{240+280}{2} = 260$
+- **IQR:** $260 - 182.5 = 77.5$"""
+        }
+    },
+    "hs2023_full_prob2": {
+        "source": "HS 2023 Januar, Problem 2 (18 Punkte)",
+        "type": "problem",
+        "question": {
+            "de": r"""**Wahrscheinlichkeitsrechnung (18 Punkte)**
+
+Ein Schachspieler spielt 10 Partien gegen einen Computer. P(Gewinn) = 0.7 pro Partie.
+
+1. Wie groß ist die Wahrscheinlichkeit, dass er mindestens 8 Partien gewinnt?
+2. Der Spieler erhält 10 CHF pro gewonnene Partie und zahlt 5 CHF pro verlorene. Was ist sein erwarteter Gewinn?
+3. Wenn er 6 Partien gewonnen hat, wie hoch ist die Wahrscheinlichkeit, dass er die ersten 3 gewonnen hat?
+4. In einem Turnier spielen 100 Spieler mit gleichen Fähigkeiten. Approximieren Sie P(mindestens 75 gewinnen ≥ 7 Partien).""",
+            "en": r"""**Probability Theory (18 Points)**
+
+A chess player plays 10 games against a computer. P(Win) = 0.7 per game.
+
+1. What is the probability of winning at least 8 games?
+2. The player receives 10 CHF per won game and pays 5 CHF per lost game. What is his expected profit?
+3. If he won 6 games, what is the probability that he won the first 3?
+4. In a tournament, 100 players with equal abilities play. Approximate P(at least 75 win ≥ 7 games)."""
+        },
+        "solution": {
+            "de": r"""**Lösung:**
+1. $X \sim B(10, 0.7)$
+   $P(X \geq 8) = P(X=8) + P(X=9) + P(X=10)$
+   $= \binom{10}{8}(0.7)^8(0.3)^2 + \binom{10}{9}(0.7)^9(0.3) + (0.7)^{10}$
+   $\approx 0.233 + 0.121 + 0.028 = 0.382$
+
+2. Gewinn $G = 10X - 5(10-X) = 15X - 50$
+   $E[G] = 15 \cdot E[X] - 50 = 15(7) - 50 = 55$ CHF
+
+3. $P(\text{erste 3 gewonnen} | X=6)$
+   $= \frac{P(\text{erste 3 gewinnt, letzte 7 hat 3 Siege})}{\binom{10}{6}(0.7)^6(0.3)^4}$
+   $= \frac{\binom{7}{3}}{\binom{10}{6}} = \frac{35}{210} = \frac{1}{6}$
+
+4. $Y = $ Anzahl Spieler mit $\geq 7$ Siegen.
+   $p = P(X \geq 7) \approx 0.65$ (für einen Spieler)
+   $Y \sim B(100, 0.65)$, CLT: $Y \approx N(65, 22.75)$
+   $P(Y \geq 75) \approx \Phi\left(\frac{75-65}{\sqrt{22.75}}\right) \approx \Phi(2.1) \approx 0.018$""",
+            "en": r"""**Solution:**
+1. $X \sim B(10, 0.7)$
+   $P(X \geq 8) \approx 0.382$
+
+2. Profit $G = 15X - 50$, $E[G] = 55$ CHF
+
+3. $P(\text{first 3 won} | X=6) = \frac{\binom{7}{3}}{\binom{10}{6}} = \frac{1}{6}$
+
+4. CLT approximation: $P(Y \geq 75) \approx 0.018$"""
+        }
+    },
+    "hs2023_full_prob3": {
+        "source": "HS 2023 Januar, Problem 3 (18 Punkte)",
+        "type": "problem",
+        "question": {
+            "de": r"""**Stetige Zufallsvariablen (18 Punkte)**
+
+Gemeinsame Dichte von $(X, Y)$:
+$$f(x,y) = \begin{cases} c(x + y) & 0 \leq x \leq 1, 0 \leq y \leq 1 \\ 0 & \text{sonst} \end{cases}$$
+
+1. Bestimmen Sie die Konstante $c$.
+2. Berechnen Sie die Randdichten $f_X(x)$ und $f_Y(y)$.
+3. Sind $X$ und $Y$ unabhängig?
+4. Berechnen Sie $E[X]$, $E[Y]$ und $Cov(X,Y)$.
+5. Berechnen Sie $P(X + Y \leq 1)$.""",
+            "en": r"""**Continuous Random Variables (18 Points)**
+
+Joint density of $(X, Y)$:
+$$f(x,y) = \begin{cases} c(x + y) & 0 \leq x \leq 1, 0 \leq y \leq 1 \\ 0 & \text{otherwise} \end{cases}$$
+
+1. Determine the constant $c$.
+2. Calculate the marginal densities $f_X(x)$ and $f_Y(y)$.
+3. Are $X$ and $Y$ independent?
+4. Calculate $E[X]$, $E[Y]$ and $Cov(X,Y)$.
+5. Calculate $P(X + Y \leq 1)$."""
+        },
+        "solution": {
+            "de": r"""**Lösung:**
+1. $\int_0^1 \int_0^1 c(x+y) \, dx \, dy = c \cdot 1 = 1 \Rightarrow c = 1$
+
+2. $f_X(x) = \int_0^1 (x+y) \, dy = x + \frac{1}{2}$
+   $f_Y(y) = \int_0^1 (x+y) \, dx = \frac{1}{2} + y$
+
+3. **Nein**, denn $f(x,y) = (x+y) \neq f_X(x) \cdot f_Y(y) = (x+\frac{1}{2})(y+\frac{1}{2})$.
+
+4. $E[X] = \int_0^1 x(x+\frac{1}{2}) \, dx = \frac{7}{12}$
+   Analog: $E[Y] = \frac{7}{12}$
+   $E[XY] = \int_0^1 \int_0^1 xy(x+y) \, dx \, dy = \frac{1}{3}$
+   $Cov(X,Y) = E[XY] - E[X]E[Y] = \frac{1}{3} - \frac{49}{144} = -\frac{1}{144}$
+
+5. $P(X+Y \leq 1) = \int_0^1 \int_0^{1-x} (x+y) \, dy \, dx = \frac{1}{3}$""",
+            "en": r"""**Solution:**
+1. $c = 1$
+2. $f_X(x) = x + \frac{1}{2}$, $f_Y(y) = \frac{1}{2} + y$
+3. **No**, since $f(x,y) \neq f_X(x) \cdot f_Y(y)$
+4. $E[X] = E[Y] = \frac{7}{12}$, $Cov(X,Y) = -\frac{1}{144}$
+5. $P(X+Y \leq 1) = \frac{1}{3}$"""
+        }
+    },
+    "hs2022_full_prob3": {
+        "source": "HS 2022 Januar, Problem 3 (18 Punkte)",
+        "type": "problem",
+        "question": {
+            "de": r"""**Konfidenzintervalle (18 Punkte)**
+
+In einer Fabrik werden Schrauben produziert. Die Länge einer Schraube ist normalverteilt.
+Aus einer Stichprobe von 25 Schrauben: $\bar{x} = 10.2$ mm, $s = 0.5$ mm.
+
+1. Konstruieren Sie ein 95%-Konfidenzintervall für die mittlere Schraubenlänge.
+2. Wie groß muss die Stichprobe sein, um eine Breite von höchstens 0.2 mm zu erreichen?
+3. Testen Sie die Hypothese $H_0: \mu = 10$ gegen $H_1: \mu \neq 10$ auf dem 5%-Niveau.
+4. Berechnen Sie den p-Wert des Tests.""",
+            "en": r"""**Confidence Intervals (18 Points)**
+
+A factory produces screws. The length of a screw is normally distributed.
+From a sample of 25 screws: $\bar{x} = 10.2$ mm, $s = 0.5$ mm.
+
+1. Construct a 95% confidence interval for the mean screw length.
+2. How large must the sample be to achieve a width of at most 0.2 mm?
+3. Test the hypothesis $H_0: \mu = 10$ against $H_1: \mu \neq 10$ at the 5% level.
+4. Calculate the p-value of the test."""
+        },
+        "solution": {
+            "de": r"""**Lösung:**
+1. KI: $\bar{x} \pm t_{24, 0.975} \cdot \frac{s}{\sqrt{n}} = 10.2 \pm 2.064 \cdot \frac{0.5}{5} = [9.99, 10.41]$
+
+2. Breite $= 2 \cdot z_{0.975} \cdot \frac{s}{\sqrt{n}} \leq 0.2$
+   $n \geq \left(\frac{2 \cdot 1.96 \cdot 0.5}{0.2}\right)^2 = 96.04 \Rightarrow n \geq 97$
+
+3. Teststatistik: $T = \frac{10.2 - 10}{0.5/5} = 2.0$
+   Kritischer Wert: $t_{24, 0.975} = 2.064$
+   $|T| = 2.0 < 2.064 \Rightarrow H_0$ nicht ablehnen.
+
+4. $p = 2 \cdot P(T_{24} > 2.0) \approx 0.057$""",
+            "en": r"""**Solution:**
+1. CI: $[9.99, 10.41]$
+2. $n \geq 97$
+3. $|T| = 2.0 < 2.064 \Rightarrow$ Do not reject $H_0$
+4. p-value $\approx 0.057$"""
+        }
+    }
+}
 
 # Aliases for export
 QUESTIONS_5 = QUESTIONS_5_3

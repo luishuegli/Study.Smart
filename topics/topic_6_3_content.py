@@ -1,7 +1,8 @@
 import streamlit as st
 from utils.localization import t
 from utils.quiz_helper import render_mcq
-from data.exam_questions import get_question
+from utils.problem_renderer import render_open_question
+from data.exam_questions import get_all_questions_for_topic
 
 def render_subtopic_6_3(model):
     """6.3 Additional Exam Questions"""
@@ -16,17 +17,29 @@ def render_subtopic_6_3(model):
     
     st.markdown("<br>", unsafe_allow_html=True)
     
-    # List of Question IDs to render
-    question_ids = [
-        "uebung4_mc1", "uebung4_mc2", 
-        "uebung4_mc3", "uebung4_prob3", 
-        "uebung4_prob7",
-        "uebung4_prob2", "uebung4_prob4", "uebung4_prob5", "uebung4_prob6"
-    ]
+    # Get all questions for this subtopic
+    questions = get_all_questions_for_topic("6.3")
     
-    for q_id in question_ids:
-        q = get_question("6.3", q_id)
-        if q:
+    for q_id, q in questions.items():
+        q_type = q.get("type", "mc")
+        
+        if q_type == "problem" or q_type == "open":
+            # Use problem renderer for open-ended questions
+            render_open_question(
+                key_suffix=f"6_3_{q_id}",
+                question_text=q["question"],
+                solution_text_dict=q["solution"],
+                source=q.get("source", ""),
+                hints=q.get("hints", []),
+                model=model,
+                ai_context=f"CLT Problem: {q_id}",
+                course_id="vwl",
+                topic_id="6",
+                subtopic_id="6.3",
+                question_id=q_id
+            )
+        else:
+            # Use MCQ renderer for multiple choice
             with st.container(border=True):
                 st.caption(q.get("source", ""))
                 opts = q.get("options", [])
@@ -50,4 +63,4 @@ def render_subtopic_6_3(model):
                     subtopic_id="6.3",
                     question_id=q_id
                 )
-            st.markdown("<br>", unsafe_allow_html=True)
+        st.markdown("<br>", unsafe_allow_html=True)

@@ -1,7 +1,8 @@
 import streamlit as st
 from utils.localization import t
 from utils.quiz_helper import render_mcq
-from data.exam_questions import get_question
+from utils.problem_renderer import render_open_question, render_multi_stage_problem
+from data.exam_questions import get_all_questions_for_topic
 
 def render_subtopic_8_4(model):
     """8.4 Additional Exam Questions"""
@@ -16,18 +17,41 @@ def render_subtopic_8_4(model):
     
     st.markdown("<br>", unsafe_allow_html=True)
     
-    # List of Question IDs to render
-    question_ids = [
-        "uebung5_mc1", "uebung5_mc2", "uebung5_mc3", "uebung5_mc4", "uebung5_mc5",
-        "uebung5_mc6", "uebung5_mc7", "uebung5_mc8", "uebung5_mc9",
-        "uebung5_mc10", "uebung5_mc11", "uebung5_mc12", "uebung5_mc13", "uebung5_mc14", "uebung5_mc15",
-        "uebung5_prob1", "uebung5_prob3", "uebung5_prob5", "uebung5_prob6", "uebung5_prob8",
-        "test5_mc3"
-    ]
+    # Get all questions for this subtopic
+    questions = get_all_questions_for_topic("8.4")
     
-    for q_id in question_ids:
-        q = get_question("8.4", q_id)
-        if q:
+    for q_id, q in questions.items():
+        q_type = q.get("type", "mc")
+        
+        if q_type == "multi_stage":
+            render_multi_stage_problem(
+                key_suffix=f"8_4_{q_id}",
+                stem_text=q.get("stem", {}),
+                parts=q.get("parts", []),
+                source=q.get("source", ""),
+                model=model,
+                ai_context=f"Estimation Problem: {q_id}",
+                course_id="vwl",
+                topic_id="8",
+                subtopic_id="8.4",
+                question_id=q_id
+            )
+        elif q_type == "problem" or q_type == "open":
+            render_open_question(
+                key_suffix=f"8_4_{q_id}",
+                question_text=q["question"],
+                solution_text_dict=q["solution"],
+                source=q.get("source", ""),
+                hints=q.get("hints", []),
+                model=model,
+                ai_context=f"Estimation Problem: {q_id}",
+                course_id="vwl",
+                topic_id="8",
+                subtopic_id="8.4",
+                question_id=q_id
+            )
+        else:
+            # MC type
             with st.container(border=True):
                 st.caption(q.get("source", ""))
                 opts = q.get("options", [])
@@ -51,4 +75,4 @@ def render_subtopic_8_4(model):
                     subtopic_id="8.4",
                     question_id=q_id
                 )
-            st.markdown("<br>", unsafe_allow_html=True)
+        st.markdown("<br>", unsafe_allow_html=True)

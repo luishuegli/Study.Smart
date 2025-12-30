@@ -154,21 +154,44 @@ def render_mcq(
     user_submitted = False
     is_correct = False
     
-    # --- CASE A: MULTIPLE SELECT (Checkboxes) ---
+    # --- CASE A: MULTIPLE SELECT (Custom Button Bars) ---
     if is_multi_select:
         selected_indices = []
-        for i, opt in enumerate(options):
-            # Checkbox persistence via session_state keys
+        
+        # Initialize state for each option
+        for i in range(len(options)):
             k = f"{checkbox_prefix}_{i}"
-            # Default to False if not set
             if k not in st.session_state:
                 st.session_state[k] = False
-                
-            st.checkbox(opt, key=k)
-            if st.session_state[k]:
+        
+        # Render custom option bars (matching radio button styling)
+        for i, opt in enumerate(options):
+            k = f"{checkbox_prefix}_{i}"
+            is_selected = st.session_state.get(k, False)
+            
+            # Style: selected = black border + gray background, unselected = light border
+            if is_selected:
                 selected_indices.append(i)
+                border_style = "border: 2px solid #1f2937; background: #f3f4f6;"
+            else:
+                border_style = "border: 1px solid #e5e7eb; background: white;"
+            
+            # Render as a clickable button
+            if st.button(
+                opt,
+                key=f"{checkbox_prefix}_btn_{i}",
+                use_container_width=True,
+                type="secondary"
+            ):
+                # Toggle selection
+                st.session_state[k] = not st.session_state[k]
+                st.rerun()
+        
+        # Collect current selection
+        selected_indices = [i for i in range(len(options)) if st.session_state.get(f"{checkbox_prefix}_{i}", False)]
         
         # Check Answer Button (Combined Submit + Show Solution)
+        st.markdown("<br>", unsafe_allow_html=True)
         if st.button(t({"de": "Antwort prüfen", "en": "Check Answer"}), key=check_btn_key, type="primary"):
             user_submitted = True
             # Sort for comparison

@@ -307,10 +307,18 @@ def render_subtopic_2_5(model):
     
     with st.container(border=True):
         q_data = get_question("2.5", "coin_toss_seq")
+        
+        # Translate options
+        opts = q_data.get("options", [])
+        if opts and isinstance(opts[0], dict):
+            option_labels = [t(o) for o in opts]
+        else:
+            option_labels = opts
+        
         render_mcq(
             key_suffix="2_5_coin",
             question_text=t(q_data["question"]),
-            options=q_data["options"],
+            options=option_labels,
             correct_idx=q_data["correct_idx"],
             solution_text_dict=q_data["solution"],
             success_msg_dict={"de": "Korrekt!", "en": "Correct!"},

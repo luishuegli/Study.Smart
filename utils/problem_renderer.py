@@ -1,6 +1,5 @@
 
 import streamlit as st
-from utils.styles import render_icon
 from utils.localization import t
 from utils.progress_tracker import track_question_answer
 

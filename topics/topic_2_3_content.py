@@ -235,10 +235,18 @@ svg { width: 1.5rem; height: 1.5rem; }
     
     with st.container(border=True):
         q_data = get_question("2.3", "dvd_collection")
+        
+        # Translate options
+        opts = q_data.get("options", [])
+        if opts and isinstance(opts[0], dict):
+            option_labels = [t(o) for o in opts]
+        else:
+            option_labels = opts
+        
         render_mcq(
             key_suffix="2_3_dvd",
             question_text=t(q_data["question"]),
-            options=q_data["options"],
+            options=option_labels,
             correct_idx=q_data["correct_idx"],
             solution_text_dict=q_data["solution"],
             success_msg_dict={"de": "Korrekt!", "en": "Correct!"},

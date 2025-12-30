@@ -166,14 +166,11 @@ def render_subtopic_1_8(model):
         
         st.markdown("<br>", unsafe_allow_html=True)
         
-        # 2. EXPERIMENT (Controls)
-        col_ctrl, col_vis = st.columns([1, 1.5], gap="large")
+        # 2. EXPERIMENT (Bordered Supplier Cards)
+        col_ctrl, col_vis = st.columns([1, 1], gap="medium")
         
         with col_ctrl:
-            st.markdown(f"**{t({'de': 'Marktanteile (Priors)', 'en': 'Market Shares (Priors)'})}**")
-            
-            # --- COUPLED SLIDER LOGIC ---
-            # Callbacks to enforce A + B <= 100 while keeping absolute scales (0-100)
+            # Callbacks to enforce A + B <= 100
             def update_alpha():
                 if st.session_state.slider_1_8_pa + st.session_state.slider_1_8_pb > 100:
                     st.session_state.slider_1_8_pb = 100 - st.session_state.slider_1_8_pa
@@ -181,40 +178,50 @@ def render_subtopic_1_8(model):
             def update_beta():
                 if st.session_state.slider_1_8_pa + st.session_state.slider_1_8_pb > 100:
                     st.session_state.slider_1_8_pa = 100 - st.session_state.slider_1_8_pb
-
-            # Alpha - Blue #60A5FA (Standard Label)
-            st.markdown(f"Alpha Inc. (%)")
-            p_a = st.slider("Alpha", 0, 100, 30, key="slider_1_8_pa", label_visibility="collapsed", on_change=update_alpha)
             
-            # Beta - Green #34D399 (Standard Label)
-            st.markdown(f"Beta Corp. (%)")
-            p_b = st.slider("Beta", 0, 100, 50, key="slider_1_8_pb", label_visibility="collapsed", on_change=update_beta)
+            # --- SUPPLIER CARDS (Color-coded) ---
+            # Alpha Card (Blue)
+            st.markdown("""
+<div style="border: 2px solid #60A5FA; border-radius: 8px; padding: 10px; margin-bottom: 8px; background: rgba(96,165,250,0.05);">
+<div style="font-weight: 600; color: #60A5FA; margin-bottom: 4px;">Alpha Inc.</div>
+</div>
+            """, unsafe_allow_html=True)
+            alpha_s, alpha_d = st.columns(2)
+            with alpha_s:
+                st.caption("Share (Bar Width)")
+                p_a = st.slider("Alpha", 0, 100, 30, key="slider_1_8_pa", label_visibility="collapsed", on_change=update_alpha)
+            with alpha_d:
+                st.caption("Defect Rate (Bar Height)")
+                def_a = st.slider("Defect Alpha", 0, 100, 5, key="slider_1_8_defa", label_visibility="collapsed")
             
+            # Beta Card (Green)
+            st.markdown("""
+<div style="border: 2px solid #34D399; border-radius: 8px; padding: 10px; margin-bottom: 8px; background: rgba(52,211,153,0.05);">
+<div style="font-weight: 600; color: #34D399; margin-bottom: 4px;">Beta Corp.</div>
+</div>
+            """, unsafe_allow_html=True)
+            beta_s, beta_d = st.columns(2)
+            with beta_s:
+                st.caption("Share (Bar Width)")
+                p_b = st.slider("Beta", 0, 100, 50, key="slider_1_8_pb", label_visibility="collapsed", on_change=update_beta)
+            with beta_d:
+                st.caption("Defect Rate (Bar Height)")
+                def_b = st.slider("Defect Beta", 0, 100, 20, key="slider_1_8_defb", label_visibility="collapsed")
+            
+            # Gamma Card (Amber)
             p_c = 100 - p_a - p_b
+            st.markdown(f"""
+<div style="border: 2px solid #FBBF24; border-radius: 8px; padding: 10px; margin-bottom: 8px; background: rgba(251,191,36,0.05);">
+<div style="font-weight: 600; color: #FBBF24; margin-bottom: 4px;">Gamma Ltd. — {p_c}% (Residual)</div>
+</div>
+            """, unsafe_allow_html=True)
+            gamma_d_col, _ = st.columns([1, 1])
+            with gamma_d_col:
+                st.caption("Defect Rate (Bar Height)")
+                def_c = st.slider("Defect Gamma", 0, 100, 50, key="slider_1_8_defc", label_visibility="collapsed")
             
-            # Gamma - Amber #FBBF24 (Standard Label)
-            st.markdown(f"Gamma Ltd.: **{p_c}%** (Residual)")
-            
-            # --- MISSION TARGET ---
-            st.markdown("<br>", unsafe_allow_html=True)
-            st.markdown(f"**{t({'de': 'Zielvorgabe', 'en': 'Mission Target'})}**")
+            # Target
             target_val = 2.0
-            
-            # This will be checked against the result below
-            
-            st.markdown(f"**{t({'de': 'Defektraten (Conditionals)', 'en': 'Defect Rates (Conditionals)'})}**")
-            
-            # Defect Alpha
-            st.markdown(f"Defect Alpha (%)")
-            def_a = st.slider("Defect Alpha", 0, 100, 5, key="slider_1_8_defa", label_visibility="collapsed")
-            
-            # Defect Beta
-            st.markdown(f"Defect Beta (%)")
-            def_b = st.slider("Defect Beta", 0, 100, 20, key="slider_1_8_defb", label_visibility="collapsed")
-            
-            # Defect Gamma
-            st.markdown(f"Defect Gamma (%)")
-            def_c = st.slider("Defect Gamma", 0, 100, 50, key="slider_1_8_defc", label_visibility="collapsed")
 
         # 3. VISUALIZATION
         with col_vis:

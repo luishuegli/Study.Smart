@@ -30,7 +30,7 @@ SUBTOPIC_QUESTION_COUNTS = {
     "3.4": 6,  # + hs2024_mc7, mc12
     "3.5": 1,  # uebung2_mc8
     "3.6": 1,  # test3_q2
-    "3.7": 10,  # hs2024_mc11, hs2023_mc6 + 4 uebung2 + 4 Test
+    "3.7": 1,  # hs2024_mc11 (only one implemented)
     # Topic 4: Stochastic Models and Distributions
     "4.1": 0,  # No MCQs
     "4.2": 0,  # Problems only
@@ -51,7 +51,6 @@ SUBTOPIC_QUESTION_COUNTS = {
     "6.1": 1,  # hs2022_mc3
     "6.2": 1,  # hs2022_mc10
     "6.3": 5,  # uebung4_mc1,2,3, prob3, prob7
-    "6.3": 0,  # Additional Questions
     # Topic 7: Descriptive Statistics
     "7.1": 0,  # No MCQs
     "7.2": 6,  # test4_q3, hs2015_mc9, hs2023_mc4, test3_q3, hs2023_mc9, hs2015_mc8
@@ -63,7 +62,7 @@ SUBTOPIC_QUESTION_COUNTS = {
     "8.1": 0,  # No MCQs
     "8.2": 2,  # hs2023_mc10, hs2015_mc10
     "8.3": 3,  # hs2022_mc8, hs2015_prob5, +1
-    "8.4": 21,  # uebung5_mc1-15 + prob1,3,5,6,8 + test5_mc3 (Audit Complete)
+    "8.4": 22,  # uebung5_mc1-15 + prob3,5,6,8 + test5_mc3 + hs2023_prob5 + hs2022_prob5
     # Topic 9: Confidence Intervals
     "9.1": 0,  # No MCQs
     "9.2": 1,  # hs2023_mc5
@@ -76,7 +75,7 @@ SUBTOPIC_QUESTION_COUNTS = {
     "10.4": 0,  # No MCQs
     "10.5": 4,  # uebung6_prob1-4 (Implemented)
     # Topic 11: Interdisciplinary
-    "11.1": 0,
+    "11.1": 4,  # hs2023_full_prob1,2,3 + hs2022_full_prob3
 }
 
 def calculate_topic_progress(topic_data, subtopic_ids):
@@ -107,7 +106,7 @@ def course_overview_view():
 
     # Sidebar: Back Button + Spacer + Footer
     with st.sidebar:
-        if st.button(f"← {loc.t({'de': 'Zurück zum Dashboard', 'en': 'Back to Dashboard'})}", use_container_width=True):
+        if st.button(f"← {loc.t({'de': 'Zurück zum Dashboard', 'en': 'Back to Dashboard'})}", use_container_width=True, type="primary"):
             st.session_state.current_page = "dashboard"
             st.session_state.selected_topic = None
             st.session_state.selected_subtopic = None

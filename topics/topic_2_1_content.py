@@ -206,38 +206,54 @@ But the permutation formula counts each order separately! For 3 people, there ar
             'de': '<b>Frag dich:</b> Kann dieselbe Person/Sache mehrfach vorkommen?', 
             'en': '<b>Ask yourself:</b> Can the same person/thing appear multiple times?'}), unsafe_allow_html=True)
 
-        # --- INTEGRATED DECISION GUIDE (Stable Flexbox Strategy) ---
-        st.markdown("<hr style='margin: 24px 0; border: 0; border-top: 1.5px solid #f3f4f6;'>", unsafe_allow_html=True)
-        st.markdown(f"**{t({'de': 'Klausur-Entscheidungshilfe: Signalwörter', 'en': 'Exam Decision Guide: Signal Words'})}**")
+        # --- QUESTION DISSECTOR (Rule: Teach by Example) ---
+        st.markdown("<hr style='margin: 16px 0; border: 0; border-top: 1px solid #e5e7eb;'>", unsafe_allow_html=True)
+        st.markdown(f"**{t({'de': 'Fragen-Analysator: So erkennst du die Formel', 'en': 'Question Dissector: How to Spot the Formula'})}**")
         
-        def get_signal_rows(words, color):
-            return "".join([f'<div style="background: #fafafa; border-radius: 6px; padding: 4px 10px; margin-bottom: 4px; font-size: 0.85em; color: #475569; border-left: 3px solid {color};">{w}</div>' for w in words])
-
-        p_words = t({
-            'de': ['Rangliste, Platz 1/2/3', 'Anordnen, Reihenfolge', 'Passwort, PIN-Code, Code', 'Wer kommt zuerst (Warteschlange)?', 'Planen, Position'],
-            'en': ['Ranking, 1st/2nd/3rd place', 'Arrange, sequence', 'Password, PIN code, Code', 'Who comes first (Queue)?', 'Schedule, Position']
-        })
-        c_words = t({
-            'de': ['Auswählen, Team bilden', 'Menge, Gruppe', 'Lotto, Ziehung', 'Wer ist dabei? (Auswahl)'],
-            'en': ['Select, form a team', 'Set, group', 'Lottery, draw', 'Who is included? (Choose)']
-        })
-
-        st.markdown(f"""
-<div style="display: flex; gap: 24px; margin-top: 16px; align-items: flex-start; padding-bottom: 16px;">
-<div style="flex: 1;">
-<div style="margin-bottom: 12px; height: 24px;">
-<span style="font-weight: 700; color: #1e293b; font-size: 0.95em;">{t({'de': 'Permutation', 'en': 'Permutation'})}</span>
+        # Color Legend (compact inline)
+        st.markdown("""
+<div style="display: flex; gap: 16px; flex-wrap: wrap; font-size: 0.8em; margin-bottom: 12px; color: #64748b;">
+    <span><span style="background:#dbeafe; padding:2px 6px; border-radius:4px; color:#1d4ed8;">Given</span> = Data</span>
+    <span><span style="background:#fee2e2; padding:2px 6px; border-radius:4px; color:#dc2626;">Target</span> = Find</span>
+    <span><span style="background:#dcfce7; padding:2px 6px; border-radius:4px; color:#16a34a;">Signal</span> = Formula Hint</span>
+    <span><span style="background:#fef3c7; padding:2px 6px; border-radius:4px; color:#d97706;">→ Formula</span></span>
 </div>
-{get_signal_rows(p_words, '#007AFF')}
+        """, unsafe_allow_html=True)
+        
+        # Tabbed Examples
+        tab_perm, tab_comb = st.tabs([t({"de": "Permutation Beispiel", "en": "Permutation Example"}), t({"de": "Kombination Beispiel", "en": "Combination Example"})])
+        
+        with tab_perm:
+            st.markdown(f"""
+<div style="background: #fafafa; border-radius: 8px; padding: 12px; line-height: 1.8; font-size: 0.95em;">
+<span style="background:#dbeafe; padding:2px 6px; border-radius:4px; color:#1d4ed8;">8 runners</span> compete in a race. 
+<span style="background:#fee2e2; padding:2px 6px; border-radius:4px; color:#dc2626;">How many ways</span> can the 
+<span style="background:#dbeafe; padding:2px 6px; border-radius:4px; color:#1d4ed8;">top 3 positions</span> be filled 
+if there are <span style="background:#dcfce7; padding:2px 6px; border-radius:4px; color:#16a34a;">no ties</span>?
 </div>
-<div style="flex: 1;">
-<div style="margin-bottom: 12px; height: 24px;">
-<span style="font-weight: 700; color: #1e293b; font-size: 0.95em;">{t({'de': 'Kombination', 'en': 'Combination'})}</span>
+<div style="margin-top: 8px; font-size: 0.85em;">
+<b>📘 Given:</b> $n=8$, $k=3$ &nbsp;|&nbsp; 
+<b>🎯 Target:</b> Number of arrangements &nbsp;|&nbsp;
+<b>💡 Signal:</b> "positions", "no ties" → Order matters!<br>
+<span style="background:#fef3c7; padding:2px 8px; border-radius:4px; color:#d97706; font-weight:600;">→ $P(8,3) = \\frac{{8!}}{{5!}} = 336$</span>
 </div>
-{get_signal_rows(c_words, '#FF4B4B')}
+            """, unsafe_allow_html=True)
+        
+        with tab_comb:
+            st.markdown(f"""
+<div style="background: #fafafa; border-radius: 8px; padding: 12px; line-height: 1.8; font-size: 0.95em;">
+From <span style="background:#dbeafe; padding:2px 6px; border-radius:4px; color:#1d4ed8;">12 students</span>, 
+a <span style="background:#dcfce7; padding:2px 6px; border-radius:4px; color:#16a34a;">committee of 4</span> is 
+<span style="background:#dcfce7; padding:2px 6px; border-radius:4px; color:#16a34a;">selected</span>. 
+<span style="background:#fee2e2; padding:2px 6px; border-radius:4px; color:#dc2626;">How many different committees</span> are possible?
 </div>
+<div style="margin-top: 8px; font-size: 0.85em;">
+<b>📘 Given:</b> $n=12$, $k=4$ &nbsp;|&nbsp; 
+<b>🎯 Target:</b> Number of groups &nbsp;|&nbsp;
+<b>💡 Signal:</b> "committee", "selected" → Order irrelevant!<br>
+<span style="background:#fef3c7; padding:2px 8px; border-radius:4px; color:#d97706; font-weight:600;">→ $\\binom{{12}}{{4}} = 495$</span>
 </div>
-""", unsafe_allow_html=True)
+            """, unsafe_allow_html=True)
 
     st.markdown("<br>", unsafe_allow_html=True)
     

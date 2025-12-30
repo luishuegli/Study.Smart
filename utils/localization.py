@@ -140,7 +140,7 @@ def render_sidebar_footer():
     
     render_language_selector()
     
-    if st.button(t({"de": "Abmelden", "en": "Sign Out"}), type="secondary", use_container_width=True):
+    if st.button(t({"de": "Abmelden", "en": "Sign Out"}), type="primary", use_container_width=True):
         if "user" in st.session_state:
             del st.session_state["user"]
         st.rerun()

@@ -345,10 +345,18 @@ def render_subtopic_1_7(model):
     with st.container(border=True):
         st.markdown(f"**{t(content_1_7['exam']['q1']['title'])}**")
         q1_data = get_question("1.7", "hs2024_mc3")
+        
+        # Handle bilingual options
+        q1_opts = q1_data.get("options", [])
+        if q1_opts and isinstance(q1_opts[0], dict) and ('de' in q1_opts[0] or 'en' in q1_opts[0]):
+            q1_option_labels = [t(o) for o in q1_opts]
+        else:
+            q1_option_labels = q1_opts
+        
         render_mcq(
             key_suffix="1_7_q1_narrative",
             question_text=t(q1_data["question"]),
-            options=q1_data["options"],
+            options=q1_option_labels,
             correct_idx=q1_data["correct_idx"],
             solution_text_dict=q1_data["solution"],
             success_msg_dict={"de": "Korrekt", "en": "Correct"},

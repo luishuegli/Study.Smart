@@ -296,6 +296,16 @@ def load_design_system():
              line-height: 1.6;
              color: #333;
         }
+        
+        /* LaTeX/KaTeX Font Size Harmonization */
+        /* Reduce default LaTeX size (1.21em) to match body text */
+        .katex {
+            font-size: 1.0em !important;
+        }
+        /* Inline math should match surrounding text */
+        .katex-display {
+            font-size: 1.1em !important;
+        }
 
         /* --- 9. LINKS --- */
         a {

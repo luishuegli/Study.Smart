@@ -138,11 +138,17 @@ def render_subtopic_1_5(model):
     if q_data:
         st.markdown(f"### {t({'de': 'Prüfungstraining: HS2022 (MC 5)', 'en': 'Exam Practice: HS2022 (MC 5)'})}")
         
+        # Translate options properly
+        translated_options = [t(opt) for opt in q_data["options"]]
+        
+        # Fix escaped newlines in question text
+        question_text = t(q_data["question"]).replace("\\n\\n", "<br><br>").replace("\\n", "<br>")
+        
         with st.container(border=True):
              render_mcq(
                 key_suffix="1_5_q1",
-                question_text=t(q_data["question"]),
-                options=q_data["options"],
+                question_text=question_text,
+                options=translated_options,
                 correct_idx=q_data["correct_idx"],
                 solution_text_dict=q_data["solution"],
                 success_msg_dict={"de": "Korrekt!", "en": "Correct!"},

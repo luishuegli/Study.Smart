@@ -86,22 +86,20 @@ def render_subtopic_2_3(client):
 
 @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-/* Fix: Nuclear Option for Crate Buttons - Force Black Text */
+
+/* Scaling fix for icon rendering */
+svg { width: 1.5rem; height: 1.5rem; }
+
+/* Tame the Math: Prevent KaTeX from exploding */
+.katex {
+    font-size: 1.1em !important; /* Cap it relative to the 20px base */
+}
+
+/* Alignment Fix: Force Crate Buttons to match Cassette Height (54px) */
 .stApp [data-testid="stButton"] button {
-    background-color: #ffffff !important;
-    color: #000000 !important;
-    border: 1px solid #d1d5db !important;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-}
-.stApp [data-testid="stButton"] button p,
-.stApp [data-testid="stButton"] button div, 
-.stApp [data-testid="stButton"] button span {
-    color: #000000 !important; /* Force Black specifically on text nodes */
-}
-.stApp [data-testid="stButton"] button:hover {
-    background-color: #f3f4f6 !important;
-    color: #000000 !important;
-    border-color: #9ca3af !important;
+    height: 54px !important;
+    border-radius: 8px !important;
+    font-weight: 500 !important;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -175,7 +173,7 @@ def render_subtopic_2_3(client):
                 # Render Available Buttons
                 for track in available_tracks:
                     # Pure text button, no emoji, per Premium feel
-                    if st.button(f"+ {track}", key=f"btn_{track}", use_container_width=True):
+                    if st.button(f"+ {track}", key=f"btn_{track}", use_container_width=True, type="primary"):
                         st.session_state.playlist_2_3.append(track)
                         st.rerun()
                 

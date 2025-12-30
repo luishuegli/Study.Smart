@@ -140,15 +140,46 @@ def lesson_view():
                 # Logic: Expand if it contains the selected subtopic OR if it's the selected topic
                 is_expanded = (topic["id"] == current_topic_id)
                 
-                with st.expander(loc.t(topic['title']), expanded=is_expanded):
+                # --- CALCULATE TOPIC PROGRESS ---
+                from views.course_overview import SUBTOPIC_QUESTION_COUNTS
+                user_progress = st.session_state.get("user_progress", {})
+                topic_key = topic["id"].replace("topic_", "")
+                topic_data = user_progress.get("topics", {}).get(topic_key, {})
+                subtopics_data = topic_data.get("subtopics", {})
+                
+                topic_completed_count = 0
+                topic_total_count = 0
+                
+                subtopics_list = topic.get("subtopics", [])
+                for s in subtopics_list:
+                    s_id = s["id"]
+                    # Get correct count
+                    s_completed = len(subtopics_data.get(s_id, {}).get("correct_questions", []))
+                    # Get total count
+                    s_total = SUBTOPIC_QUESTION_COUNTS.get(s_id, 0)
+                    
+                    topic_completed_count += s_completed
+                    topic_total_count += s_total
+                
+                # Build Label
+                base_title = loc.t(topic['title'])
+                expander_label = base_title
+                
+                if topic_total_count > 0:
+                    if topic_completed_count >= topic_total_count:
+                         # Green Checkmark
+                         checkmark_svg_b64 = "PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiMzNEM3NTkiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cG9seWxpbmUgcG9pbnRzPSIyMCA2IDkgMTcgNCAxMiI+PC9wb2x5bGluZT48L3N2Zz4="
+                         expander_label = f"{base_title} ![check](data:image/svg+xml;base64,{checkmark_svg_b64})"
+                    elif topic_completed_count > 0:
+                         expander_label = f"{base_title} ({topic_completed_count}/{topic_total_count})"
+                
+                with st.expander(expander_label, expanded=is_expanded):
                     subtopics = topic.get("subtopics", [])
                     if subtopics:
                         # Translate titles for the map
                         # --- PROGRESS LABELS ---
-                        from views.course_overview import SUBTOPIC_QUESTION_COUNTS
-                        user_progress = st.session_state.get("user_progress", {})
-                        topic_data = user_progress.get("topics", {}).get(topic["id"].replace("topic_", ""), {})
-                        subtopic_progress = topic_data.get("subtopics", {})
+                        # SUBTOPIC_QUESTION_COUNTS imported above
+                        subtopic_progress = subtopics_data # Renamed variable usage
                         
                         dynamic_sub_titles = []
                         sub_map = {} # label -> id

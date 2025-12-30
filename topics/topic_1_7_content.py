@@ -581,10 +581,10 @@ def render_subtopic_1_7(model):
     st.markdown("<br><br>", unsafe_allow_html=True)
     st.markdown(f"### {t({'de': 'Prüfungstraining: Weitere Aufgaben', 'en': 'Exam Practice: Additional Problems'})}")
     
-    def render_exam_q(label, q_id, key_suffix, source_caption):
-        q_data = get_question("1.7", q_id)
+    def render_exam_q(label, q_id, key_suffix, source_caption, override_topic_id=None):
+        q_data = get_question(override_topic_id or "1.7", q_id)
         if not q_data:
-            st.warning(f"Question {q_id} not found")
+            st.warning(f"Question {q_id} not found in topic {override_topic_id or '1.7'}")
             return
         
         opts = q_data.get("options", [])
@@ -621,6 +621,7 @@ def render_subtopic_1_7(model):
     st.markdown("<br>", unsafe_allow_html=True)
     render_exam_q("Q6", "hs2023_mc1", "1_7_hs2023_mc1", "HS 2023, MC 1")
     st.markdown("<br>", unsafe_allow_html=True)
-    render_exam_q("Q7", "test3_q1", "1_7_test3_q1", "Test 3, Frage 1")
+    # test3_q1 is actually located in Topic 1.2 (QUESTIONS_1_2)
+    render_exam_q("Q7", "test3_q1", "1_7_test3_q1", "Test 3, Frage 1", override_topic_id="1.2")
     st.markdown("<br>", unsafe_allow_html=True)
     render_exam_q("Q8", "hs2024_mc5", "1_7_hs2024_mc5", "HS 2024, MC 5")

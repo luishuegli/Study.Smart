@@ -1,6 +1,8 @@
 # Topic 3.4: Expected Values
 import streamlit as st
 from utils.localization import t
+from utils.quiz_helper import render_mcq
+from data.exam_questions import get_question
 
 def render_subtopic_3_4(model):
     """3.4 Erwartungswerte - Expected Values"""

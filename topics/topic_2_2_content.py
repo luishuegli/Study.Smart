@@ -23,8 +23,8 @@ content_2_2 = {
         "en": "Intuition: For each of the **{n_s}** shirts, there are **{n_p}** pants options."
     },
     "relate": {
-        "de": "Das ist das **Fundamentalprinzip**: Unabhängige Entscheidungen werden **multipliziert**.",
-        "en": "This is the **Fundamental Principle**: Independent choices are **multiplied**."
+        "de": "Das ist das <b>Fundamentalprinzip</b>: Unabhängige Entscheidungen werden <b>multipliziert</b>.",
+        "en": "This is the <b>Fundamental Principle</b>: Independent choices are <b>multiplied</b>."
     }
 }
 

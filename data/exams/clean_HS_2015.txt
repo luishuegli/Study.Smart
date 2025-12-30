@@ -1,0 +1,506 @@
+Prüfungen Bachelor-Stufe - Herbstsemester 2014
+Name:                                                             Vorname:
+Muttersprache(n):                                                 Matrikel-Nr.:
+Prüfungsfach:               Statistik
+3,220
+für Major VWL
+Datum / Zeit:               15.01.2015 16:15-18:15
+Verantwortlich:             Baumann Roger
+Umfang (Teile bzw.          18 Seiten (inkl. diese Seite und Tabellen )
+Seiten):
+Bemerkungen:
+Diese Aufgabenblätter sind zusammen mit den Lösungen abzugeben.
+1. Überprüfen Sie bitte die Vollständigkeit der Aufgaben-
+Mögliche Erzielte
+blätter.
+MC                      40
+2. Der Lösungsweg muss bei jeder Aufgabe klar ersicht-
+A1                      12
+lich sein und jede Aufgabe darf nur eine definitive
+A2                      10                       Lösungsversion enthalten.
+A3                      18                    3. Die definitive Lösung ist auf dem jeweiligen Aufgaben-
+A4                      20                       blatt direkt aufzuführen. Es dürfen Vorder- und Rückseite
+chen Sie einen klaren Verweis auf dem Aufgabenblatt der
+Summe                  120                       Prüfung und beschriften Sie auch das zusätzliche Blatt
+Note                                             klar und deutlich.
+4. Für provisorische Berechnungen benützen Sie bitte die
+separaten Blätter, welche ebenfalls abzugeben sind.
+Teil A: Multiple Choice (40 Punkte)
+Markieren Sie bei folgenden Multiple-Choice-Aufgaben die korrekte Aussage.
+• In jedem Block von Aussagen ist genau eine Antwort korrekt.
+• Die eindeutig markierte korrekte Aussage wird mit 4 Punkten (pro MC-Aufgabe) bewertet.
+• Eine Markierung der falschen Aussage, eine Mehrfachmarkierung oder keine Markierung wird mit
+0 Punkten bewertet.
+1. (4 Punkte) Es seien X, Y zwei stetige Zufallsvariablen. Welche der folgenden Aussagen ist immer
+korrekt?
+(a) Wenn die Randdichten fX (x) und fY (y) bekannt sind, können wir daraus die gemeinsame
+Dichte fX,Y (x, y) berechnen.
+(b) X und Y sind unabhängig dann und nur dann wenn Cov(X, Y ) = 0.
+(c) fY |X (y|x) = fX|Y (x|y).
+(d) Cov(X, Y ) = 0 dann und nur dann wenn E[XY ] = E[X]E[Y ].
+2. (4 Punkte) Sei X eine stetige Zufallsvariable mit kumulativer Verteilungsfunktion F (x). Welche
+der folgenden Aussagen ist FALSCH?
+Rb
+(a) P (a ≤ X ≤ b) = a F (x)dx
+(b) Wenn X normalverteilt ist, dann gilt E[X] = M edian(X).
+(c) Wenn X uniform verteilt ist auf [0, 1], dann ist F (x) linear für x ∈ [0, 1].
+(d) Wenn X uniform verteilt ist, dann gilt E[X] = M edian(X).
+2 = 4, µ = 0
+3. (4 Punkte) Es seien X und Y zwei normal verteilte Zufallsvariablen mit µX = 1, σX       Y
+Welche der folgenden Aussagen ist FALSCH?
+X−1
+
+(a) P    2 ≤ y = Φ(y)
+(b) Φ−1 (0.91) = 0.8186
+(c) E[2X − 3Y ] = −1
+(d) Φ(−1) = P (Y ≥ 1)
+4. (4 Punkte) Herr Meyer hat seinen Schlüssel für das Schliessfach verloren. Die Schliessfachnummer
+hat er leider vergessen. Er erinnert sich allerdings daran, dass es sich um eine vierstellige Zahl
+handelt, bei der zwei Ziffern gleich sind und dass als Ziffern die 3, 5 und 7 vorkommen. Wieviele
+Schliessfächer erfüllen diese Kriterien?
+(a) 12
+(b) 24
+(c) 36
+(d) 72
+5. (4 Punkte) Es sei X eine diskrete Zufallsvariable mit einer Wahrscheinlichkeitsmassenfunktion
+der Form                               (
+x+4
+c   für x = 1, . . . , 5
+f (x) =
+0     sonst.
+Für welchen Wert von c ist f (x) eine Wahrscheinlichkeitsmassenfunktion?
+(a) c = 20
+(b) c = 25
+(c) c = 30
+(d) c = 35
+6. (4 Punkte) Es seien Xi , i = 1, . . . , n Zufallsvariablen, die jedoch nicht notwendigerweise unabhängig oder identisch verteilt sind. Nehmen Sie an, folgende Gleichungen sind erfüllt:
+n            n
+!
+1                2
+X            X
+V ar       Xi =         V ar (Xi ) = n · V ar (Xj ) , ∀j = 1, . . . , n
+i=1        i=1
+Welche der folgenden Aussagen ist korrekt?
+(a) Hinreichend für ein Halten von Gleichung 1 ist, dass die Zufallsvariablen Xi identisch verteilt
+sind.
+Hinreichend für ein Halten von Gleichung 2 ist, dass die Zufallsvariablen Xi unabhängig
+verteilt sind.
+(b) Hinreichend für ein Halten von Gleichung 1 ist, dass die Zufallsvariablen Xi unabhängig
+verteilt sind.
+Hinreichend für ein Halten von Gleichung 2 ist, dass die Zufallsvariablen Xi identisch verteilt
+sind.
+(c) Beide Gleichungen halten selbst in allen Fällen wenn die Zufallsvariablen Xi abhängig sind.
+(d) Beide Gleichungen halten selbst in allen Fällen wenn die Zufallsvariablen Xi nicht identisch
+verteilt sind.
+7. (4 Punkte) Es seien X, Y und Z drei Zufallsvariablen wobei Y = 3X + 2 und Z = 2X − 3. Welche
+der folgenden Aussagen ist korrekt?
+(a) Corr(X, Y ) > Corr(X, Z)
+(b) Corr(X, Y ) = Corr(X, Z)
+(c) Corr(X, Y ) < Corr(X, Z)
+(d) Wir haben nicht genügend Informationen um die Korrelationen Corr(X, Y ) und Corr(X, Z)
+zu berechnen.
+8. (4 Punkte) Aus einer Stichprobe von 3 Werten berechnet man den Mittelwert (x = 5.5) und die
+empirische Varianz (σ 2 = 4.5). Der mittlere der beiden Werte ist dann notwendigerweise:
+(a) −1
+(b) 1
+(c) 4
+(d) Wir haben nicht genügend Informationen, um die Frage zu beantworten.
+9. (4 Punkte) Zu Kontrollzwecken werden 1000 Packungen Reis aus der Produktion entnommen und
+gewogen. Dabei stellt sich heraus, dass das Gewicht der Packungen annähernd normalverteilt ist.
+Wenn 800 der Packungen zwischen 343.2 und 356.8 Gramm wiegen, was ist dann die ungefähre
+Varianz des Gewichtes?
+(a) σ 2 ≈ 16
+(b) σ 2 ≈ 25
+(c) σ 2 ≈ 36
+(d) σ 2 ≈ 49
+10. (4 Punkte) Für θ > 1 sei X1 , X2 , . . . , Xn eine unabhängige Folge in [1, θ] gleichverteilter Zufallsvariablen, Xi ∼ U [1, θ]. Wir betrachten den Schätzer θ̂ = n2 (x1 + x2 + . . . + xn ) für den Parameter
+θ. Welche der folgenden Aussagen über θ̂ trifft zu?
+(a) Die Varianz des Schätzers ist (θ−1)
+3n .
+(b) Der Schätzer ist erwartungstreu, aber nicht konsistent.
+(c) Der Schätzer ist konsistent, aber nicht erwartungstreu.
+θ   2
+(d) Der Bias des Schätzers ist 3n .
+Aufgabe 1 (12 Punkte)
+Teil 1A (4 Punkte)
+Wir haben zufällige Stichproben von je 100 Beobachtungen der folgenden vier Verteilungen V 1, V 2,
+V 3 und V 4 gezogen:
+V1) Normalverteilung mit Erwartungswert µ = 0 und Varianz σ 2 = 3.
+Stichprobengrösse: n1 = 100
+V2) Exponentialverteilung mit Parameter λ = 3.
+Stichprobengrösse: n2 = 100
+V3) Normalverteilung mit Erwartungswert µ = 0 und Varianz σ 2 = 1.
+Stichprobengrösse: n3 = 100
+V4) Gleichverteilung U [−3, 3].
+Stichprobengrösse: n4 = 100
+Untenstehend sind ein Boxplot (A), ein Histogramm (B), eine empirische kumulative Verteilungsfunktion (C) und ein QQ-Plot (vs. Normalverteilung) (D) von jeweils einer Stichprobe gegeben.
+Ordnen Sie die jeweiligen Grafiken (A, B, C und D) den entsprechenden Stichproben (V1 , V2 , V3 und
+V4 ) zu, z.B. V 1 : D.
+Wichtig: Jeder Stichprobe entspricht genau eine Grafik!
+A                                                                                   B
+1.5
+●
+10 15 20
+●
+1.0
+0.5
+0.0
+−2        −1       0       1       2       3
+C                                                                                   D
+1 2 3
+●● ●                                                                                ●●● ●
+Empirische Quantile
+●
+●●●
+●●                                                                                  ●●●●
+●
+●●                                                                                ●●
+●●
+●
+●●●
+●                                                                                 ●
+●
+0.8
+●●●                                                                                ●
+●
+●●                                                                                  ●
+●
+●●
+●
+●                                                                                  ●
+●
+●●
+●
+●●
+●●●                                                                                ●●
+●
+●
+●●
+●
+●
+●●                                                                                 ●●
+●
+Fn(x)
+●
+●                                                                                   ●
+●
+●
+●                                                                                  ●
+●●
+●
+●                                                                                  ●●
+●
+●
+0.4
+●●                                                                                   ●
+●●
+●                                                                                    ●
+●
+●
+−1
+●
+●                                                                                    ●
+●
+●
+●                                                                                   ●
+●●
+●
+●
+●●
+●
+●
+●                                                                                   ●
+●
+●●
+●
+●●                                                                                   ●
+●
+●
+●                                                                                   ●
+●
+●●
+●
+●
+●
+●
+●
+●●
+●●
+●
+●
+●●                                                                                ●●
+●●
+●●
+●
+●
+●●●●●
+0.0
+●   ●
+−3
+● ●                                                                             ● ●
+−5              0              5                                                −2        −1          0       1       2
+Theoretische Quantile
+Teil 1B (8 Punkte)
+Die Ergebnisse der Statistik Klausur an der Universität Hawaii ergab folgende Häufigkeitstabelle:
+Note    0.7   1.0   1.3   2.0   2.3   3.0   3.7   4.0   4.3   4.7   5.0
+ni       1     0     0     0     5     6     6     4     6     4     7
+1. (2 Punkte) Berechnen Sie Mittelwert und Modus der Stichprobe.
+2. (6 Punkte) Zeichnen Sie einen Boxplot, berechnen Sie die zugehörigen Masszahlen und zeichnen
+Sie diese ein.
+mehr Platz benötigen, machen Sie einen klaren Verweis auf dem Aufgabenblatt der Prüfung und beschriften Sie auch das zusätzliche
+Blatt klar und deutlich. Die Aufgabe wird sonst nicht gewertet.
+Aufgabe 2 (10 Punkte)
+Teil 2A (6 Punkte)
+Gegeben sei eine Urne mit einer schwarzen und zwei roten Kugeln. Wir betrachten die Ereignisse
+• R: “Es wird eine rote Kugel gezogen” und
+• S: “Es wird eine schwarze Kugel gezogen”.
+Es werde nun dreimal aus dieser Urne ohne Zurücklegen gezogen - die Urne ist also nach dem letzten
+Zug leer.
+1. (1 Punkte) Zeichnen Sie hierzu ein Baumdiagramm und zeichnen Sie die zugehörigen Wahrscheinlichkeiten ein.
+2. (2 Punkte) Wie gross ist die Wahrscheinlichkeit, im zweiten Zug eine rote Kugel zu ziehen?
+3. (3 Punkte) Nehmen Sie an, es wurde im zweiten Zug eine rote Kugel gezogen. Mit welcher Wahrscheinlichkeit wurde im ersten Zug ebenfalls eine rote Kugel gezogen?
+Teil 2B (4 Punkte)
+Bei einer Klausur werden 20 Multiple-Choice-Fragen mit jeweils vier angebotenen Antworten gestellt,
+von denen genau eine richtig ist. Zum Bestehen der Klausur sind mindestens 12 richtige Antworten
+notwendig.
+1. (2 Punkte) Mit welcher Wahrscheinlichkeit p besteht ein Student die Prüfung, der bei jeder Frage
+eine der vier Antwortmöglichkeiten als falsch erkennt und rein zufällig eine der restlichen drei
+Antworten ankreuzt? (Ersatzergebnis: p = 0.015)
+2. (2 Punkte) Die Klausur wird von 100 Studenten geschrieben, welche alle wie in der vorigen
+Aufgabe beschrieben vorgehen. Was ist die Wahrscheinlichkeit, dass mindestens drei Studenten
+die Klausur bestehen? Approximieren Sie die gegebene Wahrscheinlichkeit mittels der Poisson
+Verteilung.
+mehr Platz benötigen, machen Sie einen klaren Verweis auf dem Aufgabenblatt der Prüfung und beschriften Sie auch das zusätzliche
+Blatt klar und deutlich. Die Aufgabe wird sonst nicht gewertet.
+Aufgabe 3 (18 Punkte)
+Davide hat sich ein neues Motorrad gekauft und fährt damit nun täglich. Da er häufig auf Kieswegen
+fährt, hat Davide oft einen platten Reifen. Die Zufallsvariable T1 beschreibt die Lebensdauer eines
+Reifens in Tagen (d.h. die Zeit bis er platt ist). Nehmen Sie an T1 ist exponential verteilt mit der
+folgenden Wahrscheinlichkeitsdichtefunktion
+(
+1         t
+
+500 exp − 500   für t ≥ 0,
+f (t) =
+0                sonst.
+1. (2 Punkte) Berechnen Sie die kumulative Verteilungsfunktion F (t).
+2. (2 Punkte) Wie gross ist die Wahrscheinlichkeit, dass der vordere Reifen länger als 500 Tage keine
+Reifenpanne aufweist?
+3. (2 Punkte) Welche Lebensdauer wird von dem vorderen Reifen mit einer Wahrscheinlichkeit von
+0.2 überschritten?
+Wir betrachten nun zusätzlich die Zufallsvariable T2 , welche die Lebensdauer (in Tagen) des hinteren
+Reifens beschreibt. Wir nehmen an, dass T1 und T2 unabhängige und identisch verteilte Zufallsvariablen
+sind.
+Sobald ein Reifen platt ist, ersetzt Davide beide Reifen durch neue. Die Zufallsvariable T bezeichnet die
+Anzahl Tage zwischen dem Ersetzen der beiden Reifen bis zum nächsten Mal, dass die Reifen gewechselt
+werden müssen. (Hinweis: Es gilt T = min(T1 , T2 ))
+4. (6 Punkte) Berechnen Sie die kumulative Verteilungsfunktion von T . (Ersatzergebnis: T ∼ Exp(λ)
+mit λ = 220 ).
+5. (6 Punkte) Davide besitzt 20 Paar Reifen. Sobald ein Reifen platt ist, ersetzt er das alte Paar
+Reifen durch ein neues Paar. Sobald er keine Reifen mehr übrig hat, will er sich ein Auto kaufen.
+Nehmen Sie an, dass die Lebenszeiten aller Reifenpaare identisch und unabhängig verteilt sind.
+Nehmen Sie ausserdem an, dass die Verteilung für jedes Reifenpaar derjenigen aus der vorigen
+Teilaufgabe entspricht.
+Berechnen Sie die ungefähre Wahrscheinlichkeit, dass Davide mit dieser Vorgehensweise nach
+frühestens 15 Jahren ein Auto kauft (1 Jahr = 365 Tage).
+mehr Platz benötigen, machen Sie einen klaren Verweis auf dem Aufgabenblatt der Prüfung und beschriften Sie auch das zusätzliche
+Blatt klar und deutlich. Die Aufgabe wird sonst nicht gewertet.
+Aufgabe 4 (20 Punkte)
+Wir betrachten die beiden Zufallsvariablen X und Y mit gemeinsamer Dichte
+(
+λ(xy + c) für 0 ≤ x ≤ 2 und 0 ≤ y ≤ 1,
+fX,Y (x, y) =
+0          sonst,
+für die Parameter λ ∈ R und c ≥ 0.
+1. (3 Punkte) Zeigen Sie, dass fX,Y für λ = 1/(1 + 2c) eine Dichtefunktion ist.
+2. (2 Punkte) Zeigen Sie, dass für die Randdichte fX (x) gilt:
+(
+x+2c
+für 0 ≤ x ≤ 2,
+fX (x) = 2+4c
+0       sonst.
+3. (5 Punkte) Berechnen Sie die Varianz von X für c = 1.
+4. (5 Punkte) Geben Sie den Ansatz zur Berechnung der Wahrscheinlichkeit P(X + Y < 6/5).
+Fertigen Sie hierfür zuerst eine Skizze in der xy-Ebene an.
+5. (5 Punkte) Berechnen Sie die Wahrscheinlichkeit P(X + Y < 6/5) für c = 0.
+mehr Platz benötigen, machen Sie einen klaren Verweis auf dem Aufgabenblatt der Prüfung und beschriften Sie auch das zusätzliche
+Blatt klar und deutlich. Die Aufgabe wird sonst nicht gewertet.
+Aufgabe 5 (20 Punkte)
+Wir betrachten eine stetige Verteilung mit folgender Dichtefunktion:
+(
+α
+α+1  für x ≥ 1,
+f (x) = x
+0      sonst,
+wobei α > 0 ein unbekannter Parameter ist. Wir wollen einen Schätzer für den Parameter α finden.
+1. (7 Punkte) Bestimmen Sie den Maximum Likelihood Schätzer für α basierend auf n unabhängigen
+identisch verteilten Beobachtungen X1 , . . . , Xn einer Zufallsvariablen mit der obigen Dichtefunktion f .
+2. (2 Punkte) Berechnen Sie den Maximum Likelihood Schätzer für die folgende konkrete Stichprobe:
+x1     x2     x3     x4
+11.0   16.4   27.9   15.9
+3. (7 Punkte) Bestimmen Sie einen Momentenmethodeschätzer für α > 1 basierend auf n unabhängigen identisch verteilten Beobachtungen X1 , . . . , Xn . Sie müssen für diese Teilaufgabe annehmen, dass α > 1 ist, da ansonsten der Erwartungswert nicht definiert (unendlich) ist.
+4. (2 Punkte) Berechnen Sie den Momentenmethodeschätzer für die obige Stichprobe.
+5. (2 Punkte) Vergleichen Sie den Maximum Likelihood Schätzer und den Momentenmethodeschätzer
+für die obige Stichprobe. Ist der Momentenschätzer hier sinnvoll?
+mehr Platz benötigen, machen Sie einen klaren Verweis auf dem Aufgabenblatt der Prüfung und beschriften Sie auch das zusätzliche
+Blatt klar und deutlich. Die Aufgabe wird sonst nicht gewertet.
+Standardnormalverteilung
+(z  0)                                               Φ(z)
+Verteilungsfunktion
+z
+Verteilungsfunktion F Z (z ) einer standardnormalverteilten
+Zufallsvariablen Z ~ N (0, 1)
+z          .00      .01      .02      .03      .04        .05      .06      .07       .08      .09
+0.00    0.5000   0.5040   0.5080   0.5120   0.5160   0.5199     0.5239   0.5279   0.5319    0.5359
+0.10    0.5398   0.5438   0.5478   0.5517   0.5557   0.5596     0.5636   0.5675   0.5714    0.5753
+0.20    0.5793   0.5832   0.5871   0.5910   0.5948   0.5987     0.6026   0.6064   0.6103    0.6141
+0.30    0.6179   0.6217   0.6255   0.6293   0.6331   0.6368     0.6406   0.6443   0.6480    0.6517
+0.40    0.6554   0.6591   0.6628   0.6664   0.6700   0.6736     0.6772   0.6808   0.6844    0.6879
+0.50    0.6915   0.6950   0.6985   0.7019   0.7054   0.7088     0.7123   0.7157   0.7190    0.7224
+0.60    0.7257   0.7291   0.7324   0.7357   0.7389   0.7422     0.7454   0.7486   0.7517    0.7549
+0.70    0.7580   0.7611   0.7642   0.7673   0.7704   0.7734     0.7764   0.7794   0.7823    0.7852
+0.80    0.7881   0.7910   0.7939   0.7967   0.7995   0.8023     0.8051   0.8078   0.8106    0.8133
+0.90    0.8159   0.8186   0.8212   0.8238   0.8264   0.8289     0.8315   0.8340   0.8365    0.8389
+1.00    0.8413   0.8438   0.8461   0.8485   0.8508   0.8531     0.8554   0.8577   0.8599    0.8621
+1.10    0.8643   0.8665   0.8686   0.8708   0.8729   0.8749     0.8770   0.8790   0.8810    0.8830
+1.20    0.8849   0.8869   0.8888   0.8907   0.8925   0.8944     0.8962   0.8980   0.8997    0.9015
+1.30    0.9032   0.9049   0.9066   0.9082   0.9099   0.9115     0.9131   0.9147   0.9162    0.9177
+1.40    0.9192   0.9207   0.9222   0.9236   0.9251   0.9265     0.9279   0.9292   0.9306    0.9319
+1.50    0.9332   0.9345   0.9357   0.9370   0.9382   0.9394     0.9406   0.9418   0.9429    0.9441
+1.60    0.9452   0.9463   0.9474   0.9484   0.9495   0.9505     0.9515   0.9525   0.9535    0.9545
+1.70    0.9554   0.9564   0.9573   0.9582   0.9591   0.9599     0.9608   0.9616   0.9625    0.9633
+1.80    0.9641   0.9649   0.9656   0.9664   0.9671   0.9678     0.9686   0.9693   0.9699    0.9706
+1.90    0.9713   0.9719   0.9726   0.9732   0.9738   0.9744     0.9750   0.9756   0.9761    0.9767
+2.00    0.9772   0.9778   0.9783   0.9788   0.9793   0.9798     0.9803   0.9808   0.9812    0.9817
+2.10    0.9821   0.9826   0.9830   0.9834   0.9838   0.9842     0.9846   0.9850   0.9854    0.9857
+2.20    0.9861   0.9864   0.9868   0.9871   0.9875   0.9878     0.9881   0.9884   0.9887    0.9890
+2.30    0.9893   0.9896   0.9898   0.9901   0.9904   0.9906     0.9909   0.9911   0.9913    0.9916
+2.40    0.9918   0.9920   0.9922   0.9925   0.9927   0.9929     0.9931   0.9932   0.9934    0.9936
+2.50    0.9938   0.9940   0.9941   0.9943   0.9945   0.9946     0.9948   0.9949   0.9951    0.9952
+2.60    0.9953   0.9955   0.9956   0.9957   0.9959   0.9960     0.9961   0.9962   0.9963    0.9964
+2.70    0.9965   0.9966   0.9967   0.9968   0.9969   0.9970     0.9971   0.9972   0.9973    0.9974
+2.80    0.9974   0.9975   0.9976   0.9977   0.9977   0.9978     0.9979   0.9979   0.9980    0.9981
+2.90    0.9981   0.9982   0.9982   0.9983   0.9984   0.9984     0.9985   0.9985   0.9986    0.9986
+3.00    0.9987   0.9987   0.9987   0.9988   0.9988   0.9989     0.9989   0.9989   0.9990    0.9990
+3.10    0.9990   0.9991   0.9991   0.9991   0.9992   0.9992     0.9992   0.9992   0.9993    0.9993
+3.20    0.9993   0.9993   0.9994   0.9994   0.9994   0.9994     0.9994   0.9995   0.9995    0.9995
+3.30    0.9995   0.9995   0.9995   0.9996   0.9996   0.9996     0.9996   0.9996   0.9996    0.9997
+3.40    0.9997   0.9997   0.9997   0.9997   0.9997   0.9997     0.9997   0.9997   0.9997    0.9998
+0.25 p  0.5
+Binomialverteilung
+15 n  30
+p = 0.25            p = 0.30            p = 1/3             p = 0.40            p = 0.50
+n   x
+f X (x ) F X (x )   f X (x ) F X (x )   f X (x ) F X (x )   f X (x ) F X (x )   f X (x ) F X (x )
+0     0.0134 0.0134       0.0047 0.0047       0.0023 0.0023       0.0005 0.0005       0.0000 0.0000
+1     0.0668 0.0802       0.0305 0.0353       0.0171 0.0194       0.0047 0.0052       0.0005 0.0005
+2     0.1559 0.2361       0.0916 0.1268       0.0599 0.0794       0.0219 0.0271       0.0032 0.0037
+3     0.2252 0.4613       0.1700 0.2969       0.1299 0.2092       0.0634 0.0905       0.0139 0.0176
+4     0.2252 0.6865       0.2186 0.5155       0.1948 0.4041       0.1268 0.2173       0.0417 0.0592
+5     0.1651 0.8516       0.2061 0.7216       0.2143 0.6184       0.1859 0.4032       0.0916 0.1509
+6     0.0917 0.9434       0.1472 0.8689       0.1786 0.7970       0.2066 0.6098       0.1527 0.3036
+7     0.0393 0.9827       0.0811 0.9500       0.1148 0.9118       0.1771 0.7869       0.1964 0.5000
+8     0.0131 0.9958       0.0348 0.9848       0.0574 0.9692       0.1181 0.9050       0.1964 0.6964
+9     0.0034 0.9992       0.0116 0.9963       0.0223 0.9915       0.0612 0.9662       0.1527 0.8491
+10    0.0007 0.9999       0.0030 0.9993       0.0067 0.9982       0.0245 0.9907       0.0916 0.9408
+11    0.0001 1.0000       0.0006 0.9999       0.0015 0.9997       0.0074 0.9981       0.0417 0.9824
+12    0.0000 1.0000       0.0001 1.0000       0.0003 1.0000       0.0016 0.9997       0.0139 0.9963
+13                        0.0000 1.0000       0.0000 1.0000       0.0003 1.0000       0.0032 0.9995
+14                                                                0.0000 1.0000       0.0005 1.0000
+15                                                                                    0.0000 1.0000
+0     0.0032   0.0032     0.0008   0.0008     0.0003   0.0003     0.0000   0.0000
+1     0.0211   0.0243     0.0068   0.0076     0.0030   0.0033     0.0005   0.0005     0.0000   0.0000
+2     0.0669   0.0913     0.0278   0.0355     0.0143   0.0176     0.0031   0.0036     0.0002   0.0002
+3     0.1339   0.2252     0.0716   0.1071     0.0429   0.0604     0.0123   0.0160     0.0011   0.0013
+4     0.1897   0.4148     0.1304   0.2375     0.0911   0.1515     0.0350   0.0510     0.0046   0.0059
+5     0.2023   0.6172     0.1789   0.4164     0.1457   0.2972     0.0746   0.1256     0.0148   0.0207
+6     0.1686   0.7858     0.1916   0.6080     0.1821   0.4793     0.1244   0.2500     0.0370   0.0577
+7     0.1124   0.8982     0.1643   0.7723     0.1821   0.6615     0.1659   0.4159     0.0739   0.1316
+8     0.0609   0.9591     0.1144   0.8867     0.1480   0.8095     0.1797   0.5956     0.1201   0.2517
+9     0.0271   0.9861     0.0654   0.9520     0.0987   0.9081     0.1597   0.7553     0.1602   0.4119
+20 10    0.0099   0.9961     0.0308   0.9829     0.0543   0.9624     0.1171   0.8725     0.1762   0.5881
+11    0.0030   0.9991     0.0120   0.9949     0.0247   0.9870     0.0710   0.9435     0.1602   0.7483
+12    0.0008   0.9998     0.0039   0.9987     0.0092   0.9963     0.0355   0.9790     0.1201   0.8684
+13    0.0002   1.0000     0.0010   0.9997     0.0028   0.9991     0.0146   0.9935     0.0739   0.9423
+14    0.0000   1.0000     0.0002   1.0000     0.0007   0.9998     0.0049   0.9984     0.0370   0.9793
+15                        0.0000   1.0000     0.0001   1.0000     0.0013   0.9997     0.0148   0.9941
+16                                            0.0000   1.0000     0.0003   1.0000     0.0046   0.9987
+17                                                                0.0000   1.0000     0.0011   0.9998
+18                                                                                    0.0002   1.0000
+19                                                                                    0.0000   1.0000
+0     0.0002   0.0002     0.0000   0.0000     0.0000   0.0000
+1     0.0018   0.0020     0.0003   0.0003     0.0001   0.0001
+2     0.0086   0.0106     0.0018   0.0021     0.0006   0.0007     0.0000   0.0000
+3     0.0269   0.0374     0.0072   0.0093     0.0026   0.0033     0.0003   0.0003
+4     0.0604   0.0979     0.0208   0.0302     0.0089   0.0122     0.0012   0.0015     0.0000   0.0000
+5     0.1047   0.2026     0.0464   0.0766     0.0232   0.0355     0.0041   0.0057     0.0001   0.0002
+6     0.1455   0.3481     0.0829   0.1595     0.0484   0.0838     0.0115   0.0172     0.0006   0.0007
+7     0.1662   0.5143     0.1219   0.2814     0.0829   0.1668     0.0263   0.0435     0.0019   0.0026
+8     0.1593   0.6736     0.1501   0.4315     0.1192   0.2860     0.0505   0.0940     0.0055   0.0081
+9     0.1298   0.8034     0.1573   0.5888     0.1457   0.4317     0.0823   0.1763     0.0133   0.0214
+10    0.0909   0.8943     0.1416   0.7304     0.1530   0.5848     0.1152   0.2915     0.0280   0.0494
+11    0.0551   0.9493     0.1103   0.8407     0.1391   0.7239     0.1396   0.4311     0.0509   0.1002
+12    0.0291   0.9784     0.0749   0.9155     0.1101   0.8340     0.1474   0.5785     0.0806   0.1808
+30 13    0.0134   0.9918     0.0444   0.9599     0.0762   0.9102     0.1360   0.7145     0.1115   0.2923
+14    0.0054   0.9973     0.0231   0.9831     0.0463   0.9565     0.1101   0.8246     0.1354   0.4278
+15    0.0019   0.9992     0.0106   0.9936     0.0247   0.9812     0.0783   0.9029     0.1445   0.5722
+16    0.0006   0.9998     0.0042   0.9979     0.0116   0.9928     0.0489   0.9519     0.1354   0.7077
+17    0.0002   0.9999     0.0015   0.9994     0.0048   0.9975     0.0269   0.9788     0.1115   0.8192
+18    0.0000   1.0000     0.0005   0.9998     0.0017   0.9993     0.0129   0.9917     0.0806   0.8998
+19                        0.0001   1.0000     0.0005   0.9998     0.0054   0.9971     0.0509   0.9506
+20                        0.0000   1.0000     0.0001   1.0000     0.0020   0.9991     0.0280   0.9786
+21                                            0.0000   1.0000     0.0006   0.9998     0.0133   0.9919
+22                                                                0.0002   0.9999     0.0055   0.9974
+23                                                                0.0000   1.0000     0.0019   0.9993
+24                                                                                    0.0006   0.9998
+25                                                                                    0.0001   1.0000
+26                                                                                    0.0000   1.0000
+Poissonverteilung                                                      l =0.01 bis l =1.50
+Wahrscheinlichkeitsfunktion f X (x ) und Verteilungsfunktion F X (x )
+einer poissonverteilten Zufallsvariablen X ~ Po (l )
+Bemerkungen:
+Für grosse Werte von M (Mp12) kann eine poissonverteilte Zufallsvariable
+X ~ Po (M) mittels der Normalverteilung approximiert werden:
+Approximativ gilt: X ~N (N , T ) mit N =M und T  M
+l = 0.01              l = 0.02              l = 0.03               l = 0.04             l = 0.05
+x
+f X (x )   F X (x )   f X (x )   F X (x )   f X (x )   F X (x )   f X (x )   F X (x )   f X (x )   F X (x )
+0   0.9900     0.9900     0.9802     0.9802     0.9704     0.9704     0.9608     0.9608     0.9512     0.9512
+1   0.0099     1.0000     0.0196     0.9998     0.0291     0.9996     0.0384     0.9992     0.0476     0.9988
+2   0.0000     1.0000     0.0002     1.0000     0.0004     1.0000     0.0008     1.0000     0.0012     1.0000
+3                         0.0000     1.0000     0.0000     1.0000     0.0000     1.0000     0.0000     1.0000
+l = 0.10              l = 0.20              l = 0.30               l = 0.40             l = 0.50
+x
+f X (x )   F X (x )   f X (x )   F X (x )   f X (x )   F X (x )   f X (x )   F X (x )   f X (x )   F X (x )
+0   0.9048     0.9048     0.8187     0.8187     0.7408     0.7408     0.6703     0.6703     0.6065     0.6065
+1   0.0905     0.9953     0.1637     0.9825     0.2222     0.9631     0.2681     0.9384     0.3033     0.9098
+2   0.0045     0.9998     0.0164     0.9989     0.0333     0.9964     0.0536     0.9921     0.0758     0.9856
+3   0.0002     1.0000     0.0011     0.9999     0.0033     0.9997     0.0072     0.9992     0.0126     0.9982
+4   0.0000     1.0000     0.0001     1.0000     0.0003     1.0000     0.0007     0.9999     0.0016     0.9998
+5                         0.0000     1.0000     0.0000     1.0000     0.0001     1.0000     0.0002     1.0000
+6                                                                     0.0000     1.0000     0.0000     1.0000
+l = 0.60              l = 0.70              l = 0.80               l = 0.90             l = 1.00
+x
+f X (x )   F X (x )   f X (x )   F X (x )   f X (x )   F X (x )   f X (x )   F X (x )   f X (x )   F X (x )
+0   0.5488     0.5488     0.4966     0.4966     0.4493     0.4493     0.4066     0.4066     0.3679     0.3679
+1   0.3293     0.8781     0.3476     0.8442     0.3595     0.8088     0.3659     0.7725     0.3679     0.7358
+2   0.0988     0.9769     0.1217     0.9659     0.1438     0.9526     0.1647     0.9371     0.1839     0.9197
+3   0.0198     0.9966     0.0284     0.9942     0.0383     0.9909     0.0494     0.9865     0.0613     0.9810
+4   0.0030     0.9996     0.0050     0.9992     0.0077     0.9986     0.0111     0.9977     0.0153     0.9963
+5   0.0004     1.0000     0.0007     0.9999     0.0012     0.9998     0.0020     0.9997     0.0031     0.9994
+6   0.0000     1.0000     0.0001     1.0000     0.0002     1.0000     0.0003     1.0000     0.0005     0.9999
+7                         0.0000     1.0000     0.0000     1.0000     0.0000     1.0000     0.0001     1.0000
+8                                                                                           0.0000     1.0000
+l = 1.10              l = 1.20              l = 1.30               l = 1.40             l = 1.50
+x
+f X (x )   F X (x )   f X (x )   F X (x )   f X (x )   F X (x )   f X (x )   F X (x )   f X (x )   F X (x )
+0   0.3329     0.3329     0.3012     0.3012     0.2725     0.2725     0.2466     0.2466     0.2231     0.2231
+1   0.3662     0.6990     0.3614     0.6626     0.3543     0.6268     0.3452     0.5918     0.3347     0.5578
+2   0.2014     0.9004     0.2169     0.8795     0.2303     0.8571     0.2417     0.8335     0.2510     0.8088
+3   0.0738     0.9743     0.0867     0.9662     0.0998     0.9569     0.1128     0.9463     0.1255     0.9344
+4   0.0203     0.9946     0.0260     0.9923     0.0324     0.9893     0.0395     0.9857     0.0471     0.9814
+5   0.0045     0.9990     0.0062     0.9985     0.0084     0.9978     0.0111     0.9968     0.0141     0.9955
+6   0.0008     0.9999     0.0012     0.9997     0.0018     0.9996     0.0026     0.9994     0.0035     0.9991
+7   0.0001     1.0000     0.0002     1.0000     0.0003     0.9999     0.0005     0.9999     0.0008     0.9998
+8   0.0000     1.0000     0.0000     1.0000     0.0001     1.0000     0.0001     1.0000     0.0001     1.0000
+9                                               0.0000     1.0000     0.0000     1.0000     0.0000     1.0000

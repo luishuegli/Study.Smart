@@ -74,7 +74,7 @@ SUBTOPIC_QUESTION_COUNTS = {
     "10.2": 0,  # No MCQs
     "10.3": 0,  # No MCQs
     "10.4": 0,  # No MCQs
-    "10.5": 4,  # uebung6_prob1-4
+    "10.5": 4,  # uebung6_prob1-4 (Implemented)
     # Topic 11: Interdisciplinary
     "11.1": 0,
 }

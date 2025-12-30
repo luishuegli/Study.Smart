@@ -88,114 +88,221 @@ def render_mcq(
 ):
     """
     Renders a standardized Multiple Choice Question with persistence.
+    Supports Single Choice (Radio) if correct_idx is int.
+    Supports Multiple Choice (Checkbox) if correct_idx is list[int].
     """
     from utils.localization import t
     
-    # 1. Question
-    st.markdown(question_text)
+    # 1. Question (Allow HTML for <br>)
+    st.markdown(question_text, unsafe_allow_html=True)
     
     # 2. Hint (Always below question)
     if hint_text_dict:
         with st.expander(t({"de": "Hinweis anzeigen", "en": "Show Hint"})):
             st.markdown(t(hint_text_dict))
     
-    # 2. Options (Radio)
-    radio_key = f"mcq_radio_{key_suffix}"
+    # --- DETERMINE TYPE: Single vs Multi ---
+    is_multi_select = isinstance(correct_idx, list)
     
-    # --- PERSISTENCE: Check for saved answer ---
-    initial_index = None
+    # --- PERSISTENCE KEYS ---
+    radio_key = f"mcq_radio_{key_suffix}"
+    checkbox_prefix = f"mcq_check_{key_suffix}"
+    check_btn_key = f"mcq_check_btn_{key_suffix}"
+    show_sol_key = f"mcq_show_sol_{key_suffix}"
+    
+    # Initialize Solution State
+    if show_sol_key not in st.session_state:
+        st.session_state[show_sol_key] = False
+
+    # --- RESTORE SAVED STATE (if new session) ---
+    initial_value = None
     if question_id:
         user_progress = st.session_state.get("user_progress", {})
         topic_data = user_progress.get("topics", {}).get(str(topic_id), {})
         subtopic_data = topic_data.get("subtopics", {}).get(str(subtopic_id), {})
-        saved_index = subtopic_data.get("answers", {}).get(question_id)
+        saved_answer = subtopic_data.get("answers", {}).get(question_id)
         
-        # If we have a saved index, use it. 
-        # But if it's already in session state (meaning user just clicked it), session state wins.
-        if radio_key not in st.session_state and saved_index is not None:
-             # Validate index to prevent StreamlitAPIException
-             if isinstance(saved_index, int) and 0 <= saved_index < len(options):
-                 initial_index = saved_index
-             else:
-                 initial_index = 0 # Default to first option if saved index is invalid
+        if saved_answer is not None:
+            # Only restore if not already interacted with in this session
+            if is_multi_select:
+                # Expect list of ints
+                if isinstance(saved_answer, list):
+                    for i in range(len(options)):
+                        k = f"{checkbox_prefix}_{i}"
+                        if k not in st.session_state:
+                            st.session_state[k] = (i in saved_answer)
+                    # If previously correct, show solution
+                    if set(saved_answer) == set(correct_idx):
+                        if not st.session_state[show_sol_key]:
+                            # Automatically show solution if answered correctly previously
+                            # But only if user hasn't explicitly toggled it off? 
+                            # Let's keep it simple: if done, show it? No, user might want to re-test.
+                            # Just restore selection.
+                            pass
+            else:
+                # specific radio logic handled below or via key default
+                if radio_key not in st.session_state:
+                    if isinstance(saved_answer, int) and 0 <= saved_answer < len(options):
+                         initial_value = saved_answer
+                    else:
+                         initial_value = 0
 
-    # --- CALLBACK FOR IMMEDIATE SYNC ---
-    def on_mcq_change():
-        selection = st.session_state[radio_key]
-        if selection and all([course_id, topic_id, subtopic_id, question_id]):
+    # =================================================================
+    # RENDERING LOGIC
+    # =================================================================
+
+    user_submitted = False
+    is_correct = False
+    
+    # --- CASE A: MULTIPLE SELECT (Checkboxes) ---
+    if is_multi_select:
+        selected_indices = []
+        for i, opt in enumerate(options):
+            # Checkbox persistence via session_state keys
+            k = f"{checkbox_prefix}_{i}"
+            # Default to False if not set
+            if k not in st.session_state:
+                st.session_state[k] = False
+                
+            st.checkbox(opt, key=k)
+            if st.session_state[k]:
+                selected_indices.append(i)
+        
+        # Check Answer Button (Combined Submit + Show Solution)
+        if st.button(t({"de": "Antwort prüfen", "en": "Check Answer"}), key=check_btn_key, type="primary"):
+            user_submitted = True
+            # Sort for comparison
+            selected_indices.sort()
+            correct_set = sorted(correct_idx)
+            is_correct = (selected_indices == correct_set)
+            
+            # Reveal solution immediately on check
+            st.session_state[show_sol_key] = True
+            
+            # Persist Result
+            if all([course_id, topic_id, subtopic_id, question_id]):
+                user = st.session_state.get("user")
+                if user and "localId" in user:
+                    track_question_answer(
+                        user_id=user["localId"],
+                        course_id=course_id,
+                        topic_id=topic_id,
+                        subtopic_id=subtopic_id,
+                        question_id=question_id,
+                        is_correct=is_correct,
+                        selected_index=selected_indices # Store list
+                    )
+                    from utils.progress_tracker import update_local_progress
+                    update_local_progress(topic_id, subtopic_id, question_id, is_correct, selected_indices)
+
+        # Feedback Display (Only if button clicked or solution visible)
+        if st.session_state[show_sol_key]:
+             # Re-calc correctness for display in case user changed boxes after clicking 
+             # (Though usually UI refresh resets without re-click. 
+             # Standard Streamlit pattern: Use current state)
+             curr_selection = [i for i in range(len(options)) if st.session_state.get(f"{checkbox_prefix}_{i}", False)]
+             curr_selection.sort()
+             curr_correct = (curr_selection == sorted(correct_idx))
+             
+             if curr_correct:
+                 st.success(t(success_msg_dict))
+             else:
+                 st.error(t(error_msg_dict))
+
+
+    # --- CASE B: SINGLE SELECT (Radio - Instant) ---
+    else:
+        # Callback for immediate sync
+        def on_radio_change():
+            selection = st.session_state[radio_key]
+            if selection and all([course_id, topic_id, subtopic_id, question_id]):
+                try:
+                    sel_idx = options.index(selection)
+                except ValueError:
+                    sel_idx = -1
+                
+                is_correct = (sel_idx == correct_idx)
+                user = st.session_state.get("user")
+                if user and "localId" in user:
+                    track_question_answer(
+                        user_id=user["localId"],
+                        course_id=course_id,
+                        topic_id=topic_id,
+                        subtopic_id=subtopic_id,
+                        question_id=question_id,
+                        is_correct=is_correct,
+                        selected_index=sel_idx
+                    )
+                    from utils.progress_tracker import update_local_progress
+                    update_local_progress(topic_id, subtopic_id, question_id, is_correct, sel_idx)
+
+        user_selection = st.radio(
+            "Select Answer:",
+            options,
+            index=initial_value,
+            key=radio_key,
+            label_visibility="collapsed",
+            on_change=on_radio_change
+        )
+        
+        if user_selection:
             try:
-                sel_idx = options.index(selection)
+                sel_idx = options.index(user_selection)
             except ValueError:
                 sel_idx = -1
             
             is_correct = (sel_idx == correct_idx)
-            user = st.session_state.get("user")
-            if user and "localId" in user:
-                user_id = user["localId"]
-                # Track the answer in Firestore
-                success = track_question_answer(
-                    user_id=user_id,
-                    course_id=course_id,
-                    topic_id=topic_id,
-                    subtopic_id=subtopic_id,
-                    question_id=question_id,
-                    is_correct=is_correct,
-                    selected_index=sel_idx
-                )
-                
-                # Update local session progress immediately
-                if success:
-                    from utils.progress_tracker import update_local_progress
-                    update_local_progress(topic_id, subtopic_id, question_id, is_correct, sel_idx)
+            if is_correct:
+                st.success(t(success_msg_dict))
+            else:
+                st.error(t(error_msg_dict))
 
-    user_selection = st.radio(
-        "Select Answer:",
-        options,
-        index=initial_index,
-        key=radio_key,
-        label_visibility="collapsed",
-        on_change=on_mcq_change
-    )
+
+    # 4. Solution Display Logic
+    # Multi-select: Controlled by "Check Answer" (which sets show_sol_key=True)
+    # Single-select: Controlled by "Show Solution" Toggle
     
-    # 3. Check Answer & Feedback
-    if user_selection:
-        # Find index of selection
-        try:
-            sel_idx = options.index(user_selection)
-        except ValueError:
-            sel_idx = -1
-            
-        is_correct = (sel_idx == correct_idx)
-        
-        if is_correct:
-            st.success(t(success_msg_dict))
-        else:
-            st.error(t(error_msg_dict))
-            
-    # Spacer removed for tighter layout
+    should_show_solution = False
     
-    # 4. Solution Toggle
-    sol_btn_key = f"mcq_sol_btn_{key_suffix}"
-    if sol_btn_key not in st.session_state:
-        st.session_state[sol_btn_key] = False
-    
-    # Styled like the other topics
-    if st.button(t({"de": "Lösung zeigen", "en": "Show Solution"}), key=f"toggle_{key_suffix}", type="primary"):
-        st.session_state[sol_btn_key] = not st.session_state[sol_btn_key]
-        
-    if st.session_state[sol_btn_key]:
+    if is_multi_select:
+        # Already handled by Check Button setting the key
+        should_show_solution = st.session_state[show_sol_key]
+        # Allow manual toggle if user wants to hide it? 
+        # User requirement: "Serve as a show answer button simultaneously"
+        # So "Check Answer" enables it. We can validly keep a manual toggle for Single Choice.
+        # For Multi-choice, maybe just showing it is enough. 
+        # Let's keep the explicit toggle button ONLY for Single Choice to avoid clutter,
+        # OR keep it for both but sync the state?
+        # Requirement: "Submit button... should serve as show answer button".
+        # Implies we don't need a separate button for Multi.
+        pass
+    else:
+        # Standard Single Choice Toggle
+        if st.button(t({"de": "Lösung zeigen", "en": "Show Solution"}), key=f"toggle_{key_suffix}", type="primary"):
+            st.session_state[show_sol_key] = not st.session_state[show_sol_key]
+        should_show_solution = st.session_state[show_sol_key]
+
+    if should_show_solution:
         with st.container(border=True):
-            # Render solution
             sol_content = t(solution_text_dict)
             st.markdown(sol_content, unsafe_allow_html=True)
             
-            # 5. AI Tutor
-            # We append the user's view of the question to the context if not present
-            full_context = f"{ai_context}\n\nProblem: {question_text}\nCorrect Answer Index: {correct_idx}"
-            render_ai_tutor(f"mcq_ai_{key_suffix}", full_context, client)
+            # AI Tutor
+            if is_multi_select:
+                 full_context = f"{ai_context}\n\nProblem: {question_text}\nCorrect Indices: {correct_idx}"
+            else:
+                 full_context = f"{ai_context}\n\nProblem: {question_text}\nCorrect Answer Index: {correct_idx}"
             
-    # Retry logic if requested (optional)
+            render_ai_tutor(f"mcq_ai_{key_suffix}", full_context, client)
+
+    # Retry/Reset
     if allow_retry:
         if st.button(t({"de": "Frage zurücksetzen", "en": "Reset Question"}), key=f"retry_{key_suffix}", type="secondary"):
-            st.session_state[radio_key] = None
+            if is_multi_select:
+                 for i in range(len(options)):
+                     st.session_state[f"{checkbox_prefix}_{i}"] = False
+                 st.session_state[show_sol_key] = False
+            else:
+                st.session_state[radio_key] = None
+                st.session_state[show_sol_key] = False
             st.rerun()

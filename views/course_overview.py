@@ -29,8 +29,8 @@ SUBTOPIC_QUESTION_COUNTS = {
     "3.3": 5,  # test2_q3, hs2015_mc2, uebung2_mc2, uebung2_mc7, 3_3_mission
     "3.4": 7,  # 6 MCQs + 3_4_mission
     "3.5": 5,  # uebung2_mc8, uebung2_mc4, hs2023_mc4, test3_mc2, 3_5_mission
-    "3.6": 1,  # test3_q2
-    "3.7": 10,  # hs2024_mc11, hs2023_mc6 + 4 uebung2 + 4 Test
+    "3.6": 3,  # uebung2_mc14, uebung2_mc15, 3_6_mission
+    "3.7": 2,  # hs2024_mc11, 3_7_mission
     # Topic 4: Stochastic Models and Distributions
     "4.1": 0,  # No MCQs
     "4.2": 0,  # Problems only

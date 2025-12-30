@@ -14,32 +14,32 @@ content_3_3 = {
     "intuition": {
         "title": {"de": "Die Intuition", "en": "The Intuition"},
         "text": {
-            "de": "Stell dir eine Dartscheibe vor. Wie wahrscheinlich ist es, dass du EXAKT den Mittelpunkt triffst? Nicht 'ungefähr', sondern auf das Atom genau? Die Wahrscheinlichkeit ist Null. Du brauchst eine Fläche (den Bullseye-Ring), um eine Trefferchance zu haben.",
-            "en": "Imagine a dartboard. What is the probability of hitting EXACTLY the center point? Not 'roughly', but to the precise atom? The probability is zero. You need an area (the Bullseye ring) to have a chance of hitting."
+            "de": "Stell dir eine Zielscheibe vor. Du versuchst, exakt den Punkt 0.50000... zu treffen. Aber egal wie sehr du reinzoomst, du kannst immer noch weiter reinzoomen. Ein einzelner Punkt ist 'unendlich dünn'. Die Chance, ihn zu treffen, ist daher **Null**.",
+            "en": "Imagine a target. You are trying to hit exactly the point 0.50000... But no matter how much you zoom in, you can always zoom in further. A single point is 'infinitely thin'. The chance of hitting it is therefore **zero**."
         }
     },
     "interactive": {
-        "title": {"de": "Das Präzisions-Paradoxon", "en": "The Precision Paradox"},
+        "title": {"de": "Das Mikroskop", "en": "The Microscope"},
         "instruction": {
-            "de": "Versuche, exakt den Wert 0.5000 zu treffen. Zoome hinein.",
-            "en": "Try to hit exactly 0.5000. Zoom in."
+            "de": "Erhöhe die Vergrößerung. Versuche, die Nadel auf dem Ziel zu halten.",
+            "en": "Increase magnification. Try to keep the needle on the target."
         },
-        "feedback_miss": {"de": "Knapp daneben! Du hast {val} getroffen.", "en": "Missed! You hit {val}."},
-        "feedback_hit": {"de": "Perfekt! (Theoretisch unmöglich, aber gut gemacht)", "en": "Perfect! (Theoretically impossible, but well done)"}
+        "feedback_miss": {"de": "Abweichung: {val:.6f}", "en": "Deviation: {val:.6f}"},
+        "feedback_hit": {"de": "Perfekt! (Theoretisch unmöglich)", "en": "Perfect! (Theoretically impossible)"}
     },
     "definition": {
         "title": {"de": "Die Dichtefunktion (PDF)", "en": "The Density Function (PDF)"},
         "text": {
-            "de": "Bei stetigen Variablen ist die Wahrscheinlichkeit für einen einzelnen Punkt immer 0. Wir messen stattdessen die **Fläche** unter der Kurve in einem Intervall.",
-            "en": "For continuous variables, the probability of a single point is always 0. Instead, we measure the **area** under the curve within an interval."
+            "de": "Bei stetigen Variablen messen wir keine Punkte, sondern **Flächen**. Die Wahrscheinlichkeit ist das Integral unter der Kurve.",
+            "en": "For continuous variables, we don't measure points, but **areas**. Probability is the integral under the curve."
         },
         "formula": r"P(a \leq X \leq b) = \int_a^b f(x) dx"
     },
     "pro_tip": {
         "title": {"de": "Profi-Tipp", "en": "Pro Tip"},
         "text": {
-            "de": r"Verwechsle nie $f(x)$ mit Wahrscheinlichkeit! $f(x)$ kann größer als 1 sein. Nur die **Fläche** (Integral) muss $\le 1$ sein. $P(X=x) = 0$ gilt immer.",
-            "en": r"Never confuse $f(x)$ with probability! $f(x)$ can be greater than 1. Only the **area** (integral) must be $\le 1$. $P(X=x) = 0$ always holds."
+            "de": r"Ein einzelner Punkt hat Wahrscheinlichkeit 0 ($P(X=x)=0$). Daher ist es egal, ob wir $\le$ oder $<$ schreiben. $P(X \le 5)$ ist dasselbe wie $P(X < 5)$.",
+            "en": r"A single point has probability 0 ($P(X=x)=0$). Therefore, it doesn't matter if we write $\le$ or $<$. $P(X \le 5)$ is the same as $P(X < 5)$."
         }
     },
     "mission": {
@@ -55,88 +55,121 @@ content_3_3 = {
         ],
         "correct_id": "b",
         "solution": {
-            "de": "Richtig! Bei stetigen Variablen ist die Wahrscheinlichkeit für einen *einzelnen Punkt* immer 0. Nur Intervalle haben Wahrscheinlichkeit.",
-            "en": "Correct! For continuous variables, the probability of a *single point* is always 0. Only intervals have probability."
+            "de": "Richtig! Ein Punkt hat keine Breite, also keine Fläche.",
+            "en": "Correct! A point has no width, so no area."
         }
     }
 }
 
 def render_interactive_pdf_zoom():
-    """Renders a visualization of 'zooming in' to a point."""
+    """Renders the Microscope visualization."""
 
-    col_ctrl, col_viz = st.columns([1, 2])
+    col_ctrl, col_viz = st.columns([1, 1.5])
+
+    # State for Magnification (Log Scale)
+    # 0 = 1x, 1 = 10x, 2 = 100x, 3 = 1000x
+    if "mag_level" not in st.session_state: st.session_state.mag_level = 0.0
 
     with col_ctrl:
         st.markdown(f"**{t(content_3_3['interactive']['instruction'])}**")
 
-        # A slider that simulates "infinite precision" difficulty
-        # We start with range 0-1.
-        zoom_level = st.radio("Zoom Level", ["1x (0-1)", "10x (0.4-0.6)", "100x (0.49-0.51)"], horizontal=False)
+        mag = st.slider(
+            "Magnification (Log Scale)",
+            0.0, 4.0,
+            value=st.session_state.mag_level,
+            step=0.1
+        )
+        st.session_state.mag_level = mag
 
-        min_v, max_v = 0.0, 1.0
-        step = 0.01
+        # Calculate range based on magnification
+        # range_width shrinks from 1.0 to 0.0001
+        width = 1.0 / (10 ** mag)
+        center = 0.5
+        min_v = center - width/2
+        max_v = center + width/2
 
-        if "10x" in zoom_level:
-            min_v, max_v = 0.4, 0.6
-            step = 0.001
-        elif "100x" in zoom_level:
-            min_v, max_v = 0.49, 0.51
-            step = 0.0001
+        # User tries to pick center
+        # The slider step needs to be finer than the view width to allow precision
+        step_size = width / 100.0
 
-        user_val = st.slider("Select 0.5", min_v, max_v, (min_v+max_v)/2, step=step, format="%.4f")
+        user_val = st.slider(
+            f"Needle Position (Range: {width:.5f})",
+            min_v, max_v,
+            center + (width * 0.2), # Start off-center
+            step=step_size,
+            format="%.6f"
+        )
 
-        is_hit = abs(user_val - 0.5) < 0.0000001
+        deviation = abs(user_val - center)
 
-        if is_hit:
+        st.markdown(f"""
+        <div style="margin-top: 20px; padding: 15px; background: #F3F4F6; border-radius: 8px;">
+            <div style="color: #6B7280; font-size: 0.8em; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">
+                {t({'de': 'Abstand zum Ziel', 'en': 'Distance to Target'})}
+            </div>
+            <div style="font-family: monospace; font-size: 1.5em; font-weight: bold; color: {'#EF4444' if deviation > 0 else '#10B981'};">
+                {deviation:.8f}
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        if deviation == 0:
             st.success(t(content_3_3['interactive']['feedback_hit']))
-        else:
-            st.caption(f"{t({'de': 'Aktueller Wert', 'en': 'Current Value'})}: {user_val:.4f}")
-            if "100x" in zoom_level:
-                st.info(t({"de": "Siehst du? Selbst hier ist es schwer, genau 0.5000... zu treffen.", "en": "See? Even here it's hard to hit exactly 0.5000..."}))
+        elif mag > 3.0:
+            st.info(t({"de": "Bei 1000x Zoom siehst du: Du triffst nie exakt.", "en": "At 1000x zoom you see: You never hit exactly."}))
 
     with col_viz:
-        # Visualize the PDF (Uniform) and the point
+        # Visualize the "View"
         x = np.linspace(min_v, max_v, 100)
-        y = np.ones_like(x) * 1.0 # Uniform density f(x)=1
+        y = np.ones_like(x) * 1.0
 
         fig = go.Figure()
 
-        # The PDF area
+        # 1. Background (The "Matter")
         fig.add_trace(go.Scatter(
             x=x, y=y,
             fill='tozeroy',
-            fillcolor='rgba(59, 130, 246, 0.2)', # Blue
-            line=dict(color='#3B82F6'),
-            name='f(x)'
+            fillcolor='rgba(59, 130, 246, 0.1)',
+            line=dict(color='rgba(59, 130, 246, 0.0)'),
+            hoverinfo='skip'
         ))
 
-        # The user's point (Needle)
+        # 2. The Target Line (Green) - "Infinitely Thin" but drawn with fixed pixel width
+        fig.add_trace(go.Scatter(
+            x=[center, center],
+            y=[0, 1.5],
+            mode='lines',
+            line=dict(color='#10B981', width=2, dash='dash'),
+            name='Target'
+        ))
+
+        # 3. The User Needle (Red)
         fig.add_trace(go.Scatter(
             x=[user_val, user_val],
             y=[0, 1.5],
             mode='lines',
-            line=dict(color='#EF4444', width=2), # Red
-            name='You'
+            line=dict(color='#EF4444', width=3),
+            name='Needle'
         ))
 
-        # The Target
-        fig.add_trace(go.Scatter(
-            x=[0.5, 0.5],
-            y=[0, 1.2],
-            mode='lines',
-            line=dict(color='#10B981', width=2, dash='dot'), # Green
-            name='Target (0.5)'
-        ))
-
+        # Layout
         fig.update_layout(
             yaxis=dict(range=[0, 1.6], visible=False, fixedrange=True),
-            xaxis=dict(range=[min_v, max_v], title="x", fixedrange=True),
-            margin=dict(l=20, r=20, t=20, b=20),
+            xaxis=dict(
+                range=[min_v, max_v],
+                title=dict(text="x (Zoomed)", font=dict(size=10, color="#9CA3AF")),
+                fixedrange=True,
+                showgrid=True,
+                gridcolor='#E5E7EB',
+                zeroline=False
+            ),
+            margin=dict(l=10, r=10, t=10, b=10),
             height=300,
             showlegend=False,
             plot_bgcolor='rgba(0,0,0,0)',
             paper_bgcolor='rgba(0,0,0,0)'
         )
+
         st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False})
 
 def render_subtopic_3_3(model):
@@ -163,7 +196,7 @@ def render_subtopic_3_3(model):
         with st.container(border=True):
             st.markdown(t(content_3_3["intuition"]["text"]))
             st.markdown("<br>", unsafe_allow_html=True)
-            st.info(t({"de": "Ein Punkt hat keine Breite!", "en": "A point has no width!"}))
+            st.info(t({"de": "Die Nadel hat Breite 0!", "en": "The needle has width 0!"}))
 
     with col_play:
         with st.container(border=True):

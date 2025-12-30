@@ -1,6 +1,7 @@
 import streamlit as st
 import plotly.graph_objects as go
 import numpy as np
+import scipy.stats as stats
 from utils.localization import t
 from utils.quiz_helper import render_mcq
 from data.exam_questions import get_question
@@ -14,37 +15,37 @@ content_3_1 = {
     "intuition": {
         "title": {"de": "Die Intuition", "en": "The Intuition"},
         "text": {
-            "de": "Stell dir vor, du läufst einen Zahlenstrahl entlang. Dein 'Rucksack' füllt sich mit Wahrscheinlichkeit. Die Verteilungsfunktion $F(x)$ zeigt dir jederzeit an: Wie viel Prozent der gesamten Wahrscheinlichkeit liegen **hinter dir** (oder genau hier)?",
-            "en": "Imagine walking along a number line. Your 'backpack' fills up with probability. The distribution function $F(x)$ tells you at any moment: What percentage of the total probability is **behind you** (or exactly here)?"
+            "de": "Stell dir vor, du läufst einen Zahlenstrahl entlang und sammelst Wahrscheinlichkeit wie Regenwasser in einem Tank. $F(x)$ zeigt dir den aktuellen Füllstand an. Wenn du ganz links startest ($-\infty$), ist der Tank leer (0). Wenn du ganz rechts ankommst ($+\infty$), ist er voll (1).",
+            "en": "Imagine walking along a number line collecting probability like rainwater in a tank. $F(x)$ shows you the current fill level. When you start at the far left ($-\infty$), the tank is empty (0). When you reach the far right ($+\infty$), it is full (1)."
         }
     },
     "interactive": {
         "title": {"de": "Der Wahrscheinlichkeits-Tank", "en": "The Probability Tank"},
         "instruction": {
-            "de": "Ziehe den roten Punkt nach rechts. Beobachte, wie sich der 'Tank' füllt.",
-            "en": "Drag the red dot to the right. Watch how the 'tank' fills up."
+            "de": "Ziehe den Regler. Beobachte, wie die Fläche volläuft.",
+            "en": "Drag the slider. Watch the area fill up."
         }
     },
     "definition": {
         "title": {"de": "Die Definition", "en": "The Definition"},
         "text": {
-            "de": "Die Verteilungsfunktion $F(x)$ ist einfach die **kumulierte** Wahrscheinlichkeit bis zum Punkt $x$.",
-            "en": "The distribution function $F(x)$ is simply the **cumulative** probability up to point $x$."
+            "de": "Die Verteilungsfunktion $F(x)$ ist die **Summe aller Wahrscheinlichkeiten** links von $x$ (inklusive $x$).",
+            "en": "The distribution function $F(x)$ is the **sum of all probabilities** to the left of $x$ (including $x$)."
         },
         "formula": r"F(x) = P(X \leq x)"
     },
     "pro_tip": {
         "title": {"de": "Profi-Tipp", "en": "Pro Tip"},
         "text": {
-            "de": "Willst du die Wahrscheinlichkeit für ein Intervall $P(a < X \leq b)$? Subtrahiere einfach: $F(b) - F(a)$. Das ist wie der Kontostand-Check: Kontostand Ende - Kontostand Anfang = Gewinn.",
-            "en": "Want the probability for an interval $P(a < X \leq b)$? Just subtract: $F(b) - F(a)$. It's like checking your bank balance: Balance End - Balance Start = Profit."
+            "de": "Intervall-Wahrscheinlichkeit $P(a < X \leq b)$? Einfach 'Groß minus Klein': $F(b) - F(a)$. Denke an deinen Stromzähler: Zählerstand Ende minus Zählerstand Anfang = Verbrauch.",
+            "en": "Interval probability $P(a < X \leq b)$? Simply 'Big minus Small': $F(b) - F(a)$. Think of your electric meter: Reading End minus Reading Start = Consumption."
         }
     },
     "mission": {
         "title": {"de": "Mission: Der Qualitäts-Check", "en": "Mission: Quality Check"},
         "task": {
-            "de": "Ein Bauteil hält höchstens $x$ Stunden. Gegeben ist $F(100) = 0.8$. Was bedeutet das?",
-            "en": "A component lasts at most $x$ hours. Given $F(100) = 0.8$. What does this mean?"
+            "de": "Ein Bauteil hält höchstens $x$ Stunden. Gegeben ist $F(100) = 0.8$. Was bedeutet das exakt?",
+            "en": "A component lasts at most $x$ hours. Given $F(100) = 0.8$. What does this mean exactly?"
         },
         "options": [
             {"id": "a", "de": "80% der Bauteile halten genau 100 Stunden.", "en": "80% of components last exactly 100 hours."},
@@ -53,41 +54,55 @@ content_3_1 = {
         ],
         "correct_id": "b",
         "solution": {
-            "de": "Richtig! $F(100)$ summiert alle Wahrscheinlichkeiten von 0 bis 100.",
-            "en": "Correct! $F(100)$ sums up all probabilities from 0 to 100."
+            "de": "Richtig! $F(100)$ ist die kumulierte Wahrscheinlichkeit bis 100.",
+            "en": "Correct! $F(100)$ is the cumulative probability up to 100."
         }
     }
 }
 
 def render_interactive_cdf():
-    """Renders the interactive CDF visualization."""
+    """Renders the high-fidelity CDF visualization."""
 
-    # 1. Controls
-    col_ctrl, col_viz = st.columns([1, 2])
+    # 1. Controls (Left Side)
+    col_ctrl, col_viz = st.columns([1, 2.5])
 
     with col_ctrl:
         st.markdown(f"**{t(content_3_1['interactive']['instruction'])}**")
+
+        # Custom CSS for the slider to make it look "integrated"
+        st.markdown("""
+        <style>
+        div[data-baseweb="slider"] > div > div > div[role="slider"] {
+            background-color: #EF4444 !important; /* Red thumb */
+            border-color: #EF4444 !important;
+        }
+        </style>
+        """, unsafe_allow_html=True)
+
         x_val = st.slider(
             "x",
-            min_value=-4.0,
-            max_value=4.0,
+            min_value=-3.0,
+            max_value=3.0,
             value=0.0,
             step=0.1,
             label_visibility="collapsed"
         )
 
-        # Calculate Normal CDF for demo
-        import scipy.stats as stats
+        # Calculate Normal CDF
         p_val = stats.norm.cdf(x_val)
 
-        # Live Indicator (The "Thermometer")
-        st.markdown(f"<h3 style='text-align: center; color: #4B5563;'>F(x) = {p_val:.2f}</h3>", unsafe_allow_html=True)
-        st.progress(p_val)
-        st.caption(t({"de": "Gefüllte Wahrscheinlichkeit", "en": "Accumulated Probability"}))
+        # "Big Number" Display
+        st.markdown(f"""
+        <div style="text-align: center; margin-top: 20px; padding: 15px; background: #F9FAFB; border-radius: 12px; border: 1px solid #E5E7EB;">
+            <div style="color: #6B7280; font-size: 0.9em; font-weight: 500; margin-bottom: 5px;">F(x) = P(X ≤ {x_val})</div>
+            <div style="color: #111827; font-size: 2.5em; font-weight: 700; line-height: 1.0;">{p_val:.2f}</div>
+            <div style="color: #EF4444; font-size: 0.8em; font-weight: 600; margin-top: 5px;">{int(p_val*100)}% {t({'de': 'Gefüllt', 'en': 'Filled'})}</div>
+        </div>
+        """, unsafe_allow_html=True)
 
     with col_viz:
         # Generate data for PDF (Normal Distribution)
-        x = np.linspace(-4, 4, 200)
+        x = np.linspace(-3.5, 3.5, 300)
         y = stats.norm.pdf(x)
 
         # Mask for filled area
@@ -96,45 +111,57 @@ def render_interactive_cdf():
         y_fill = y[mask]
 
         # Add zero points to close the polygon for filling
-        x_fill_poly = np.concatenate(([-4], x_fill, [x_val]))
+        # We need to ensure the polygon closes nicely at the bottom
+        x_fill_poly = np.concatenate(([-3.5], x_fill, [x_val]))
         y_fill_poly = np.concatenate(([0], y_fill, [0]))
 
         fig = go.Figure()
 
-        # 1. The Full Curve (Outline)
+        # 1. The Full Curve (Background Ghost)
         fig.add_trace(go.Scatter(
             x=x, y=y,
             mode='lines',
-            line=dict(color='lightgray', width=2),
+            line=dict(color='#E5E7EB', width=2), # Gray-200
             hoverinfo='skip'
         ))
 
-        # 2. The Filled Area (Accumulated Probability)
+        # 2. The Filled Area (Accumulated Probability - Liquid Red)
         fig.add_trace(go.Scatter(
             x=x_fill_poly,
             y=y_fill_poly,
             fill='toself',
-            fillcolor='rgba(239, 68, 68, 0.3)', # Red with opacity
+            fillcolor='rgba(239, 68, 68, 0.6)', # Red-500 with opacity
             line=dict(color='rgba(239, 68, 68, 1)', width=0),
             name=f'P(X ≤ {x_val})',
             hoverinfo='skip'
         ))
 
-        # 3. The Vertical Line at x
+        # 3. The Vertical Line at x (Needle)
         fig.add_trace(go.Scatter(
             x=[x_val, x_val],
             y=[0, stats.norm.pdf(x_val)],
             mode='lines',
-            line=dict(color='#DC2626', width=3, dash='solid'), # Red-600
+            line=dict(color='#DC2626', width=3), # Red-600
             name='x'
         ))
 
-        # Layout
+        # Layout Polish
         fig.update_layout(
-            margin=dict(l=20, r=20, t=20, b=20),
-            height=300,
-            xaxis=dict(range=[-4.2, 4.2], fixedrange=True, title="x"),
-            yaxis=dict(range=[0, 0.45], fixedrange=True, visible=False),
+            margin=dict(l=0, r=0, t=10, b=20),
+            height=280,
+            xaxis=dict(
+                range=[-3.5, 3.5],
+                fixedrange=True,
+                title="x",
+                showgrid=False,
+                zeroline=False,
+                tickfont=dict(color='#9CA3AF')
+            ),
+            yaxis=dict(
+                range=[0, 0.45],
+                fixedrange=True,
+                visible=False
+            ),
             showlegend=False,
             plot_bgcolor='rgba(0,0,0,0)',
             paper_bgcolor='rgba(0,0,0,0)',
@@ -151,9 +178,6 @@ def render_subtopic_3_1(model):
     
     # --- INTUITION SECTION ---
     st.markdown(f"### {t(content_3_1['intuition']['title'])}")
-
-    # Split Row Protocol: Text | Interactive
-    # We want "Equal Height" for these two boxes
     
     # CSS Injection for Equal Height
     st.markdown("""
@@ -164,7 +188,7 @@ def render_subtopic_3_1(model):
     </style>
     """, unsafe_allow_html=True)
 
-    col_intuition, col_interactive = st.columns([1, 1.6], gap="medium")
+    col_intuition, col_interactive = st.columns([1, 1.8], gap="medium")
 
     with col_intuition:
         with st.container(border=True):
@@ -198,12 +222,11 @@ def render_subtopic_3_1(model):
     st.markdown(f"### {t(content_3_1['mission']['title'])}")
 
     with st.container(border=True):
-        # We implement this as a simple MCQ but inline
         render_mcq(
             key_suffix="3_1_mission",
             question_text=t(content_3_1["mission"]["task"]),
             options=[t(o) for o in content_3_1["mission"]["options"]],
-            correct_idx=1, # Option B is correct (0-based index)
+            correct_idx=1,
             solution_text_dict=content_3_1["mission"]["solution"],
             success_msg_dict={"de": "Exzellent!", "en": "Excellent!"},
             error_msg_dict={"de": "Nicht ganz.", "en": "Not quite."},
@@ -226,10 +249,7 @@ def render_subtopic_3_1(model):
             st.caption(q_data.get("source", ""))
             
             opts = q_data.get("options", [])
-            if opts and isinstance(opts[0], dict):
-                option_labels = [t(o) for o in opts]
-            else:
-                option_labels = opts
+            option_labels = [t(o) for o in opts] if opts and isinstance(opts[0], dict) else opts
             
             render_mcq(
                 key_suffix="3_1_mc6",

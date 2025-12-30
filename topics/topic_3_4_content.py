@@ -35,18 +35,18 @@ content_3_4 = {
         "formula_cont": r"E(X) = \int_{-\infty}^{\infty} x \cdot f(x) \, dx"
     },
     "mission": {
-        "title": {"de": "Mission: Der Portfolio-Manager", "en": "Mission: The Portfolio Manager"},
+        "title": {"de": "Mission: Der Hedge-Fonds-Manager", "en": "Mission: The Hedge Fund Manager"},
         "briefing": {
-            "de": "Du hast zwei Aktien. Aktie A: 50% Chance auf +20%, 50% auf -10%. Aktie B: 90% Chance auf +5%, 10% auf -50%.",
-            "en": "You have two stocks. Stock A: 50% chance of +20%, 50% of -10%. Stock B: 90% chance of +5%, 10% of -50%."
+            "de": "Du verwaltest ein Portfolio. **Staatsanleihen (Safe)** bringen sichere **2%**. **Tech-Aktien (Risk)** haben eine 50/50 Chance auf **+20%** oder **-10%**.",
+            "en": "You manage a portfolio. **Bonds (Safe)** yield a sure **2%**. **Tech Stocks (Risk)** have a 50/50 chance of **+20%** or **-10%**."
         },
         "task": {
-            "de": "Welche Aktie hat den höheren Erwartungswert? Berechne ihn und wähle die richtige Strategie.",
-            "en": "Which stock has the higher expected value? Calculate it and choose the correct strategy."
+            "de": "Mische das Portfolio so, dass du einen **Erwartungswert von exakt 5.0%** Rendite erzielst. Wie viel Prozent investierst du in Tech-Aktien?",
+            "en": "Mix the portfolio to achieve an **Expected Return of exactly 5.0%**. What percentage do you invest in Tech Stocks?"
         },
         "success": {
-            "de": "Richtig analysiert! Langfristig gewinnt Mathe.",
-            "en": "Correctly analyzed! In the long run, math wins."
+            "de": "Ziel erreicht! Dein Portfolio ist perfekt ausbalanciert.",
+            "en": "Target achieved! Your portfolio is perfectly balanced."
         }
     },
     "pro_tip": {
@@ -59,7 +59,7 @@ content_3_4 = {
 
 def render_subtopic_3_4(model):
     """3.4 Expected Values - The Seesaw Metaphor"""
-    
+
     # --- CSS INJECTION ---
     st.markdown("""
     <style>
@@ -88,30 +88,19 @@ def render_subtopic_3_4(model):
         st.caption(t(content_3_4["playground"]["desc"]))
 
         # Setup Weights (Fixed scenario for simplicity)
-        # Weights at x=2 (Mass 4), x=5 (Mass 1), x=8 (Mass 3)
-        # Expected Value = (2*4 + 5*1 + 8*3) / (4+1+3) = (8+5+24)/8 = 37/8 = 4.625
         masses = [(2, 4), (5, 1), (8, 3)]
-        true_ev = 4.625
 
-        # State
         if "fulcrum_pos" not in st.session_state: st.session_state.fulcrum_pos = 2.0
 
         c_ctrl, c_vis = st.columns([1, 2], gap="large")
 
         with c_ctrl:
-            fulcrum = st.slider(
-                t({"de": "Stützpunkt verschieben", "en": "Move Fulcrum"}),
-                0.0, 10.0, st.session_state.fulcrum_pos, 0.1,
-                key="fulcrum_slider"
-            )
+            fulcrum = st.slider(t({"de": "Stützpunkt verschieben", "en": "Move Fulcrum"}), 0.0, 10.0, st.session_state.fulcrum_pos, 0.1, key="fulcrum_slider")
             st.session_state.fulcrum_pos = fulcrum
 
-            # Calculate Torque
             net_torque = sum([m * (x - fulcrum) for x, m in masses])
-
-            # Display
             st.metric(t(content_3_4["playground"]["metric_torque"]), f"{net_torque:.2f}")
-            
+
             if abs(net_torque) < 0.5:
                 st.success(t({"de": "Im Gleichgewicht!", "en": "Balanced!"}))
             elif net_torque > 0:
@@ -139,36 +128,63 @@ def render_subtopic_3_4(model):
 
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # --- MISSION: PORTFOLIO MANAGER ---
+    # --- MISSION: HEDGE FUND MANAGER ---
     st.markdown(f"### {t(content_3_4['mission']['title'])}")
     with st.container(border=True):
         st.markdown(t(content_3_4["mission"]["briefing"]))
 
-        # Calculate EV
-        ev_a = 0.5 * 20 + 0.5 * (-10) # 10 - 5 = 5
-        ev_b = 0.9 * 5 + 0.1 * (-50)  # 4.5 - 5 = -0.5
+        # Safe Asset (Bonds): Return = 2%
+        # Risky Asset (Tech): E(R) = 0.5*20 + 0.5*(-10) = 5%
+        # Portfolio E(R) = w * E(Risk) + (1-w) * E(Safe)
+        # Target = 5%? Wait. E(Risk) IS 5%. So to get 5% you need 100% Tech.
+        # Let's make Target 3.5%.
+        # 3.5 = w * 5 + (1-w) * 2 = 5w + 2 - 2w = 3w + 2 => 1.5 = 3w => w = 0.5 (50%)
 
-        # User Choice
-        choice = st.radio(
-            t(content_3_4["mission"]["task"]),
-            ["Aktie A (Stock A)", "Aktie B (Stock B)"],
-            horizontal=True
-        )
+        # Dynamic Text update based on calculation
+        e_safe = 2.0
+        e_risk = 0.5 * 20.0 + 0.5 * (-10.0) # 5.0
 
-        if st.button(t({"de": "Entscheidung prüfen", "en": "Check Decision"})):
-            if "Aktie A" in choice: # Correct
-                st.success(f"{t(content_3_4['mission']['success'])} E(A) = +5%, E(B) = -0.5%")
+        target_return = 3.5
+
+        if "mission_3_4_done" not in st.session_state: st.session_state.mission_3_4_done = False
+        if "alloc_tech" not in st.session_state: st.session_state.alloc_tech = 0.0
+
+        st.markdown(t({
+            "de": "Ziel: Erreiche einen **Erwartungswert von 3.5%**.",
+            "en": "Goal: Achieve an **Expected Return of 3.5%**."
+        }))
+
+        c_m_ctrl, c_m_res = st.columns([1, 1], gap="large")
+
+        with c_m_ctrl:
+            w_tech = st.slider(
+                t({"de": "Anteil Tech-Aktien (%)", "en": "Tech Allocation (%)"}),
+                0, 100, int(st.session_state.alloc_tech * 100), 5,
+                key="alloc_slider"
+            ) / 100.0
+            st.session_state.alloc_tech = w_tech
+
+        with c_m_res:
+            port_ev = w_tech * e_risk + (1 - w_tech) * e_safe
+            st.metric("Portfolio Expected Return", f"{port_ev:.1f}%", delta=f"{port_ev - target_return:.1f}%")
+
+        # Win Condition
+        if abs(port_ev - target_return) < 0.1:
+            if not st.session_state.mission_3_4_done:
                 st.balloons()
-                
-                # Track
+                st.session_state.mission_3_4_done = True
                 user = st.session_state.get("user")
                 if user:
                     track_question_answer(user["localId"], "vwl", "3", "3.4", "3_4_mission", True)
                     update_local_progress("3", "3.4", "3_4_mission", True)
                     st.rerun()
+            st.success(t(content_3_4["mission"]["success"]))
+        else:
+            st.session_state.mission_3_4_done = False
+            if port_ev < target_return:
+                st.info(t({"de": "Zu wenig Rendite. Mehr Risiko wagen!", "en": "Return too low. Take more risk!"}))
             else:
-                st.error(t({"de": "Vorsicht! Rechne nochmal nach.", "en": "Careful! Calculate again."}))
-                st.markdown(f"E(B) = $0.9 \\cdot 5 + 0.1 \\cdot (-50)$ ...")
+                st.info(t({"de": "Zu viel Risiko. Mehr Staatsanleihen!", "en": "Too much risk. Buy more bonds!"}))
 
     st.markdown("<br>", unsafe_allow_html=True)
 
@@ -183,7 +199,6 @@ def render_subtopic_3_4(model):
 
     # --- EXAM PRACTICE ---
     st.markdown(f"### {t({'de': 'Prüfungstraining', 'en': 'Exam Practice'})}")
-
     questions = ["hs2024_mc7", "hs2024_mc12"]
     for q_id in questions:
         q_data = get_question("3.4", q_id)
@@ -195,7 +210,6 @@ def render_subtopic_3_4(model):
                     option_labels = [t(o) for o in opts]
                 else:
                     option_labels = opts
-
                 render_mcq(
                     key_suffix=f"3_4_{q_id}",
                     question_text=t(q_data["question"]),
@@ -211,87 +225,36 @@ def render_subtopic_3_4(model):
             st.markdown("<br>", unsafe_allow_html=True)
 
 def get_seesaw_chart(masses, fulcrum):
-    """Seesaw Visualization."""
     fig = go.Figure()
-
-    # 1. The Beam (Plank)
-    beam_len = 10
-    # Rotation Angle (proportional to torque, clamped)
     net_torque = sum([m * (x - fulcrum) for x, m in masses])
-    angle = np.clip(net_torque * -2, -20, 20) # Degrees. neg torque -> left down (pos angle) ?
-    # Actually: Positive torque (right heavy) -> Clockwise (negative angle)
-    # If torque > 0 (right heavy), beam should dip right (y < 0 on right).
     angle = np.clip(net_torque * -2, -20, 20)
-
-    # Coordinate Transform
     rad = np.radians(angle)
     c, s = np.cos(rad), np.sin(rad)
 
-    # Beam Coords relative to fulcrum (0,0 locally)
-    # Beam goes from 0 to 10 in global coords.
-    # Local coords: x_local = x_global - fulcrum
-
-    x_left = 0 - fulcrum
-    x_right = 10 - fulcrum
-
-    # Rotate
-    x0_rot = x_left * c
-    y0_rot = x_left * s
-    x1_rot = x_right * c
-    y1_rot = x_right * s
-
-    # Shift back to fulcrum plot position
-    # Plot origin (0,0) is fulcrum bottom? Let's say fulcrum tip is at (fulcrum, 1)
     tip_x, tip_y = fulcrum, 1.0
+    x_left, x_right = 0 - fulcrum, 10 - fulcrum
 
     fig.add_trace(go.Scatter(
-        x=[tip_x + x0_rot, tip_x + x1_rot],
-        y=[tip_y + y0_rot, tip_y + y1_rot],
-        mode='lines',
-        line=dict(color='#8E8E93', width=5)
+        x=[tip_x + x_left * c, tip_x + x_right * c],
+        y=[tip_y + x_left * s, tip_y + x_right * s],
+        mode='lines', line=dict(color='#8E8E93', width=5)
     ))
 
-    # 2. The Weights (Masses)
     for x_pos, mass in masses:
-        # Distance from fulcrum
         dist = x_pos - fulcrum
-
-        # Rotated position
-        mx = dist * c
-        my = dist * s
-
-        # Final Plot Position
-        px = tip_x + mx
-        py = tip_y + my
-
-        # Draw Circle
-        r = mass * 0.1 # Size prop to mass
+        px = tip_x + dist * c
+        py = tip_y + dist * s
+        r = mass * 0.1
         fig.add_trace(go.Scatter(
-            x=[px], y=[py + r], # Sit on top of beam
-            mode='markers+text',
+            x=[px], y=[py + r], mode='markers+text',
             marker=dict(size=mass*10, color='#007AFF'),
-            text=str(mass),
-            textposition="middle center",
-            textfont=dict(color='white')
+            text=str(mass), textposition="middle center", textfont=dict(color='white')
         ))
 
-    # 3. The Fulcrum (Triangle)
     fig.add_trace(go.Scatter(
         x=[fulcrum - 0.5, fulcrum + 0.5, fulcrum, fulcrum - 0.5],
-        y=[0, 0, 1, 0],
-        fill="toself",
-        fillcolor="#FF9500",
-        line=dict(color="#FF9500"),
-        mode='lines'
+        y=[0, 0, 1, 0], fill="toself", fillcolor="#FF9500", line=dict(color="#FF9500"), mode='lines'
     ))
 
-    fig.update_layout(
-        xaxis=dict(range=[-1, 11], visible=False, fixedrange=True),
-        yaxis=dict(range=[-2, 4], visible=False, fixedrange=True),
-        margin=dict(l=0, r=0, t=0, b=0),
-        height=250,
-        showlegend=False,
-        paper_bgcolor="rgba(0,0,0,0)",
-        plot_bgcolor="rgba(0,0,0,0)"
-    )
+    fig.update_layout(xaxis=dict(range=[-1, 11], visible=False, fixedrange=True), yaxis=dict(range=[-2, 4], visible=False, fixedrange=True), margin=dict(t=0, b=0), height=250, showlegend=False, paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)")
     return fig

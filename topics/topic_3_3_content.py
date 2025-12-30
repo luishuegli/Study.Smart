@@ -1,6 +1,7 @@
 import streamlit as st
 import plotly.graph_objects as go
 import numpy as np
+from math import erf, sqrt
 from views.styles import render_icon
 from utils.localization import t
 from utils.quiz_helper import render_mcq
@@ -38,18 +39,19 @@ content_3_3 = {
         }
     },
     "mission": {
-        "title": {"de": "Mission: Der Präzisions-Ingenieur", "en": "Mission: The Precision Engineer"},
+        "title": {"de": "Mission: Der Fabrik-Tycoon", "en": "Mission: The Factory Tycoon"},
         "briefing": {
-            "de": r"Du produzierst Bolzen. Die Maschine hat eine Standardabweichung von $\sigma=0.2$ mm. Der Kunde akzeptiert nur Bolzen zwischen **9.8 mm** und **10.2 mm**.",
-            "en": r"You manufacture bolts. The machine has a standard deviation of $\sigma=0.2$ mm. The client only accepts bolts between **9.8 mm** and **10.2 mm**."
+            "de": r"Du produzierst High-Tech-Bolzen. Kunden zahlen **$10** pro gutem Bolzen (9.8-10.2mm). Jeder Ausschuss (zu klein/groß) kostet dich **$5** Strafe.",
+            "en": r"You produce high-tech bolts. Clients pay **$10** per good bolt (9.8-10.2mm). Any defect (too small/big) costs you **$5** in penalty."
         },
         "task": {
-            "de": r"Stelle den Mittelwert $\mu$ der Maschine so ein, dass der Ausschuss minimiert wird (maximiere die Fläche im grünen Bereich).",
-            "en": r"Adjust the machine mean $\mu$ to minimize waste (maximize the area in the green zone)."
+            "de": r"Die Maschine streut mit $\sigma=0.2$. Stelle den Mittelwert $\mu$ so ein, dass dein Profit maximiert wird.",
+            "en": r"The machine varies with $\sigma=0.2$. Adjust the mean $\mu$ to maximize your profit."
         },
+        "sim_btn": {"de": "Produktionslauf starten (100 Bolzen)", "en": "Start Production Run (100 Bolts)"},
         "success": {
-            "de": "Perfekt zentriert! Maximale Effizienz erreicht.",
-            "en": "Perfectly centered! Maximum efficiency achieved."
+            "de": "Profit Maximiert! Du hast die perfekte Einstellung gefunden.",
+            "en": "Profit Maximized! You found the perfect setting."
         }
     },
     "pro_tip": {
@@ -61,14 +63,14 @@ content_3_3 = {
 }
 
 def render_subtopic_3_3(model):
-    """3.3 Continuous Random Variables - The Smoothie Metaphor"""
+    """3.3 Continuous Random Variables - The Factory Tycoon"""
 
     # --- CSS INJECTION ---
     st.markdown("""
     <style>
     [data-testid="stHorizontalBlock"] { align-items: stretch !important; }
     
-    /* Slider Colors for Precision Engineer */
+    /* Slider Colors for Factory */
     .stSlider:has([aria-label*="Mean"]) div[data-baseweb="slider"] > div:first-child > div:first-child { background-color: #34C759 !important; }
     .stSlider:has([aria-label*="Mean"]) div[role="slider"] { border: 2px solid #34C759 !important; }
     </style>
@@ -93,17 +95,10 @@ def render_subtopic_3_3(model):
         c_ctrl, c_vis = st.columns([1, 2], gap="large")
 
         with c_ctrl:
-            # Range Slider for Interval
-            interval = st.slider(
-                t({"de": "Intervall (a bis b)", "en": "Interval (a to b)"}),
-                -3.0, 3.0, (-0.5, 0.5), 0.1
-            )
+            interval = st.slider(t({"de": "Intervall (a bis b)", "en": "Interval (a to b)"}), -3.0, 3.0, (-0.5, 0.5), 0.1)
             a, b = interval
 
-            # Calculate Area (Standard Normal)
-            from math import erf, sqrt
             p_area = 0.5 * (erf(b/sqrt(2)) - erf(a/sqrt(2)))
-
             st.metric(t(content_3_3["playground"]["metric_area"]), f"{p_area:.1%}")
 
             if abs(a - b) < 0.01:
@@ -130,17 +125,16 @@ def render_subtopic_3_3(model):
 
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # --- MISSION: PRECISION ENGINEER ---
+    # --- MISSION: FACTORY TYCOON ---
     st.markdown(f"### {t(content_3_3['mission']['title'])}")
     with st.container(border=True):
         st.markdown(t(content_3_3["mission"]["briefing"]))
         st.markdown(f"**{t(content_3_3['mission']['task'])}**")
 
-        # State
         if "eng_mu" not in st.session_state: st.session_state.eng_mu = 9.0
         if "mission_3_3_done" not in st.session_state: st.session_state.mission_3_3_done = False
+        if "factory_profit" not in st.session_state: st.session_state.factory_profit = None
 
-        # Controls
         mu = st.slider(
             t({"de": "Maschinen-Einstellung (µ)", "en": "Machine Setting (µ)"}),
             9.0, 11.0, st.session_state.eng_mu, 0.05,
@@ -148,19 +142,13 @@ def render_subtopic_3_3(model):
         )
         st.session_state.eng_mu = mu
 
-        # Calculation (Normal with sigma=0.2)
-        # Acceptable range: 9.8 to 10.2
         sigma = 0.2
         lower, upper = 9.8, 10.2
 
-        # Z-scores
         z1 = (lower - mu) / sigma
         z2 = (upper - mu) / sigma
+        yield_rate = 0.5 * (erf(z2/sqrt(2)) - erf(z1/sqrt(2)))
 
-        # Probability in range
-        success_prob = 0.5 * (erf(z2/sqrt(2)) - erf(z1/sqrt(2)))
-
-        # Visualization
         col_m_vis, col_m_res = st.columns([2, 1])
 
         with col_m_vis:
@@ -168,16 +156,22 @@ def render_subtopic_3_3(model):
             st.plotly_chart(fig_eng, use_container_width=True, config={'displayModeBar': False})
 
         with col_m_res:
-            st.metric("Yield (Accepted Bolts)", f"{success_prob:.1%}")
+            st.metric("Theoretical Yield", f"{yield_rate:.1%}")
 
-            # Win Condition: mu must be close to 10.0
-            # Max possible yield at mu=10 is approx 68% (1 sigma each side) -> actually +/- 0.2 is 1 sigma.
-            # 9.8 to 10.2 is +/- 0.2. Sigma is 0.2. So range is +/- 1 sigma. Area = 68.2%.
+            # Simulation
+            if st.button(t(content_3_3["mission"]["sim_btn"])):
+                rng = np.random.default_rng()
+                bolts = rng.normal(mu, sigma, 100)
+                good = np.sum((bolts >= lower) & (bolts <= upper))
+                bad = 100 - good
+                profit = (good * 10) - (bad * 5)
+                st.session_state.factory_profit = profit
 
+            if st.session_state.factory_profit is not None:
+                st.metric("Last Run Profit", f"${st.session_state.factory_profit}")
+
+            # Win Condition: Target mu=10.0 (+/- 0.06)
             target_mu = 10.0
-            max_yield = 0.6826 # approx
-
-            # Allow small error in setting
             if abs(mu - target_mu) < 0.06:
                 if not st.session_state.mission_3_3_done:
                     st.balloons()
@@ -191,9 +185,9 @@ def render_subtopic_3_3(model):
             else:
                  st.session_state.mission_3_3_done = False
                  if mu < target_mu:
-                     st.info(t({"de": "Zu weit links! Schieb nach rechts.", "en": "Too far left! Shift right."}))
+                     st.info(t({"de": "Zu weit links!", "en": "Too far left!"}))
                  else:
-                     st.info(t({"de": "Zu weit rechts! Schieb nach links.", "en": "Too far right! Shift left."}))
+                     st.info(t({"de": "Zu weit rechts!", "en": "Too far right!"}))
 
     st.markdown("<br>", unsafe_allow_html=True)
     
@@ -232,73 +226,34 @@ def render_subtopic_3_3(model):
             )
 
 def get_pdf_area_chart(a, b):
-    """Standard Normal PDF with highlighted area."""
     x = np.linspace(-3.5, 3.5, 200)
     y = (1 / np.sqrt(2 * np.pi)) * np.exp(-0.5 * x**2)
-
     fig = go.Figure()
-
-    # Main Line
     fig.add_trace(go.Scatter(x=x, y=y, mode='lines', line=dict(color='black', width=2), hoverinfo='skip'))
-
-    # Area
     mask = (x >= a) & (x <= b)
     if np.any(mask):
         fig.add_trace(go.Scatter(
             x=np.concatenate(([x[mask][0]], x[mask], [x[mask][-1]])),
             y=np.concatenate(([0], y[mask], [0])),
-            fill='toself',
-            fillcolor='rgba(0, 122, 255, 0.3)',
-            line=dict(width=0),
-            hoverinfo='skip'
+            fill='toself', fillcolor='rgba(0, 122, 255, 0.3)', line=dict(width=0), hoverinfo='skip'
         ))
-
-    fig.update_layout(
-        xaxis=dict(title="x", range=[-3.5, 3.5], fixedrange=True),
-        yaxis=dict(title="f(x)", range=[0, 0.45], fixedrange=True),
-        margin=dict(l=20, r=20, t=20, b=20),
-        height=250,
-        showlegend=False,
-        paper_bgcolor="rgba(0,0,0,0)",
-        plot_bgcolor="rgba(0,0,0,0)"
-    )
+    fig.update_layout(xaxis=dict(title="x", range=[-3.5, 3.5], fixedrange=True), yaxis=dict(title="f(x)", range=[0, 0.45], fixedrange=True), margin=dict(t=20, b=20), height=250, showlegend=False)
     return fig
 
 def get_engineer_chart(mu, sigma, lower, upper):
-    """Manufacturing process visualization."""
-    # Plot range: centered on target (10), wide enough
     x = np.linspace(9.0, 11.0, 300)
     y = (1 / (sigma * np.sqrt(2 * np.pi))) * np.exp(-0.5 * ((x - mu) / sigma)**2)
-
     fig = go.Figure()
-
-    # Tolerance Zone (Green Background)
     fig.add_vrect(x0=lower, x1=upper, fillcolor="rgba(52, 199, 89, 0.1)", layer="below", line_width=0)
-    fig.add_vline(x=lower, line_dash="dash", line_color="green", annotation_text="Min")
-    fig.add_vline(x=upper, line_dash="dash", line_color="green", annotation_text="Max")
-
-    # Distribution Curve
+    fig.add_vline(x=lower, line_dash="dash", line_color="green")
+    fig.add_vline(x=upper, line_dash="dash", line_color="green")
     fig.add_trace(go.Scatter(x=x, y=y, mode='lines', line=dict(color='#34C759', width=3)))
-
-    # Highlight area inside tolerance
     mask = (x >= lower) & (x <= upper)
     if np.any(mask):
         fig.add_trace(go.Scatter(
             x=np.concatenate(([x[mask][0]], x[mask], [x[mask][-1]])),
             y=np.concatenate(([0], y[mask], [0])),
-            fill='toself',
-            fillcolor='rgba(52, 199, 89, 0.4)',
-            line=dict(width=0),
-            hoverinfo='skip'
+            fill='toself', fillcolor='rgba(52, 199, 89, 0.4)', line=dict(width=0), hoverinfo='skip'
         ))
-
-    fig.update_layout(
-        xaxis=dict(title="Diameter (mm)", range=[9.0, 11.0], fixedrange=True),
-        yaxis=dict(visible=False, fixedrange=True),
-        margin=dict(l=20, r=20, t=20, b=20),
-        height=250,
-        showlegend=False,
-        paper_bgcolor="rgba(0,0,0,0)",
-        plot_bgcolor="rgba(0,0,0,0)"
-    )
+    fig.update_layout(xaxis=dict(title="Diameter (mm)", range=[9.0, 11.0], fixedrange=True), yaxis=dict(visible=False, fixedrange=True), margin=dict(t=20, b=20), height=250, showlegend=False)
     return fig

@@ -1,6 +1,7 @@
 import streamlit as st
 import plotly.graph_objects as go
 import numpy as np
+import time
 from views.styles import render_icon
 from utils.localization import t
 from utils.quiz_helper import render_mcq
@@ -38,14 +39,15 @@ content_3_2 = {
         }
     },
     "mission": {
-        "title": {"de": "Mission: Der Gezinkte Würfel", "en": "Mission: The Loaded Die"},
+        "title": {"de": "Mission: Der Casino-Boss", "en": "Mission: The Casino Boss"},
         "briefing": {
-            "de": "Ein Casino-Besitzer will einen Würfel, bei dem die **6** genau **50%** der Zeit fällt. Die anderen Zahlen (1-5) sollen sich den Rest **fair** (gleichmäßig) teilen.",
-            "en": "A casino owner wants a die where **6** comes up exactly **50%** of the time. The other numbers (1-5) must split the rest **fairly** (equally)."
+            "de": "Du designst ein Würfelspiel. Der Spieler gewinnt bei einer **6** groß, verliert aber bei **1-5** klein. Dein Ziel: Der Würfel soll so gezinkt sein, dass die **6** genau **40%** der Zeit fällt (um Spieler anzulocken), aber die Summe muss stimmen.",
+            "en": "You are designing a dice game. The player wins big on a **6**, but loses small on **1-5**. Your goal: Load the die so **6** comes up exactly **40%** of the time (to lure players), but the probability sum must be valid."
         },
+        "sim_btn": {"de": "100 Spiele simulieren", "en": "Simulate 100 Games"},
         "success": {
-            "de": "Exzellent! Der Würfel ist perfekt gezinkt.",
-            "en": "Excellent! The die is perfectly loaded."
+            "de": "Perfekt kalibriert! Das Casino gewinnt langfristig, aber die Spieler bleiben motiviert.",
+            "en": "Perfectly calibrated! The casino wins long-term, but players stay motivated."
         }
     },
     "pro_tip": {
@@ -57,17 +59,16 @@ content_3_2 = {
 }
 
 def render_subtopic_3_2(model):
-    """3.2 Discrete Random Variables - Interactive Equalizer"""
+    """3.2 Discrete Random Variables - Interactive Equalizer & Casino Sim"""
     
     # --- CSS INJECTION ---
     st.markdown("""
     <style>
     [data-testid="stHorizontalBlock"] { align-items: stretch !important; }
-    [data-testid="column"] { display: flex !important; flex-direction: column !important; }
     
-    /* Custom Slider Colors for the Equalizer */
-    .stSlider div[data-baseweb="slider"] > div:first-child > div:first-child { background-color: #5856D6 !important; }
-    .stSlider div[role="slider"] { border: 2px solid #5856D6 !important; }
+    /* Custom Slider Colors */
+    .stSlider:has([aria-label*="P(X=6)"]) div[data-baseweb="slider"] > div:first-child > div:first-child { background-color: #FF4B4B !important; }
+    .stSlider:has([aria-label*="P(X=6)"]) div[role="slider"] { border: 2px solid #FF4B4B !important; }
     </style>
     """, unsafe_allow_html=True)
 
@@ -89,32 +90,29 @@ def render_subtopic_3_2(model):
 
         c_plot, c_ctrl = st.columns([2, 1], gap="medium")
 
-        # State for sliders (using defaults if not set)
-        if "pmf_1" not in st.session_state: st.session_state.pmf_1 = 0.2
-        if "pmf_2" not in st.session_state: st.session_state.pmf_2 = 0.2
-        if "pmf_3" not in st.session_state: st.session_state.pmf_3 = 0.2
-        if "pmf_4" not in st.session_state: st.session_state.pmf_4 = 0.2
-        if "pmf_5" not in st.session_state: st.session_state.pmf_5 = 0.2
+        # State for sliders
+        defaults = [0.2] * 5
+        for i in range(1, 6):
+            if f"pmf_{i}" not in st.session_state: st.session_state[f"pmf_{i}"] = defaults[i-1]
 
         with c_ctrl:
-            p1 = st.slider("P(X=1)", 0.0, 1.0, 0.2, 0.05, key="pmf_1")
-            p2 = st.slider("P(X=2)", 0.0, 1.0, 0.2, 0.05, key="pmf_2")
-            p3 = st.slider("P(X=3)", 0.0, 1.0, 0.2, 0.05, key="pmf_3")
-            p4 = st.slider("P(X=4)", 0.0, 1.0, 0.2, 0.05, key="pmf_4")
-            p5 = st.slider("P(X=5)", 0.0, 1.0, 0.2, 0.05, key="pmf_5")
-
-            total_sum = p1 + p2 + p3 + p4 + p5
+            p_vals = []
+            for i in range(1, 6):
+                p = st.slider(f"P(X={i})", 0.0, 1.0, st.session_state[f"pmf_{i}"], 0.05, key=f"pmf_{i}")
+                p_vals.append(p)
             
+            total_sum = sum(p_vals)
+
             delta_color = "normal"
             if abs(total_sum - 1.0) < 0.001:
-                delta_color = "normal" # Green handled by logic below
+                delta_color = "normal"
             else:
                 delta_color = "inverse"
 
             st.metric(t(content_3_2["playground"]["metric_sum"]), f"{total_sum:.2f}", delta=f"{1.0-total_sum:.2f}", delta_color=delta_color)
 
         with c_plot:
-            fig = get_pmf_chart([1,2,3,4,5], [p1,p2,p3,p4,p5])
+            fig = get_pmf_chart([1,2,3,4,5], p_vals)
             st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False})
             
             if abs(total_sum - 1.0) < 0.001:
@@ -141,39 +139,32 @@ def render_subtopic_3_2(model):
 
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # --- MISSION: LOADED DIE ---
+    # --- MISSION: CASINO BOSS ---
     st.markdown(f"### {t(content_3_2['mission']['title'])}")
     with st.container(border=True):
         st.markdown(t(content_3_2["mission"]["briefing"]))
 
-        # We reuse the same component concept but with dedicated state for the mission
         if "load_6" not in st.session_state: st.session_state.load_6 = 0.0
         if "load_others" not in st.session_state: st.session_state.load_others = 0.2
         if "mission_3_2_done" not in st.session_state: st.session_state.mission_3_2_done = False
+        if "sim_results" not in st.session_state: st.session_state.sim_results = []
 
-        # Two controls: P(6) and P(Others)
-        # This simplifies the task from 6 sliders to 2, reducing cognitive load
         c_m_ctrl, c_m_vis = st.columns([1, 1.5], gap="large")
 
         with c_m_ctrl:
-            val_6 = st.slider("P(X=6)", 0.0, 1.0, st.session_state.load_6, 0.05, key="load_6_slider")
-            val_others = st.slider("P(X=1,2,3,4,5) [Each]", 0.0, 0.2, st.session_state.load_others, 0.01, key="load_others_slider")
+            val_6 = st.slider("P(X=6) [Jackpot]", 0.0, 1.0, st.session_state.load_6, 0.05, key="load_6_slider")
+            val_others = st.slider("P(X=1-5) [Each]", 0.0, 0.2, st.session_state.load_others, 0.01, key="load_others_slider")
             
-            # Sync
             st.session_state.load_6 = val_6
             st.session_state.load_others = val_others
-            
-            # Calc
-            sum_others = val_others * 5
-            total_mission = val_6 + sum_others
 
+            total_mission = val_6 + val_others * 5
             st.metric("Total Sum", f"{total_mission:.2f}")
 
         with c_m_vis:
-            # Build full distribution for chart
             outcomes = [1, 2, 3, 4, 5, 6]
             probs = [val_others]*5 + [val_6]
-            colors = ["#AF52DE"]*5 + ["#FF4B4B"] # Purple for others, Red for 6
+            colors = ["#AF52DE"]*5 + ["#FF4B4B"]
 
             fig_m = go.Figure(data=[go.Bar(
                 x=outcomes, y=probs,
@@ -181,35 +172,43 @@ def render_subtopic_3_2(model):
                 text=[f"{p:.2f}" for p in probs],
                 textposition='auto'
             )])
-            fig_m.update_layout(
-                yaxis=dict(range=[0, 1.1], title="P(X=x)"),
-                xaxis=dict(title="Outcome", tickmode='linear'),
-                margin=dict(l=20, r=20, t=20, b=20),
-                height=250
-            )
+            fig_m.update_layout(yaxis=dict(range=[0, 1.1], title="P(X=x)"), margin=dict(t=20, b=20), height=200)
             st.plotly_chart(fig_m, use_container_width=True, config={'displayModeBar': False})
 
-        # Win Condition
-        # P(6) = 0.5, P(others) = 0.1 each. Sum = 0.5 + 5*0.1 = 1.0
-        is_success = (abs(val_6 - 0.5) < 0.01) and (abs(val_others - 0.1) < 0.01)
+        # Simulation Button
+        if st.button(t(content_3_2["mission"]["sim_btn"])):
+            if abs(total_mission - 1.0) > 0.01:
+                st.error("Sum != 1.0. Cannot simulate.")
+            else:
+                # Run Simulation
+                rng = np.random.default_rng()
+                sim_outcomes = rng.choice(outcomes, size=100, p=[p/total_mission for p in probs])
+                st.session_state.sim_results = sim_outcomes
 
-        if is_success:
+        # Show Simulation Results (Histogram)
+        if len(st.session_state.sim_results) > 0:
+            counts = np.bincount(st.session_state.sim_results, minlength=7)[1:]
+            st.caption("Simulation Results (100 Games)")
+            st.bar_chart(counts, height=150)
+
+        # Win Condition
+        is_success = (abs(val_6 - 0.40) < 0.01) and (abs(val_others - 0.12) < 0.01) # 0.6 / 5 = 0.12
+
+        if is_success and abs(total_mission - 1.0) < 0.01:
             if not st.session_state.mission_3_2_done:
                 st.balloons()
                 st.session_state.mission_3_2_done = True
-                # Track
                 user = st.session_state.get("user")
                 if user:
                     track_question_answer(user["localId"], "vwl", "3", "3.2", "3_2_mission", True)
                     update_local_progress("3", "3.2", "3_2_mission", True)
                     st.rerun()
             st.success(t(content_3_2["mission"]["success"]))
-        else:
-             st.session_state.mission_3_2_done = False
-             if total_mission != 1.0:
-                 st.info(t({"de": "Die Summe muss genau 1.0 sein.", "en": "The sum must be exactly 1.0."}))
-             elif val_6 != 0.5:
-                 st.info(t({"de": "P(6) muss 0.5 sein.", "en": "P(6) must be 0.5."}))
+        elif total_mission == 1.0:
+            if val_6 < 0.40:
+                st.info(t({"de": "Mehr Action! Erhöhe P(6).", "en": "More action! Increase P(6)."}))
+            elif val_6 > 0.40:
+                st.info(t({"de": "Zu teuer für das Casino! Verringere P(6).", "en": "Too expensive! Decrease P(6)."}))
 
     st.markdown("<br>", unsafe_allow_html=True)
 
@@ -224,10 +223,7 @@ def render_subtopic_3_2(model):
 
     # --- EXAM PRACTICE ---
     st.markdown(f"### {t({'de': 'Prüfungstraining', 'en': 'Exam Practice'})}")
-
-    # Render all 3 existing questions
     questions = ["uebung2_mc5", "test2_q4", "hs2015_mc5"]
-
     for q_id in questions:
         q_data = get_question("3.2", q_id)
         if q_data:
@@ -238,7 +234,6 @@ def render_subtopic_3_2(model):
                     option_labels = [t(o) for o in opts]
                 else:
                     option_labels = opts
-
                 render_mcq(
                     key_suffix=f"3_2_{q_id}",
                     question_text=t(q_data["question"]),
@@ -249,21 +244,12 @@ def render_subtopic_3_2(model):
                     error_msg_dict={"de": "Falsch.", "en": "Incorrect."},
                     client=model,
                     ai_context=f"Question {q_id}",
-                    course_id="vwl",
-                    topic_id="3",
-                    subtopic_id="3.2",
-                    question_id=f"3_2_{q_id}"
+                    course_id="vwl", topic_id="3", subtopic_id="3.2", question_id=f"3_2_{q_id}"
                 )
             st.markdown("<br>", unsafe_allow_html=True)
 
 def get_pmf_chart(x, y):
-    """Simple PMF Bar Chart"""
-    fig = go.Figure([go.Bar(
-        x=x, y=y,
-        marker_color="#5856D6",
-        opacity=0.8
-    )])
-
+    fig = go.Figure([go.Bar(x=x, y=y, marker_color="#5856D6", opacity=0.8)])
     fig.update_layout(
         xaxis=dict(title="x", tickmode='linear'),
         yaxis=dict(title="P(X=x)", range=[0, 1.1]),

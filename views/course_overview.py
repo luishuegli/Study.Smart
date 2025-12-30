@@ -25,10 +25,10 @@ SUBTOPIC_QUESTION_COUNTS = {
     "2.6": 3,  # Additional Questions
     # Topic 3: Random Variables
     "3.1": 1,  # uebung2_mc6
-    "3.2": 3,  # uebung2_mc5, test2_q4, hs2015_mc5
-    "3.3": 1,  # test2_q3
-    "3.4": 6,  # + hs2024_mc7, mc12
-    "3.5": 1,  # uebung2_mc8
+    "3.2": 4,  # m1 (50%), m2 (3x), uebung2_mc5, test2_q4
+    "3.3": 2,  # test2_q3, 3_3_mission (Factory Tycoon)
+    "3.4": 7,  # 3_4_casino + hs2024_mc7, mc12, +4 more
+    "3.5": 2,  # 3_5_sharpshooter + uebung2_mc8
     "3.6": 1,  # test3_q2
     "3.7": 1,  # hs2024_mc11 (only one implemented)
     # Topic 4: Stochastic Models and Distributions

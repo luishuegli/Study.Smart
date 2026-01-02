@@ -21,6 +21,56 @@ trigger: /implement or "implement topic X.Y"
 
 ---
 
+## ⚠️ MANDATORY: Layout Approval Gate
+
+> **CRITICAL RULE:** Before writing ANY implementation code, you MUST create a layout/design document and get user approval.
+
+### What to Include in Layout:
+1. **Section Order** — List every section that will appear on the page
+2. **Content Outline** — Key bullet points for each section
+3. **Interactive Design** — What type of interaction, mission goal, completion criteria
+4. **Visual Structure** — Side-by-side columns? Single column? Tables?
+5. **MCQ Selection** — Which questions will be used
+
+### Format:
+Create a markdown layout in the implementation_plan.md artifact:
+```markdown
+## Layout: Topic X.Y
+
+### 1. Intuition Section
+- Analogy: [describe]
+- Key visual metaphor
+
+### 2. Frag Dich
+- Question 1: [...]
+- Question 2: [...]
+
+### 3. Theory / Definitions
+- Layout: [2-column / single]
+- Formulas: [list main ones]
+
+### 4. Interactive Element
+- Type: [slider / table / click / etc.]
+- Mission: [goal]
+- Success condition: [how to win]
+
+### 5. Exam Essentials
+- Trap: [main trap]
+- Tips: [1-2 sentence each]
+
+### 6. MCQs
+- Question 1: [source]
+- Question 2: [source]
+```
+
+### Approval Process:
+1. **Create Layout** → call `notify_user` with layout for review
+2. **WAIT for user feedback** → user may comment with changes
+3. **Update if needed** → incorporate feedback
+4. **Proceed ONLY after approval** → user says "LGTM", "approved", or similar
+
+---
+
 ## Adaptive Learning Integration
 
 ### BEFORE Implementation

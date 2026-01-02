@@ -9,6 +9,12 @@
 
 _Rules that have been identified but not yet added to rule files._
 
+### From Topic 5
+| Rule | Evidence | Add to File | Status |
+|------|----------|-------------|--------|
+| **Layout-First Approval Gate** | User feedback: must show layout before implementing | implement.md (workflow) | ⏳ CRITICAL |
+| No special Unicode quotes | German `„"` caused SyntaxError | design-system.md | ⏳ Pending |
+
 ### From Topic 4
 | Rule | Evidence | Add to File | Status |
 |------|----------|-------------|--------|

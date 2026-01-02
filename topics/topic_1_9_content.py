@@ -33,20 +33,8 @@ content_1_9 = {
         "origin": {
             "title": {"de": "Die Ursprungsgeschichte (1990)", "en": "The Origin Story (1990)"},
             "text": {
-                "de": """
-                **New York, 1990:** Marilyn vos Savant (höchster IQ der Welt) veröffentlichte dieses Rätsel im *Parade Magazine*. Ihre Antwort: **"Wechseln verdoppelt die Gewinnchance."**
-                
-                Die Reaktion? Tausende Briefe, viele von Mathematik-PhDs, die sie beschimpften: *"Sie haben einen Fehler gemacht... als Mathematiker bin ich entsetzt!"*
-                
-                Warum irrten sich so viele Experten? Weil sie den Kontext ignorierten.
-                """,
-                "en": """
-                **New York, 1990:** Marilyn vos Savant (highest IQ record) published this puzzle in *Parade Magazine*. Her answer: **"Switching doubles your chance."**
-                
-                The reaction? Thousands of letters, many from Math PhDs, calling her wrong: *"You made a mistake... as a mathematician I am appalled!"*
-                
-                Why did so many experts get it wrong? Because they ignored the context.
-                """
+                "de": """<strong>New York, 1990:</strong> Marilyn vos Savant (höchster IQ der Welt) veröffentlichte dieses Rätsel im <em>Parade Magazine</em>. Ihre Antwort: <strong>"Wechseln verdoppelt die Gewinnchance."</strong><br><br>Die Reaktion? Tausende Briefe, viele von Mathematik-PhDs, die sie beschimpften: <em>"Sie haben einen Fehler gemacht... als Mathematiker bin ich entsetzt!"</em><br><br>Warum irrten sich so viele Experten? Weil sie den Kontext ignorierten.""",
+                "en": """<strong>New York, 1990:</strong> Marilyn vos Savant (highest IQ record) published this puzzle in <em>Parade Magazine</em>. Her answer: <strong>"Switching doubles your chance."</strong><br><br>The reaction? Thousands of letters, many from Math PhDs, calling her wrong: <em>"You made a mistake... as a mathematician I am appalled!"</em><br><br>Why did so many experts get it wrong? Because they ignored the context."""
             }
         },
         "constraints": {
@@ -70,26 +58,8 @@ content_1_9 = {
         "intuition_100": {
             "title": {"de": "Der 50-Türen-Trick (Intuition Pump)", "en": "The 50 Doors Trick (Intuition Pump)"},
             "text": {
-                "de": """
-                Stell dir vor, es gibt **50 Türen**.
-                1. Du wählst **Tür 1**. Chance: **1/50**.
-                2. Die 'Anderen' (Tür 2-50) haben zusammen **49/50**.
-                3. Monty öffnet **48** dieser anderen Türen (alles Ziegen).
-                4. Nur **Tür 50** bleibt von den 'Anderen' übrig.
-                
-                Die 49/50 der 'Anderen' sind nicht verschwunden. Sie haben sich auf Tür 50 konzentriert.
-                **Tür 1:** 1/50. **Tür 50:** 49/50. **Wechseln!**
-                """,
-                "en": """
-                Imagine there are **50 doors**.
-                1. You pick **Door 1**. Chance: **1/50**.
-                2. The 'Others' (Doors 2-50) have a combined **49/50**.
-                3. Monty opens **48** of these other doors (all goats).
-                4. Only **Door 50** remains closed from the 'Others'.
-                
-                The 49/50 probability of the 'Others' didn't disappear. It concentrated on **Door 50**.
-                **Door 1:** 1/50. **Door 50:** 49/50. **Switch!**
-                """
+                "de": """Stell dir vor, es gibt <strong>50 Türen</strong>.<br><br>1. Du wählst <strong>Tür 1</strong>. Chance: <strong>1/50 (2%)</strong>.<br>2. Die 'Anderen' (Tür 2-50) haben zusammen <strong>49/50 (98%)</strong>.<br>3. Monty öffnet <strong>48</strong> dieser anderen Türen (alles Ziegen).<br>4. Nur <strong>Tür 50</strong> bleibt von den 'Anderen' übrig.<br><br><strong>Warum 48 Türen?</strong> Monty öffnet IMMER alle Ziegen-Türen ausser einer. Die 98% Wahrscheinlichkeit der 'Anderen' verschwinden nicht - sie konzentrieren sich auf die EINE überlebende Tür!<br><br><strong>Ergebnis:</strong> Tür 1 = 2%, Tür 50 = 98%. <strong>Wechseln!</strong>""",
+                "en": """Imagine there are <strong>50 doors</strong>.<br><br>1. You pick <strong>Door 1</strong>. Chance: <strong>1/50 (2%)</strong>.<br>2. The 'Others' (Doors 2-50) have a combined <strong>49/50 (98%)</strong>.<br>3. Monty opens <strong>48</strong> of these other doors (all goats).<br>4. Only <strong>Door 50</strong> remains closed from the 'Others'.<br><br><strong>Why 48 doors?</strong> Monty ALWAYS opens all goat doors except one. The 98% probability of the 'Others' doesn't disappear - it CONCENTRATES on the ONE surviving door!<br><br><strong>Result:</strong> Door 1 = 2%, Door 50 = 98%. <strong>Switch!</strong>"""
             }
         },
         "anchor": {
@@ -141,9 +111,46 @@ def render_subtopic_1_9(model):
     
     st.header(t(content_1_9["title"]))
     
-    # --- THEORY ---
-    st.info(t({"de": "Bayes ist das 'Update' von Wahrscheinlichkeiten durch neue Information.", "en": "Bayes is the 'Update' of probabilities using new information."}))
-    st.latex(r"P(A|B) = \frac{P(B|A) \cdot P(A)}{P(B)}")
+    # --- THEORY: BAYES THEOREM (Stupid Person Rule Applied) ---
+    with st.container(border=True):
+        st.markdown(f"### {t({'de': 'Das Bayes-Theorem', 'en': 'Bayes Theorem'})}")
+        
+        # The Core Idea (Simple Analogy)
+        st.markdown(f"""
+<div style="background: #f4f4f5; border-left: 4px solid #a1a1aa; padding: 12px 16px; border-radius: 8px; color: #3f3f46; margin-bottom: 16px;">
+<strong>{t({"de": "Die Kernidee:", "en": "The Core Idea:"})}</strong><br>
+{t({"de": "Du glaubst etwas über die Welt (z.B. 'Ich bin wahrscheinlich gesund'). Dann bekommst du neue Information (z.B. 'Der Test war positiv!'). Bayes sagt dir, wie du deine Meinung UPDATE sollst.", 
+    "en": "You believe something about the world (e.g., 'I'm probably healthy'). Then you get new information (e.g., 'The test was positive!'). Bayes tells you how to UPDATE your belief."})}
+</div>
+""", unsafe_allow_html=True)
+        
+        # The Formula
+        st.latex(r"P(A|B) = \frac{P(B|A) \cdot P(A)}{P(B)}")
+        
+        # Variable Decoder (The Critical Part)
+        st.markdown(f"""
+<div style="padding: 12px 0; color: #3f3f46; margin-top: 16px;">
+<strong>{t({"de": "Die Variablen erklärt:", "en": "The Variables Explained:"})}</strong><br><br>
+
+<strong>$P(A)$</strong> = <strong>{t({"de": "Prior", "en": "Prior"})}</strong> — {t({"de": "Was du VORHER glaubst. 'Wie wahrscheinlich ist Krankheit, BEVOR du den Test machst?'", "en": "What you believe BEFORE. 'How likely is the disease, BEFORE you take the test?'"})}<br><br>
+
+<strong>$P(B|A)$</strong> = <strong>{t({"de": "Likelihood", "en": "Likelihood"})}</strong> — {t({"de": "Wie gut ist der Beweis? 'Wenn ich krank BIN, wie oft zeigt der Test positiv?'", "en": "How good is the evidence? 'IF I AM sick, how often does the test show positive?'"})}<br><br>
+
+<strong>$P(B)$</strong> = <strong>{t({"de": "Normalisierung", "en": "Normalizer"})}</strong> — {t({"de": "Wie oft sehen wir diesen Beweis überhaupt? 'Wie oft sind Tests positiv (egal ob krank oder gesund)?'", "en": "How often do we see this evidence at all? 'How often are tests positive (sick or healthy)?'"})}<br><br>
+
+<strong>$P(A|B)$</strong> = <strong>{t({"de": "Posterior", "en": "Posterior"})}</strong> — {t({"de": "Deine NEUE Überzeugung. 'Wie wahrscheinlich bin ich krank, NACHDEM der Test positiv war?'", "en": "Your NEW belief. 'How likely am I sick, AFTER the test was positive?'"})}
+</div>
+""", unsafe_allow_html=True)
+        
+        # The Key Insight
+        st.markdown("<br>", unsafe_allow_html=True)
+        st.markdown(f"""
+<div style="background: #f4f4f5; border-left: 4px solid #71717a; padding: 12px 16px; border-radius: 8px; color: #3f3f46;">
+<strong>{t({"de": "Der Schlüssel-Insight:", "en": "The Key Insight:"})}</strong> 
+{t({"de": "Ein positiver Test bedeutet NICHT automatisch, dass du krank bist! Es hängt davon ab, wie SELTEN die Krankheit ist (Prior) und wie GUT der Test ist (Likelihood).", 
+    "en": "A positive test does NOT automatically mean you're sick! It depends on how RARE the disease is (Prior) and how GOOD the test is (Likelihood)."})}
+</div>
+""", unsafe_allow_html=True)
     
     st.markdown("<br>", unsafe_allow_html=True)
 
@@ -390,108 +397,386 @@ def render_subtopic_1_9(model):
     # --- PART 2: MONTY HALL ---
     st.markdown("<br>", unsafe_allow_html=True)
     st.markdown(f"### {t(content_1_9['monty']['title'])}")
+    st.caption(t(content_1_9["monty"]["intro"]))
     
-    with st.container(border=True):
-        st.caption(t(content_1_9["monty"]["intro"]))
+    # =========================================================================
+    # SECTION 1: THE SETUP (Collapsible)
+    # =========================================================================
+    with st.expander(t({"de": "Die Geschichte & Regeln", "en": "The Story & Rules"}), expanded=False):
+        # Origin Story
+        st.markdown(f"#### {t(content_1_9['monty']['origin']['title'])}")
+        st.markdown(f"""
+<div style="background: #f4f4f5; border-left: 4px solid #a1a1aa; padding: 12px 16px; border-radius: 8px; color: #3f3f46;">
+{t(content_1_9["monty"]["origin"]["text"])}
+</div>
+""", unsafe_allow_html=True)
         
-        # 1. ORIGIN STORY (Always visible now)
-        with st.container():
-            st.markdown(f"#### {t(content_1_9['monty']['origin']['title'])}")
-            st.info(t(content_1_9["monty"]["origin"]["text"]))
-            
         st.markdown("<br>", unsafe_allow_html=True)
-
-        # 2. THE GAME SETUP
+        
+        # Game Setup
         st.markdown(f"#### {t(content_1_9['monty']['constraints']['title'])}")
         st.markdown(t(content_1_9["monty"]["constraints"]["intro"]))
-        
         for rule in t(content_1_9['monty']['constraints']['list']):
             st.markdown(f"- {rule}")
-            
-        st.markdown("---")
-        st.markdown(f"**{t(content_1_9['monty']['anchor'])}**")
         
-        # 3. INTUITION PUMP (100 Doors - Always visible)
         st.markdown("<br>", unsafe_allow_html=True)
+        
+        # 50 Doors Intuition
         st.markdown(f"#### {t(content_1_9['monty']['intuition_100']['title'])}")
+        st.markdown(f"""
+<div style="background: #f4f4f5; border-left: 4px solid #a1a1aa; padding: 12px 16px; border-radius: 8px; color: #3f3f46; box-sizing: border-box; word-wrap: break-word; overflow-wrap: break-word;">
+{t(content_1_9["monty"]["intuition_100"]["text"])}
+</div>
+""", unsafe_allow_html=True)
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+    # =========================================================================
+    # SECTION 2: THE LAB (Main Focus - Game + Live Stats)
+    # =========================================================================
+    st.markdown(f"#### {t({'de': 'Das Experiment', 'en': 'The Experiment'})}")
+    
+    with st.container(border=True):
         
-        st.warning(t(content_1_9["monty"]["intuition_100"]["text"]))
+        @st.fragment
+        def monty_hall_lab():
+            import random
+            
+            # Initialize unified state
+            if "mh" not in st.session_state:
+                st.session_state.mh = {
+                    "game": {
+                        "car": random.randint(0, 2),
+                        "phase": "PICK",
+                        "user_pick": None,
+                        "monty_reveal": None,
+                    },
+                    "stats": {
+                        "games_played": 0,
+                        "stay_wins": 0,
+                        "stay_losses": 0,
+                        "switch_wins": 0,
+                        "switch_losses": 0,
+                    }
+                }
+            
+            g = st.session_state.mh["game"]
+            stats = st.session_state.mh["stats"]
+            
+            # Door labels
+            door_labels = [
+                t({"de": "Tür 1", "en": "Door 1"}),
+                t({"de": "Tür 2", "en": "Door 2"}),
+                t({"de": "Tür 3", "en": "Door 3"})
+            ]
+            
+            # --- GAME DOORS ---
+            d1, d2, d3 = st.columns(3, gap="small")
+            
+            for i, col in enumerate([d1, d2, d3]):
+                with col:
+                    if g["phase"] == "PICK":
+                        label = f"🚪 {door_labels[i]}"
+                        btn_type = "secondary"
+                        disabled = False
+                    elif g["phase"] == "REVEALED":
+                        if i == g["monty_reveal"]:
+                            label = f"🐐 {door_labels[i]}"
+                            btn_type = "secondary"
+                            disabled = True
+                        elif i == g["user_pick"]:
+                            label = f"🚪 {door_labels[i]} ✓"
+                            btn_type = "primary"
+                            disabled = True
+                        else:
+                            label = f"🚪 {door_labels[i]}"
+                            btn_type = "secondary"
+                            disabled = True
+                    else:  # RESULT
+                        if i == g["car"]:
+                            label = f"🚗 {door_labels[i]}"
+                            btn_type = "primary" if g.get("won") else "secondary"
+                        else:
+                            label = f"🐐 {door_labels[i]}"
+                            btn_type = "secondary"
+                        disabled = True
+                    
+                    if st.button(label, key=f"mh_door_{i}", use_container_width=True, 
+                                type=btn_type, disabled=disabled):
+                        if g["phase"] == "PICK":
+                            g["user_pick"] = i
+                            goat_doors = [d for d in range(3) if d != i and d != g["car"]]
+                            g["monty_reveal"] = random.choice(goat_doors)
+                            g["phase"] = "REVEALED"
+                            st.rerun(scope="fragment")
+            
+            # --- STAY/SWITCH BUTTONS ---
+            if g["phase"] == "REVEALED":
+                st.markdown("<br>", unsafe_allow_html=True)
+                st.markdown(f"**{t({'de': 'Monty zeigt eine Ziege! Was tust du?', 'en': 'Monty reveals a goat! What do you do?'})}**")
+                
+                remaining_door = [d for d in range(3) if d != g["user_pick"] and d != g["monty_reveal"]][0]
+                
+                b1, b2 = st.columns(2)
+                with b1:
+                    if st.button(t({"de": "Bleiben", "en": "Stay"}), key="mh_stay", 
+                                use_container_width=True, type="secondary"):
+                        won = g["user_pick"] == g["car"]
+                        g["won"] = won
+                        g["choice"] = "STAY"
+                        g["phase"] = "RESULT"
+                        stats["games_played"] += 1
+                        if won:
+                            stats["stay_wins"] += 1
+                        else:
+                            stats["stay_losses"] += 1
+                        st.rerun(scope="fragment")
+                with b2:
+                    if st.button(t({"de": "Wechseln", "en": "Switch"}), key="mh_switch", 
+                                use_container_width=True, type="primary"):
+                        won = remaining_door == g["car"]
+                        g["won"] = won
+                        g["choice"] = "SWITCH"
+                        g["phase"] = "RESULT"
+                        stats["games_played"] += 1
+                        if won:
+                            stats["switch_wins"] += 1
+                        else:
+                            stats["switch_losses"] += 1
+                        st.rerun(scope="fragment")
+            
+            # --- RESULT + NEXT GAME ---
+            if g["phase"] == "RESULT":
+                st.markdown("<br>", unsafe_allow_html=True)
+                if g["won"]:
+                    st.success(t({"de": "Gewonnen! Du hast das Auto!", "en": "You won! You got the car!"}))
+                else:
+                    st.error(t({"de": "Verloren. Du hast eine Ziege.", "en": "You lost. You got a goat."}))
+                
+                if st.button(t({"de": "Nächstes Spiel", "en": "Next Game"}), key="mh_next"):
+                    st.session_state.mh["game"] = {
+                        "car": random.randint(0, 2),
+                        "phase": "PICK",
+                        "user_pick": None,
+                        "monty_reveal": None,
+                    }
+                    st.rerun(scope="fragment")
+            
+            # --- LIVE STATS ---
+            st.markdown("<br>", unsafe_allow_html=True)
+            st.markdown("---")
+            
+            total_stay = stats["stay_wins"] + stats["stay_losses"]
+            total_switch = stats["switch_wins"] + stats["switch_losses"]
+            total = stats["games_played"]
+            
+            stay_pct = (stats["stay_wins"] / total_stay * 100) if total_stay > 0 else 0
+            switch_pct = (stats["switch_wins"] / total_switch * 100) if total_switch > 0 else 0
+            
+            st.markdown(f"**{t({'de': 'Deine Ergebnisse', 'en': 'Your Results'})}** ({total} {t({'de': 'Spiele', 'en': 'games'})})")
+            
+            c1, c2 = st.columns(2)
+            with c1:
+                st.markdown(f"""
+<div style="background: #f4f4f5; border-radius: 8px; padding: 12px; text-align: center;">
+    <div style="font-size: 1.5rem; font-weight: 700; color: #3f3f46;">{stay_pct:.0f}%</div>
+    <div style="font-size: 0.85rem; color: #71717a;">{t({"de": "Bleiben gewinnt", "en": "Stay Wins"})}</div>
+    <div style="font-size: 0.75rem; color: #a1a1aa;">{stats["stay_wins"]}/{total_stay}</div>
+</div>
+""", unsafe_allow_html=True)
+            with c2:
+                st.markdown(f"""
+<div style="background: #f4f4f5; border-radius: 8px; padding: 12px; text-align: center;">
+    <div style="font-size: 1.5rem; font-weight: 700; color: #3f3f46;">{switch_pct:.0f}%</div>
+    <div style="font-size: 0.85rem; color: #71717a;">{t({"de": "Wechseln gewinnt", "en": "Switch Wins"})}</div>
+    <div style="font-size: 0.75rem; color: #a1a1aa;">{stats["switch_wins"]}/{total_switch}</div>
+</div>
+""", unsafe_allow_html=True)
+            
+            # --- FAST FORWARD BUTTON (unlocks after 2 games) ---
+            if total >= 2:
+                st.markdown("<br>", unsafe_allow_html=True)
+                st.caption(t({"de": "Simuliert 1000 Spiele mit zufälliger Wahl, dann Stay vs Switch", 
+                              "en": "Simulates 1000 games with random pick, then Stay vs Switch"}))
+                if st.button(t({"de": "1000 Spiele simulieren", "en": "Simulate 1000 Games"}), 
+                            key="mh_fast_forward", use_container_width=True, type="primary"):
+                    # Run simulation
+                    cars = np.random.randint(0, 3, 1000)
+                    choices = np.random.randint(0, 3, 1000)
+                    sim_stay_wins = np.sum(cars == choices)
+                    sim_switch_wins = 1000 - sim_stay_wins
+                    
+                    # Add to existing stats
+                    stats["stay_wins"] += sim_stay_wins
+                    stats["stay_losses"] += (1000 - sim_stay_wins)
+                    stats["switch_wins"] += sim_switch_wins
+                    stats["switch_losses"] += (1000 - sim_switch_wins)
+                    stats["games_played"] += 1000
+                    
+                    st.rerun(scope="fragment")
+                
+                if total >= 100:
+                    st.success(t({"de": "Beweis: Wechseln verdoppelt die Gewinnchance!", 
+                                  "en": "Proof: Switching doubles your chance!"}))
         
-        # VISUAL PROOF (50 DOORS)
-        fig_doors = go.Figure()
-        fig_doors.add_trace(go.Bar(
-            x=[t({"de": "Deine Tür (1)", "en": "Your Door (1)"}), t({"de": "Die Überlebende (50)", "en": "The Survivor (50)"})],
-            y=[1, 49],
-            text=["1/50 (2%)", "49/50 (98%)"],
-            textposition='auto',
-            marker_color=["#9CA3AF", "#EF4444"]
-        ))
-        fig_doors.update_layout(
-            title=dict(text=t({"de": "Die Last der Wahrscheinlichkeit", "en": "The Weight of Probability"}), font=dict(size=14)),
-            yaxis=dict(visible=False),
-            height=200,
-            margin=dict(t=30, b=0, l=0, r=0),
-            paper_bgcolor='rgba(0,0,0,0)',
-            plot_bgcolor='rgba(0,0,0,0)'
-        )
-        st.plotly_chart(fig_doors, use_container_width=True, config={'staticPlot': True})
+        # Render the lab
+        monty_hall_lab()
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+    # =========================================================================
+    # 50 DOORS INTUITION PUMP (Interactive)
+    # =========================================================================
+    st.markdown(f"#### {t({'de': 'Der 50-Türen-Trick', 'en': 'The 50 Doors Trick'})}")
+    st.caption(t({"de": "Warum Wechseln so offensichtlich richtig ist, wenn man es grösser denkt", 
+                  "en": "Why switching is obviously correct when you scale it up"}))
+    
+    with st.container(border=True):
         
-        st.markdown("<br>", unsafe_allow_html=True)
+        @st.fragment
+        def fifty_doors_demo():
+            import random
+            
+            N_DOORS = 50
+            
+            # Initialize state
+            if "fd" not in st.session_state:
+                st.session_state.fd = {
+                    "phase": "PICK",  # PICK, ELIMINATED, FINAL
+                    "car": random.randint(0, N_DOORS - 1),
+                    "user_pick": None,
+                    "eliminated": [],
+                    "survivor": None
+                }
+            
+            fd = st.session_state.fd
+            
+            # --- PHASE: PICK ---
+            if fd["phase"] == "PICK":
+                st.markdown(f"**{t({'de': 'Wähle eine Tür (1-50):', 'en': 'Pick a door (1-50):'})}**")
+                
+                # Show 50 doors as a grid (5 columns x 10 rows - wider buttons)
+                for row in range(10):
+                    cols = st.columns(5)
+                    for col_idx, col in enumerate(cols):
+                        door_num = row * 5 + col_idx
+                        with col:
+                            if st.button(f"{door_num + 1}", key=f"fd_door_{door_num}", 
+                                        use_container_width=True):
+                                fd["user_pick"] = door_num
+                                # Determine survivor (the one door Monty leaves from "Others")
+                                if fd["car"] == door_num:
+                                    # User picked the car - survivor is random other door
+                                    others = [d for d in range(N_DOORS) if d != door_num]
+                                    fd["survivor"] = random.choice(others)
+                                else:
+                                    # User didn't pick car - survivor IS the car
+                                    fd["survivor"] = fd["car"]
+                                # Eliminate all others except user pick and survivor
+                                fd["eliminated"] = [d for d in range(N_DOORS) 
+                                                   if d != door_num and d != fd["survivor"]]
+                                fd["phase"] = "ELIMINATED"
+                                st.rerun(scope="fragment")
+            
+            # --- PHASE: ELIMINATED ---
+            elif fd["phase"] == "ELIMINATED":
+                st.markdown(f"**{t({'de': 'Monty öffnet 48 Türen...', 'en': 'Monty opens 48 doors...'})}**")
+                
+                # Show doors with eliminated ones as goats
+                for row in range(10):
+                    cols = st.columns(5)
+                    for col_idx, col in enumerate(cols):
+                        door_num = row * 5 + col_idx
+                        with col:
+                            if door_num == fd["user_pick"]:
+                                st.markdown(f"<div style='background: #18181b; color: white; padding: 8px; border-radius: 6px; text-align: center; font-weight: bold;'>{door_num + 1}</div>", unsafe_allow_html=True)
+                            elif door_num == fd["survivor"]:
+                                st.markdown(f"<div style='background: #f4f4f5; padding: 8px; border-radius: 6px; text-align: center; font-weight: bold; border: 2px solid #18181b;'>{door_num + 1}</div>", unsafe_allow_html=True)
+                            else:
+                                st.markdown(f"<div style='background: #fecaca; color: #991b1b; padding: 8px; border-radius: 6px; text-align: center; font-size: 0.75rem;'>🐐</div>", unsafe_allow_html=True)
+                
+                st.markdown("<br>", unsafe_allow_html=True)
+                
+                # Show the choice
+                user_door = fd["user_pick"] + 1
+                survivor_door = fd["survivor"] + 1
+                
+                st.markdown(f"""
+<div style="background: #f4f4f5; padding: 16px; border-radius: 8px;">
+<strong>{t({"de": "Die Situation:", "en": "The Situation:"})}</strong><br><br>
+{t({"de": f"Deine Tür ({user_door}): 1/50 = <strong>2%</strong>", "en": f"Your Door ({user_door}): 1/50 = <strong>2%</strong>"})}
+<br>
+{t({"de": f"Die Überlebende ({survivor_door}): 49/50 = <strong>98%</strong>", "en": f"The Survivor ({survivor_door}): 49/50 = <strong>98%</strong>"})}
+<br><br>
+<strong>{t({"de": "Die 98% sind nicht verschwunden - sie haben sich auf EINE Tür konzentriert!", "en": "The 98% didn't disappear - they CONCENTRATED on ONE door!"})}</strong>
+</div>
+""", unsafe_allow_html=True)
+                
+                st.markdown("<br>", unsafe_allow_html=True)
+                
+                c1, c2 = st.columns(2)
+                with c1:
+                    if st.button(t({"de": "Bleiben", "en": "Stay"}), key="fd_stay", use_container_width=True):
+                        fd["choice"] = "STAY"
+                        fd["won"] = fd["user_pick"] == fd["car"]
+                        fd["phase"] = "FINAL"
+                        st.rerun(scope="fragment")
+                with c2:
+                    if st.button(t({"de": "Wechseln", "en": "Switch"}), key="fd_switch", 
+                                use_container_width=True, type="primary"):
+                        fd["choice"] = "SWITCH"
+                        fd["won"] = fd["survivor"] == fd["car"]
+                        fd["phase"] = "FINAL"
+                        st.rerun(scope="fragment")
+            
+            # --- PHASE: FINAL ---
+            elif fd["phase"] == "FINAL":
+                if fd["won"]:
+                    st.success(t({"de": "Gewonnen! Du hast das Auto!", "en": "You won! You got the car!"}))
+                else:
+                    st.error(t({"de": "Verloren. Du hast eine Ziege.", "en": "You lost. You got a goat."}))
+                
+                car_door = fd["car"] + 1
+                st.markdown(f"*{t({'de': f'Das Auto war hinter Tür {car_door}.', 'en': f'The car was behind Door {car_door}.'})}*")
+                
+                if st.button(t({"de": "Nochmal spielen", "en": "Play Again"}), key="fd_reset"):
+                    st.session_state.fd = {
+                        "phase": "PICK",
+                        "car": random.randint(0, N_DOORS - 1),
+                        "user_pick": None,
+                        "eliminated": [],
+                        "survivor": None
+                    }
+                    st.rerun(scope="fragment")
         
-        if st.button(t(content_1_9["monty"]["sim_btn"]), key="monty_sim", use_container_width=True):
-            # Simulation
-            n_sim = 1000
-            
-            # Simple Monte Carlo
-            cars = np.random.randint(0, 3, n_sim)
-            choices = np.random.randint(0, 3, n_sim)
-            
-            wins_stay = np.sum(cars == choices)
-            wins_switch = n_sim - wins_stay
-            
-            st.session_state.monty_res = (wins_stay, wins_switch)
-            
-        if "monty_res" in st.session_state:
-            stay, switch = st.session_state.monty_res
-            
-            # Bar Chart
-            fig_m = go.Figure()
-            fig_m.add_trace(go.Bar(
-                x=[t({"de": "Bleiben (Stay)", "en": "Stay"}), t({"de": "Wechseln (Switch)", "en": "Switch"})],
-                y=[stay, switch],
-                marker_color=["#EF4444", "#10B981"],
-                text=[f"{stay/10:.1f}%", f"{switch/10:.1f}%"],
-                textposition='auto',
-            ))
-            fig_m.update_layout(height=300, margin=dict(t=10, b=10), yaxis_title="Wins (out of 1000)")
-            st.plotly_chart(fig_m, use_container_width=True)
-            
-            if switch > stay:
-                st.success(t({"de": "Beweis: Wechseln verdoppelt die Chance!", "en": "Proof: Switching doubles your chance!"}))
+        fifty_doors_demo()
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+    # =========================================================================
+    # SECTION 3: THE PROOF (Expander)
+    # =========================================================================
+    with st.expander(t(content_1_9['monty']['matrix_title'])):
+        st.markdown(t({
+            "de": """
+| Deine Wahl | Auto ist hinter | Monty öffnet | Wechseln gewinnt? |
+|---|---|---|---|
+| **Tür 1** | Tür 1 | Tür 2/3 | Nein (Ziege) |
+| **Tür 1** | Tür 2 | Tür 3 (Zwang!) | **Ja (Auto)** |
+| **Tür 1** | Tür 3 | Tür 2 (Zwang!) | **Ja (Auto)** |
 
-        # 4. WHY IT WORKS (The Matrix) - Kept as expander for deep dive
-        st.markdown("<br>", unsafe_allow_html=True)
-        with st.expander(t(content_1_9['monty']['matrix_title'])):
-            st.markdown(t({
-                "de": """
-                | Deine Wahl | Auto ist hinter | Monty öffnet | Wechseln gewinnt? |
-                |---|---|---|---|
-                | **Tür 1** | Tür 1 | Tür 2/3 | Nein (Ziege) |
-                | **Tür 1** | Tür 2 | Tür 3 (Zwang!) | **Ja (Auto)** |
-                | **Tür 1** | Tür 3 | Tür 2 (Zwang!) | **Ja (Auto)** |
-                
-                **Die Logik:** Wenn du bleibst, musst du von Anfang an richtig liegen (Chance 1/3). Wenn du wechselst, gewinnst du immer dann, wenn du anfangs *falsch* lagst (Chance 2/3).
-                """,
-                "en": """
-                | Your Pick | Car is behind | Monty opens | Switch wins? |
-                |---|---|---|---|
-                | **Door 1** | Door 1 | Door 2/3 | No (Goat) |
-                | **Door 1** | Door 2 | Door 3 (Forced!) | **Yes (Car)** |
-                | **Door 1** | Door 3 | Door 2 (Forced!) | **Yes (Car)** |
-                
-                **The Logic:** If you stay, you must be right from the start (1/3 chance). If you switch, you win whenever you were *wrong* initially (2/3 chance).
-                """
-            }))
+**Die Logik:** Wenn du bleibst, musst du von Anfang an richtig liegen (Chance 1/3). Wenn du wechselst, gewinnst du immer dann, wenn du anfangs *falsch* lagst (Chance 2/3).
+            """,
+            "en": """
+| Your Pick | Car is behind | Monty opens | Switch wins? |
+|---|---|---|---|
+| **Door 1** | Door 1 | Door 2/3 | No (Goat) |
+| **Door 1** | Door 2 | Door 3 (Forced!) | **Yes (Car)** |
+| **Door 1** | Door 3 | Door 2 (Forced!) | **Yes (Car)** |
+
+**The Logic:** If you stay, you must be right from the start (1/3 chance). If you switch, you win whenever you were *wrong* initially (2/3 chance).
+            """
+        }))
 
     st.markdown("---")
 

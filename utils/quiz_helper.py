@@ -20,8 +20,12 @@ def shuffle_options(options, correct_idx, seed):
 
 def render_tab_progress_css(tab_keys, key_prefix, topic_id=None, subtopic_id=None):
     """
-    Generates CSS to show green indicators on answered tabs.
-    Uses a 4px left accent bar for better visibility (Option C).
+    Returns tab labels with checkmarks for completed tabs (Option A).
+    Also returns minimal CSS to remove any default styling.
+    
+    Returns: (tab_labels, css_string)
+    - tab_labels: List of strings like ["Event A ✓", "Event B ✓", "Event C"]
+    - css_string: Minimal CSS to inject
     """
     answered_tabs = []
     user_progress = st.session_state.get("user_progress", {})
@@ -30,44 +34,36 @@ def render_tab_progress_css(tab_keys, key_prefix, topic_id=None, subtopic_id=Non
     correct_questions = subtopic_data.get("correct_questions", [])
 
     for tab_key in tab_keys:
-        # Check Firestore progress
         question_id = f"{key_prefix}_{tab_key}"
         if question_id in correct_questions:
             answered_tabs.append(tab_key)
     
-    # Check if all tabs are answered
-    all_answered = len(answered_tabs) == len(tab_keys)
+    # Generate tab labels with checkmarks for completed
+    tab_labels = []
+    for tab_key in tab_keys:
+        if tab_key in answered_tabs:
+            tab_labels.append(f"{tab_key} ✓")
+        else:
+            tab_labels.append(tab_key)
     
-    # Generate CSS for left accent bar indicators (Option C - thick left border)
+    # Minimal CSS (remove borders from previous implementation)
     css = """<style>
-    /* Base tab styling */
     button[data-baseweb="tab"] {
-        padding-left: 16px !important;
-        padding-right: 16px !important;
-        border-left: 4px solid transparent !important;
-        transition: border-color 0.2s ease;
+        border-left: none !important;
+        border-bottom: none !important;
     }
+    </style>"""
+    
+    return tab_labels, css
+
+
+def get_tab_labels_with_progress(tab_keys, key_prefix, topic_id=None, subtopic_id=None):
     """
-    
-    if all_answered:
-        # All tabs completed - show green left border on all
-        css += """
-        button[data-baseweb="tab"] {
-            border-left: 4px solid #34C759 !important;
-        }
-        """
-    else:
-        # Only completed tabs get green left border
-        for i, tab_key in enumerate(tab_keys):
-            if tab_key in answered_tabs:
-                css += f"""
-                button[data-baseweb="tab"]:nth-child({i + 1}) {{
-                    border-left: 4px solid #34C759 !important;
-                }}
-                """
-    
-    css += "</style>"
-    return css
+    Convenience function that returns just the tab labels with checkmarks.
+    Use this when you only need labels, not CSS.
+    """
+    labels, _ = render_tab_progress_css(tab_keys, key_prefix, topic_id, subtopic_id)
+    return labels
 
 def render_mcq(
     key_suffix,

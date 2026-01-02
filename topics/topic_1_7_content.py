@@ -164,13 +164,14 @@ def render_subtopic_1_7(model):
     st.header(t(content_1_7["title"]))
 
     # --- THEORY CARDS ---
-    with st.container(border=True):
-        c1, c2 = st.columns(2, gap="medium")
-        with c1:
+    c1, c2 = st.columns(2, gap="medium")
+    with c1:
+        with st.container(border=True):
             st.markdown(f"**{t(content_1_7['theory_cards']['cond']['title'])}**")
             st.caption(t(content_1_7["theory_cards"]["cond"]["def"]))
             st.latex(content_1_7["theory_cards"]["cond"]["latex"])
-        with c2:
+    with c2:
+        with st.container(border=True):
             st.markdown(f"**{t(content_1_7['theory_cards']['indep']['title'])}**")
             st.caption(t(content_1_7["theory_cards"]["indep"]["def"]))
             st.latex(content_1_7["theory_cards"]["indep"]["latex"])
@@ -273,10 +274,15 @@ def render_subtopic_1_7(model):
         # C. The "Live Math" Panel (Right Side) - Simplified
         with col_math:
             st.markdown(f"**{t({'de': 'Live-Notation', 'en': 'Live Notation'})}**")
-            st.latex(fr"P(\text{{Rot}} \mid \text{{Kreis}}) = \frac{{\text{{\color{{#FF4B4B}}{{Treffer}}}}}}{{\text{{\color{{#1E88E5}}{{Universum}}}}}}")
+            # Bilingual labels for formula
+            label_red = t({"de": "Rot", "en": "Red"})
+            label_circle = t({"de": "Kreis", "en": "Circle"})
+            label_hit = t({"de": "Treffer", "en": "Hit"})
+            label_universe = t({"de": "Universum", "en": "Universe"})
+            st.latex(fr"P(\text{{{label_red}}} \mid \text{{{label_circle}}}) = \frac{{\text{{\color{{#FF4B4B}}{{{label_hit}}}}}}}{{\text{{\color{{#1E88E5}}{{{label_universe}}}}}}}")
             
             st.markdown("<br>", unsafe_allow_html=True)
-            st.markdown("**Current Status:**")
+            st.markdown(f"**{t({'de': 'Aktueller Status:', 'en': 'Current Status:'})}**")
             
             # Color coding: Red numerator (target), Blue denominator (universe/condition)
             num_color = "#FF4B4B"  # Always red for target

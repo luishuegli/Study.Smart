@@ -20,26 +20,42 @@
 ### 4.1 No Global CSS
 - Use scoped rendering only.
 
-### 4.2 Equal Height Columns (AUTOMATIC)
-Side-by-side bordered containers now automatically stretch to equal heights. The fix is global via `load_design_system()` in `styles.py` (Section 3c).
+### 4.2 Equal Height Columns (CRITICAL CSS)
+If side-by-side bordered containers have unequal heights, inject this CSS:
 
-**You don't need to do anything special** — just use:
+```python
+st.markdown("""
+<style>
+[data-testid="stHorizontalBlock"] { align-items: stretch !important; }
+[data-testid="column"], [data-testid="stColumn"] {
+    display: flex !important;
+    flex-direction: column !important;
+}
+[data-testid="column"] > div, [data-testid="stColumn"] > div {
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
+}
+div[data-testid="stVerticalBlock"],
+div[data-testid="stVerticalBlockBorderWrapper"] {
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+</style>
+""", unsafe_allow_html=True)
+```
+
+**Required pattern:**
 ```python
 c1, c2 = st.columns(2)
 with c1:
     with st.container(border=True):
-        # Short content
+        # content
 with c2:
     with st.container(border=True):
-        # Longer content will make both boxes same height
-```
-
-**How it works:** The CSS targets `stLayoutWrapper` which by default has `flex-grow: 0` and breaks the height chain. Our fix forces it to grow.
-
-**For formulas of different heights**, use the phantom:
-```python
-from views.styles import LATEX_PHANTOM
-st.latex(formula + LATEX_PHANTOM)  # Reserves space for tall formulas
+        # content
 ```
 
 ### 4.3 LaTeX in HTML Content
@@ -92,27 +108,53 @@ Before considering any topic file complete, verify:
 - **Real-world example** - Concrete application from lectures
 - **Parameter meanings** - Not just symbols, but what they represent
 
-### 6.2 "Frag dich" Decision Guides:
+### 6.2 Theory Section Structure (MANDATORY):
+Every theory section introducing a formula must follow this structure:
+
+1. **Simple Analogy (Amber box)** - A 12-year-old should understand the core idea
+   ```python
+   st.markdown(f"""
+   <div style="background: #fef3c7; border-left: 4px solid #d97706; padding: 12px...">
+   <strong>The Core Idea:</strong> [Simple real-world analogy]
+   </div>
+   """, unsafe_allow_html=True)
+   ```
+
+2. **The Formula** - LaTeX display of the main formula
+
+3. **Variable Decoder (Grey box)** - EVERY symbol explained in plain language
+   - Use format: `$X$ = **Name** — Plain English explanation`
+   - Include concrete questions like "How likely is X BEFORE/AFTER Y?"
+   - Color-code key terms (Prior=Blue, Likelihood=Green, Result=Red)
+
+4. **Key Insight (Grey callout)** - The "aha!" moment or common misconception
+
+**Test:** A 12-year-old should be able to read the theory section and understand:
+- What the formula calculates
+- What each letter means
+- When to use it
+
+### 6.3 "Frag dich" Decision Guides:
 - Use `<strong>` HTML tags, NOT `**markdown**` (renders inside HTML divs)
 - Keep questions actionable and specific
 
-### 6.3 Pro Tips - Contextual Placement:
+### 6.4 Pro Tips - Contextual Placement:
 - **Place Pro Tips INSIDE the relevant section**, not floating at the bottom
 - If a tip relates to a formula, put it right after that formula
 - If it helps with a common mistake, put it in the same container as the trap
 - Only use a standalone Pro Tip section for general exam strategy
 
-### 6.4 Content Depth Standard:
+### 6.5 Content Depth Standard:
 - **No shallow content** - Every section must add genuine value
 - **Derivations > Memorization** - Show the "why" behind formulas
 - **Lecture integration** - Use examples and language from the official course material
 - **Completeness** - Student should not need to consult other sources
 
-### 6.5 HTML in Content Strings:
+### 6.6 HTML in Content Strings:
 - When text will render inside HTML `<div>`, use `<strong>` not `**bold**`
 - Always add `unsafe_allow_html=True` to `st.markdown()` for HTML content
 
-### 6.6 The "Stupid Person Check" (MANDATORY Final Step):
+### 6.7 The "Stupid Person Check" (MANDATORY Final Step):
 **Before marking ANY subtopic complete, ask:**
 
 > "Would the least prepared student in the class be able to understand this topic **completely** from my content alone, without needing to Google anything or ask a friend?"

@@ -137,7 +137,7 @@ def render_subtopic_1_2(model):
     st.caption(t(content_1_2["theory_intro"]))
     st.markdown("---")
     
-    # --- CSS: FORCE EQUAL HEIGHT COLUMNS ---
+    # --- CSS: FORCE EQUAL HEIGHT COLUMNS + COMPACT CARDS ---
     st.markdown("""
     <style>
     /* Force horizontal blocks (rows) to stretch columns to equal height */
@@ -177,6 +177,26 @@ def render_subtopic_1_2(model):
     /* Radio button fix */
     div[role="radiogroup"] {
         width: 100% !important;
+    }
+    
+    /* COMPACT CARDS - reduce padding and margins */
+    div[data-testid="stVerticalBlockBorderWrapper"] {
+        padding: 0.75rem !important;
+    }
+    
+    /* Reduce spacing between elements inside cards */
+    div[data-testid="stVerticalBlockBorderWrapper"] h3 {
+        margin-top: 0 !important;
+        margin-bottom: 0.25rem !important;
+        font-size: 1.3rem !important;
+    }
+    
+    div[data-testid="stVerticalBlockBorderWrapper"] hr {
+        margin: 0.5rem 0 !important;
+    }
+    
+    div[data-testid="stVerticalBlockBorderWrapper"] p {
+        margin-bottom: 0.4rem !important;
     }
     </style>
     """, unsafe_allow_html=True)
@@ -309,10 +329,11 @@ def render_subtopic_1_2(model):
         st.markdown("")
         
         # Apply green indicators for answered tabs (only A, B, C for dice problem)
-        tab_css = render_tab_progress_css(["A", "B", "C"], "1_2", topic_id="1", subtopic_id="1.2")
+        tab_labels, tab_css = render_tab_progress_css(["A", "B", "C"], "1_2", topic_id="1", subtopic_id="1.2")
         st.markdown(tab_css, unsafe_allow_html=True)
         
-        tab_a, tab_b, tab_c = st.tabs(["Event A", "Event B", "Event C"])
+        # Use labels with checkmarks: ["A ✓", "B", "C ✓"] etc.
+        tab_a, tab_b, tab_c = st.tabs([f"Event {tab_labels[0]}", f"Event {tab_labels[1]}", f"Event {tab_labels[2]}"])
         
         def render_exam_workbench(label, q_id, ai_ctx="Topic 1.2: Set operations"):
             q_data = get_question("1.2", q_id)

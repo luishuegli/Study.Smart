@@ -100,13 +100,14 @@ def render_subtopic_1_6(model):
         </style>
     """, unsafe_allow_html=True)
     
-    with st.container(border=True):
-        col1, col2 = st.columns(2, gap="medium")
-        with col1:
+    col1, col2 = st.columns(2, gap="medium")
+    with col1:
+        with st.container(border=True):
             st.markdown(f"**{t(content_1_6['theory']['discrete']['title'])}**")
             st.caption(t(content_1_6["theory"]["discrete"]["text"]))
             st.latex(content_1_6["theory"]["discrete"]["formula"])
-        with col2:
+    with col2:
+        with st.container(border=True):
             st.markdown(f"**{t(content_1_6['theory']['continuous']['title'])}**")
             st.caption(t(content_1_6["theory"]["continuous"]["text"]))
             st.latex(content_1_6["theory"]["continuous"]["formula"])

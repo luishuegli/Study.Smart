@@ -334,8 +334,8 @@ def render_subtopic_1_10(model):
     levels = content_1_10["exam"]["levels"]
     tab_labels = [l["tab"] for l in levels]
     
-    # Progress Indicators for Tabs
-    tab_css = render_tab_progress_css(
+    # Progress Indicators for Tabs (Option A - checkmarks)
+    progress_labels, tab_css = render_tab_progress_css(
         [l["id"] for l in levels], 
         key_prefix="1_10", 
         topic_id="1", 
@@ -343,8 +343,11 @@ def render_subtopic_1_10(model):
     )
     st.markdown(tab_css, unsafe_allow_html=True)
     
-    # Render Tabs
-    tabs = st.tabs(tab_labels)
+    # Combine original tab names with progress checkmarks
+    tab_display_labels = [f"{levels[i]['tab']} {progress_labels[i].replace(levels[i]['id'], '').strip()}" if '✓' in progress_labels[i] else levels[i]['tab'] for i in range(len(levels))]
+    
+    # Render Tabs with checkmarks
+    tabs = st.tabs(tab_display_labels)
     
     for i, tab in enumerate(tabs):
         with tab:

@@ -77,22 +77,46 @@ def render_subtopic_1_8(model):
         </style>
     """, unsafe_allow_html=True)
     
-    with st.container(border=True):
-        # ROW 1: Titles and Descriptions
-        c1, c2 = st.columns(2, gap="medium")
-        with c1:
+    c1, c2 = st.columns(2, gap="medium")
+    with c1:
+        with st.container(border=True):
             st.markdown(f"**{t(content_1_8['theory_cards']['partition']['title'])}**")
             st.caption(t(content_1_8["theory_cards"]["partition"]["text"]))
-        with c2:
+            st.latex(content_1_8["theory_cards"]["partition"]["formula"])
+            
+            # Variable Decoder (Stupid Person Rule)
+            st.markdown(f"""
+<div style="background: #f4f4f5; padding: 10px 12px; border-radius: 6px; font-size: 0.85em; color: #3f3f46; margin-top: 8px;">
+<strong>{t({"de": "Die Variablen:", "en": "The Variables:"})}</strong><br>
+• <strong>$B_i$</strong> = {t({"de": "Jeder einzelne Zulieferer (Alpha, Beta, Gamma...)", "en": "Each individual supplier (Alpha, Beta, Gamma...)"})} <br>
+• <strong>$P(B_i)$</strong> = {t({"de": "Marktanteil dieses Zulieferers", "en": "Market share of that supplier"})} <br>
+• <strong>$\\sum = 1$</strong> = {t({"de": "Alle Anteile zusammen = 100%", "en": "All shares together = 100%"})}
+</div>
+""", unsafe_allow_html=True)
+    with c2:
+        with st.container(border=True):
             st.markdown(f"**{t(content_1_8['theory_cards']['total_prob']['title'])}**")
             st.caption(t(content_1_8["theory_cards"]["total_prob"]["text"]))
-            
-        # ROW 2: Formulas (Split-Row Grid Protocol - Rule 2.7)
-        f1, f2 = st.columns(2, gap="medium")
-        with f1:
-            st.latex(content_1_8["theory_cards"]["partition"]["formula"])
-        with f2:
             st.latex(content_1_8["theory_cards"]["total_prob"]["formula"])
+            
+            # Variable Decoder (Stupid Person Rule)
+            st.markdown(f"""
+<div style="background: #f4f4f5; padding: 10px 12px; border-radius: 6px; font-size: 0.85em; color: #3f3f46; margin-top: 8px;">
+<strong>{t({"de": "Die Variablen:", "en": "The Variables:"})}</strong><br>
+• <strong>$P(A)$</strong> = {t({"de": "Gesamte Fehlerquote der Fabrik", "en": "Total defect rate of the factory"})} <br>
+• <strong>$P(A|B_i)$</strong> = {t({"de": "Fehlerquote VON diesem Zulieferer", "en": "Defect rate FROM this supplier"})} <br>
+• <strong>$P(B_i)$</strong> = {t({"de": "Wie viel liefert er? (Gewicht)", "en": "How much does he supply? (Weight)"})}
+</div>
+""", unsafe_allow_html=True)
+    
+    # THE INTUITION (Pro Tip)
+    st.markdown(f"""
+<div style="background: #fef3c7; border-left: 4px solid #d97706; padding: 12px 16px; border-radius: 8px; color: #92400e; margin-top: 12px;">
+<strong>{t({"de": "Die Intuition:", "en": "The Intuition:"})}</strong> 
+{t({"de": "Stell dir vor, du mischt Farben. Jeder Zulieferer hat eine 'Farbe' (Fehlerquote). Die Gesamtfarbe hängt davon ab, WIE VIEL von jeder Farbe du hinzufügst (Marktanteil).", 
+    "en": "Imagine mixing paints. Each supplier has a 'color' (defect rate). The final color depends on HOW MUCH of each color you add (market share)."})}
+</div>
+""", unsafe_allow_html=True)
             
     st.markdown("<br>", unsafe_allow_html=True)
 

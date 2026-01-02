@@ -4,7 +4,7 @@ from utils.localization import t
 from utils.quiz_helper import render_mcq
 from data.exam_questions import get_question
 from data.exam_questions import get_question
-from views.styles import render_icon
+from views.styles import render_icon, inject_equal_height_css
 
 # --- CONTENT DICTIONARY (BILINGUAL) ---
 content_2_4 = {
@@ -63,6 +63,7 @@ This is the essence of **Combinations**: The order of selection doesn't matter."
 # --- MAIN RENDERING FUNCTION ---
 def render_subtopic_2_4(model):
     """Renders Section 2.4: Combinations (Selection Without Order)"""
+    inject_equal_height_css()
     
     # --- HEADER ---
     st.header(t(content_2_4["title"]))

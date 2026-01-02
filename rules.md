@@ -20,24 +20,26 @@
 ### 4.1 No Global CSS
 - Use scoped rendering only.
 
-### 4.2 Equal Height Columns (MANDATORY)
-Every render function that uses `st.columns` with bordered containers MUST inject this CSS at the TOP of the function:
+### 4.2 Equal Height Columns (AUTOMATIC)
+Side-by-side bordered containers now automatically stretch to equal heights. The fix is global via `load_design_system()` in `styles.py` (Section 3c).
 
+**You don't need to do anything special** — just use:
 ```python
-st.markdown("""
-<style>
-[data-testid="stHorizontalBlock"] { align-items: stretch !important; }
-[data-testid="column"], [data-testid="stColumn"] {
-    display: flex !important;
-    flex-direction: column !important;
-}
-[data-testid="column"] > div, [data-testid="stColumn"] > div {
-    flex: 1 !important;
-    display: flex !important;
-    flex-direction: column !important;
-}
-</style>
-""", unsafe_allow_html=True)
+c1, c2 = st.columns(2)
+with c1:
+    with st.container(border=True):
+        # Short content
+with c2:
+    with st.container(border=True):
+        # Longer content will make both boxes same height
+```
+
+**How it works:** The CSS targets `stLayoutWrapper` which by default has `flex-grow: 0` and breaks the height chain. Our fix forces it to grow.
+
+**For formulas of different heights**, use the phantom:
+```python
+from views.styles import LATEX_PHANTOM
+st.latex(formula + LATEX_PHANTOM)  # Reserves space for tall formulas
 ```
 
 ### 4.3 LaTeX in HTML Content

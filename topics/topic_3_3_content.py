@@ -2,7 +2,7 @@ import streamlit as st
 import plotly.graph_objects as go
 import numpy as np
 from math import erf, sqrt
-from views.styles import render_icon
+from views.styles import render_icon, inject_equal_height_css
 from utils.localization import t
 from utils.quiz_helper import render_mcq
 from data.exam_questions import get_question
@@ -33,10 +33,9 @@ content_3_3 = {
             "en": "For continuous variables, we don't speak of probability at a point, but of **density** $f(x)$. Probability only exists by integrating over a width."
         },
         "prop_title": {"de": "Eigenschaften", "en": "Properties"},
-        "prop_text": {
-            "de": "1. Gesamte Fläche = 1 (100%)\n2. $P(X=x) = 0$ (Einzelpunkte sind unmöglich)",
-            "en": "1. Total Area = 1 (100%)\n2. $P(X=x) = 0$ (Single points are impossible)"
-        }
+        "prop_p1": {"de": "1. Gesamte Fläche = 1 (100%)", "en": "1. Total Area = 1 (100%)"},
+        "prop_p2": {"de": "2. Einzelpunkte sind unmöglich:", "en": "2. Single points are impossible:"},
+        "prop_formula": r"P(X = x) = 0"
     },
     "mission": {
         "title": {"de": "Mission: Der Fabrik-Tycoon", "en": "Mission: The Factory Tycoon"},
@@ -65,12 +64,11 @@ content_3_3 = {
 def render_subtopic_3_3(model):
     """3.3 Continuous Random Variables - The Factory Tycoon"""
 
-    # --- CSS INJECTION ---
+    inject_equal_height_css()
+    
+    # Slider Colors for Factory
     st.markdown("""
     <style>
-    [data-testid="stHorizontalBlock"] { align-items: stretch !important; }
-    
-    /* Slider Colors for Factory */
     .stSlider:has([aria-label*="Mean"]) div[data-baseweb="slider"] > div:first-child > div:first-child { background-color: #34C759 !important; }
     .stSlider:has([aria-label*="Mean"]) div[role="slider"] { border: 2px solid #34C759 !important; }
     </style>
@@ -120,7 +118,9 @@ def render_subtopic_3_3(model):
     with c2:
         with st.container(border=True):
             st.markdown(f"**{t(content_3_3['theory']['prop_title'])}**")
-            st.markdown(t(content_3_3["theory"]["prop_text"]))
+            st.markdown(t(content_3_3["theory"]["prop_p1"]))
+            st.markdown(t(content_3_3["theory"]["prop_p2"]))
+            st.latex(content_3_3["theory"]["prop_formula"])
             st.latex(r"\int_{-\infty}^{\infty} f(x) \, dx = 1")
 
     st.markdown("<br>", unsafe_allow_html=True)

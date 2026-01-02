@@ -1,5 +1,5 @@
 import streamlit as st
-from views.styles import render_icon
+from views.styles import render_icon, inject_equal_height_css
 from utils.localization import t
 from utils.quiz_helper import render_mcq, render_tab_progress_css
 
@@ -117,6 +117,7 @@ content_1_10 = {
 # --- HELPER: RENDER BENTO CARD ---
 def render_bento_card(title, icon_name, color, items):
     """Renders a visual card for a specific knowledge category."""
+    inject_equal_height_css()
     # We use a native container with a border as the base
     with st.container(border=True):
         # Header with Icon

@@ -1,6 +1,7 @@
 # Topic 4.1: Discrete Uniform Distribution - Gleichförmige Verteilung
 # ULTRATHINK ENHANCED VERSION
 import streamlit as st
+from views.styles import inject_equal_height_css
 from utils.localization import t
 from utils.quiz_helper import render_mcq
 from data.exam_questions import get_question
@@ -211,6 +212,7 @@ $V(X) = \\frac{6^2 - 1}{12} = \\frac{35}{12} \\approx 2.92$
 
 def render_subtopic_4_1(model):
     """4.1 Gleichförmige Verteilung - ULTRATHINK Enhanced"""
+    inject_equal_height_css()
     
     # --- CSS INJECTION FOR EQUAL HEIGHT (AGGRESSIVE) ---
     st.markdown("""

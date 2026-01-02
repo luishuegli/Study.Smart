@@ -1,5 +1,5 @@
 import streamlit as st
-from views.styles import render_icon
+from views.styles import render_icon, inject_equal_height_css
 from utils.localization import t
 from utils.quiz_helper import render_mcq
 from data.exam_questions import get_question
@@ -47,6 +47,7 @@ def render_cassette(text, color, is_empty=False, slot_label="", options_left=0):
     Renders a CSS-only Cassette Tape / Slot representation.
     Strictly No Emojis. Uses CSS borders and shadows for premium feel.
     """
+    inject_equal_height_css()
     if is_empty:
         # Ghost State (The Receptacle)
         label = t({"de": f"Wähle 1 aus {options_left}", "en": f"Pick 1 of {options_left}"})

@@ -1,5 +1,6 @@
 # Topic 2.6: Summary — Elementary Combinatorics
 import streamlit as st
+from views.styles import inject_equal_height_css
 from utils.localization import t
 from utils.quiz_helper import render_mcq
 from data.exam_questions import get_question
@@ -56,7 +57,8 @@ content_2_6 = {
             },
             {
                 "title": {"de": "Symmetrie-Trick", "en": "Symmetry Trick"},
-                "tip": {"de": "$\\binom{n}{k} = \\binom{n}{n-k}$. 3 aus 10 wählen = 7 ausschließen!", "en": "$\\binom{n}{k} = \\binom{n}{n-k}$. Choose 3 from 10 = Exclude 7!"}
+                "tip_text": {"de": "3 aus 10 wählen = 7 ausschließen!", "en": "Choose 3 from 10 = Exclude 7!"},
+                "formula": r"\binom{n}{k} = \binom{n}{n-k}"
             },
             {
                 "title": {"de": "Der Divisions-Hack", "en": "The Division Hack"},
@@ -70,18 +72,24 @@ content_2_6 = {
         "items": [
             {
                 "trap": {"de": "P vs C verwechseln", "en": "Confusing P vs C"},
-                "wrong": {"de": "C(n,k) bei Podium", "en": "C(n,k) for podium"},
-                "right": {"de": "P(n,k) bei Podium", "en": "P(n,k) for podium"}
+                "wrong_formula": r"C(n,k)",
+                "wrong_context": {"de": "bei Podium", "en": "for podium"},
+                "right_formula": r"P(n,k)",
+                "right_context": {"de": "bei Podium", "en": "for podium"}
             },
             {
                 "trap": {"de": "Zurücklegen vergessen", "en": "Forgetting replacement"},
-                "wrong": {"de": "P(10,4) für PIN", "en": "P(10,4) for PIN"},
-                "right": {"de": "10⁴ für PIN", "en": "10⁴ for PIN"}
+                "wrong_formula": r"P(10,4)",
+                "wrong_context": {"de": "für PIN", "en": "for PIN"},
+                "right_formula": r"10^4",
+                "right_context": {"de": "für PIN", "en": "for PIN"}
             },
             {
                 "trap": {"de": "Gruppen doppelt zählen", "en": "Double counting groups"},
-                "wrong": {"de": "n·(n-1) für Paare", "en": "n·(n-1) for pairs"},
-                "right": {"de": "n·(n-1)/2 für Paare", "en": "n·(n-1)/2 for pairs"}
+                "wrong_formula": r"n \cdot (n-1)",
+                "wrong_context": {"de": "für Paare", "en": "for pairs"},
+                "right_formula": r"\frac{n \cdot (n-1)}{2}",
+                "right_context": {"de": "für Paare", "en": "for pairs"}
             }
         ]
     },
@@ -97,13 +105,49 @@ content_2_6 = {
 
 def render_subtopic_2_6(model):
     """2.6 Summary — Complete combinatorics review"""
+    inject_equal_height_css()
     
-    # --- CSS ---
+    # --- CSS: Equal height (AGGRESSIVE) ---
     st.markdown("""
     <style>
-    [data-testid="stHorizontalBlock"] { align-items: stretch !important; }
-    [data-testid="column"] { display: flex !important; flex-direction: column !important; }
-    [data-testid="column"] > div { flex: 1 !important; }
+    /* Force horizontal blocks to stretch children */
+    [data-testid="stHorizontalBlock"] {
+        align-items: stretch !important;
+        display: flex !important;
+    }
+    
+    /* Make columns flex containers that fill height */
+    [data-testid="column"], [data-testid="stColumn"] {
+        display: flex !important;
+        flex-direction: column !important;
+        flex: 1 !important;
+    }
+    
+    /* All direct children should expand */
+    [data-testid="column"] > div,
+    [data-testid="stColumn"] > div {
+        flex: 1 !important; 
+        display: flex !important;
+        flex-direction: column !important;
+        height: 100% !important;
+        min-height: 100% !important;
+    }
+    
+    /* Target the border wrapper specifically */
+    [data-testid="column"] [data-testid="stVerticalBlockBorderWrapper"],
+    [data-testid="stColumn"] [data-testid="stVerticalBlockBorderWrapper"] {
+        flex: 1 !important;
+        height: 100% !important;
+        min-height: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    
+    /* And its child */
+    [data-testid="stVerticalBlockBorderWrapper"] > div {
+        flex: 1 !important;
+        height: 100% !important;
+    }
     </style>
     """, unsafe_allow_html=True)
     
@@ -191,58 +235,63 @@ def render_cheat_sheet():
 
 
 def render_pro_tricks():
-    """Render pro tips section"""
+    """Render pro tips section - using native Streamlit for equal height"""
     pt = content_2_6["pro_tricks"]
     st.markdown(f"### {t(pt['header'])}")
     st.caption(t(pt['subtitle']))
     
-    with st.container(border=True):
-        tricks = pt["tricks"]
-        
-        c1, c2 = st.columns(2, gap="medium")
-        for col, trick in zip([c1, c2], tricks[:2]):
-            with col:
-                st.markdown(f"""
-                <div style="background: #f4f4f5; border-radius: 8px; padding: 12px; margin-bottom: 8px;">
-                    <div style="font-weight: 600; color: #3f3f46; margin-bottom: 6px;">{t(trick['title'])}</div>
-                    <div style="font-size: 0.9em; color: #71717a;">{t(trick['tip'])}</div>
-                </div>
-                """, unsafe_allow_html=True)
-        
-        c3, c4 = st.columns(2, gap="medium")
-        for col, trick in zip([c3, c4], tricks[2:]):
-            with col:
-                st.markdown(f"""
-                <div style="background: #f4f4f5; border-radius: 8px; padding: 12px; margin-bottom: 8px;">
-                    <div style="font-weight: 600; color: #3f3f46; margin-bottom: 6px;">{t(trick['title'])}</div>
-                    <div style="font-size: 0.9em; color: #71717a;">{t(trick['tip'])}</div>
-                </div>
-                """, unsafe_allow_html=True)
+    tricks = pt["tricks"]
+    
+    # Row 1
+    c1, c2 = st.columns(2, gap="medium")
+    for col, trick in zip([c1, c2], tricks[:2]):
+        with col:
+            with st.container(border=True):
+                st.markdown(f"**{t(trick['title'])}**")
+                st.markdown(t(trick['tip']), unsafe_allow_html=True)
+    
+    # Row 2
+    c3, c4 = st.columns(2, gap="medium")
+    for col, trick in zip([c3, c4], tricks[2:]):
+        with col:
+            with st.container(border=True):
+                st.markdown(f"**{t(trick['title'])}**")
+                # Handle formula separately if present
+                if "formula" in trick:
+                    st.latex(trick["formula"])
+                    st.markdown(t(trick.get("tip_text", trick.get("tip", {}))), unsafe_allow_html=True)
+                else:
+                    st.markdown(t(trick['tip']), unsafe_allow_html=True)
 
 
 def render_exam_traps():
-    """Render common exam traps"""
+    """Render common exam traps with proper LaTeX"""
     traps = content_2_6["traps"]
     st.markdown(f"### {t(traps['header'])}")
     
     with st.container(border=True):
-        # Table header
-        st.markdown(f"""
-        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; font-weight: 600; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #e5e5ea;">
-            <div>{t({'de': 'Falle', 'en': 'Trap'})}</div>
-            <div style="color: #dc2626;">{t({'de': 'Falsch', 'en': 'Wrong'})}</div>
-            <div style="color: #16a34a;">{t({'de': 'Richtig', 'en': 'Right'})}</div>
-        </div>
-        """, unsafe_allow_html=True)
+        # Header row
+        col_trap, col_wrong, col_right = st.columns(3)
+        with col_trap:
+            st.markdown(f"**{t({'de': 'Falle', 'en': 'Trap'})}**")
+        with col_wrong:
+            st.markdown(f"<span style='color:#dc2626; font-weight:600;'>{t({'de': 'Falsch', 'en': 'Wrong'})}</span>", unsafe_allow_html=True)
+        with col_right:
+            st.markdown(f"<span style='color:#16a34a; font-weight:600;'>{t({'de': 'Richtig', 'en': 'Right'})}</span>", unsafe_allow_html=True)
         
+        st.markdown("---")
+        
+        # Each trap row
         for item in traps["items"]:
-            st.markdown(f"""
-            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; padding: 8px 0; border-bottom: 1px solid #f4f4f5;">
-                <div style="font-weight: 500;">{t(item['trap'])}</div>
-                <div style="color: #dc2626; font-family: monospace;">{t(item['wrong'])}</div>
-                <div style="color: #16a34a; font-family: monospace;">{t(item['right'])}</div>
-            </div>
-            """, unsafe_allow_html=True)
+            col_trap, col_wrong, col_right = st.columns(3)
+            with col_trap:
+                st.markdown(f"**{t(item['trap'])}**")
+            with col_wrong:
+                st.latex(f"\\color{{red}}{{{item['wrong_formula']}}}")
+                st.caption(t(item['wrong_context']))
+            with col_right:
+                st.latex(f"\\color{{green}}{{{item['right_formula']}}}")
+                st.caption(t(item['right_context']))
 
 
 def render_counting_compass():

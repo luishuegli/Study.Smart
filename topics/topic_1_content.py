@@ -6,7 +6,7 @@ Brilliant.org-style learning experience with TechNoir theme
 import streamlit as st
 import plotly.graph_objects as go
 import numpy as np
-from views.styles import render_icon
+from views.styles import render_icon, inject_equal_height_css
 from utils.localization import t
 from utils.ai_helper import render_ai_tutor
 from utils.quiz_helper import render_mcq
@@ -39,6 +39,7 @@ def get_dice_svg(number, size=48):
 
 def render_subtopic_1_1(model):
     """1.1 Ereignisse, Ereignisraum und Ereignismenge"""
+    inject_equal_height_css()
     # Header
     st.header(t({"de": "1.1 Ereignisse, Ereignisraum und Ereignismenge", "en": "1.1 Events, Sample Space and Sets"}))
     

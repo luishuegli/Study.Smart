@@ -1,6 +1,7 @@
 # Topic 4.5: Rectangular Distribution - Rechteckverteilung (stetig)
 # ULTRATHINK ENHANCED VERSION - "Stupid Person Check" Compliant
 import streamlit as st
+from views.styles import inject_equal_height_css
 from utils.localization import t
 from utils.quiz_helper import render_mcq
 from data.exam_questions import get_question
@@ -86,10 +87,7 @@ content_4_5 = {
     "interval": {
         "header": {"de": "Intervallwahrscheinlichkeit (Prüfungs-Essential!)", "en": "Interval Probability (Exam Essential!)"},
         "formula": r"P(c \leq X \leq d) = \frac{d-c}{b-a}",
-        "derivation": {
-            "de": "Herleitung: P(c ≤ X ≤ d) = F(d) - F(c) = (d-a)/(b-a) - (c-a)/(b-a) = <strong>(d-c)/(b-a)</strong>",
-            "en": "Derivation: P(c ≤ X ≤ d) = F(d) - F(c) = (d-a)/(b-a) - (c-a)/(b-a) = <strong>(d-c)/(b-a)</strong>"
-        },
+        "derivation": r"P(c \leq X \leq d) = F(d) - F(c) = \frac{d-a}{b-a} - \frac{c-a}{b-a} = \frac{d-c}{b-a}",
         "intuition_de": "Die Wahrscheinlichkeit ist einfach das <strong>Längenverhältnis</strong>: Wie gross ist das Teilintervall [c,d] im Vergleich zum Gesamtintervall [a,b]?",
         "intuition_en": "The probability is simply the <strong>length ratio</strong>: How large is the subinterval [c,d] compared to the total interval [a,b]?"
     },
@@ -124,20 +122,20 @@ content_4_5 = {
             {
                 "label_de": "Modell",
                 "label_en": "Model",
-                "content_de": "X = Wartezeit in Minuten. X ~ R(0, 10), also a = 0, b = 10.",
-                "content_en": "X = waiting time in minutes. X ~ R(0, 10), so a = 0, b = 10."
+                "latex": r"X = \text{Wartezeit in Minuten}, \quad X \sim R(0, 10), \quad a = 0, b = 10",
+                "is_latex": True
             },
             {
                 "label_de": "(a) E[X]",
                 "label_en": "(a) E[X]",
-                "content_de": "E[X] = (a + b)/2 = (0 + 10)/2 = <strong>5 Minuten</strong>",
-                "content_en": "E[X] = (a + b)/2 = (0 + 10)/2 = <strong>5 minutes</strong>"
+                "latex": r"E[X] = \frac{a + b}{2} = \frac{0 + 10}{2} = \textbf{5 Minuten}",
+                "is_latex": True
             },
             {
                 "label_de": "(b) P(X < 3)",
                 "label_en": "(b) P(X < 3)",
-                "content_de": "P(X < 3) = (3 - 0)/(10 - 0) = 3/10 = <strong>30%</strong>",
-                "content_en": "P(X < 3) = (3 - 0)/(10 - 0) = 3/10 = <strong>30%</strong>"
+                "latex": r"P(X < 3) = \frac{3 - 0}{10 - 0} = \frac{3}{10} = \textbf{30\%}",
+                "is_latex": True
             }
         ],
         "check": {
@@ -153,15 +151,17 @@ content_4_5 = {
             {
                 "label": {"de": "Falle", "en": "Trap"},
                 "title": {"de": "Dichte ≠ Wahrscheinlichkeit!", "en": "Density ≠ Probability!"},
+                "formula": r"P(X = 5) = 0 \neq \frac{1}{10}",
                 "content": {
-                    "de": "Bei stetigen Verteilungen: P(X = 5) = 0, nicht 1/10! Du brauchst immer ein <strong>Intervall</strong>.<br><em>Merke:</em> P(X = exakter Wert) = 0",
-                    "en": "For continuous distributions: P(X = 5) = 0, not 1/10! You always need an <strong>interval</strong>.<br><em>Remember:</em> P(X = exact value) = 0"
+                    "de": "Du brauchst immer ein <strong>Intervall</strong>.",
+                    "en": "You always need an <strong>interval</strong>."
                 },
+                "note": {"de": "Merke: P(X = exakter Wert) = 0", "en": "Remember: P(X = exact value) = 0"},
                 "type": "warning"
             },
             {
                 "label": {"de": "Formel", "en": "Formula"},
-                "title": {"de": "E[X] = (a+b)/2", "en": "E[X] = (a+b)/2"},
+                "title_formula": r"E[X] = \frac{a+b}{2}",
                 "content": {
                     "de": "Der Erwartungswert ist der <strong>Mittelpunkt</strong> des Intervalls [a, b].",
                     "en": "The expected value is the <strong>midpoint</strong> of interval [a, b]."
@@ -170,7 +170,7 @@ content_4_5 = {
             },
             {
                 "label": {"de": "Shortcut", "en": "Shortcut"},
-                "title": {"de": "P(c ≤ X ≤ d) = (d-c)/(b-a)", "en": "P(c ≤ X ≤ d) = (d-c)/(b-a)"},
+                "title_formula": r"P(c \leq X \leq d) = \frac{d-c}{b-a}",
                 "content": {
                     "de": "Einfach das <strong>Längenverhältnis</strong>! Intervall-Länge geteilt durch Gesamtlänge.",
                     "en": "Just the <strong>length ratio</strong>! Interval length divided by total length."
@@ -184,6 +184,7 @@ content_4_5 = {
 
 def render_subtopic_4_5(model):
     """4.5 Rechteckverteilung - ULTRATHINK Enhanced with Stupid Person Check"""
+    inject_equal_height_css()
     
     # --- CSS INJECTION FOR EQUAL HEIGHT (AGGRESSIVE) ---
     st.markdown("""
@@ -310,13 +311,13 @@ def render_subtopic_4_5(model):
         with st.container(border=True):
             st.markdown(f"**{t(content_4_5['formula']['pdf']['header'])}**")
             st.latex(content_4_5["formula"]["pdf"]["formula"])
-            st.markdown(t({"de": content_4_5["formula"]["pdf"]["intuition_de"], "en": content_4_5["formula"]["pdf"]["intuition_en"]}))
+            st.markdown(t({"de": content_4_5["formula"]["pdf"]["intuition_de"], "en": content_4_5["formula"]["pdf"]["intuition_en"]}), unsafe_allow_html=True)
     
     with col_cdf:
         with st.container(border=True):
             st.markdown(f"**{t(content_4_5['formula']['cdf']['header'])}**")
             st.latex(content_4_5["formula"]["cdf"]["formula"])
-            st.markdown(t({"de": content_4_5["formula"]["cdf"]["intuition_de"], "en": content_4_5["formula"]["cdf"]["intuition_en"]}))
+            st.markdown(t({"de": content_4_5["formula"]["cdf"]["intuition_de"], "en": content_4_5["formula"]["cdf"]["intuition_en"]}), unsafe_allow_html=True)
     
     st.markdown("<br>", unsafe_allow_html=True)
     
@@ -324,7 +325,8 @@ def render_subtopic_4_5(model):
     st.markdown(f"### {t(content_4_5['interval']['header'])}")
     with st.container(border=True):
         st.latex(content_4_5["interval"]["formula"])
-        st.markdown(t(content_4_5["interval"]["derivation"]), unsafe_allow_html=True)
+        st.caption(t({"de": "Herleitung:", "en": "Derivation:"}))
+        st.latex(content_4_5["interval"]["derivation"])
         intuition_text = t({"de": content_4_5["interval"]["intuition_de"], "en": content_4_5["interval"]["intuition_en"]})
         st.markdown(f"""
 <div style="background-color: rgba(0, 122, 255, 0.08); border-radius: 8px; padding: 12px; border-left: 4px solid #007AFF; color: #1c1c1e;">
@@ -343,14 +345,14 @@ def render_subtopic_4_5(model):
             st.markdown(f"**{t({'de': content_4_5['moments']['expectation']['title_de'], 'en': content_4_5['moments']['expectation']['title_en']})}**")
             st.latex(content_4_5["moments"]["expectation"]["formula"])
             st.markdown("---")
-            st.markdown(t({"de": content_4_5["moments"]["expectation"]["interpretation_de"], "en": content_4_5["moments"]["expectation"]["interpretation_en"]}))
+            st.markdown(t({"de": content_4_5["moments"]["expectation"]["interpretation_de"], "en": content_4_5["moments"]["expectation"]["interpretation_en"]}), unsafe_allow_html=True)
     
     with col_v:
         with st.container(border=True):
             st.markdown(f"**{t({'de': content_4_5['moments']['variance']['title_de'], 'en': content_4_5['moments']['variance']['title_en']})}**")
             st.latex(content_4_5["moments"]["variance"]["formula"])
             st.markdown("---")
-            st.markdown(t({"de": content_4_5["moments"]["variance"]["interpretation_de"], "en": content_4_5["moments"]["variance"]["interpretation_en"]}))
+            st.markdown(t({"de": content_4_5["moments"]["variance"]["interpretation_de"], "en": content_4_5["moments"]["variance"]["interpretation_en"]}), unsafe_allow_html=True)
     
     st.markdown("<br><br>", unsafe_allow_html=True)
     
@@ -373,19 +375,23 @@ def render_subtopic_4_5(model):
         
         for step in content_4_5["example_worked"]["steps"]:
             label = t({"de": step["label_de"], "en": step["label_en"]})
-            content_text = t({"de": step["content_de"], "en": step["content_en"]})
+            is_latex = step.get("is_latex", False)
             
             bg, color = step_colors.get(label, ("#f4f4f5", "#3f3f46"))
             
             col_label, col_content = st.columns([1, 4])
             with col_label:
                 st.markdown(f"""
-                <div style="background:{bg}; padding:8px 12px; border-radius:6px; color:{color}; font-weight:600; text-align:center;">
+                <div style="background:{bg}; padding:8px 12px; border-radius:6px; color:{color}; font-weight:600; text-align:center; margin-top:8px;">
                     {label}
                 </div>
                 """, unsafe_allow_html=True)
             with col_content:
-                st.markdown(content_text, unsafe_allow_html=True)
+                if is_latex:
+                    st.latex(step["latex"])
+                else:
+                    content_text = t({"de": step.get("content_de", ""), "en": step.get("content_en", "")})
+                    st.markdown(content_text, unsafe_allow_html=True)
         
         st.markdown("---")
         check_text = t(content_4_5['example_worked']['check'])
@@ -396,16 +402,28 @@ def render_subtopic_4_5(model):
     
     st.markdown("<br>", unsafe_allow_html=True)
     
-    # --- EXAM ESSENTIALS (Simple Grey) ---
+    # --- EXAM ESSENTIALS (With LaTeX) ---
     st.markdown(f"### {t(content_4_5['exam_essentials']['header'])}")
     with st.container(border=True):
         for item in content_4_5["exam_essentials"]["items"]:
-            st.markdown(f"""
-<div style="padding: 10px 0; border-bottom: 1px solid #e4e4e7;">
-    <div style="font-weight: 600; color: #1c1c1e; margin-bottom: 4px;">{t(item['title'])}</div>
-    <div style="color: #52525b; font-size: 0.95em; line-height: 1.5;">{t(item['content'])}</div>
-</div>
-            """, unsafe_allow_html=True)
+            st.markdown("---")
+            
+            # Title - either text or LaTeX formula
+            if "title_formula" in item:
+                st.latex(item["title_formula"])
+            elif "title" in item:
+                st.markdown(f"**{t(item['title'])}**")
+            
+            # Main formula (if present)
+            if "formula" in item:
+                st.latex(item["formula"])
+            
+            # Content text
+            st.markdown(t(item['content']), unsafe_allow_html=True)
+            
+            # Note (if present)
+            if "note" in item:
+                st.caption(t(item["note"]))
     
     st.markdown("<br><br>", unsafe_allow_html=True)
     

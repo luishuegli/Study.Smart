@@ -1,7 +1,7 @@
 import streamlit as st
 import plotly.graph_objects as go
 import numpy as np
-from views.styles import render_icon
+from views.styles import render_icon, inject_equal_height_css
 from utils.localization import t
 from utils.quiz_helper import render_mcq
 from utils.progress_tracker import track_question_answer
@@ -51,6 +51,7 @@ content_1_8 = {
 
 def render_subtopic_1_8(model):
     """1.8 Total Probability - The Factory & The Bridge"""
+    inject_equal_height_css()
     
     # Global CSS for LaTeX visibility
     st.markdown("""

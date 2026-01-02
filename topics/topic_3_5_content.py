@@ -2,6 +2,7 @@ import streamlit as st
 import numpy as np
 import plotly.graph_objects as go
 from utils.localization import t
+from views.styles import inject_equal_height_css
 from utils.quiz_helper import render_mcq
 from data.exam_questions import get_question
 from utils.progress_tracker import track_question_answer, update_local_progress
@@ -47,14 +48,7 @@ content_3_5 = {
 def render_subtopic_3_5(model):
     """3.5 Variance - The Sharpshooter Design"""
     
-    # --- CSS ---
-    st.markdown("""
-    <style>
-    [data-testid="stHorizontalBlock"] { align-items: stretch !important; }
-    [data-testid="column"] { display: flex !important; flex-direction: column !important; }
-    [data-testid="column"] > div { flex: 1 !important; }
-    </style>
-    """, unsafe_allow_html=True)
+    inject_equal_height_css()
 
     st.header(t(content_3_5["title"]))
     st.markdown(t(content_3_5["subtitle"]))

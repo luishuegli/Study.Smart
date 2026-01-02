@@ -5,6 +5,7 @@ import plotly.graph_objects as go
 from math import sqrt, erf
 from utils.localization import t
 from utils.quiz_helper import render_mcq
+from views.styles import inject_equal_height_css
 from data.exam_questions import get_question
 from utils.progress_tracker import track_question_answer, update_local_progress
 
@@ -50,13 +51,11 @@ content_3_6 = {
 def render_subtopic_3_6(model):
     """3.6 Standardization - The Universal Translator"""
     
-    # --- CSS INJECTION ---
+    inject_equal_height_css()
+    
+    # Slider styling
     st.markdown("""
     <style>
-    [data-testid="stHorizontalBlock"] { align-items: stretch !important; }
-    [data-testid="column"] { display: flex !important; flex-direction: column !important; }
-    [data-testid="column"] > div { flex: 1 !important; }
-    
     /* Blue slider for Z */
     .stSlider:has([aria-label*="Z"]) div[data-baseweb="slider"] > div:first-child > div:first-child { background-color: #007AFF !important; }
     .stSlider:has([aria-label*="Z"]) div[role="slider"] { background-color: #FFFFFF !important; border: 2px solid #007AFF !important; }
@@ -172,8 +171,8 @@ def render_z_table_explorer():
             fig = create_z_distribution_plot(z_val, prob)
             st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False})
         
-        # Live formula
-        st.latex(rf"\Phi({z_val:.2f}) = P(Z \leq {z_val:.2f}) = \mathbf{{{prob:.4f}}}")
+        # Live formula with semantic colors (Blue = Z, Purple = Probability)
+        st.latex(rf"\Phi({{\color{{blue}}{z_val:.2f}}}) = P(Z \leq {{\color{{blue}}{z_val:.2f}}}) = {{\color{{purple}}\mathbf{{{prob:.4f}}}}}")
 
 
 def render_grade_translator_mission():

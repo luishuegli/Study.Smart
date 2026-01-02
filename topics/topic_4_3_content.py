@@ -1,6 +1,7 @@
 # Topic 4.3: Binomial Distribution - Binomialverteilung
 # ULTRATHINK ENHANCED VERSION
 import streamlit as st
+from views.styles import inject_equal_height_css
 from utils.localization import t
 from utils.quiz_helper import render_mcq
 from data.exam_questions import get_question
@@ -287,6 +288,7 @@ content_4_3 = {
 
 def render_subtopic_4_3(model):
     """4.3 Binomialverteilung - ULTRATHINK Enhanced"""
+    inject_equal_height_css()
     
     # --- CSS INJECTION FOR EQUAL HEIGHT (AGGRESSIVE) ---
     st.markdown("""

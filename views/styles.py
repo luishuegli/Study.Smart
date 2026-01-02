@@ -127,6 +127,41 @@ def load_design_system():
              gap: 16px;
         }
         
+        /* --- 3c. EQUAL HEIGHT COLUMNS (Force side-by-side containers to match height) --- */
+        /* Turn columns into stretch flex containers */
+        [data-testid="stHorizontalBlock"] {
+            align-items: stretch !important;
+        }
+        [data-testid="column"], [data-testid="stColumn"] {
+            display: flex !important;
+            flex-direction: column !important;
+        }
+        /* Make inner wrappers grow to fill space */
+        [data-testid="column"] > div, [data-testid="stColumn"] > div {
+            flex: 1 !important;
+        }
+        /* CRITICAL: stVerticalBlock inside columns must also flex */
+        [data-testid="column"] [data-testid="stVerticalBlock"],
+        [data-testid="stColumn"] [data-testid="stVerticalBlock"] {
+            display: flex !important;
+            flex-direction: column !important;
+            flex: 1 !important;
+        }
+        /* CRITICAL FIX: stLayoutWrapper breaks the chain with flex-grow: 0 by default */
+        [data-testid="stLayoutWrapper"] {
+            flex: 1 !important;
+            display: flex !important;
+            flex-direction: column !important;
+        }
+        /* Force border containers to take full height */
+        [data-testid="stVerticalBlockBorderWrapper"] {
+            height: 100% !important;
+            flex: 1 !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: space-between !important;
+        }
+        
         /* --- 4. BUTTONS (The 'Ghost' Fix) --- */
         .stButton > button {
             width: 100%;
@@ -381,3 +416,34 @@ def icon(name, size=24, color=None):
             icon_svg = icon_svg.replace('stroke="currentColor"', f'stroke="{color}"')
     
     return icon_svg
+
+def inject_equal_height_css():
+    """
+    Inject CSS to force side-by-side containers to have equal height.
+    Call this once at the start of any render function that uses st.columns with bordered containers.
+    """
+    st.markdown("""
+    <style>
+    /* Turn the column into a flex container that stretches its children */
+    [data-testid="column"], [data-testid="stColumn"] {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    /* Make the inner wrapper grow to fill available space */
+    [data-testid="column"] > div, [data-testid="stColumn"] > div {
+        flex: 1;
+    }
+    
+    /* Force the actual border container to take up 100% height */
+    [data-testid="stVerticalBlockBorderWrapper"] {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+# LaTeX phantom for equalizing formula heights
+LATEX_PHANTOM = r"\vphantom{\int_{-\infty}^{x} \frac{A^2}{B^2}}"

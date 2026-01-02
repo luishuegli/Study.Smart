@@ -1,6 +1,6 @@
 import streamlit as st
 import itertools
-from views.styles import render_icon
+from views.styles import render_icon, inject_equal_height_css
 from utils.localization import t
 from utils.quiz_helper import render_mcq
 from data.exam_questions import get_question
@@ -40,6 +40,7 @@ content_2_1 = {
 # --- VISUAL HELPERS ---
 def render_avatar(item, style_type="circle"):
     """Renders a neutral visual item (Ball, Medal, or Letter)."""
+    inject_equal_height_css()
     # Design change: Neutral elements, color reserved for variables
     bg = "#f1f5f9" # slate-100
     text_color = "#334155" # slate-700

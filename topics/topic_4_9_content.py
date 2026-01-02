@@ -1,5 +1,6 @@
 # Topic 4.9: Summary — Stochastic Models & Distributions
 import streamlit as st
+from views.styles import inject_equal_height_css
 from utils.localization import t
 from utils.quiz_helper import render_mcq
 from data.exam_questions import get_question
@@ -178,6 +179,7 @@ content_4_9 = {
 
 def render_subtopic_4_9(model):
     """4.9 Summary — Complete distributions review"""
+    inject_equal_height_css()
     
     # --- CSS ---
     st.markdown("""

@@ -2,7 +2,7 @@ import streamlit as st
 import plotly.graph_objects as go
 import numpy as np
 import pandas as pd
-from views.styles import render_icon
+from views.styles import render_icon, inject_equal_height_css
 from utils.localization import t
 from utils.localization import t
 from utils.quiz_helper import render_mcq
@@ -117,6 +117,7 @@ content_1_9 = {
 
 def render_subtopic_1_9(model):
     """1.9 Bayes Theorem - Medical Detective & Monty Hall & Bayesian Search"""
+    inject_equal_height_css()
     
     # Global CSS for LaTeX visibility
     st.markdown("""

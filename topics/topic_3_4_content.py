@@ -1,7 +1,7 @@
 import streamlit as st
 import numpy as np
 import plotly.graph_objects as go
-from views.styles import render_icon
+from views.styles import render_icon, inject_equal_height_css
 from utils.localization import t
 from utils.quiz_helper import render_mcq
 from data.exam_questions import get_question
@@ -24,7 +24,8 @@ content_3_4 = {
         "lin_title": {"de": "Der Shortcut", "en": "The Shortcut"},
         "lin_text": {"de": "Die Linearitätseigenschaft ist extrem nützlich in Prüfungen!", "en": "The linearity property is extremely useful in exams!"},
         "lin_formula": r"E[aX + b] = a \cdot E[X] + b",
-        "lin_formula2": r"E[X + Y] = E[X] + E[Y] \quad \text{(immer!)}"
+        "lin_formula2": r"E[X + Y] = E[X] + E[Y]",
+        "lin_formula2_note": {"de": "(immer!)", "en": "(always!)"}
     },
     "interactive": {
         "header": {"de": "Der Balance-Simulator", "en": "The Balance Simulator"},
@@ -45,14 +46,7 @@ content_3_4 = {
 def render_subtopic_3_4(model):
     """3.4 Expected Values - Premium Implementation"""
     
-    # --- CSS ---
-    st.markdown("""
-    <style>
-    [data-testid="stHorizontalBlock"] { align-items: stretch !important; }
-    [data-testid="column"] { display: flex !important; flex-direction: column !important; }
-    [data-testid="column"] > div { flex: 1 !important; }
-    </style>
-    """, unsafe_allow_html=True)
+    inject_equal_height_css()
 
     st.header(t(content_3_4["title"]))
     st.markdown(t({"de": "Wo liegt der Schwerpunkt?", "en": "Where is the balance point?"}))
@@ -83,6 +77,7 @@ def render_subtopic_3_4(model):
             st.latex(content_3_4['theory']['lin_formula'])
             st.markdown("<br>", unsafe_allow_html=True)
             st.latex(content_3_4['theory']['lin_formula2'])
+            st.caption(t(content_3_4['theory']['lin_formula2_note']))
 
     st.markdown("<br><br>", unsafe_allow_html=True)
 

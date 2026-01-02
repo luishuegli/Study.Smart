@@ -2,7 +2,7 @@ import streamlit as st
 import plotly.graph_objects as go
 import numpy as np
 from utils.localization import t
-from views.styles import render_icon
+from views.styles import render_icon, inject_equal_height_css
 from utils.localization import t
 from utils.ai_helper import render_ai_tutor
 from utils.quiz_helper import render_mcq

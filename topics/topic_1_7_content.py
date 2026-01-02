@@ -1,7 +1,7 @@
 import streamlit as st
 import plotly.graph_objects as go
 import math
-from views.styles import render_icon
+from views.styles import render_icon, inject_equal_height_css
 from utils.localization import t
 from utils.quiz_helper import render_mcq
 from data.exam_questions import get_question
@@ -146,6 +146,7 @@ content_1_7 = {
 
 def render_subtopic_1_7(model):
     """1.7 Narrative & Notation Bridge"""
+    inject_equal_height_css()
     
     # FIX: Global CSS to prevent LaTeX cutoff in this topic
     st.markdown("""

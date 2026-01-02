@@ -1,5 +1,6 @@
 # Topic 1.11: Summary — Basics of Probability
 import streamlit as st
+from views.styles import inject_equal_height_css
 from utils.localization import t
 from utils.quiz_helper import render_mcq
 from data.exam_questions import get_question
@@ -132,6 +133,7 @@ content_1_11 = {
 
 def render_subtopic_1_11(model):
     """1.11 Summary — Complete probability review"""
+    inject_equal_height_css()
     
     # --- CSS ---
     st.markdown("""

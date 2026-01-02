@@ -1,7 +1,7 @@
 import streamlit as st
 import numpy as np
 import plotly.graph_objects as go
-from views.styles import render_icon
+from views.styles import render_icon, inject_equal_height_css
 from utils.localization import t
 from utils.quiz_helper import render_mcq
 from data.exam_questions import get_question
@@ -47,14 +47,7 @@ content_3_2 = {
 def render_subtopic_3_2(model):
     """3.2 Discrete Random Variables - High-Fidelity Dashboard"""
     
-    # --- CSS INJECTION ---
-    st.markdown("""
-    <style>
-    [data-testid="stHorizontalBlock"] { align-items: stretch !important; }
-    [data-testid="column"] { display: flex !important; flex-direction: column !important; }
-    [data-testid="column"] > div { flex: 1 !important; }
-    </style>
-    """, unsafe_allow_html=True)
+    inject_equal_height_css()
 
     st.header(t(content_3_2["title"]))
     st.markdown(t({"de": "Wie modellieren wir Ereignisse, die man zählen kann?", "en": "How do we model events that can be counted?"}))
@@ -81,12 +74,10 @@ def render_subtopic_3_2(model):
     with c2:
         with st.container(border=True):
             st.markdown(f"**{t(content_3_2['theory']['prop_title'])}**")
-            st.markdown(f"""
-            <div style="font-size: 14px; color: #333; line-height: 2.0; margin-top: 8px;">
-            1. {t(content_3_2['theory']['props']['p1'])}<br>
-            2. {t(content_3_2['theory']['props']['p2'])}
-            </div>
-            """, unsafe_allow_html=True)
+            st.markdown(f"1. {t({'de': 'Niemals negativ:', 'en': 'Never negative:'})}")
+            st.latex(r"p_k \geq 0")
+            st.markdown(f"2. {t({'de': 'Alles muss da sein:', 'en': 'All accounted for:'})}")
+            st.latex(r"\sum p_k = 1")
             st.markdown("<br>", unsafe_allow_html=True)
             st.markdown(f"""
             <div style="text-align: center;">

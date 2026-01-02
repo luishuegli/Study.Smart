@@ -2,7 +2,7 @@ import streamlit as st
 import numpy as np
 import math
 import plotly.graph_objects as go
-from views.styles import render_icon
+from views.styles import render_icon, inject_equal_height_css
 from utils.localization import t
 from utils.quiz_helper import render_mcq
 from data.exam_questions import get_question
@@ -43,14 +43,7 @@ content_3_1 = {
 def render_subtopic_3_1(model):
     """3.1 Distribution Function (CDF) - High-Fidelity Dashboard"""
     
-    # --- STEP 0: THE ULTRA-ROBUST EQUAL HEIGHT PROTOCOL ---
-    st.markdown("""
-    <style>
-    [data-testid="stHorizontalBlock"] { align-items: stretch !important; }
-    [data-testid="column"] { display: flex !important; flex-direction: column !important; }
-    [data-testid="column"] > div { flex: 1 !important; display: flex !important; flex-direction: column !important; }
-    </style>
-    """, unsafe_allow_html=True)
+    inject_equal_height_css()
 
     st.header(t(content_3_1["title"]))
     st.markdown(t({"de": "Wie sammeln wir Wahrscheinlichkeiten?", "en": "How do we accumulate probabilities?"}))

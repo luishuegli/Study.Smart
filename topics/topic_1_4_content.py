@@ -1,7 +1,7 @@
 import streamlit as st
 import plotly.graph_objects as go
 from utils.localization import t
-from views.styles import render_icon
+from views.styles import render_icon, inject_equal_height_css
 from utils.ai_helper import render_ai_tutor
 from utils.quiz_helper import render_mcq
 from data.exam_questions import get_question
@@ -182,14 +182,7 @@ def get_scenario_donut(scenario_key, user_values):
     return fig
 
 def render_subtopic_1_4(model):
-    # --- CSS: Equal height columns ---
-    st.markdown("""
-    <style>
-    [data-testid="stHorizontalBlock"] { align-items: stretch !important; }
-    [data-testid="column"] { display: flex !important; flex-direction: column !important; }
-    [data-testid="column"] > div { flex: 1 !important; }
-    </style>
-    """, unsafe_allow_html=True)
+    inject_equal_height_css()
     
     # --- HEADER ---
     st.header(t(content_1_4["title"]))

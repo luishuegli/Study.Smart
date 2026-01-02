@@ -1,6 +1,7 @@
 # Topic 4.2: Bernoulli Distribution - Bernoulli-Verteilung
 # ULTRATHINK ENHANCED VERSION - Fixed HTML rendering + enriched content
 import streamlit as st
+from views.styles import inject_equal_height_css
 from utils.localization import t
 from utils.quiz_helper import render_mcq
 from data.exam_questions import get_question
@@ -240,6 +241,7 @@ $p = 1 - \\left(\\frac{5}{6}\\right)^3 = 1 - \\frac{125}{216} = \\frac{91}{216} 
 
 def render_subtopic_4_2(model):
     """4.2 Bernoulli-Verteilung - ULTRATHINK Enhanced with fixed HTML"""
+    inject_equal_height_css()
     
     # --- CSS INJECTION FOR EQUAL HEIGHT (AGGRESSIVE) ---
     st.markdown("""

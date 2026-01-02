@@ -1,6 +1,7 @@
 # Topic 4.4: Poisson Distribution - Poisson-Verteilung
 # ULTRATHINK ENHANCED VERSION
 import streamlit as st
+from views.styles import inject_equal_height_css
 import re
 from utils.localization import t
 from utils.quiz_helper import render_mcq
@@ -230,6 +231,7 @@ content_4_4 = {
 
 def render_subtopic_4_4(model):
     """4.4 Poisson-Verteilung - ULTRATHINK Enhanced"""
+    inject_equal_height_css()
     
     # --- CSS INJECTION FOR EQUAL HEIGHT (AGGRESSIVE) ---
     st.markdown("""

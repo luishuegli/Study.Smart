@@ -3,7 +3,7 @@ from math import factorial
 from utils.localization import t
 from utils.quiz_helper import render_mcq
 from data.exam_questions import get_question
-from views.styles import render_icon
+from views.styles import render_icon, inject_equal_height_css
 
 # --- CONTENT DICTIONARY (BILINGUAL) ---
 content_2_5 = {
@@ -87,6 +87,7 @@ This is **WITH REPLACEMENT**."""
 # --- MAIN RENDERING FUNCTION ---
 def render_subtopic_2_5(model):
     """Renders Section 2.5: Variations (With Replacement)"""
+    inject_equal_height_css()
     
     # --- HEADER ---
     st.header(t(content_2_5["title"]))

@@ -1,6 +1,6 @@
 import streamlit as st
 import re
-from views.styles import render_icon
+from views.styles import render_icon, inject_equal_height_css
 from utils.localization import t
 from utils.quiz_helper import render_mcq
 from data.exam_questions import get_question
@@ -34,6 +34,7 @@ def render_clothing_stack(shirt_name, pant_name, colors):
     Renders a premium stacked visual of Shirt + Pants using pure CSS (No Emojis).
     Design: Flat design with subtle border boxing for depth.
     """
+    inject_equal_height_css()
     s_col = colors.get(shirt_name, "#ccc")
     p_col = colors.get(pant_name, "#666")
     

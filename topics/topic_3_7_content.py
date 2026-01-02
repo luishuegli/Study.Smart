@@ -3,6 +3,7 @@ import streamlit as st
 import numpy as np
 import plotly.graph_objects as go
 from scipy.special import comb
+from views.styles import inject_equal_height_css
 from utils.localization import t
 from utils.quiz_helper import render_mcq
 from data.exam_questions import get_question
@@ -123,15 +124,8 @@ content_3_7 = {
 def render_subtopic_3_7(model):
     """3.7 Summary — Complete chapter review"""
     
-    # --- CSS ---
-    st.markdown("""
-    <style>
-    [data-testid="stHorizontalBlock"] { align-items: stretch !important; }
-    [data-testid="column"] { display: flex !important; flex-direction: column !important; }
-    [data-testid="column"] > div { flex: 1 !important; }
-    h3 { margin-top: 0 !important; }
-    </style>
-    """, unsafe_allow_html=True)
+    inject_equal_height_css()
+    st.markdown("<style>h3 { margin-top: 0 !important; }</style>", unsafe_allow_html=True)
     
     st.header(t(content_3_7["title"]))
     st.caption(t(content_3_7["subtitle"]))
@@ -188,28 +182,55 @@ def render_subtopic_3_7(model):
 
 
 def render_cheat_sheet():
-    """Render the formula quick reference cards"""
+    """Render cards that ALWAYS match the height of the tallest card."""
     cs = content_3_7["cheat_sheet"]
     st.markdown(f"### {t(cs['header'])}")
     
     cards = cs["cards"]
     
-    # Row 1: 3 cards
+    # 1. LATEX PHANTOM - Forces every formula to be at least as tall as Fraction + Integral
+    latex_phantom = r"\vphantom{\int_{-\infty}^{x} \frac{A^2}{B^2}}"
+    
+    # 2. CSS STRETCH - Forces border containers to fill 100% of column height
+    st.markdown("""
+    <style>
+    /* Turn the column into a flex container that stretches its children */
+    [data-testid="column"], [data-testid="stColumn"] {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    /* Make the inner wrapper grow to fill available space */
+    [data-testid="column"] > div, [data-testid="stColumn"] > div {
+        flex: 1;
+    }
+    
+    /* Force the actual border container to take up 100% height */
+    [data-testid="stVerticalBlockBorderWrapper"] {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+    # Row 1
     c1, c2, c3 = st.columns(3, gap="small")
     for col, card in zip([c1, c2, c3], cards[:3]):
         with col:
             with st.container(border=True):
                 st.markdown(f"**{t(card['title'])}**")
-                st.latex(card['formula'])
+                st.latex(card['formula'] + latex_phantom)
                 st.caption(t(card['use']))
     
-    # Row 2: 3 cards
+    # Row 2
     c4, c5, c6 = st.columns(3, gap="small")
     for col, card in zip([c4, c5, c6], cards[3:]):
         with col:
             with st.container(border=True):
                 st.markdown(f"**{t(card['title'])}**")
-                st.latex(card['formula'])
+                st.latex(card['formula'] + latex_phantom)
                 st.caption(t(card['use']))
 
 

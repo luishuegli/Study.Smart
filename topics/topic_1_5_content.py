@@ -1,7 +1,7 @@
 import streamlit as st
 import plotly.graph_objects as go
 import numpy as np
-from views.styles import render_icon
+from views.styles import render_icon, inject_equal_height_css
 from utils.localization import t
 from utils.ai_helper import render_ai_tutor
 from utils.quiz_helper import render_mcq
@@ -52,6 +52,7 @@ content_1_5 = {
 
 def render_subtopic_1_5(model):
     """1.5 Wichtige Regeln (Additionssatz) - High-Fidelity Dashboard"""
+    inject_equal_height_css()
     
     # --- STEP 0: THE ULTRA-ROBUST EQUAL HEIGHT PROTOCOL (Ported from 1.2) ---
     st.markdown("""

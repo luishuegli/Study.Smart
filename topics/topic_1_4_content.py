@@ -20,8 +20,8 @@ content_1_4 = {
             "desc": {"de": "Eine Wahrscheinlichkeit ist nie kleiner als 0.", "en": "A probability is never less than 0."},
             "latex": r"P(A) \ge 0",
             "example": {
-                "de": r"$\textbf{Beispiel: Würfel werfen}$" + "\n" + r"- $P(\text{Sechs}) = \frac{1}{6} \approx 0.167 \quad \checkmark$" + "\n" + r"- $P(\text{Unmöglich}) = 0 \quad \checkmark$" + "\n" + r"- $P(\text{Fehler}) = -0.2 \quad \text{false}$",
-                "en": r"$\textbf{Example: Rolling a die}$" + "\n" + r"- $P(\text{Six}) = \frac{1}{6} \approx 0.167 \quad \checkmark$" + "\n" + r"- $P(\text{Impossible}) = 0 \quad \checkmark$" + "\n" + r"- $P(\text{Error}) = -0.2 \quad \text{false}$"
+                "de": r"$P(\text{Sechs}) = \frac{1}{6} \checkmark$" + "\n" + r"$P(\text{Error}) = -0.2$ false",
+                "en": r"$P(\text{Six}) = \frac{1}{6} \checkmark$" + "\n" + r"$P(\text{Error}) = -0.2$ false"
             }
         },
         "2": {
@@ -29,30 +29,30 @@ content_1_4 = {
             "desc": {"de": "Die Wahrscheinlichkeit des gesamten Ereignisraums ist 100%.", "en": "The probability of the entire sample space is 100%."},
             "latex": r"P(S) = 1",
             "example": {
-                "de": r"$\textbf{Beispiel: Münzwurf}$" + "\n" + r"- $P(\text{Kopf}) + P(\text{Zahl}) = 1$" + "\n" + r"- $\text{Bei fairer Münze: } 0.5 + 0.5 = 1 \quad \checkmark$",
-                "en": r"$\textbf{Example: Coin flip}$" + "\n" + r"- $P(\text{Heads}) + P(\text{Tails}) = 1$" + "\n" + r"- $\text{Fair coin: } 0.5 + 0.5 = 1 \quad \checkmark$"
+                "de": r"$P(\text{Kopf}) + P(\text{Zahl}) = 1$ $\checkmark$",
+                "en": r"$P(\text{Heads}) + P(\text{Tails}) = 1$ $\checkmark$"
             }
         },
         "3": {
             "title": {"de": "3. Additivität", "en": "3. Additivity"},
-            "desc": {"de": "Für disjunkte (getrennte) Ereignisse addieren sich die Wahrscheinlichkeiten.", "en": "For disjoint (separate) events, probabilities add up."},
+            "desc": {"de": "Für disjunkte Ereignisse addieren sich die Wahrscheinlichkeiten.", "en": "For disjoint events, probabilities add up."},
             "latex": r"P(A \cup B) = P(A) + P(B)",
             "example": {
-                "de": r"$\textbf{Beispiel: Würfel}$" + "\n" + r"- $A = \{1,2\}$" + "\n" + r"- $B = \{5,6\} \quad \text{(disjunkt)}$" + "\n" + r"- $P(A \cup B) = \frac{2}{6} + \frac{2}{6} = \frac{4}{6} \quad \checkmark$",
-                "en": r"$\textbf{Example: Die roll}$" + "\n" + r"- $A = \{1,2\}$" + "\n" + r"- $B = \{5,6\} \quad \text{(disjoint)}$" + "\n" + r"- $P(A \cup B) = \frac{2}{6} + \frac{2}{6} = \frac{4}{6} \quad \checkmark$"
+                "de": r"$A = \{1,2\}, B = \{5,6\}$" + "\n" + r"$P(A \cup B) = \frac{4}{6}$ $\checkmark$",
+                "en": r"$A = \{1,2\}, B = \{5,6\}$" + "\n" + r"$P(A \cup B) = \frac{4}{6}$ $\checkmark$"
             }
         }
     },
     "interactive": {
-        "header": {"de": "Axiom-Labor: Vervollständige den Raum", "en": "Axiom Lab: Complete the Space"},
-        "desc": {"de": "Diese Modelle sind unvollständig. Finde die fehlende Wahrscheinlichkeit, um Axiom 2 ($P(S)=1$) zu erfüllen.", "en": "These models are incomplete. Find the missing probability to satisfy Axiom 2 ($P(S)=1$)."},
+        "header": {"de": "Axiom-Labor", "en": "Axiom Lab"},
+        "desc": {"de": "Finde die fehlende Wahrscheinlichkeit, um Axiom 2 zu erfüllen.", "en": "Find the missing probability to satisfy Axiom 2."},
         "success_msg": {"de": "Perfekt! Der Ereignisraum ist normiert.", "en": "Perfect! The sample space is normalized."},
         "error_overflow": {"de": "Zu hoch! Axiom 2 verletzt.", "en": "Too high! Axiom 2 violated."},
         "error_gap": {"de": "Lücke! Axiom 2 nicht erfüllt.", "en": "Gap! Axiom 2 not satisfied."}
     },
     "scenarios": {
         "market": {
-            "mode": "normalization", # Axiom 2
+            "mode": "normalization",
             "name": {"de": "Marktanteile (Lücke)", "en": "Market Shares (Gap)"},
             "icon": "pie-chart",
             "desc": {"de": "Der Bericht ist unvollständig. Finde den Restwert.", "en": "The report is incomplete. Find the residual value."},
@@ -66,7 +66,7 @@ content_1_4 = {
             "initial": 0.0
         },
         "merger": {
-            "mode": "additivity", # Axiom 3
+            "mode": "additivity",
             "name": {"de": "Die Fusion (Additivität)", "en": "The Merger (Additivity)"},
             "icon": "git-merge",
             "desc": {"de": "Company A (0.15) und B (0.20) fusionieren. Wie groß ist die neue Firma?", "en": "Company A (0.15) and B (0.20) merge. How big is the new entity?"},
@@ -76,11 +76,11 @@ content_1_4 = {
             "targets": [
                 {"label": {"de": "New Giant (A+B)", "en": "New Giant (A+B)"}, "color": "#AF52DE"}
             ],
-            "correct_val": 0.35, # 0.15 + 0.20
+            "correct_val": 0.35,
             "initial": 0.10
         },
         "glitch": {
-            "mode": "negativity", # Axiom 1
+            "mode": "negativity",
             "name": {"de": "Daten-Fehler (Nicht-Negativität)", "en": "Data Glitch (Non-Negativity)"},
             "icon": "alert-triangle",
             "desc": {"de": "Ein Algorithmus hat einen negativen Wert berechnet (-0.15). Korrigiere das.", "en": "An algorithm calculated a negative value (-0.15). Correct this."},
@@ -97,32 +97,27 @@ content_1_4 = {
 }
 
 def get_scenario_donut(scenario_key, user_values):
-    """Generate the Plotly donut chart for the scenario solver.
-    """
+    """Generate the Plotly donut chart for the scenario solver."""
     scenario = content_1_4["scenarios"][scenario_key]
     mode = scenario.get("mode", "normalization")
     
-    # Calculate fixed sum
     fixed_sum = sum(item["value"] for item in scenario["fixed"])
     user_sum = sum(user_values)
     total_prob = fixed_sum + user_sum
     
-    # Build data - start with fixed slices
     labels = [t(item["label"]) for item in scenario["fixed"]]
     values = [item["value"] for item in scenario["fixed"]]
     colors = [item.get("color", "#007AFF") for item in scenario["fixed"]]
     patterns = [""] * len(scenario["fixed"])
     
-    # Add user slices
     for idx, target in enumerate(scenario["targets"]):
         val = user_values[idx]
         labels.append(t(target["label"]))
         
-        # Handle Negative Values (Visual Hack)
         if val < 0:
-            values.append(abs(val)) # Plot absolute size
+            values.append(abs(val))
             colors.append(target["color"]) 
-            patterns.append("/") # Stripe pattern for error
+            patterns.append("/")
         else:
             values.append(val)
             colors.append(target["color"])
@@ -138,13 +133,12 @@ def get_scenario_donut(scenario_key, user_values):
             line=dict(color='#FFFFFF', width=2)
         ),
         textinfo='label+percent',
-        textposition='outside', # Move labels outside the donut
-        textfont=dict(family="Arial Black, sans-serif", size=14, color="black"),
+        textposition='outside',
+        textfont=dict(family="Arial Black, sans-serif", size=12, color="black"),
         hoverinfo='label+value',
         sort=False
     )])
     
-    # HUD LOGIC BY MODE
     center_text = ""
     center_color = "black"
     
@@ -157,40 +151,30 @@ def get_scenario_donut(scenario_key, user_values):
             center_color = "#FF3B30"
             
     elif mode == "additivity":
-        # Target is specific sum (A+B)
-        # We assume the user is manipulating the target slices (New Giant)
-        # Current logic: total_prob includes the "Fixed" background.
-        # We want to show the SUM of the target parts? Or Total?
-        # Let's show the specific Sum (P(A U B))?
-        # Actually user manipulated "New Giant".
-        # If correct, show Valid.
         correct_val = scenario.get("correct_val", 0.0)
-        # Check if user value (user_sum) matches correct_val (ignoring fixed background)
-        # Wait, for "merger", fixed is 0.65. Correct output is 0.35.
         if abs(user_sum - correct_val) < 0.001:
-             center_text = f"<b>P(A∪B)<br>{user_sum:.2f}</b>"
-             center_color = "#34C759"
+            center_text = f"<b>P(A∪B)<br>{user_sum:.2f}</b>"
+            center_color = "#34C759"
         else:
-             center_text = f"<b>P(A∪B)<br>{user_sum:.2f}</b>"
-             center_color = "#AF52DE" # Purple
+            center_text = f"<b>P(A∪B)<br>{user_sum:.2f}</b>"
+            center_color = "#AF52DE"
              
     elif mode == "negativity":
-        # Show the error term
         center_text = f"<b>Error<br>{user_sum:.2f}</b>"
         if user_sum < 0:
-             center_color = "#FF3B30"
+            center_color = "#FF3B30"
         elif user_sum == 0:
-             center_text = "<b>VALID<br>0.00</b>"
-             center_color = "#34C759"
+            center_text = "<b>VALID<br>0.00</b>"
+            center_color = "#34C759"
     
     fig.update_layout(
         annotations=[dict(
             text=center_text,
-            x=0.5, y=0.5, font_size=18, font_color=center_color, showarrow=False
+            x=0.5, y=0.5, font_size=16, font_color=center_color, showarrow=False
         )],
         showlegend=False,
-        margin=dict(l=80, r=80, t=60, b=60), # Increased margins for outside labels
-        height=350,
+        margin=dict(l=60, r=60, t=40, b=40),
+        height=300,
         paper_bgcolor='rgba(0,0,0,0)',
         plot_bgcolor='rgba(0,0,0,0)'
     )
@@ -198,45 +182,47 @@ def get_scenario_donut(scenario_key, user_values):
     return fig
 
 def render_subtopic_1_4(model):
+    # --- CSS: Equal height columns ---
+    st.markdown("""
+    <style>
+    [data-testid="stHorizontalBlock"] { align-items: stretch !important; }
+    [data-testid="column"] { display: flex !important; flex-direction: column !important; }
+    [data-testid="column"] > div { flex: 1 !important; }
+    </style>
+    """, unsafe_allow_html=True)
+    
     # --- HEADER ---
     st.header(t(content_1_4["title"]))
     st.markdown("---")
 
-    # --- UNIFIED CAPSULE ---
+    # --- THEORY SECTION ---
+    st.markdown(f"### {t(content_1_4['theory_header'])}")
+    st.caption(t(content_1_4["intro"]))
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+    # === ROW 1: THREE AXIOM CARDS SIDE-BY-SIDE ===
+    c1, c2, c3 = st.columns(3, gap="small")
+    
+    axiom_cols = [c1, c2, c3]
+    for idx, axiom_num in enumerate(["1", "2", "3"]):
+        axiom = content_1_4["axioms"][axiom_num]
+        with axiom_cols[idx]:
+            with st.container(border=True):
+                st.markdown(f"**{t(axiom['title'])}**")
+                st.caption(t(axiom['desc']))
+                st.latex(axiom['latex'])
+                st.markdown("")
+                st.markdown(t(axiom['example']), unsafe_allow_html=True)
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+    # === ROW 2: INTERACTIVE LAB (Controls Left, Chart Right) ===
+    st.markdown(f"### {t(content_1_4['interactive']['header'])}")
+    
     with st.container(border=True):
+        col_ctrl, col_vis = st.columns([1, 1.5], gap="large")
         
-        # 1. Full Width Intro
-        st.markdown(f"### {t(content_1_4['theory_header'])}")
-        st.markdown(t(content_1_4["intro"]))
-        st.markdown("<br>", unsafe_allow_html=True)
-
-        # 2. Columns (Left: Axiom Cards, Right: Scenario Solver)
-        col_theory, col_vis = st.columns([1, 1.2], gap="large")
-        
-        # --- LEFT: THE 3 AXIOM CARDS (STACKED) ---
-        with col_theory:
-            for idx, axiom_num in enumerate(["1", "2", "3"]):
-                axiom = content_1_4["axioms"][axiom_num]
-                
-                with st.container(border=True):
-                    st.markdown(f"**{t(axiom['title'])}**")
-                    st.caption(t(axiom['desc']))
-                    st.latex(axiom['latex'])
-                    
-                    # Add example
-                    st.markdown("")
-                    st.markdown(t(axiom['example']), unsafe_allow_html=True)
-
-        # --- RIGHT: SCENARIO SOLVER ---
-        with col_vis:
-            # Force alignment
-            st.markdown("""
-                <style>
-                h3 { margin-top: 0 !important; padding-top: 0 !important; }
-                </style>
-            """, unsafe_allow_html=True)
-            
-            st.markdown(f"### {t(content_1_4['interactive']['header'])}")
+        with col_ctrl:
             st.caption(t(content_1_4["interactive"]["desc"]))
             
             # Scenario Selector
@@ -257,15 +243,13 @@ def render_subtopic_1_4(model):
             st.markdown("**Given:**")
             fixed_sum = 0
             for item in scenario["fixed"]:
-                st.markdown(f"- {t(item['label'])}: **{item['value']:.2f}**")
+                st.markdown(f"- {t(item['label'])}: {item['value']:.2f}")
                 fixed_sum += item["value"]
             
             st.markdown("")
             
-            # Multiple Sliders for each target
+            # Sliders for each target
             user_values = []
-            
-            # Dynamic range for sliders
             min_val = scenario.get("min_val", 0.0)
             
             for target in scenario["targets"]:
@@ -280,44 +264,41 @@ def render_subtopic_1_4(model):
                 )
                 user_values.append(user_val)
             
-            # LOGIC ENGINE
+            # Logic Engine & Feedback
             user_total = sum(user_values)
             
             if mode == "normalization":
                 total_prob = fixed_sum + user_total
                 gap = 1.0 - total_prob
                 if abs(total_prob - 1.0) < 0.001:
-                    st.success(f"{t(content_1_4['interactive']['success_msg'])} (Axiom 2)")
+                    st.success(t(content_1_4['interactive']['success_msg']))
                 elif total_prob > 1.0:
                     st.error(t(content_1_4["interactive"]["error_overflow"]))
                 else:
-                    st.warning(f"{t(content_1_4['interactive']['error_gap'])} ({gap:.2%} missing)")
+                    st.warning(f"{t(content_1_4['interactive']['error_gap'])} ({gap:.0%} missing)")
                     
             elif mode == "additivity":
                 correct_val = scenario.get("correct_val", 0.0)
                 if abs(user_total - correct_val) < 0.001:
-                    st.success(f"Correct $P(A \\cup B) = P(A) + P(B)$ (Axiom 3). New Size: {user_total:.2f}")
+                    st.success(f"Correct! $P(A \\cup B) = {user_total:.2f}$")
                 elif user_total < correct_val:
-                    st.warning("Too small! $P(A \\cup B)$ must be the sum of the merging companies.")
+                    st.warning("Too small!")
                 else:
-                    st.error("Too high! Probabilities only add up, they don't multiply/expand magically.")
+                    st.error("Too high!")
                     
             elif mode == "negativity":
                 if user_total == 0.0:
-                    st.success("Correct. Probabilities cannot be negative (Axiom 1).")
+                    st.success("Correct. Probabilities cannot be negative.")
                 elif user_total < 0:
-                    st.error(f"Invalid! Found negative probability: {user_total:.2f}. Axiom 1 violated.")
+                    st.error(f"Invalid! Negative probability: {user_total:.2f}")
                 else:
                     st.info("Set the error term to 0.")
-
-            st.markdown("<br>", unsafe_allow_html=True) 
-            
+        
+        with col_vis:
             # The Donut Chart
             fig = get_scenario_donut(scenario_key, user_values)
             st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False})
 
-    # --- EXAM WORKBENCH ---
-    st.markdown("<br><br>", unsafe_allow_html=True)
     # --- EXAM WORKBENCH ---
     st.markdown("<br><br>", unsafe_allow_html=True)
     
@@ -325,17 +306,16 @@ def render_subtopic_1_4(model):
     q_data = get_question("1.4", q_id)
     
     if q_data:
-        st.markdown(f"### {t({'de': 'Logik-Check', 'en': 'Logic Check'})}", unsafe_allow_html=True)
+        st.markdown(f"### {t({'de': 'Logik-Check', 'en': 'Logic Check'})}")
         st.caption(t({'de': 'Selbst erstellt', 'en': 'Self-created'}))
         
         with st.container(border=True):
-            # Format options (1.4 has "text" key in options dicts)
             opt_labels = []
             for o in q_data["options"]:
                 if isinstance(o, dict) and "text" in o:
-                     opt_labels.append(o["text"])
+                    opt_labels.append(o["text"])
                 else:
-                     opt_labels.append(t(o))
+                    opt_labels.append(t(o))
             
             render_mcq(
                 key_suffix="1_4_exam",

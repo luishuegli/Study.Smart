@@ -72,34 +72,36 @@ def render_subtopic_2_3(client):
         }
         .icon-header svg {
             flex-shrink: 0 !important;
-        }
         </style>
     """, unsafe_allow_html=True)
+    
     # --- CSS: LAYOUT STABILITY & ANIMATION ---
+    # NOTE: DJ Deck buttons use the .dj-deck-buttons container marker for scoped styling
     st.markdown("""
 <style>
 [data-testid="stHorizontalBlock"] { align-items: stretch; }
 [data-testid="column"] { display: flex; flex-direction: column; }
 
-/* Button Styling - Reverted to Global Styles (views/styles.py) for consistency */
-/* The previous local override forced 54px height and white background, which conflicted with the "Show Solution" buttons elsewhere. */
-
 @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-
 
 /* Scaling fix for icon rendering */
 svg { width: 1.5rem; height: 1.5rem; }
 
 /* Tame the Math: Prevent KaTeX from exploding */
-.katex {
-    font-size: 1.1em !important; /* Cap it relative to the 20px base */
-}
+.katex { font-size: 1.1em !important; }
 
-/* Alignment Fix: Force Crate Buttons to match Cassette Height (54px) */
-.stApp [data-testid="stButton"] button {
+/* DJ DECK BUTTONS ONLY - Scoped by container class */
+.dj-deck-buttons button {
     height: 54px !important;
     border-radius: 8px !important;
-    font-weight: 500 !important;
+    font-weight: 600 !important;
+    font-size: 1rem !important;
+}
+
+/* Also style primary buttons in the crate column */
+.dj-deck-buttons [data-testid="stButton"] button[kind="primary"] {
+    background-color: #1a1a1a !important;
+    color: white !important;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -140,6 +142,32 @@ svg { width: 1.5rem; height: 1.5rem; }
                  "de": "Spezialfall: Alle n Elemente anordnen",
                  "en": "Special case: arrange all n elements"
              }))
+    
+    # NEW: Permutations with Repetition (MISSISSIPPI-type problems)
+    st.markdown("<br>", unsafe_allow_html=True)
+    with st.container(border=True):
+        st.markdown(f"**{t({'de': 'Permutation mit Wiederholung', 'en': 'Permutations with Repetition'})}**")
+        st.markdown(t({
+            "de": "Wenn Elemente **mehrfach vorkommen**, müssen wir die identischen Anordnungen herausdividieren.",
+            "en": "When elements **repeat**, we must divide out the identical arrangements."
+        }))
+        
+        col_form, col_ex = st.columns([1, 1], gap="medium")
+        
+        with col_form:
+            st.latex(r"\text{Permutations} = \frac{n!}{n_1! \cdot n_2! \cdots n_k!}")
+            st.caption(t({
+                "de": "$n_i$ = Anzahl der Wiederholungen pro Element",
+                "en": "$n_i$ = count of each repeated element"
+            }))
+        
+        with col_ex:
+            st.markdown(f"**{t({'de': 'Klassiker: MISSISSIPPI', 'en': 'Classic: MISSISSIPPI'})}**")
+            st.markdown(t({
+                "de": "11 Buchstaben: M(1), I(4), S(4), P(2)",
+                "en": "11 letters: M(1), I(4), S(4), P(2)"
+            }))
+            st.latex(r"\frac{11!}{1! \cdot 4! \cdot 4! \cdot 2!} = 34,650")
 
     st.markdown("<br>", unsafe_allow_html=True)
 
@@ -163,6 +191,9 @@ svg { width: 1.5rem; height: 1.5rem; }
         with col_crate:
             st.markdown(f"**{t({'de': 'Plattenkiste (Optionen)', 'en': 'Crate (Options)'})}**")
             
+            # Start DJ Deck buttons wrapper for scoped styling
+            st.markdown('<div class="dj-deck-buttons">', unsafe_allow_html=True)
+            
             if not available_tracks and len(current_queue) == 3:
                 # Success State
                 st.success(t({"de": "Set komplett!", "en": "Set Complete!"}))
@@ -173,12 +204,15 @@ svg { width: 1.5rem; height: 1.5rem; }
                 # Render Available Buttons
                 for track in available_tracks:
                     # Pure text button, no emoji, per Premium feel
-                    if st.button(f"+ {track}", key=f"btn_{track}", use_container_width=True, type="primary"):
+                    if st.button(f"{track}", key=f"btn_{track}", use_container_width=True, type="primary"):
                         st.session_state.playlist_2_3.append(track)
                         st.rerun()
                 
                 left_count = len(available_tracks)
                 st.caption(f"{left_count} {t({'de': 'Tracks übrig', 'en': 'tracks remaining'})}")
+            
+            # End DJ Deck buttons wrapper
+            st.markdown('</div>', unsafe_allow_html=True)
 
         # --- RIGHT: THE QUEUE (VISUAL) ---
         with col_queue:

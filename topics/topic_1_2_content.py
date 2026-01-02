@@ -51,6 +51,15 @@ content_1_2 = {
             "def_en": "Everything in sample space $S$ that is not in $A$.",
             "example_de": r"$\text{Wenn } S = \{1, 2, 3\} \text{ und } A = \{1\}$" + "\n\n" + r"$\rightarrow \bar{A} = \{2, 3\}$",
             "example_en": r"$\text{If } S = \{1, 2, 3\} \text{ and } A = \{1\}$" + "\n\n" + r"$\rightarrow \bar{A} = \{2, 3\}$"
+        },
+        "impl": {
+            "symbol": "C ⊂ A",
+            "title_de": "Implikation",
+            "title_en": "Implication",
+            "def_de": "Wenn C eintritt, tritt immer auch A ein. C ist Teilmenge von A.",
+            "def_en": "If C occurs, A always occurs too. C is a subset of A.",
+            "example_de": r"$\text{Wenn } C = \{2\} \text{ und } A = \{2,4,6\}$" + "\n\n" + r"$\rightarrow C \subset A$ (C impliziert A)",
+            "example_en": r"$\text{If } C = \{2\} \text{ and } A = \{2,4,6\}$" + "\n\n" + r"$\rightarrow C \subset A$ (C implies A)"
         }
     },
     "interactive_header": {"de": "Interaktive Visualisierung", "en": "Interactive Visualization"}

@@ -1552,6 +1552,9 @@ QUESTIONS_3_5 = {
             "en": r"**Correct: 35**<br>Sum of numerators: $5+6+7+8+9 = 35$. For sum to be 1, $c=35$."
         }
     },
+}
+
+QUESTIONS_3_6 = {
     "test3_mc2": {
         "source": "Test 3, Q2",
         "type": "mc",
@@ -1573,7 +1576,6 @@ QUESTIONS_3_5 = {
     }
 }
 
-QUESTIONS_3_6 = {}
 
 
 # =============================================================================

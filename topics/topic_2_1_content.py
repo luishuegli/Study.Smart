@@ -216,7 +216,7 @@ But the permutation formula counts each order separately! For 3 people, there ar
     <span><span style="background:#dbeafe; padding:2px 6px; border-radius:4px; color:#1d4ed8;">Given</span> = Data</span>
     <span><span style="background:#fee2e2; padding:2px 6px; border-radius:4px; color:#dc2626;">Target</span> = Find</span>
     <span><span style="background:#dcfce7; padding:2px 6px; border-radius:4px; color:#16a34a;">Signal</span> = Formula Hint</span>
-    <span><span style="background:#fef3c7; padding:2px 6px; border-radius:4px; color:#d97706;">→ Formula</span></span>
+    <span><span style="background:#f4f4f5; padding:2px 6px; border-radius:4px; color:#3f3f46;">→ Formula</span></span>
 </div>
         """, unsafe_allow_html=True)
         
@@ -235,7 +235,7 @@ if there are <span style="background:#dcfce7; padding:2px 6px; border-radius:4px
 <b>📘 Given:</b> $n=8$, $k=3$ &nbsp;|&nbsp; 
 <b>🎯 Target:</b> Number of arrangements &nbsp;|&nbsp;
 <b>💡 Signal:</b> "positions", "no ties" → Order matters!<br>
-<span style="background:#fef3c7; padding:2px 8px; border-radius:4px; color:#d97706; font-weight:600;">→ $P(8,3) = \\frac{{8!}}{{5!}} = 336$</span>
+<span style="background:#f4f4f5; padding:2px 8px; border-radius:4px; color:#3f3f46; font-weight:600;">→ $P(8,3) = \\frac{{8!}}{{5!}} = 336$</span>
 </div>
             """, unsafe_allow_html=True)
         
@@ -251,7 +251,7 @@ a <span style="background:#dcfce7; padding:2px 6px; border-radius:4px; color:#16
 <b>📘 Given:</b> $n=12$, $k=4$ &nbsp;|&nbsp; 
 <b>🎯 Target:</b> Number of groups &nbsp;|&nbsp;
 <b>💡 Signal:</b> "committee", "selected" → Order irrelevant!<br>
-<span style="background:#fef3c7; padding:2px 8px; border-radius:4px; color:#d97706; font-weight:600;">→ $\\binom{{12}}{{4}} = 495$</span>
+<span style="background:#f4f4f5; padding:2px 8px; border-radius:4px; color:#3f3f46; font-weight:600;">→ $\\binom{{12}}{{4}} = 495$</span>
 </div>
             """, unsafe_allow_html=True)
 

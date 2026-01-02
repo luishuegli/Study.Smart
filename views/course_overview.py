@@ -29,8 +29,8 @@ SUBTOPIC_QUESTION_COUNTS = {
     "3.3": 2,  # test2_q3, 3_3_mission (Factory Tycoon)
     "3.4": 7,  # 3_4_casino + hs2024_mc7, mc12, +4 more
     "3.5": 2,  # 3_5_sharpshooter + uebung2_mc8
-    "3.6": 1,  # test3_q2
-    "3.7": 1,  # hs2024_mc11 (only one implemented)
+    "3.6": 2,  # 3_6_mission + test3_mc2
+    "3.7": 2,  # 3_7_symmetry_mission + hs2024_mc11
     # Topic 4: Stochastic Models and Distributions
     "4.1": 0,  # No MCQs
     "4.2": 0,  # Problems only

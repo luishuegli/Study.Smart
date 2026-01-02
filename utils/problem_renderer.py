@@ -133,7 +133,7 @@ def render_open_question(
                     # Warm background for hints
                     st.markdown(
                         f"""
-                        <div style="background-color: #fef3c7; color: #92400e; padding: 12px; border-radius: 8px; border: 1px solid #f59e0b;">
+                        <div style="background-color: #f4f4f5; color: #3f3f46; padding: 12px; border-radius: 8px; border: 1px solid #e5e5ea;">
                             {t(hint)}
                         </div>
                         """, 

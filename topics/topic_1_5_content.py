@@ -24,6 +24,16 @@ content_1_5 = {
             "title": {"de": "2. Der Additionssatz", "en": "2. General Addition Rule"},
             "text": {"de": "Für beliebige Ereignisse. Wir müssen die Schnittmenge abziehen.", "en": "For any events. We must subtract the intersection."},
             "latex": r"P(A \cup B) = P(A) + P(B) - P(A \cap B)"
+        },
+        "diff": {
+            "title": {"de": "3. Differenzregel", "en": "3. Difference Rule"},
+            "text": {"de": "Das Ereignis 'A ohne B' (Theorem 4).", "en": "The event 'A without B' (Theorem 4)."},
+            "latex": r"P(A \setminus B) = P(A) - P(A \cap B)"
+        },
+        "mono": {
+            "title": {"de": "4. Monotonie", "en": "4. Monotonicity"},
+            "text": {"de": "Wenn A ein Teil von B ist, kann P(A) nicht größer sein (Theorem 6).", "en": "If A is part of B, P(A) cannot be larger (Theorem 6)."},
+            "latex": r"A \subseteq B \Rightarrow P(A) \leq P(B)"
         }
     },
     "interactive": {
@@ -122,6 +132,25 @@ def render_subtopic_1_5(model):
             st.latex(content_1_5['rules']['union']['latex'])
             # Explicit min-height balance
             st.markdown("<div style='height: 80px;'></div>", unsafe_allow_html=True)
+
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+    # ROW 2B: ADDITIONAL RULES (Difference + Monotonicity from slides)
+    c3, c4 = st.columns(2, gap="medium")
+    
+    with c3:
+        with st.container(border=True):
+            st.markdown(f"**{t(content_1_5['rules']['diff']['title'])}**")
+            st.caption(t(content_1_5['rules']['diff']['text']))
+            st.latex(content_1_5['rules']['diff']['latex'])
+            st.caption(t({"de": "Nützlich für 'A aber nicht B' Szenarien", "en": "Useful for 'A but not B' scenarios"}))
+    
+    with c4:
+        with st.container(border=True):
+            st.markdown(f"**{t(content_1_5['rules']['mono']['title'])}**")
+            st.caption(t(content_1_5['rules']['mono']['text']))
+            st.latex(content_1_5['rules']['mono']['latex'])
+            st.caption(t({"de": "Teil einer Menge hat nie größere W'keit", "en": "Part of a set never has larger probability"}))
 
     st.markdown("<br>", unsafe_allow_html=True)
 

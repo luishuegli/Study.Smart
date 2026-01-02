@@ -1,34 +1,632 @@
-# Topic 4.4: Poisson Distribution
+# Topic 4.4: Poisson Distribution - Poisson-Verteilung
+# ULTRATHINK ENHANCED VERSION
 import streamlit as st
+import re
 from utils.localization import t
 from utils.quiz_helper import render_mcq
 from data.exam_questions import get_question
+import numpy as np
+import plotly.graph_objects as go
+from scipy.stats import poisson
+
+# ==========================================
+# 1. CONTENT DICTIONARY - BILINGUAL (ULTRATHINK)
+# ==========================================
+content_4_4 = {
+    "title": {"de": "4.4 Poisson-Verteilung (diskret)", "en": "4.4 Poisson Distribution (Discrete)"},
+    "subtitle": {
+        "de": "Seltene Ereignisse in grossen Zeiträumen",
+        "en": "Rare Events Over Large Time Periods"
+    },
+    
+    # --- INTUITION HOOK ---
+    "intuition": {
+        "header": {"de": "Die Intuition", "en": "The Intuition"},
+        "text": {
+            "de": "Wie viele **Tore** fallen in einem Fussballspiel? Wie viele **Kunden** betreten den Laden pro Stunde? Wie viele **Serverabstürze** passieren pro Monat? Diese Ereignisse haben eines gemeinsam: Sie sind **selten** (verglichen mit allen möglichen Zeitpunkten), aber sie passieren mit einer gewissen **durchschnittlichen Rate** $\\lambda$.",
+            "en": "How many **goals** are scored in a soccer match? How many **customers** enter the store per hour? How many **server crashes** happen per month? These events have something in common: They are **rare** (compared to all possible moments), but they happen at some **average rate** $\\lambda$."
+        }
+    },
+    
+    # --- FRAG DICH (Decision Guide) ---
+    "frag_dich": {
+        "header": {"de": "Frag dich: Ist es Poisson?", "en": "Ask yourself: Is it Poisson?"},
+        "questions": [
+            {"de": "Zähle ich Ereignisse <strong>pro Zeiteinheit/Fläche</strong>?", "en": "Am I counting events <strong>per time unit/area</strong>?"},
+            {"de": "Sind die Ereignisse <strong>selten</strong> (viele Möglichkeiten, wenig Realisierungen)?", "en": "Are the events <strong>rare</strong> (many opportunities, few occurrences)?"},
+            {"de": "Gibt es eine bekannte <strong>durchschnittliche Rate</strong> λ?", "en": "Is there a known <strong>average rate</strong> λ?"},
+            {"de": "Sind die Ereignisse <strong>unabhängig</strong> voneinander?", "en": "Are the events <strong>independent</strong> of each other?"}
+        ],
+        "conclusion": {
+            "de": "4× Ja → Poisson-Verteilung anwenden!",
+            "en": "4× Yes → Apply Poisson Distribution!"
+        }
+    },
+    
+    # --- DEFINITION ---
+    "definition": {
+        "header": {"de": "Definition", "en": "Definition"},
+        "text": {
+            "de": "Eine Zufallsvariable $X$ mit abzählbar unendlich vielen Werten ($x = 0, 1, 2, 3, \\ldots$) heisst **Poisson-verteilt** mit Parameter $\\lambda > 0$.",
+            "en": "A random variable $X$ with countably infinite values ($x = 0, 1, 2, 3, \\ldots$) is called **Poisson distributed** with parameter $\\lambda > 0$."
+        },
+        "notation": r"X \sim \text{Poi}(\lambda)"
+    },
+    
+    # --- THE FORMULA (With Breakdown) ---
+    "formula": {
+        "header": {"de": "Die Massenfunktion", "en": "The Mass Function"},
+        "pmf": r"f_{\text{Po}}(x; \lambda) = \frac{\lambda^x \cdot e^{-\lambda}}{x!}",
+        "range": {"de": "x = 0, 1, 2, 3, ... (beliebig viele Ereignisse möglich)", "en": "x = 0, 1, 2, 3, ... (any number of events possible)"},
+        "breakdown": {
+            "header": {"de": "Was bedeutet jeder Teil? (Intuition!)", "en": "What does each part mean? (Intuition!)"},
+            "parts": [
+                {
+                    "symbol": r"\lambda^x",
+                    "meaning_de": "<strong>Warum λ hoch x?</strong> Stell dir vor, du erwartest λ = 4 Anrufe/Stunde. Die Chance, dass das erste Ereignis passiert, hängt von λ ab, das zweite auch, usw. Bei x Ereignissen: λ × λ × ... × λ = λ<sup>x</sup>. Je mehr Ereignisse du willst, desto höher muss die Rate 'zusammenwirken'.",
+                    "meaning_en": "<strong>Why λ to the power x?</strong> Imagine you expect λ = 4 calls/hour. The chance of the first event depends on λ, the second too, etc. For x events: λ × λ × ... × λ = λ<sup>x</sup>. The more events you want, the more the rate has to 'cooperate'."
+                },
+                {
+                    "symbol": r"e^{-\lambda}",
+                    "meaning_de": "<strong>Warum e<sup>-λ</sup>?</strong> Das ist die Wahrscheinlichkeit, dass KEIN Ereignis passiert (P(X=0) = e<sup>-λ</sup>). Es ist der 'Grundpreis' — je höher λ, desto unwahrscheinlicher, dass nichts passiert. Es sorgt auch dafür, dass alle Wahrscheinlichkeiten zusammen = 1 ergeben.",
+                    "meaning_en": "<strong>Why e<sup>-λ</sup>?</strong> This is the probability that NO event happens (P(X=0) = e<sup>-λ</sup>). It's the 'base price' — the higher λ, the less likely nothing happens. It also ensures all probabilities sum to 1."
+                },
+                {
+                    "symbol": r"x!",
+                    "meaning_de": "<strong>Warum x! im Nenner?</strong> Die Ereignisse passieren in beliebiger Reihenfolge. Anruf A um 10:15, B um 10:30 ist dasselbe wie B um 10:15, A um 10:30. Bei x Ereignissen gibt es x! Reihenfolgen — wir teilen durch x!, um nicht mehrfach zu zählen.",
+                    "meaning_en": "<strong>Why x! in denominator?</strong> Events happen in any order. Call A at 10:15, B at 10:30 is the same as B at 10:15, A at 10:30. With x events there are x! orderings — we divide by x! to avoid counting multiple times."
+                }
+            ]
+        }
+    },
+    
+    # --- PARAMETER WITH MEANING ---
+    "parameter": {
+        "header": {"de": "Der Parameter", "en": "The Parameter"},
+        "symbol": r"\lambda > 0",
+        "name_de": "Erwartete Ereignisrate",
+        "name_en": "Expected Event Rate",
+        "meaning_de": "Wie viele Ereignisse erwarte ich **durchschnittlich** pro Zeiteinheit/Fläche? Das ist gleichzeitig Erwartungswert UND Varianz!",
+        "meaning_en": "How many events do I expect **on average** per time unit/area? This is BOTH expected value AND variance!"
+    },
+    
+    # --- MOMENTS WITH INTERPRETATION (THE KEY INSIGHT) ---
+    "moments": {
+        "header": {"de": "Erwartungswert & Varianz", "en": "Expected Value & Variance"},
+        "key_property": {
+            "header": {"de": "DIE Schlüsseleigenschaft", "en": "THE Key Property"},
+            "text": {
+                "de": "Bei der Poisson-Verteilung sind Erwartungswert und Varianz **identisch**! Das ist einzigartig und ein sofortiges Erkennungszeichen.",
+                "en": "For the Poisson distribution, expected value and variance are **identical**! This is unique and an immediate recognition sign."
+            }
+        },
+        "expectation": {
+            "title_de": "Erwartungswert",
+            "title_en": "Expected Value",
+            "formula": r"E[X] = \lambda",
+            "interpretation_de": "Die durchschnittliche Anzahl von Ereignissen. Bei $\\lambda = 5$ erwarte ich im Schnitt 5 Ereignisse pro Zeiteinheit.",
+            "interpretation_en": "The average number of events. With $\\lambda = 5$, I expect 5 events on average per time unit."
+        },
+        "variance": {
+            "title_de": "Varianz",
+            "title_en": "Variance",
+            "formula": r"V(X) = \lambda",
+            "interpretation_de": "Die Streuung wächst MIT der Rate! Mehr erwartete Ereignisse = mehr Variabilität.",
+            "interpretation_en": "The spread grows WITH the rate! More expected events = more variability."
+        }
+    },
+    
+    # --- APPROXIMATION (Binomial → Poisson) ---
+    "approximation": {
+        "header": {"de": "Binomial-Approximation", "en": "Binomial Approximation"},
+        "when": {
+            "de": "Wann verwenden? Wenn Binomial(n, p) mit: $n \\geq 100$ und $p \\leq 0.05$ (oft auch $n \\cdot p \\leq 10$)",
+            "en": "When to use? When Binomial(n, p) with: $n \\geq 100$ and $p \\leq 0.05$ (often also $n \\cdot p \\leq 10$)"
+        },
+        "formula": r"\text{Bin}(n, p) \approx \text{Poi}(\lambda) \quad \text{mit } \lambda = n \cdot p",
+        "why": {
+            "de": "Warum? Die Binomialformel mit grossen $n$ ist rechnerisch mühsam. Poisson ist einfacher!",
+            "en": "Why? The binomial formula with large $n$ is computationally tedious. Poisson is simpler!"
+        }
+    },
+    
+    # --- WORKED EXAMPLE ---
+    "example_worked": {
+        "header": {"de": "Schritt-für-Schritt Beispiel", "en": "Step-by-Step Example"},
+        "problem": {
+            "de": "Ein Callcenter erhält **durchschnittlich 4 Anrufe pro Minute**. Wie wahrscheinlich ist es, dass in einer Minute **genau 6 Anrufe** eingehen?",
+            "en": "A call center receives **on average 4 calls per minute**. What is the probability that **exactly 6 calls** arrive in one minute?"
+        },
+        "steps": [
+            {
+                "label_de": "Gegeben",
+                "label_en": "Given",
+                "content_de": "$\\lambda = 4$ (Rate pro Minute)",
+                "content_en": "$\\lambda = 4$ (rate per minute)"
+            },
+            {
+                "label_de": "Gesucht",
+                "label_en": "Find",
+                "content_de": "$P(X = 6)$ wobei $X \\sim \\text{Poi}(4)$",
+                "content_en": "$P(X = 6)$ where $X \\sim \\text{Poi}(4)$"
+            },
+            {
+                "label_de": "Signal",
+                "label_en": "Signal",
+                "content_de": "'pro Minute' + 'durchschnittlich' → Poisson",
+                "content_en": "'per minute' + 'on average' → Poisson"
+            },
+            {
+                "label_de": "Formel",
+                "label_en": "Formula",
+                "content_de": "$P(X = 6) = \\frac{4^6 \\cdot e^{-4}}{6!}$",
+                "content_en": "$P(X = 6) = \\frac{4^6 \\cdot e^{-4}}{6!}$"
+            },
+            {
+                "label_de": "Rechnung",
+                "label_en": "Calculation",
+                "content_de": "$= \\frac{4096 \\cdot 0.0183}{720} \\approx 0.104$",
+                "content_en": "$= \\frac{4096 \\cdot 0.0183}{720} \\approx 0.104$"
+            }
+        ],
+        "answer": {
+            "de": "Die Wahrscheinlichkeit beträgt etwa **10.4%**.",
+            "en": "The probability is approximately **10.4%**."
+        }
+    },
+    
+    # --- RECOGNITION SIGNALS ---
+    "signals": {
+        "header": {"de": "Signalwörter erkennen", "en": "Recognize Signal Words"},
+        "keywords": {
+            "trigger_de": ["pro Stunde/Tag/Monat/Jahr", "durchschnittlich X pro...", "Rate", "seltene Ereignisse", "Anzahl der Unfälle/Anrufe/Kunden"],
+            "trigger_en": ["per hour/day/month/year", "on average X per...", "rate", "rare events", "number of accidents/calls/customers"]
+        },
+        "vs_binomial": {
+            "header": {"de": "Poisson vs. Binomial", "en": "Poisson vs. Binomial"},
+            "items": [
+                {"de": "<strong>Poisson</strong>: Feste ZEIT, variable Anzahl", "en": "<strong>Poisson</strong>: Fixed TIME, variable count"},
+                {"de": "<strong>Binomial</strong>: Feste VERSUCHE, zähle Erfolge", "en": "<strong>Binomial</strong>: Fixed TRIALS, count successes"}
+            ]
+        }
+    },
+    
+    # --- COMMON TRAP ---
+    "trap": {
+        "header": {"de": "Die häufigste Falle", "en": "The Most Common Trap"},
+        "text": {
+            "de": "<strong>Zeitintervall-Anpassung vergessen!</strong> Wenn λ = 2 pro Stunde, aber du fragst nach 30 Minuten, dann ist λ<sub>30min</sub> = 1.",
+            "en": "<strong>Forgetting time interval adjustment!</strong> If λ = 2 per hour but you're asking about 30 minutes, then λ<sub>30min</sub> = 1."
+        },
+        "rule": {
+            "de": "Regel: λ skaliert linear mit der Zeit/Fläche!",
+            "en": "Rule: λ scales linearly with time/area!"
+        }
+    },
+    
+    # --- PRO TIP ---
+    "pro_tip": {
+        "de": """<strong>Prüfungs-Essentials:</strong><br><br>
+<strong>(1) Wenn E[X] = V(X) gegeben → sofort Poisson!</strong><br>
+<em>Warum?</em> EINZIGE Verteilung wo Erwartungswert = Varianz = λ. Wenn du das siehst, ist die Verteilung bereits identifiziert!<br><br>
+<strong>(2) λ immer an Zeitintervall anpassen</strong><br>
+<em>Warum?</em> λ = 2 pro Stunde aber du fragst nach 30 Minuten? Dann λ₃₀min = 1. Vergiss nie die Umrechnung!<br><br>
+<strong>(3) Poisson approximiert Binomial wenn n gross und p klein</strong><br>
+<em>Warum?</em> Faustregel: n > 30 und p < 0.05 → nutze Poisson mit λ = n·p. Spart Rechenaufwand!<br><br>
+<strong>(4) P(X = 0) = e⁻λ auswendig!</strong><br>
+<em>Warum?</em> 'Kein Anruf in einer Stunde?' Diese Frage kommt oft. e⁻λ direkt anwenden spart Zeit.""",
+        "en": """<strong>Exam essentials:</strong><br><br>
+<strong>(1) If E[X] = V(X) is given → immediately Poisson!</strong><br>
+<em>Why?</em> ONLY distribution where expected value = variance = λ. When you see this, the distribution is already identified!<br><br>
+<strong>(2) Always adjust λ to time interval</strong><br>
+<em>Why?</em> λ = 2 per hour but asking about 30 minutes? Then λ₃₀min = 1. Never forget to convert!<br><br>
+<strong>(3) Poisson approximates Binomial when n large and p small</strong><br>
+<em>Why?</em> Rule of thumb: n > 30 and p < 0.05 → use Poisson with λ = n·p. Saves computation!<br><br>
+<strong>(4) Memorize P(X = 0) = e⁻λ!</strong><br>
+<em>Why?</em> 'No call in an hour?' This question comes up often. Apply e⁻λ directly to save time."""
+    }
+}
+
 
 def render_subtopic_4_4(model):
-    """4.4 Poisson-Verteilung - Poisson Distribution"""
+    """4.4 Poisson-Verteilung - ULTRATHINK Enhanced"""
     
-    st.header(t({"de": "4.4 Poisson-Verteilung (diskret)", "en": "4.4 Poisson Distribution (Discrete)"}))
+    # --- CSS INJECTION FOR EQUAL HEIGHT (AGGRESSIVE) ---
+    st.markdown("""
+    <style>
+    /* Force horizontal blocks to stretch children */
+    [data-testid="stHorizontalBlock"] {
+        align-items: stretch !important;
+        display: flex !important;
+    }
+    
+    /* Make columns flex containers that fill height */
+    [data-testid="column"], [data-testid="stColumn"] {
+        display: flex !important;
+        flex-direction: column !important;
+        flex: 1 !important;
+    }
+    
+    /* All direct children should expand */
+    [data-testid="column"] > div,
+    [data-testid="stColumn"] > div {
+        flex: 1 !important; 
+        display: flex !important;
+        flex-direction: column !important;
+        height: 100% !important;
+        min-height: 100% !important;
+    }
+    
+    /* Target the vertical block inside columns */
+    [data-testid="column"] [data-testid="stVerticalBlock"],
+    [data-testid="stColumn"] [data-testid="stVerticalBlock"] {
+        flex: 1 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        height: 100% !important;
+    }
+    
+    /* Target the border wrapper specifically */
+    [data-testid="column"] [data-testid="stVerticalBlockBorderWrapper"],
+    [data-testid="stColumn"] [data-testid="stVerticalBlockBorderWrapper"] {
+        flex: 1 !important;
+        height: 100% !important;
+        min-height: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    
+    /* And its child */
+    [data-testid="stVerticalBlockBorderWrapper"] > div {
+        flex: 1 !important;
+        height: 100% !important;
+    }
+    
+    /* Also target any container with border=True */
+    .stContainer, [data-testid="stContainer"] {
+        height: 100% !important;
+        flex: 1 !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+    
+    # --- HEADER ---
+    st.header(t(content_4_4["title"]))
+    st.caption(t(content_4_4["subtitle"]))
     st.markdown("---")
     
-    # --- THEORY PLACEHOLDER ---
+    # --- INTUITION HOOK ---
+    st.markdown(f"### {t(content_4_4['intuition']['header'])}")
     with st.container(border=True):
-        st.markdown(f"### {t({'de': 'Theorie', 'en': 'Theory'})}")
-        st.info(t({
-            "de": "**Theorie-Inhalte kommen bald!**\n\nDieser Abschnitt wird theoretische Erklärungen zur Poisson-Verteilung enthalten.",
-            "en": "**Theory content coming soon!**\n\nThis section will contain theoretical explanations of the Poisson distribution."
-        }))
+        st.markdown(t(content_4_4["intuition"]["text"]))
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+    # --- FRAG DICH: DECISION GUIDE ---
+    st.markdown(f"""
+    <div style="background-color: rgba(0, 122, 255, 0.08); border-radius: 12px; padding: 20px; border: 2px solid #007AFF;">
+        <div style="font-weight: 700; color: #007AFF; margin-bottom: 16px; font-size: 1.1em;">
+            {t(content_4_4['frag_dich']['header'])}
+        </div>
+        <div style="color: #1c1c1e;">
+            <ol style="margin: 0; padding-left: 20px; line-height: 2;">
+                {"".join([f"<li>{t({'de': q['de'], 'en': q['en']})}</li>" for q in content_4_4['frag_dich']['questions']])}
+            </ol>
+        </div>
+        <div style="margin-top: 16px; padding: 10px; background: #007AFF; color: white; border-radius: 8px; text-align: center; font-weight: 600;">
+            {t(content_4_4['frag_dich']['conclusion'])}
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+    # --- DEFINITION ---
+    st.markdown(f"### {t(content_4_4['definition']['header'])}")
+    with st.container(border=True):
+        st.markdown(t(content_4_4["definition"]["text"]))
+        st.markdown("<br>", unsafe_allow_html=True)
+        st.latex(content_4_4["definition"]["notation"])
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+    # --- THE FORMULA WITH BREAKDOWN ---
+    st.markdown(f"### {t(content_4_4['formula']['header'])}")
+    with st.container(border=True):
+        st.latex(content_4_4["formula"]["pmf"])
+        st.caption(t(content_4_4["formula"]["range"]))
+        
+        st.markdown("<br>", unsafe_allow_html=True)
+        st.markdown(f"**{t(content_4_4['formula']['breakdown']['header'])}**")
+        
+        for part in content_4_4["formula"]["breakdown"]["parts"]:
+            col_sym, col_mean = st.columns([1, 3])
+            with col_sym:
+                st.latex(part["symbol"])
+            with col_mean:
+                st.markdown(t({"de": part["meaning_de"], "en": part["meaning_en"]}), unsafe_allow_html=True)
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+    # --- PARAMETER WITH MEANING ---
+    st.markdown(f"### {t(content_4_4['parameter']['header'])}")
+    with st.container(border=True):
+        col_sym, col_desc = st.columns([1, 3])
+        with col_sym:
+            st.latex(content_4_4["parameter"]["symbol"])
+        with col_desc:
+            st.markdown(f"**{t({'de': content_4_4['parameter']['name_de'], 'en': content_4_4['parameter']['name_en']})}**")
+            st.caption(t({"de": content_4_4["parameter"]["meaning_de"], "en": content_4_4["parameter"]["meaning_en"]}))
+    
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+    # --- MOMENTS WITH INTERPRETATION ---
+    st.markdown(f"### {t(content_4_4['moments']['header'])}")
+    
+    col_e, col_v = st.columns(2, gap="medium")
+    
+    with col_e:
+        with st.container(border=True):
+            st.markdown(f"**{t({'de': content_4_4['moments']['expectation']['title_de'], 'en': content_4_4['moments']['expectation']['title_en']})}**")
+            st.latex(content_4_4["moments"]["expectation"]["formula"])
+            st.markdown("---")
+            st.markdown(t({"de": content_4_4["moments"]["expectation"]["interpretation_de"], "en": content_4_4["moments"]["expectation"]["interpretation_en"]}))
+    
+    with col_v:
+        with st.container(border=True):
+            st.markdown(f"**{t({'de': content_4_4['moments']['variance']['title_de'], 'en': content_4_4['moments']['variance']['title_en']})}**")
+            st.latex(content_4_4["moments"]["variance"]["formula"])
+            st.markdown("---")
+            st.markdown(t({"de": content_4_4["moments"]["variance"]["interpretation_de"], "en": content_4_4["moments"]["variance"]["interpretation_en"]}))
+    
+    # Add Key Property note inline (zinc neutral styling)
+    st.markdown(f"""
+<div style="background-color: #f4f4f5; border-radius: 8px; padding: 12px; margin-top: 12px;">
+    <strong style="color: #3f3f46;">{t(content_4_4['moments']['key_property']['header'])}:</strong>
+    <span style="color: #52525b;">{t(content_4_4['moments']['key_property']['text'])}</span>
+</div>
+    """, unsafe_allow_html=True)
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+    # --- APPROXIMATION ---
+    st.markdown(f"### {t(content_4_4['approximation']['header'])}")
+    with st.container(border=True):
+        st.markdown(t(content_4_4["approximation"]["when"]))
+        st.latex(content_4_4["approximation"]["formula"])
+        st.markdown(t(content_4_4["approximation"]["why"]))
+    
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    
+    # --- WORKED EXAMPLE ---
+    st.markdown(f"### {t(content_4_4['example_worked']['header'])}")
+    with st.container(border=True):
+        
+        # Problem statement - use HTML for bold since it's in a grey box
+        problem_text = t(content_4_4['example_worked']['problem']).replace("**", "<strong>").replace("</strong></strong>", "</strong>")
+        # Fix: replace **x** with <strong>x</strong>
+        problem_text_de = content_4_4['example_worked']['problem']['de']
+        problem_text_en = content_4_4['example_worked']['problem']['en']
+        problem_text_de = re.sub(r'\*\*(.*?)\*\*', r'<strong>\1</strong>', problem_text_de)
+        problem_text_en = re.sub(r'\*\*(.*?)\*\*', r'<strong>\1</strong>', problem_text_en)
+        problem_text = t({"de": problem_text_de, "en": problem_text_en})
+        
+        st.markdown(f"""
+        <div style="background:#fafafa; border-radius:8px; padding:12px; margin-bottom:16px;">
+            {problem_text}
+        </div>
+        """, unsafe_allow_html=True)
+        
+        # Step-by-step solution - use proper st.columns to avoid LaTeX in HTML
+        step_colors = {
+            "Given": ("#dbeafe", "#1d4ed8"),
+            "Gegeben": ("#dbeafe", "#1d4ed8"),
+            "Find": ("#fee2e2", "#dc2626"),
+            "Gesucht": ("#fee2e2", "#dc2626"),
+            "Signal": ("#dcfce7", "#16a34a"),
+            "Formula": ("#f4f4f5", "#3f3f46"),
+            "Formel": ("#f4f4f5", "#3f3f46"),
+            "Calculation": ("#f4f4f5", "#3f3f46"),
+            "Rechnung": ("#f4f4f5", "#3f3f46"),
+        }
+        
+        for step in content_4_4["example_worked"]["steps"]:
+            label = t({"de": step["label_de"], "en": step["label_en"]})
+            content_raw = t({"de": step["content_de"], "en": step["content_en"]})
+            
+            bg, color = step_colors.get(label, ("#f4f4f5", "#3f3f46"))
+            
+            col_label, col_content = st.columns([1, 5])
+            with col_label:
+                st.markdown(f"""
+                <div style="background:{bg}; padding:6px 12px; border-radius:6px; color:{color}; font-weight:600; text-align:center;">
+                    {label}
+                </div>
+                """, unsafe_allow_html=True)
+            with col_content:
+                # Check if content contains LaTeX - if so, extract and render properly
+                if "$" in content_raw:
+                    # Extract and render LaTeX separately
+                    st.markdown(content_raw)
+                else:
+                    st.markdown(content_raw)
+        
+        st.markdown("---")
+        
+        # Answer - convert **bold** to <strong>
+        answer_de = re.sub(r'\*\*(.*?)\*\*', r'<strong>\1</strong>', content_4_4['example_worked']['answer']['de'])
+        answer_en = re.sub(r'\*\*(.*?)\*\*', r'<strong>\1</strong>', content_4_4['example_worked']['answer']['en'])
+        st.markdown(t({"de": answer_de, "en": answer_en}), unsafe_allow_html=True)
+    
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    
+    # --- INTERACTIVE MISSION: POISSON DISCOVERY ---
+    st.markdown(f"### {t({'de': 'Mission: Die Poisson-Entdeckung', 'en': 'Mission: The Poisson Discovery'})}")
+    
+    # Mission state initialization
+    if "poisson_mission_done" not in st.session_state:
+        st.session_state.poisson_mission_done = False
+    
+    with st.container(border=True):
+        # REAL-WORLD SCENARIO
+        st.markdown(f"""
+<div style="background: rgba(0, 122, 255, 0.08); padding:14px; border-radius:8px; color:#1c1c1e; margin-bottom:12px; border-left: 4px solid #007AFF;">
+<strong>{t({'de': 'Szenario:', 'en': 'Scenario:'})}</strong> {t({'de': 'Eine Notaufnahme plant die Schichtbesetzung. Sie müssen wissen: Ab welcher durchschnittlichen Ankunftsrate (λ) ist es fast sicher, dass mindestens ein Patient pro Stunde kommt?', 'en': 'An emergency room is planning shift coverage. They need to know: At what average arrival rate (λ) is it almost certain that at least one patient arrives per hour?'})}
+</div>""", unsafe_allow_html=True)
+        
+        # THE MISSION GOAL
+        target_p0 = 0.05
+        st.markdown(f"""
+<div style="background:#f4f4f5; padding:16px; border-radius:8px; color:#3f3f46; border-left: 4px solid #a1a1aa;">
+<strong>{t({'de': 'Deine Aufgabe:', 'en': 'Your Mission:'})}</strong> {t({'de': f'Finde den λ-Wert, bei dem P(X=0) unter {target_p0*100:.0f}% fällt!', 'en': f'Find the λ value where P(X=0) drops below {target_p0*100:.0f}%!'})}
+</div>""", unsafe_allow_html=True)
+        
+        st.markdown("<br>", unsafe_allow_html=True)
+        
+        col_ctrl, col_chart = st.columns([1.2, 2.3], gap="large")
+        
+        with col_ctrl:
+            lam = st.slider("λ", min_value=0.5, max_value=8.0, value=1.0, step=0.5, key="poisson_lambda")
+            
+            st.markdown("<br>", unsafe_allow_html=True)
+            
+            # Calculate probabilities
+            p0 = poisson.pmf(0, lam)
+            goal_reached = p0 < target_p0
+            
+            # Semantic colored formula display
+            p0_color = "#34C759" if goal_reached else "#FF4B4B"
+            st.markdown(f"""
+<div style="font-size: 1.1em;">
+<strong>P(X=0)</strong> = e<sup>-λ</sup> = e<sup>-{lam:.1f}</sup> = <span style="color:{p0_color}; font-weight:bold;">{p0:.3f}</span>
+</div>""", unsafe_allow_html=True)
+            
+            # Progress feedback
+            st.markdown("<br>", unsafe_allow_html=True)
+            if p0 >= 0.20:
+                st.info(t({"de": "λ ist noch klein. Die Wahrscheinlichkeit für 0 Ereignisse ist hoch.", "en": "λ is still small. Probability of 0 events is high."}))
+            elif p0 >= target_p0:
+                st.warning(t({"de": f"Fast da! P(X=0) = {p0:.1%} — noch etwas höher mit λ!", "en": f"Almost there! P(X=0) = {p0:.1%} — push λ a bit higher!"}))
+            else:
+                if not st.session_state.poisson_mission_done:
+                    st.balloons()
+                    st.session_state.poisson_mission_done = True
+                    # Track progress
+                    from utils.progress_tracker import track_question_answer
+                    if user := st.session_state.get("user"):
+                        track_question_answer(user["localId"], "vwl", "4", "4.4", "poisson_mission", True)
+                
+                st.success(t({"de": f"Mission erfüllt! Bei λ = {lam:.1f} ist P(X=0) = {p0:.1%} < 5%", "en": f"Mission Complete! At λ = {lam:.1f}, P(X=0) = {p0:.1%} < 5%"}))
+            
+            # Additional insights
+            st.markdown("<br>", unsafe_allow_html=True)
+            st.markdown(f"**E[X] = Var(X) = <span style='color:#007AFF;'>{lam:.1f}</span>**", unsafe_allow_html=True)
+        
+        with col_chart:
+            x_vals = np.arange(0, int(lam * 2.5) + 5)
+            y_vals = poisson.pmf(x_vals, lam)
+            
+            # Color bars: highlight x=0 differently
+            bar_colors = ['#FF4B4B' if x == 0 else '#007AFF' for x in x_vals]
+            
+            fig = go.Figure()
+            fig.add_trace(go.Bar(
+                x=x_vals, y=y_vals,
+                marker_color=bar_colors,
+                hovertemplate='x=%{x}<br>P(X=x)=%{y:.4f}<extra></extra>'
+            ))
+            
+            # Mark the mean
+            fig.add_vline(x=lam, line_dash="dash", line_color="#34C759", line_width=2,
+                         annotation_text=f"μ=λ={lam}", annotation_position="top")
+            
+            # Target line for P(X=0)
+            fig.add_hline(y=target_p0, line_dash="dot", line_color="#a1a1aa", line_width=1,
+                         annotation_text="5% Target", annotation_position="right")
+            
+            fig.update_layout(
+                xaxis=dict(title="x", fixedrange=True, showgrid=False),
+                yaxis=dict(title="P(X=x)", fixedrange=True, showgrid=True, gridcolor='#E5E5EA'),
+                height=300,
+                margin=dict(l=40, r=20, t=30, b=50),
+                paper_bgcolor='rgba(0,0,0,0)',
+                plot_bgcolor='rgba(0,0,0,0)',
+                showlegend=False
+            )
+            
+            st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False})
+        
+        # Mastery insight (shown after completion)
+        if goal_reached:
+            st.markdown(f"""
+<div style="background:#f4f4f5; padding:16px; border-radius:8px; color:#3f3f46; margin-top:12px; border-left: 4px solid #a1a1aa;">
+<strong>{t({'de': 'Was du entdeckt hast:', 'en': 'What you discovered:'})}</strong> {t({'de': 'Bei höherem λ (mehr erwartete Ereignisse) wird "0 Ereignisse" immer unwahrscheinlicher. Die Formel P(X=0) = e^(-λ) fällt exponentiell!', 'en': 'With higher λ (more expected events), "0 events" becomes increasingly unlikely. The formula P(X=0) = e^(-λ) falls exponentially!'})}
+</div>""", unsafe_allow_html=True)
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+    # --- RECOGNITION SIGNALS (UNIFIED CARD) ---
+    st.markdown(f"### {t({'de': 'Schnellübersicht: Poisson-Signale', 'en': 'Quick Reference: Poisson Signals'})}")
+    
+    # Build keywords HTML
+    lang = "trigger_de" if t({"de": "x", "en": "y"}) == "x" else "trigger_en"
+    keywords = content_4_4["signals"]["keywords"][lang]
+    keywords_html = "".join([f"<span style='background:#dcfce7; padding:5px 12px; border-radius:6px; color:#16a34a; margin:4px; display:inline-block; font-weight:500;'>{kw}</span>" for kw in keywords])
+    
+    # Build vs-binomial HTML (properly render the <strong> tags)
+    vs_items_html = "".join([f"<li style='margin-bottom:10px;'>{t({'de': item['de'], 'en': item['en']})}</li>" for item in content_4_4["signals"]["vs_binomial"]["items"]])
+    
+    st.markdown(f"""
+    <div style="display: flex; gap: 24px; align-items: stretch;">
+        <div style="flex: 1; background: #f9fafb; border-radius: 12px; padding: 20px; border: 1px solid #e5e7eb;">
+            <div style="font-weight: 600; color: #16a34a; margin-bottom: 16px; font-size: 0.95em;">
+                {t({'de': 'Poisson-Signale', 'en': 'Poisson Signals'})}
+            </div>
+            <div style="line-height: 2.2;">
+                {keywords_html}
+            </div>
+        </div>
+        <div style="flex: 1; background: #f9fafb; border-radius: 12px; padding: 20px; border: 1px solid #e5e7eb;">
+            <div style="font-weight: 600; color: #6b7280; margin-bottom: 12px; font-size: 0.95em;">
+                {t(content_4_4['signals']['vs_binomial']['header'])}
+            </div>
+            <ul style="margin: 0; padding-left: 20px; color: #374151; line-height: 1.8;">
+                {vs_items_html}
+            </ul>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+    # --- COMMON TRAP + PRO TIP (MERGED) ---
+    st.markdown(f"""
+<div style="background-color: #f4f4f5; border-radius: 8px; padding: 16px; border-left: 4px solid #a1a1aa;">
+<div style="font-weight: 600; color: #52525b; margin-bottom: 8px;">
+{t(content_4_4['trap']['header'])}
+</div>
+<div style="color: #3f3f46; margin-bottom: 8px;">
+{t(content_4_4['trap']['text'])}
+</div>
+<div style="color: #52525b; font-weight: 600; margin-bottom: 16px;">
+{t(content_4_4['trap']['rule'])}
+</div>
+<div style="border-top: 1px solid #d4d4d8; padding-top: 12px; color: #3f3f46;">
+<strong>Pro Tip:</strong> {t(content_4_4['pro_tip'])}
+</div>
+</div>""", unsafe_allow_html=True)
     
     st.markdown("<br><br>", unsafe_allow_html=True)
     
     # --- EXAM SECTION ---
     st.markdown(f"### {t({'de': 'Prüfungstraining', 'en': 'Exam Practice'})}")
     
-    # MCQ 1: test4_q1 (Poisson transformation)
-    q1 = get_question("4.4", "test4_q1")
-    if q1:
+    q_data = get_question("4.4", "poisson_rate")
+    if q_data:
         with st.container(border=True):
-            st.caption(q1.get("source", ""))
-            opts = q1.get("options", [])
+            st.caption(q_data.get("source", ""))
+            opts = q_data.get("options", [])
             if opts and isinstance(opts[0], dict):
                 option_labels = [t(o) for o in opts]
             else:
@@ -36,16 +634,22 @@ def render_subtopic_4_4(model):
             
             render_mcq(
                 key_suffix="4_4_poisson",
-                question_text=t(q1["question"]),
+                question_text=t(q_data["question"]),
                 options=option_labels,
-                correct_idx=q1["correct_idx"],
-                solution_text_dict=q1["solution"],
+                correct_idx=q_data["correct_idx"],
+                solution_text_dict=q_data["solution"],
                 success_msg_dict={"de": "Korrekt!", "en": "Correct!"},
                 error_msg_dict={"de": "Nicht ganz.", "en": "Not quite."},
                 client=model,
-                ai_context="Poisson distribution - transformation properties",
+                ai_context="Poisson distribution",
                 course_id="vwl",
                 topic_id="4",
                 subtopic_id="4.4",
                 question_id="4_4_poisson"
             )
+    else:
+        with st.container(border=True):
+            st.info(t({
+                "de": "Für diesen Abschnitt gibt es derzeit keine MCQ-Fragen. Die Theorie oben deckt die Prüfungsinhalte ab.",
+                "en": "This section currently has no MCQ questions. The theory above covers the exam content."
+            }))

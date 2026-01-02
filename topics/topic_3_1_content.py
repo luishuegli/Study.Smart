@@ -184,7 +184,7 @@ def render_simulator_3_1():
 
         with col_ctrl:
             st.markdown(f"""
-            <div style="background-color: #fef3c7; border-radius: 8px; padding: 12px; color: #92400e; margin-bottom: 16px;">
+            <div style="background-color: #f4f4f5; border-radius: 8px; padding: 12px; color: #3f3f46; margin-bottom: 16px;">
                 <strong>{t({'de': 'Aufgabe:', 'en': 'Task:'})}</strong> {t({'de': 'Finde den Wert x, bei dem 84% der Maschinen ausgefallen sind.', 'en': 'Find the value x where 84% of machines have failed.'})}
             </div>
             """, unsafe_allow_html=True)
@@ -210,7 +210,7 @@ def render_simulator_3_1():
                     if user:
                         track_question_answer(user["localId"], "vwl", "3", "3.1", "3_1_mission", True)
                         update_local_progress("3", "3.1", "3_1_mission", True)
-                        st.rerun()
+                        # Note: We do NOT call st.rerun() here so the user can see the balloons
 
                 if st.button(t({"de": "Neustart", "en": "Restart"})):
                     st.session_state.miss_3_1_done = False
@@ -233,7 +233,7 @@ def render_simulator_3_1():
     # ROW 4: PRO TIP
     st.markdown("<br>", unsafe_allow_html=True)
     st.markdown(f"""
-    <div style="background-color: #fef3c7; border-radius: 8px; padding: 12px; color: #92400e;">
+    <div style="background-color: #f4f4f5; border-radius: 8px; padding: 12px; color: #3f3f46;">
         <strong>Pro Tip:</strong> {t(content_3_1['pro_tip'])}
     </div>
     """, unsafe_allow_html=True)
@@ -282,8 +282,8 @@ def get_cdf_pdf_plot(x_highlight, show_pdf=True):
             name='Density', hoverinfo='skip'
         ))
 
-        # Annotation "PDF"
-        fig.add_annotation(x=-2.5, y=0.3, text="PDF (Density)", showarrow=False, font=dict(size=12, color="#888"))
+        # Annotation "PDF" (Blue to match slider)
+        fig.add_annotation(x=-2.5, y=0.3, text="PDF (Density)", showarrow=False, font=dict(size=12, color="#007AFF"))
 
     # 2. CDF (Bottom Line)
     # To show it on the same chart, we might need secondary y-axis or separate plots.

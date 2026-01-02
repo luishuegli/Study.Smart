@@ -42,6 +42,60 @@ def render_subtopic_1_1(model):
     # Header
     st.header(t({"de": "1.1 Ereignisse, Ereignisraum und Ereignismenge", "en": "1.1 Events, Sample Space and Sets"}))
     
+    # ===== NEW: FOUNDATIONAL DEFINITIONS FROM SLIDES =====
+    st.markdown(f"### {t({'de': 'Grundlegende Definitionen', 'en': 'Fundamental Definitions'})}")
+    
+    # Zufallsexperiment Definition (from slides p.8)
+    with st.container(border=True):
+        st.markdown(f"**{t({'de': 'Was ist ein Zufallsexperiment?', 'en': 'What is a Random Experiment?'})}**")
+        st.markdown(t({
+            "de": """
+Ein Experiment ist ein **Zufallsexperiment**, wenn es:
+
+1. Nach einer **bestimmten Vorschrift** ausgeführt wird
+2. Unter gleichen Bedingungen **beliebig oft wiederholbar** ist
+3. Das Ergebnis **ungewiss** ist und nicht vorausgesagt werden kann
+
+*Beispiele: Würfelwurf, Münzwurf, Lottoziehung*
+            """,
+            "en": """
+An experiment is a **random experiment** if:
+
+1. It follows a **specific procedure**
+2. It can be **repeated indefinitely** under the same conditions
+3. The outcome is **uncertain** and cannot be predicted
+
+*Examples: dice roll, coin flip, lottery draw*
+            """
+        }))
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+    # Special Events (sichere/unmögliches Ereignis from slides p.17)
+    c_sicher, c_unmog = st.columns(2, gap="medium")
+    
+    with c_sicher:
+        with st.container(border=True):
+            st.markdown(f"**{t({'de': 'Sicheres Ereignis', 'en': 'Certain Event'})}**")
+            st.latex(r"S")
+            st.markdown(t({
+                "de": "Der gesamte Ereignisraum. Tritt **immer** ein.",
+                "en": "The entire sample space. **Always** occurs."
+            }))
+            st.caption(t({"de": "Beispiel: 'Es fällt eine Zahl 1-6' beim Würfel", "en": "Example: 'A number 1-6 appears' on a die"}))
+    
+    with c_unmog:
+        with st.container(border=True):
+            st.markdown(f"**{t({'de': 'Unmögliches Ereignis', 'en': 'Impossible Event'})}**")
+            st.latex(r"\emptyset")
+            st.markdown(t({
+                "de": "Die leere Menge. Tritt **niemals** ein.",
+                "en": "The empty set. **Never** occurs."
+            }))
+            st.caption(t({"de": "Beispiel: 'Es fällt eine 7' beim Würfel", "en": "Example: 'A 7 appears' on a die"}))
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+    
     # Section header with Lucide icon
     st.markdown(f"### {t({'de': 'Theorie & Experimente', 'en': 'Theory & Experiments'})}")
     st.markdown(f"*{t({'de': 'Lerne jedes Konzept und wende es sofort interaktiv an!', 'en': 'Learn each concept and apply it interactively immediately!'})}*")

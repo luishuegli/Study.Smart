@@ -163,7 +163,7 @@ def render_missions_3_2():
     # PRO TIP (Below missions)
     st.markdown("<br>", unsafe_allow_html=True)
     st.markdown(f"""
-    <div style="background-color: #fef3c7; border-radius: 8px; padding: 12px; color: #92400e;">
+    <div style="background-color: #f4f4f5; border-radius: 8px; padding: 12px; color: #3f3f46;">
         <strong>Pro Tip:</strong> {t(content_3_2['pro_tip'])}
     </div>
     """, unsafe_allow_html=True)

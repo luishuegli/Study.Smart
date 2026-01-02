@@ -180,7 +180,6 @@ def render_subtopic_3_3(model):
                     if user:
                         track_question_answer(user["localId"], "vwl", "3", "3.3", "3_3_mission", True)
                         update_local_progress("3", "3.3", "3_3_mission", True)
-                        st.rerun()
                 st.success(t(content_3_3["mission"]["success"]))
             else:
                  st.session_state.mission_3_3_done = False
@@ -189,14 +188,13 @@ def render_subtopic_3_3(model):
                  else:
                      st.info(t({"de": "Zu weit rechts!", "en": "Too far right!"}))
 
-    st.markdown("<br>", unsafe_allow_html=True)
-    
-    # --- PRO TIP ---
-    st.markdown(f"""
-    <div style="background-color: #fef3c7; border-radius: 8px; padding: 12px; color: #92400e;">
-        <strong>Pro Tip:</strong> {t(content_3_3['pro_tip']['text'])}
-    </div>
-    """, unsafe_allow_html=True)
+        # --- PRO TIP (inside container, gray background) ---
+        st.markdown("<br>", unsafe_allow_html=True)
+        st.markdown(f"""
+        <div style="background-color: #f4f4f5; border-radius: 8px; padding: 12px; color: #3f3f46;">
+            <strong>Pro Tip:</strong> {t(content_3_3['pro_tip']['text'])}
+        </div>
+        """, unsafe_allow_html=True)
 
     st.markdown("<br><br>", unsafe_allow_html=True)
     

@@ -98,7 +98,7 @@ def render_subtopic_3_4(model):
     
     # --- PRO TIP ---
     st.markdown(f"""
-    <div style="background-color: #fef3c7; border-radius: 8px; padding: 12px; color: #92400e;">
+    <div style="background-color: #f4f4f5; border-radius: 8px; padding: 12px; color: #3f3f46;">
         <strong>Pro Tip:</strong> {t(content_3_4['pro_tip'])}
     </div>
     """, unsafe_allow_html=True)
@@ -154,7 +154,10 @@ def render_balance_simulator():
         reset_mode = st.session_state.get("bal_needs_reset", False)
         if reset_mode:
             st.session_state.bal_needs_reset = False
-        default_val = 0.20
+        
+        # ASYMMETRIC starting values to ensure E[X] != 3.0 (the target)
+        # These give E[X] ≈ 3.45, forcing the user to rebalance
+        default_vals = [0.05, 0.10, 0.10, 0.25, 0.50]
         
         target_ex = 3.0
         
@@ -171,7 +174,7 @@ def render_balance_simulator():
                 # Use fresh key on reset to avoid session state conflict
                 key_suffix = "_r" if reset_mode else ""
                 p = st.slider(
-                    f"X={i+1}", 0.0, 0.50, default_val, 0.05,
+                    f"X={i+1}", 0.0, 0.50, default_vals[i], 0.05,
                     key=f"bal_game_{i}{key_suffix}",
                     disabled=st.session_state.bal_mission_done
                 )

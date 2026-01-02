@@ -114,7 +114,7 @@ def render_subtopic_3_5(model):
     
     # --- PRO TIP ---
     st.markdown(f"""
-    <div style="background-color: #fef3c7; border-radius: 8px; padding: 12px; color: #92400e;">
+    <div style="background-color: #f4f4f5; border-radius: 8px; padding: 12px; color: #3f3f46;">
         <strong>Pro Tip:</strong> {t(content_3_5['pro_tip'])}
     </div>
     """, unsafe_allow_html=True)

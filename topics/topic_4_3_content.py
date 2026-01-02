@@ -208,32 +208,35 @@ content_4_3 = {
             {
                 "label_de": "Gegeben",
                 "label_en": "Given",
-                "content_de": "n = 12 (Anzahl Befragte), p = 0.35 (Erfolgswahrscheinlichkeit)",
-                "content_en": "n = 12 (number surveyed), p = 0.35 (success probability)"
+                "content_de": "$n = 12$ (Anzahl Befragte), $p = 0.35$ (Erfolgswahrscheinlichkeit)",
+                "content_en": "$n = 12$ (number surveyed), $p = 0.35$ (success probability)",
+                "is_latex": False
             },
             {
                 "label_de": "Gesucht",
                 "label_en": "Find",
-                "content_de": "P(X = 5) wobei X ∼ Bin(12, 0.35)",
-                "content_en": "P(X = 5) where X ∼ Bin(12, 0.35)"
+                "latex": r"P(X = 5) \text{ wobei } X \sim \text{Bin}(12, 0.35)",
+                "latex_en": r"P(X = 5) \text{ where } X \sim \text{Bin}(12, 0.35)",
+                "is_latex": True
             },
             {
                 "label_de": "Signal",
                 "label_en": "Signal",
                 "content_de": "'genau 5 von 12' + unabhängige Befragungen → Binomial",
-                "content_en": "'exactly 5 of 12' + independent surveys → Binomial"
+                "content_en": "'exactly 5 of 12' + independent surveys → Binomial",
+                "is_latex": False
             },
             {
                 "label_de": "Formel",
                 "label_en": "Formula",
-                "content_de": "P(X = 5) = C(12,5) × 0.35⁵ × 0.65⁷",
-                "content_en": "P(X = 5) = C(12,5) × 0.35⁵ × 0.65⁷"
+                "latex": r"P(X = 5) = \binom{12}{5} \times 0.35^5 \times 0.65^7",
+                "is_latex": True
             },
             {
                 "label_de": "Rechnung",
                 "label_en": "Calculation",
-                "content_de": "= 792 × 0.00525 × 0.0490 ≈ 0.204",
-                "content_en": "= 792 × 0.00525 × 0.0490 ≈ 0.204"
+                "latex": r"= 792 \times 0.00525 \times 0.0490 \approx 0.204",
+                "is_latex": True
             }
         ],
         "answer": {
@@ -249,27 +252,31 @@ content_4_3 = {
             {
                 "label": {"de": "Falle", "en": "Trap"},
                 "title": {"de": "'Mindestens k' ≠ 'genau k'", "en": "'At least k' ≠ 'exactly k'"},
+                "formula": r"P(X \geq k) = 1 - P(X < k)",
                 "content": {
-                    "de": "P(X ≥ k) = 1 − P(X < k). Oft ist der Umweg über das Komplement schneller!<br><em>Shortcut:</em> Für 'mindestens 1': P(X ≥ 1) = 1 − (1−p)<sup>n</sup>",
-                    "en": "P(X ≥ k) = 1 − P(X < k). Often the detour via complement is faster!<br><em>Shortcut:</em> For 'at least 1': P(X ≥ 1) = 1 − (1−p)<sup>n</sup>"
+                    "de": "Oft ist der Umweg über das Komplement schneller!",
+                    "en": "Often the detour via complement is faster!"
                 },
+                "shortcut_label": {"de": "Shortcut", "en": "Shortcut"},
+                "shortcut_text": {"de": "Für 'mindestens 1':", "en": "For 'at least 1':"},
+                "shortcut_formula": r"P(X \geq 1) = 1 - (1-p)^n",
                 "type": "warning"
             },
             {
                 "label": {"de": "Regel", "en": "Rule"},
                 "title": {"de": "'mit Zurücklegen' = Binomial", "en": "'with replacement' = Binomial"},
                 "content": {
-                    "de": "Mit Zurücklegen → p bleibt konstant → Binomial.<br>Ohne Zurücklegen → p ändert sich → Hypergeometrisch.",
-                    "en": "With replacement → p stays constant → Binomial.<br>Without replacement → p changes → Hypergeometric."
+                    "de": "Mit Zurücklegen → $p$ bleibt konstant → Binomial.<br>Ohne Zurücklegen → $p$ ändert sich → Hypergeometrisch.",
+                    "en": "With replacement → $p$ stays constant → Binomial.<br>Without replacement → $p$ changes → Hypergeometric."
                 },
                 "type": "tip"
             },
             {
                 "label": {"de": "Check", "en": "Check"},
-                "title": {"de": "Erwartete Erfolge = n · p", "en": "Expected successes = n · p"},
+                "title_formula": r"E[X] = n \cdot p",
                 "content": {
-                    "de": "Schneller Plausibilitäts-Check! n=100, p=0.3 → erwarte ~30 Erfolge.",
-                    "en": "Quick plausibility check! n=100, p=0.3 → expect ~30 successes."
+                    "de": "Schneller Plausibilitäts-Check! $n=100$, $p=0.3$ → erwarte ~30 Erfolge.",
+                    "en": "Quick plausibility check! $n=100$, $p=0.3$ → expect ~30 successes."
                 },
                 "type": "tip"
             }
@@ -371,53 +378,37 @@ def render_subtopic_4_3(model):
     
     st.markdown("<br>", unsafe_allow_html=True)
     
-    # --- DEFINITION ---
+    # --- DEFINITION (With integrated Symbol Ledger - like 4.2) ---
     st.markdown(f"### {t(content_4_3['definition']['header'])}")
     with st.container(border=True):
         st.markdown(t(content_4_3["definition"]["text"]))
         st.markdown("<br>", unsafe_allow_html=True)
         st.latex(content_4_3["definition"]["notation"])
-    
-    st.markdown("<br>", unsafe_allow_html=True)
-    
-    # --- VARIABLE DECODER (Stupid Person Rule) ---
-    decoder = content_4_3["definition"]["variable_decoder"]
-    st.markdown(f"### {t(decoder['header'])}")
-    
-    with st.container(border=True):
-        # Build a visual grid of variable explanations
-        for i, var in enumerate(decoder["variables"]):
-            st.markdown(f"""
-<div style="background: #fafafa; border-radius: 8px; padding: 16px; margin-bottom: 12px; border-left: 4px solid #3b82f6;">
-    <div style="display: flex; align-items: flex-start; gap: 16px;">
-        <div style="background: #3b82f6; color: white; border-radius: 8px; padding: 8px 16px; font-size: 1.2em; font-weight: 600; min-width: 60px; text-align: center;">
-            ${var['symbol']}$
-        </div>
-        <div style="flex: 1;">
-            <div style="font-weight: 700; font-size: 1.05em; color: #1c1c1e; margin-bottom: 4px;">
-                {t(var['name'])}
-            </div>
-            <div style="color: #3f3f46; line-height: 1.6; margin-bottom: 8px;">
-                {t(var['meaning'])}
-            </div>
-            <div style="background: #e5e7eb; border-radius: 6px; padding: 8px 12px; font-size: 0.9em; color: #52525b;">
-                <em>{t(var['example'])}</em>
-            </div>
-        </div>
-    </div>
-</div>
-            """, unsafe_allow_html=True)
         
-        # Full reading at the bottom
+        st.markdown("<br>", unsafe_allow_html=True)
+        
+        # --- INTEGRATED SYMBOL LEDGER (inside same container) ---
+        decoder = content_4_3["definition"]["variable_decoder"]
+        st.markdown(f"**{t(decoder['header'])}**")
+        st.markdown("<br>", unsafe_allow_html=True)
+        
+        # Render each variable using native Streamlit layout for proper LaTeX
+        for i, var in enumerate(decoder["variables"]):
+            col_sym, col_content = st.columns([1, 4])
+            with col_sym:
+                st.latex(var['symbol'])
+            with col_content:
+                st.markdown(f"**{t(var['name'])}**")
+                st.markdown(t(var['meaning']), unsafe_allow_html=True)
+                st.caption(t(var['example']))
+            st.markdown("---")
+        
+        # Full reading summary at the bottom
         st.markdown(f"""
-<div style="background: #f4f4f5; border-radius: 8px; padding: 16px; border-left: 4px solid #a1a1aa; margin-top: 16px;">
-    <div style="color: #1c1c1e; line-height: 1.6; font-size: 1.05em;">
-        {t(decoder['full_reading'])}
-    </div>
+<div style="background: #f4f4f5; border-radius: 8px; padding: 14px;">
+    <div style="color: #3f3f46; line-height: 1.5;">{t(decoder['full_reading'])}</div>
 </div>
         """, unsafe_allow_html=True)
-    
-    st.markdown("<br>", unsafe_allow_html=True)
 
     
     # --- THE FORMULA WITH BREAKDOWN ---
@@ -544,7 +535,7 @@ def render_subtopic_4_3(model):
         # Steps with color coding
         for step in content_4_3["example_worked"]["steps"]:
             label = t({"de": step["label_de"], "en": step["label_en"]})
-            content = t({"de": step["content_de"], "en": step["content_en"]})
+            is_latex = step.get("is_latex", False)
             
             # Color based on step type
             if "Gegeben" in label or "Given" in label:
@@ -556,28 +547,54 @@ def render_subtopic_4_3(model):
             else:
                 bg = "#f4f4f5"; color = "#3f3f46"
             
-            st.markdown(f"""
-            <div style="display:flex; align-items:center; gap:12px; margin:8px 0;">
-                <span style="background:{bg}; padding:4px 10px; border-radius:4px; color:{color}; font-weight:600; min-width:80px;">{label}</span>
-                <span>{content}</span>
-            </div>
-            """, unsafe_allow_html=True)
+            # Render the step
+            col_label, col_content = st.columns([1, 4])
+            with col_label:
+                st.markdown(f"""
+                <div style="background:{bg}; padding:6px 12px; border-radius:6px; color:{color}; font-weight:600; text-align:center; margin-top:8px;">
+                    {label}
+                </div>
+                """, unsafe_allow_html=True)
+            
+            with col_content:
+                if is_latex:
+                    # Use latex_en if available and language is English
+                    if "latex_en" in step and t({"de": "x", "en": "y"}) == "y":
+                        st.latex(step["latex_en"])
+                    else:
+                        st.latex(step["latex"])
+                else:
+                    content = t({"de": step["content_de"], "en": step["content_en"]})
+                    st.markdown(content)
         
         st.markdown("---")
         st.markdown(f"**{t(content_4_3['example_worked']['answer'])}**")
     
     st.markdown("<br>", unsafe_allow_html=True)
     
-    # --- EXAM ESSENTIALS (Simple Grey) ---
+    # --- EXAM ESSENTIALS (With LaTeX) ---
     st.markdown(f"### {t(content_4_3['exam_essentials']['header'])}")
     with st.container(border=True):
         for item in content_4_3["exam_essentials"]["items"]:
-            st.markdown(f"""
-<div style="padding: 10px 0; border-bottom: 1px solid #e4e4e7;">
-    <div style="font-weight: 600; color: #1c1c1e; margin-bottom: 4px;">{t(item['title'])}</div>
-    <div style="color: #52525b; font-size: 0.95em; line-height: 1.5;">{t(item['content'])}</div>
-</div>
-            """, unsafe_allow_html=True)
+            st.markdown("---")
+            
+            # Title - either text or LaTeX formula
+            if "title_formula" in item:
+                st.latex(item["title_formula"])
+            elif "title" in item:
+                st.markdown(f"**{t(item['title'])}**")
+            
+            # Main formula (if present)
+            if "formula" in item:
+                st.latex(item["formula"])
+            
+            # Content text
+            st.markdown(t(item['content']), unsafe_allow_html=True)
+            
+            # Shortcut section (if present)
+            if "shortcut_formula" in item:
+                st.markdown(f"*{t(item['shortcut_label'])}: {t(item['shortcut_text'])}*")
+                st.latex(item["shortcut_formula"])
     
     st.markdown("<br><br>", unsafe_allow_html=True)
     

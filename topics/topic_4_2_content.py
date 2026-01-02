@@ -343,24 +343,20 @@ def render_subtopic_4_2(model):
         # --- INTEGRATED SYMBOL LEDGER (inside same container) ---
         decoder = content_4_2["bernoulli_experiment"]["variable_decoder"]
         st.markdown(f"**{t(decoder['header'])}**")
+        st.markdown("<br>", unsafe_allow_html=True)
         
-        # Ledger-style table with gray Zinc palette
+        # Render each variable using native Streamlit layout for proper LaTeX
         for var in decoder["variables"]:
-            st.markdown(f"""
-<div style="display: flex; align-items: flex-start; gap: 14px; padding: 12px 0; border-bottom: 1px solid #e4e4e7;">
-    <div style="background: #18181b; color: white; border-radius: 6px; padding: 6px 12px; font-size: 1em; font-weight: 600; min-width: 80px; text-align: center; flex-shrink: 0;">
-        ${var['symbol']}$
-    </div>
-    <div style="flex: 1;">
-        <div style="font-weight: 600; color: #1c1c1e; margin-bottom: 2px;">{t(var['name'])}</div>
-        <div style="color: #52525b; font-size: 0.95em; line-height: 1.5;">{t(var['meaning'])}</div>
-        <div style="color: #71717a; font-size: 0.85em; font-style: italic; margin-top: 4px;">{t(var['example'])}</div>
-    </div>
-</div>
-            """, unsafe_allow_html=True)
+            col_sym, col_content = st.columns([1, 4])
+            with col_sym:
+                st.latex(var['symbol'])
+            with col_content:
+                st.markdown(f"**{t(var['name'])}**")
+                st.markdown(t(var['meaning']), unsafe_allow_html=True)
+                st.caption(t(var['example']))
+            st.markdown("---")
         
         # Full reading summary at the bottom
-        st.markdown("<br>", unsafe_allow_html=True)
         st.markdown(f"""
 <div style="background: #f4f4f5; border-radius: 8px; padding: 14px;">
     <div style="color: #3f3f46; line-height: 1.5;">{t(decoder['full_reading'])}</div>

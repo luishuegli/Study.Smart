@@ -2520,10 +2520,10 @@ Welche der folgenden Aussagen ist korrekt?""",
 Which of the following statements is correct?"""
         },
         "options": [
-            {"de": "Hinreichend für 1: Identisch verteilt. Hinreichend für 2: Unabhängig.", "en": "Hinreichend für 1: Identisch verteilt. Hinreichend für 2: Unabhängig."},
-            {"de": "Hinreichend für 1: Unabhängig. Hinreichend für 2: Identisch verteilt.", "en": "Hinreichend für 1: Unabhängig. Hinreichend für 2: Identisch verteilt."},
-            {"de": "Beide gelten immer, auch bei Abhängigkeit.", "en": "Beide gelten immer, auch bei Abhängigkeit."},
-            {"de": "Beide gelten immer, auch bei nicht-identischer Verteilung.", "en": "Beide gelten immer, auch bei nicht-identischer Verteilung."}
+            {"de": "Hinreichend für 1: Identisch verteilt. Hinreichend für 2: Unabhängig.", "en": "Sufficient for 1: Identically distributed. Sufficient for 2: Independent."},
+            {"de": "Hinreichend für 1: Unabhängig. Hinreichend für 2: Identisch verteilt.", "en": "Sufficient for 1: Independent. Sufficient for 2: Identically distributed."},
+            {"de": "Beide gelten immer, auch bei Abhängigkeit.", "en": "Both always hold, even with dependence."},
+            {"de": "Beide gelten immer, auch bei nicht-identischer Verteilung.", "en": "Both always hold, even without identical distribution."}
         ],
         "correct_idx": 1,
         "solution": {

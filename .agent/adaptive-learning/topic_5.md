@@ -390,11 +390,59 @@ Topic 5.1 was a complete failure. What should have taken 20-30 minutes took 2+ h
 
 ## Notes
 
-- 44 fixes applied (total for Topic 5)
+- 45 fixes applied (total for Topic 5)
 - Topic 5.2 ✓ COMPLETE
+- Topic 5.3 ✓ COMPLETE
 - ALWAYS REFERENCE TOPIC 4.x BEFORE IMPLEMENTING NEW TOPICS
 - ACTUALLY READ the gold standard files, don't just know they exist
 - CSS selector `stVerticalBlockBorderWrapper` is DEPRECATED - use `stVerticalBlock` instead
 - Interactive elements: MCQs are NOT truly interactive. Future topics need sliders, click grids, or Plotly-based interactions.
 
+---
+
+## TOPIC 5.3 FIXES
+
+### Fix 45: Portfolio Mission Semantic Coloring + Scenario-First + Formula Connection
+**Date:** 2026-01-03
+**Category:** Interactive/Pedagogy
+**Description:** Portfolio diversification mission lacked semantic coloring, context, and didn't relate discovery back to formula. Formulas were cut off in narrow columns.
+**Issues Found:**
+1. No semantic colors (red=risk, green=safe, blue=neutral)
+2. Scenario was vague ("You invest in two stocks")  
+3. Mission goal appeared at END instead of beginning
+4. No guidance during exploration (positive/negative correlation)
+5. Completion message didn't connect to formula meaning
+6. Formula cutoff in nested column containers
+7. Excessive spacing (`<br><br>`) between sections
+
+**Solution:**
+1. **Semantic Colors:** 
+   - Red (#FF4B4B) for high risk/positive covariance
+   - Green (#16a34a) for low risk/negative covariance
+   - Blue (#007AFF) for neutral states
+2. **Scenario-First Pattern:** WHY → WHAT → HOW structure
+3. **Mission Statement at Top:** "Your Mission: Find the ρ value where portfolio risk is lowest!"
+4. **Guided Feedback:** Different messages for ρ < 0, ρ > 0, ρ = 0, ρ = 1, ρ = -1
+5. **Formula Connection:** "What You Just Discovered" section explicitly explains Cov term
+6. **HTML Flexbox:** Replaced nested `st.container()` in columns with HTML flex layout
+7. **Reduced Spacing:** Changed multiple `<br><br>` to `<br>`
+8. **Full-Width Symbol Ledger:** Removed narrow columns for formula symbols
+
+**New Rules Identified:**
+- **Semantic Colors in Missions:** Use red/green/blue to reinforce meaning visually
+- **Never Nest Containers in Columns:** Use HTML flexbox for side-by-side displays
+- **Mission Statement First:** Goal appears BEFORE the interaction, not after
+- **Discovery Debrief:** Always explain what the student learned at completion
+
+### Fix 46: Mandatory Utils Reading Before Implementation
+**Date:** 2026-01-03
+**Category:** Workflow
+**Description:** Topics 5.2 and 5.3 only used 2 utilities despite 15+ being available. Agent wasn't aware of full utility inventory.
+**Solution:** Updated `implement.md` workflow:
+1. Pre-Flight Checks now include reading `utils/layouts/__init__.py` (utility index)
+2. Added `view_file_outline` for `worked_example.py`, `ask_yourself.py`, `exam_essentials.py`
+3. Expanded MANDATORY Utilities section with full list and "When to Use Each" table
+4. Added rule: "If writing raw HTML for a layout that looks like a utility, STOP and use the utility"
+
+**New Rule:** ALWAYS scan utils before implementation. Don't reinvent existing utilities.
 

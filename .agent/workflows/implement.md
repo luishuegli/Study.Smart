@@ -12,7 +12,7 @@ description: Complete workflow for implementing a new topic/subtopic
 
 ## Pre-Flight Checks (MANDATORY — NO EXCEPTIONS)
 
-> **Every rule file MUST be read before implementing a new topic.**
+> **Every rule file AND all utilities MUST be read before implementing a new topic.**
 
 ```
 // turbo
@@ -31,9 +31,17 @@ description: Complete workflow for implementing a new topic/subtopic
 7. view_file .agent/adaptive-learning/synthesis.md
 // turbo
 8. view_file .agent/adaptive-learning/topic_[previous].md (if exists)
+// turbo
+9. view_file utils/layouts/__init__.py (UTILITY INDEX)
+// turbo
+10. view_file_outline utils/worked_example.py
+// turbo
+11. view_file_outline utils/ask_yourself.py
+// turbo
+12. view_file_outline utils/exam_essentials.py
 ```
 
-**Confirm:** ✓ All rule files read | ✓ Pending rules from synthesis | ✓ Theory structure clear
+**Confirm:** ✓ All rule files read | ✓ All utils scanned | ✓ Pending rules from synthesis
 
 ---
 
@@ -47,15 +55,72 @@ description: Complete workflow for implementing a new topic/subtopic
 
 ---
 
-## MANDATORY Utilities
+## MANDATORY Utilities (USE THESE — DON'T REINVENT)
 
-> **See `.agent/workflows/implement-reference.md` for full code snippets.**
+> **Before writing ANY custom HTML or layout code, check if a utility exists.**
 
-**Always import:** `t`, `render_mcq`, `render_ask_yourself`, `render_exam_essentials`, `render_worked_example`
+### Core Imports (Always)
+```python
+from utils.localization import t
+from utils.quiz_helper import render_mcq
+from utils.ask_yourself import render_ask_yourself
+from utils.exam_essentials import render_exam_essentials
+from utils.worked_example import render_worked_example
+```
 
-**Layout utilities:** `render_single_formula`, `render_comparison`, `render_formula_grid`, `render_definition`, `grey_callout`, `intuition_box`, `variable_decoder`, `key_insight`
+### Layout Utilities (EVALUATE EACH ONE)
+```python
+from utils.layouts import (
+    render_single_formula,     # A: Formula + Intuition + Decoder
+    render_comparison,         # B: Side-by-side (e.g., Joint vs Marginal)
+    render_formula_grid,       # C: Multiple formulas in grid (MAX 2 cols!)
+    render_steps,              # D: Step-by-step process
+    render_formula_breakdown,  # E: Deep dive into formula parts
+    render_definition,         # G: Definition card
+    render_decision_tree,      # H: Decision flow
+)
+from utils.layouts.foundation import (
+    grey_callout,             # Standard grey info box
+    intuition_box,            # Opening intuition hook
+    variable_decoder,         # Symbol explanations
+    key_insight,              # "Aha!" moment box
+    inject_equal_height_css,  # For side-by-side containers
+)
+```
 
-**Rules:** Use utils, don't write inline HTML. No backslash escapes in f-strings.
+### ⚠️ MANDATORY Utility Selection Checklist
+
+**Before Phase 3, explicitly evaluate EACH utility below. Answer YES/NO/NA for each:**
+
+| Utility | Question to Ask | Answer |
+|---------|-----------------|--------|
+| `render_single_formula` | Does this topic introduce ONE key formula? | |
+| `render_comparison` | Are there TWO concepts to compare/contrast? | |
+| `render_formula_grid` | Are there 3+ related formulas (cheat sheet)? | |
+| `render_formula_breakdown` | Is there a complex formula needing part-by-part explanation? | |
+| `render_definition` | Is there a key term needing formal definition? | |
+| `render_decision_tree` | Is there a "which method/formula to use" decision? | |
+| `render_steps` | Is there a procedure/algorithm to explain? | |
+| `render_worked_example` | Is there a numerical example to walk through? | |
+
+**RULE:** You MUST use AT LEAST 3 different utilities per subtopic (excluding ask_yourself and exam_essentials which are always required).
+
+### Utility Selection Guide
+
+| Content Type | Use This Utility |
+|--------------|------------------|
+| **One formula + intuition + decoder** | `render_single_formula` |
+| **Compare two concepts** (Cov vs Corr, E vs Var, Joint vs Marginal) | `render_comparison` |
+| **Multiple related formulas** (cheat sheet, formula summary) | `render_formula_grid` |
+| **Complex formula breakdown** (Binomial PMF, Hypergeometric) | `render_formula_breakdown` |
+| **Definition of term** (Independence, Random Variable) | `render_definition` |
+| **Which method to choose** (distribution selection, test selection) | `render_decision_tree` |
+| **Step-by-step procedure** (Bayes, Hypothesis testing) | `render_steps` |
+| **Numerical worked example** (calculation with answer) | `render_worked_example` |
+| **Self-check questions** | `render_ask_yourself` (ALWAYS) |
+| **Exam tips + trap** | `render_exam_essentials` (ALWAYS) |
+
+**RULE:** If you find yourself writing raw HTML for a layout that looks like one of these utilities, STOP and use the utility instead.
 
 ---
 
@@ -181,9 +246,20 @@ All MCQs need: course_id, topic_id, subtopic_id, question_id
 
 ```
 ☑️ Theory (Analogy→Formula→Decoder→Insight)
-☑️ ≥1 visual/interactive
-☑️ Frag Dich
-☑️ Exam Essentials
+☑️ ≥3 layout utilities used (not counting ask_yourself/exam_essentials)
+☑️ ≥1 visual/interactive with @st.fragment
+☑️ Frag Dich (render_ask_yourself)
+☑️ Exam Essentials (render_exam_essentials)
 ☑️ ≥1 MCQ with tracking
 ☑️ SUBTOPIC_QUESTION_COUNTS
 ```
+
+**Utility Examples per Topic Type:**
+
+| Topic Type | Suggested Utilities |
+|------------|---------------------|
+| **Formula introduction** | `render_single_formula` + `render_worked_example` + `render_definition` |
+| **Two-concept comparison** | `render_comparison` + `render_decision_tree` + `render_worked_example` |
+| **Complex formula** | `render_formula_breakdown` + `render_steps` + `render_worked_example` |
+| **Distribution overview** | `render_formula_grid` + `render_decision_tree` + `render_comparison` |
+

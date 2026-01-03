@@ -26,6 +26,10 @@ _Rules that have been identified but not yet added to rule files._
 |------|----------|-------------|--------|
 | **Layout-First Approval Gate** | User feedback: must show layout before implementing | implement.md (workflow) | ⏳ CRITICAL |
 | No special Unicode quotes | German `„"` caused SyntaxError | design-system.md | ⏳ Pending |
+| **Semantic Colors in Missions** | Fix #45: Red=risk, Green=safe, Blue=neutral | interactive.md | ✅ DOCUMENTED |
+| **Never Nest Containers in Columns** | Fix #45: Causes formula cutoff | layout.md | ✅ DOCUMENTED |
+| **Mission Statement First** | Fix #45: Goal BEFORE interaction | interactive.md | ✅ DOCUMENTED |
+| **Discovery Debrief** | Fix #45: Explain what student learned at completion | interactive.md | ✅ DOCUMENTED |
 
 ### From Topic 3 (NEW)
 | Rule | Evidence | Add to File | Status |
@@ -41,6 +45,48 @@ _Rules that have been identified but not yet added to rule files._
 | Grey callouts only | Fixes #2, #5, #7 | design-system.md | ⏳ Pending |
 | Headers outside containers | Fixes #1, #3 | layout.md | ✅ Integrated |
 
+### From Topic 5.4 (NEW)
+| Rule | Evidence | Add to File | Status |
+|------|----------|-------------|--------|
+| **Connection Coloring (Trace Values)** | User feedback: Colors should show where SAME value appears again, not categorize by type. Each distinct value gets its own color throughout. | design-system.md | ⏳ CRITICAL |
+| **No emojis in decision trees** | Emoji ⭐ in decision tree violates No Emojis rule | decision_tree.py | ✅ Fixed |
+| **Color the question too** | Given values in problem statement should use same colors as in solution steps | worked_example.py | ⏳ Pending |
+
+**Connection Coloring Specification:**
+
+> **Purpose:** Colors trace the SAME value across steps, showing where numbers come from.
+
+**How it works:**
+1. Assign each DISTINCT given value its own color
+2. When that value appears in later steps, use the SAME color
+3. Intermediate results get new colors
+4. Final answer is always GREEN
+
+**Example (Portfolio Variance):**
+```
+PROBLEM: σ²_X = 100, σ²_Y = 64, ρ = 0.5. Find Var(X+Y)?
+
+GIVEN:
+  σ²_X = {blue}100      σ²_Y = {red}64       ρ = {purple}0.5
+
+CALCULATE COV:
+  Cov = {purple}0.5 · √{blue}100 · √{red}64 = {purple}0.5 · 10 · 8 = {gray}40
+
+APPLY FORMULA:
+  Var(X+Y) = {blue}100 + {red}64 + 2·{gray}40 = {green}244
+```
+
+**Color Palette:**
+| Role | Color | Hex | Notes |
+|------|-------|-----|-------|
+| Value A | Blue | #007AFF | First given value |
+| Value B | Red | #FF4B4B | Second given value |
+| Value C | Purple | #9B59B6 | Third given value |
+| Intermediate | Gray | #6B7280 | Computed values (reused later) |
+| Final Answer | Green | #16a34a | Always green |
+
+**Anti-pattern:** DON'T use same color for different values just because they're "inputs".
+
 ---
 
 ## Cross-Topic Patterns
@@ -53,9 +99,10 @@ _Same issue appearing across multiple topics = CRITICAL rule._
 | Colored callouts inside containers | T3, T4 | HIGH | ✅ Added |
 | Equal height CSS missing | T1, T2, T3 | CRITICAL | ✅ Added |
 | Inline custom HTML for traps | T2 | MEDIUM | ⏳ NEW - Use utilities |
-| Formula columns too narrow | T1 | MEDIUM | ⏳ NEW - Max 2 columns |
+| Formula columns too narrow | T1, T5.3 | MEDIUM | ⏳ NEW - Max 2 columns |
 | **Decoder separated from formula** | T3 | HIGH | ⏳ NEW - Use `---` separators |
 | **Missing @st.fragment** | T3 (3.5, 3.6) | HIGH | ⏳ NEW - Decorator mandatory |
+| **Nested containers in columns** | T5.3 | HIGH | ⏳ NEW - Use HTML flexbox instead |
 
 ---
 
@@ -110,6 +157,35 @@ _Track how rules improve over time._
 
 | Metric | T1 | T2 | T3 | T4 | T5 | Trend |
 |--------|----|----|----|----|----|-------|
-| Fixes needed | 5 | 2 | 10 | - | - | ↑ (new topic) |
+| Fixes needed | 5 | 2 | 10 | - | 45 | ↑ (complex topic) |
 | Implementation time | - | - | - | - | - | ↓ |
-| Rules added | 3 | 1 | 4 | - | - | ↑ |
+| Rules added | 3 | 1 | 4 | - | 4 | ↑ |
+
+---
+
+## Topic 5.3 Synthesis
+- **Completed:** 2026-01-03
+- **Total fixes:** 1 (session) + 44 prior = 45
+- **New rules created:** 4 (semantic-colors, no-nested-containers, mission-first, discovery-debrief)
+- **Key learnings:**
+  1. **Semantic Colors in Missions:** Red = danger/high risk, Green = safe/low risk, Blue = neutral. Colors must reinforce meaning.
+  2. **Never nest st.container() inside st.columns():** Causes formula cutoff. Use HTML flexbox instead.
+  3. **Mission Statement First:** Goal appears BEFORE the interactive, not at the bottom.
+  4. **Discovery Debrief:** After mission completion, explain what the student learned and relate back to the formula.
+
+## Topic 5.4 Synthesis
+- **Completed:** 2026-01-03
+- **Total fixes:** 6
+- **New rules created:** 3 (connection-coloring, color-question-too, ≥3-utilities-mandate)
+- **Key learnings:**
+  1. **Connection Coloring (CRITICAL):** Colors trace SAME value across steps - each distinct value gets its own persistent color. Anti-pattern: Don't color different values the same just because they're "inputs".
+  2. **Color the Question Too:** Given values in problem statement should use same colors as in solution steps for full traceability.
+  3. **≥3 Utilities Mandate:** Every subtopic must use at least 3 different layout utilities (excluding ask_yourself and exam_essentials). Updated `implement.md` workflow.
+  4. **No Emojis in Utilities:** Removed ⭐ from decision_tree.py, replaced with ✓.
+  
+**Files modified:**
+- `topic_5_4_content.py` — Full implementation with Connection Coloring
+- `decision_tree.py` — Emoji removal
+- `implement.md` — Added utility selection checklist
+- `exam_questions.py` — Fixed English translations for hs2015_mc6
+

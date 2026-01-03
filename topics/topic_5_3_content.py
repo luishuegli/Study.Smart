@@ -196,22 +196,18 @@ def render_subtopic_5_3(model):
         
         st.markdown("---")
         
-        # --- SYMBOL LEDGER ---
+        # --- SYMBOL LEDGER (full-width to prevent formula cutoff) ---
         decoder = cov["variable_decoder"]
         st.markdown(f"**{t(decoder['header'])}**")
-        st.markdown("<br>", unsafe_allow_html=True)
         
         for var in decoder["variables"]:
-            col_sym, col_content = st.columns([1, 4])
-            with col_sym:
-                st.latex(var['symbol'])
-            with col_content:
-                st.markdown(f"**{t(var['name'])}**")
-                st.markdown(t(var['meaning']), unsafe_allow_html=True)
-                st.caption(t(var['example']))
+            st.latex(var['symbol'])
+            st.markdown(f"**{t(var['name'])}**")
+            st.markdown(t(var['meaning']), unsafe_allow_html=True)
+            st.caption(t(var['example']))
             st.markdown("---")
     
-    st.markdown("<br><br>", unsafe_allow_html=True)
+    st.markdown("<br>", unsafe_allow_html=True)
     
     # --- DEFINITION: CORRELATION ---
     corr = content_5_3["definition_corr"]
@@ -224,19 +220,15 @@ def render_subtopic_5_3(model):
         
         st.markdown("---")
         
-        # --- SYMBOL LEDGER ---
+        # --- SYMBOL LEDGER (full-width to prevent formula cutoff) ---
         decoder = corr["variable_decoder"]
         st.markdown(f"**{t(decoder['header'])}**")
-        st.markdown("<br>", unsafe_allow_html=True)
         
         for var in decoder["variables"]:
-            col_sym, col_content = st.columns([1, 4])
-            with col_sym:
-                st.latex(var['symbol'])
-            with col_content:
-                st.markdown(f"**{t(var['name'])}**")
-                st.markdown(t(var['meaning']), unsafe_allow_html=True)
-                st.caption(t(var['example']))
+            st.latex(var['symbol'])
+            st.markdown(f"**{t(var['name'])}**")
+            st.markdown(t(var['meaning']), unsafe_allow_html=True)
+            st.caption(t(var['example']))
             st.markdown("---")
         
         # Scale interpretation
@@ -245,44 +237,41 @@ def render_subtopic_5_3(model):
         for item in scale["values"]:
             st.markdown(f"- **ρ = {item['value']}**: {t({'de': item['meaning_de'], 'en': item['meaning_en']})}")
     
-    st.markdown("<br><br>", unsafe_allow_html=True)
+    st.markdown("<br>", unsafe_allow_html=True)
     
     # =========================================
     # INTERACTIVE MISSION: PORTFOLIO DIVERSIFICATION
     # =========================================
-    st.markdown(f"### {t({'de': 'Interaktiv: Portfolio-Diversifikation', 'en': 'Interactive: Portfolio Diversification'})}")
+    st.markdown(f"### {t({'de': 'Mission: Portfolio-Diversifikation', 'en': 'Mission: Portfolio Diversification'})}")
     
     @st.fragment
     def portfolio_mission():
         if "portfolio_5_3_completed" not in st.session_state:
             st.session_state.portfolio_5_3_completed = False
         
-        # Scenario callout
+        # Step 1: Scenario (WHY does this matter?)
         st.markdown(f"""
 <div style="background: #f4f4f5; border-left: 4px solid #a1a1aa; 
-            padding: 12px 16px; border-radius: 8px; color: #3f3f46; margin-bottom: 16px;">
-<strong>{t({'de': 'Das Szenario', 'en': 'The Scenario'})}</strong><br>
-{t({'de': 'Du investierst in zwei Aktien. Jede hat Varianz 16. Du willst die Schwankung deines Portfolios minimieren. Dafur ist die Korrelation entscheidend!', 
-    'en': 'You invest in two stocks. Each has variance 16. You want to minimize your portfolio volatility. For this, correlation is key!'})}
+            padding: 12px 16px; border-radius: 8px; color: #3f3f46;">
+<strong>{t({'de': 'Szenario', 'en': 'Scenario'})}:</strong><br>
+{t({'de': 'Du bist Fondsmanager und investierst in zwei Aktien (X und Y). Jede hat eine Varianz von 16 — also ziemlich volatil. Dein Ziel: Das Gesamtrisiko deines Portfolios minimieren. Die entscheidende Frage: <strong>Wie hängen die Aktien zusammen?</strong>', 
+    'en': "You're a fund manager investing in two stocks (X and Y). Each has variance 16 — pretty volatile. Your goal: Minimize your portfolio's total risk. The key question: <strong>How are the stocks related?</strong>"})}
 </div>
 """, unsafe_allow_html=True)
         
+        # Step 2: Mission statement (WHAT should they do?)
+        st.markdown(f"**{t({'de': 'Deine Mission', 'en': 'Your Mission'})}:** {t({'de': 'Finde den ρ-Wert, bei dem das Portfolio-Risiko am kleinsten wird!', 'en': 'Find the ρ value where portfolio risk is lowest!'})}")
+        
         with st.container(border=True):
-            st.markdown(f"**{t({'de': 'Die Portfolio-Varianz-Formel', 'en': 'The Portfolio Variance Formula'})}**")
-            st.latex(r"\text{Var}(X + Y) = \text{Var}(X) + \text{Var}(Y) + 2 \cdot \text{Cov}(X, Y)")
+            # Step 3: The formula (HOW does it work?)
+            st.markdown(f"**{t({'de': 'Die Formel, die alles erklärt', 'en': 'The Formula That Explains Everything'})}:**")
+            st.latex(r"\text{Var}(X + Y) = \underbrace{\sigma_X^2}_{16} + \underbrace{\sigma_Y^2}_{16} + 2 \cdot \underbrace{\rho \cdot \sigma_X \cdot \sigma_Y}_{\text{Cov}(X,Y)}")
             
-            st.markdown("<br>", unsafe_allow_html=True)
-            st.markdown(f"*{t({'de': 'Mit Korrelation', 'en': 'With correlation'})}:*")
-            st.latex(r"\text{Var}(X + Y) = \sigma_X^2 + \sigma_Y^2 + 2 \rho \sigma_X \sigma_Y")
+            st.caption(t({'de': 'Die Kovarianz bestimmt, ob sich Risiken addieren oder aufheben!', 'en': 'The covariance determines whether risks add up or cancel out!'}))
             
             st.markdown("---")
             
-            # Parameters displayed
-            st.markdown(f"**{t({'de': 'Gegeben', 'en': 'Given'})}:** $\\sigma_X^2 = \\sigma_Y^2 = 16$ (also $\\sigma_X = \\sigma_Y = 4$)")
-            
-            st.markdown("<br>", unsafe_allow_html=True)
-            
-            # Correlation slider
+            # Step 4: Interactive controls
             rho = st.slider(
                 t({"de": "Korrelation ρ zwischen den Aktien", "en": "Correlation ρ between stocks"}),
                 min_value=-1.0,
@@ -297,38 +286,71 @@ def render_subtopic_5_3(model):
             sigma_x, sigma_y = 4, 4
             cov_xy = rho * sigma_x * sigma_y
             portfolio_var = var_x + var_y + 2 * cov_xy
-            portfolio_std = portfolio_var ** 0.5
             
-            st.markdown("<br>", unsafe_allow_html=True)
+            # Step 5: Live calculation display with semantic colors
+            # Color coding: Red = high risk, Green = low risk, Blue = neutral
+            if portfolio_var >= 48:
+                var_color = "#FF4B4B"  # Red - danger/high risk
+                risk_label = t({"de": "Hohes Risiko", "en": "High Risk"})
+            elif portfolio_var <= 8:
+                var_color = "#16a34a"  # Green - safe/low risk
+                risk_label = t({"de": "Niedriges Risiko", "en": "Low Risk"})
+            else:
+                var_color = "#007AFF"  # Blue - neutral
+                risk_label = t({"de": "Mittleres Risiko", "en": "Medium Risk"})
             
-            # Display result
-            col_cov, col_var = st.columns(2, gap="medium")
-            with col_cov:
-                with st.container(border=True):
-                    st.markdown(f"**Cov(X, Y)**")
-                    st.latex(f"= \\rho \\cdot \\sigma_X \\cdot \\sigma_Y = {rho:.1f} \\times 4 \\times 4 = {cov_xy:.1f}")
+            cov_color = "#FF4B4B" if cov_xy > 0 else ("#16a34a" if cov_xy < 0 else "#6B7280")
             
-            with col_var:
-                with st.container(border=True):
-                    st.markdown(f"**Var(X + Y)**")
-                    st.latex(f"= 16 + 16 + 2({cov_xy:.1f}) = {portfolio_var:.1f}")
+            # Display calculations WITHOUT nested containers in columns (prevents formula cutoff)
+            st.markdown(f"""
+<div style="display: flex; gap: 16px; margin: 12px 0;">
+    <div style="flex: 1; padding: 12px; background: #fafafa; border-radius: 8px; border: 1px solid #e5e5e5;">
+        <strong style="color: {cov_color};">Cov(X, Y) = {cov_xy:.1f}</strong><br>
+        <span style="font-size: 0.9em; color: #6B7280;">ρ × σ_X × σ_Y = {rho:.1f} × 4 × 4</span>
+    </div>
+    <div style="flex: 1; padding: 12px; background: #fafafa; border-radius: 8px; border: 1px solid #e5e5e5;">
+        <strong style="color: {var_color};">Var(X + Y) = {portfolio_var:.1f}</strong><br>
+        <span style="font-size: 0.9em; color: #6B7280;">16 + 16 + 2×({cov_xy:.1f})</span>
+    </div>
+</div>
+""", unsafe_allow_html=True)
             
-            st.markdown("<br>", unsafe_allow_html=True)
+            # Risk indicator bar
+            st.markdown(f"""
+<div style="background: linear-gradient(to right, #16a34a 0%, #007AFF 50%, #FF4B4B 100%); 
+            height: 8px; border-radius: 4px; margin: 8px 0; position: relative;">
+    <div style="position: absolute; left: {((portfolio_var) / 64) * 100}%; top: -4px; 
+                width: 16px; height: 16px; background: white; border: 2px solid #333; 
+                border-radius: 50%; transform: translateX(-50%);"></div>
+</div>
+<div style="display: flex; justify-content: space-between; font-size: 0.8em; color: #6B7280;">
+    <span>0 ({t({'de': 'Min', 'en': 'Min'})})</span>
+    <span style="color: {var_color}; font-weight: bold;">{risk_label}</span>
+    <span>64 ({t({'de': 'Max', 'en': 'Max'})})</span>
+</div>
+""", unsafe_allow_html=True)
             
-            # Visual feedback
+            # Step 6: Feedback based on state
             if rho == -1:
                 st.balloons()
                 st.success(t({
-                    "de": f"**Perfekt!** Bei ρ = -1 ist Var(X+Y) = {portfolio_var:.0f}. Die Schwankungen heben sich auf!",
-                    "en": f"**Perfect!** At ρ = -1, Var(X+Y) = {portfolio_var:.0f}. The fluctuations cancel out!"
+                    "de": f"🎯 **Mission erfüllt!** Bei ρ = -1 ist Var(X+Y) = {portfolio_var:.0f}!",
+                    "en": f"🎯 **Mission Complete!** At ρ = -1, Var(X+Y) = {portfolio_var:.0f}!"
                 }))
                 
-                # Insight box
+                # Step 7: Connect discovery back to formula
                 st.markdown(f"""
-<div style="background: #f4f4f5; border-left: 4px solid #16a34a; padding: 12px 16px; border-radius: 8px; color: #3f3f46;">
-<strong>{t({'de': 'Diversifikations-Effekt', 'en': 'Diversification Effect'})}</strong><br>
-{t({'de': 'Je negativer die Korrelation, desto mehr Risiko wird eliminiert. Bei ρ = -1 verschwindet das Risiko komplett!', 
-    'en': 'The more negative the correlation, the more risk is eliminated. At ρ = -1, risk disappears completely!'})}
+<div style="background: rgba(22, 163, 74, 0.1); border-left: 4px solid #16a34a; 
+            padding: 12px 16px; border-radius: 8px; color: #3f3f46;">
+<strong>{t({'de': 'Was du gerade entdeckt hast', 'en': 'What You Just Discovered'})}:</strong><br><br>
+{t({'de': '''In der Formel <strong>Var(X+Y) = σ²_X + σ²_Y + 2·Cov(X,Y)</strong> ist der Kovarianz-Term der Schlüssel:
+<br>• <strong style="color: #FF4B4B;">Cov > 0</strong> → Risiken addieren sich (schlecht!)
+<br>• <strong style="color: #16a34a;">Cov < 0</strong> → Risiken heben sich auf (Diversifikation!)
+<br>• <strong>ρ = -1</strong> → Perfekte Gegenbewegung = Minimales Risiko''',
+    'en': '''In the formula <strong>Var(X+Y) = σ²_X + σ²_Y + 2·Cov(X,Y)</strong>, the covariance term is key:
+<br>• <strong style="color: #FF4B4B;">Cov > 0</strong> → Risks add up (bad!)
+<br>• <strong style="color: #16a34a;">Cov < 0</strong> → Risks cancel out (diversification!)
+<br>• <strong>ρ = -1</strong> → Perfect opposite movement = Minimum risk'''})}
 </div>
 """, unsafe_allow_html=True)
                 
@@ -339,28 +361,33 @@ def render_subtopic_5_3(model):
                         update_local_progress("5", "5.3", "5_3_portfolio", True)
                         track_question_answer(user["localId"], "vwl", "5", "5.3", "5_3_portfolio", True)
             
+            elif rho == 1:
+                st.error(t({
+                    "de": f"⚠️ ρ = +1 → Var = {portfolio_var:.0f} — Maximum! Die Aktien schwanken synchron. Versuch's mit negativer Korrelation!",
+                    "en": f"⚠️ ρ = +1 → Var = {portfolio_var:.0f} — Maximum! Stocks move in sync. Try negative correlation!"
+                }))
+            
             elif rho == 0:
                 st.info(t({
-                    "de": f"Bei ρ = 0 addieren sich die Varianzen einfach: {portfolio_var:.0f}. Kein Diversifikationseffekt.",
-                    "en": f"At ρ = 0, variances simply add: {portfolio_var:.0f}. No diversification effect."
+                    "de": f"ρ = 0 → Var = {portfolio_var:.0f}. Keine Korrelation = Varianzen addieren sich einfach. Geht das noch besser?",
+                    "en": f"ρ = 0 → Var = {portfolio_var:.0f}. No correlation = variances simply add. Can you do better?"
                 }))
             
-            elif rho == 1:
+            elif rho < 0:
+                st.info(t({
+                    "de": f"ρ = {rho:.1f} → Var = {portfolio_var:.1f}. Gute Richtung! Negative Korrelation senkt das Risiko. Aber es geht noch tiefer...",
+                    "en": f"ρ = {rho:.1f} → Var = {portfolio_var:.1f}. Good direction! Negative correlation lowers risk. But you can go lower..."
+                }))
+            
+            else:  # rho > 0
                 st.warning(t({
-                    "de": f"Bei ρ = +1 ist Var(X+Y) maximal: {portfolio_var:.0f}. Beide bewegen sich gleich — Hochstes Risiko!",
-                    "en": f"At ρ = +1, Var(X+Y) is maximum: {portfolio_var:.0f}. Both move together — Highest risk!"
+                    "de": f"ρ = {rho:.1f} → Var = {portfolio_var:.1f}. Positive Korrelation erhöht das Risiko! Versuch's in die andere Richtung.",
+                    "en": f"ρ = {rho:.1f} → Var = {portfolio_var:.1f}. Positive correlation increases risk! Try the other direction."
                 }))
-            
-            else:
-                direction = t({"de": "Risiko sinkt", "en": "Risk decreases"}) if rho < 0 else t({"de": "Risiko steigt", "en": "Risk increases"})
-                st.caption(f"ρ = {rho:.1f} → Var(X+Y) = {portfolio_var:.1f} → {direction}")
-            
-            st.markdown("<br>", unsafe_allow_html=True)
-            st.markdown(f"**{t({'de': 'Mission', 'en': 'Mission'})}:** {t({'de': 'Finde die Korrelation, die das Risiko minimiert!', 'en': 'Find the correlation that minimizes risk!'})}")
     
     portfolio_mission()
     
-    st.markdown("<br><br>", unsafe_allow_html=True)
+    st.markdown("<br>", unsafe_allow_html=True)
     
     # --- EXAM ESSENTIALS ---
     from utils.exam_essentials import render_exam_essentials
@@ -370,7 +397,7 @@ def render_subtopic_5_3(model):
         tips=content_5_3["exam_essentials"]["tips"]
     )
     
-    st.markdown("<br><br>", unsafe_allow_html=True)
+    st.markdown("<br>", unsafe_allow_html=True)
     
     # --- EXAM SECTION ---
     st.markdown(f"### {t({'de': 'Prufungstraining', 'en': 'Exam Practice'})}")

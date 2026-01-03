@@ -45,24 +45,39 @@ content_2_6 = {
     
     "pro_tricks": {
         "header": {"de": "Pro-Tricks", "en": "Pro Tricks"},
-        "subtitle": {"de": "Was Top-Studenten wissen", "en": "What Top Students Know"},
         "tricks": [
             {
                 "title": {"de": "Der Order-Test", "en": "The Order Test"},
-                "tip": {"de": "Reihenfolge wichtig? → Permutation. Egal? → Kombination.", "en": "Order matters? → Permutation. Doesn't? → Combination."}
+                "question": {"de": "Ist ABC ≠ CBA?", "en": "Is ABC ≠ CBA?"},
+                "example": {
+                    "de": "Podium: Gold-Silber-Bronze ≠ Bronze-Silber-Gold → <strong>JA</strong> → Permutation",
+                    "en": "Podium: Gold-Silver-Bronze ≠ Bronze-Silver-Gold → <strong>YES</strong> → Permutation"
+                }
             },
             {
                 "title": {"de": "Multiplikationsprinzip", "en": "Multiplication Principle"},
-                "tip": {"de": "Mehrere Stufen? → Multipliziere die Anzahlen!", "en": "Multiple stages? → Multiply the counts!"}
+                "question": {"de": "Mehrere unabhängige Entscheidungen?", "en": "Multiple independent choices?"},
+                "example": {
+                    "de": "3 Hemden × 4 Hosen = <strong>12 Outfits</strong>",
+                    "en": "3 shirts × 4 pants = <strong>12 outfits</strong>"
+                }
             },
             {
                 "title": {"de": "Symmetrie-Trick", "en": "Symmetry Trick"},
-                "tip_text": {"de": "3 aus 10 wählen = 7 ausschließen!", "en": "Choose 3 from 10 = Exclude 7!"},
+                "question": {"de": "Ist k > n/2?", "en": "Is k > n/2?"},
+                "example": {
+                    "de": "7 aus 10 wählen = 3 ausschließen: C(10,7) = C(10,3) = <strong>120</strong>",
+                    "en": "Choose 7 from 10 = Exclude 3: C(10,7) = C(10,3) = <strong>120</strong>"
+                },
                 "formula": r"\binom{n}{k} = \binom{n}{n-k}"
             },
             {
                 "title": {"de": "Der Divisions-Hack", "en": "The Division Hack"},
-                "tip": {"de": "Doppelt gezählt? → Durch Anzahl der Anordnungen teilen!", "en": "Double counted? → Divide by number of arrangements!"}
+                "question": {"de": "Zu viel gezählt?", "en": "Overcounted?"},
+                "example": {
+                    "de": "AB und BA sind dasselbe Paar → 6 Sequenzen ÷ 2! = <strong>3 Paare</strong>",
+                    "en": "AB and BA are the same pair → 6 sequences ÷ 2! = <strong>3 pairs</strong>"
+                }
             }
         ]
     },
@@ -99,6 +114,18 @@ content_2_6 = {
         "desc": {"de": "Beantworte zwei Fragen, finde die richtige Formel!", "en": "Answer two questions, find the right formula!"},
         "q1": {"de": "Ist die Reihenfolge wichtig?", "en": "Does order matter?"},
         "q2": {"de": "Mit Zurücklegen (Wiederholung)?", "en": "With replacement (repetition)?"}
+    },
+    
+    # --- FRAG DICH (Ask Yourself) ---
+    "frag_dich": {
+        "header": {"de": "Schnell-Check vor der Prüfung", "en": "Quick Check Before the Exam"},
+        "questions": [
+            {"de": "Kannst du <strong>alle 4 Formeln</strong> aus dem Gedächtnis aufschreiben?", "en": "Can you write <strong>all 4 formulas</strong> from memory?"},
+            {"de": "Erkennst du den <strong>Unterschied</strong> zwischen Permutation und Kombination in einer Aufgabe?", "en": "Can you spot the <strong>difference</strong> between Permutation and Combination in a problem?"},
+            {"de": "Weisst du, wann du <strong>mit Wiederholung</strong> (n^k) vs. ohne (P oder C) rechnen musst?", "en": "Do you know when to use <strong>with replacement</strong> (n^k) vs. without (P or C)?"},
+            {"de": "Kannst du <strong>ABC ≠ CBA</strong> als Order-Test anwenden?", "en": "Can you apply <strong>ABC ≠ CBA</strong> as the Order Test?"}
+        ],
+        "conclusion": {"de": "Alle JA? → Du bist bereit für Kombinatorik-Aufgaben!", "en": "All YES? → You're ready for combinatorics problems!"}
     }
 }
 
@@ -175,7 +202,17 @@ def render_subtopic_2_6(model):
     
     st.markdown("<br><br>", unsafe_allow_html=True)
     
-    # === SECTION 5: EXAM PRACTICE ===
+    # === SECTION 5: ASK YOURSELF (QUICK CHECK) ===
+    from utils.ask_yourself import render_ask_yourself
+    render_ask_yourself(
+        header=content_2_6["frag_dich"]["header"],
+        questions=content_2_6["frag_dich"]["questions"],
+        conclusion=content_2_6["frag_dich"]["conclusion"]
+    )
+    
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    
+    # === SECTION 6: EXAM PRACTICE ===
     st.markdown(f"### {t({'de': 'Prüfungstraining', 'en': 'Exam Practice'})}")
     
     question_ids = ["test1_mc3", "test2_mc1"]
@@ -235,33 +272,34 @@ def render_cheat_sheet():
 
 
 def render_pro_tricks():
-    """Render pro tips section - using native Streamlit for equal height"""
+    """Render pro tips section with concrete examples"""
     pt = content_2_6["pro_tricks"]
     st.markdown(f"### {t(pt['header'])}")
-    st.caption(t(pt['subtitle']))
     
     tricks = pt["tricks"]
     
-    # Row 1
+    # Row 1: Order Test + Multiplication Principle
     c1, c2 = st.columns(2, gap="medium")
     for col, trick in zip([c1, c2], tricks[:2]):
         with col:
             with st.container(border=True):
                 st.markdown(f"**{t(trick['title'])}**")
-                st.markdown(t(trick['tip']), unsafe_allow_html=True)
+                st.markdown(f"*{t(trick['question'])}*")
+                st.markdown("---")
+                st.markdown(t(trick['example']), unsafe_allow_html=True)
     
-    # Row 2
+    # Row 2: Symmetry Trick + Division Hack
     c3, c4 = st.columns(2, gap="medium")
     for col, trick in zip([c3, c4], tricks[2:]):
         with col:
             with st.container(border=True):
                 st.markdown(f"**{t(trick['title'])}**")
-                # Handle formula separately if present
+                st.markdown(f"*{t(trick['question'])}*")
+                # Show formula if present
                 if "formula" in trick:
                     st.latex(trick["formula"])
-                    st.markdown(t(trick.get("tip_text", trick.get("tip", {}))), unsafe_allow_html=True)
-                else:
-                    st.markdown(t(trick['tip']), unsafe_allow_html=True)
+                st.markdown("---")
+                st.markdown(t(trick['example']), unsafe_allow_html=True)
 
 
 def render_exam_traps():
@@ -376,12 +414,9 @@ def render_counting_compass():
                         track_question_answer(user["localId"], "vwl", "2", "2.6", "2_6_compass_mission", True)
                         update_local_progress("2", "2.6", "2_6_compass_mission", True)
                 
-                # Result display
-                st.markdown(f"""
-                <div style="background: {color}20; border: 2px solid {color}; border-radius: 12px; padding: 20px; text-align: center;">
-                    <div style="font-weight: 700; font-size: 1.2em; color: {color}; margin-bottom: 12px;">{name}</div>
-                </div>
-                """, unsafe_allow_html=True)
+                # Result display - left aligned, pushed down
+                st.markdown("<br>", unsafe_allow_html=True)
+                st.markdown(f"**{name}**")
                 st.latex(formula)
                 st.caption(example)
             else:

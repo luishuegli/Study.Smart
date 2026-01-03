@@ -25,6 +25,43 @@ content_2_2 = {
     "relate": {
         "de": "Das ist das <b>Fundamentalprinzip</b>: Unabhängige Entscheidungen werden <b>multipliziert</b>.",
         "en": "This is the <b>Fundamental Principle</b>: Independent choices are <b>multiplied</b>."
+    },
+    
+    # --- FRAG DICH (Ask Yourself) ---
+    "frag_dich": {
+        "header": {"de": "Frag dich: Multiplikation oder nicht?", "en": "Ask yourself: Multiply or not?"},
+        "questions": [
+            {"de": "Sind die Entscheidungen <strong>unabhängig</strong>? (Die erste beeinflusst die zweite nicht?)", "en": "Are the choices <strong>independent</strong>? (First doesn't affect second?)"},
+            {"de": "Könnte ich einen <strong>Entscheidungsbaum</strong> zeichnen, der sich verzweigt?", "en": "Could I draw a <strong>decision tree</strong> that branches out?"},
+            {"de": "Ist es 'UND' (beide Entscheidungen) oder 'ODER' (Alternativen)?", "en": "Is it 'AND' (both choices) or 'OR' (alternatives)?"}
+        ],
+        "conclusion": {"de": "UND + Unabhängig → Multiplizieren. ODER → Addieren.", "en": "AND + Independent → Multiply. OR → Add."}
+    },
+    
+    # --- EXAM ESSENTIALS ---
+    "exam_essentials": {
+        "trap": {
+            "de": "Multiplikationsprinzip anwenden, wenn Entscheidungen <strong>NICHT unabhängig</strong> sind! Beispiel: '2 aus 5 wählen' ist NICHT 5×4 (sonst Overcounting).",
+            "en": "Applying multiplication when choices are <strong>NOT independent</strong>! Example: 'Choose 2 from 5' is NOT 5×4 (would overcount)."
+        },
+        "trap_rule": {
+            "de": "Frag dich: Beeinflusst die erste Wahl die zweite? JA → Prüfe genau!",
+            "en": "Ask yourself: Does the first choice affect the second? YES → Check carefully!"
+        },
+        "tips": [
+            {
+                "tip": {"de": "UND = Multiplizieren", "en": "AND = Multiply"},
+                "why": {"de": "Jede Entscheidung öffnet neue Pfade. Der Baum verzweigt sich.", "en": "Each choice opens new paths. The tree branches out."}
+            },
+            {
+                "tip": {"de": "ODER = Addieren", "en": "OR = Add"},
+                "why": {"de": "Alternativen schließen sich aus. Du nimmst einen ODER den anderen Pfad.", "en": "Alternatives are mutually exclusive. You take one path OR the other."}
+            },
+            {
+                "tip": {"de": "Zeichne immer den Baum!", "en": "Always draw the tree!"},
+                "why": {"de": "Visualisierung verhindert Denkfehler. Verzweigung = multiplizieren.", "en": "Visualization prevents mistakes. Branching = multiply."}
+            }
+        ]
     }
 }
 
@@ -324,61 +361,6 @@ def render_subtopic_2_2(client):
         # Safety margin for last pro tip
         st.markdown("<div style='margin-bottom: 12px;'></div>", unsafe_allow_html=True)
 
-    # --- ROW 3: THE TRAP (Now after Formula Compass) ---
-    # --- STAGE 2: THE TRAP (Unified Card Layout) ---
-    st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown(f"### {t({'de': 'Die Falle: Unabhängigkeit prüfen!', 'en': 'The Trap: Check Independence!'})}")
-
-    st.markdown(t({
-        'de': 'Das Multiplikationsprinzip gilt <b>nur für unabhängige Entscheidungen</b>.', 
-        'en': 'The multiplication principle <b>only works for independent choices</b>.'}), unsafe_allow_html=True)
-    st.markdown("<br>", unsafe_allow_html=True)
-
-    # --- SINGLE OUTER BORDER WRAPPING BOTH COLUMNS ---
-    with st.container(border=True):
-        c_indep, c_dep = st.columns(2, gap="medium")
-
-        with c_indep:
-            # Gray Box 1
-            st.markdown(f"""
-            <div style="background: #f8f9fa; border-radius: 8px; padding: 16px; height: 100%; display: flex; flex-direction: column;">
-                <div style="color: #334155; font-weight: 600; font-size: 1.1em; margin-bottom: 12px;">
-                    {t({'de': 'Unabhängig', 'en': 'Independent'})}
-                </div>
-                <div style="font-size: 0.9em; color: #334155; flex-grow: 1;">
-                    {t({'de': 'Hemd wählen UND Hose wählen', 'en': 'Choose shirt AND choose pants'})}
-                    <br><span style="color: #64748b; font-size: 0.85em;">({t({'de': 'Hemd beeinflusst Hosen nicht', 'en': "Shirt doesn't affect pants"})})</span>
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
-
-        with c_dep:
-            # Gray Box 2
-            st.markdown(f"""
-            <div style="background: #f8f9fa; border-radius: 8px; padding: 16px; height: 100%; display: flex; flex-direction: column;">
-                <div style="color: #334155; font-weight: 600; font-size: 1.1em; margin-bottom: 12px;">
-                    {t({'de': 'NICHT Unabhängig', 'en': 'NOT Independent'})}
-                </div>
-                <div style="font-size: 0.9em; color: #334155; flex-grow: 1;">
-                    {t({'de': '"Wähle 2 Personen aus 5"', 'en': '"Choose 2 people from 5"'})}
-                    <br><span style="color: #64748b; font-size: 0.85em;">(≠ 5 × 4 → Overcounting!)</span>
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
-
-        st.markdown("<br>", unsafe_allow_html=True)
-
-        # Unified Rule of Thumb Footer (Inside Border)
-        st.markdown(f"""
-        <div style="background: #f8f9fa; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; text-align: center;">
-            <span style="font-weight: 600; color: #334155;">{t({'de': 'Faustregel:', 'en': 'Rule of thumb:'})}</span>
-            <span style="color: #475569;">{t({'de': 'Wenn die erste Wahl die zweite beeinflusst → prüfe genau!', 'en': 'If the first choice affects the second → check carefully!'})}</span>
-        </div>
-        <!-- Spacer to Extend Bottom Border -->
-        <div style="height: 24px;"></div>
-        """, unsafe_allow_html=True)
-    st.markdown("<br>", unsafe_allow_html=True)
-
     st.markdown("<br>", unsafe_allow_html=True)
 
     # --- THE INTERACTIVE MATRIX ---
@@ -511,6 +493,24 @@ border-color: #3B82F6;
             else:
                 # Empty State
                 st.info(t({"de": "Wähle mindestens ein Hemd und eine Hose.", "en": "Select at least one shirt and one pair of pants."}))
+
+    # --- FRAG DICH (Ask Yourself) ---
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    from utils.ask_yourself import render_ask_yourself
+    render_ask_yourself(
+        header=content_2_2["frag_dich"]["header"],
+        questions=content_2_2["frag_dich"]["questions"],
+        conclusion=content_2_2["frag_dich"]["conclusion"]
+    )
+    
+    # --- EXAM ESSENTIALS ---
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    from utils.exam_essentials import render_exam_essentials
+    render_exam_essentials(
+        trap=content_2_2["exam_essentials"]["trap"],
+        trap_rule=content_2_2["exam_essentials"]["trap_rule"],
+        tips=content_2_2["exam_essentials"]["tips"]
+    )
 
     # --- EXAM SECTION ---
     st.markdown("<br><br>", unsafe_allow_html=True)

@@ -81,6 +81,43 @@ This is **WITH REPLACEMENT**."""
     "exam": {
         "title": {"de": "Prüfungstraining", "en": "Exam Practice"},
         "source": "Variation with Replacement Practice"
+    },
+    
+    # --- FRAG DICH (Ask Yourself) ---
+    "frag_dich": {
+        "header": {"de": "Frag dich: Mit oder ohne Wiederholung?", "en": "Ask yourself: With or without replacement?"},
+        "questions": [
+            {"de": "Kann das <strong>gleiche Element</strong> mehrfach gewählt werden?", "en": "Can the <strong>same element</strong> be chosen multiple times?"},
+            {"de": "Schrumpft der <strong>Pool</strong> nach jeder Auswahl?", "en": "Does the <strong>pool</strong> shrink after each selection?"},
+            {"de": "Sind die Entscheidungen <strong>unabhängig</strong>?", "en": "Are the choices <strong>independent</strong>?"}
+        ],
+        "conclusion": {"de": "Gleich erlaubt / Pool bleibt / Unabhängig → n^k. Sonst → P(n,k).", "en": "Same allowed / Pool stays / Independent → n^k. Otherwise → P(n,k)."}
+    },
+    
+    # --- EXAM ESSENTIALS ---
+    "exam_essentials": {
+        "trap": {
+            "de": "Variation <strong>mit</strong> Wiederholung (n^k) vs. <strong>ohne</strong> (P(n,k)) verwechseln! Der Pool-Check ist entscheidend.",
+            "en": "Confusing variation <strong>with</strong> replacement (n^k) vs. <strong>without</strong> (P(n,k))! The pool-check is key."
+        },
+        "trap_rule": {
+            "de": "Frag dich: Schrumpft der Pool nach jeder Wahl? NEIN → n^k. JA → P(n,k).",
+            "en": "Ask yourself: Does the pool shrink after each pick? NO → n^k. YES → P(n,k)."
+        },
+        "tips": [
+            {
+                "tip": {"de": "n^k = Pool bleibt konstant", "en": "n^k = Pool stays constant"},
+                "why": {"de": "Wie bei PINs: Nach jeder Ziffer sind immer noch 10 Ziffern verfügbar.", "en": "Like PINs: After each digit, all 10 digits are still available."}
+            },
+            {
+                "tip": {"de": "Signalwörter: 'PIN', 'Code', 'unabhängig', 'Würfeln'", "en": "Signal words: 'PIN', 'code', 'independent', 'dice roll'"},
+                "why": {"de": "Diese Szenarien erlauben Wiederholungen.", "en": "These scenarios allow repetition."}
+            },
+            {
+                "tip": {"de": "Mit Wiederholung = mehr Möglichkeiten", "en": "With replacement = more possibilities"},
+                "why": {"de": "10^4 = 10'000 > P(10,4) = 5'040. Darum sind PINs mit Wiederholung sicherer!", "en": "10^4 = 10,000 > P(10,4) = 5,040. That's why PINs with replacement are more secure!"}
+            }
+        ]
     }
 }
 
@@ -93,17 +130,71 @@ def render_subtopic_2_5(model):
     st.header(t(content_2_5["title"]))
     st.markdown("---")
     
-    # --- CONTEXT ANCHOR ---
+    # --- THEORY SECTION (Following Pedagogy Rules) ---
+    
+    # 1. THE INTUITION (Outside container)
+    st.markdown(f"### {t({'de': 'Die Intuition', 'en': 'The Intuition'})}")
     with st.container(border=True):
-        st.markdown(t(content_2_5["context_anchor"]))
+        st.markdown(t({
+            "de": "Stell dir ein Schloss mit Zahlenrädern vor. Jedes Rad hat die Ziffern 0-9. Egal welche Zahl du für das erste Rad wählst - beim zweiten hast du WIEDER alle 10 Optionen. Die Auswahl 'verbraucht' nichts. Das ist wie Zurücklegen: Der Pool schrumpft nie!",
+            "en": "Imagine a lock with number wheels. Each wheel has digits 0-9. No matter what number you pick for the first wheel, the second wheel STILL has all 10 options. Your choice doesn't 'use up' anything. This is like replacement: the pool never shrinks!"
+        }))
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+    # 2. THE FORMULA + VARIABLE DECODER + KEY INSIGHT (Single container)
+    st.markdown(f"### {t({'de': 'Die Formel', 'en': 'The Formula'})}")
+    with st.container(border=True):
+        # Formula
+        st.latex(r"n^k")
+        st.caption(t({"de": "Variation mit Wiederholung: k Positionen, jeweils n Optionen", "en": "Variation with replacement: k positions, each with n options"}))
         
-        st.markdown("<hr style='margin: 16px 0; border: 0; border-top: 1.5px solid #f3f4f6;'>", unsafe_allow_html=True)
+        st.markdown("---")
         
+        # Variable Decoder
+        st.markdown(f"**{t({'de': 'Die Variablen erklärt', 'en': 'The Variables Explained'})}:**")
         st.markdown(f"""
-<div style="background: #f4f4f5; border-left: 3px solid #71717a; padding: 12px; border-radius: 6px; color: #3f3f46;">
-{t(content_2_5["key_insight"])}
+• $n$ = **{t({"de": "Pool", "en": "Pool"})}** — {t({"de": "Wie viele Optionen pro Position?", "en": "How many options per position?"})}
+
+• $k$ = **{t({"de": "Positionen", "en": "Positions"})}** — {t({"de": "Wie viele Entscheidungen treffen wir?", "en": "How many decisions do we make?"})}
+
+• $n^k$ = **{t({"de": "Ergebnis", "en": "Result"})}** — {t({"de": "n Optionen, k-mal unabhängig gewählt", "en": "n options, chosen k times independently"})}
+""")
+        
+        st.markdown("---")
+        
+        # Key Insight
+        st.markdown(f"*{t({'de': 'Der Schlüssel: Bei MIT Wiederholung ist jede Entscheidung UNABHÄNGIG. Die erste Wahl beeinflusst die zweite nicht. Deshalb multiplizieren wir n × n × n... (k mal) = n^k', 'en': 'The key: WITH replacement means each decision is INDEPENDENT. The first choice does not affect the second. That is why we multiply n × n × n... (k times) = n^k'})}*")
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+    # --- CONTEXT ANCHOR (PIN Security Scenario) ---
+    st.markdown(f"### {t({'de': 'Anwendung: PIN-Sicherheit', 'en': 'Application: PIN Security'})}")
+    with st.container(border=True):
+        st.markdown(f"**{t({'de': 'Sicherheitsfrage', 'en': 'Security Question'})}:** {t({'de': 'Warum sind 4-stellige PINs sicher?', 'en': 'Why are 4-digit PINs secure?'})}")
+        
+        col_scenario, col_insight = st.columns([1, 1.2], gap="large", vertical_alignment="center")
+        
+        with col_scenario:
+            st.markdown(f"""
+<div style="background: #f4f4f5; border-radius: 8px; padding: 16px; color: #3f3f46;">
+<strong>{t({'de': 'Das Szenario', 'en': 'The Scenario'})}</strong><br><br>
+{t({'de': 'Jemand versucht, deinen PIN zu knacken:', 'en': "Someone's trying to brute-force your PIN:"})}<br>
+<code style="background:#e4e4e7; padding:2px 6px; border-radius:4px;">0000</code> → 
+<code style="background:#e4e4e7; padding:2px 6px; border-radius:4px;">0001</code> → 
+<code style="background:#e4e4e7; padding:2px 6px; border-radius:4px;">0002</code> → ...
+<br><br>
+<strong>{t({'de': 'Wie viele Versuche bis ALLE durchprobiert?', 'en': 'How many tries until ALL tested?'})}</strong>
 </div>
 """, unsafe_allow_html=True)
+        
+        with col_insight:
+            st.markdown(f"**{t({'de': 'Antwort', 'en': 'Answer'})}**")
+            st.latex(r"10^4 = 10,000")
+            st.markdown(t({
+                "de": "10 Ziffern pro Position × 4 Positionen = 10.000 mögliche PINs",
+                "en": "10 digits per position × 4 positions = 10,000 possible PINs"
+            }))
     
     st.markdown("<br><br>", unsafe_allow_html=True)
     
@@ -302,7 +393,25 @@ def render_subtopic_2_5(model):
     
     st.markdown("<br><br>", unsafe_allow_html=True)
     
+    # --- FRAG DICH (Ask Yourself) ---
+    from utils.ask_yourself import render_ask_yourself
+    render_ask_yourself(
+        header=content_2_5["frag_dich"]["header"],
+        questions=content_2_5["frag_dich"]["questions"],
+        conclusion=content_2_5["frag_dich"]["conclusion"]
+    )
+    
+    # --- EXAM ESSENTIALS ---
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    from utils.exam_essentials import render_exam_essentials
+    render_exam_essentials(
+        trap=content_2_5["exam_essentials"]["trap"],
+        trap_rule=content_2_5["exam_essentials"]["trap_rule"],
+        tips=content_2_5["exam_essentials"]["tips"]
+    )
+
     # --- EXAM SECTION ---
+    st.markdown("<br><br>", unsafe_allow_html=True)
     st.markdown(f"### {t(content_2_5['exam']['title'])}")
     st.caption(t(content_2_5['exam']['source']))
     

@@ -345,21 +345,12 @@ def render_subtopic_4_7(model):
     st.markdown("<br>", unsafe_allow_html=True)
     
     # --- FRAG DICH: DECISION GUIDE ---
-    st.markdown(f"""
-    <div style="background-color: rgba(0, 122, 255, 0.08); border-radius: 12px; padding: 20px; border: 2px solid #007AFF;">
-        <div style="font-weight: 700; color: #007AFF; margin-bottom: 16px; font-size: 1.1em;">
-            {t(content_4_7['frag_dich']['header'])}
-        </div>
-        <div style="color: #1c1c1e;">
-            <ol style="margin: 0; padding-left: 20px; line-height: 2;">
-                {"".join([f"<li>{t({'de': q['de'], 'en': q['en']})}</li>" for q in content_4_7['frag_dich']['questions']])}
-            </ol>
-        </div>
-        <div style="margin-top: 16px; padding: 10px; background: #007AFF; color: white; border-radius: 8px; text-align: center; font-weight: 600;">
-            {t(content_4_7['frag_dich']['conclusion'])}
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+    from utils.ask_yourself import render_ask_yourself
+    render_ask_yourself(
+        header=content_4_7['frag_dich']['header'],
+        questions=content_4_7['frag_dich']['questions'],
+        conclusion=content_4_7['frag_dich']['conclusion']
+    )
     
     st.markdown("<br>", unsafe_allow_html=True)
     
@@ -454,7 +445,9 @@ def render_subtopic_4_7(model):
         </div>
         """, unsafe_allow_html=True)
         
-        for step in content_4_7["example_z"]["steps"]:
+        for i, step in enumerate(content_4_7["example_z"]["steps"]):
+            if i > 0:
+                st.markdown("---")
             label = t({"de": step["label_de"], "en": step["label_en"]})
             action = t({"de": step["action_de"], "en": step["action_en"]})
             
@@ -647,16 +640,9 @@ P(X ≤ {x_val:.0f}) = Φ({z_score:.2f}) = <span style="color:{prob_color}; font
     
     st.markdown("<br>", unsafe_allow_html=True)
     
-    # --- EXAM ESSENTIALS (Simple Grey) ---
-    st.markdown(f"### {t(content_4_7['exam_essentials']['header'])}")
-    with st.container(border=True):
-        for item in content_4_7["exam_essentials"]["items"]:
-            st.markdown(f"""
-<div style="padding: 10px 0; border-bottom: 1px solid #e4e4e7;">
-    <div style="font-weight: 600; color: #1c1c1e; margin-bottom: 4px;">{t(item['title'])}</div>
-    <div style="color: #52525b; font-size: 0.95em; line-height: 1.5;">{t(item['content'])}</div>
-</div>
-            """, unsafe_allow_html=True)
+    # --- EXAM ESSENTIALS (Using Utility) ---
+    from utils.exam_essentials import render_exam_essentials
+    render_exam_essentials(items=content_4_7["exam_essentials"]["items"])
     
     st.markdown("<br><br>", unsafe_allow_html=True)
     

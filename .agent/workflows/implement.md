@@ -1,7 +1,8 @@
 ---
 description: Complete workflow for implementing a new topic/subtopic
-trigger: /implement or "implement topic X.Y"
 ---
+
+// turbo-all
 
 # Topic Implementation Workflow
 
@@ -9,65 +10,88 @@ trigger: /implement or "implement topic X.Y"
 
 ---
 
-## Pre-Flight Checks (Before Starting)
+## Pre-Flight Checks (MANDATORY - Execute These Commands)
+
+> **DO NOT SKIP.** These are commands to run, not suggestions.
 
 ```
-□ Read @rules.md for mandatory elements
-□ Read @adaptive-learning/synthesis.md for pending rules
-□ Identify gold standard: Which existing topic is most similar?
-□ Create adaptive-learning/topic_[X].md to log fixes
-□ Open browser preview for real-time testing
+Step 1: view_file .agent/rules/pedagogy.md (lines 1-70)
+Step 2: view_file .agent/adaptive-learning/synthesis.md
+Step 3: view_file .agent/adaptive-learning/topic_[previous].md (if exists)
+```
+
+After reading files, confirm:
+```
+✓ I reviewed pedagogy.md - Theory structure: Analogy → Formula → Decoder → Insight
+✓ I reviewed synthesis.md - Pending rules to apply: [list each one]
+✓ I know the gold standard topics: Topics 1+2 (interactive elements + variety)
+✓ I checked utils/layouts/ for available layout utilities
 ```
 
 ---
 
-## ⚠️ MANDATORY: Layout Approval Gate
+## MANDATORY Utilities (Use These, Don't Reinvent)
 
-> **CRITICAL RULE:** Before writing ANY implementation code, you MUST create a layout/design document and get user approval.
+> **ALWAYS use existing utilities for consistent styling.** Never write inline HTML for these.
 
-### What to Include in Layout:
-1. **Section Order** — List every section that will appear on the page
-2. **Content Outline** — Key bullet points for each section
-3. **Interactive Design** — What type of interaction, mission goal, completion criteria
-4. **Visual Structure** — Side-by-side columns? Single column? Tables?
-5. **MCQ Selection** — Which questions will be used
-
-### Format:
-Create a markdown layout in the implementation_plan.md artifact:
-```markdown
-## Layout: Topic X.Y
-
-### 1. Intuition Section
-- Analogy: [describe]
-- Key visual metaphor
-
-### 2. Frag Dich
-- Question 1: [...]
-- Question 2: [...]
-
-### 3. Theory / Definitions
-- Layout: [2-column / single]
-- Formulas: [list main ones]
-
-### 4. Interactive Element
-- Type: [slider / table / click / etc.]
-- Mission: [goal]
-- Success condition: [how to win]
-
-### 5. Exam Essentials
-- Trap: [main trap]
-- Tips: [1-2 sentence each]
-
-### 6. MCQs
-- Question 1: [source]
-- Question 2: [source]
+```python
+# Required imports for EVERY topic file
+from utils.localization import t                    # Translation
+from utils.quiz_helper import render_mcq            # MCQ component
+from utils.ask_yourself import render_ask_yourself  # Ask Yourself section
+from utils.exam_essentials import render_exam_essentials  # Exam Essentials
+from views.styles import render_icon, inject_equal_height_css  # Styling
 ```
 
-### Approval Process:
-1. **Create Layout** → call `notify_user` with layout for review
-2. **WAIT for user feedback** → user may comment with changes
-3. **Update if needed** → incorporate feedback
-4. **Proceed ONLY after approval** → user says "LGTM", "approved", or similar
+### Layout Utilities (USE FOR NEW SECTIONS)
+
+> **For brand new sections**, use the pre-built layouts from `utils/layouts/` instead of writing custom HTML.
+
+```python
+from utils.layouts import (
+    render_single_formula,      # Layout A: Single formula intro
+    render_comparison,          # Layout B: Side-by-side comparison
+    render_formula_grid,        # Layout C: Multi-formula grid (2x2)
+    render_steps,               # Layout D: Step-by-step process
+    render_formula_breakdown,   # Layout E: Deep dive into formula
+    render_definition,          # Layout G: Definition card
+    render_decision_tree,       # Layout H: Decision tree
+)
+from utils.layouts.foundation import (
+    grey_callout,               # Grey callout box
+    intuition_box,              # Intuition section
+    variable_decoder,           # Variable decoder section
+    key_insight,                # Key insight section
+)
+```
+
+**When to use layouts:**
+- **New topic from scratch** → Use layouts for consistency
+- **Filling gaps in existing topic** → Follow existing patterns in that file
+- **Refactoring** → Migrate to layouts when touching that code
+
+### Usage:
+```python
+# Ask Yourself (Frag Dich) - HEADER IS REQUIRED!
+render_ask_yourself(
+    header=content["frag_dich"]["header"],  # REQUIRED!
+    questions=content["frag_dich"]["questions"],
+    conclusion=content["frag_dich"]["conclusion"]
+)
+
+# Exam Essentials
+render_exam_essentials(
+    trap=content["exam_essentials"]["trap"],
+    trap_rule=content["exam_essentials"]["trap_rule"],
+    tips=content["exam_essentials"]["tips"]
+)
+```
+
+**DO NOT:**
+- Write inline `<div style="background: #f4f4f5...">` for Ask Yourself
+- Write custom HTML for Exam Essentials
+- Create new styling patterns
+- **Use backslash escapes (\' or \") inside f-strings** (Python 3.12+ syntax error!)
 
 ---
 
@@ -76,29 +100,31 @@ Create a markdown layout in the implementation_plan.md artifact:
 ### BEFORE Implementation
 1. Read `@adaptive-learning/synthesis.md` for pending rules
 2. Check if similar topics had frequent fixes → apply those patterns proactively
-3. Create `adaptive-learning/topic_[X].md` using template
+3. Create `adaptive-learning/topic_[X].md` if it doesn't exist
 
-### DURING Implementation (Real-Time Logging)
-Every time the user requests a fix:
+### DURING Implementation (AUTOMATIC Real-Time Logging)
+
+> **NO MANUAL TRIGGER NEEDED.** Log fixes AS THEY HAPPEN.
+
+**When to log (automatically, don't ask):**
+- User says "fix this", "change this", "wrong", "not stupid-person-proof"
+- User points out an error or requests a change
+- I make a mistake and correct it
+- User rejects a design choice
+
+**Log format (add to topic_[X].md immediately):**
 ```markdown
-### Fix [N]: [Title]
-- **Phase:** [Which phase: Theory/Interactive/etc.]
+### Fix [N]: [Short Title]
 - **What was wrong:** [Issue]
 - **What I changed:** [Fix]
-- **Pattern:** [Potential rule if repeats]
+- **Pattern:** [Potential rule name]
+- **Files:** [affected files]
 ```
 
-**Log triggers:**
-- User says "change this", "fix this", "make it X instead"
-- User rejects a design choice
-- User provides styling feedback
-- User corrects content/wording
-
-### AFTER Implementation (Synthesis)
-When user says "Topic complete":
-1. Count fixes by phase
-2. Identify patterns (3+ = rule)
-3. Propose additions to rule files
+### NO MANUAL SYNTHESIS STEP
+- Logging happens in real-time, not at the end
+- When moving to next topic, just start - no "synthesize" command needed
+- Rules emerge naturally from accumulated logs
 
 ### The Compounding Effect
 
@@ -109,16 +135,14 @@ Topic 5: 3 fixes → rules stabilizing
 Topic 10: 0-1 fixes → near-perfect implementation
 ```
 
-### Integration Points Per Phase
+### What to Log Per Phase
 
 | Phase | What to log |
 |-------|-------------|
-| Theory | Formula formatting, decoder style, analogy quality |
-| Exam Audit | Question selection criteria, solution format |
+| Theory | Formula formatting, decoder style, analogy quality, Stupid Person Rule violations |
 | Interactive | Interaction type preferences, scenario styles |
-| Frag Dich | Question phrasing, styling |
-| Exam Essentials | Trap format, tip numbering |
-| QA | Layout issues, CSS problems |
+| Exam Essentials | Trap format, tip clarity |
+| Layout | CSS issues, container problems, spacing |
 
 ---
 
@@ -195,7 +219,7 @@ Topic 10: 0-1 fixes → near-perfect implementation
 - Clean LaTeX display
 - One formula per concept
 
-### 3.3 Variable Decoder (Grey Box)
+### 3.3 Variable Decoder 
 For EACH variable:
 ```
 $X$ = **Name** — Plain English explanation
@@ -382,64 +406,11 @@ render_mcq(
 
 ### Cohesion Check
 ```
-□ Theory structure matches Topic 4.3 (gold standard)
-□ Interactive variety maintained (not repetitive)
+□ Theory structure follows pedagogy rules
+□ Interactive variety maintained (check Topics 1+2 as reference)
 □ Exam Essentials format consistent
+□ Layout utilities used where applicable
 ```
-
----
-
-## Post-Implementation: Synthesis Workflow
-
-### Step 1: User Triggers Synthesis
-```
-User: "Topic X complete, synthesize"
-```
-
-### Step 2: Agent Reviews Fix Log
-Read `adaptive-learning/topic_[X].md` and count:
-```
-Phase             | Fix Count
-------------------|----------
-Theory            | ?
-Interactive       | ?
-Exam Questions    | ?
-Styling/Layout    | ?
-```
-
-### Step 3: Apply Graduation Logic
-
-| Frequency | Action |
-|-----------|--------|
-| 1 fix | Note only (don't generalize) |
-| 2 fixes same issue | Flag as potential pattern |
-| 3+ fixes same issue | **MUST become a rule** |
-| Cross-topic repeat | **CRITICAL rule** → add to main rules.md |
-
-### Step 4: Propose New Rules
-For each graduated pattern, write:
-```markdown
-**Proposed Rule:**
-- Text: "[Exact rule wording]"
-- Add to: [design-system.md / pedagogy.md / etc.]
-- Evidence: Fixes #X, #Y, #Z from Topic N
-```
-
-### Step 5: Update Synthesis File
-Add to `adaptive-learning/synthesis.md`:
-```markdown
-## Topic [X] Synthesis
-- **Date:** [Date]
-- **Total fixes:** [N]
-- **New rules proposed:** [List]
-- **Key learnings:** [Summary]
-```
-
-### Step 6: Integration Before Next Topic
-Before starting Topic X+1:
-1. Read synthesis.md for pending rules
-2. Add approved rules to rule files
-3. Mark as "✅ Integrated" in synthesis.md
 
 ---
 

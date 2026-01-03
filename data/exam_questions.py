@@ -1108,11 +1108,11 @@ QUESTIONS_3_1 = {
             "en": r"A function $f(x) \ge 0$ is a probability density function (PDF) if:"
         },
         "options": [
-            {"de": r"$\sum f(x_i) = 1$.", "en": r"$\sum f(x_i) = 1$."},
-            {"de": r"$\int_{-\infty}^{\infty} f(x) dx = 1$.", "en": r"$\int_{-\infty}^{\infty} f(x) dx = 1$."},
-            {"de": r"die Fläche unterhalb gleich 1 ist.", "en": r"the area underneath is equal to 1."},
-            {"de": r"$F(-\infty)=1$.", "en": r"$F(-\infty)=1$."},
-            {"de": r"$F(-\infty)=0$ und $F(+\infty)=1$.", "en": r"$F(-\infty)=0$ and $F(+\infty)=1$."}
+            {"de": "Σf(xᵢ) = 1.", "en": "Σf(xᵢ) = 1."},
+            {"de": "∫f(x)dx von -∞ bis +∞ = 1.", "en": "∫f(x)dx from -∞ to +∞ = 1."},
+            {"de": "die Fläche unterhalb gleich 1 ist.", "en": "the area underneath is equal to 1."},
+            {"de": "F(-∞) = 1.", "en": "F(-∞) = 1."},
+            {"de": "F(-∞) = 0 und F(+∞) = 1.", "en": "F(-∞) = 0 and F(+∞) = 1."}
         ],
         "correct_idx": [1, 2, 4],
         "solution": {

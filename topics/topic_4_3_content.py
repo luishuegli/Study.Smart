@@ -362,21 +362,12 @@ def render_subtopic_4_3(model):
     st.markdown("<br>", unsafe_allow_html=True)
     
     # --- FRAG DICH: DECISION GUIDE ---
-    st.markdown(f"""
-    <div style="background-color: rgba(0, 122, 255, 0.08); border-radius: 12px; padding: 20px; border: 2px solid #007AFF;">
-        <div style="font-weight: 700; color: #007AFF; margin-bottom: 16px; font-size: 1.1em;">
-            {t(content_4_3['frag_dich']['header'])}
-        </div>
-        <div style="color: #1c1c1e;">
-            <ol style="margin: 0; padding-left: 20px; line-height: 2;">
-                {"".join([f"<li>{t({'de': q['de'], 'en': q['en']})}</li>" for q in content_4_3['frag_dich']['questions']])}
-            </ol>
-        </div>
-        <div style="margin-top: 16px; padding: 10px; background: #007AFF; color: white; border-radius: 8px; text-align: center; font-weight: 600;">
-            {t(content_4_3['frag_dich']['conclusion'])}
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+    from utils.ask_yourself import render_ask_yourself
+    render_ask_yourself(
+        header=content_4_3['frag_dich']['header'],
+        questions=content_4_3['frag_dich']['questions'],
+        conclusion=content_4_3['frag_dich']['conclusion']
+    )
     
     st.markdown("<br>", unsafe_allow_html=True)
     
@@ -428,6 +419,7 @@ def render_subtopic_4_3(model):
                 st.latex(part["symbol"])
             with col_mean:
                 st.markdown(t({"de": part["meaning_de"], "en": part["meaning_en"]}), unsafe_allow_html=True)
+            st.markdown("---")
         
         st.markdown("<br>", unsafe_allow_html=True)
         example_text = t(content_4_3["formula"]["breakdown"]["example"])
@@ -527,15 +519,21 @@ def render_subtopic_4_3(model):
     st.markdown(f"### {t(content_4_3['example_worked']['header'])}")
     with st.container(border=True):
         
-        # Problem statement
+        # Problem statement - convert **bold** to <strong>bold</strong> for HTML
+        import re
+        problem_text = t(content_4_3['example_worked']['problem'])
+        problem_text = re.sub(r'\*\*(.*?)\*\*', r'<strong>\1</strong>', problem_text)
+        
         st.markdown(f"""
         <div style="background:#fafafa; border-radius:8px; padding:12px; margin-bottom:16px;">
-            {t(content_4_3['example_worked']['problem'])}
+            {problem_text}
         </div>
         """, unsafe_allow_html=True)
         
         # Steps with color coding
-        for step in content_4_3["example_worked"]["steps"]:
+        for i, step in enumerate(content_4_3["example_worked"]["steps"]):
+            if i > 0:
+                st.markdown("---")
             label = t({"de": step["label_de"], "en": step["label_en"]})
             is_latex = step.get("is_latex", False)
             
@@ -574,29 +572,9 @@ def render_subtopic_4_3(model):
     
     st.markdown("<br>", unsafe_allow_html=True)
     
-    # --- EXAM ESSENTIALS (With LaTeX) ---
-    st.markdown(f"### {t(content_4_3['exam_essentials']['header'])}")
-    with st.container(border=True):
-        for item in content_4_3["exam_essentials"]["items"]:
-            st.markdown("---")
-            
-            # Title - either text or LaTeX formula
-            if "title_formula" in item:
-                st.latex(item["title_formula"])
-            elif "title" in item:
-                st.markdown(f"**{t(item['title'])}**")
-            
-            # Main formula (if present)
-            if "formula" in item:
-                st.latex(item["formula"])
-            
-            # Content text
-            st.markdown(t(item['content']), unsafe_allow_html=True)
-            
-            # Shortcut section (if present)
-            if "shortcut_formula" in item:
-                st.markdown(f"*{t(item['shortcut_label'])}: {t(item['shortcut_text'])}*")
-                st.latex(item["shortcut_formula"])
+    # --- EXAM ESSENTIALS (Using Utility) ---
+    from utils.exam_essentials import render_exam_essentials
+    render_exam_essentials(items=content_4_3["exam_essentials"]["items"])
     
     st.markdown("<br><br>", unsafe_allow_html=True)
     

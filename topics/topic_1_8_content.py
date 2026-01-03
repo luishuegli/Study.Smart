@@ -46,6 +46,44 @@ content_1_8 = {
     },
     "quiz": {
         "title": {"de": "Konzept-Check", "en": "Concept Check"}
+    },
+    
+    # --- FRAG DICH (Ask Yourself) ---
+    "frag_dich": {
+        "header": {"de": "Frag dich: Totale Wahrscheinlichkeit oder Bayes?", "en": "Ask yourself: Total Probability or Bayes?"},
+        "questions": [
+            {"de": "Suche ich die <strong>gesamte Wahrscheinlichkeit</strong> von A über alle Pfade?", "en": "Am I looking for the <strong>total probability</strong> of A across all paths?"},
+            {"de": "Habe ich eine <strong>Partition</strong> (disjunkte Teile, die 100% ergeben)?", "en": "Do I have a <strong>partition</strong> (disjoint parts that sum to 100%)?"},
+            {"de": "Kenne ich die <strong>bedingten Wahrscheinlichkeiten</strong> $P(A|B_i)$ für jeden Teil?", "en": "Do I know the <strong>conditional probabilities</strong> $P(A|B_i)$ for each part?"},
+            {"de": "Will ich <strong>vorwärts</strong> rechnen (von Ursache zu Effekt)?", "en": "Do I want to calculate <strong>forward</strong> (from cause to effect)?"}
+        ],
+        "conclusion": {"de": "Alle JA? → Totale Wahrscheinlichkeit. Rückwärts (Effekt → Ursache)? → Bayes!", "en": "All YES? → Total Probability. Backwards (effect → cause)? → Bayes!"}
+    },
+    
+    # --- EXAM ESSENTIALS ---
+    "exam_essentials": {
+        "trap": {
+            "de": "Die Partition vergessen! $\\sum P(B_i) = 1$ MUSS gelten. Wenn die Marktanteile nicht 100% ergeben, ist die Rechnung falsch.",
+            "en": "Forgetting the partition! $\\sum P(B_i) = 1$ MUST hold. If market shares don't sum to 100%, the calculation is wrong."
+        },
+        "trap_rule": {
+            "de": "Faustregel: Immer erst prüfen, ob die Gewichte (Priors) zusammen 100% ergeben.",
+            "en": "Rule of thumb: Always first check if the weights (priors) sum to 100%."
+        },
+        "tips": [
+            {
+                "tip": {"de": "Totale Wsk = Summe der gewichteten Pfade", "en": "Total prob = sum of weighted paths"},
+                "why": {"de": "$P(A) = \\sum P(A|B_i) \\cdot P(B_i)$ — jeder Pfad zählt proportional zu seinem Gewicht.", "en": "$P(A) = \\sum P(A|B_i) \\cdot P(B_i)$ — each path counts proportionally to its weight."}
+            },
+            {
+                "tip": {"de": "Baumdiagramm zeichnen!", "en": "Draw a tree diagram!"},
+                "why": {"de": "Visualisiert die Partition und die bedingten Wsk auf einen Blick.", "en": "Visualizes the partition and conditional probs at a glance."}
+            },
+            {
+                "tip": {"de": "System-Zuverlässigkeit: Keystone-Trick", "en": "System reliability: Keystone trick"},
+                "why": {"de": "Bei Brücken-Systemen: Bedinge auf ein Bauteil K, das das System vereinfacht.", "en": "For bridge systems: Condition on a component K that simplifies the system."}
+            }
+        ]
     }
 }
 
@@ -66,58 +104,43 @@ def render_subtopic_1_8(model):
     """, unsafe_allow_html=True)
     
     st.header(t(content_1_8["title"]))
+    st.markdown("---")
     
-    # --- THEORY CARDS ---
-    # Equal Height Protocol
-    st.markdown("""
-        <style>
-        [data-testid="stHorizontalBlock"] { align-items: stretch !important; }
-        [data-testid="column"] { display: flex !important; flex-direction: column !important; }
-        [data-testid="stVerticalBlock"], [data-testid="stVerticalBlockBorderWrapper"] { flex: 1 !important; }
-        </style>
-    """, unsafe_allow_html=True)
+    # --- THEORY SECTION: Using Layout B (Comparison) ---
+    from utils.layouts import render_comparison
+    render_comparison(
+        title={"de": "Die zwei Bausteine der Totalen Wahrscheinlichkeit", "en": "The Two Building Blocks of Total Probability"},
+        intuition={
+            "de": "Stell dir vor, du mischt Farben. Jeder Zulieferer hat eine 'Farbe' (Fehlerquote). Die Gesamtfarbe hängt davon ab, WIE VIEL von jeder Farbe du hinzufügst (Marktanteil).",
+            "en": "Imagine mixing paints. Each supplier has a 'color' (defect rate). The final color depends on HOW MUCH of each color you add (market share)."
+        },
+        left={
+            "title": {"de": "Die Partition", "en": "The Partition"},
+            "intuition": {"de": "Zerlege das Problem in Teile, die zusammen 100% ergeben.", "en": "Break the problem into parts that sum to 100%."},
+            "formula": r"\sum P(B_i) = 1",
+            "variables": [
+                {"symbol": "B_i", "name": {"de": "Zulieferer i", "en": "Supplier i"}, "description": {"de": "Alpha, Beta, Gamma...", "en": "Alpha, Beta, Gamma..."}},
+                {"symbol": "P(B_i)", "name": {"de": "Marktanteil", "en": "Market share"}, "description": {"de": "das Gewicht dieses Teils", "en": "the weight of this part"}}
+            ],
+            "insight": {"de": "Die Teile müssen disjunkt sein (kein Überlapp) und vollständig (alles abdecken).", "en": "Parts must be disjoint (no overlap) and exhaustive (cover everything)."}
+        },
+        right={
+            "title": {"de": "Totale Wahrscheinlichkeit", "en": "Total Probability"},
+            "intuition": {"de": "Die gewichtete Summe aller Pfade.", "en": "The weighted sum of all paths."},
+            "formula": r"P(A) = \sum P(A|B_i) \cdot P(B_i)",
+            "variables": [
+                {"symbol": "P(A)", "name": {"de": "Gesamt-Wsk", "en": "Total prob"}, "description": {"de": "was wir suchen", "en": "what we're looking for"}},
+                {"symbol": "P(A|B_i)", "name": {"de": "Bedingte Wsk", "en": "Conditional prob"}, "description": {"de": "Fehlerrate VON Zulieferer i", "en": "defect rate FROM supplier i"}},
+                {"symbol": "P(B_i)", "name": {"de": "Gewicht", "en": "Weight"}, "description": {"de": "wie viel liefert er?", "en": "how much does he supply?"}}
+            ],
+            "insight": {"de": "Jeder Pfad = bedingte Wsk × Gewicht. Dann summieren!", "en": "Each path = conditional prob × weight. Then sum!"}
+        },
+        key_difference={
+            "de": "<strong>Partition:</strong> Zerlegt das Universum in Teile. <strong>Totale Wsk:</strong> Summiert die gewichteten Pfade durch diese Teile.",
+            "en": "<strong>Partition:</strong> Breaks universe into parts. <strong>Total prob:</strong> Sums the weighted paths through those parts."
+        }
+    )
     
-    c1, c2 = st.columns(2, gap="medium")
-    with c1:
-        with st.container(border=True):
-            st.markdown(f"**{t(content_1_8['theory_cards']['partition']['title'])}**")
-            st.caption(t(content_1_8["theory_cards"]["partition"]["text"]))
-            st.latex(content_1_8["theory_cards"]["partition"]["formula"])
-            
-            # Variable Decoder (Stupid Person Rule)
-            st.markdown(f"""
-<div style="background: #f4f4f5; padding: 10px 12px; border-radius: 6px; font-size: 0.85em; color: #3f3f46; margin-top: 8px;">
-<strong>{t({"de": "Die Variablen:", "en": "The Variables:"})}</strong><br>
-• <strong>$B_i$</strong> = {t({"de": "Jeder einzelne Zulieferer (Alpha, Beta, Gamma...)", "en": "Each individual supplier (Alpha, Beta, Gamma...)"})} <br>
-• <strong>$P(B_i)$</strong> = {t({"de": "Marktanteil dieses Zulieferers", "en": "Market share of that supplier"})} <br>
-• <strong>$\\sum = 1$</strong> = {t({"de": "Alle Anteile zusammen = 100%", "en": "All shares together = 100%"})}
-</div>
-""", unsafe_allow_html=True)
-    with c2:
-        with st.container(border=True):
-            st.markdown(f"**{t(content_1_8['theory_cards']['total_prob']['title'])}**")
-            st.caption(t(content_1_8["theory_cards"]["total_prob"]["text"]))
-            st.latex(content_1_8["theory_cards"]["total_prob"]["formula"])
-            
-            # Variable Decoder (Stupid Person Rule)
-            st.markdown(f"""
-<div style="background: #f4f4f5; padding: 10px 12px; border-radius: 6px; font-size: 0.85em; color: #3f3f46; margin-top: 8px;">
-<strong>{t({"de": "Die Variablen:", "en": "The Variables:"})}</strong><br>
-• <strong>$P(A)$</strong> = {t({"de": "Gesamte Fehlerquote der Fabrik", "en": "Total defect rate of the factory"})} <br>
-• <strong>$P(A|B_i)$</strong> = {t({"de": "Fehlerquote VON diesem Zulieferer", "en": "Defect rate FROM this supplier"})} <br>
-• <strong>$P(B_i)$</strong> = {t({"de": "Wie viel liefert er? (Gewicht)", "en": "How much does he supply? (Weight)"})}
-</div>
-""", unsafe_allow_html=True)
-    
-    # THE INTUITION (Pro Tip)
-    st.markdown(f"""
-<div style="background: #fef3c7; border-left: 4px solid #d97706; padding: 12px 16px; border-radius: 8px; color: #92400e; margin-top: 12px;">
-<strong>{t({"de": "Die Intuition:", "en": "The Intuition:"})}</strong> 
-{t({"de": "Stell dir vor, du mischt Farben. Jeder Zulieferer hat eine 'Farbe' (Fehlerquote). Die Gesamtfarbe hängt davon ab, WIE VIEL von jeder Farbe du hinzufügst (Marktanteil).", 
-    "en": "Imagine mixing paints. Each supplier has a 'color' (defect rate). The final color depends on HOW MUCH of each color you add (market share)."})}
-</div>
-""", unsafe_allow_html=True)
-            
     st.markdown("<br>", unsafe_allow_html=True)
 
     # --- PART 1: THE FACTORY (Interactive Visualizer) ---
@@ -466,6 +489,27 @@ def render_subtopic_1_8(model):
             st.caption(t({"de": "Oberer Pfad (1-3) und unterer Pfad (2-4) sind parallel.", "en": "Top path (1-3) and bottom path (2-4) are in parallel."}))
 
     st.markdown("<br>", unsafe_allow_html=True)
+    
+    # --- FRAG DICH (Ask Yourself) ---
+    from utils.ask_yourself import render_ask_yourself
+    render_ask_yourself(
+        header=content_1_8["frag_dich"]["header"],
+        questions=content_1_8["frag_dich"]["questions"],
+        conclusion=content_1_8["frag_dich"]["conclusion"]
+    )
+    
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    
+    # --- EXAM ESSENTIALS ---
+    from utils.exam_essentials import render_exam_essentials
+    render_exam_essentials(
+        trap=content_1_8["exam_essentials"]["trap"],
+        trap_rule=content_1_8["exam_essentials"]["trap_rule"],
+        tips=content_1_8["exam_essentials"]["tips"]
+    )
+    
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    
     # --- PART 3: EXAM WORKBENCH ---
     st.markdown(f"### {t({'de': 'Prüfungstraining', 'en': 'Exam Practice'})}")
     

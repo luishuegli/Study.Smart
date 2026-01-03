@@ -37,6 +37,43 @@ content_3_1 = {
     "pro_tip": {
         "de": "Um die Wahrscheinlichkeit für ein Intervall zu finden, subtrahiere einfach: P(a < X ≤ b) = F(b) - F(a). Denk an deinen Stromzähler: Zählerstand Ende minus Zählerstand Anfang = Verbrauch!",
         "en": "To find the probability for an interval, simply subtract: P(a < X ≤ b) = F(b) - F(a). Think of your electric meter: Reading End minus Reading Start = Consumption!"
+    },
+    
+    # --- FRAG DICH (Ask Yourself) ---
+    "frag_dich": {
+        "header": {"de": "Frag dich: Verstehst du die CDF?", "en": "Ask yourself: Do you understand the CDF?"},
+        "questions": [
+            {"de": "Was bedeutet F(x) = 0.84 in Worten?", "en": "What does F(x) = 0.84 mean in words?"},
+            {"de": "Warum kann F(x) <strong>niemals sinken</strong>?", "en": "Why can F(x) <strong>never decrease</strong>?"},
+            {"de": "Wie berechnet man P(2 < X ≤ 5) mit der CDF?", "en": "How do you calculate P(2 < X ≤ 5) using the CDF?"}
+        ],
+        "conclusion": {"de": "F(x) = 0.84 heisst '84% liegen ≤ x'. Sie sinkt nie, weil Wahrscheinlichkeit sich nur ansammelt. P(2 < X ≤ 5) = F(5) - F(2).", "en": "F(x) = 0.84 means '84% are ≤ x'. It never decreases because probability only accumulates. P(2 < X ≤ 5) = F(5) - F(2)."}
+    },
+    
+    # --- EXAM ESSENTIALS ---
+    "exam_essentials": {
+        "trap": {
+            "de": "<strong>< vs. ≤</strong> verwechseln! Bei stetigen Verteilungen ist P(X < x) = P(X ≤ x). Bei diskreten Verteilungen ist das NICHT der Fall!",
+            "en": "Confusing <strong>< vs. ≤</strong>! For continuous distributions, P(X < x) = P(X ≤ x). For discrete distributions, this is NOT the case!"
+        },
+        "trap_rule": {
+            "de": "Stetig: < und ≤ sind gleich. Diskret: Aufpassen!",
+            "en": "Continuous: < and ≤ are equal. Discrete: Be careful!"
+        },
+        "tips": [
+            {
+                "tip": {"de": "Intervall-Trick: P(a < X ≤ b) = F(b) - F(a)", "en": "Interval trick: P(a < X ≤ b) = F(b) - F(a)"},
+                "why": {"de": "Die CDF akkumuliert - subtrahiere um ein Stück herauszuschneiden.", "en": "The CDF accumulates - subtract to cut out a piece."}
+            },
+            {
+                "tip": {"de": "Komplementär-Trick: P(X > x) = 1 - F(x)", "en": "Complement trick: P(X > x) = 1 - F(x)"},
+                "why": {"de": "Der Tank ist bei 1 voll. Was übrig bleibt nach F(x) ist 1 - F(x).", "en": "The tank is full at 1. What's left after F(x) is 1 - F(x)."}
+            },
+            {
+                "tip": {"de": "Grenzen prüfen: F(-∞) = 0, F(+∞) = 1", "en": "Check limits: F(-∞) = 0, F(+∞) = 1"},
+                "why": {"de": "Deine Antwort muss zwischen 0 und 1 liegen!", "en": "Your answer must be between 0 and 1!"}
+            }
+        ]
     }
 }
 
@@ -46,47 +83,84 @@ def render_subtopic_3_1(model):
     inject_equal_height_css()
 
     st.header(t(content_3_1["title"]))
-    st.markdown(t({"de": "Wie sammeln wir Wahrscheinlichkeiten?", "en": "How do we accumulate probabilities?"}))
+    st.markdown("---")
     
-    # ROW 1: THE INTUITION (Full Width)
+    # --- THEORY SECTION (Following Pedagogy Rules) ---
+    
+    # 1. THE INTUITION (Outside container)
     st.markdown(f"### {t(content_3_1['anchor']['header'])}")
-    st.markdown(t(content_3_1["anchor"]["text"]))
-    st.markdown("<br>", unsafe_allow_html=True)
-
-    # ROW 2: THE THEORY (Side-by-Side)
-    c1, c2 = st.columns(2, gap="medium")
+    with st.container(border=True):
+        st.markdown(t(content_3_1["anchor"]["text"]))
     
-    with c1:
-        with st.container(border=True):
-            st.markdown(f"**{t(content_3_1['theory']['def_title'])}**")
-            st.caption(t(content_3_1['theory']['def_text']))
-            st.latex(content_3_1['theory']['formula'])
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+    # 2. THE FORMULA + VARIABLE DECODER + KEY INSIGHT (Single container)
+    st.markdown(f"### {t({'de': 'Die Formel', 'en': 'The Formula'})}")
+    with st.container(border=True):
+        # Formula
+        st.latex(content_3_1['theory']['formula'])
+        
+        st.markdown("---")
+        
+        # Variable Decoder
+        st.markdown(f"**{t({'de': 'Die Variablen erklärt', 'en': 'The Variables Explained'})}:**")
+        st.markdown(f"""
+• $F(x)$ = **{t({"de": "Verteilungsfunktion", "en": "Distribution Function"})}** — {t({"de": "Der 'Füllstand' an Position x", "en": "The 'fill level' at position x"})}
 
-            st.markdown(f"""
-            <div style="font-size: 13px; color: #555; line-height: 1.5; margin-top: 10px;">
-            • {t(content_3_1['theory']['props']['p1'])}<br>
-            • {t(content_3_1['theory']['props']['p2'])}
-            </div>
-            """, unsafe_allow_html=True)
+• $P(X \\leq x)$ = **{t({"de": "Wahrscheinlichkeit", "en": "Probability"})}** — {t({"de": "Chance, dass X kleiner oder gleich x ist", "en": "Chance that X is less than or equal to x"})}
 
-    with c2:
-        with st.container(border=True):
-            st.markdown(f"**{t(content_3_1['theory']['prop_title'])}**")
-            st.markdown(f"""
-            <div style="font-size: 14px; color: #333; line-height: 1.8; margin-bottom: 12px;">
-            1. {t(content_3_1['theory']['props']['p1'])}<br>
-            2. {t(content_3_1['theory']['props']['p2'])}
-            </div>
-            """, unsafe_allow_html=True)
-            st.latex(content_3_1['theory']['limits_formula'])
+• $\\int f(t) dt$ = **{t({"de": "Integral der Dichte", "en": "Integral of Density"})}** — {t({"de": "Sammelt die Wahrscheinlichkeit von links auf", "en": "Accumulates probability from the left"})}
+""")
+        
+        st.markdown("---")
+        
+        # Key Insight
+        key_insight_text = t({
+            'de': 'Der Schlüssel: Die CDF kann NIEMALS sinken! Sie steigt nur (oder bleibt gleich). Warum? Weil Wahrscheinlichkeit sich nur ansammelt - du kannst keine Wahrscheinlichkeit "verlieren" wenn du weiter nach rechts gehst.',
+            'en': 'The key: The CDF can NEVER decrease! It only rises (or stays flat). Why? Because probability only accumulates - you cannot "lose" probability as you move right.'
+        })
+        st.markdown(f"*{key_insight_text}*")
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+    # 3. PROPERTIES (Compact)
+    st.markdown(f"### {t(content_3_1['theory']['prop_title'])}")
+    with st.container(border=True):
+        st.markdown(f"""
+**1.** {t(content_3_1['theory']['props']['p1'])}
+
+**2.** {t(content_3_1['theory']['props']['p2'])}
+""")
+        st.latex(content_3_1['theory']['limits_formula'])
 
     st.markdown("<br>", unsafe_allow_html=True)
 
     # ROW 3: THE SIMULATOR
     render_simulator_3_1()
 
-    # EXAM SECTION
-    st.markdown("<br>", unsafe_allow_html=True)
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    
+    # --- FRAG DICH (Ask Yourself) ---
+    from utils.ask_yourself import render_ask_yourself
+    render_ask_yourself(
+        header=content_3_1["frag_dich"]["header"],
+        questions=content_3_1["frag_dich"]["questions"],
+        conclusion=content_3_1["frag_dich"]["conclusion"]
+    )
+    
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    
+    # --- EXAM ESSENTIALS ---
+    from utils.exam_essentials import render_exam_essentials
+    render_exam_essentials(
+        trap=content_3_1["exam_essentials"]["trap"],
+        trap_rule=content_3_1["exam_essentials"]["trap_rule"],
+        tips=content_3_1["exam_essentials"]["tips"]
+    )
+    
+    st.markdown("<br><br>", unsafe_allow_html=True)
+
+    # EXAM PRACTICE
     st.markdown(f"### {t({'de': 'Prüfungstraining', 'en': 'Exam Practice'})}")
     
     # MCQ 1: uebung2_mc6
@@ -222,14 +296,6 @@ def render_simulator_3_1():
             # Simplified Visual for Mission
             fig_m = get_cdf_pdf_plot(val_x, show_pdf=False) # Only CDF for variety? Or both. Let's show both.
             st.plotly_chart(fig_m, use_container_width=True, config={'displayModeBar': False}, key="fig_miss_3_1")
-
-    # ROW 4: PRO TIP
-    st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown(f"""
-    <div style="background-color: #f4f4f5; border-radius: 8px; padding: 12px; color: #3f3f46;">
-        <strong>Pro Tip:</strong> {t(content_3_1['pro_tip'])}
-    </div>
-    """, unsafe_allow_html=True)
 
 # --- HELPER FUNCTIONS ---
 

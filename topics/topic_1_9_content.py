@@ -82,6 +82,44 @@ content_1_9 = {
     },
     "quiz": {
         "title": {"de": "4. Logik-Check: 3 Gefangene", "en": "4. Logic Check: 3 Prisoners"}
+    },
+    
+    # --- FRAG DICH (Ask Yourself) ---
+    "frag_dich": {
+        "header": {"de": "Frag dich: Bayes oder Totale Wahrscheinlichkeit?", "en": "Ask yourself: Bayes or Total Probability?"},
+        "questions": [
+            {"de": "Habe ich einen <strong>Prior</strong> (was ich VORHER glaube)?", "en": "Do I have a <strong>prior</strong> (what I believe BEFORE)?"},
+            {"de": "Bekomme ich <strong>neue Evidenz</strong> (z.B. Testergebnis)?", "en": "Do I get <strong>new evidence</strong> (e.g., test result)?"},
+            {"de": "Muss ich <strong>rückwärts</strong> rechnen (Effekt → Ursache)?", "en": "Do I need to calculate <strong>backwards</strong> (effect → cause)?"},
+            {"de": "Kenne ich $P(B|A)$ aber brauche $P(A|B)$?", "en": "Do I know $P(B|A)$ but need $P(A|B)$?"}
+        ],
+        "conclusion": {"de": "Alle JA? → Bayes! Vorwärts (Ursache → Effekt)? → Totale Wahrscheinlichkeit.", "en": "All YES? → Bayes! Forward (cause → effect)? → Total Probability."}
+    },
+    
+    # --- EXAM ESSENTIALS ---
+    "exam_essentials": {
+        "trap": {
+            "de": "Base Rate Fallacy! Ein positiver Test bedeutet NICHT automatisch 'wahrscheinlich krank' — es hängt von der <strong>Seltenheit der Krankheit</strong> ab.",
+            "en": "Base Rate Fallacy! A positive test does NOT automatically mean 'probably sick' — it depends on the <strong>rarity of the disease</strong>."
+        },
+        "trap_rule": {
+            "de": "Faustregel: Je seltener die Krankheit (Prior), desto mehr falsch-positive überschwemmen die wahr-positiven.",
+            "en": "Rule of thumb: The rarer the disease (prior), the more false positives swamp the true positives."
+        },
+        "tips": [
+            {
+                "tip": {"de": "Prior × Likelihood ÷ Normalizer = Posterior", "en": "Prior × Likelihood ÷ Normalizer = Posterior"},
+                "why": {"de": "Die Bayes-Formel in Worten: $P(A|B) = \\frac{P(B|A) \\cdot P(A)}{P(B)}$", "en": "The Bayes formula in words: $P(A|B) = \\frac{P(B|A) \\cdot P(A)}{P(B)}$"}
+            },
+            {
+                "tip": {"de": "Monty Hall: Wechseln verdoppelt die Gewinnchance!", "en": "Monty Hall: Switching doubles your chance!"},
+                "why": {"de": "Du gewinnst durch Wechseln immer dann, wenn du anfangs FALSCH lagst (2/3 Chance).", "en": "You win by switching whenever you were WRONG initially (2/3 chance)."}
+            },
+            {
+                "tip": {"de": "P(B) oft mit Totaler Wahrscheinlichkeit berechnen", "en": "P(B) often calculated with Total Probability"},
+                "why": {"de": "$P(B) = P(B|A) \\cdot P(A) + P(B|\\neg A) \\cdot P(\\neg A)$ — alle Pfade summieren.", "en": "$P(B) = P(B|A) \\cdot P(A) + P(B|\\neg A) \\cdot P(\\neg A)$ — sum all paths."}
+            }
+        ]
     }
 }
 
@@ -110,47 +148,43 @@ def render_subtopic_1_9(model):
     """, unsafe_allow_html=True)
     
     st.header(t(content_1_9["title"]))
+    st.markdown("---")
     
     # --- THEORY: BAYES THEOREM (Stupid Person Rule Applied) ---
+    # Header OUTSIDE container (Header-Out Protocol)
+    st.markdown(f"### {t({'de': 'Das Bayes-Theorem', 'en': 'Bayes Theorem'})}")
+    
+    # Intuition OUTSIDE and ABOVE container
+    from utils.layouts.foundation import intuition_box
+    intuition_box({
+        "de": "Du glaubst etwas über die Welt (z.B. 'Ich bin wahrscheinlich gesund'). Dann bekommst du neue Information (z.B. 'Der Test war positiv!'). Bayes sagt dir, wie du deine Meinung UPDATE sollst.",
+        "en": "You believe something about the world (e.g., 'I'm probably healthy'). Then you get new information (e.g., 'The test was positive!'). Bayes tells you how to UPDATE your belief."
+    })
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+    
     with st.container(border=True):
-        st.markdown(f"### {t({'de': 'Das Bayes-Theorem', 'en': 'Bayes Theorem'})}")
-        
-        # The Core Idea (Simple Analogy)
-        st.markdown(f"""
-<div style="background: #f4f4f5; border-left: 4px solid #a1a1aa; padding: 12px 16px; border-radius: 8px; color: #3f3f46; margin-bottom: 16px;">
-<strong>{t({"de": "Die Kernidee:", "en": "The Core Idea:"})}</strong><br>
-{t({"de": "Du glaubst etwas über die Welt (z.B. 'Ich bin wahrscheinlich gesund'). Dann bekommst du neue Information (z.B. 'Der Test war positiv!'). Bayes sagt dir, wie du deine Meinung UPDATE sollst.", 
-    "en": "You believe something about the world (e.g., 'I'm probably healthy'). Then you get new information (e.g., 'The test was positive!'). Bayes tells you how to UPDATE your belief."})}
-</div>
-""", unsafe_allow_html=True)
-        
         # The Formula
         st.latex(r"P(A|B) = \frac{P(B|A) \cdot P(A)}{P(B)}")
         
+        st.markdown("---")
+        
         # Variable Decoder (The Critical Part)
+        st.markdown(f"**{t({'de': 'Die Variablen erklärt', 'en': 'The Variables Explained'})}:**")
         st.markdown(f"""
-<div style="padding: 12px 0; color: #3f3f46; margin-top: 16px;">
-<strong>{t({"de": "Die Variablen erklärt:", "en": "The Variables Explained:"})}</strong><br><br>
+• $P(A)$ = **{t({"de": "Prior", "en": "Prior"})}** — {t({"de": "Was du VORHER glaubst", "en": "What you believe BEFORE"})}
 
-<strong>$P(A)$</strong> = <strong>{t({"de": "Prior", "en": "Prior"})}</strong> — {t({"de": "Was du VORHER glaubst. 'Wie wahrscheinlich ist Krankheit, BEVOR du den Test machst?'", "en": "What you believe BEFORE. 'How likely is the disease, BEFORE you take the test?'"})}<br><br>
+• $P(B|A)$ = **{t({"de": "Likelihood", "en": "Likelihood"})}** — {t({"de": "Wie gut ist der Beweis?", "en": "How good is the evidence?"})}
 
-<strong>$P(B|A)$</strong> = <strong>{t({"de": "Likelihood", "en": "Likelihood"})}</strong> — {t({"de": "Wie gut ist der Beweis? 'Wenn ich krank BIN, wie oft zeigt der Test positiv?'", "en": "How good is the evidence? 'IF I AM sick, how often does the test show positive?'"})}<br><br>
+• $P(B)$ = **{t({"de": "Normalisierung", "en": "Normalizer"})}** — {t({"de": "Wie oft sehen wir diesen Beweis überhaupt?", "en": "How often do we see this evidence at all?"})}
 
-<strong>$P(B)$</strong> = <strong>{t({"de": "Normalisierung", "en": "Normalizer"})}</strong> — {t({"de": "Wie oft sehen wir diesen Beweis überhaupt? 'Wie oft sind Tests positiv (egal ob krank oder gesund)?'", "en": "How often do we see this evidence at all? 'How often are tests positive (sick or healthy)?'"})}<br><br>
-
-<strong>$P(A|B)$</strong> = <strong>{t({"de": "Posterior", "en": "Posterior"})}</strong> — {t({"de": "Deine NEUE Überzeugung. 'Wie wahrscheinlich bin ich krank, NACHDEM der Test positiv war?'", "en": "Your NEW belief. 'How likely am I sick, AFTER the test was positive?'"})}
-</div>
-""", unsafe_allow_html=True)
+• $P(A|B)$ = **{t({"de": "Posterior", "en": "Posterior"})}** — {t({"de": "Deine NEUE Überzeugung", "en": "Your NEW belief"})}
+""")
+        
+        st.markdown("---")
         
         # The Key Insight
-        st.markdown("<br>", unsafe_allow_html=True)
-        st.markdown(f"""
-<div style="background: #f4f4f5; border-left: 4px solid #71717a; padding: 12px 16px; border-radius: 8px; color: #3f3f46;">
-<strong>{t({"de": "Der Schlüssel-Insight:", "en": "The Key Insight:"})}</strong> 
-{t({"de": "Ein positiver Test bedeutet NICHT automatisch, dass du krank bist! Es hängt davon ab, wie SELTEN die Krankheit ist (Prior) und wie GUT der Test ist (Likelihood).", 
-    "en": "A positive test does NOT automatically mean you're sick! It depends on how RARE the disease is (Prior) and how GOOD the test is (Likelihood)."})}
-</div>
-""", unsafe_allow_html=True)
+        st.markdown(f"*{t({'de': 'Ein positiver Test bedeutet NICHT automatisch, dass du krank bist! Es hängt davon ab, wie SELTEN die Krankheit ist (Prior) und wie GUT der Test ist (Likelihood).', 'en': 'A positive test does NOT automatically mean you are sick! It depends on how RARE the disease is (Prior) and how GOOD the test is (Likelihood).'})}*")
     
     st.markdown("<br>", unsafe_allow_html=True)
 
@@ -1060,6 +1094,24 @@ def render_subtopic_1_9(model):
             ai_context="Bayes Theorem / Three Prisoners Problem",
             course_id="vwl", topic_id="1", subtopic_id="1.9", question_id="1_9_prisoners"
         )
+    
+    # --- FRAG DICH (Ask Yourself) ---
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    from utils.ask_yourself import render_ask_yourself
+    render_ask_yourself(
+        header=content_1_9["frag_dich"]["header"],
+        questions=content_1_9["frag_dich"]["questions"],
+        conclusion=content_1_9["frag_dich"]["conclusion"]
+    )
+    
+    # --- EXAM ESSENTIALS ---
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    from utils.exam_essentials import render_exam_essentials
+    render_exam_essentials(
+        trap=content_1_9["exam_essentials"]["trap"],
+        trap_rule=content_1_9["exam_essentials"]["trap_rule"],
+        tips=content_1_9["exam_essentials"]["tips"]
+    )
     
     # --- EXAM WORKBENCH ---
     st.markdown("<br><br>", unsafe_allow_html=True)

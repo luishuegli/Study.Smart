@@ -58,6 +58,35 @@ content_3_3 = {
             "de": "Lass dich nicht täuschen: $f(x)$ kann größer als 1 sein! Nur die Fläche darf nicht größer als 1 sein. Dichte ist wie 'Konzentration', nicht wie Wahrscheinlichkeit.",
             "en": "Don't be fooled: $f(x)$ can be greater than 1! Only the area cannot exceed 1. Density is like 'concentration', not probability."
         }
+    },
+    "frag_dich": {
+        "header": {"de": "Frag dich: Stetige Variablen", "en": "Ask yourself: Continuous Variables"},
+        "questions": [
+            {"de": "Kann P(X = 5.000) bei einer stetigen Variable > 0 sein?", "en": "Can P(X = 5.000) be > 0 for a continuous variable?"},
+            {"de": "Wenn f(3) = 2, ist das ein Problem? (Wahrscheinlichkeit > 100%?)", "en": "If f(3) = 2, is that a problem? (Probability > 100%?)"},
+            {"de": "Was ist der Unterschied zwischen f(x) und P(X=x)?", "en": "What's the difference between f(x) and P(X=x)?"}
+        ],
+        "conclusion": {"de": "f(x) ist DICHTE, nicht Wahrscheinlichkeit! Nur Flächen (Integrale) sind Wahrscheinlichkeiten.", "en": "f(x) is DENSITY, not probability! Only areas (integrals) are probabilities."}
+    },
+    "exam_essentials": {
+        "trap": {
+            "de": "Glauben, dass f(x) ≤ 1 sein muss (wie bei diskreten Variablen).",
+            "en": "Believing that f(x) must be ≤ 1 (like with discrete variables)."
+        },
+        "trap_rule": {
+            "de": "**Merke:** f(x) ist DICHTE, nicht Wahrscheinlichkeit! f(x) kann 5, 10, 100 sein - nur die FLÄCHE muss 1 sein.",
+            "en": "**Remember:** f(x) is DENSITY, not probability! f(x) can be 5, 10, 100 - only the AREA must be 1."
+        },
+        "tips": [
+            {
+                "tip": {"de": "Einzelpunkt = 0", "en": "Single point = 0"},
+                "why": {"de": "P(X = exakter Wert) = 0, IMMER. Nutze das für Vereinfachungen!", "en": "P(X = exact value) = 0, ALWAYS. Use this for simplifications!"}
+            },
+            {
+                "tip": {"de": "≤ und < sind gleichwertig", "en": "≤ and < are equivalent"},
+                "why": {"de": "P(X ≤ 3) = P(X < 3) weil P(X=3) = 0. Spart Rechenzeit!", "en": "P(X ≤ 3) = P(X < 3) because P(X=3) = 0. Saves calculation time!"}
+            }
+        ]
     }
 }
 
@@ -75,12 +104,11 @@ def render_subtopic_3_3(model):
     """, unsafe_allow_html=True)
 
     st.header(t(content_3_3["title"]))
-    st.markdown(f"**{t(content_3_3['anchor'])}**")
     st.markdown("---")
 
-    # --- INTUITION ---
+    # --- INTUITION (Header OUTSIDE container) ---
+    st.markdown(f"### {t({'de': 'Die Intuition', 'en': 'The Intuition'})}")
     with st.container(border=True):
-        st.markdown(f"### {t({'de': 'Die Intuition', 'en': 'The Intuition'})}")
         st.markdown(t(content_3_3["intro"]["text"]))
     
     st.markdown("<br>", unsafe_allow_html=True)
@@ -108,20 +136,59 @@ def render_subtopic_3_3(model):
 
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # --- THEORY ---
-    c1, c2 = st.columns(2, gap="medium")
-    with c1:
-        with st.container(border=True):
-            st.markdown(f"**{t(content_3_3['theory']['def_title'])}**")
-            st.markdown(t(content_3_3["theory"]["def_text"]))
-            st.latex(r"P(a \le X \le b) = \int_a^b f(x) \, dx")
-    with c2:
-        with st.container(border=True):
-            st.markdown(f"**{t(content_3_3['theory']['prop_title'])}**")
-            st.markdown(t(content_3_3["theory"]["prop_p1"]))
-            st.markdown(t(content_3_3["theory"]["prop_p2"]))
-            st.latex(content_3_3["theory"]["prop_formula"])
-            st.latex(r"\int_{-\infty}^{\infty} f(x) \, dx = 1")
+    # --- THE FORMULA + VARIABLE DECODER + KEY INSIGHT ---
+    st.markdown(f"### {t({'de': 'Die Formel', 'en': 'The Formula'})}")
+    with st.container(border=True):
+        st.latex(r"P(a \le X \le b) = \int_a^b f(x) \, dx")
+        st.caption(t(content_3_3["theory"]["def_text"]))
+        
+        st.markdown("---")
+        
+        # Variable Decoder
+        st.markdown(f"**{t({'de': 'Die Variablen erklärt', 'en': 'The Variables Explained'})}:**")
+        st.markdown(f"""
+• $f(x)$ = **{t({"de": "Dichtefunktion (PDF)", "en": "Density Function (PDF)"})}** — {t({"de": "Wie 'konzentriert' ist die Wahrscheinlichkeit bei x? (Kann > 1 sein!)", "en": "How 'concentrated' is probability at x? (Can be > 1!)"})}
+
+• $\\int_a^b$ = **{t({"de": "Das Integral", "en": "The Integral"})}** — {t({"de": "Berechnet die FLÄCHE unter der Kurve von a bis b", "en": "Calculates the AREA under the curve from a to b"})}
+
+• $a, b$ = **{t({"de": "Die Grenzen", "en": "The Bounds"})}** — {t({"de": "Start und Ende des Intervalls (z.B. 9.8mm bis 10.2mm)", "en": "Start and end of the interval (e.g., 9.8mm to 10.2mm)"})}
+
+• $P(a \\le X \\le b)$ = **{t({"de": "Intervall-Wahrscheinlichkeit", "en": "Interval Probability"})}** — {t({"de": "Die Chance, dass X irgendwo zwischen a und b liegt", "en": "The chance that X falls somewhere between a and b"})}
+""")
+        
+        st.markdown("---")
+        
+        # Key Insight
+        key_insight = t({
+            'de': 'Der Schlüssel: Ein EINZELNER Punkt hat Wahrscheinlichkeit NULL! Warum? Weil ein Strich keine Breite hat, also keine Fläche. Nur Intervalle (Schlücke vom Smoothie) haben Wahrscheinlichkeit > 0.',
+            'en': 'The key: A SINGLE point has ZERO probability! Why? Because a line has no width, thus no area. Only intervals (sips of the smoothie) have probability > 0.'
+        })
+        st.markdown(f"*{key_insight}*")
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+    # --- PROPERTIES (Stupid Person Proof) ---
+    st.markdown(f"### {t(content_3_3['theory']['prop_title'])}")
+    with st.container(border=True):
+        # Property 1
+        st.markdown(f"**1. {t({'de': 'Gesamte Fläche = 1', 'en': 'Total Area = 1'})}**")
+        st.latex(r"\int_{-\infty}^{\infty} f(x) \, dx = 1")
+        prop1_why = t({
+            'de': '*Warum? Der gesamte Smoothie ist 100%. Die Kurve muss die ganzen 100% irgendwo verteilen.*',
+            'en': '*Why? The entire smoothie is 100%. The curve must distribute all 100% somewhere.*'
+        })
+        st.markdown(prop1_why)
+        
+        st.markdown("---")
+        
+        # Property 2
+        st.markdown(f"**2. {t({'de': 'Einzelpunkte sind unmöglich', 'en': 'Single Points Are Impossible'})}**")
+        st.latex(content_3_3["theory"]["prop_formula"])
+        prop2_why = t({
+            'de': '*Warum? Stell dir vor, du versuchst GENAU ein Apfel-Atom aus dem Smoothie zu fischen. Das ist physisch unmöglich - du bekommst immer etwas Umgebung mit.*',
+            'en': '*Why? Imagine trying to fish out EXACTLY one apple atom from the smoothie. That\'s physically impossible - you always get some surroundings.*'
+        })
+        st.markdown(prop2_why)
 
     st.markdown("<br>", unsafe_allow_html=True)
 
@@ -188,13 +255,25 @@ def render_subtopic_3_3(model):
                  else:
                      st.info(t({"de": "Zu weit rechts!", "en": "Too far right!"}))
 
-        # --- PRO TIP (inside container, gray background) ---
-        st.markdown("<br>", unsafe_allow_html=True)
-        st.markdown(f"""
-        <div style="background-color: #f4f4f5; border-radius: 8px; padding: 12px; color: #3f3f46;">
-            <strong>Pro Tip:</strong> {t(content_3_3['pro_tip']['text'])}
-        </div>
-        """, unsafe_allow_html=True)
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    
+    # --- ASK YOURSELF ---
+    from utils.ask_yourself import render_ask_yourself
+    render_ask_yourself(
+        header=content_3_3["frag_dich"]["header"],
+        questions=content_3_3["frag_dich"]["questions"],
+        conclusion=content_3_3["frag_dich"]["conclusion"]
+    )
+    
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    
+    # --- EXAM ESSENTIALS ---
+    from utils.exam_essentials import render_exam_essentials
+    render_exam_essentials(
+        trap=content_3_3["exam_essentials"]["trap"],
+        trap_rule=content_3_3["exam_essentials"]["trap_rule"],
+        tips=content_3_3["exam_essentials"]["tips"]
+    )
 
     st.markdown("<br><br>", unsafe_allow_html=True)
     

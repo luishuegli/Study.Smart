@@ -127,6 +127,19 @@ content_1_11 = {
                 "color": "#34C759"
             }
         }
+    },
+    
+    # --- FRAG DICH (Ask Yourself) ---
+    "frag_dich": {
+        "header": {"de": "Frag dich: Welche Formel brauche ich?", "en": "Ask yourself: Which formula do I need?"},
+        "questions": [
+            {"de": "Suche ich <strong>A oder B</strong>? → Additionssatz (Überlappung abziehen!)", "en": "Looking for <strong>A or B</strong>? → Addition law (subtract overlap!)"},
+            {"de": "Suche ich <strong>A gegeben B</strong>? → Bedingte Wahrscheinlichkeit", "en": "Looking for <strong>A given B</strong>? → Conditional probability"},
+            {"de": "Muss ich die <strong>Bedingung umkehren</strong>? → Bayes!", "en": "Need to <strong>flip the condition</strong>? → Bayes!"},
+            {"de": "Sind A und B <strong>unabhängig</strong>? → Teste $P(A \\cap B) = P(A) \\cdot P(B)$", "en": "Are A and B <strong>independent</strong>? → Test $P(A \\cap B) = P(A) \\cdot P(B)$"},
+            {"de": "Suche ich <strong>mindestens eins</strong>? → Komplement: 1 - P(keins)", "en": "Looking for <strong>at least one</strong>? → Complement: 1 - P(none)"}
+        ],
+        "conclusion": {"de": "Signalwörter im Aufgabentext verraten die Formel!", "en": "Signal words in the problem reveal the formula!"}
     }
 }
 
@@ -168,7 +181,17 @@ def render_subtopic_1_11(model):
     
     st.markdown("<br><br>", unsafe_allow_html=True)
     
-    # === SECTION 5: EXAM PRACTICE ===
+    # === SECTION 5: FRAG DICH (Ask Yourself) ===
+    from utils.ask_yourself import render_ask_yourself
+    render_ask_yourself(
+        header=content_1_11["frag_dich"]["header"],
+        questions=content_1_11["frag_dich"]["questions"],
+        conclusion=content_1_11["frag_dich"]["conclusion"]
+    )
+    
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    
+    # === SECTION 6: EXAM PRACTICE ===
     render_exam_practice(model)
 
 
@@ -179,23 +202,18 @@ def render_cheat_sheet():
     
     cards = cs["cards"]
     
-    # Row 1: 3 cards
-    cols = st.columns(3, gap="small")
-    for col, card in zip(cols, cards[:3]):
-        with col:
-            with st.container(border=True):
-                st.markdown(f"**{t(card['title'])}**")
-                st.latex(card['formula'])
-                st.caption(t(card['when']))
-    
-    # Row 2: 4 cards
-    cols2 = st.columns(4, gap="small")
-    for col, card in zip(cols2, cards[3:]):
-        with col:
-            with st.container(border=True):
-                st.markdown(f"**{t(card['title'])}**")
-                st.latex(card['formula'])
-                st.caption(t(card['when']))
+    # Use 2 columns per row to prevent formula overflow
+    for i in range(0, len(cards), 2):
+        cols = st.columns(2, gap="medium")
+        for j, col in enumerate(cols):
+            idx = i + j
+            if idx < len(cards):
+                card = cards[idx]
+                with col:
+                    with st.container(border=True):
+                        st.markdown(f"**{t(card['title'])}**")
+                        st.latex(card['formula'])
+                        st.caption(t(card['when']))
 
 
 def render_pro_tricks():
@@ -315,9 +333,10 @@ def render_formula_finder():
                 st.info(t({"de": "Wähle ein Szenario!", "en": "Select a scenario!"}))
         
         # Pro tip
+        pro_tip_text = t({"de": "Bei Bayes-Aufgaben: Immer zuerst P(A) via Totale W'keit berechnen!", "en": "For Bayes problems: Always compute P(A) via Total Probability first!"})
         st.markdown(f"""
         <div style="background: #f4f4f5; border-radius: 8px; padding: 12px; color: #3f3f46; margin-top: 12px;">
-            <strong>Pro Tip:</strong> {t({'de': 'Bei Bayes-Aufgaben: Immer zuerst P(A) via Totale W\'keit berechnen!', 'en': 'For Bayes problems: Always compute P(A) via Total Probability first!'})}
+            <strong>Pro Tip:</strong> {pro_tip_text}
         </div>
         """, unsafe_allow_html=True)
 

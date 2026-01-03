@@ -192,39 +192,35 @@ content_4_4 = {
         }
     },
     
-    # --- COMMON TRAP ---
-    "trap": {
-        "header": {"de": "Die häufigste Falle", "en": "The Most Common Trap"},
-        "text": {
-            "de": "<strong>Zeitintervall-Anpassung vergessen!</strong> Wenn λ = 2 pro Stunde, aber du fragst nach 30 Minuten, dann ist λ<sub>30min</sub> = 1.",
-            "en": "<strong>Forgetting time interval adjustment!</strong> If λ = 2 per hour but you're asking about 30 minutes, then λ<sub>30min</sub> = 1."
+    # --- EXAM ESSENTIALS (Merged Trap + Pro Tip) ---
+    "exam_essentials": {
+        "header": {"de": "Prüfungs-Essentials", "en": "Exam Essentials"},
+        "trap": {
+            "de": "Zeitintervall-Anpassung vergessen! Wenn λ = 2 pro Stunde, aber du fragst nach 30 Minuten, dann ist λ₃₀min = 1.",
+            "en": "Forgetting time interval adjustment! If λ = 2 per hour but you're asking about 30 minutes, then λ₃₀min = 1."
         },
-        "rule": {
-            "de": "Regel: λ skaliert linear mit der Zeit/Fläche!",
-            "en": "Rule: λ scales linearly with time/area!"
-        }
-    },
-    
-    # --- PRO TIP ---
-    "pro_tip": {
-        "de": """<strong>Prüfungs-Essentials:</strong><br><br>
-<strong>(1) Wenn E[X] = V(X) gegeben → sofort Poisson!</strong><br>
-<em>Warum?</em> EINZIGE Verteilung wo Erwartungswert = Varianz = λ. Wenn du das siehst, ist die Verteilung bereits identifiziert!<br><br>
-<strong>(2) λ immer an Zeitintervall anpassen</strong><br>
-<em>Warum?</em> λ = 2 pro Stunde aber du fragst nach 30 Minuten? Dann λ₃₀min = 1. Vergiss nie die Umrechnung!<br><br>
-<strong>(3) Poisson approximiert Binomial wenn n gross und p klein</strong><br>
-<em>Warum?</em> Faustregel: n > 30 und p < 0.05 → nutze Poisson mit λ = n·p. Spart Rechenaufwand!<br><br>
-<strong>(4) P(X = 0) = e⁻λ auswendig!</strong><br>
-<em>Warum?</em> 'Kein Anruf in einer Stunde?' Diese Frage kommt oft. e⁻λ direkt anwenden spart Zeit.""",
-        "en": """<strong>Exam essentials:</strong><br><br>
-<strong>(1) If E[X] = V(X) is given → immediately Poisson!</strong><br>
-<em>Why?</em> ONLY distribution where expected value = variance = λ. When you see this, the distribution is already identified!<br><br>
-<strong>(2) Always adjust λ to time interval</strong><br>
-<em>Why?</em> λ = 2 per hour but asking about 30 minutes? Then λ₃₀min = 1. Never forget to convert!<br><br>
-<strong>(3) Poisson approximates Binomial when n large and p small</strong><br>
-<em>Why?</em> Rule of thumb: n > 30 and p < 0.05 → use Poisson with λ = n·p. Saves computation!<br><br>
-<strong>(4) Memorize P(X = 0) = e⁻λ!</strong><br>
-<em>Why?</em> 'No call in an hour?' This question comes up often. Apply e⁻λ directly to save time."""
+        "trap_rule": {
+            "de": "λ skaliert linear mit der Zeit/Fläche!",
+            "en": "λ scales linearly with time/area!"
+        },
+        "tips": [
+            {
+                "tip": {"de": "Wenn E[X] = V(X) gegeben → sofort Poisson!", "en": "If E[X] = V(X) is given → immediately Poisson!"},
+                "why": {"de": "EINZIGE Verteilung wo Erwartungswert = Varianz = λ. Wenn du das siehst, ist die Verteilung bereits identifiziert!", "en": "ONLY distribution where expected value = variance = λ. When you see this, the distribution is already identified!"}
+            },
+            {
+                "tip": {"de": "λ immer an Zeitintervall anpassen", "en": "Always adjust λ to time interval"},
+                "why": {"de": "λ = 2 pro Stunde aber du fragst nach 30 Minuten? Dann λ₃₀min = 1. Vergiss nie die Umrechnung!", "en": "λ = 2 per hour but asking about 30 minutes? Then λ₃₀min = 1. Never forget to convert!"}
+            },
+            {
+                "tip": {"de": "Poisson approximiert Binomial wenn n gross und p klein", "en": "Poisson approximates Binomial when n large and p small"},
+                "why": {"de": "Faustregel: n > 30 und p < 0.05 → nutze Poisson mit λ = n·p. Spart Rechenaufwand!", "en": "Rule of thumb: n > 30 and p < 0.05 → use Poisson with λ = n·p. Saves computation!"}
+            },
+            {
+                "tip": {"de": "P(X = 0) = e⁻λ auswendig!", "en": "Memorize P(X = 0) = e⁻λ!"},
+                "why": {"de": "'Kein Anruf in einer Stunde?' Diese Frage kommt oft. e⁻λ direkt anwenden spart Zeit.", "en": "'No call in an hour?' This question comes up often. Apply e⁻λ directly to save time."}
+            }
+        ]
     }
 }
 
@@ -305,21 +301,12 @@ def render_subtopic_4_4(model):
     st.markdown("<br>", unsafe_allow_html=True)
     
     # --- FRAG DICH: DECISION GUIDE ---
-    st.markdown(f"""
-    <div style="background-color: rgba(0, 122, 255, 0.08); border-radius: 12px; padding: 20px; border: 2px solid #007AFF;">
-        <div style="font-weight: 700; color: #007AFF; margin-bottom: 16px; font-size: 1.1em;">
-            {t(content_4_4['frag_dich']['header'])}
-        </div>
-        <div style="color: #1c1c1e;">
-            <ol style="margin: 0; padding-left: 20px; line-height: 2;">
-                {"".join([f"<li>{t({'de': q['de'], 'en': q['en']})}</li>" for q in content_4_4['frag_dich']['questions']])}
-            </ol>
-        </div>
-        <div style="margin-top: 16px; padding: 10px; background: #007AFF; color: white; border-radius: 8px; text-align: center; font-weight: 600;">
-            {t(content_4_4['frag_dich']['conclusion'])}
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+    from utils.ask_yourself import render_ask_yourself
+    render_ask_yourself(
+        header=content_4_4['frag_dich']['header'],
+        questions=content_4_4['frag_dich']['questions'],
+        conclusion=content_4_4['frag_dich']['conclusion']
+    )
     
     st.markdown("<br>", unsafe_allow_html=True)
     
@@ -341,7 +328,9 @@ def render_subtopic_4_4(model):
         st.markdown("<br>", unsafe_allow_html=True)
         st.markdown(f"**{t(content_4_4['formula']['breakdown']['header'])}**")
         
-        for part in content_4_4["formula"]["breakdown"]["parts"]:
+        for i, part in enumerate(content_4_4["formula"]["breakdown"]["parts"]):
+            if i > 0:
+                st.markdown("---")
             col_sym, col_mean = st.columns([1, 3])
             with col_sym:
                 st.latex(part["symbol"])
@@ -433,7 +422,9 @@ def render_subtopic_4_4(model):
             "Rechnung": ("#f4f4f5", "#3f3f46"),
         }
         
-        for step in content_4_4["example_worked"]["steps"]:
+        for i, step in enumerate(content_4_4["example_worked"]["steps"]):
+            if i > 0:
+                st.markdown("---")
             label = t({"de": step["label_de"], "en": step["label_en"]})
             content_raw = t({"de": step["content_de"], "en": step["content_en"]})
             
@@ -602,22 +593,13 @@ def render_subtopic_4_4(model):
     
     st.markdown("<br>", unsafe_allow_html=True)
     
-    # --- COMMON TRAP + PRO TIP (MERGED) ---
-    st.markdown(f"""
-<div style="background-color: #f4f4f5; border-radius: 8px; padding: 16px; border-left: 4px solid #a1a1aa;">
-<div style="font-weight: 600; color: #52525b; margin-bottom: 8px;">
-{t(content_4_4['trap']['header'])}
-</div>
-<div style="color: #3f3f46; margin-bottom: 8px;">
-{t(content_4_4['trap']['text'])}
-</div>
-<div style="color: #52525b; font-weight: 600; margin-bottom: 16px;">
-{t(content_4_4['trap']['rule'])}
-</div>
-<div style="border-top: 1px solid #d4d4d8; padding-top: 12px; color: #3f3f46;">
-<strong>Pro Tip:</strong> {t(content_4_4['pro_tip'])}
-</div>
-</div>""", unsafe_allow_html=True)
+    # --- EXAM ESSENTIALS ---
+    from utils.exam_essentials import render_exam_essentials
+    render_exam_essentials(
+        trap=content_4_4["exam_essentials"]["trap"],
+        trap_rule=content_4_4["exam_essentials"]["trap_rule"],
+        tips=content_4_4["exam_essentials"]["tips"]
+    )
     
     st.markdown("<br><br>", unsafe_allow_html=True)
     

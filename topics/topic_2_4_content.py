@@ -57,6 +57,43 @@ This is the essence of **Combinations**: The order of selection doesn't matter."
     "exam": {
         "title": {"de": "Prüfungstraining", "en": "Exam Practice"},
         "source": "Combination Practice"
+    },
+    
+    # --- FRAG DICH (Ask Yourself) ---
+    "frag_dich": {
+        "header": {"de": "Frag dich: Kombination oder Permutation?", "en": "Ask yourself: Combination or Permutation?"},
+        "questions": [
+            {"de": "Wärst du <strong>verärgert</strong>, wenn die Reihenfolge sich ändert?", "en": "Would you be <strong>upset</strong> if the order changed?"},
+            {"de": "Ist es ein <strong>Team</strong> (egal wo jeder steht) oder ein <strong>Podium</strong> (Gold ≠ Silber)?", "en": "Is it a <strong>team</strong> (doesn't matter where people stand) or a <strong>podium</strong> (Gold ≠ Silver)?"},
+            {"de": "Enthält das Ergebnis <strong>geschweifte Klammern</strong> {A,B,C} oder eine <strong>Sequenz</strong> (A→B→C)?", "en": "Does the result have <strong>curly braces</strong> {A,B,C} or a <strong>sequence</strong> (A→B→C)?"}
+        ],
+        "conclusion": {"de": "Nicht verärgert / Team / Klammern → Kombination (÷ k!).", "en": "Not upset / Team / Braces → Combination (÷ k!)."}
+    },
+    
+    # --- EXAM ESSENTIALS ---
+    "exam_essentials": {
+        "trap": {
+            "de": "Kombinations-Formel verwenden, wenn Reihenfolge <strong>doch</strong> zählt! Du verlierst Punkte, wenn du bei Podium-Problemen durch k! teilst.",
+            "en": "Using Combination formula when order <strong>does</strong> matter! You lose points if you divide by k! on podium problems."
+        },
+        "trap_rule": {
+            "de": "Frag dich: Ist {A,B} = {B,A}? JA → Kombination. NEIN → Permutation!",
+            "en": "Ask yourself: Is {A,B} = {B,A}? YES → Combination. NO → Permutation!"
+        },
+        "tips": [
+            {
+                "tip": {"de": "Kombination = Permutation ÷ k!", "en": "Combination = Permutation ÷ k!"},
+                "why": {"de": "Wir entfernen die k! 'Geister' (identische Gruppen in anderer Reihenfolge).", "en": "We remove the k! 'ghosts' (identical groups in different orders)."}
+            },
+            {
+                "tip": {"de": "Signalwörter: 'Team', 'Gruppe', 'Menge', 'wählen'", "en": "Signal words: 'team', 'group', 'set', 'choose'"},
+                "why": {"de": "Diese Wörter deuten auf 'keine Reihenfolge' hin → Kombination.", "en": "These words suggest 'no order' → Combination."}
+            },
+            {
+                "tip": {"de": "Immer das Beispiel durchdenken!", "en": "Always think through the example!"},
+                "why": {"de": "Tausche zwei Elemente. Wenn das Ergebnis gleich bleibt → Kombination.", "en": "Swap two elements. If the result stays the same → Combination."}
+            }
+        ]
     }
 }
 
@@ -69,7 +106,47 @@ def render_subtopic_2_4(model):
     st.header(t(content_2_4["title"]))
     st.markdown("---")
     
-    # --- CONTEXT ANCHOR ---
+    # --- THEORY SECTION (Following Pedagogy Rules) ---
+    
+    # 1. THE INTUITION (Outside container)
+    st.markdown(f"### {t({'de': 'Die Intuition', 'en': 'The Intuition'})}")
+    with st.container(border=True):
+        st.markdown(t({
+            "de": "Stell dir vor, du wählst 3 Freunde für ein Lotto-Syndikat. Es ist egal, ob du zuerst Anna, dann Ben, dann Clara wählst oder Ben → Clara → Anna. Am Ende ist es **dieselbe Gruppe**. Bei Kombinationen zählt nur WER drin ist, nicht WANN sie gewählt wurden.",
+            "en": "Imagine picking 3 friends for a lottery syndicate. It doesn't matter if you pick Anna first, then Ben, then Clara - or Ben → Clara → Anna. In the end, it's the **same group**. With combinations, only WHO is in matters, not WHEN they were picked."
+        }))
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+    # 2. THE FORMULA + VARIABLE DECODER + KEY INSIGHT (Single container)
+    st.markdown(f"### {t({'de': 'Die Formel', 'en': 'The Formula'})}")
+    with st.container(border=True):
+        # Formula
+        st.latex(r"C(n,k) = \binom{n}{k} = \frac{n!}{k!(n-k)!}")
+        st.caption(t({"de": "Kombination: k Elemente aus n auswählen (Reihenfolge egal)", "en": "Combination: select k elements from n (order irrelevant)"}))
+        
+        st.markdown("---")
+        
+        # Variable Decoder
+        st.markdown(f"**{t({'de': 'Die Variablen erklärt', 'en': 'The Variables Explained'})}:**")
+        st.markdown(f"""
+• $n$ = **{t({"de": "Pool", "en": "Pool"})}** — {t({"de": "Wie viele Elemente stehen zur Verfügung?", "en": "How many elements are available?"})}
+
+• $k$ = **{t({"de": "Auswahl", "en": "Selection"})}** — {t({"de": "Wie viele wählen wir aus?", "en": "How many do we choose?"})}
+
+• $k!$ = **{t({"de": "Die Geister", "en": "The Ghosts"})}** — {t({"de": "Wie viele 'Duplikate' entstehen durch verschiedene Reihenfolgen?", "en": "How many 'duplicates' arise from different orderings?"})}
+
+• $\\binom{{n}}{{k}}$ = **{t({"de": "Binomialkoeffizient", "en": "Binomial Coefficient"})}** — {t({"de": "'n über k' - die Anzahl einzigartiger Gruppen", "en": "'n choose k' - the number of unique groups"})}
+""")
+        
+        st.markdown("---")
+        
+        # Key Insight
+        st.markdown(f"*{t({'de': 'Der Schlüssel: Kombination = Permutation ÷ k! Die k! Geister sind identische Gruppen, die in verschiedener Reihenfolge gewählt wurden. Wir teilen sie heraus!', 'en': 'The key: Combination = Permutation ÷ k! The k! ghosts are identical groups picked in different orders. We divide them out!'})}*")
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+    # --- CONTEXT ANCHOR (Now just a scenario introduction) ---
     with st.container(border=True):
         st.markdown(t(content_2_4["context_anchor"]))
     
@@ -79,9 +156,9 @@ def render_subtopic_2_4(model):
     with st.container(border=True):
         st.markdown(f"### {t(content_2_4['worked_example_title'])}")
         
-        col_scenario, col_math = st.columns([1.4, 1], gap="large")
-        
-        with col_scenario:
+        # --- STEP 1 ---
+        col1_theory, col1_math = st.columns([1.4, 1], gap="large", vertical_alignment="center")
+        with col1_theory:
             st.markdown(f"**{t({'de': 'Schritt 1: Wenn Reihenfolge zählen würde', 'en': 'Step 1: If order mattered'})}**")
             st.markdown(f"""
 <div style="background: #f4f4f5; border-left: 3px solid #71717a; padding: 12px; border-radius: 6px; color: #3f3f46;">
@@ -93,9 +170,14 @@ A→B, B→A, A→C, C→A, B→C, C→B = <b>6 {t({"de": "Ergebnisse", "en": "r
 {t({"de": "Formel: P(3,2) = 3 × 2 = 6", "en": "Formula: P(3,2) = 3 × 2 = 6"})}
 </div>
 """, unsafe_allow_html=True)
-            
-            st.markdown("<br>", unsafe_allow_html=True)
-            
+        with col1_math:
+            st.latex(r"P(3,2) = \frac{3!}{(3-2)!} = \frac{6}{1} = 6")
+        
+        st.markdown("---")
+        
+        # --- STEP 2 ---
+        col2_theory, col2_math = st.columns([1.4, 1], gap="large", vertical_alignment="center")
+        with col2_theory:
             st.markdown(f"**{t({'de': 'Schritt 2: Bemerke die Duplikate', 'en': 'Step 2: Notice the duplicates'})}**")
             st.markdown(f"""
 <div style="background: #f4f4f5; border-left: 3px solid #71717a; padding: 12px; border-radius: 6px; color: #3f3f46;">
@@ -106,9 +188,14 @@ A→B, B→A, A→C, C→A, B→C, C→B = <b>6 {t({"de": "Ergebnisse", "en": "r
 {t({"de": "Jedes Paar wurde 2! = 2 mal gezählt.", "en": "Each pair was counted 2! = 2 times."})}
 </div>
 """, unsafe_allow_html=True)
-            
-            st.markdown("<br>", unsafe_allow_html=True)
-            
+        with col2_math:
+            st.latex(r"k! = 2! = 2")
+        
+        st.markdown("---")
+        
+        # --- STEP 3 ---
+        col3_theory, col3_math = st.columns([1.4, 1], gap="large", vertical_alignment="center")
+        with col3_theory:
             st.markdown(f"**{t({'de': 'Schritt 3: Teile durch k!', 'en': 'Step 3: Divide by k!'})}**")
             st.markdown(f"""
 <div style="background: #f4f4f5; border-left: 3px solid #71717a; padding: 12px; border-radius: 6px; color: #3f3f46;">
@@ -117,23 +204,9 @@ A→B, B→A, A→C, C→A, B→C, C→B = <b>6 {t({"de": "Ergebnisse", "en": "r
 {{A, B}}, {{A, C}}, {{B, C}}
 </div>
 """, unsafe_allow_html=True)
-        
-        with col_math:
-            st.markdown(f"**{t({'de': 'Schritt 1', 'en': 'Step 1'})}**")
-            st.latex(r"P(3,2) = \frac{3!}{(3-2)!} = \frac{6}{1} = 6")
-            
-            st.markdown("<br>", unsafe_allow_html=True)
-            
-            st.markdown(f"**{t({'de': 'Schritt 2', 'en': 'Step 2'})}**")
-            st.latex(r"k! = 2! = 2")
-            
-            st.markdown("<br>", unsafe_allow_html=True)
-            
-            st.markdown(f"**{t({'de': 'Schritt 3', 'en': 'Step 3'})}**")
+        with col3_math:
             st.latex(r"C(3,2) = \frac{P(3,2)}{k!} = \frac{6}{2} = 3")
-            
             st.markdown("<br>", unsafe_allow_html=True)
-            
             st.latex(r"C(n,k) = \frac{n!}{k!(n-k)!}")
     
     st.markdown("<br><br>", unsafe_allow_html=True)
@@ -224,6 +297,7 @@ A→B, B→A, A→C, C→A, B→C, C→B = <b>6 {t({"de": "Ergebnisse", "en": "r
         
         with col_perm:
             st.markdown(f"**{t({'de': 'Permutation (2.3)', 'en': 'Permutation (2.3)'})}**")
+            st.latex(r"P(n,k) = \frac{n!}{(n-k)!}")
             st.markdown(f"""
 <div style="background: #f4f4f5; border-radius: 8px; padding: 16px;">
 <b>{t({"de": "Reihenfolge ZÄHLT", "en": "Order MATTERS"})}</b><br><br>
@@ -233,10 +307,10 @@ A→B, B→A, A→C, C→A, B→C, C→B = <b>6 {t({"de": "Ergebnisse", "en": "r
 → {t({"de": "JA", "en": "YES"})} = Permutation
 </div>
 """, unsafe_allow_html=True)
-            st.latex(r"P(n,k) = \frac{n!}{(n-k)!}")
         
         with col_comb:
             st.markdown(f"**{t({'de': 'Kombination (2.4)', 'en': 'Combination (2.4)'})}**")
+            st.latex(r"C(n,k) = \frac{n!}{k!(n-k)!}")
             st.markdown(f"""
 <div style="background: #f4f4f5; border-radius: 8px; padding: 16px;">
 <b>{t({"de": "Reihenfolge EGAL", "en": "Order DOESN'T MATTER"})}</b><br><br>
@@ -246,7 +320,6 @@ A→B, B→A, A→C, C→A, B→C, C→B = <b>6 {t({"de": "Ergebnisse", "en": "r
 → {t({"de": "NEIN", "en": "NO"})} = {t({"de": "Kombination", "en": "Combination"})}
 </div>
 """, unsafe_allow_html=True)
-            st.latex(r"C(n,k) = \frac{n!}{k!(n-k)!}")
     
     st.markdown("<br><br>", unsafe_allow_html=True)
     
@@ -276,7 +349,25 @@ A→B, B→A, A→C, C→A, B→C, C→B = <b>6 {t({"de": "Ergebnisse", "en": "r
     
     st.markdown("<br><br>", unsafe_allow_html=True)
     
+    # --- FRAG DICH (Ask Yourself) ---
+    from utils.ask_yourself import render_ask_yourself
+    render_ask_yourself(
+        header=content_2_4["frag_dich"]["header"],
+        questions=content_2_4["frag_dich"]["questions"],
+        conclusion=content_2_4["frag_dich"]["conclusion"]
+    )
+    
+    # --- EXAM ESSENTIALS ---
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    from utils.exam_essentials import render_exam_essentials
+    render_exam_essentials(
+        trap=content_2_4["exam_essentials"]["trap"],
+        trap_rule=content_2_4["exam_essentials"]["trap_rule"],
+        tips=content_2_4["exam_essentials"]["tips"]
+    )
+
     # --- EXAM SECTION ---
+    st.markdown("<br><br>", unsafe_allow_html=True)
     st.markdown(f"### {t(content_2_4['exam']['title'])}")
     st.caption(t(content_2_4['exam']['source']))
     

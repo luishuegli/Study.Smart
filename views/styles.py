@@ -344,6 +344,30 @@ def load_design_system():
         .katex-display {
             font-size: 1.1em !important;
         }
+        
+        /* === COMPACT DIVIDERS WITHIN CONTAINERS === */
+        /* CRITICAL: Streamlit's st.container(border=True) no longer uses stVerticalBlockBorderWrapper */
+        /* The bordered container uses stVerticalBlock with emotion-cache classes for border */
+        /* We target ALL hr elements with high specificity to override Streamlit's 2em margins */
+        
+        /* Global compact hr - override Streamlit's .st-emotion-cache-* 2em margins */
+        .stApp hr,
+        [data-testid="stVerticalBlock"] hr,
+        [data-testid="stMarkdownContainer"] hr {
+            margin-top: 4px !important;
+            margin-bottom: 4px !important;
+        }
+        
+        /* Keep page-level dividers (after header) with normal spacing */
+        .stApp > [data-testid="stVerticalBlock"] > [data-testid="stVerticalBlock"] > [data-testid="stElementContainer"]:first-child ~ [data-testid="stElementContainer"]:nth-child(3) hr {
+            margin-top: 16px !important;
+            margin-bottom: 16px !important;
+        }
+        
+        /* Reduce vertical gaps between markdown elements */
+        [data-testid="stVerticalBlock"] [data-testid="stMarkdownContainer"] p {
+            margin-bottom: 4px !important;
+        }
 
         /* --- 9. LINKS --- */
         a {

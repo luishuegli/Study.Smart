@@ -40,6 +40,35 @@ content_3_4 = {
     "pro_tip": {
         "de": "E[X] muss KEIN möglicher Wert sein! Beim Würfeln ist E[X] = 3.5, obwohl man niemals eine 3.5 würfeln kann. Es ist der Langzeit-Durchschnitt, keine Vorhersage für einen Wurf.",
         "en": "E[X] does NOT have to be a possible value! When rolling a die, E[X] = 3.5, even though you can never roll 3.5. It's the long-run average, not a single-roll prediction."
+    },
+    "frag_dich": {
+        "header": {"de": "Frag dich: Erwartungswert", "en": "Ask yourself: Expected Value"},
+        "questions": [
+            {"de": "Was bedeutet es wenn E[X] = 3.5 beim Würfel? Kann man 3.5 würfeln?", "en": "What does it mean when E[X] = 3.5 for a die? Can you roll 3.5?"},
+            {"de": "Wenn E[X] = 10€, verdienst du bei JEDEM Spiel genau 10€?", "en": "If E[X] = €10, do you earn exactly €10 on EVERY game?"},
+            {"de": "Wie berechnet man E[2X + 5] wenn man E[X] kennt?", "en": "How do you calculate E[2X + 5] if you know E[X]?"}
+        ],
+        "conclusion": {"de": "E[X] ist der LANGZEIT-Durchschnitt, nicht das was bei einem Versuch passiert!", "en": "E[X] is the LONG-RUN average, not what happens in a single trial!"}
+    },
+    "exam_essentials": {
+        "trap": {
+            "de": "Glauben, dass E[X] ein möglicher Wert sein muss.",
+            "en": "Believing that E[X] must be a possible value."
+        },
+        "trap_rule": {
+            "de": "**Merke:** E[X] ist der Schwerpunkt, nicht ein Ergebnis! E[Würfel] = 3.5, aber 3.5 kann nie fallen.",
+            "en": "**Remember:** E[X] is the balance point, not an outcome! E[Die] = 3.5, but 3.5 can never occur."
+        },
+        "tips": [
+            {
+                "tip": {"de": "Linearität nutzen!", "en": "Use linearity!"},
+                "why": {"de": "E[aX + b] = a·E[X] + b. Spart viel Rechenzeit bei transformierten Variablen.", "en": "E[aX + b] = a·E[X] + b. Saves calculation time for transformed variables."}
+            },
+            {
+                "tip": {"de": "E[X + Y] = E[X] + E[Y] gilt IMMER", "en": "E[X + Y] = E[X] + E[Y] holds ALWAYS"},
+                "why": {"de": "Auch wenn X und Y abhängig sind! Das vergessen viele.", "en": "Even if X and Y are dependent! Many forget this."}
+            }
+        ]
     }
 }
 
@@ -49,35 +78,68 @@ def render_subtopic_3_4(model):
     inject_equal_height_css()
 
     st.header(t(content_3_4["title"]))
-    st.markdown(t({"de": "Wo liegt der Schwerpunkt?", "en": "Where is the balance point?"}))
     st.markdown("---")
     
-    # --- INTUITION ---
+    # --- THEORY SECTION (Following Pedagogy Rules) ---
+    
+    # 1. THE INTUITION (Header OUTSIDE container)
+    st.markdown(f"### {t(content_3_4['anchor']['header'])}")
     with st.container(border=True):
-        st.markdown(f"### {t(content_3_4['anchor']['header'])}")
         st.markdown(t(content_3_4["anchor"]["text"]))
     
     st.markdown("<br>", unsafe_allow_html=True)
+    
+    # 2. THE FORMULA + VARIABLE DECODER + KEY INSIGHT
+    st.markdown(f"### {t({'de': 'Die Formel', 'en': 'The Formula'})}")
+    with st.container(border=True):
+        # Formulas
+        st.markdown(f"**{t({'de': 'Diskret', 'en': 'Discrete'})}:**")
+        st.latex(content_3_4['theory']['discrete_formula'])
+        st.markdown(f"**{t({'de': 'Stetig', 'en': 'Continuous'})}:**")
+        st.latex(content_3_4['theory']['continuous_formula'])
+        
+        st.markdown("---")
+        
+        # Variable Decoder
+        st.markdown(f"**{t({'de': 'Die Variablen erklärt', 'en': 'The Variables Explained'})}:**")
+        st.markdown(f"""
+• $E[X]$ = **{t({"de": "Erwartungswert", "en": "Expected Value"})}** — {t({"de": "Der 'Schwerpunkt' - wo balanciert die Verteilung?", "en": "The 'balance point' - where does the distribution balance?"})}
 
-    # --- THEORY CARDS ---
-    c1, c2 = st.columns(2, gap="medium")
-    with c1:
-        with st.container(border=True):
-            st.markdown(f"**{t(content_3_4['theory']['def_title'])}**")
-            st.caption(t(content_3_4['theory']['def_text']))
-            st.markdown(f"**{t({'de': 'Diskret', 'en': 'Discrete'})}:**")
-            st.latex(content_3_4['theory']['discrete_formula'])
-            st.markdown(f"**{t({'de': 'Stetig', 'en': 'Continuous'})}:**")
-            st.latex(content_3_4['theory']['continuous_formula'])
+• $x_i$ = **{t({"de": "Mögliche Werte", "en": "Possible Values"})}** — {t({"de": "Die konkreten Ergebnisse (1, 2, 3... beim Würfel)", "en": "The specific outcomes (1, 2, 3... for a die)"})}
 
-    with c2:
-        with st.container(border=True):
-            st.markdown(f"**{t(content_3_4['theory']['lin_title'])}**")
-            st.caption(t(content_3_4['theory']['lin_text']))
-            st.latex(content_3_4['theory']['lin_formula'])
-            st.markdown("<br>", unsafe_allow_html=True)
-            st.latex(content_3_4['theory']['lin_formula2'])
-            st.caption(t(content_3_4['theory']['lin_formula2_note']))
+• $P(X=x_i)$ = **{t({"de": "Gewicht", "en": "Weight"})}** — {t({"de": "Wie wahrscheinlich ist dieser Wert? (Das Gewicht beim Balancieren!)", "en": "How likely is this value? (The weight when balancing!)"})}
+
+• $\\sum$ = **{t({"de": "Summieren", "en": "Sum Up"})}** — {t({"de": "Für ALLE möglichen Werte berechnen und addieren", "en": "Calculate for ALL possible values and add together"})}
+""")
+        
+        st.markdown("---")
+        
+        # Key Insight
+        key_insight = t({
+            'de': 'Der Schlüssel: E[X] ist ein GEWICHTETER Durchschnitt. Werte mit hoher Wahrscheinlichkeit "ziehen" den Erwartungswert zu sich. Denk an eine Wippe: Schwere Gewichte (= hohe Wahrscheinlichkeit) haben mehr Einfluss!',
+            'en': 'The key: E[X] is a WEIGHTED average. Values with high probability "pull" the expected value toward them. Think of a seesaw: Heavy weights (= high probability) have more influence!'
+        })
+        st.markdown(f"*{key_insight}*")
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+    # 3. THE LINEARITY SHORTCUT (Separate section)
+    st.markdown(f"### {t(content_3_4['theory']['lin_title'])}")
+    with st.container(border=True):
+        st.caption(t(content_3_4['theory']['lin_text']))
+        st.latex(content_3_4['theory']['lin_formula'])
+        st.markdown("<br>", unsafe_allow_html=True)
+        st.latex(content_3_4['theory']['lin_formula2'])
+        st.caption(t(content_3_4['theory']['lin_formula2_note']))
+        
+        st.markdown("---")
+        
+        # Why this matters
+        shortcut_why = t({
+            'de': '*Warum ist das so mächtig? Du kannst E[aX + b] berechnen, ohne die ganze Verteilung von aX+b zu kennen! Einfach: a mal den alten Erwartungswert, plus b.*',
+            'en': '*Why is this so powerful? You can calculate E[aX + b] without knowing the whole distribution of aX+b! Just: a times the old expected value, plus b.*'
+        })
+        st.markdown(shortcut_why)
 
     st.markdown("<br><br>", unsafe_allow_html=True)
 
@@ -89,14 +151,25 @@ def render_subtopic_3_4(model):
     # --- MISSION: CASINO CONSULTANT ---
     render_casino_mission()
 
-    st.markdown("<br>", unsafe_allow_html=True)
+    st.markdown("<br><br>", unsafe_allow_html=True)
     
-    # --- PRO TIP ---
-    st.markdown(f"""
-    <div style="background-color: #f4f4f5; border-radius: 8px; padding: 12px; color: #3f3f46;">
-        <strong>Pro Tip:</strong> {t(content_3_4['pro_tip'])}
-    </div>
-    """, unsafe_allow_html=True)
+    # --- ASK YOURSELF ---
+    from utils.ask_yourself import render_ask_yourself
+    render_ask_yourself(
+        header=content_3_4["frag_dich"]["header"],
+        questions=content_3_4["frag_dich"]["questions"],
+        conclusion=content_3_4["frag_dich"]["conclusion"]
+    )
+    
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    
+    # --- EXAM ESSENTIALS ---
+    from utils.exam_essentials import render_exam_essentials
+    render_exam_essentials(
+        trap=content_3_4["exam_essentials"]["trap"],
+        trap_rule=content_3_4["exam_essentials"]["trap_rule"],
+        tips=content_3_4["exam_essentials"]["tips"]
+    )
 
     st.markdown("<br><br>", unsafe_allow_html=True)
 

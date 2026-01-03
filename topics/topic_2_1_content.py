@@ -34,6 +34,47 @@ content_2_1 = {
         "title": {"de": "Klausur-Hack: Signalwörter", "en": "Exam Hack: Signal Words"},
         "perm": {"de": "Rangliste, Planen, Code, Anordnen, Warteschlange", "en": "Rank, Schedule, Code, Arrange, Queue"},
         "comb": {"de": "Auswählen, Team, Menge, Gezogen, Lottoprozahl", "en": "Select, Choose, Set, Drawn, Lottery"}
+    },
+    
+    # --- FRAG DICH (Ask Yourself) ---
+    "frag_dich": {
+        "header": {"de": "Frag dich: Permutation oder Kombination?", "en": "Ask yourself: Permutation or Combination?"},
+        "questions": [
+            {"de": "Zählt die <strong>Reihenfolge</strong>? (Gold ≠ Silber?)", "en": "Does <strong>order</strong> matter? (Gold ≠ Silver?)"},
+            {"de": "Ist es ein <strong>Team/Menge</strong> oder eine <strong>Rangliste/Anordnung</strong>?", "en": "Is it a <strong>team/set</strong> or a <strong>ranking/arrangement</strong>?"},
+            {"de": "Könnten zwei verschiedene Reihenfolgen das <strong>gleiche Ergebnis</strong> sein?", "en": "Could two different orders be the <strong>same result</strong>?"}
+        ],
+        "conclusion": {"de": "Reihenfolge zählt → Permutation. Reihenfolge egal → Kombination (÷ k!).", "en": "Order matters → Permutation. Order irrelevant → Combination (÷ k!)."}
+    },
+    
+    # --- EXAM ESSENTIALS ---
+    "exam_essentials": {
+        "trap": {
+            "de": "Variation vs. Permutation verwechseln! <strong>Variation MIT Wiederholung</strong> ($n^k$) erlaubt Wiederholungen. <strong>Permutation OHNE Wiederholung</strong> nicht.",
+            "en": "Confusing Variation vs. Permutation! <strong>Variation WITH repetition</strong> ($n^k$) allows repeats. <strong>Permutation WITHOUT repetition</strong> doesn't."
+        },
+        "trap_rule": {
+            "de": "Frag dich: Kann dieselbe Sache mehrfach vorkommen? JA → $n^k$. NEIN → $P(n,k)$.",
+            "en": "Ask yourself: Can the same thing appear multiple times? YES → $n^k$. NO → $P(n,k)$."
+        },
+        "tips": [
+            {
+                "tip": {"de": "Signalwörter für Permutation", "en": "Signal words for Permutation"},
+                "why": {"de": "'Rangliste', 'Platz', 'Code', 'Anordnung', 'Reihenfolge' → Reihenfolge zählt!", "en": "'Ranking', 'Position', 'Code', 'Arrangement', 'Order' → Order matters!"}
+            },
+            {
+                "tip": {"de": "Signalwörter für Kombination", "en": "Signal words for Combination"},
+                "why": {"de": "'Team', 'Menge', 'gewählt', 'Gruppe', 'Komitee' → Reihenfolge egal!", "en": "'Team', 'Set', 'chosen', 'Group', 'Committee' → Order irrelevant!"}
+            },
+            {
+                "tip": {"de": "Kombination = Permutation ÷ Ghosts", "en": "Combination = Permutation ÷ Ghosts"},
+                "why": {"de": "$\\binom{n}{k} = \\frac{P(n,k)}{k!}$ — wir entfernen die k! Duplikate.", "en": "$\\binom{n}{k} = \\frac{P(n,k)}{k!}$ — we remove the k! duplicates."}
+            },
+            {
+                "tip": {"de": "Immer erst n und k identifizieren!", "en": "Always identify n and k first!"},
+                "why": {"de": "n = Pool (woraus du wählst), k = Auswahl (wie viele du nimmst).", "en": "n = Pool (what you choose from), k = Selection (how many you take)."}
+            }
+        ]
     }
 }
 
@@ -183,79 +224,6 @@ But the permutation formula counts each order separately! For 3 people, there ar
         
         # --- PRO TIP (Rule 5.4) ---
 
-    
-    # --- ROW 5: THE TRAP (COMMON MISTAKE) ---
-    st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown(f"### {t({'de': 'Die Falle: Variation vs. Permutation', 'en': 'The Trap: Variation vs. Permutation'})}")
-    with st.container(border=True):
-        
-        st.markdown(t({
-            'de': '<b>Variation mit Wiederholung</b> ($n^k$): Jede Position kann jeden Wert haben (z.B. PIN-Code 1-1-1-1 erlaubt).', 
-            'en': '<b>Variation with Repetition</b> ($n^k$): Each position can have any value (e.g., PIN code 1-1-1-1 allowed).'}), unsafe_allow_html=True)
-        
-        st.markdown("<br>", unsafe_allow_html=True)
-        
-        st.markdown(t({
-            'de': '<b>Permutation ohne Wiederholung</b> ($P(n,k)$): Jedes Element kann nur einmal verwendet werden (z.B. Podiumsplatz).', 
-            'en': '<b>Permutation without Repetition</b> ($P(n,k)$): Each element can only be used once (e.g., podium position).'}), unsafe_allow_html=True)
-        
-        st.markdown("<br>", unsafe_allow_html=True)
-        
-        st.markdown("<br>", unsafe_allow_html=True)
-        
-        st.markdown(t({
-            'de': '<b>Frag dich:</b> Kann dieselbe Person/Sache mehrfach vorkommen?', 
-            'en': '<b>Ask yourself:</b> Can the same person/thing appear multiple times?'}), unsafe_allow_html=True)
-
-        # --- QUESTION DISSECTOR (Rule: Teach by Example) ---
-        st.markdown("<hr style='margin: 16px 0; border: 0; border-top: 1px solid #e5e7eb;'>", unsafe_allow_html=True)
-        st.markdown(f"**{t({'de': 'Fragen-Analysator: So erkennst du die Formel', 'en': 'Question Dissector: How to Spot the Formula'})}**")
-        
-        # Color Legend (compact inline)
-        st.markdown("""
-<div style="display: flex; gap: 16px; flex-wrap: wrap; font-size: 0.8em; margin-bottom: 12px; color: #64748b;">
-    <span><span style="background:#dbeafe; padding:2px 6px; border-radius:4px; color:#1d4ed8;">Given</span> = Data</span>
-    <span><span style="background:#fee2e2; padding:2px 6px; border-radius:4px; color:#dc2626;">Target</span> = Find</span>
-    <span><span style="background:#dcfce7; padding:2px 6px; border-radius:4px; color:#16a34a;">Signal</span> = Formula Hint</span>
-    <span><span style="background:#f4f4f5; padding:2px 6px; border-radius:4px; color:#3f3f46;">→ Formula</span></span>
-</div>
-        """, unsafe_allow_html=True)
-        
-        # Tabbed Examples
-        tab_perm, tab_comb = st.tabs([t({"de": "Permutation Beispiel", "en": "Permutation Example"}), t({"de": "Kombination Beispiel", "en": "Combination Example"})])
-        
-        with tab_perm:
-            st.markdown(f"""
-<div style="background: #fafafa; border-radius: 8px; padding: 12px; line-height: 1.8; font-size: 0.95em;">
-<span style="background:#dbeafe; padding:2px 6px; border-radius:4px; color:#1d4ed8;">8 runners</span> compete in a race. 
-<span style="background:#fee2e2; padding:2px 6px; border-radius:4px; color:#dc2626;">How many ways</span> can the 
-<span style="background:#dbeafe; padding:2px 6px; border-radius:4px; color:#1d4ed8;">top 3 positions</span> be filled 
-if there are <span style="background:#dcfce7; padding:2px 6px; border-radius:4px; color:#16a34a;">no ties</span>?
-</div>
-<div style="margin-top: 8px; font-size: 0.85em;">
-<b>📘 Given:</b> $n=8$, $k=3$ &nbsp;|&nbsp; 
-<b>🎯 Target:</b> Number of arrangements &nbsp;|&nbsp;
-<b>💡 Signal:</b> "positions", "no ties" → Order matters!<br>
-<span style="background:#f4f4f5; padding:2px 8px; border-radius:4px; color:#3f3f46; font-weight:600;">→ $P(8,3) = \\frac{{8!}}{{5!}} = 336$</span>
-</div>
-            """, unsafe_allow_html=True)
-        
-        with tab_comb:
-            st.markdown(f"""
-<div style="background: #fafafa; border-radius: 8px; padding: 12px; line-height: 1.8; font-size: 0.95em;">
-From <span style="background:#dbeafe; padding:2px 6px; border-radius:4px; color:#1d4ed8;">12 students</span>, 
-a <span style="background:#dcfce7; padding:2px 6px; border-radius:4px; color:#16a34a;">committee of 4</span> is 
-<span style="background:#dcfce7; padding:2px 6px; border-radius:4px; color:#16a34a;">selected</span>. 
-<span style="background:#fee2e2; padding:2px 6px; border-radius:4px; color:#dc2626;">How many different committees</span> are possible?
-</div>
-<div style="margin-top: 8px; font-size: 0.85em;">
-<b>📘 Given:</b> $n=12$, $k=4$ &nbsp;|&nbsp; 
-<b>🎯 Target:</b> Number of groups &nbsp;|&nbsp;
-<b>💡 Signal:</b> "committee", "selected" → Order irrelevant!<br>
-<span style="background:#f4f4f5; padding:2px 8px; border-radius:4px; color:#3f3f46; font-weight:600;">→ $\\binom{{12}}{{4}} = 495$</span>
-</div>
-            """, unsafe_allow_html=True)
-
     st.markdown("<br>", unsafe_allow_html=True)
     
     # --- SCENARIO ENGINE ---
@@ -387,6 +355,24 @@ a <span style="background:#dcfce7; padding:2px 6px; border-radius:4px; color:#16
                 
                 html += "</div>"
                 st.markdown(html, unsafe_allow_html=True)
+
+    # --- FRAG DICH (Ask Yourself) ---
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    from utils.ask_yourself import render_ask_yourself
+    render_ask_yourself(
+        header=content_2_1["frag_dich"]["header"],
+        questions=content_2_1["frag_dich"]["questions"],
+        conclusion=content_2_1["frag_dich"]["conclusion"]
+    )
+    
+    # --- EXAM ESSENTIALS ---
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    from utils.exam_essentials import render_exam_essentials
+    render_exam_essentials(
+        trap=content_2_1["exam_essentials"]["trap"],
+        trap_rule=content_2_1["exam_essentials"]["trap_rule"],
+        tips=content_2_1["exam_essentials"]["tips"]
+    )
 
     # --- EXAM SECTION ---
     st.markdown("<br><br>", unsafe_allow_html=True)

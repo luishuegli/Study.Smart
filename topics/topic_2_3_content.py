@@ -36,6 +36,43 @@ content_2_3 = {
             "de": "Das Ergebnis $3.04 \\cdot 10^{64}$ ist größer als die Anzahl der Atome in der Milchstraße.",
             "en": "The result $3.04 \\cdot 10^{64}$ is larger than the number of atoms in the Milky Way."
         }
+    },
+    
+    # --- FRAG DICH (Ask Yourself) ---
+    "frag_dich": {
+        "header": {"de": "Frag dich: Welche Permutation?", "en": "Ask yourself: Which Permutation?"},
+        "questions": [
+            {"de": "Werden <strong>alle</strong> Elemente verwendet oder nur <strong>k aus n</strong>?", "en": "Are <strong>all</strong> elements used or only <strong>k from n</strong>?"},
+            {"de": "Gibt es <strong>Wiederholungen</strong>? (Gleiche Buchstaben wie in MISSISSIPPI?)", "en": "Are there <strong>repetitions</strong>? (Same letters like in MISSISSIPPI?)"},
+            {"de": "Zählt die <strong>Reihenfolge</strong>? (Opener ≠ Closer?)", "en": "Does <strong>order</strong> matter? (Opener ≠ Closer?)"}
+        ],
+        "conclusion": {"de": "Alle → n!. Mit Wiederholung → n!/(n₁!·n₂!...). Nur k aus n → P(n,k).", "en": "All → n!. With repetition → n!/(n₁!·n₂!...). Only k from n → P(n,k)."}
+    },
+    
+    # --- EXAM ESSENTIALS ---
+    "exam_essentials": {
+        "trap": {
+            "de": "Permutation vs. Kombination verwechseln! Bei Permutation zählt <strong>Reihenfolge</strong> (Podium). Bei Kombination <strong>nicht</strong> (Lotto).",
+            "en": "Confusing Permutation vs. Combination! Permutation = <strong>order matters</strong> (podium). Combination = <strong>order irrelevant</strong> (lottery)."
+        },
+        "trap_rule": {
+            "de": "Frag dich: Wärst du verärgert, wenn Platz 1 und 3 tauschen? JA → Permutation!",
+            "en": "Ask yourself: Would you be upset if 1st and 3rd swapped? YES → Permutation!"
+        },
+        "tips": [
+            {
+                "tip": {"de": "n! = alle Elemente anordnen", "en": "n! = arrange all elements"},
+                "why": {"de": "Spezialfall von P(n,k) wenn k=n. Jeder Platz verbraucht eine Option.", "en": "Special case of P(n,k) when k=n. Each slot uses up one option."}
+            },
+            {
+                "tip": {"de": "MISSISSIPPI-Formel für Wiederholungen", "en": "MISSISSIPPI formula for repetitions"},
+                "why": {"de": "n!/(n₁!·n₂!·...) — identische Anordnungen rausdividieren!", "en": "n!/(n₁!·n₂!·...) — divide out identical arrangements!"}
+            },
+            {
+                "tip": {"de": "Fakultäten explodieren schnell!", "en": "Factorials explode fast!"},
+                "why": {"de": "50! hat 65 Stellen. Immer Taschenrechner/Formelblatt nutzen.", "en": "50! has 65 digits. Always use calculator/formula sheet."}
+            }
+        ]
     }
 }
 
@@ -113,62 +150,88 @@ svg { width: 1.5rem; height: 1.5rem; }
     st.header(t(c["title"]))
     st.markdown("---")
     
-    # --- THEORY SECTION ---
+    # --- THEORY SECTION (Following Pedagogy Rules) ---
+    
+    # 1. THE INTUITION (Outside container)
     st.markdown(f"### {t(c['theory_header'])}")
     with st.container(border=True):
-        col_t1, col_t2 = st.columns([1, 1], gap="medium")
-        with col_t1:
-            st.markdown(f"**{t({'de': 'Definition', 'en': 'Definition'})}**")
-            st.markdown(t({
-                "de": "Wenn wir **alle** Elemente einer Menge verwenden und die **Reihenfolge zählt**, sprechen wir von einer Permutation (ohne Zurücklegen).",
-                "en": "When we use **all** elements of a set and the **order matters**, we speak of a permutation (without replacement)."
-            }))
-            
-            st.markdown("<br>", unsafe_allow_html=True)
-            st.markdown(f"**{t({'de': 'Notation', 'en': 'Notation'})}**")
-            st.markdown("- $n$ = " + t({"de": "Gesamtzahl der Elemente", "en": "Total number of elements"}))
-            st.markdown("- $k$ = " + t({"de": "Anzahl ausgewählter Elemente", "en": "Number of selected elements"}))
-            
-        with col_t2:
-             st.markdown(f"**{t({'de': 'Formeln', 'en': 'Formulas'})}**")
-             st.latex(r"P(n, k) = \frac{n!}{(n-k)!}")
-             st.caption(t({
-                 "de": "Permutation: k Elemente aus n auswählen (Reihenfolge zählt)",
-                 "en": "Permutation: select k elements from n (order matters)"
-             }))
-             
-             st.markdown("<br>", unsafe_allow_html=True)
-             st.latex(r"P(n, n) = n!")
-             st.caption(t({
-                 "de": "Spezialfall: Alle n Elemente anordnen",
-                 "en": "Special case: arrange all n elements"
-             }))
+        st.markdown(t({
+            "de": "Stell dir einen DJ vor, der Songs für eine Party anordnet. Die **Reihenfolge** der Songs ist entscheidend - 'Happy' → 'Sad' → 'Dance' ist eine völlig andere Stimmung als 'Sad' → 'Dance' → 'Happy'. Bei Permutationen zählt jede Anordnung als eigenes Ergebnis.",
+            "en": "Imagine a DJ arranging songs for a party. The **order** of songs is crucial - 'Happy' → 'Sad' → 'Dance' creates a completely different vibe than 'Sad' → 'Dance' → 'Happy'. With permutations, each arrangement counts as a unique outcome."
+        }))
     
-    # NEW: Permutations with Repetition (MISSISSIPPI-type problems)
     st.markdown("<br>", unsafe_allow_html=True)
+    
+    # 2. THE FORMULA + VARIABLE DECODER + KEY INSIGHT (Single container)
+    st.markdown(f"### {t({'de': 'Die Formel', 'en': 'The Formula'})}")
     with st.container(border=True):
-        st.markdown(f"**{t({'de': 'Permutation mit Wiederholung', 'en': 'Permutations with Repetition'})}**")
+        # Formula
+        st.latex(r"P(n, k) = \frac{n!}{(n-k)!}")
+        st.caption(t({"de": "Permutation: k Elemente aus n auswählen (Reihenfolge zählt)", "en": "Permutation: select k elements from n (order matters)"}))
+        
+        st.markdown("---")
+        
+        # Variable Decoder
+        st.markdown(f"**{t({'de': 'Die Variablen erklärt', 'en': 'The Variables Explained'})}:**")
+        st.markdown(f"""
+• $n$ = **{t({"de": "Pool", "en": "Pool"})}** — {t({"de": "Wie viele Elemente stehen zur Verfügung?", "en": "How many elements are available?"})}
+
+• $k$ = **{t({"de": "Auswahl", "en": "Selection"})}** — {t({"de": "Wie viele wählen wir aus?", "en": "How many do we choose?"})}
+
+• $n!$ = **{t({"de": "Alle Anordnungen", "en": "All Arrangements"})}** — {t({"de": "Alle möglichen Wege, n Dinge anzuordnen", "en": "All possible ways to arrange n items"})}
+
+• $(n-k)!$ = **{t({"de": "Unbenutzte", "en": "Unused"})}** — {t({"de": "Die Anordnungen der Elemente, die wir NICHT wählen", "en": "Arrangements of elements we DON'T pick"})}
+""")
+        
+        st.markdown("---")
+        
+        # Key Insight
+        st.markdown(f"*{t({'de': 'Der Schlüssel: Warum teilen wir durch (n-k)!? Weil uns die Reihenfolge der ÜBRIG GEBLIEBENEN Elemente egal ist! Wir wollen nur wissen, wie wir die k AUSGEWÄHLTEN anordnen.', 'en': 'The key: Why divide by (n-k)!? Because we do not care about the order of LEFTOVER elements! We only care about how we arrange the k elements we SELECTED.'})}*")
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+    # 3. SPECIAL CASE: P(n,n) = n!
+    st.markdown(f"### {t({'de': 'Spezialfall: Alles anordnen', 'en': 'Special Case: Arrange Everything'})}")
+    with st.container(border=True):
+        st.latex(r"P(n, n) = n!")
+        st.markdown(t({
+            "de": "Wenn wir **alle** Elemente verwenden ($k = n$), dann gibt es nichts übrig: $(n-n)! = 0! = 1$, also bleibt nur $n!$ übrig.",
+            "en": "When we use **all** elements ($k = n$), nothing is left: $(n-n)! = 0! = 1$, so we're left with just $n!$."
+        }))
+
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    # 4. PERMUTATIONS WITH REPETITION
+    st.markdown(f"### {t({'de': 'Permutation mit Wiederholung', 'en': 'Permutations with Repetition'})}")
+    with st.container(border=True):
         st.markdown(t({
             "de": "Wenn Elemente **mehrfach vorkommen**, müssen wir die identischen Anordnungen herausdividieren.",
             "en": "When elements **repeat**, we must divide out the identical arrangements."
         }))
         
-        col_form, col_ex = st.columns([1, 1], gap="medium")
+        # Formula
+        st.latex(r"\text{Permutationen} = \frac{n!}{n_1! \cdot n_2! \cdots n_k!}")
         
-        with col_form:
-            st.latex(r"\text{Permutations} = \frac{n!}{n_1! \cdot n_2! \cdots n_k!}")
-            st.caption(t({
-                "de": "$n_i$ = Anzahl der Wiederholungen pro Element",
-                "en": "$n_i$ = count of each repeated element"
-            }))
+        st.markdown("---")
         
-        with col_ex:
-            st.markdown(f"**{t({'de': 'Klassiker: MISSISSIPPI', 'en': 'Classic: MISSISSIPPI'})}**")
-            st.markdown(t({
-                "de": "11 Buchstaben: M(1), I(4), S(4), P(2)",
-                "en": "11 letters: M(1), I(4), S(4), P(2)"
-            }))
-            st.latex(r"\frac{11!}{1! \cdot 4! \cdot 4! \cdot 2!} = 34,650")
+        # Variable Decoder for this formula
+        st.markdown(f"**{t({'de': 'Die Variablen erklärt', 'en': 'The Variables Explained'})}:**")
+        st.markdown(f"""
+• $n$ = **{t({"de": "Gesamtanzahl", "en": "Total Count"})}** — {t({"de": "Wie viele Elemente insgesamt?", "en": "How many elements in total?"})}
+
+• $n_i$ = **{t({"de": "Wiederholungen", "en": "Repetitions"})}** — {t({"de": "Wie oft kommt Element i vor?", "en": "How many times does element i appear?"})}
+""")
+        
+        st.markdown("---")
+        
+        # MISSISSIPPI Example
+        st.markdown(f"""
+<div style="background: #f4f4f5; border-left: 3px solid #71717a; padding: 16px; border-radius: 6px; color: #3f3f46;">
+<strong>{t({'de': 'Klassiker: MISSISSIPPI', 'en': 'Classic: MISSISSIPPI'})}</strong><br><br>
+{t({'de': '11 Buchstaben: M(1), I(4), S(4), P(2)', 'en': '11 letters: M(1), I(4), S(4), P(2)'})}
+</div>
+""", unsafe_allow_html=True)
+        st.latex(r"\frac{11!}{1! \cdot 4! \cdot 4! \cdot 2!} = 34,650")
 
     st.markdown("<br>", unsafe_allow_html=True)
 
@@ -262,6 +325,24 @@ svg { width: 1.5rem; height: 1.5rem; }
                 st.info(t(c["toy"]["reveal"]))
             else:
                 st.caption(t({"de": "Jeder Song, den du wählst, wird Teil der Formel.", "en": "Every song you pick becomes part of the formula."}))
+
+    # --- FRAG DICH (Ask Yourself) ---
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    from utils.ask_yourself import render_ask_yourself
+    render_ask_yourself(
+        header=content_2_3["frag_dich"]["header"],
+        questions=content_2_3["frag_dich"]["questions"],
+        conclusion=content_2_3["frag_dich"]["conclusion"]
+    )
+    
+    # --- EXAM ESSENTIALS ---
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    from utils.exam_essentials import render_exam_essentials
+    render_exam_essentials(
+        trap=content_2_3["exam_essentials"]["trap"],
+        trap_rule=content_2_3["exam_essentials"]["trap_rule"],
+        tips=content_2_3["exam_essentials"]["tips"]
+    )
 
     # --- EXAM SECTION ---
     st.markdown("<br><br>", unsafe_allow_html=True)

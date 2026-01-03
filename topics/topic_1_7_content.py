@@ -141,6 +141,44 @@ content_1_7 = {
                 "en": "Independence is the absence of information. When A and B are independent, B tells you nothing about A."
             }
         }
+    },
+    
+    # --- FRAG DICH (Ask Yourself) ---
+    "frag_dich": {
+        "header": {"de": "Frag dich: Bedingt oder Unabhängig?", "en": "Ask yourself: Conditional or Independent?"},
+        "questions": [
+            {"de": "Verändert <strong>Wissen über B</strong> meine Einschätzung von A?", "en": "Does <strong>knowing B</strong> change my estimate of A?"},
+            {"de": "Ist $P(A|B) = P(A)$? Dann sind A und B <strong>unabhängig</strong>.", "en": "Is $P(A|B) = P(A)$? Then A and B are <strong>independent</strong>."},
+            {"de": "Wird das <strong>Universum kleiner</strong> nach der Bedingung?", "en": "Does the <strong>universe shrink</strong> after the condition?"},
+            {"de": "Frage ich nach $P(A \\cap B)$ (Schnitt) oder $P(A|B)$ (gegeben)?", "en": "Am I asking for $P(A \\cap B)$ (intersection) or $P(A|B)$ (given)?"}
+        ],
+        "conclusion": {"de": "Strich = Filter → kleines Universum. Kein Strich = Multiplikation im ganzen Universum.", "en": "Bar = Filter → smaller universe. No bar = multiplication in the whole universe."}
+    },
+    
+    # --- EXAM ESSENTIALS ---
+    "exam_essentials": {
+        "trap": {
+            "de": "$P(A \\cap B)$ mit $P(A|B)$ verwechseln! Der Strich $|$ bedeutet 'gegeben' — du rechnest in einem <strong>kleineren Universum</strong>.",
+            "en": "Confusing $P(A \\cap B)$ with $P(A|B)$! The bar $|$ means 'given' — you calculate in a <strong>smaller universe</strong>."
+        },
+        "trap_rule": {
+            "de": "Faustregel: Strich = Teilen durch $P(B)$. Kein Strich = Multiplizieren.",
+            "en": "Rule of thumb: Bar = divide by $P(B)$. No bar = multiply."
+        },
+        "tips": [
+            {
+                "tip": {"de": "Unabhängigkeit prüfen: $P(A \\cap B) = P(A) \\cdot P(B)$", "en": "Check independence: $P(A \\cap B) = P(A) \\cdot P(B)$"},
+                "why": {"de": "Wenn diese Gleichung gilt, sind A und B unabhängig. Dann ist $P(A|B) = P(A)$.", "en": "If this equation holds, A and B are independent. Then $P(A|B) = P(A)$."}
+            },
+            {
+                "tip": {"de": "Bayes umstellen: $P(A|B) = \\frac{P(B|A) \\cdot P(A)}{P(B)}$", "en": "Rearrange Bayes: $P(A|B) = \\frac{P(B|A) \\cdot P(A)}{P(B)}$"},
+                "why": {"de": "Nützlich wenn du $P(A|B)$ brauchst aber nur $P(B|A)$ gegeben ist.", "en": "Useful when you need $P(A|B)$ but only $P(B|A)$ is given."}
+            },
+            {
+                "tip": {"de": "Bei 'gegeben' immer: Zähler = Schnitt, Nenner = Bedingung", "en": "For 'given' always: Numerator = intersection, Denominator = condition"},
+                "why": {"de": "Die Formel $P(A|B) = \\frac{P(A \\cap B)}{P(B)}$ direkt anwenden.", "en": "Apply the formula $P(A|B) = \\frac{P(A \\cap B)}{P(B)}$ directly."}
+            }
+        ]
     }
 }
 
@@ -162,19 +200,43 @@ def render_subtopic_1_7(model):
     """, unsafe_allow_html=True)
     
     st.header(t(content_1_7["title"]))
+    st.markdown("---")
 
-    # --- THEORY CARDS ---
-    c1, c2 = st.columns(2, gap="medium")
-    with c1:
-        with st.container(border=True):
-            st.markdown(f"**{t(content_1_7['theory_cards']['cond']['title'])}**")
-            st.caption(t(content_1_7["theory_cards"]["cond"]["def"]))
-            st.latex(content_1_7["theory_cards"]["cond"]["latex"])
-    with c2:
-        with st.container(border=True):
-            st.markdown(f"**{t(content_1_7['theory_cards']['indep']['title'])}**")
-            st.caption(t(content_1_7["theory_cards"]["indep"]["def"]))
-            st.latex(content_1_7["theory_cards"]["indep"]["latex"])
+    # --- THEORY SECTION: Using Layout B (Comparison) ---
+    from utils.layouts import render_comparison
+    render_comparison(
+        title={"de": "Zwei Konzepte, ein Universum", "en": "Two Concepts, One Universe"},
+        intuition={
+            "de": "Dein Chef fragt: 'Wie wahrscheinlich ist ROT, wenn ich dir sage, dass es ein KREIS ist?' Das ist bedingte Wahrscheinlichkeit — du filterst das Universum BEVOR du zählst.",
+            "en": "Your boss asks: 'How likely is RED, if I tell you it's a CIRCLE?' That's conditional probability — you filter the universe BEFORE you count."
+        },
+        left={
+            "title": {"de": "Bedingte Wahrscheinlichkeit", "en": "Conditional Probability"},
+            "intuition": {"de": "Die Wsk von A, GEGEBEN dass B passiert ist.", "en": "The probability of A, GIVEN that B happened."},
+            "formula": r"P(A|B) = \frac{P(A \cap B)}{P(B)}",
+            "variables": [
+                {"symbol": "A|B", "name": {"de": "A gegeben B", "en": "A given B"}, "description": {"de": "der Strich = Filter", "en": "the bar = filter"}},
+                {"symbol": r"P(A \cap B)", "name": {"de": "Schnitt", "en": "Intersection"}, "description": {"de": "beides passiert", "en": "both happen"}},
+                {"symbol": "P(B)", "name": {"de": "Bedingung", "en": "Condition"}, "description": {"de": "dein neues Universum", "en": "your new universe"}}
+            ],
+            "insight": {"de": "Der Nenner P(B) schrumpft dein Universum.", "en": "The denominator P(B) shrinks your universe."}
+        },
+        right={
+            "title": {"de": "Unabhängigkeit", "en": "Independence"},
+            "intuition": {"de": "Wissen über B sagt NICHTS über A.", "en": "Knowing B tells you NOTHING about A."},
+            "formula": r"P(A \cap B) = P(A) \cdot P(B)",
+            "variables": [
+                {"symbol": r"P(A \cap B)", "name": {"de": "Schnitt", "en": "Intersection"}, "description": {"de": "einfach multiplizieren!", "en": "just multiply!"}},
+                {"symbol": "P(A)", "name": {"de": "Wsk von A", "en": "Prob of A"}, "description": {"de": "unverändert", "en": "unchanged"}},
+                {"symbol": "P(B)", "name": {"de": "Wsk von B", "en": "Prob of B"}, "description": {"de": "unverändert", "en": "unchanged"}}
+            ],
+            "insight": {"de": "Wenn unabhängig: P(A|B) = P(A). Der Filter ändert nichts!", "en": "If independent: P(A|B) = P(A). The filter changes nothing!"}
+        },
+        key_difference={
+            "de": "<strong>Bedingt:</strong> Filter verändert die Wsk (P(A|B) ≠ P(A)). <strong>Unabhängig:</strong> Filter ändert nichts (P(A|B) = P(A)).",
+            "en": "<strong>Conditional:</strong> Filter changes the prob (P(A|B) ≠ P(A)). <strong>Independent:</strong> Filter changes nothing (P(A|B) = P(A))."
+        }
+    )
     
     st.markdown("<br>", unsafe_allow_html=True)
 
@@ -343,6 +405,24 @@ def render_subtopic_1_7(model):
     if st.button("Reset Story"):
         st.session_state.visible_indices_1_7 = list(range(9))
         st.rerun()
+
+    # --- FRAG DICH (Ask Yourself) ---
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    from utils.ask_yourself import render_ask_yourself
+    render_ask_yourself(
+        header=content_1_7["frag_dich"]["header"],
+        questions=content_1_7["frag_dich"]["questions"],
+        conclusion=content_1_7["frag_dich"]["conclusion"]
+    )
+    
+    # --- EXAM ESSENTIALS ---
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    from utils.exam_essentials import render_exam_essentials
+    render_exam_essentials(
+        trap=content_1_7["exam_essentials"]["trap"],
+        trap_rule=content_1_7["exam_essentials"]["trap_rule"],
+        tips=content_1_7["exam_essentials"]["tips"]
+    )
 
     # --- EXAM SECTION ---
     st.markdown("<br><br>", unsafe_allow_html=True)

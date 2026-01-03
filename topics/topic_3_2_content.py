@@ -41,6 +41,35 @@ content_3_2 = {
     "pro_tip": {
         "de": "Der 'Kuchen-Trick': Fehlt in der Prüfung ein Wert? Der ganze Kuchen ist 1. Fehlender Wert = 1 - Summe(Rest). Wenn du n-1 Wahrscheinlichkeiten kennst, kennst du automatisch die letzte!",
         "en": "The 'Cake Trick': Missing a value in the exam? The whole cake is 1. Missing value = 1 - Sum(Rest). If you know n-1 probabilities, you automatically know the last one!"
+    },
+    "frag_dich": {
+        "header": {"de": "Frag dich: Diskrete Wahrscheinlichkeit", "en": "Ask yourself: Discrete Probability"},
+        "questions": [
+            {"de": "Kann P(X=5) negativ sein?", "en": "Can P(X=5) be negative?"},
+            {"de": "Was passiert wenn die Summe aller Wahrscheinlichkeiten > 1 ist?", "en": "What happens if the sum of all probabilities > 1?"},
+            {"de": "Wenn du 5 von 6 Wahrscheinlichkeiten kennst, wie findest du die 6.?", "en": "If you know 5 out of 6 probabilities, how do you find the 6th?"}
+        ],
+        "conclusion": {"de": "Der Kuchen ist immer genau 1!", "en": "The cake is always exactly 1!"}
+    },
+    "exam_essentials": {
+        "trap": {
+            "de": "Vergessen zu prüfen ob die Summe wirklich 1 ergibt.",
+            "en": "Forgetting to check if the sum really equals 1."
+        },
+        "trap_rule": {
+            "de": "**Immer prüfen:** Summe = 1? Alle Werte ≥ 0?",
+            "en": "**Always check:** Sum = 1? All values ≥ 0?"
+        },
+        "tips": [
+            {
+                "tip": {"de": "Der Kuchen-Trick", "en": "The Cake Trick"},
+                "why": {"de": "Fehlender Wert = 1 - Summe(Rest). Spart Zeit!", "en": "Missing value = 1 - Sum(Rest). Saves time!"}
+            },
+            {
+                "tip": {"de": "Normierungskonstante c finden", "en": "Finding normalization constant c"},
+                "why": {"de": "Setze Σf(x) = 1 und löse nach c auf.", "en": "Set Σf(x) = 1 and solve for c."}
+            }
+        ]
     }
 }
 
@@ -50,45 +79,103 @@ def render_subtopic_3_2(model):
     inject_equal_height_css()
 
     st.header(t(content_3_2["title"]))
-    st.markdown(t({"de": "Wie modellieren wir Ereignisse, die man zählen kann?", "en": "How do we model events that can be counted?"}))
     st.markdown("---")
     
-    # ROW 1: INTUITION
+    # --- THEORY SECTION (Following Pedagogy Rules) ---
+    
+    # 1. THE INTUITION (Header OUTSIDE container)
+    st.markdown(f"### {t(content_3_2['anchor']['header'])}")
     with st.container(border=True):
-        st.markdown(f"### {t(content_3_2['anchor']['header'])}")
         st.markdown(t(content_3_2["anchor"]["text"]))
     
     st.markdown("<br>", unsafe_allow_html=True)
+    
+    # 2. THE FORMULA + VARIABLE DECODER + KEY INSIGHT
+    st.markdown(f"### {t({'de': 'Die Formel', 'en': 'The Formula'})}")
+    with st.container(border=True):
+        # Formula
+        st.latex(content_3_2['theory']['pmf_formula'])
+        st.caption(t(content_3_2['theory']['pmf_text']))
+        
+        st.markdown("---")
+        
+        # Variable Decoder
+        st.markdown(f"**{t({'de': 'Die Variablen erklärt', 'en': 'The Variables Explained'})}:**")
+        st.markdown(f"""
+• $f(x)$ = **{t({"de": "Wahrscheinlichkeitsfunktion (PMF)", "en": "Probability Mass Function (PMF)"})}** — {t({"de": "Wie wahrscheinlich ist genau dieser Wert?", "en": "How likely is exactly this value?"})}
 
-    # ROW 2: THEORY
-    c1, c2 = st.columns(2, gap="medium")
-    with c1:
-        with st.container(border=True):
-            st.markdown(f"**{t(content_3_2['theory']['pmf_title'])}**")
-            st.caption(t(content_3_2['theory']['pmf_text']))
-            st.latex(content_3_2['theory']['pmf_formula'])
-            st.markdown("<br>", unsafe_allow_html=True)
-            st.markdown(f"**{t({'de': 'Normierung', 'en': 'Normalization'})}:**")
-            st.latex(content_3_2['theory']['norm_formula'])
+• $P(X=x)$ = **{t({"de": "Punktwahrscheinlichkeit", "en": "Point Probability"})}** — {t({"de": "Die Chance, dass X genau gleich x ist", "en": "The chance that X equals exactly x"})}
 
-    with c2:
-        with st.container(border=True):
-            st.markdown(f"**{t(content_3_2['theory']['prop_title'])}**")
-            st.markdown(f"1. {t({'de': 'Niemals negativ:', 'en': 'Never negative:'})}")
-            st.latex(r"p_k \geq 0")
-            st.markdown(f"2. {t({'de': 'Alles muss da sein:', 'en': 'All accounted for:'})}")
-            st.latex(r"\sum p_k = 1")
-            st.markdown("<br>", unsafe_allow_html=True)
-            st.markdown(f"""
-            <div style="text-align: center;">
-                {render_icon("bar-chart", size=48, color="#AF52DE")}
-            </div>
-            """, unsafe_allow_html=True)
+• $x$ = **{t({"de": "Ein möglicher Wert", "en": "A possible value"})}** — {t({"de": "Ein konkretes Ergebnis (z.B. 1, 2, 3...)", "en": "A specific outcome (e.g., 1, 2, 3...)"})}
+""")
+        
+        st.markdown("---")
+        
+        # Key Insight
+        key_insight = t({
+            'de': 'Der Schlüssel: Bei diskreten Variablen "klebt" Wahrscheinlichkeit an einzelnen PUNKTEN. Zwischen den Punkten ist NICHTS. Deshalb SUMME, nicht Integral! Und die Summe muss genau 1 sein - wie ein Kuchen.',
+            'en': 'The key: For discrete variables, probability "sticks" to individual POINTS. Between points, there\'s NOTHING. That\'s why we SUM, not integrate! And the sum must equal exactly 1 - like a cake.'
+        })
+        st.markdown(f"*{key_insight}*")
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+    # 3. PROPERTIES (Stupid Person Proof)
+    st.markdown(f"### {t(content_3_2['theory']['prop_title'])}")
+    with st.container(border=True):
+        # Property 1
+        st.markdown(f"**1. {t({'de': 'Niemals negativ', 'en': 'Never Negative'})}**")
+        st.latex(r"p_k \geq 0")
+        prop1_why = t({
+            'de': 'Warum? Du kannst keine "-20% Chance" haben, dass etwas passiert. Wahrscheinlichkeiten sind immer 0% oder mehr.',
+            'en': 'Why? You can\'t have a "-20% chance" of something happening. Probabilities are always 0% or more.'
+        })
+        st.markdown(f"*{prop1_why}*")
+        
+        st.markdown("---")
+        
+        # Property 2
+        st.markdown(f"**2. {t({'de': 'Summe = 1 (Der Kuchen)', 'en': 'Sum = 1 (The Cake)'})}**")
+        st.latex(content_3_2['theory']['norm_formula'])
+        prop2_why = t({
+            'de': 'Warum? Stell dir einen Kuchen vor. Du kannst ihn in Stücke teilen, aber am Ende hast du immer genau 1 ganzen Kuchen - nicht mehr, nicht weniger. 100% Wahrscheinlichkeit wird auf alle möglichen Ergebnisse aufgeteilt.',
+            'en': 'Why? Think of a cake. You can slice it into pieces, but in the end you always have exactly 1 whole cake - no more, no less. 100% probability is divided among all possible outcomes.'
+        })
+        st.markdown(f"*{prop2_why}*")
+        
+        st.markdown("---")
+        
+        # Concrete Example
+        example_text = t({
+            'de': '**Beispiel Würfel:** P(1) + P(2) + P(3) + P(4) + P(5) + P(6) = 1/6 + 1/6 + 1/6 + 1/6 + 1/6 + 1/6 = 1 ✓',
+            'en': '**Die Example:** P(1) + P(2) + P(3) + P(4) + P(5) + P(6) = 1/6 + 1/6 + 1/6 + 1/6 + 1/6 + 1/6 = 1 ✓'
+        })
+        st.markdown(example_text)
 
     st.markdown("<br><br>", unsafe_allow_html=True)
 
     # ROW 3: MISSION TABS
     render_missions_3_2()
+
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    
+    # --- ASK YOURSELF ---
+    from utils.ask_yourself import render_ask_yourself
+    render_ask_yourself(
+        header=content_3_2["frag_dich"]["header"],
+        questions=content_3_2["frag_dich"]["questions"],
+        conclusion=content_3_2["frag_dich"]["conclusion"]
+    )
+    
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    
+    # --- EXAM ESSENTIALS ---
+    from utils.exam_essentials import render_exam_essentials
+    render_exam_essentials(
+        trap=content_3_2["exam_essentials"]["trap"],
+        trap_rule=content_3_2["exam_essentials"]["trap_rule"],
+        tips=content_3_2["exam_essentials"]["tips"]
+    )
 
     # EXAM SECTION
     st.markdown("<br><br>", unsafe_allow_html=True)

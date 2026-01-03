@@ -6,6 +6,8 @@ from views.styles import inject_equal_height_css
 from utils.quiz_helper import render_mcq
 from data.exam_questions import get_question
 from utils.progress_tracker import track_question_answer, update_local_progress
+from utils.ask_yourself import render_ask_yourself
+from utils.exam_essentials import render_exam_essentials
 
 # ==========================================
 # CONTENT DICTIONARY
@@ -38,9 +40,61 @@ content_3_5 = {
         },
         "target_sigma": 0.50
     },
-    "pro_tip": {
-        "de": "Prüfungs-Hack: Siehst du E[X²] in der Aufgabe? Sofort den Verschiebungssatz anwenden: Var(X) = E[X²] - (E[X])². Das ist fast immer der schnellste Weg!",
-        "en": "Exam hack: See E[X²] in the problem? Immediately use the shift formula: Var(X) = E[X²] - (E[X])². This is almost always the fastest approach!"
+    
+    # --- VARIABLE DECODER ---
+    "variable_decoder": {
+        "header": {"de": "Variablen-Decoder", "en": "Variable Decoder"},
+        "content": {
+            "de": "$Var(X)$ = <strong>Varianz</strong> — Wie weit die Werte im Schnitt vom Mittelwert abweichen (quadriert)<br><br>$\\sigma$ = <strong>Standardabweichung</strong> — Wurzel der Varianz (gleiche Einheit wie X)<br><br>$E[X^2]$ = <strong>Zweites Moment</strong> — Erwartungswert der quadrierten Werte (für Verschiebungssatz)",
+            "en": "$Var(X)$ = <strong>Variance</strong> — How far values deviate from the mean on average (squared)<br><br>$\\sigma$ = <strong>Standard Deviation</strong> — Square root of variance (same unit as X)<br><br>$E[X^2]$ = <strong>Second Moment</strong> — Expected value of squared outcomes (for shift formula)"
+        }
+    },
+    
+    # --- KEY INSIGHT ---
+    "key_insight": {
+        "header": {"de": "Aha-Moment", "en": "Key Insight"},
+        "text": {
+            "de": "Varianz misst <strong>quadrierte</strong> Abweichungen! Ein Schuss 2 Einheiten daneben zählt <strong>4-mal</strong> so viel wie ein Schuss 1 Einheit daneben. Deshalb 'bestraft' die Varianz Ausreisser überproportional.",
+            "en": "Variance measures <strong>squared</strong> deviations! A shot 2 units off counts <strong>4 times</strong> as much as a shot 1 unit off. That's why variance 'punishes' outliers disproportionately."
+        }
+    },
+    
+    # --- FRAG DICH ---
+    "frag_dich": {
+        "header": {"de": "Frag dich: Varianz oder Erwartungswert?", "en": "Ask yourself: Variance or Expected Value?"},
+        "questions": [
+            {"de": "Geht es um <strong>Streuung/Schwankung</strong> oder um den <strong>Durchschnitt</strong>?", "en": "Is it about <strong>spread/fluctuation</strong> or about the <strong>average</strong>?"},
+            {"de": "Siehst du <strong>E[X²]</strong> in der Aufgabe? → Verschiebungssatz!", "en": "Do you see <strong>E[X²]</strong> in the problem? → Shift formula!"},
+            {"de": "Wird X mit einer <strong>Konstante multipliziert</strong>? → a² kommt raus!", "en": "Is X <strong>multiplied by a constant</strong>? → a² comes out!"},
+            {"de": "Wird eine <strong>Konstante addiert</strong>? → Varianz bleibt gleich!", "en": "Is a <strong>constant added</strong>? → Variance stays the same!"}
+        ],
+        "conclusion": {"de": "Streuung gefragt → Varianz berechnen!", "en": "Spread asked → Calculate variance!"}
+    },
+    
+    # --- EXAM ESSENTIALS ---
+    "exam_essentials": {
+        "trap": {
+            "de": "<strong>Var(aX) ≠ a·Var(X)</strong> — Die Konstante kommt <strong>quadratisch</strong> raus, nicht linear! Var(2X) = 4·Var(X), nicht 2·Var(X).",
+            "en": "<strong>Var(aX) ≠ a·Var(X)</strong> — The constant comes out <strong>squared</strong>, not linear! Var(2X) = 4·Var(X), not 2·Var(X)."
+        },
+        "trap_rule": {
+            "de": "Multiplikation → Quadrat. Addition → Nichts.",
+            "en": "Multiplication → Square. Addition → Nothing."
+        },
+        "tips": [
+            {
+                "tip": {"de": "Verschiebungssatz ist fast immer schneller", "en": "Shift formula is almost always faster"},
+                "why": {"de": "E[X²] - (E[X])² braucht weniger Rechenschritte als die Definition.", "en": "E[X²] - (E[X])² requires fewer calculation steps than the definition."}
+            },
+            {
+                "tip": {"de": "Var(X+b) = Var(X) — Verschiebung ändert nichts", "en": "Var(X+b) = Var(X) — Shifting changes nothing"},
+                "why": {"de": "Addieren verschiebt alle Werte gleich, die Abstände bleiben gleich.", "en": "Adding shifts all values equally, the distances stay the same."}
+            },
+            {
+                "tip": {"de": "Bei Linearkombination: Var(aX+b) = a²·Var(X)", "en": "For linear combination: Var(aX+b) = a²·Var(X)"},
+                "why": {"de": "Das +b fällt weg, das a wird quadriert.", "en": "The +b drops out, the a gets squared."}
+            }
+        ]
     }
 }
 
@@ -54,9 +108,9 @@ def render_subtopic_3_5(model):
     st.markdown(t(content_3_5["subtitle"]))
     st.markdown("---")
     
-    # --- INTUITION ---
+    # --- INTUITION (Header-Out Protocol) ---
+    st.markdown(f"### {t(content_3_5['intuition']['header'])}")
     with st.container(border=True):
-        st.markdown(f"### {t(content_3_5['intuition']['header'])}")
         st.markdown(t(content_3_5['intuition']['text']))
     
     st.markdown("<br>", unsafe_allow_html=True)
@@ -106,12 +160,41 @@ def render_subtopic_3_5(model):
 
     st.markdown("<br>", unsafe_allow_html=True)
     
-    # --- PRO TIP ---
+    # --- VARIABLE DECODER ---
     st.markdown(f"""
-    <div style="background-color: #f4f4f5; border-radius: 8px; padding: 12px; color: #3f3f46;">
-        <strong>Pro Tip:</strong> {t(content_3_5['pro_tip'])}
-    </div>
-    """, unsafe_allow_html=True)
+<div style="background: #f4f4f5; border-left: 4px solid #a1a1aa; padding: 12px 16px; border-radius: 8px; color: #3f3f46;">
+<strong>{t(content_3_5['variable_decoder']['header'])}:</strong><br><br>
+{t(content_3_5['variable_decoder']['content'])}
+</div>
+""", unsafe_allow_html=True)
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+    # --- KEY INSIGHT ---
+    st.markdown(f"""
+<div style="background: #f4f4f5; border-left: 4px solid #a1a1aa; padding: 12px 16px; border-radius: 8px; color: #3f3f46;">
+<strong>{t(content_3_5['key_insight']['header'])}:</strong><br>
+{t(content_3_5['key_insight']['text'])}
+</div>
+""", unsafe_allow_html=True)
+
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    
+    # --- FRAG DICH ---
+    render_ask_yourself(
+        header=content_3_5['frag_dich']['header'],
+        questions=content_3_5['frag_dich']['questions'],
+        conclusion=content_3_5['frag_dich']['conclusion']
+    )
+
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    
+    # --- EXAM ESSENTIALS ---
+    render_exam_essentials(
+        trap=content_3_5['exam_essentials']['trap'],
+        trap_rule=content_3_5['exam_essentials']['trap_rule'],
+        tips=content_3_5['exam_essentials']['tips']
+    )
 
     st.markdown("<br><br>", unsafe_allow_html=True)
 

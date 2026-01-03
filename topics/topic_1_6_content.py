@@ -57,6 +57,43 @@ content_1_6 = {
             "de": "**Pro-Trick:** In stetigen Räumen haben nur Intervalle (Bereiche) eine Wahrscheinlichkeit > 0. Einzelne Punkte haben immer P = 0.",
             "en": "**Pro Trick:** In continuous spaces, only intervals (regions) have probability > 0. Individual points always have P = 0."
         }
+    },
+    
+    # --- FRAG DICH (Decision Guide) - ULTRATHINK CRAFTED ---
+    "frag_dich": {
+        "header": {"de": "Frag dich: Diskret oder Stetig?", "en": "Ask yourself: Discrete or Continuous?"},
+        "questions": [
+            {"de": "Kann ich die Ergebnisse <strong>abzählen</strong> (1, 2, 3...)?", "en": "Can I <strong>count</strong> the outcomes (1, 2, 3...)?"},
+            {"de": "Kann X <strong>jeden Wert</strong> in einem Intervall annehmen (z.B. 3.14159...)?", "en": "Can X take <strong>any value</strong> in an interval (e.g., 3.14159...)?"},
+            {"de": "Messe ich etwas <strong>Genaues</strong> (Zeit, Distanz, Gewicht)?", "en": "Am I measuring something <strong>exact</strong> (time, distance, weight)?"}
+        ],
+        "conclusion": {"de": "Zählbar → Diskret | Messbar (unendlich genau) → Stetig", "en": "Countable → Discrete | Measurable (infinitely precise) → Continuous"}
+    },
+    
+    # --- EXAM ESSENTIALS - ULTRATHINK CRAFTED ---
+    "exam_essentials": {
+        "trap": {
+            "de": "$P(X = \\text{exakter Wert})$ berechnen bei stetiger Variable! Bei stetigen Variablen ist $P(X = x) = 0$ IMMER.",
+            "en": "Calculating $P(X = \\text{exact value})$ for continuous variable! For continuous variables, $P(X = x) = 0$ ALWAYS."
+        },
+        "trap_rule": {
+            "de": "Faustregel: Stetig → nur Intervalle haben $P > 0$. Nutze $P(a \\leq X \\leq b)$, nie $P(X = c)$.",
+            "en": "Rule of thumb: Continuous → only intervals have $P > 0$. Use $P(a \\leq X \\leq b)$, never $P(X = c)$."
+        },
+        "tips": [
+            {
+                "tip": {"de": "Würfel, Münzen, Karten = DISKRET", "en": "Dice, coins, cards = DISCRETE"},
+                "why": {"de": "Du kannst die Ergebnisse auflisten: $\\{1,2,3,4,5,6\\}$. Endlich oder abzählbar unendlich.", "en": "You can list the outcomes: $\\{1,2,3,4,5,6\\}$. Finite or countably infinite."}
+            },
+            {
+                "tip": {"de": "Zeit, Distanz, Gewicht = STETIG", "en": "Time, distance, weight = CONTINUOUS"},
+                "why": {"de": "Zwischen 1.0 und 1.1 gibt es unendlich viele Werte. Nicht abzählbar!", "en": "Between 1.0 and 1.1 there are infinitely many values. Not countable!"}
+            },
+            {
+                "tip": {"de": "Bei stetig: $P(X \\leq x) = P(X < x)$", "en": "For continuous: $P(X \\leq x) = P(X < x)$"},
+                "why": {"de": "Da $P(X = x) = 0$, macht der Randpunkt keinen Unterschied!", "en": "Since $P(X = x) = 0$, the boundary point makes no difference!"}
+            }
+        ]
     }
 }
 
@@ -78,39 +115,41 @@ def render_subtopic_1_6(model):
     """, unsafe_allow_html=True)
     
     st.header(t(content_1_6["title"]))
+    st.markdown("---")
     
-    # --- THEORY SECTION: Equal Height Columns ---
-    # Following Rule #2: Equal Height Boxes Protocol
-    st.markdown("""
-        <style>
-        /* Equal-height theory cards - scoped CSS */
-        [data-testid="stHorizontalBlock"] { 
-            align-items: stretch !important; 
+    # --- THEORY SECTION: Using Layout B (Comparison) ---
+    from utils.layouts import render_comparison
+    render_comparison(
+        title={"de": "Die zwei Arten von Wahrscheinlichkeitsräumen", "en": "The Two Types of Probability Spaces"},
+        intuition={
+            "de": "Stell dir vor, du wirfst einen Dart auf eine Scheibe. Kannst du sagen 'Ich habe genau Punkt 3.14159... getroffen'? Nein! Du kannst nur eine ZONE treffen. Das ist der Unterschied zwischen zählbar und messbar.",
+            "en": "Imagine throwing a dart at a board. Can you say 'I hit exactly point 3.14159...'? No! You can only hit a ZONE. This is the difference between countable and measurable."
+        },
+        left={
+            "title": {"de": "Diskrete Räume", "en": "Discrete Spaces"},
+            "intuition": {"de": "Du kannst die Ergebnisse aufzählen: 1, 2, 3...", "en": "You can list the outcomes: 1, 2, 3..."},
+            "formula": r"\sum_{i} P(\omega_i) = 1",
+            "variables": [
+                {"symbol": r"\omega_i", "name": {"de": "Einzelergebnis", "en": "Single outcome"}, "description": {"de": "z.B. eine bestimmte Augenzahl", "en": "e.g., a specific die face"}},
+                {"symbol": r"P(\omega_i)", "name": {"de": "Wahrscheinlichkeit", "en": "Probability"}, "description": {"de": "kann > 0 sein!", "en": "can be > 0!"}}
+            ],
+            "insight": {"de": "Jedes Ergebnis hat eine 'Masse' — es kann einzeln passieren.", "en": "Each outcome has 'mass' — it can happen individually."}
+        },
+        right={
+            "title": {"de": "Stetige Räume", "en": "Continuous Spaces"},
+            "intuition": {"de": "Du MISST etwas — Zeit, Distanz, Gewicht...", "en": "You MEASURE something — time, distance, weight..."},
+            "formula": r"P(X = x) = 0",
+            "variables": [
+                {"symbol": "X", "name": {"de": "Zufallsvariable", "en": "Random variable"}, "description": {"de": "das, was du misst", "en": "what you're measuring"}},
+                {"symbol": "x", "name": {"de": "Exakter Wert", "en": "Exact value"}, "description": {"de": "ein einzelner Punkt", "en": "a single point"}}
+            ],
+            "insight": {"de": "Ein Punkt hat keine 'Breite' — nur INTERVALLE haben Wahrscheinlichkeit > 0!", "en": "A point has no 'width' — only INTERVALS have probability > 0!"}
+        },
+        key_difference={
+            "de": "<strong>Diskret:</strong> Ergebnisse AUFLISTEN (Würfel: 1,2,3,4,5,6). <strong>Stetig:</strong> Ergebnisse MESSEN (unendlich viele Werte möglich).",
+            "en": "<strong>Discrete:</strong> LIST outcomes (die: 1,2,3,4,5,6). <strong>Continuous:</strong> MEASURE outcomes (infinitely many values possible)."
         }
-        [data-testid="column"] { 
-            display: flex !important; 
-            flex-direction: column !important; 
-        }
-        [data-testid="stVerticalBlock"],
-        [data-testid="stVerticalBlockBorderWrapper"] {
-            flex: 1 !important; 
-            display: flex !important; 
-            flex-direction: column !important;
-        }
-        </style>
-    """, unsafe_allow_html=True)
-    
-    col1, col2 = st.columns(2, gap="medium")
-    with col1:
-        with st.container(border=True):
-            st.markdown(f"**{t(content_1_6['theory']['discrete']['title'])}**")
-            st.caption(t(content_1_6["theory"]["discrete"]["text"]))
-            st.latex(content_1_6["theory"]["discrete"]["formula"])
-    with col2:
-        with st.container(border=True):
-            st.markdown(f"**{t(content_1_6['theory']['continuous']['title'])}**")
-            st.caption(t(content_1_6["theory"]["continuous"]["text"]))
-            st.latex(content_1_6["theory"]["continuous"]["formula"])
+    )
     
     st.markdown("<br>", unsafe_allow_html=True)
     
@@ -229,6 +268,26 @@ def render_subtopic_1_6(model):
         """)
     
     st.markdown("<br>", unsafe_allow_html=True)
+    
+    # --- FRAG DICH (Ask Yourself) ---
+    from utils.ask_yourself import render_ask_yourself
+    render_ask_yourself(
+        header=content_1_6['frag_dich']['header'],
+        questions=content_1_6['frag_dich']['questions'],
+        conclusion=content_1_6['frag_dich']['conclusion']
+    )
+    
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    
+    # --- EXAM ESSENTIALS ---
+    from utils.exam_essentials import render_exam_essentials
+    render_exam_essentials(
+        trap=content_1_6['exam_essentials']['trap'],
+        trap_rule=content_1_6['exam_essentials']['trap_rule'],
+        tips=content_1_6['exam_essentials']['tips']
+    )
+    
+    st.markdown("<br><br>", unsafe_allow_html=True)
     
     # --- CONCEPT CHECK MCQ ---
     st.markdown(f"### {t({'de': 'Konzept-Check', 'en': 'Concept Check'})}")

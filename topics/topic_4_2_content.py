@@ -215,26 +215,35 @@ $p = 1 - \\left(\\frac{5}{6}\\right)^3 = 1 - \\frac{125}{216} = \\frac{91}{216} 
         "formula": r"\text{Wenn } Y_i \sim \text{Ber}(p), \text{ dann } X = \sum_{i=1}^{n} Y_i \sim \text{Bin}(n, p)"
     },
     
-    # --- PRO TIP ---
-    "pro_tip": {
-        "de": """<strong>Prüfungs-Essentials:</strong><br><br>
-<strong>(1) Bernoulli = EINZELNER Versuch mit 2 Ausgängen</strong><br>
-<em>Warum wichtig?</em> Bernoulli ist der Grundbaustein! Münzwurf, Prüfung bestanden/nicht bestanden, Produkt defekt/OK — alles Bernoulli.<br><br>
-<strong>(2) n Bernoullis = Binomial</strong><br>
-<em>Warum?</em> Wenn du den gleichen Bernoulli-Versuch n-mal unabhängig wiederholst und die Erfolge zählst, landest du bei der Binomialverteilung.<br><br>
-<strong>(3) Varianz maximal bei p = 0.5</strong><br>
-<em>Warum?</em> V(X) = p(1-p) ist eine Parabel. Der Scheitelpunkt liegt bei p = 0.5. Dort ist die Unsicherheit am grössten — könnte genauso gut Erfolg wie Misserfolg sein.<br><br>
-<strong>(4) E[X] = p und V(X) = p(1-p) auswendig lernen!</strong><br>
-<em>Warum?</em> Diese kommen in fast jeder Prüfung vor. Keine Zeit fürs Herleiten — direkt anwenden!""",
-        "en": """<strong>Exam essentials:</strong><br><br>
-<strong>(1) Bernoulli = SINGLE trial with 2 outcomes</strong><br>
-<em>Why important?</em> Bernoulli is the building block! Coin flip, exam pass/fail, product defective/OK — all Bernoulli.<br><br>
-<strong>(2) n Bernoullis = Binomial</strong><br>
-<em>Why?</em> When you repeat the same Bernoulli trial n times independently and count successes, you get the Binomial distribution.<br><br>
-<strong>(3) Variance maximum at p = 0.5</strong><br>
-<em>Why?</em> V(X) = p(1-p) is a parabola. The vertex is at p = 0.5. That's where uncertainty is greatest — equally likely to succeed or fail.<br><br>
-<strong>(4) Memorize E[X] = p and V(X) = p(1-p)!</strong><br>
-<em>Why?</em> These appear in almost every exam. No time to derive — apply directly!"""
+    # --- EXAM ESSENTIALS ---
+    "exam_essentials": {
+        "header": {"de": "Prüfungs-Essentials", "en": "Exam Essentials"},
+        "trap": {
+            "de": "Bernoulli mit Binomial verwechselt! Bernoulli ist EIN Wurf, Binomial ist n Würfe.",
+            "en": "Confusing Bernoulli with Binomial! Bernoulli is ONE trial, Binomial is n trials."
+        },
+        "trap_rule": {
+            "de": "Faustregel: X ∈ {0,1}? → Bernoulli. X ∈ {0,1,2,...,n}? → Binomial.",
+            "en": "Rule of thumb: X ∈ {0,1}? → Bernoulli. X ∈ {0,1,2,...,n}? → Binomial."
+        },
+        "tips": [
+            {
+                "tip": {"de": "Bernoulli = EINZELNER Versuch mit 2 Ausgängen", "en": "Bernoulli = SINGLE trial with 2 outcomes"},
+                "why": {"de": "Bernoulli ist der Grundbaustein! Münzwurf, Prüfung bestanden/nicht bestanden, Produkt defekt/OK — alles Bernoulli.", "en": "Bernoulli is the building block! Coin flip, exam pass/fail, product defective/OK — all Bernoulli."}
+            },
+            {
+                "tip": {"de": "n Bernoullis = Binomial", "en": "n Bernoullis = Binomial"},
+                "why": {"de": "Wenn du den gleichen Bernoulli-Versuch n-mal unabhängig wiederholst und die Erfolge zählst, landest du bei der Binomialverteilung.", "en": "When you repeat the same Bernoulli trial n times independently and count successes, you get the Binomial distribution."}
+            },
+            {
+                "tip": {"de": "Varianz maximal bei p = 0.5", "en": "Variance maximum at p = 0.5"},
+                "why": {"de": "V(X) = p(1-p) ist eine Parabel. Der Scheitelpunkt liegt bei p = 0.5. Dort ist die Unsicherheit am grössten.", "en": "V(X) = p(1-p) is a parabola. The vertex is at p = 0.5. That's where uncertainty is greatest."}
+            },
+            {
+                "tip": {"de": "E[X] = p und V(X) = p(1-p) auswendig lernen!", "en": "Memorize E[X] = p and V(X) = p(1-p)!"},
+                "why": {"de": "Diese kommen in fast jeder Prüfung vor. Keine Zeit fürs Herleiten — direkt anwenden!", "en": "These appear in almost every exam. No time to derive — apply directly!"}
+            }
+        ]
     }
 }
 
@@ -315,21 +324,12 @@ def render_subtopic_4_2(model):
     st.markdown("<br>", unsafe_allow_html=True)
     
     # --- FRAG DICH ---
-    st.markdown(f"""
-    <div style="background-color: rgba(0, 122, 255, 0.08); border-radius: 12px; padding: 20px; border: 2px solid #007AFF;">
-        <div style="font-weight: 700; color: #007AFF; margin-bottom: 16px; font-size: 1.1em;">
-            {t(content_4_2['frag_dich']['header'])}
-        </div>
-        <div style="color: #1c1c1e;">
-            <ol style="margin: 0; padding-left: 20px; line-height: 2;">
-                {"".join([f"<li>{t(q)}</li>" for q in content_4_2['frag_dich']['questions']])}
-            </ol>
-        </div>
-        <div style="margin-top: 16px; padding: 10px; background: #007AFF; color: white; border-radius: 8px; text-align: center; font-weight: 600;">
-            {t(content_4_2['frag_dich']['conclusion'])}
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+    from utils.ask_yourself import render_ask_yourself
+    render_ask_yourself(
+        header=content_4_2['frag_dich']['header'],
+        questions=content_4_2['frag_dich']['questions'],
+        conclusion=content_4_2['frag_dich']['conclusion']
+    )
     
     st.markdown("<br>", unsafe_allow_html=True)
     
@@ -461,12 +461,13 @@ def render_subtopic_4_2(model):
     
     st.markdown("<br>", unsafe_allow_html=True)
     
-    # --- PRO TIP ---
-    st.markdown(f"""
-    <div style="background-color: #f4f4f5; border-radius: 8px; padding: 12px; color: #3f3f46;">
-        {t(content_4_2['pro_tip'])}
-    </div>
-    """, unsafe_allow_html=True)
+    # --- EXAM ESSENTIALS ---
+    from utils.exam_essentials import render_exam_essentials
+    render_exam_essentials(
+        trap=content_4_2["exam_essentials"]["trap"],
+        trap_rule=content_4_2["exam_essentials"]["trap_rule"],
+        tips=content_4_2["exam_essentials"]["tips"]
+    )
     
     st.markdown("<br><br>", unsafe_allow_html=True)
     

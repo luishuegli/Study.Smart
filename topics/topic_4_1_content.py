@@ -181,31 +181,31 @@ $V(X) = \\frac{6^2 - 1}{12} = \\frac{35}{12} \\approx 2.92$
         }
     },
     
-    # --- COMMON TRAP ---
-    "trap": {
-        "header": {"de": "Die häufigste Falle", "en": "The Most Common Trap"},
-        "text": {
-            "de": "<strong>Nicht reproduktiv!</strong> Die Summe zweier gleichverteilter Zufallsvariablen ist NICHT gleichverteilt. Beispiel: 2 Würfel → Summe ist NICHT uniform (7 ist am wahrscheinlichsten).",
-            "en": "<strong>Not reproductive!</strong> The sum of two uniformly distributed random variables is NOT uniform. Example: 2 dice → Sum is NOT uniform (7 is most likely)."
-        }
-    },
-    
-    # --- PRO TIP ---
-    "pro_tip": {
-        "de": """<strong>Prüfungs-Essentials:</strong><br><br>
-<strong>(1) P = 1/m für jeden Ausgang</strong><br>
-<em>Warum?</em> "Gleich"verteilung = alle gleich wahrscheinlich. Bei m Möglichkeiten muss sich 1 (= 100%) auf alle aufteilen → 1/m pro Ausgang.<br><br>
-<strong>(2) E[X] = (m+1)/2 als Schnellformel</strong><br>
-<em>Warum?</em> Statt jeden Wert einzeln zu berechnen, nutze diese Abkürzung. Sie funktioniert nur wenn X ∈ {1, 2, ..., m}. Der Durchschnitt von 1 bis m ist immer die Mitte: (1+m)/2.<br><br>
-<strong>(3) Summen sind NICHT gleichverteilt</strong><br>
-<em>Warum?</em> Klassische Falle! Bei 2 Würfeln gibt es nur 1 Weg für Summe 2 (1+1), aber 6 Wege für Summe 7. Mehr Wege = höhere Wahrscheinlichkeit → nicht mehr "gleich"verteilt.""",
-        "en": """<strong>Exam essentials:</strong><br><br>
-<strong>(1) P = 1/m for each outcome</strong><br>
-<em>Why?</em> "Uniform" distribution = all equally likely. With m possibilities, 1 (= 100%) must split evenly → 1/m per outcome.<br><br>
-<strong>(2) E[X] = (m+1)/2 as a shortcut formula</strong><br>
-<em>Why?</em> Instead of calculating each value individually, use this shortcut. It only works when X ∈ {1, 2, ..., m}. The average of 1 to m is always the midpoint: (1+m)/2.<br><br>
-<strong>(3) Sums are NOT uniformly distributed</strong><br>
-<em>Why?</em> Classic trap! With 2 dice, there's only 1 way to get sum 2 (1+1), but 6 ways to get sum 7. More ways = higher probability → no longer "uniformly" distributed."""
+    # --- EXAM ESSENTIALS (Merged Trap + Pro Tip) ---
+    "exam_essentials": {
+        "header": {"de": "Prüfungs-Essentials", "en": "Exam Essentials"},
+        "trap": {
+            "de": "Die Summe zweier gleichverteilter Zufallsvariablen ist NICHT gleichverteilt. Beispiel: 2 Würfel → Summe ist NICHT uniform (7 ist am wahrscheinlichsten).",
+            "en": "The sum of two uniformly distributed random variables is NOT uniform. Example: 2 dice → Sum is NOT uniform (7 is most likely)."
+        },
+        "trap_rule": {
+            "de": "Gleichverteilung ist NICHT reproduktiv!",
+            "en": "Uniform distribution is NOT reproductive!"
+        },
+        "tips": [
+            {
+                "tip": {"de": "P = 1/m für jeden Ausgang", "en": "P = 1/m for each outcome"},
+                "why": {"de": "\"Gleich\"verteilung = alle gleich wahrscheinlich. Bei m Möglichkeiten muss sich 1 (= 100%) auf alle aufteilen.", "en": "\"Uniform\" distribution = all equally likely. With m possibilities, 1 (= 100%) must split evenly."}
+            },
+            {
+                "tip": {"de": "E[X] = (m+1)/2 als Schnellformel", "en": "E[X] = (m+1)/2 as shortcut formula"},
+                "why": {"de": "Funktioniert nur wenn X ∈ {1, 2, ..., m}. Der Durchschnitt von 1 bis m ist immer die Mitte.", "en": "Only works when X ∈ {1, 2, ..., m}. The average of 1 to m is always the midpoint."}
+            },
+            {
+                "tip": {"de": "Summen sind NICHT gleichverteilt", "en": "Sums are NOT uniformly distributed"},
+                "why": {"de": "Bei 2 Würfeln: nur 1 Weg für Summe 2 (1+1), aber 6 Wege für Summe 7. Mehr Wege = höhere Wahrscheinlichkeit.", "en": "With 2 dice: only 1 way to get sum 2 (1+1), but 6 ways to get sum 7. More ways = higher probability."}
+            }
+        ]
     }
 }
 
@@ -270,6 +270,22 @@ def render_subtopic_4_1(model):
         height: 100% !important;
         flex: 1 !important;
     }
+    
+    /* COMPACT DIVIDER: Aggressive spacing reduction */
+    [data-testid="stVerticalBlockBorderWrapper"] hr {
+        margin-top: 2px !important;
+        margin-bottom: 2px !important;
+    }
+    
+    /* Reduce vertical spacing of elements within bordered containers */
+    [data-testid="stVerticalBlockBorderWrapper"] [data-testid="stMarkdownContainer"] {
+        margin-bottom: 0 !important;
+    }
+    
+    /* Compact column gaps within containers */
+    [data-testid="stVerticalBlockBorderWrapper"] [data-testid="stHorizontalBlock"] {
+        gap: 4px !important;
+    }
     </style>
     """, unsafe_allow_html=True)
     
@@ -278,29 +294,20 @@ def render_subtopic_4_1(model):
     st.caption(t(content_4_1["subtitle"]))
     st.markdown("---")
     
-    # --- INTUITION HOOK ---
+    # --- INTUITION HOOK (Header-Out Protocol) ---
+    st.markdown(f"### {t(content_4_1['intuition']['header'])}")
     with st.container(border=True):
-        st.markdown(f"### {t(content_4_1['intuition']['header'])}")
         st.markdown(t(content_4_1["intuition"]["text"]))
     
     st.markdown("<br>", unsafe_allow_html=True)
     
     # --- FRAG DICH ---
-    st.markdown(f"""
-    <div style="background-color: rgba(0, 122, 255, 0.08); border-radius: 12px; padding: 20px; border: 2px solid #007AFF;">
-        <div style="font-weight: 700; color: #007AFF; margin-bottom: 16px; font-size: 1.1em;">
-            {t(content_4_1['frag_dich']['header'])}
-        </div>
-        <div style="color: #1c1c1e;">
-            <ol style="margin: 0; padding-left: 20px; line-height: 2;">
-                {"".join([f"<li>{t({'de': q['de'], 'en': q['en']})}</li>" for q in content_4_1['frag_dich']['questions']])}
-            </ol>
-        </div>
-        <div style="margin-top: 16px; padding: 10px; background: #007AFF; color: white; border-radius: 8px; text-align: center; font-weight: 600;">
-            {t(content_4_1['frag_dich']['conclusion'])}
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+    from utils.ask_yourself import render_ask_yourself
+    render_ask_yourself(
+        header=content_4_1['frag_dich']['header'],
+        questions=content_4_1['frag_dich']['questions'],
+        conclusion=content_4_1['frag_dich']['conclusion']
+    )
     
     st.markdown("<br>", unsafe_allow_html=True)
     
@@ -319,6 +326,7 @@ def render_subtopic_4_1(model):
                 st.latex(part["symbol"])
             with col_mean:
                 st.markdown(t({"de": part["meaning_de"], "en": part["meaning_en"]}), unsafe_allow_html=True)
+            st.markdown("---")
         
         st.markdown("<br>", unsafe_allow_html=True)
         example_data = content_4_1["definition"]["breakdown"]["example"]
@@ -402,20 +410,13 @@ def render_subtopic_4_1(model):
     
     st.markdown("<br>", unsafe_allow_html=True)
     
-    # --- TRAP + PRO TIP (merged) ---
-    st.markdown(f"""
-<div style="background-color: #f4f4f5; border-radius: 8px; padding: 16px; border-left: 4px solid #a1a1aa;">
-    <div style="font-weight: 600; color: #52525b; margin-bottom: 8px;">
-        {t(content_4_1['trap']['header'])}
-    </div>
-    <div style="color: #3f3f46; margin-bottom: 16px;">
-        {t(content_4_1['trap']['text'])}
-    </div>
-    <div style="border-top: 1px solid #d4d4d8; padding-top: 12px; color: #3f3f46;">
-        {t(content_4_1['pro_tip'])}
-    </div>
-</div>
-    """, unsafe_allow_html=True)
+    # --- EXAM ESSENTIALS ---
+    from utils.exam_essentials import render_exam_essentials
+    render_exam_essentials(
+        trap=content_4_1["exam_essentials"]["trap"],
+        trap_rule=content_4_1["exam_essentials"]["trap_rule"],
+        tips=content_4_1["exam_essentials"]["tips"]
+    )
     
     st.markdown("<br><br>", unsafe_allow_html=True)
     

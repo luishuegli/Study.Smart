@@ -129,38 +129,210 @@
 **Description:** f_X(1) not rendering as LaTeX, table too small, no visual connection cues
 **Solution:** 1) Proper st.latex() for formulas, 2) Padding 8px→12px, 3) Red (#FF4B4B) highlighting for target row
 
+### Fix 21: LaTeX Won't Render in HTML Divs
+**Date:** 2026-01-02
+**Category:** Rendering
+**Description:** $f_X$ inside HTML divs shows as raw text, not LaTeX
+**Solution:** Use st.latex() separately OR st.caption() for inline LaTeX. Never put $...$ inside HTML divs.
+
+### Fix 22: Exam Essentials Utility (Design Cohesion)
+**Date:** 2026-01-02
+**Category:** Architecture
+**Description:** Exam Essentials sections were inconsistent across topics
+**Solution:** Created `utils/exam_essentials.py` with `render_exam_essentials()`. Two formats: Simple (trap+tips) and Items (formula-based). Refactored all Topic 4 and 5.1 files.
+
+### Fix 23: Formula Section Reference Layout
+**Date:** 2026-01-02
+**Category:** Layout
+**Description:** Formula sections had inconsistent structure (floating text, poor hierarchy)
+**Solution:** New layout pattern: 1) Title, 2) Centered formula, 3) "What does this mean?" header, 4) Two-column grid (symbol left, explanation right), 5) Concrete example. Applied to Topic 5.1 Joint/Marginal sections.
+
+### Fix 24: Variables One Per Row
+**Date:** 2026-01-02
+**Category:** Layout
+**Description:** Variables were cramped on single line, hard to read
+**Solution:** Each variable on its own row with `st.caption()`. Format: `$symbol$ = explanation`
+
+### Fix 25: Separator Lines for Structure
+**Date:** 2026-01-02
+**Category:** Layout
+**Description:** Step-by-step sections and variable breakdowns lacked visual separation
+**Solution:** Added `st.markdown("---")` between rows. Applied to: Topic 5.1 formula sections, exam_essentials utility, and Step-by-Step Examples in topics 4.3, 4.4, 4.5, 4.6, 4.7, 4.8.
+
+### Fix 26: Bold Markdown in HTML Divs
+**Date:** 2026-01-02
+**Category:** Rendering
+**Description:** `**text**` markdown doesn't render inside HTML divs
+**Solution:** Convert `**text**` to `<strong>text</strong>` using regex before embedding in HTML.
+
+### Fix 27: Complete Topic 5.1 ULTRATHINK Redesign
+**Date:** 2026-01-03
+**Category:** Architecture
+**Description:** Topic 5.1 was a complete disaster - "dog shat on floor, ate it, shat again" level bad. Lost ALL cohesion with Topic 4.x sections. Random floating text, overcomplicated interactive mission that violated Stupid Person Rule, grey callouts inside borders (double border violation), formulas not in equal-height side-by-side containers, Exam Essentials didn't match the standard set 30 minutes prior.
+**Root Cause:** Rule changes mid-implementation caused drift from established patterns. No reference back to Topic 4.x gold standards.
+**Solution:** Complete rewrite required. Must match Topic 4.x exactly:
+1) Intuition with TWO equal-height bordered containers (Joint | Marginal)
+2) Frag Dich WITHOUT outer border (grey callout only)
+3) Interactive element restored (but simpler)
+4) Exam Essentials matched to reference: Trap header → description → rule, then "Pro Tip: Exam essentials:" header → numbered tips with Why?
+**Lesson:** ALWAYS cross-reference Topic 4.x files before implementing new topics. Never drift from established patterns.
+
+### Fix 28: Still Floating Text in Exercise
+**Date:** 2026-01-03
+**Category:** Layout
+**Description:** Exercise section had "Task:" "Calculate" formula "— the probability..." as 3 separate floating elements. Looked like random piss floating around.
+**Root Cause:** Tried to use st.latex() separately from text to get proper LaTeX rendering, but this creates disconnected elements.
+**Solution:** Combine everything into ONE grey callout. Use inline $...$ LaTeX (which does render in st.markdown but NOT in HTML divs with unsafe_allow_html). For proper subscripts in HTML, use HTML sub tags or accept the limitation.
+
+### Fix 29: CRITICAL FAILURE - Ignored Established Pedagogy Rules
+**Date:** 2026-01-03
+**Category:** Process Failure
+**Description:** Exercise section had HOW but no WHY. Student knew steps but not purpose. The pedagogy rules EXPLICITLY require "Why does this matter?" context before any exercise. This is in the rules. I had access to the rules. I did not apply them.
+**Root Cause:** Agent drift during extended session. Did not re-read rules before implementing. Assumed knowledge instead of verifying against established patterns.
+**Solution:** Added "Why does this matter?" section with real-world scenario (boss asking about age demographics from survey data).
+**LESSON (CRITICAL):** 
+1. ALWAYS re-read .agent/rules/ before ANY new implementation
+2. NEVER assume you remember the rules correctly
+3. When implementing interactive elements, use checklist: ☐ WHY ☐ WHAT ☐ HOW
+4. This failure cost significant time and user frustration
+
+### Fix 30: Grey Box Overuse
+**Date:** 2026-01-03
+**Category:** Layout
+**Description:** Exercise section had 3 grey callout boxes stacked. User said "looks like my dog shat on a page". Grey boxes are for special emphasis only, not every piece of text.
+**Solution:** Use st.caption() for subtle context, bold markdown for headers. Grey boxes reserved for Variable Decoder, Key Insight, Frag Dich only.
+
+### Fix 31: st.caption Makes Text Too Small
+**Date:** 2026-01-03
+**Category:** Typography
+**Description:** Boss questions in formula boxes were using st.caption(), making them small grey text. User wanted consistent normal font for important content.
+**Solution:** Use st.markdown() for all important content. st.caption() only for truly secondary/supplementary text.
+
+### Fix 32: Parallel Comparison Row Alignment
+**Date:** 2026-01-03
+**Category:** Layout
+**Description:** When two side-by-side containers show the same structure for different concepts (e.g., JOINT vs MARGINAL), corresponding rows should align horizontally (Boss Asks ↔ Boss Asks, Answer ↔ Answer).
+**Solution:** 
+1. Add equal-height CSS before columns
+2. Use identical element structure in both columns
+3. Add `st.markdown("---")` dividers between sections for visual alignment
+4. Keep text length comparable in both boxes
+
+**Rule: Parallel Comparison Alignment**
+> When side-by-side containers compare two concepts with matching structure, ensure:
+> - Equal number of elements in each container
+> - Same element types in same order (header, formula, divider, question, divider, answer)
+> - Similar text length to prevent vertical misalignment
+
+### Fix 33: Mission Text Never Smaller Than Content
+**Date:** 2026-01-03
+**Category:** Typography
+**Description:** Questions and context in interactive missions were using st.caption(), making them grey and smaller than surrounding text. This creates visual hierarchy problems - important content looks secondary.
+**Solution:** Always use st.markdown() for mission context and questions. Never st.caption().
+
+**Rule: Mission Text Prominence**
+> Questions, context, and instructions in interactive missions/exercises should NEVER be smaller or greyer than surrounding content. Use st.markdown() with normal black font for all important text.
+
 ---
 
 ## Summary Statistics
 
 | Category | Count |
 |----------|-------|
-| Total fixes | 17 |
-| Layout | 5 |
+| Total fixes | 38 |
+| Layout | 13 |
 | Pedagogy | 6 |
-| Rendering | 2 |
-| Localization | 1 |
-| Syntax/Encoding | 1 |
-| Workflow | 1 |
-| Interactive | 1 |
+| Rendering | 3 |
+| Process Failure | 2 |
+| Architecture | 3 |
+| Consistency | 5 |
+| Other | 6 |
 
 ---
 
-## Patterns Emerging
+## NEW FIXES (2026-01-03)
 
-| Pattern | Occurrences | Rule Candidate? |
-|---------|-------------|-----------------|
-| Side-by-side comparison boxes | 2 | YES - Use for contrasting concepts |
-| Color-coded sections | 2 | YES - Amber=warning, Green=success, Grey=neutral |
-| Visual hierarchy missing | 3 | YES - Always break down walls of text |
-| Step-by-step examples | 2 | YES - Concrete examples mandatory |
-| Formula before context | 1 | YES - Show math first, example below |
+### Fix 34: Compact Divider Spacing (CSS)
+**Date:** 2026-01-03
+**Category:** Layout
+**Description:** `st.markdown("---")` dividers had excessive vertical margin (32px default from Streamlit). Made formula breakdowns too tall.
+**Solution:** Added CSS in `views/styles.py` to reduce hr margins to 4px within containers:
+```css
+.stApp hr, [data-testid="stVerticalBlock"] hr {
+    margin-top: 4px !important;
+    margin-bottom: 4px !important;
+}
+```
+**CRITICAL:** The selector `[data-testid="stVerticalBlockBorderWrapper"]` NO LONGER EXISTS in Streamlit. Use broader selectors.
+
+### Fix 35: Mass Function Divider Lines
+**Date:** 2026-01-03
+**Category:** Layout
+**Description:** Mass Function breakdown (C(n,x), p^x, (1-p)^n-x) lacked visual separation between rows.
+**Solution:** Added `st.markdown("---")` after each formula part row in topic_4_3_content.py.
+
+### Fix 36: Exam Essentials Consistency Audit
+**Date:** 2026-01-03
+**Category:** Consistency
+**Description:** Exam Essentials sections used inconsistent patterns across topics - some raw HTML, some using utility, some missing.
+**Solution:** Audited all topic files. Created `exam_essentials_audit.md` report.
+
+### Fix 37: Migrate Topic 4.1, 4.2, 4.4 to render_exam_essentials()
+**Date:** 2026-01-03
+**Category:** Consistency
+**Description:** Topics 4.1, 4.2, 4.4 used old separate trap/pro_tip pattern with raw HTML rendering.
+**Solution:** 
+1. Converted data structures from `trap` + `pro_tip` to unified `exam_essentials` dict with `trap`, `trap_rule`, and `tips` arrays
+2. Replaced raw HTML rendering with `render_exam_essentials()` utility calls
+
+### Fix 38: Variable Decoder Divider Lines (Topic 4.1)
+**Date:** 2026-01-03
+**Category:** Layout
+**Description:** Definition section variable breakdown lacked visual separation between rows.
+**Solution:** Added `st.markdown("---")` after each variable row in the loop.
+
+**Rule: Consistent Exam Essentials**
+> ALL topic files must use `render_exam_essentials()` utility for Exam Essentials sections. No raw HTML. Convert existing files to use the `tips` format: `[{"tip": {...}, "why": {...}}, ...]`
+
+### Fix 39: Create and Migrate render_ask_yourself() Utility
+**Date:** 2026-01-03
+**Category:** Architecture
+**Description:** "Ask Yourself" (Frag Dich) sections used raw HTML with blue styling repeated 8+ times across Topic 4.x files.
+**Solution:** 
+1. Created `utils/ask_yourself.py` with `render_ask_yourself(header, questions, conclusion)` function
+2. Migrated all 8 Topic 4.x files (4.1-4.8) to use the utility
+3. Each file reduced by ~9 lines of raw HTML per file
+
+**Rule: Consistent Ask Yourself**
+> ALL topic files with "Frag Dich" sections must use `render_ask_yourself()` utility. Blue theme (#007AFF) with numbered questions and optional conclusion badge.
+
+---
+
+## TOPIC 5 POST-MORTEM
+
+### The Disaster
+Topic 5.1 was a complete failure. What should have taken 20-30 minutes took 2+ hours.
+
+### Root Causes
+1. **Rule Drift:** Did not re-read rules before starting
+2. **No Reference:** Did not open Topic 4.x as reference
+3. **Grey Box Abuse:** Used for everything
+4. **No WHY:** Forgot Scenario → Goal → Action
+5. **Floating Text:** Separated st.latex() from context
+
+### MANDATORY CHECKLIST FOR TOPIC 5.2+
+☐ Re-read `.agent/rules/pedagogy.md`
+☐ Re-read `.agent/rules/design-system.md`
+☐ Open Topic 4.3 as reference
+☐ For every section: WHY → WHAT → HOW
+☐ Grey boxes ONLY for: Variable Decoder, Key Insight, Frag Dich
+☐ Test in browser after EVERY section
 
 ---
 
 ## Notes
 
-- Topic 5.1: Gemeinsame Verteilung und Randverteilungen (Joint Distributions)
-- 17 fixes applied through iterative user feedback
-- Key pattern: Visual structure > Wall of text
-- Generated visual saved to assets/topic_5/joint_marginal_visual.png
+- 38 fixes applied (8 new today - 2026-01-03)
+- ALWAYS REFERENCE TOPIC 4.x BEFORE IMPLEMENTING NEW TOPICS
+- CSS selector `stVerticalBlockBorderWrapper` is DEPRECATED - use `stVerticalBlock` instead
+

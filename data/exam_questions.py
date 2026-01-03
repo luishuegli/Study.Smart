@@ -2250,21 +2250,19 @@ QUESTIONS_5_2 = {
         "source": "HS 2023 Januar, MC #9",
         "type": "mc",
         "question": {
-            "de": r"""Seien X und Y zwei Zufallsvariablen mit Verteilungen X ∼ N (µ = 4, σ 2 = 2)
-und Y ∼ N (µ = 0, σ 2 = 3). Des Weiteren gilt E[XY ] = E[X]E[Y ]. Sei Z eine Zufallsvariable
-welche als Z = 3 - 2X + 3Y definiert ist. Wie lautet die Kovarianz Cov(Y, Z)?""",
-            "en": r"""Let X and Y be two random variables with distributions X ~ N(mu = 4, sigma^2 = 2) and Y ~ N(mu = 0, sigma^2 = 3). Furthermore, E[XY] = E[X]E[Y] holds. Let Z be a random variable defined as Z = 3 - 2X + 3Y. What is the covariance Cov(Y, Z)?"""
+            "de": r"""Seien $X$ und $Y$ zwei Zufallsvariablen mit Verteilungen $X \sim N(\mu = 4, \sigma^2 = 2)$ und $Y \sim N(\mu = 0, \sigma^2 = 3)$. Des Weiteren gilt $E[XY] = E[X]E[Y]$. Sei $Z$ eine Zufallsvariable welche als $Z = 3 - 2X + 3Y$ definiert ist. Wie lautet die Kovarianz $\text{Cov}(Y, Z)$?""",
+            "en": r"""Let $X$ and $Y$ be two random variables with distributions $X \sim N(\mu = 4, \sigma^2 = 2)$ and $Y \sim N(\mu = 0, \sigma^2 = 3)$. Furthermore, $E[XY] = E[X]E[Y]$ holds. Let $Z$ be a random variable defined as $Z = 3 - 2X + 3Y$. What is the covariance $\text{Cov}(Y, Z)$?"""
         },
         "options": [
             {"de": "27", "en": "27"},
             {"de": "9", "en": "9"},
             {"de": "12", "en": "12"},
-            {"de": "Keine der obigen.", "en": "Keine der obigen."}
+            {"de": "Keine der obigen.", "en": "None of the above."}
         ],
         "correct_idx": 1,
         "solution": {
-            "de": r"**Richtig: (b)**<br>$Cov(Y, 3-2X+3Y) = Cov(Y,3) - 2Cov(Y,X) + 3Cov(Y,Y)$.<br>$= 0 - 0 + 3Var(Y) = 3 \cdot 3 = 9$.",
-            "en": r"**Correct: (b)**<br>$Cov(Y, 3-2X+3Y) = Cov(Y,3) - 2Cov(Y,X) + 3Cov(Y,Y)$.<br>$= 0 - 0 + 3Var(Y) = 3 \cdot 3 = 9$."
+            "de": r"**Richtig: (b)**<br>$\text{Cov}(Y, 3-2X+3Y) = \text{Cov}(Y,3) - 2\text{Cov}(Y,X) + 3\text{Cov}(Y,Y)$.<br>$= 0 - 0 + 3\text{Var}(Y) = 3 \cdot 3 = 9$.",
+            "en": r"**Correct: (b)**<br>$\text{Cov}(Y, 3-2X+3Y) = \text{Cov}(Y,3) - 2\text{Cov}(Y,X) + 3\text{Cov}(Y,Y)$.<br>$= 0 - 0 + 3\text{Var}(Y) = 3 \cdot 3 = 9$."
         }
     },
     "test3_q5": {

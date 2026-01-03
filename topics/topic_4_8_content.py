@@ -138,34 +138,29 @@ content_4_8 = {
         },
         "steps": [
             {
-                "label_de": "Parameter",
-                "label_en": "Parameters",
-                "content_de": "N = 10 (total), M = 4 (rot), n = 3 (Ziehungen), x = 2 (gesucht)",
-                "content_en": "N = 10 (total), M = 4 (red), n = 3 (draws), x = 2 (wanted)"
+                "label": {"de": "Gegeben", "en": "Given"},
+                "latex": r"{\color{#007AFF}N = 10}, \quad {\color{#FF4B4B}M = 4}, \quad {\color{#007AFF}n = 3}, \quad {\color{#FF4B4B}x = 2}",
+                "note": {"de": "(Gesamt, Rot, Ziehungen, Gesucht)", "en": "(Total, Red, Draws, Wanted)"}
             },
             {
-                "label_de": "Zähler Teil 1",
-                "label_en": "Numerator Part 1",
-                "content_de": "C(M,x) = C(4,2) = 6 Wege, 2 Rote aus 4 zu wählen",
-                "content_en": "C(M,x) = C(4,2) = 6 ways to choose 2 red from 4"
+                "label": {"de": "Zähler Teil 1", "en": "Numerator Part 1"},
+                "latex": r"\binom{\color{#FF4B4B}M}{\color{#FF4B4B}x} = \binom{\color{#FF4B4B}4}{\color{#FF4B4B}2} = 6",
+                "note": {"de": "Wege, 2 Rote aus 4 zu wählen", "en": "ways to choose 2 red from 4"}
             },
             {
-                "label_de": "Zähler Teil 2",
-                "label_en": "Numerator Part 2",
-                "content_de": "C(N-M, n-x) = C(6,1) = 6 Wege, 1 Weisse aus 6 zu wählen",
-                "content_en": "C(N-M, n-x) = C(6,1) = 6 ways to choose 1 white from 6"
+                "label": {"de": "Zähler Teil 2", "en": "Numerator Part 2"},
+                "latex": r"\binom{\color{#6B7280}N-M}{\color{#6B7280}n-x} = \binom{\color{#6B7280}6}{\color{#6B7280}1} = 6",
+                "note": {"de": "Wege, 1 Weisse aus 6 zu wählen", "en": "ways to choose 1 white from 6"}
             },
             {
-                "label_de": "Nenner",
-                "label_en": "Denominator",
-                "content_de": "C(N,n) = C(10,3) = 120 Wege total",
-                "content_en": "C(N,n) = C(10,3) = 120 total ways"
+                "label": {"de": "Nenner", "en": "Denominator"},
+                "latex": r"\binom{\color{#007AFF}N}{\color{#007AFF}n} = \binom{\color{#007AFF}10}{\color{#007AFF}3} = 120",
+                "note": {"de": "Alle möglichen Ziehungen", "en": "All possible draws"}
             },
             {
-                "label_de": "Ergebnis",
-                "label_en": "Result",
-                "content_de": "P(X=2) = (6 × 6) / 120 = 36/120 = <strong>0.3 = 30%</strong>",
-                "content_en": "P(X=2) = (6 × 6) / 120 = 36/120 = <strong>0.3 = 30%</strong>"
+                "label": {"de": "Ergebnis", "en": "Result"},
+                "latex": r"P(X=2) = \frac{6 \times 6}{120} = \frac{36}{120} = \mathbf{0.3 = 30\%}",
+                "note": None
             }
         ],
         "check": {
@@ -292,7 +287,12 @@ def render_subtopic_4_8(model):
     with st.container(border=True):
         st.markdown(t(content_4_8["intuition"]["text"]), unsafe_allow_html=True)
         st.markdown("<br>", unsafe_allow_html=True)
-        st.info(t(content_4_8["intuition"]["key_insight"]))
+        key_insight = t(content_4_8["intuition"]["key_insight"])
+        st.markdown(f"""
+<div style="background: #f4f4f5; border-left: 4px solid #a1a1aa; padding: 12px 16px; border-radius: 8px; color: #3f3f46;">
+{key_insight}
+</div>
+""", unsafe_allow_html=True)
     
     st.markdown("<br>", unsafe_allow_html=True)
     
@@ -341,16 +341,21 @@ def render_subtopic_4_8(model):
         col_n1, col_n2, col_d = st.columns(3)
         with col_n1:
             st.latex(breakdown["numerator1"]["formula"])
-            st.caption(t({"de": breakdown["numerator1"]["de"], "en": breakdown["numerator1"]["en"]}))
+            st.markdown(f"<small style='color:#6b7280;'>{t({'de': breakdown['numerator1']['de'], 'en': breakdown['numerator1']['en']})}</small>", unsafe_allow_html=True)
         with col_n2:
             st.latex(breakdown["numerator2"]["formula"])
-            st.caption(t({"de": breakdown["numerator2"]["de"], "en": breakdown["numerator2"]["en"]}))
+            st.markdown(f"<small style='color:#6b7280;'>{t({'de': breakdown['numerator2']['de'], 'en': breakdown['numerator2']['en']})}</small>", unsafe_allow_html=True)
         with col_d:
             st.latex(breakdown["denominator"]["formula"])
-            st.caption(t({"de": breakdown["denominator"]["de"], "en": breakdown["denominator"]["en"]}))
+            st.markdown(f"<small style='color:#6b7280;'>{t({'de': breakdown['denominator']['de'], 'en': breakdown['denominator']['en']})}</small>", unsafe_allow_html=True)
         
         st.markdown("<br>", unsafe_allow_html=True)
-        st.success(t(breakdown["summary"]))
+        summary_text = t(breakdown["summary"])
+        st.markdown(f"""
+<div style="background: #f4f4f5; border-left: 4px solid #a1a1aa; padding: 12px 16px; border-radius: 8px; color: #3f3f46;">
+{summary_text}
+</div>
+""", unsafe_allow_html=True)
     
     st.markdown("<br>", unsafe_allow_html=True)
     
@@ -379,42 +384,17 @@ def render_subtopic_4_8(model):
     st.markdown(f"### {t(content_4_8['example_worked']['header'])}")
     with st.container(border=True):
         
-        st.markdown(f"""
-        <div style="background:#fafafa; border-radius:8px; padding:12px; margin-bottom:16px;">
-            {t(content_4_8['example_worked']['problem'])}
-        </div>
-        """, unsafe_allow_html=True)
+        st.markdown(t(content_4_8['example_worked']['problem']), unsafe_allow_html=True)
         
-        step_colors = {
-            "Parameter": ("#dbeafe", "#1d4ed8"),
-            "Parameters": ("#dbeafe", "#1d4ed8"),
-            "Zähler Teil 1": ("#dcfce7", "#16a34a"),
-            "Numerator Part 1": ("#dcfce7", "#16a34a"),
-            "Zähler Teil 2": ("#dcfce7", "#16a34a"),
-            "Numerator Part 2": ("#dcfce7", "#16a34a"),
-            "Nenner": ("#fef3c7", "#92400e"),
-            "Denominator": ("#fef3c7", "#92400e"),
-            "Ergebnis": ("#fee2e2", "#dc2626"),
-            "Result": ("#fee2e2", "#dc2626"),
-        }
+        st.markdown("---")
         
         for i, step in enumerate(content_4_8["example_worked"]["steps"]):
             if i > 0:
                 st.markdown("---")
-            label = t({"de": step["label_de"], "en": step["label_en"]})
-            content_text = t({"de": step["content_de"], "en": step["content_en"]})
-            
-            bg, color = step_colors.get(label, ("#f4f4f5", "#3f3f46"))
-            
-            col_label, col_content = st.columns([1.5, 4])
-            with col_label:
-                st.markdown(f"""
-                <div style="background:{bg}; padding:8px 12px; border-radius:6px; color:{color}; font-weight:600; text-align:center;">
-                    {label}
-                </div>
-                """, unsafe_allow_html=True)
-            with col_content:
-                st.markdown(content_text, unsafe_allow_html=True)
+            st.markdown(f"**{t(step['label'])}:**")
+            st.latex(step["latex"])
+            if step.get("note"):
+                st.caption(t(step["note"]))
         
         st.markdown("---")
         check_text = t(content_4_8['example_worked']['check'])
@@ -451,4 +431,8 @@ def render_subtopic_4_8(model):
             )
     else:
         with st.container(border=True):
-            st.info(t({"de": "Keine MCQ-Fragen verfügbar.", "en": "No MCQ questions available."}))
+            st.markdown(f"""
+<div style="background: #f4f4f5; border-left: 4px solid #a1a1aa; padding: 12px 16px; border-radius: 8px; color: #3f3f46;">
+{t({"de": "Keine MCQ-Fragen verfügbar.", "en": "No MCQ questions available."})}
+</div>
+""", unsafe_allow_html=True)

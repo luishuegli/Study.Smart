@@ -6,439 +6,184 @@ description: Complete workflow for implementing a new topic/subtopic
 
 # Topic Implementation Workflow
 
-> **Spirit:** This is Brilliant.org meets Apple. Every screen should make a student think "this is actually fun to learn from."
+> **Spirit:** Brilliant.org meets Apple. Make students think "this is fun to learn from."
 
 ---
 
-## Pre-Flight Checks (MANDATORY - Execute These Commands)
+## Pre-Flight Checks (MANDATORY — NO EXCEPTIONS)
 
-> **DO NOT SKIP.** These are commands to run, not suggestions.
+> **Every rule file MUST be read before implementing a new topic.**
 
 ```
-Step 1: view_file .agent/rules/pedagogy.md (lines 1-70)
-Step 2: view_file .agent/adaptive-learning/synthesis.md
-Step 3: view_file .agent/adaptive-learning/topic_[previous].md (if exists)
+// turbo
+1. view_file .agent/rules/rules.md
+// turbo
+2. view_file .agent/rules/pedagogy.md
+// turbo
+3. view_file .agent/rules/design-system.md
+// turbo
+4. view_file .agent/rules/layout.md
+// turbo
+5. view_file .agent/rules/interactive.md
+// turbo
+6. view_file .agent/rules/templates.md
+// turbo
+7. view_file .agent/adaptive-learning/synthesis.md
+// turbo
+8. view_file .agent/adaptive-learning/topic_[previous].md (if exists)
 ```
 
-After reading files, confirm:
-```
-✓ I reviewed pedagogy.md - Theory structure: Analogy → Formula → Decoder → Insight
-✓ I reviewed synthesis.md - Pending rules to apply: [list each one]
-✓ I know the gold standard topics: Topics 1+2 (interactive elements + variety)
-✓ I checked utils/layouts/ for available layout utilities
-```
+**Confirm:** ✓ All rule files read | ✓ Pending rules from synthesis | ✓ Theory structure clear
 
 ---
 
-## MANDATORY Utilities (Use These, Don't Reinvent)
+## Gold Standard References (USE SPARINGLY)
 
-> **ALWAYS use existing utilities for consistent styling.** Never write inline HTML for these.
+> **⚠️ Each topic's content is UNIQUE. Gold standards are starting points, NOT templates.**
 
-```python
-# Required imports for EVERY topic file
-from utils.localization import t                    # Translation
-from utils.quiz_helper import render_mcq            # MCQ component
-from utils.ask_yourself import render_ask_yourself  # Ask Yourself section
-from utils.exam_essentials import render_exam_essentials  # Exam Essentials
-from views.styles import render_icon, inject_equal_height_css  # Styling
-```
-
-### Layout Utilities (USE FOR NEW SECTIONS)
-
-> **For brand new sections**, use the pre-built layouts from `utils/layouts/` instead of writing custom HTML.
-
-```python
-from utils.layouts import (
-    render_single_formula,      # Layout A: Single formula intro
-    render_comparison,          # Layout B: Side-by-side comparison
-    render_formula_grid,        # Layout C: Multi-formula grid (2x2)
-    render_steps,               # Layout D: Step-by-step process
-    render_formula_breakdown,   # Layout E: Deep dive into formula
-    render_definition,          # Layout G: Definition card
-    render_decision_tree,       # Layout H: Decision tree
-)
-from utils.layouts.foundation import (
-    grey_callout,               # Grey callout box
-    intuition_box,              # Intuition section
-    variable_decoder,           # Variable decoder section
-    key_insight,                # Key insight section
-)
-```
-
-**When to use layouts:**
-- **New topic from scratch** → Use layouts for consistency
-- **Filling gaps in existing topic** → Follow existing patterns in that file
-- **Refactoring** → Migrate to layouts when touching that code
-
-### Usage:
-```python
-# Ask Yourself (Frag Dich) - HEADER IS REQUIRED!
-render_ask_yourself(
-    header=content["frag_dich"]["header"],  # REQUIRED!
-    questions=content["frag_dich"]["questions"],
-    conclusion=content["frag_dich"]["conclusion"]
-)
-
-# Exam Essentials
-render_exam_essentials(
-    trap=content["exam_essentials"]["trap"],
-    trap_rule=content["exam_essentials"]["trap_rule"],
-    tips=content["exam_essentials"]["tips"]
-)
-```
-
-**DO NOT:**
-- Write inline `<div style="background: #f4f4f5...">` for Ask Yourself
-- Write custom HTML for Exam Essentials
-- Create new styling patterns
-- **Use backslash escapes (\' or \") inside f-strings** (Python 3.12+ syntax error!)
+- Topics 1+2 show possible patterns — **adapt, don't copy**
+- What worked in one section may be wrong for another
+- Always prioritize the **actual content and pedagogy** over matching examples
 
 ---
 
-## Adaptive Learning Integration
+## MANDATORY Utilities
 
-### BEFORE Implementation
-1. Read `@adaptive-learning/synthesis.md` for pending rules
-2. Check if similar topics had frequent fixes → apply those patterns proactively
-3. Create `adaptive-learning/topic_[X].md` if it doesn't exist
+> **See `.agent/workflows/implement-reference.md` for full code snippets.**
 
-### DURING Implementation (AUTOMATIC Real-Time Logging)
+**Always import:** `t`, `render_mcq`, `render_ask_yourself`, `render_exam_essentials`, `render_worked_example`
 
-> **NO MANUAL TRIGGER NEEDED.** Log fixes AS THEY HAPPEN.
+**Layout utilities:** `render_single_formula`, `render_comparison`, `render_formula_grid`, `render_definition`, `grey_callout`, `intuition_box`, `variable_decoder`, `key_insight`
 
-**When to log (automatically, don't ask):**
-- User says "fix this", "change this", "wrong", "not stupid-person-proof"
-- User points out an error or requests a change
-- I make a mistake and correct it
-- User rejects a design choice
+**Rules:** Use utils, don't write inline HTML. No backslash escapes in f-strings.
 
-**Log format (add to topic_[X].md immediately):**
-```markdown
-### Fix [N]: [Short Title]
-- **What was wrong:** [Issue]
-- **What I changed:** [Fix]
-- **Pattern:** [Potential rule name]
-- **Files:** [affected files]
-```
+---
 
-### NO MANUAL SYNTHESIS STEP
-- Logging happens in real-time, not at the end
-- When moving to next topic, just start - no "synthesize" command needed
-- Rules emerge naturally from accumulated logs
+## Adaptive Learning
 
-### The Compounding Effect
-
-```
-Topic 1: 15 fixes → lots of learning
-Topic 3: 8 fixes → patterns emerging  
-Topic 5: 3 fixes → rules stabilizing
-Topic 10: 0-1 fixes → near-perfect implementation
-```
-
-### What to Log Per Phase
-
-| Phase | What to log |
-|-------|-------------|
-| Theory | Formula formatting, decoder style, analogy quality, Stupid Person Rule violations |
-| Interactive | Interaction type preferences, scenario styles |
-| Exam Essentials | Trap format, tip clarity |
-| Layout | CSS issues, container problems, spacing |
+**Before:** Read synthesis.md for pending rules
+**During:** Log fixes automatically when user corrects something
+**Format:** `### Fix N: Title` → What was wrong → What I changed → Pattern → Files
 
 ---
 
 ## Phase 1: THEORY EXTRACTION
 
-**Sources:**
-- `data/All_Theory/course_theory.txt`
-- `data/All_Theory/handwritten_Statistikskript_VWL_HS2025.pdf`
+**Sources (ALWAYS READ FIRST):**
+- `data/All_Theory/course_theory.txt` — Official lecture content
+- `data/All_Theory/handwritten_Statistikskript_VWL_HS2025.pdf` — Visual reference for formatting
 
-**Extract:**
-1. Main formula(s) for this subtopic
-2. All variables and their meanings
-3. Key conditions/assumptions
-4. Common misconceptions (for trap section later)
+**Extract:** Formulas, variables+meanings, conditions, misconceptions
 
-**Output:** Draft theory content in content dictionary
-
-**Quality Gate:**
-```
-□ All formulas in LaTeX
-□ Every variable identified
-□ Bilingual (de/en) prepared
-```
+**Gate:** □ LaTeX formulas □ All variables □ Bilingual
 
 ---
 
 ## Phase 2: EXAM QUESTION AUDIT
 
-**Sources:**
-- `data/exam_questions.py`
-- `exam_data.py`
-- `data/exams/*.pdf`
+**Source:** `data/exam_questions.py` — Questions already allocated to subtopics
 
 **Process:**
+1. Check existing MCQs in subtopic — does each one TEST this exact theory?
+2. If mismatch → reallocate or flag
+3. If no question closely tests the core insight → CREATE new question
 
-```
-1. Search for questions testing this specific theory
-2. For each candidate question:
-   - Does it TEST the core concept? (not just mention it)
-   - Is it at appropriate difficulty?
-   - Is it self-contained? (doesn't need other topics)
-3. If match found → use it
-4. If partial match → adapt it
-5. If no match → CREATE new question
-```
+**Create New:** Test core insight, 2-3 min answerable, plausible distractors
 
-**Creating New Questions:**
-- Must test the CORE insight, not edge cases
-- Should be answerable in 2-3 minutes
-- Include plausible distractors
-- Write solution with step-by-step reasoning
-
-**Quality Gate:**
-```
-□ At least 1 MCQ identified/created
-□ Question tests the exact theory (not adjacent topic)
-□ Bilingual options prepared
-```
+**Gate:** □ ≥1 MCQ closely tests theory □ Bilingual options
 
 ---
 
-## Phase 3: 12-YEAR-OLD THEORY SECTION
+## Phase 3: 12-YEAR-OLD THEORY
 
-**Structure (MANDATORY ORDER):**
+**Structure (in order):**
+1. **Simple Analogy** (grey box, no math, end with "This is what [formula] calculates")
+2. **The Formula** (clean LaTeX)
+3. **Variable Decoder** ($X$ = **Name** — explanation)
+4. **Key Insight** (grey box, the "aha!" moment)
 
-### 3.1 Simple Analogy (Grey Box)
-- Use real-world scenario (factory, hospital, cards, dice)
-- NO math symbols yet
-- End with: "This is what [formula] calculates"
-
-**Test:** Would a 12-year-old understand the core idea?
-
-### 3.2 The Formula
-- Clean LaTeX display
-- One formula per concept
-
-### 3.3 Variable Decoder 
-For EACH variable:
-```
-$X$ = **Name** — Plain English explanation
-```
-
-**Must answer:**
-- What does this measure?
-- What are typical values?
-- What happens when it changes?
-
-### 3.4 Key Insight (Grey Box)
-- The "aha!" moment
-- Common misconception to avoid
-- The wisdom an experienced student would share
-
-**Quality Gate:**
-```
-□ 12-year-old could explain the concept
-□ Every formula symbol defined
-□ No naked formulas without context
-```
+**Gate:** □ 12-y-o could explain □ Every symbol defined □ No naked formulas
 
 ---
 
-## Phase 4: INTERACTIVE ELEMENT
+## Phase 4: INTERACTIVE (PROPOSE 4 OPTIONS)
+
+> **ALWAYS propose 4 different interactive element options before implementing.**
 
 **Process:**
+1. Identify core insight hard to grasp from text
+2. Check Topics 1+2 for variety — AVOID repetition
+3. **PROPOSE 4 OPTIONS** with: Type, Scenario, Mission, Rough Layout
+4. Wait for user to select best option
+5. Implement selected option
 
-1. **Identify the core insight** that's hard to grasp from text
-2. **Check existing topics** for interaction variety:
-   - What types already exist? (sliders, grids, buttons)
-   - What scenarios already used? (factory, hospital, cards)
-   - AVOID repetition
-3. **Design interaction:**
-   - Scenario first (grey box)
-   - Clear mission/goal
-   - Immediate feedback
-   - Completion state
+**Types:** Slider (continuous), Click grid (discrete), Pills (category), Button sequence (multi-step), Simulation (probability)
 
-**Interaction Types (vary across topics):**
-| Type | Best for |
-|------|----------|
-| Slider | Continuous values, "find the X" |
-| Click grid | Discrete selection, combinations |
-| Pills/Radio | Category choices |
-| Button sequence | Multi-step processes |
-| Simulation | Probability convergence |
-
-**Quality Gate:**
-```
-□ Uses @st.fragment for instant feedback
-□ Different from last 3 topics' interactions
-□ Scenario is concrete and relatable
-□ Clear completion state
-```
+**Gate:** □ @st.fragment □ Different from last 3 topics □ Concrete scenario □ Completion state
 
 ---
 
-## Phase 5: FRAG DICH (Ask Yourself)
+## Phase 5: FRAG DICH
 
-**Purpose:** Self-assessment checkpoint
+**Question types:** "Is this X or Y?", "What distribution for [signal]?", "Why can't we use [alternative]?"
 
-**Question Types:**
-- "Is this situation [X] or [Y]?"
-- "What distribution when you see [signal word]?"
-- "What does [symbol] represent here?"
-- "Why can't we use [alternative]?"
+**Use:** `render_ask_yourself(header, questions, conclusion)`
 
-**Requirements:**
-- 3-5 questions
-- Grey callout styling
-- Bilingual
-
-```python
-st.markdown(f"### {t({'de': 'Frag dich', 'en': 'Ask Yourself'})}")
-with st.container(border=True):
-    st.markdown(f"""
-<div style="background: #f4f4f5; border-left: 4px solid #a1a1aa; 
-            padding: 12px 16px; border-radius: 8px; color: #3f3f46;">
-<strong>{t({"de": "Erkennst du...", "en": "Can you recognize..."})}:</strong><br><br>
-• Question 1?<br>
-• Question 2?<br>
-• Question 3?
-</div>
-""", unsafe_allow_html=True)
-```
-
-**Quality Gate:**
-```
-□ Tests recognition, not recall
-□ Would help student on exam
-□ Grey styling applied
-```
+**Gate:** □ 3-5 questions □ Tests recognition □ Bilingual
 
 ---
 
-## Phase 6: EXAM ESSENTIALS (Merged Trap + Tips)
+## Phase 6: EXAM ESSENTIALS
 
 **Structure:**
+- **Trap:** #1 mistake + rule to avoid
+- **Tips:** Numbered, each with "Why?" explanation
 
-### 6.1 The Most Common Trap
-- What's the #1 mistake students make?
-- What's the rule to avoid it?
+**Use:** `render_exam_essentials(trap, trap_rule, tips)`
 
-### 6.2 Pro Tips (Numbered)
-- Shortcuts that save time on exams
-- Each with *Why?* explanation
-- Insider knowledge an experienced student would share
-
-**Sources for tips:**
-- Common errors from graded exams
-- Efficiency tricks for calculations
-- Pattern recognition shortcuts
-
-```python
-st.markdown("### Exam Essentials")
-with st.container(border=True):
-    st.markdown("**The Most Common Trap**")
-    st.markdown("...")
-    st.markdown("---")
-    st.markdown("**Pro Tip: Exam essentials:**")
-    st.markdown("**(1) [Tip]**")
-    st.markdown("*Why?* [Explanation]")
-```
-
-**Quality Gate:**
-```
-□ Trap is the REAL #1 mistake (not generic)
-□ Tips are CLASS A (would actually help on exam)
-□ Grey container, no colored callouts
-```
+**Gate:** □ Real #1 mistake □ Class A tips □ Grey container
 
 ---
 
-## Phase 7: BACKEND INTEGRATION
+## Phase 7: BACKEND
 
 ```python
-# In views/course_overview.py
-SUBTOPIC_QUESTION_COUNTS = {
-    "X.Y": N,  # Number of MCQs in this subtopic
-}
+SUBTOPIC_QUESTION_COUNTS = {"X.Y": N}
 ```
 
-**MCQ Tracking:**
-```python
-render_mcq(
-    ...,
-    course_id="vwl",
-    topic_id="X",
-    subtopic_id="X.Y",
-    question_id="unique_id"
-)
-```
+All MCQs need: course_id, topic_id, subtopic_id, question_id
 
-**Quality Gate:**
-```
-□ SUBTOPIC_QUESTION_COUNTS updated
-□ All MCQs have tracking parameters
-□ Question IDs unique
-```
+**Gate:** □ Counts updated □ Tracking params □ Unique IDs
 
 ---
 
 ## Phase 8: FINAL QA
 
-### Browser Testing
-```
-□ Load the page - no errors in console
-□ Side-by-side boxes equal height
-□ Interactive element responds correctly
-□ MCQ submits and tracks
-□ Success/error feedback works
-□ Looks good on different window widths
-```
-
-### Code Review
-```
-□ No emojis (except st.button)
-□ Grey callouts only (no st.info inside containers)
-□ Headers outside containers
-□ All content bilingual
-□ @st.fragment for interactivity
-```
-
-### Cohesion Check
-```
-□ Theory structure follows pedagogy rules
-□ Interactive variety maintained (check Topics 1+2 as reference)
-□ Exam Essentials format consistent
-□ Layout utilities used where applicable
-```
+**Browser:** □ No errors □ Equal height □ Interactive works □ MCQ tracks
+**Code:** □ No emojis □ Grey callouts □ Headers outside containers □ Bilingual □ @st.fragment
+**Cohesion:** □ Theory follows pedagogy □ Interactive variety □ Utils used
 
 ---
 
-## Quick Reference: Mandatory Elements
+## Summary Topics: Learn-Test-Learn
 
-```
-Every subtopic MUST have:
-☑️ Theory (Analogy → Formula → Decoder → Insight)
-☑️ At least 1 visual or interactive
-☑️ Frag Dich section
-☑️ Exam Essentials (merged Trap + Tips)
-☑️ At least 1 MCQ with tracking
-☑️ Registered in SUBTOPIC_QUESTION_COUNTS
-```
+> For overview topics (like 4.9), use chunked layout.
+
+**Flow:** Chunk→Cards→MCQ | Chunk→Cards→MCQ | Key Formulas→Ask Yourself→Exam Essentials
+
+**Compact Card:** Name (bold) | Notation (mono) | One-liner (when to use)
+
+**Ref:** `topic_4_9_content.py`
 
 ---
 
-## Time Estimate
+## Mandatory Elements
 
-| Phase | First Topics | After 5+ Topics |
-|-------|--------------|-----------------|
-| Theory extraction | 15 min | 8 min |
-| Exam question audit | 10 min | 5 min |
-| Theory section | 20 min | 10 min |
-| Interactive element | 25 min | 12 min |
-| Frag Dich | 5 min | 3 min |
-| Exam Essentials | 10 min | 5 min |
-| Backend + QA | 10 min | 5 min |
-| **TOTAL** | **~95 min** | **~48 min** |
-
-With adaptive learning, expect ~20 min by Topic 10.
+```
+☑️ Theory (Analogy→Formula→Decoder→Insight)
+☑️ ≥1 visual/interactive
+☑️ Frag Dich
+☑️ Exam Essentials
+☑️ ≥1 MCQ with tracking
+☑️ SUBTOPIC_QUESTION_COUNTS
+```

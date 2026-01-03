@@ -27,74 +27,43 @@ content_3_7 = {
         }
     },
     
-    # FORMULA CARDS with full context (matching Topic 1.6 standard)
+    # FORMULA CARDS — Cheat Sheet Style (no Variable Decoders for summary)
     "formula_cards": [
         {
             "title": {"de": "CDF → PDF", "en": "CDF → PDF"},
-            "intuition": {"de": "Du hast die kumulative Verteilung und willst die Dichte.", "en": "You have the cumulative distribution and want the density."},
+            "intuition": {"de": "Ableiten! Steigung der CDF gibt Dichte.", "en": "Differentiate! Slope of CDF gives density."},
             "formula": r"f(x) = F'(x)",
-            "variables": [
-                {"symbol": "f(x)", "name": {"de": "PDF", "en": "PDF"}, "desc": {"de": "Dichtefunktion", "en": "Density function"}},
-                {"symbol": "F(x)", "name": {"de": "CDF", "en": "CDF"}, "desc": {"de": "Kumulative Verteilung", "en": "Cumulative distribution"}},
-                {"symbol": "F'(x)", "name": {"de": "Ableitung", "en": "Derivative"}, "desc": {"de": "Steigung der CDF", "en": "Slope of CDF"}}
-            ],
-            "when": {"de": "Aufgabe gibt CDF, fragt nach PDF/Dichte", "en": "Problem gives CDF, asks for PDF/density"}
+            "when": {"de": "'Gegeben CDF, finde PDF'", "en": "'Given CDF, find PDF'"}
         },
         {
             "title": {"de": "PDF → CDF", "en": "PDF → CDF"},
-            "intuition": {"de": "Du hast die Dichte und willst die Wahrscheinlichkeit bis x.", "en": "You have the density and want probability up to x."},
+            "intuition": {"de": "Integrieren! Fläche unter PDF bis x.", "en": "Integrate! Area under PDF up to x."},
             "formula": r"F(x) = \int_{-\infty}^{x} f(t)\,dt",
-            "variables": [
-                {"symbol": "F(x)", "name": {"de": "CDF", "en": "CDF"}, "desc": {"de": "P(X ≤ x)", "en": "P(X ≤ x)"}},
-                {"symbol": "f(t)", "name": {"de": "PDF", "en": "PDF"}, "desc": {"de": "Dichtefunktion", "en": "Density function"}},
-                {"symbol": r"\int", "name": {"de": "Integral", "en": "Integral"}, "desc": {"de": "Fläche unter Kurve", "en": "Area under curve"}}
-            ],
-            "when": {"de": "Aufgabe gibt PDF, fragt nach P(X ≤ x)", "en": "Problem gives PDF, asks for P(X ≤ x)"}
+            "when": {"de": "'P(X ≤ x) = ?' bei stetiger Verteilung", "en": "'P(X ≤ x) = ?' for continuous"}
         },
         {
             "title": {"de": "E[X] diskret", "en": "E[X] discrete"},
-            "intuition": {"de": "Gewichteter Durchschnitt aller möglichen Werte.", "en": "Weighted average of all possible values."},
+            "intuition": {"de": "Gewichteter Durchschnitt — jeder Wert mal seine Wsk.", "en": "Weighted average — each value times its probability."},
             "formula": r"E[X] = \sum_x x \cdot P(X=x)",
-            "variables": [
-                {"symbol": "E[X]", "name": {"de": "Erwartungswert", "en": "Expected Value"}, "desc": {"de": "Das 'Zentrum'", "en": "The 'center'"}},
-                {"symbol": "x", "name": {"de": "Werte", "en": "Values"}, "desc": {"de": "Mögliche Ergebnisse", "en": "Possible outcomes"}},
-                {"symbol": "P(X=x)", "name": {"de": "Wahrscheinlichkeit", "en": "Probability"}, "desc": {"de": "Gewicht jedes Werts", "en": "Weight of each value"}}
-            ],
-            "when": {"de": "Tabelle mit Werten + Wahrscheinlichkeiten gegeben", "en": "Table with values + probabilities given"}
+            "when": {"de": "Tabelle mit Werten + Wahrscheinlichkeiten", "en": "Table with values + probabilities"}
         },
         {
             "title": {"de": "E[X] stetig", "en": "E[X] continuous"},
-            "intuition": {"de": "Wie diskret, aber mit Integral statt Summe.", "en": "Like discrete, but with integral instead of sum."},
+            "intuition": {"de": "Wie diskret, aber Integral statt Summe.", "en": "Like discrete, but integral instead of sum."},
             "formula": r"E[X] = \int x \cdot f(x)\,dx",
-            "variables": [
-                {"symbol": "E[X]", "name": {"de": "Erwartungswert", "en": "Expected Value"}, "desc": {"de": "Das 'Zentrum'", "en": "The 'center'"}},
-                {"symbol": "f(x)", "name": {"de": "PDF", "en": "PDF"}, "desc": {"de": "Dichtefunktion", "en": "Density function"}},
-                {"symbol": r"\int", "name": {"de": "Integral", "en": "Integral"}, "desc": {"de": "Über alle x", "en": "Over all x"}}
-            ],
-            "when": {"de": "Stetige Verteilung (PDF) gegeben", "en": "Continuous distribution (PDF) given"}
+            "when": {"de": "PDF gegeben, Erwartungswert gefragt", "en": "PDF given, expected value asked"}
         },
         {
-            "title": {"de": "Varianz (Shortcut)", "en": "Variance (Shortcut)"},
-            "intuition": {"de": "Wie weit streuen die Werte vom Zentrum? IMMER diesen Shortcut nutzen!", "en": "How far do values spread from center? ALWAYS use this shortcut!"},
+            "title": {"de": "Varianz-Shortcut", "en": "Variance Shortcut"},
+            "intuition": {"de": "IMMER nutzen! 'E vom Quadrat minus Quadrat vom E'", "en": "ALWAYS use! 'E of square minus square of E'"},
             "formula": r"Var(X) = E[X^2] - (E[X])^2",
-            "variables": [
-                {"symbol": "Var(X)", "name": {"de": "Varianz", "en": "Variance"}, "desc": {"de": "Streuungsmaß", "en": "Spread measure"}},
-                {"symbol": "E[X²]", "name": {"de": "2. Moment", "en": "2nd Moment"}, "desc": {"de": "Erwartungswert der Quadrate", "en": "Expected value of squares"}},
-                {"symbol": "(E[X])²", "name": {"de": "Quadrat von E[X]", "en": "Square of E[X]"}, "desc": {"de": "Zentrum zum Quadrat", "en": "Center squared"}}
-            ],
-            "when": {"de": "Immer wenn Varianz gefragt! 'E vom Quadrat minus Quadrat vom E'", "en": "Whenever variance asked! 'E of square minus square of E'"}
+            "when": {"de": "Varianz berechnen — schneller als Definition", "en": "Calculate variance — faster than definition"}
         },
         {
             "title": {"de": "Standardisierung", "en": "Standardization"},
-            "intuition": {"de": "Wandle jeden Wert in 'Anzahl Standardabweichungen vom Mittelwert' um.", "en": "Convert any value to 'number of standard deviations from mean'."},
+            "intuition": {"de": "Verwandle in 'Anzahl σ vom Zentrum'", "en": "Convert to 'number of σ from center'"},
             "formula": r"Z = \frac{X - \mu}{\sigma}",
-            "variables": [
-                {"symbol": "Z", "name": {"de": "Z-Score", "en": "Z-Score"}, "desc": {"de": "Standardisierter Wert", "en": "Standardized value"}},
-                {"symbol": "X", "name": {"de": "Originalwert", "en": "Original value"}, "desc": {"de": "Der Rohwert", "en": "The raw value"}},
-                {"symbol": r"\mu", "name": {"de": "Mittelwert", "en": "Mean"}, "desc": {"de": "Zentrum", "en": "Center"}},
-                {"symbol": r"\sigma", "name": {"de": "Std.abw.", "en": "Std.dev."}, "desc": {"de": "Streuung", "en": "Spread"}}
-            ],
-            "when": {"de": "Vergleich zwischen Skalen oder Z-Tabelle nutzen", "en": "Comparing across scales or using Z-table"}
+            "when": {"de": "N(μ,σ²) → N(0,1) für Tabelle", "en": "N(μ,σ²) → N(0,1) for table"}
         }
     ],
     
@@ -238,14 +207,13 @@ def render_subtopic_3_7(model):
 
 
 def render_formula_cards():
-    """Render formula cards in 2-column grid with FULL context per card.
+    """Render formula cards in 2-column grid — CHEAT SHEET style.
     
-    Each card includes:
+    Each card includes (compact):
     - Title
-    - Intuition (when to use)
+    - Intuition
     - Formula
-    - Variable Decoder
-    - 'When to use' hint
+    - When to use (exam signal words)
     """
     cards = content_3_7["formula_cards"]
     
@@ -264,38 +232,26 @@ def render_formula_cards():
 
 
 def render_single_formula_card(card):
-    """Render a single formula card matching Topic 1.6 gold standard.
+    """Render a single formula card — CHEAT SHEET style (compact).
     
-    Structure (ONE container with --- separators):
+    Structure:
     1. Title (bold)
-    2. Intuition (italic, no math)
+    2. Intuition (italic)
     3. Formula (prominent)
-    --- separator ---
-    4. Variables: bullet list
-    --- separator ---
-    5. When/Insight (italic)
+    4. When to use (muted caption)
     """
     with st.container(border=True):
         # 1. Title
         st.markdown(f"**{t(card['title'])}**")
         
-        # 2. Intuition (italic, no nested container)
+        # 2. Intuition (italic)
         st.markdown(f"*{t(card['intuition'])}*")
         
         # 3. Formula (prominent)
         st.latex(card['formula'])
         
-        # --- Variable Decoder ---
-        st.markdown("---")
-        st.markdown(f"**{t({'de': 'Variablen', 'en': 'Variables'})}:**")
-        for v in card['variables']:
-            name = t(v['name'])
-            desc = t(v['desc'])
-            st.markdown(f"• ${v['symbol']}$ = **{name}** — {desc}")
-        
-        # --- When to use (insight) ---
-        st.markdown("---")
-        st.markdown(f"*{t(card['when'])}*")
+        # 4. When to use (caption style)
+        st.caption(t(card['when']))
 
 
 @st.fragment

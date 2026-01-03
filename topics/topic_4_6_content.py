@@ -154,28 +154,24 @@ content_4_6 = {
         },
         "steps": [
             {
-                "label_de": "Gegeben",
-                "label_en": "Given",
-                "content_de": "$E[X] = 5000$ Stunden → $\\lambda = \\frac{1}{5000}$",
-                "content_en": "$E[X] = 5000$ hours → $\\lambda = \\frac{1}{5000}$"
+                "label": {"de": "Gegeben", "en": "Given"},
+                "latex": r"E[X] = {\color{#007AFF}5000} \text{ h} \quad \Rightarrow \quad {\color{#007AFF}\lambda = \frac{1}{5000}}",
+                "note": None
             },
             {
-                "label_de": "Gesucht",
-                "label_en": "Find",
-                "content_de": "$P(X < 2500)$",
-                "content_en": "$P(X < 2500)$"
+                "label": {"de": "Gesucht", "en": "Find"},
+                "latex": r"P(X < {\color{#FF4B4B}2500})",
+                "note": {"de": "Halb so lang wie erwartet", "en": "Half the expected lifetime"}
             },
             {
-                "label_de": "Formel",
-                "label_en": "Formula",
-                "content_de": "$P(X < 2500) = F(2500) = 1 - e^{-\\lambda \\cdot 2500}$",
-                "content_en": "$P(X < 2500) = F(2500) = 1 - e^{-\\lambda \\cdot 2500}$"
+                "label": {"de": "Formel", "en": "Formula"},
+                "latex": r"P(X < {\color{#FF4B4B}2500}) = F({\color{#FF4B4B}2500}) = 1 - e^{-{\color{#007AFF}\lambda} \cdot {\color{#FF4B4B}2500}}",
+                "note": None
             },
             {
-                "label_de": "Rechnung",
-                "label_en": "Calculation",
-                "content_de": "$= 1 - e^{-\\frac{2500}{5000}} = 1 - e^{-0.5} \\approx 1 - 0.6065 = 0.3935$",
-                "content_en": "$= 1 - e^{-\\frac{2500}{5000}} = 1 - e^{-0.5} \\approx 1 - 0.6065 = 0.3935$"
+                "label": {"de": "Rechnung", "en": "Calculation"},
+                "latex": r"= 1 - e^{-\frac{{\color{#FF4B4B}2500}}{{\color{#007AFF}5000}}} = 1 - e^{-0.5} \approx 1 - 0.6065 = \mathbf{0.3935}",
+                "note": None
             }
         ],
         "answer": {
@@ -414,7 +410,12 @@ def render_subtopic_4_6(model):
         for item in content_4_6["connection"]["comparison"]:
             st.markdown(t({"de": item["de"], "en": item["en"]}), unsafe_allow_html=True)
         
-        st.info(t(content_4_6["connection"]["same_lambda"]))
+        same_lambda_text = t(content_4_6["connection"]["same_lambda"])
+        st.markdown(f"""
+<div style="background: #f4f4f5; border-left: 4px solid #a1a1aa; padding: 12px 16px; border-radius: 8px; color: #3f3f46;">
+<strong>{same_lambda_text}</strong>
+</div>
+""", unsafe_allow_html=True)
     
     st.markdown("<br>", unsafe_allow_html=True)
     
@@ -422,31 +423,19 @@ def render_subtopic_4_6(model):
     st.markdown(f"### {t(content_4_6['example_worked']['header'])}")
     with st.container(border=True):
         
-        st.markdown(f"""
-        <div style="background:#fafafa; border-radius:8px; padding:12px; margin-bottom:16px;">
-            {t(content_4_6['example_worked']['problem'])}
-        </div>
-        """, unsafe_allow_html=True)
+        st.markdown(t(content_4_6['example_worked']['problem']), unsafe_allow_html=True)
+        
+        st.markdown("---")
         
         for i, step in enumerate(content_4_6["example_worked"]["steps"]):
             if i > 0:
                 st.markdown("---")
-            label = t({"de": step["label_de"], "en": step["label_en"]})
-            content = t({"de": step["content_de"], "en": step["content_en"]})
             
-            if "Gegeben" in label or "Given" in label:
-                bg = "#dbeafe"; color = "#1d4ed8"
-            elif "Gesucht" in label or "Find" in label:
-                bg = "#fee2e2"; color = "#dc2626"
-            else:
-                bg = "#f4f4f5"; color = "#3f3f46"
+            st.markdown(f"**{t(step['label'])}:**")
+            st.latex(step["latex"])
             
-            col_label, col_content = st.columns([0.15, 0.85])
-            with col_label:
-                st.markdown(f"""<span style="background:{bg}; padding:4px 10px; border-radius:4px; color:{color}; font-weight:600; display:inline-block;">{label}</span>""", unsafe_allow_html=True)
-            with col_content:
-                # Content contains LaTeX - use st.markdown which renders inline $...$
-                st.markdown(content)
+            if step.get("note"):
+                st.caption(t(step["note"]))
         
         st.markdown("---")
         st.markdown(f"**{t(content_4_6['example_worked']['answer'])}**")
@@ -579,7 +568,8 @@ def render_subtopic_4_6(model):
     st.markdown(f"### {t({'de': 'Prüfungstraining', 'en': 'Exam Practice'})}")
     
     with st.container(border=True):
-        st.info(t({
-            "de": "Für diesen Abschnitt gibt es derzeit keine MCQ-Fragen. Die Theorie oben deckt die Prüfungsinhalte ab.",
-            "en": "This section currently has no MCQ questions. The theory above covers the exam content."
-        }))
+        st.markdown(f"""
+<div style="background: #f4f4f5; border-left: 4px solid #a1a1aa; padding: 12px 16px; border-radius: 8px; color: #3f3f46;">
+{t({"de": "Für diesen Abschnitt gibt es derzeit keine MCQ-Fragen. Die Theorie oben deckt die Prüfungsinhalte ab.", "en": "This section currently has no MCQ questions. The theory above covers the exam content."})}
+</div>
+""", unsafe_allow_html=True)

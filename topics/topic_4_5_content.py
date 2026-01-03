@@ -120,22 +120,19 @@ content_4_5 = {
         },
         "steps": [
             {
-                "label_de": "Modell",
-                "label_en": "Model",
-                "latex": r"X = \text{Wartezeit in Minuten}, \quad X \sim R(0, 10), \quad a = 0, b = 10",
-                "is_latex": True
+                "label": {"de": "Modell", "en": "Model"},
+                "latex": r"X \sim R({\color{#007AFF}0}, {\color{#007AFF}10}), \quad {\color{#007AFF}a = 0}, \quad {\color{#007AFF}b = 10}",
+                "note": {"de": "X = Wartezeit in Minuten", "en": "X = Wait time in minutes"}
             },
             {
-                "label_de": "(a) E[X]",
-                "label_en": "(a) E[X]",
-                "latex": r"E[X] = \frac{a + b}{2} = \frac{0 + 10}{2} = \textbf{5 Minuten}",
-                "is_latex": True
+                "label": {"de": "(a) E[X]", "en": "(a) E[X]"},
+                "latex": r"E[X] = \frac{{\color{#007AFF}a} + {\color{#007AFF}b}}{2} = \frac{{\color{#007AFF}0} + {\color{#007AFF}10}}{2} = \mathbf{5 \text{ Min}}",
+                "note": None
             },
             {
-                "label_de": "(b) P(X < 3)",
-                "label_en": "(b) P(X < 3)",
-                "latex": r"P(X < 3) = \frac{3 - 0}{10 - 0} = \frac{3}{10} = \textbf{30\%}",
-                "is_latex": True
+                "label": {"de": "(b) P(X < 3)", "en": "(b) P(X < 3)"},
+                "latex": r"P(X < {\color{#FF4B4B}3}) = \frac{{\color{#FF4B4B}3} - {\color{#007AFF}0}}{{\color{#007AFF}10} - {\color{#007AFF}0}} = \frac{{\color{#FF4B4B}3}}{{\color{#007AFF}10}} = \mathbf{30\%}",
+                "note": None
             }
         ],
         "check": {
@@ -255,7 +252,12 @@ def render_subtopic_4_5(model):
     with st.container(border=True):
         st.markdown(t(content_4_5["intuition"]["text"]), unsafe_allow_html=True)
         st.markdown("<br>", unsafe_allow_html=True)
-        st.info(t(content_4_5["intuition"]["why_rectangular"]))
+        why_rect = t(content_4_5["intuition"]["why_rectangular"])
+        st.markdown(f"""
+<div style="background: #f4f4f5; border-left: 4px solid #a1a1aa; padding: 12px 16px; border-radius: 8px; color: #3f3f46;">
+{why_rect}
+</div>
+""", unsafe_allow_html=True)
     
     st.markdown("<br>", unsafe_allow_html=True)
     
@@ -348,43 +350,22 @@ def render_subtopic_4_5(model):
     st.markdown("<br><br>", unsafe_allow_html=True)
     
     # --- WORKED EXAMPLE ---
+    st.markdown(f"### {t(content_4_5['example_worked']['header'])}")
     with st.container(border=True):
-        st.markdown(f"### {t(content_4_5['example_worked']['header'])}")
         
-        st.markdown(f"""
-        <div style="background:#fafafa; border-radius:8px; padding:12px; margin-bottom:16px;">
-            {t(content_4_5['example_worked']['problem'])}
-        </div>
-        """, unsafe_allow_html=True)
+        st.markdown(t(content_4_5['example_worked']['problem']), unsafe_allow_html=True)
         
-        step_colors = {
-            "Modell": ("#dbeafe", "#1d4ed8"),
-            "Model": ("#dbeafe", "#1d4ed8"),
-            "(a) E[X]": ("#dcfce7", "#16a34a"),
-            "(b) P(X < 3)": ("#fee2e2", "#dc2626"),
-        }
+        st.markdown("---")
         
         for i, step in enumerate(content_4_5["example_worked"]["steps"]):
             if i > 0:
                 st.markdown("---")
-            label = t({"de": step["label_de"], "en": step["label_en"]})
-            is_latex = step.get("is_latex", False)
             
-            bg, color = step_colors.get(label, ("#f4f4f5", "#3f3f46"))
+            st.markdown(f"**{t(step['label'])}:**")
+            st.latex(step["latex"])
             
-            col_label, col_content = st.columns([1, 4])
-            with col_label:
-                st.markdown(f"""
-                <div style="background:{bg}; padding:8px 12px; border-radius:6px; color:{color}; font-weight:600; text-align:center; margin-top:8px;">
-                    {label}
-                </div>
-                """, unsafe_allow_html=True)
-            with col_content:
-                if is_latex:
-                    st.latex(step["latex"])
-                else:
-                    content_text = t({"de": step.get("content_de", ""), "en": step.get("content_en", "")})
-                    st.markdown(content_text, unsafe_allow_html=True)
+            if step.get("note"):
+                st.caption(t(step["note"]))
         
         st.markdown("---")
         check_text = t(content_4_5['example_worked']['check'])
@@ -405,7 +386,8 @@ def render_subtopic_4_5(model):
     st.markdown(f"### {t({'de': 'Prüfungstraining', 'en': 'Exam Practice'})}")
     
     with st.container(border=True):
-        st.info(t({
-            "de": "Für diesen Abschnitt gibt es derzeit keine MCQ-Fragen. Die Theorie oben deckt die Prüfungsinhalte ab.",
-            "en": "This section currently has no MCQ questions. The theory above covers the exam content."
-        }))
+        st.markdown(f"""
+<div style="background: #f4f4f5; border-left: 4px solid #a1a1aa; padding: 12px 16px; border-radius: 8px; color: #3f3f46;">
+{t({"de": "Für diesen Abschnitt gibt es derzeit keine MCQ-Fragen. Die Theorie oben deckt die Prüfungsinhalte ab.", "en": "This section currently has no MCQ questions. The theory above covers the exam content."})}
+</div>
+""", unsafe_allow_html=True)

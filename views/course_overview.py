@@ -43,7 +43,7 @@ SUBTOPIC_QUESTION_COUNTS = {
     "4.9": 9,  # hs2023_prob3 + 4 uebung2 + 2 Test + 2 Audit (uebung2_mc11, hs2022_mc6)
     # Topic 5: Multidimensional Random Variables
     "5.1": 3,  # test3_q4, uebung3_mc5, hs2015_prob4
-    "5.2": 2,  # test3_q5, uebung3_mc7
+    "5.2": 4,  # 5_2_coin_mission, 5_2_cov, 5_2_vardiff, 5_2_varscale
     "5.3": 7,  # + hs2024_mc2
     "5.4": 3,  # uebung3_mc10, uebung3_mc11, hs2025_mc6
     "5.5": 11,  # uebung3_mc2,3,4,6,8,12,13 + 4 Test

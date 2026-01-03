@@ -346,7 +346,9 @@ def render_subtopic_4_1(model):
         st.markdown("<br>", unsafe_allow_html=True)
         st.markdown(f"**{t(content_4_1['formula']['breakdown']['header'])}**")
         
-        for part in content_4_1["formula"]["breakdown"]["parts"]:
+        for i, part in enumerate(content_4_1["formula"]["breakdown"]["parts"]):
+            if i > 0:
+                st.markdown("---")
             col_sym, col_mean = st.columns([1, 3])
             with col_sym:
                 # Handle bilingual symbols
@@ -357,13 +359,9 @@ def render_subtopic_4_1(model):
             with col_mean:
                 st.markdown(t({"de": part["meaning_de"], "en": part["meaning_en"]}), unsafe_allow_html=True)
         
-        st.markdown("<br>", unsafe_allow_html=True)
+        st.markdown("---")
         example_data = content_4_1["formula"]["breakdown"]["example"]
-        st.markdown(f"""
-        <div style="background-color: #f4f4f5; border-radius: 8px; padding: 12px; border-left: 4px solid #a1a1aa; color: #3f3f46;">
-            <strong>{t(example_data['label'])}</strong> {t(example_data['text'])}
-        </div>
-        """, unsafe_allow_html=True)
+        st.markdown(f"**{t(example_data['label'])}** {t(example_data['text'])}")
         st.latex(example_data["formula"])
     
     st.markdown("<br>", unsafe_allow_html=True)
@@ -450,7 +448,8 @@ def render_subtopic_4_1(model):
             )
     else:
         with st.container(border=True):
-            st.info(t({
-                "de": "Für diesen Abschnitt gibt es derzeit keine MCQ-Fragen.",
-                "en": "This section currently has no MCQ questions."
-            }))
+            st.markdown(f"""
+<div style="background: #f4f4f5; border-left: 4px solid #a1a1aa; padding: 12px 16px; border-radius: 8px; color: #3f3f46;">
+{t({"de": "Für diesen Abschnitt gibt es derzeit keine MCQ-Fragen.", "en": "This section currently has no MCQ questions."})}
+</div>
+""", unsafe_allow_html=True)

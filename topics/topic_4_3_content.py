@@ -207,37 +207,25 @@ content_4_3 = {
         },
         "steps": [
             {
-                "label_de": "Gegeben",
-                "label_en": "Given",
-                "content_de": "$n = 12$ (Anzahl Befragte), $p = 0.35$ (Erfolgswahrscheinlichkeit)",
-                "content_en": "$n = 12$ (number surveyed), $p = 0.35$ (success probability)",
-                "is_latex": False
+                "label": {"de": "Gegeben", "en": "Given"},
+                "latex": r"{\color{#007AFF}n = 12}, \quad {\color{#16a34a}p = 0.35}",
+                "note": {"de": "(Anzahl Befragte, Erfolgswahrscheinlichkeit)", "en": "(Number surveyed, Success probability)"}
             },
             {
-                "label_de": "Gesucht",
-                "label_en": "Find",
-                "latex": r"P(X = 5) \text{ wobei } X \sim \text{Bin}(12, 0.35)",
-                "latex_en": r"P(X = 5) \text{ where } X \sim \text{Bin}(12, 0.35)",
-                "is_latex": True
+                "label": {"de": "Gesucht", "en": "Find"},
+                "latex": r"P(X = {\color{#FF4B4B}5}) \text{ wobei } X \sim \text{Bin}({\color{#007AFF}12}, {\color{#16a34a}0.35})",
+                "latex_en": r"P(X = {\color{#FF4B4B}5}) \text{ where } X \sim \text{Bin}({\color{#007AFF}12}, {\color{#16a34a}0.35})",
+                "note": None
             },
             {
-                "label_de": "Signal",
-                "label_en": "Signal",
-                "content_de": "'genau 5 von 12' + unabhängige Befragungen → Binomial",
-                "content_en": "'exactly 5 of 12' + independent surveys → Binomial",
-                "is_latex": False
+                "label": {"de": "Formel", "en": "Formula"},
+                "latex": r"P(X = {\color{#FF4B4B}5}) = \binom{{\color{#007AFF}12}}{{\color{#FF4B4B}5}} \times {\color{#16a34a}0.35}^{\color{#FF4B4B}5} \times 0.65^{{\color{#007AFF}12}-{\color{#FF4B4B}5}}",
+                "note": {"de": "C(n,k) × p^k × (1-p)^(n-k)", "en": "C(n,k) × p^k × (1-p)^(n-k)"}
             },
             {
-                "label_de": "Formel",
-                "label_en": "Formula",
-                "latex": r"P(X = 5) = \binom{12}{5} \times 0.35^5 \times 0.65^7",
-                "is_latex": True
-            },
-            {
-                "label_de": "Rechnung",
-                "label_en": "Calculation",
-                "latex": r"= 792 \times 0.00525 \times 0.0490 \approx 0.204",
-                "is_latex": True
+                "label": {"de": "Rechnung", "en": "Calculation"},
+                "latex": r"= 792 \times 0.00525 \times 0.0490 \approx \mathbf{0.204}",
+                "note": None
             }
         ],
         "answer": {
@@ -519,53 +507,25 @@ def render_subtopic_4_3(model):
     st.markdown(f"### {t(content_4_3['example_worked']['header'])}")
     with st.container(border=True):
         
-        # Problem statement - convert **bold** to <strong>bold</strong> for HTML
-        import re
-        problem_text = t(content_4_3['example_worked']['problem'])
-        problem_text = re.sub(r'\*\*(.*?)\*\*', r'<strong>\1</strong>', problem_text)
+        st.markdown(t(content_4_3['example_worked']['problem']), unsafe_allow_html=True)
         
-        st.markdown(f"""
-        <div style="background:#fafafa; border-radius:8px; padding:12px; margin-bottom:16px;">
-            {problem_text}
-        </div>
-        """, unsafe_allow_html=True)
+        st.markdown("---")
         
-        # Steps with color coding
+        # Steps with proper LaTeX and plain labels
         for i, step in enumerate(content_4_3["example_worked"]["steps"]):
             if i > 0:
                 st.markdown("---")
-            label = t({"de": step["label_de"], "en": step["label_en"]})
-            is_latex = step.get("is_latex", False)
             
-            # Color based on step type
-            if "Gegeben" in label or "Given" in label:
-                bg = "#dbeafe"; color = "#1d4ed8"
-            elif "Gesucht" in label or "Find" in label:
-                bg = "#fee2e2"; color = "#dc2626"
-            elif "Signal" in label:
-                bg = "#dcfce7"; color = "#16a34a"
+            st.markdown(f"**{t(step['label'])}:**")
+            
+            # Use latex_en if available and language is English
+            if "latex_en" in step and t({"de": "x", "en": "y"}) == "y":
+                st.latex(step["latex_en"])
             else:
-                bg = "#f4f4f5"; color = "#3f3f46"
+                st.latex(step["latex"])
             
-            # Render the step
-            col_label, col_content = st.columns([1, 4])
-            with col_label:
-                st.markdown(f"""
-                <div style="background:{bg}; padding:6px 12px; border-radius:6px; color:{color}; font-weight:600; text-align:center; margin-top:8px;">
-                    {label}
-                </div>
-                """, unsafe_allow_html=True)
-            
-            with col_content:
-                if is_latex:
-                    # Use latex_en if available and language is English
-                    if "latex_en" in step and t({"de": "x", "en": "y"}) == "y":
-                        st.latex(step["latex_en"])
-                    else:
-                        st.latex(step["latex"])
-                else:
-                    content = t({"de": step["content_de"], "en": step["content_en"]})
-                    st.markdown(content)
+            if step.get("note"):
+                st.caption(t(step["note"]))
         
         st.markdown("---")
         st.markdown(f"**{t(content_4_3['example_worked']['answer'])}**")

@@ -219,37 +219,35 @@ def render_z_table_explorer():
     """Interactive Z-Table: See the relationship between Z and Φ(Z)"""
     
     st.markdown(f"### {t(content_3_6['playground']['title'])}")
+    st.caption(t(content_3_6["playground"]["desc"]))
     
-    with st.container(border=True):
-        st.caption(t(content_3_6["playground"]["desc"]))
+    # Controls and visualization side by side
+    col_ctrl, col_vis = st.columns([1, 2], gap="large")
+    
+    with col_ctrl:
+        z_val = st.slider(
+            t({"de": "Z-Wert", "en": "Z-Value"}),
+            -3.0, 3.0, 0.0, 0.05,
+            key="z_explorer_slider"
+        )
         
-        # Controls and visualization side by side
-        col_ctrl, col_vis = st.columns([1, 2], gap="large")
+        # Calculate probability
+        prob = get_normal_cdf(z_val)
         
-        with col_ctrl:
-            z_val = st.slider(
-                t({"de": "Z-Wert", "en": "Z-Value"}),
-                -3.0, 3.0, 0.0, 0.05,
-                key="z_explorer_slider"
-            )
-            
-            # Calculate probability
-            prob = get_normal_cdf(z_val)
-            
-            st.metric(t({"de": "Wahrscheinlichkeit Φ(Z)", "en": "Probability Φ(Z)"}), f"{prob:.4f}")
-            st.metric(t({"de": "Als Prozent", "en": "As Percent"}), f"{prob:.1%}")
-            
-            # Quick reference
-            st.markdown("<br>", unsafe_allow_html=True)
-            st.markdown(f"**{t({'de': 'Schnellreferenz', 'en': 'Quick Reference'})}**")
-            st.caption("Φ(-1.96) = 2.5%  |  Φ(0) = 50%  |  Φ(1.96) = 97.5%")
+        st.metric(t({"de": "Wahrscheinlichkeit Φ(Z)", "en": "Probability Φ(Z)"}), f"{prob:.4f}")
+        st.metric(t({"de": "Als Prozent", "en": "As Percent"}), f"{prob:.1%}")
         
-        with col_vis:
-            fig = create_z_distribution_plot(z_val, prob)
-            st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False})
+        # Quick reference
+        st.markdown("<br>", unsafe_allow_html=True)
+        st.markdown(f"**{t({'de': 'Schnellreferenz', 'en': 'Quick Reference'})}**")
+        st.caption("Φ(-1.96) = 2.5%  |  Φ(0) = 50%  |  Φ(1.96) = 97.5%")
         
-        # Live formula with semantic colors (Blue = Z, Purple = Probability)
-        st.latex(rf"\Phi({{\color{{blue}}{z_val:.2f}}}) = P(Z \leq {{\color{{blue}}{z_val:.2f}}}) = {{\color{{purple}}\mathbf{{{prob:.4f}}}}}")
+    with col_vis:
+        fig = create_z_distribution_plot(z_val, prob)
+        st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False})
+    
+    # Live formula with semantic colors (Blue = Z, Purple = Probability)
+    st.latex(rf"\Phi({{\color{{blue}}{z_val:.2f}}}) = P(Z \leq {{\color{{blue}}{z_val:.2f}}}) = {{\color{{purple}}\mathbf{{{prob:.4f}}}}}")
 
 
 @st.fragment
@@ -257,97 +255,95 @@ def render_grade_translator_mission():
     """Mission: Translate grades between different scales using Z-scores"""
     
     st.markdown(f"### {t(content_3_6['mission']['title'])}")
+    st.markdown(t(content_3_6["mission"]["desc"]))
+    st.markdown("---")
     
-    with st.container(border=True):
-        st.markdown(t(content_3_6["mission"]["desc"]))
-        st.markdown("---")
+    # State
+    if "mission_3_6_done" not in st.session_state:
+        st.session_state.mission_3_6_done = False
+    if "user_answer_3_6" not in st.session_state:
+        st.session_state.user_answer_3_6 = 500
+    
+    # Fixed parameters for mission
+    score_a = 85
+    mu_a, sigma_a = 70, 10
+    mu_b, sigma_b = 500, 100
+    
+    # Calculate correct answer
+    z_score = (score_a - mu_a) / sigma_a  # = 1.5
+    correct_score_b = mu_b + z_score * sigma_b  # = 650
+    
+    # Two-column layout for the two "schools"
+    col_a, col_b = st.columns(2, gap="large")
+    
+    with col_a:
+        st.markdown(f"""
+        <div style="background-color: rgba(0, 122, 255, 0.08); border: 2px solid #007AFF; border-radius: 8px; padding: 16px;">
+            <div style="font-weight: 600; color: #007AFF; margin-bottom: 8px;">
+                {t({'de': 'Kurs A (Gegeben)', 'en': 'Class A (Given)'})}
+            </div>
+            <div style="font-size: 14px; color: #333;">
+                μ = {mu_a}, σ = {sigma_a}<br>
+                <strong>{t({'de': 'Punktzahl', 'en': 'Score'})}: {score_a}</strong>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col_b:
+        st.markdown(f"""
+        <div style="background-color: rgba(175, 82, 222, 0.08); border: 2px solid #AF52DE; border-radius: 8px; padding: 16px;">
+            <div style="font-weight: 600; color: #AF52DE; margin-bottom: 8px;">
+                {t({'de': 'Kurs B (Ziel)', 'en': 'Class B (Target)'})}
+            </div>
+            <div style="font-size: 14px; color: #333;">
+                μ = {mu_b}, σ = {sigma_b}<br>
+                <strong>{t({'de': 'Äquivalente Punktzahl', 'en': 'Equivalent Score'})}: ?</strong>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+    # User input
+    user_answer = st.slider(
+        t({"de": "Deine Antwort: Equivalent Score in Kurs B", "en": "Your Answer: Equivalent Score in Class B"}),
+        300, 700, st.session_state.user_answer_3_6, 5,
+        key="user_answer_3_6",
+        disabled=st.session_state.mission_3_6_done
+    )
+    
+    # Z-score display (always show)
+    st.markdown(f"**Z-Score = (85 - 70) / 10 = {z_score:.1f}**")
+    
+    # Feedback
+    tolerance = content_3_6["mission"]["tolerance"]
+    is_correct = abs(user_answer - correct_score_b) <= tolerance
+    
+    if is_correct:
+        if not st.session_state.mission_3_6_done:
+            st.balloons()
+            st.session_state.mission_3_6_done = True
+            user = st.session_state.get("user")
+            if user:
+                track_question_answer(user["localId"], "vwl", "3", "3.6", "3_6_mission", True)
+                update_local_progress("3", "3.6", "3_6_mission", True)
         
-        # State
-        if "mission_3_6_done" not in st.session_state:
+        st.success(t({
+            "de": f"Perfekt! {score_a} in Kurs A entspricht {int(correct_score_b)} in Kurs B (beide sind Z = +1.5).",
+            "en": f"Perfect! {score_a} in Class A equals {int(correct_score_b)} in Class B (both are Z = +1.5)."
+        }))
+        
+        if st.button(t({"de": "Nochmal spielen", "en": "Play again"}), key="reset_3_6"):
             st.session_state.mission_3_6_done = False
-        if "user_answer_3_6" not in st.session_state:
             st.session_state.user_answer_3_6 = 500
-        
-        # Fixed parameters for mission
-        score_a = 85
-        mu_a, sigma_a = 70, 10
-        mu_b, sigma_b = 500, 100
-        
-        # Calculate correct answer
-        z_score = (score_a - mu_a) / sigma_a  # = 1.5
-        correct_score_b = mu_b + z_score * sigma_b  # = 650
-        
-        # Two-column layout for the two "schools"
-        col_a, col_b = st.columns(2, gap="large")
-        
-        with col_a:
-            st.markdown(f"""
-            <div style="background-color: rgba(0, 122, 255, 0.08); border: 2px solid #007AFF; border-radius: 8px; padding: 16px;">
-                <div style="font-weight: 600; color: #007AFF; margin-bottom: 8px;">
-                    {t({'de': 'Kurs A (Gegeben)', 'en': 'Class A (Given)'})}
-                </div>
-                <div style="font-size: 14px; color: #333;">
-                    μ = {mu_a}, σ = {sigma_a}<br>
-                    <strong>{t({'de': 'Punktzahl', 'en': 'Score'})}: {score_a}</strong>
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
-        
-        with col_b:
-            st.markdown(f"""
-            <div style="background-color: rgba(175, 82, 222, 0.08); border: 2px solid #AF52DE; border-radius: 8px; padding: 16px;">
-                <div style="font-weight: 600; color: #AF52DE; margin-bottom: 8px;">
-                    {t({'de': 'Kurs B (Ziel)', 'en': 'Class B (Target)'})}
-                </div>
-                <div style="font-size: 14px; color: #333;">
-                    μ = {mu_b}, σ = {sigma_b}<br>
-                    <strong>{t({'de': 'Äquivalente Punktzahl', 'en': 'Equivalent Score'})}: ?</strong>
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
-        
-        st.markdown("<br>", unsafe_allow_html=True)
-        
-        # User input
-        user_answer = st.slider(
-            t({"de": "Deine Antwort: Equivalent Score in Kurs B", "en": "Your Answer: Equivalent Score in Class B"}),
-            300, 700, st.session_state.user_answer_3_6, 5,
-            key="user_answer_3_6",
-            disabled=st.session_state.mission_3_6_done
-        )
-        
-        # Z-score display (always show)
-        st.markdown(f"**Z-Score = (85 - 70) / 10 = {z_score:.1f}**")
-        
-        # Feedback
-        tolerance = content_3_6["mission"]["tolerance"]
-        is_correct = abs(user_answer - correct_score_b) <= tolerance
-        
-        if is_correct:
-            if not st.session_state.mission_3_6_done:
-                st.balloons()
-                st.session_state.mission_3_6_done = True
-                user = st.session_state.get("user")
-                if user:
-                    track_question_answer(user["localId"], "vwl", "3", "3.6", "3_6_mission", True)
-                    update_local_progress("3", "3.6", "3_6_mission", True)
-            
-            st.success(t({
-                "de": f"Perfekt! {score_a} in Kurs A entspricht {int(correct_score_b)} in Kurs B (beide sind Z = +1.5).",
-                "en": f"Perfect! {score_a} in Class A equals {int(correct_score_b)} in Class B (both are Z = +1.5)."
-            }))
-            
-            if st.button(t({"de": "Nochmal spielen", "en": "Play again"}), key="reset_3_6"):
-                st.session_state.mission_3_6_done = False
-                st.session_state.user_answer_3_6 = 500
-                st.rerun()
+            st.rerun()
+    else:
+        st.session_state.mission_3_6_done = False
+        diff = user_answer - correct_score_b
+        if diff > 0:
+            st.info(t({"de": "Zu hoch! Denk an die Formel: X = μ + Z·σ", "en": "Too high! Think about the formula: X = μ + Z·σ"}))
         else:
-            st.session_state.mission_3_6_done = False
-            diff = user_answer - correct_score_b
-            if diff > 0:
-                st.info(t({"de": "Zu hoch! Denk an die Formel: X = μ + Z·σ", "en": "Too high! Think about the formula: X = μ + Z·σ"}))
-            else:
-                st.info(t({"de": "Zu niedrig! Denk an die Formel: X = μ + Z·σ", "en": "Too low! Think about the formula: X = μ + Z·σ"}))
+            st.info(t({"de": "Zu niedrig! Denk an die Formel: X = μ + Z·σ", "en": "Too low! Think about the formula: X = μ + Z·σ"}))
 
 
 # --- HELPER FUNCTIONS ---

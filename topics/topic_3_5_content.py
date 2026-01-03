@@ -230,85 +230,83 @@ def render_sharpshooter_mission():
     """The Sharpshooter: Match the target pattern by adjusting σ"""
     
     st.markdown(f"### {t(content_3_5['mission']['title'])}")
+    st.markdown(t(content_3_5['mission']['desc']))
+    st.markdown("---")
     
-    with st.container(border=True):
-        st.markdown(t(content_3_5['mission']['desc']))
-        st.markdown("---")
-        
-        # State
-        if "sharp_done" not in st.session_state: st.session_state.sharp_done = False
-        if "sharp_reset_count" not in st.session_state: st.session_state.sharp_reset_count = 0
-        target_sigma = content_3_5['mission']['target_sigma']
-        
-        # Slider for user's sigma
-        user_sigma = st.slider(
-            t({"de": "Deine Präzision (σ)", "en": "Your Precision (σ)"}),
-            0.1, 1.5, 0.8, 0.05,
-            key=f"sharp_sigma_{st.session_state.sharp_reset_count}",
-            disabled=st.session_state.sharp_done
-        )
-        
-        # Generate shots using fixed seed for consistency
-        np.random.seed(42)
-        n_shots = 50
-        
-        # Reference pattern (target σ = 0.5)
-        ref_x = np.random.normal(0, target_sigma, n_shots)
-        ref_y = np.random.normal(0, target_sigma, n_shots)
-        
-        # User's pattern
-        np.random.seed(123)
-        user_x = np.random.normal(0, user_sigma, n_shots)
-        user_y = np.random.normal(0, user_sigma, n_shots)
-        
-        # Two-column layout for targets
-        c_user, c_ref = st.columns(2, gap="medium")
-        
-        with c_user:
-            st.markdown(f"**{t({'de': 'Dein Muster', 'en': 'Your Pattern'})}**")
-            fig_user = create_target_chart(user_x, user_y, "#007AFF", user_sigma)
-            st.plotly_chart(fig_user, use_container_width=True, config={'displayModeBar': False}, key="user_target")
-        
-        with c_ref:
-            st.markdown(f"**{t({'de': 'Referenz (Ziel)', 'en': 'Reference (Target)'})}**")
-            # Changed green to gray to match design system
-            fig_ref = create_target_chart(ref_x, ref_y, "#6B7280", target_sigma)
-            st.plotly_chart(fig_ref, use_container_width=True, config={'displayModeBar': False}, key="ref_target")
-        
-        # Stats and feedback
-        c_stat1, c_stat2, c_stat3 = st.columns(3)
-        
-        with c_stat1:
-            user_var = user_sigma ** 2
-            st.metric(t({"de": "Deine Varianz", "en": "Your Variance"}), f"σ² = {user_var:.2f}")
-        
-        with c_stat2:
-            target_var = target_sigma ** 2
-            st.metric(t({"de": "Ziel-Varianz", "en": "Target Variance"}), f"σ² = {target_var:.2f}")
-        
-        with c_stat3:
-            diff = abs(user_sigma - target_sigma)
-            if diff < 0.02:  # Must be within ±0.01 of target
-                if not st.session_state.sharp_done:
-                    st.balloons()
-                    st.session_state.sharp_done = True
-                    user = st.session_state.get("user")
-                    if user:
-                        track_question_answer(user["localId"], "vwl", "3", "3.5", "3_5_sharpshooter", True)
-                        update_local_progress("3", "3.5", "3_5_sharpshooter", True)
-                        st.rerun()
-                st.success(t({"de": "Volltreffer!", "en": "Bullseye!"}))
+    # State
+    if "sharp_done" not in st.session_state: st.session_state.sharp_done = False
+    if "sharp_reset_count" not in st.session_state: st.session_state.sharp_reset_count = 0
+    target_sigma = content_3_5['mission']['target_sigma']
+    
+    # Slider for user's sigma
+    user_sigma = st.slider(
+        t({"de": "Deine Präzision (σ)", "en": "Your Precision (σ)"}),
+        0.1, 1.5, 0.8, 0.05,
+        key=f"sharp_sigma_{st.session_state.sharp_reset_count}",
+        disabled=st.session_state.sharp_done
+    )
+    
+    # Generate shots using fixed seed for consistency
+    np.random.seed(42)
+    n_shots = 50
+    
+    # Reference pattern (target σ = 0.5)
+    ref_x = np.random.normal(0, target_sigma, n_shots)
+    ref_y = np.random.normal(0, target_sigma, n_shots)
+    
+    # User's pattern
+    np.random.seed(123)
+    user_x = np.random.normal(0, user_sigma, n_shots)
+    user_y = np.random.normal(0, user_sigma, n_shots)
+    
+    # Two-column layout for targets
+    c_user, c_ref = st.columns(2, gap="medium")
+    
+    with c_user:
+        st.markdown(f"**{t({'de': 'Dein Muster', 'en': 'Your Pattern'})}**")
+        fig_user = create_target_chart(user_x, user_y, "#007AFF", user_sigma)
+        st.plotly_chart(fig_user, use_container_width=True, config={'displayModeBar': False}, key="user_target")
+    
+    with c_ref:
+        st.markdown(f"**{t({'de': 'Referenz (Ziel)', 'en': 'Reference (Target)'})}**")
+        # Changed green to gray to match design system
+        fig_ref = create_target_chart(ref_x, ref_y, "#6B7280", target_sigma)
+        st.plotly_chart(fig_ref, use_container_width=True, config={'displayModeBar': False}, key="ref_target")
+    
+    # Stats and feedback
+    c_stat1, c_stat2, c_stat3 = st.columns(3)
+    
+    with c_stat1:
+        user_var = user_sigma ** 2
+        st.metric(t({"de": "Deine Varianz", "en": "Your Variance"}), f"σ² = {user_var:.2f}")
+    
+    with c_stat2:
+        target_var = target_sigma ** 2
+        st.metric(t({"de": "Ziel-Varianz", "en": "Target Variance"}), f"σ² = {target_var:.2f}")
+    
+    with c_stat3:
+        diff = abs(user_sigma - target_sigma)
+        if diff < 0.02:  # Must be within ±0.01 of target
+            if not st.session_state.sharp_done:
+                st.balloons()
+                st.session_state.sharp_done = True
+                user = st.session_state.get("user")
+                if user:
+                    track_question_answer(user["localId"], "vwl", "3", "3.5", "3_5_sharpshooter", True)
+                    update_local_progress("3", "3.5", "3_5_sharpshooter", True)
+                    st.rerun()
+            st.success(t({"de": "Volltreffer!", "en": "Bullseye!"}))
+        else:
+            if user_sigma < target_sigma:
+                st.info(t({"de": "Zu eng! Mehr streuen.", "en": "Too tight! Spread more."}))
             else:
-                if user_sigma < target_sigma:
-                    st.info(t({"de": "Zu eng! Mehr streuen.", "en": "Too tight! Spread more."}))
-                else:
-                    st.info(t({"de": "Zu breit! Präziser zielen.", "en": "Too wide! Aim tighter."}))
-        
-        if st.session_state.sharp_done:
-            if st.button(t({"de": "Nochmal spielen", "en": "Play again"}), key="reset_sharp"):
-                st.session_state.sharp_done = False
-                st.session_state.sharp_reset_count += 1  # Fresh slider key
-                st.rerun()
+                st.info(t({"de": "Zu breit! Präziser zielen.", "en": "Too wide! Aim tighter."}))
+    
+    if st.session_state.sharp_done:
+        if st.button(t({"de": "Nochmal spielen", "en": "Play again"}), key="reset_sharp"):
+            st.session_state.sharp_done = False
+            st.session_state.sharp_reset_count += 1  # Fresh slider key
+            st.rerun()
 
 
 def create_target_chart(x_vals, y_vals, color, sigma):

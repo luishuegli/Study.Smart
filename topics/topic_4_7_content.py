@@ -134,27 +134,19 @@ content_4_7 = {
         },
         "steps": [
             {
-                "label_de": "Schritt 1",
-                "label_en": "Step 1",
-                "action_de": "Standardisieren",
-                "action_en": "Standardize",
-                "content": r"Z = \frac{115 - 100}{15} = \frac{15}{15} = 1"
+                "label": {"de": "Schritt 1 · Standardisieren", "en": "Step 1 · Standardize"},
+                "latex": r"Z = \frac{{\color{#FF4B4B}115} - {\color{#007AFF}100}}{{\color{#16a34a}15}} = \frac{15}{15} = {\color{#9B59B6}1}",
+                "note": None
             },
             {
-                "label_de": "Schritt 2",
-                "label_en": "Step 2",
-                "action_de": "Umformulieren",
-                "action_en": "Reformulate",
-                "content_de": "P(X ≤ 115) = P(Z ≤ 1)",
-                "content_en": "P(X ≤ 115) = P(Z ≤ 1)"
+                "label": {"de": "Schritt 2 · Umformulieren", "en": "Step 2 · Reformulate"},
+                "latex": r"P(X \leq {\color{#FF4B4B}115}) = P(Z \leq {\color{#9B59B6}1})",
+                "note": None
             },
             {
-                "label_de": "Schritt 3",
-                "label_en": "Step 3",
-                "action_de": "Tabelle",
-                "action_en": "Table",
-                "content_de": "Φ(1) = 0.8413 (aus Z-Tabelle)",
-                "content_en": "Φ(1) = 0.8413 (from Z-table)"
+                "label": {"de": "Schritt 3 · Tabelle", "en": "Step 3 · Table"},
+                "latex": r"\Phi({\color{#9B59B6}1}) = \mathbf{0.8413}",
+                "note": {"de": "Aus der Z-Tabelle", "en": "From the Z-table"}
             }
         ],
         "answer": {
@@ -429,7 +421,12 @@ def render_subtopic_4_7(model):
         with col_formula:
             st.latex(content_4_7["z_transform"]["formula"])
         with col_meaning:
-            st.info(t(content_4_7["z_transform"]["meaning"]))
+            z_meaning = t(content_4_7["z_transform"]["meaning"])
+            st.markdown(f"""
+<div style="background: #f4f4f5; border-left: 4px solid #a1a1aa; padding: 12px 16px; border-radius: 8px; color: #3f3f46;">
+{z_meaning}
+</div>
+""", unsafe_allow_html=True)
         
         st.markdown(t(content_4_7["z_transform"]["then"]))
     
@@ -439,30 +436,19 @@ def render_subtopic_4_7(model):
     st.markdown(f"### {t(content_4_7['example_z']['header'])}")
     with st.container(border=True):
         
-        st.markdown(f"""
-        <div style="background:#fafafa; border-radius:8px; padding:12px; margin-bottom:16px;">
-            {t(content_4_7['example_z']['problem'])}
-        </div>
-        """, unsafe_allow_html=True)
+        st.markdown(t(content_4_7['example_z']['problem']), unsafe_allow_html=True)
+        
+        st.markdown("---")
         
         for i, step in enumerate(content_4_7["example_z"]["steps"]):
             if i > 0:
                 st.markdown("---")
-            label = t({"de": step["label_de"], "en": step["label_en"]})
-            action = t({"de": step["action_de"], "en": step["action_en"]})
             
-            col_step, col_content = st.columns([1, 3])
-            with col_step:
-                st.markdown(f"""
-                <div style="background:#18181b; color:white; padding:8px 16px; border-radius:9999px; text-align:center; display:inline-block;">
-                    <strong>{label}</strong> · <small>{action}</small>
-                </div>
-                """, unsafe_allow_html=True)
-            with col_content:
-                if "content" in step:
-                    st.latex(step["content"])
-                else:
-                    st.markdown(t({"de": step["content_de"], "en": step["content_en"]}))
+            st.markdown(f"**{t(step['label'])}:**")
+            st.latex(step["latex"])
+            
+            if step.get("note"):
+                st.caption(t(step["note"]))
         
         st.markdown("---")
         st.markdown(f"**{t(content_4_7['example_z']['answer'])}**")
@@ -676,7 +662,8 @@ P(X ≤ {x_val:.0f}) = Φ({z_score:.2f}) = <span style="color:{prob_color}; font
             )
     else:
         with st.container(border=True):
-            st.info(t({
-                "de": "Für diesen Abschnitt gibt es derzeit keine MCQ-Fragen. Die Theorie oben deckt die Prüfungsinhalte ab.",
-                "en": "This section currently has no MCQ questions. The theory above covers the exam content."
-            }))
+            st.markdown(f"""
+<div style="background: #f4f4f5; border-left: 4px solid #a1a1aa; padding: 12px 16px; border-radius: 8px; color: #3f3f46;">
+{t({"de": "Für diesen Abschnitt gibt es derzeit keine MCQ-Fragen. Die Theorie oben deckt die Prüfungsinhalte ab.", "en": "This section currently has no MCQ questions. The theory above covers the exam content."})}
+</div>
+""", unsafe_allow_html=True)

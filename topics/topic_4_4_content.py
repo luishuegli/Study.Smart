@@ -140,34 +140,25 @@ content_4_4 = {
         },
         "steps": [
             {
-                "label_de": "Gegeben",
-                "label_en": "Given",
-                "content_de": "$\\lambda = 4$ (Rate pro Minute)",
-                "content_en": "$\\lambda = 4$ (rate per minute)"
+                "label": {"de": "Gegeben", "en": "Given"},
+                "latex": r"{\color{#007AFF}\lambda = 4}",
+                "note": {"de": "(Rate pro Minute)", "en": "(rate per minute)"}
             },
             {
-                "label_de": "Gesucht",
-                "label_en": "Find",
-                "content_de": "$P(X = 6)$ wobei $X \\sim \\text{Poi}(4)$",
-                "content_en": "$P(X = 6)$ where $X \\sim \\text{Poi}(4)$"
+                "label": {"de": "Gesucht", "en": "Find"},
+                "latex": r"P(X = {\color{#FF4B4B}6}) \text{ wobei } X \sim \text{Poi}({\color{#007AFF}4})",
+                "latex_en": r"P(X = {\color{#FF4B4B}6}) \text{ where } X \sim \text{Poi}({\color{#007AFF}4})",
+                "note": None
             },
             {
-                "label_de": "Signal",
-                "label_en": "Signal",
-                "content_de": "'pro Minute' + 'durchschnittlich' → Poisson",
-                "content_en": "'per minute' + 'on average' → Poisson"
+                "label": {"de": "Formel", "en": "Formula"},
+                "latex": r"P(X = {\color{#FF4B4B}6}) = \frac{{\color{#007AFF}4}^{\color{#FF4B4B}6} \cdot e^{-{\color{#007AFF}4}}}{{\color{#FF4B4B}6}!}",
+                "note": {"de": "λ^x · e^(-λ) / x!", "en": "λ^x · e^(-λ) / x!"}
             },
             {
-                "label_de": "Formel",
-                "label_en": "Formula",
-                "content_de": "$P(X = 6) = \\frac{4^6 \\cdot e^{-4}}{6!}$",
-                "content_en": "$P(X = 6) = \\frac{4^6 \\cdot e^{-4}}{6!}$"
-            },
-            {
-                "label_de": "Rechnung",
-                "label_en": "Calculation",
-                "content_de": "$= \\frac{4096 \\cdot 0.0183}{720} \\approx 0.104$",
-                "content_en": "$= \\frac{4096 \\cdot 0.0183}{720} \\approx 0.104$"
+                "label": {"de": "Rechnung", "en": "Calculation"},
+                "latex": r"= \frac{4096 \cdot 0.0183}{720} \approx \mathbf{0.104}",
+                "note": None
             }
         ],
         "answer": {
@@ -394,63 +385,28 @@ def render_subtopic_4_4(model):
     st.markdown(f"### {t(content_4_4['example_worked']['header'])}")
     with st.container(border=True):
         
-        # Problem statement - use HTML for bold since it's in a grey box
-        problem_text = t(content_4_4['example_worked']['problem']).replace("**", "<strong>").replace("</strong></strong>", "</strong>")
-        # Fix: replace **x** with <strong>x</strong>
-        problem_text_de = content_4_4['example_worked']['problem']['de']
-        problem_text_en = content_4_4['example_worked']['problem']['en']
-        problem_text_de = re.sub(r'\*\*(.*?)\*\*', r'<strong>\1</strong>', problem_text_de)
-        problem_text_en = re.sub(r'\*\*(.*?)\*\*', r'<strong>\1</strong>', problem_text_en)
-        problem_text = t({"de": problem_text_de, "en": problem_text_en})
-        
-        st.markdown(f"""
-        <div style="background:#fafafa; border-radius:8px; padding:12px; margin-bottom:16px;">
-            {problem_text}
-        </div>
-        """, unsafe_allow_html=True)
-        
-        # Step-by-step solution - use proper st.columns to avoid LaTeX in HTML
-        step_colors = {
-            "Given": ("#dbeafe", "#1d4ed8"),
-            "Gegeben": ("#dbeafe", "#1d4ed8"),
-            "Find": ("#fee2e2", "#dc2626"),
-            "Gesucht": ("#fee2e2", "#dc2626"),
-            "Signal": ("#dcfce7", "#16a34a"),
-            "Formula": ("#f4f4f5", "#3f3f46"),
-            "Formel": ("#f4f4f5", "#3f3f46"),
-            "Calculation": ("#f4f4f5", "#3f3f46"),
-            "Rechnung": ("#f4f4f5", "#3f3f46"),
-        }
-        
-        for i, step in enumerate(content_4_4["example_worked"]["steps"]):
-            if i > 0:
-                st.markdown("---")
-            label = t({"de": step["label_de"], "en": step["label_en"]})
-            content_raw = t({"de": step["content_de"], "en": step["content_en"]})
-            
-            bg, color = step_colors.get(label, ("#f4f4f5", "#3f3f46"))
-            
-            col_label, col_content = st.columns([1, 5])
-            with col_label:
-                st.markdown(f"""
-                <div style="background:{bg}; padding:6px 12px; border-radius:6px; color:{color}; font-weight:600; text-align:center;">
-                    {label}
-                </div>
-                """, unsafe_allow_html=True)
-            with col_content:
-                # Check if content contains LaTeX - if so, extract and render properly
-                if "$" in content_raw:
-                    # Extract and render LaTeX separately
-                    st.markdown(content_raw)
-                else:
-                    st.markdown(content_raw)
+        st.markdown(t(content_4_4['example_worked']['problem']), unsafe_allow_html=True)
         
         st.markdown("---")
         
-        # Answer - convert **bold** to <strong>
-        answer_de = re.sub(r'\*\*(.*?)\*\*', r'<strong>\1</strong>', content_4_4['example_worked']['answer']['de'])
-        answer_en = re.sub(r'\*\*(.*?)\*\*', r'<strong>\1</strong>', content_4_4['example_worked']['answer']['en'])
-        st.markdown(t({"de": answer_de, "en": answer_en}), unsafe_allow_html=True)
+        # Steps with proper LaTeX and plain labels
+        for i, step in enumerate(content_4_4["example_worked"]["steps"]):
+            if i > 0:
+                st.markdown("---")
+            
+            st.markdown(f"**{t(step['label'])}:**")
+            
+            # Use latex_en if available and language is English
+            if "latex_en" in step and t({"de": "x", "en": "y"}) == "y":
+                st.latex(step["latex_en"])
+            else:
+                st.latex(step["latex"])
+            
+            if step.get("note"):
+                st.caption(t(step["note"]))
+        
+        st.markdown("---")
+        st.markdown(f"**{t(content_4_4['example_worked']['answer'])}**")
     
     st.markdown("<br><br>", unsafe_allow_html=True)
     
@@ -633,7 +589,8 @@ def render_subtopic_4_4(model):
             )
     else:
         with st.container(border=True):
-            st.info(t({
-                "de": "Für diesen Abschnitt gibt es derzeit keine MCQ-Fragen. Die Theorie oben deckt die Prüfungsinhalte ab.",
-                "en": "This section currently has no MCQ questions. The theory above covers the exam content."
-            }))
+            st.markdown(f"""
+<div style="background: #f4f4f5; border-left: 4px solid #a1a1aa; padding: 12px 16px; border-radius: 8px; color: #3f3f46;">
+{t({"de": "Für diesen Abschnitt gibt es derzeit keine MCQ-Fragen. Die Theorie oben deckt die Prüfungsinhalte ab.", "en": "This section currently has no MCQ questions. The theory above covers the exam content."})}
+</div>
+""", unsafe_allow_html=True)

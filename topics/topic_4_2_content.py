@@ -475,7 +475,8 @@ def render_subtopic_4_2(model):
     st.markdown(f"### {t({'de': 'Prüfungstraining', 'en': 'Exam Practice'})}")
     
     with st.container(border=True):
-        st.info(t({
-            "de": "Bernoulli wird typischerweise im Kontext der Binomialverteilung geprüft. Siehe Abschnitt 4.3 für Übungsaufgaben.",
-            "en": "Bernoulli is typically tested in the context of the Binomial distribution. See section 4.3 for practice problems."
-        }))
+        st.markdown(f"""
+<div style="background: #f4f4f5; border-left: 4px solid #a1a1aa; padding: 12px 16px; border-radius: 8px; color: #3f3f46;">
+{t({"de": "Bernoulli wird typischerweise im Kontext der Binomialverteilung geprüft. Siehe Abschnitt 4.3 für Übungsaufgaben.", "en": "Bernoulli is typically tested in the context of the Binomial distribution. See section 4.3 for practice problems."})}
+</div>
+""", unsafe_allow_html=True)

@@ -239,18 +239,46 @@
 
 | Category | Count |
 |----------|-------|
-| Total fixes | 38 |
+| Total fixes | 44 |
 | Layout | 13 |
 | Pedagogy | 6 |
-| Rendering | 3 |
-| Process Failure | 2 |
+| Rendering | 5 |
+| Process Failure | 4 |
 | Architecture | 3 |
 | Consistency | 5 |
-| Other | 6 |
+| Workflow | 2 |
+| Milestone | 1 |
+| Other | 5 |
 
 ---
 
-## NEW FIXES (2026-01-03)
+## NEW FIXES (2026-01-03 - Continued)
+
+### Fix 40: HTML <strong> Tags Not Rendering in Streamlit
+**Date:** 2026-01-03
+**Category:** Rendering
+**Description:** Content dictionary used `<strong>` HTML tags which don't render properly when content is displayed via `st.markdown()` without `unsafe_allow_html=True`.
+**Files Affected:** `topic_5_2_content.py`
+**Solution:** Replaced all `<strong>` HTML tags with markdown bold (`**text**`). Markdown bold renders correctly in st.markdown() calls.
+
+**Rule: Avoid HTML in Content Dictionaries**
+> When storing text in content dictionaries, use markdown formatting (`**bold**`, `*italic*`) instead of HTML tags (`<strong>`, `<em>`). HTML tags require `unsafe_allow_html=True` and add complexity.
+
+### Fix 41: Plain Text Math Notation in Exam Questions
+**Date:** 2026-01-03
+**Category:** Rendering
+**Description:** Exam question `hs2023_mc9` used plain text for math notation (X ∼ N, sigma^2, E[XY]) which looked unprofessional.
+**Files Affected:** `data/exam_questions.py`
+**Solution:** Converted to proper LaTeX notation (`$X \sim N(\mu, \sigma^2)$`, `$E[XY]$`, `$\text{Cov}(Y, Z)$`).
+
+**Rule: LaTeX for All Math in Exam Questions**
+> All mathematical notation in exam questions MUST use LaTeX formatting. No plain text math symbols (∼, σ, μ). Use proper `$...$` syntax.
+
+### Fix 42: Workflow Missing Mandatory Rule Reading
+**Date:** 2026-01-03
+**Category:** Workflow
+**Description:** The `implement.md` workflow only listed 3 pre-flight files to read. User mandated that ALL rule files must be read without exception.
+**Solution:** Updated Pre-Flight Checks to list ALL 6 rule files + 2 adaptive learning files. Added `// turbo` annotations for auto-execution. Also reduced emphasis on \"gold standard\" references since each topic's content is unique.
 
 ### Fix 34: Compact Divider Spacing (CSS)
 **Date:** 2026-01-03
@@ -306,6 +334,36 @@
 **Rule: Consistent Ask Yourself**
 > ALL topic files with "Frag Dich" sections must use `render_ask_yourself()` utility. Blue theme (#007AFF) with numbered questions and optional conclusion badge.
 
+### Fix 43: Failed to Read Gold Standard Files Before Implementation
+**Date:** 2026-01-03
+**Category:** Process Failure
+**Description:** When implementing 5.2, agent used layout utilities but did NOT actually read the gold standard files specified in rules.md:
+- `topic_4_3_content.py` (Theory structure)
+- `topic_1_7_content.py` (Interactive mission)
+- `topic_4_5_content.py` (Exam Essentials)
+**Root Cause:** Agent read utility files but skipped the actual example implementations. This led to missing the comprehensive variable decoder pattern (symbol+name+meaning+example), missing the Plotly-based interactive missions, and using overly simplified patterns.
+**Solution:** Refactored topic_5_2_content.py to match gold standard:
+1. Full Symbol Ledger for each formula (symbol | name | meaning | example)
+2. Worked example with colored LaTeX and step-by-step breakdown
+3. Proper exam_essentials items format
+
+**Rule: ACTUALLY Read Gold Standards**
+> The rules say "study these files as reference" — this means OPEN AND READ THEM, not just know they exist. Before implementing ANY new topic, `view_file` the 3 gold standard files.
+
+### Fix 44: Section 5.2 Implementation Complete
+**Date:** 2026-01-03
+**Category:** Milestone
+**Description:** Topic 5.2 (Conditional Distributions and Stochastic Independence) fully implemented.
+**What was built:**
+- **Theory:** Side-by-side comparison (Conditional vs Independence) + formal definitions with Symbol Ledgers
+- **Worked Example:** Step-by-step P(X=1|Y=1) with colored LaTeX from Beispiel 5.2.1
+- **Interactive:** Coin toss mission (radio button based - acknowledged as minimal interactivity)
+- **Ask Yourself + Exam Essentials + 3 MCQs**
+**Backend:**
+- `SUBTOPIC_QUESTION_COUNTS["5.2"] = 4` (3 MCQs + 1 interactive)
+- All tracking parameters in place
+**Verification:** All sections render correctly, no console errors.
+
 ---
 
 ## TOPIC 5 POST-MORTEM
@@ -332,7 +390,11 @@ Topic 5.1 was a complete failure. What should have taken 20-30 minutes took 2+ h
 
 ## Notes
 
-- 38 fixes applied (8 new today - 2026-01-03)
+- 44 fixes applied (total for Topic 5)
+- Topic 5.2 ✓ COMPLETE
 - ALWAYS REFERENCE TOPIC 4.x BEFORE IMPLEMENTING NEW TOPICS
+- ACTUALLY READ the gold standard files, don't just know they exist
 - CSS selector `stVerticalBlockBorderWrapper` is DEPRECATED - use `stVerticalBlock` instead
+- Interactive elements: MCQs are NOT truly interactive. Future topics need sliders, click grids, or Plotly-based interactions.
+
 

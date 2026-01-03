@@ -59,7 +59,7 @@ def render_exam_essentials(
                     
                     # Why? explanation
                     if "content" in item:
-                        st.markdown(f"*{t({'de': 'Warum', 'en': 'Why'})}?* {t(item['content'])}")
+                        st.markdown(f"*{t({'de': 'Warum', 'en': 'Why'})}?* {t(item['content'])}", unsafe_allow_html=True)
                     
                     st.markdown("")
             
@@ -74,7 +74,7 @@ def render_exam_essentials(
                     if "formula" in item:
                         st.latex(item["formula"])
                     if "content" in item:
-                        st.markdown(t(item["content"]))
+                        st.markdown(t(item["content"]), unsafe_allow_html=True)
                     if "shortcut_label" in item:
                         st.markdown(f"**{t(item['shortcut_label'])}:** {t(item.get('shortcut_text', {}))}")
                     if "shortcut_formula" in item:

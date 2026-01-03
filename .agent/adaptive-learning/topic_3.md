@@ -88,13 +88,52 @@
 
 ---
 
+### Fix 7: Topic 3.7 - Complete Page Restructure
+- **What was wrong:** 
+  - Wrong section order: Cheat Sheet → Pro Tricks → Traps → Interactive → MCQ
+  - 3-column formula grid caused formulas to be cut off / require horizontal scroll
+  - Missing Intuition section
+  - Missing Ask Yourself section
+  - Pro Tricks and Traps were separate custom HTML sections, not using `render_exam_essentials()` utility
+- **What I changed:**
+  - Restructured to correct order: Intuition → Theory → Ask Yourself → Interactive → Exam Essentials → MCQ
+  - Changed formula grid from 3 columns to 2 columns (per "Max 2 columns for formulas" rule)
+  - Added Intuition section with chapter overview
+  - Added Ask Yourself section using `render_ask_yourself()` utility
+  - Consolidated Pro Tricks + Traps into single Exam Essentials section using `render_exam_essentials()` utility
+- **Pattern:** CORRECT-PAGE-ORDER, MAX-2-COLUMNS
+- **Files affected:** `topic_3_7_content.py`
+
+---
+
+### Fix 8: Topic 3.6 - Missing Fragment Decorators
+- **What was wrong:** Interactive components (`render_z_table_explorer`, `render_grade_translator_mission`) lacked the `@st.fragment` decorator
+- **What I changed:** Added `@st.fragment` to both functions
+- **Why it matters:** Prevents full page reruns on interaction, ensuring smooth UX (STRICT rule)
+- **Pattern:** FRAGMENT-ISOLATION
+- **Files affected:** `topic_3_6_content.py`
+
+---
+
+### Fix 9: Topic 3.5 - Fragment & Color Polish
+- **What was wrong:** 
+  - `render_sharpshooter_mission` missing `@st.fragment`
+  - Reference target used Green `#34C759` (reserved for 'Correct' feedback/buttons)
+- **What I changed:** 
+  - Added `@st.fragment`
+  - Changed reference color to Neutral Gray `#6B7280`
+- **Pattern:** FRAGMENT-ISOLATION, SEMANTIC-COLORS
+- **Files affected:** `topic_3_5_content.py`
+
+---
+
 ## Summary Statistics
 
 | Category | Count |
 |----------|-------|
-| Total fixes | 6 |
-| Layout fixes | 2 |
-| Styling fixes | 0 |
+| Total fixes | 9 |
+| Layout fixes | 3 |
+| Styling fixes | 1 |
 | Pedagogy fixes | 4 |
 | Syntax fixes | 1 |
 

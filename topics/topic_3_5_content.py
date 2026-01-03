@@ -225,6 +225,7 @@ def render_subtopic_3_5(model):
             )
 
 
+@st.fragment
 def render_sharpshooter_mission():
     """The Sharpshooter: Match the target pattern by adjusting σ"""
     
@@ -270,7 +271,8 @@ def render_sharpshooter_mission():
         
         with c_ref:
             st.markdown(f"**{t({'de': 'Referenz (Ziel)', 'en': 'Reference (Target)'})}**")
-            fig_ref = create_target_chart(ref_x, ref_y, "#34C759", target_sigma)
+            # Changed green to gray to match design system
+            fig_ref = create_target_chart(ref_x, ref_y, "#6B7280", target_sigma)
             st.plotly_chart(fig_ref, use_container_width=True, config={'displayModeBar': False}, key="ref_target")
         
         # Stats and feedback

@@ -6,6 +6,8 @@ from scipy.special import comb
 from views.styles import inject_equal_height_css
 from utils.localization import t
 from utils.quiz_helper import render_mcq
+from utils.ask_yourself import render_ask_yourself
+from utils.exam_essentials import render_exam_essentials
 from data.exam_questions import get_question
 from utils.progress_tracker import track_question_answer, update_local_progress
 
@@ -16,142 +18,196 @@ content_3_7 = {
     "title": {"de": "3.7 Zusammenfassung", "en": "3.7 Summary"},
     "subtitle": {"de": "Alles Wichtige zu Zufallsvariablen", "en": "Everything Important About Random Variables"},
     
-    "cheat_sheet": {
-        "header": {"de": "Das Spickzettel", "en": "The Cheat Sheet"},
-        "cards": [
-            {
-                "title": {"de": "CDF → PDF", "en": "CDF → PDF"},
-                "formula": r"f(x) = F'(x)",
-                "use": {"de": "Ableiten für Dichte", "en": "Differentiate for density"}
-            },
-            {
-                "title": {"de": "PDF → CDF", "en": "PDF → CDF"},
-                "formula": r"F(x) = \int_{-\infty}^{x} f(t)\,dt",
-                "use": {"de": "Integrieren für Verteilung", "en": "Integrate for distribution"}
-            },
-            {
-                "title": {"de": "E[X] diskret", "en": "E[X] discrete"},
-                "formula": r"E[X] = \sum_x x \cdot P(X=x)",
-                "use": {"de": "Aus PMF-Tabelle", "en": "From PMF table"}
-            },
-            {
-                "title": {"de": "E[X] stetig", "en": "E[X] continuous"},
-                "formula": r"E[X] = \int x \cdot f(x)\,dx",
-                "use": {"de": "Aus PDF-Integral", "en": "From PDF integral"}
-            },
-            {
-                "title": {"de": "Varianz", "en": "Variance"},
-                "formula": r"Var(X) = E[X^2] - E[X]^2",
-                "use": {"de": "Shortcut-Formel!", "en": "Shortcut formula!"}
-            },
-            {
-                "title": {"de": "Standardisierung", "en": "Standardization"},
-                "formula": r"Z = \frac{X - \mu}{\sigma}",
-                "use": {"de": "Für N(0,1) Tabelle", "en": "For N(0,1) table"}
-            }
-        ]
+    # CHAPTER INTUITION
+    "intuition": {
+        "header": {"de": "Die Intuition", "en": "The Intuition"},
+        "text": {
+            "de": "Dieses Kapitel hat dir die **drei Werkzeuge** gegeben, um Zufallsvariablen vollständig zu verstehen: (1) **Verteilungen** (PDF/CDF) — wie wahrscheinlich ist jeder Wert? (2) **Erwartungswert** (E[X]) — das 'Zentrum' der Verteilung (3) **Varianz** (Var) — wie 'breit' ist die Streuung? Diese Zusammenfassung zeigt dir die Formeln mit Erklärungen, wann du welche brauchst.",
+            "en": "This chapter gave you the **three tools** to fully understand random variables: (1) **Distributions** (PDF/CDF) — how likely is each value? (2) **Expected Value** (E[X]) — the 'center' of the distribution (3) **Variance** (Var) — how 'spread out' is it? This summary shows you the formulas with explanations of when to use each."
+        }
     },
     
-    "pro_tricks": {
-        "header": {"de": "Pro-Tricks", "en": "Pro Tricks"},
-        "subtitle": {"de": "Was Top-Studenten wissen", "en": "What Top Students Know"},
-        "tricks": [
-            {
-                "title": {"de": "Varianz-Shortcut", "en": "Variance Shortcut"},
-                "wrong": {"de": "E[(X-μ)²] direkt berechnen", "en": "Compute E[(X-μ)²] directly"},
-                "right": {"de": "E[X²] - E[X]² verwenden", "en": "Use E[X²] - E[X]²"},
-                "reason": {"de": "Viel schneller!", "en": "Much faster!"}
-            },
-            {
-                "title": {"de": "CDF-Sandwich", "en": "CDF Sandwich"},
-                "wrong": {"de": "P(a<X≤b) kompliziert integrieren", "en": "Integrate P(a<X≤b) complexly"},
-                "right": {"de": "F(b) - F(a)", "en": "F(b) - F(a)"},
-                "reason": {"de": "Für diskret UND stetig!", "en": "For discrete AND continuous!"}
-            },
-            {
-                "title": {"de": "Lineare Transformation", "en": "Linear Transform"},
-                "wrong": {"de": "Var(aX+b) = a²Var(X) + b", "en": "Var(aX+b) = a²Var(X) + b"},
-                "right": {"de": "Var(aX+b) = a²Var(X)", "en": "Var(aX+b) = a²Var(X)"},
-                "reason": {"de": "b verschwindet!", "en": "b disappears!"}
-            },
-            {
-                "title": {"de": "Symmetrie-Hack", "en": "Symmetry Hack"},
-                "wrong": {"de": "E[X] für symmetrische X berechnen", "en": "Compute E[X] for symmetric X"},
-                "right": {"de": "Symmetrisch um 0 → E[X] = 0", "en": "Symmetric around 0 → E[X] = 0"},
-                "reason": {"de": "Sofort ablesen!", "en": "Read off instantly!"}
-            },
-            {
-                "title": {"de": "Z-Score Reisepass", "en": "Z-Score Passport"},
-                "wrong": {"de": "Für jede Normalverteilung neue Tabelle", "en": "New table for each normal distribution"},
-                "right": {"de": "Z berechnen, eine Tabelle!", "en": "Compute Z, one table!"},
-                "reason": {"de": "Universal!", "en": "Universal!"}
-            }
-        ]
+    # FORMULA CARDS with full context (matching Topic 1.6 standard)
+    "formula_cards": [
+        {
+            "title": {"de": "CDF → PDF", "en": "CDF → PDF"},
+            "intuition": {"de": "Du hast die kumulative Verteilung und willst die Dichte.", "en": "You have the cumulative distribution and want the density."},
+            "formula": r"f(x) = F'(x)",
+            "variables": [
+                {"symbol": "f(x)", "name": {"de": "PDF", "en": "PDF"}, "desc": {"de": "Dichtefunktion", "en": "Density function"}},
+                {"symbol": "F(x)", "name": {"de": "CDF", "en": "CDF"}, "desc": {"de": "Kumulative Verteilung", "en": "Cumulative distribution"}},
+                {"symbol": "F'(x)", "name": {"de": "Ableitung", "en": "Derivative"}, "desc": {"de": "Steigung der CDF", "en": "Slope of CDF"}}
+            ],
+            "when": {"de": "Aufgabe gibt CDF, fragt nach PDF/Dichte", "en": "Problem gives CDF, asks for PDF/density"}
+        },
+        {
+            "title": {"de": "PDF → CDF", "en": "PDF → CDF"},
+            "intuition": {"de": "Du hast die Dichte und willst die Wahrscheinlichkeit bis x.", "en": "You have the density and want probability up to x."},
+            "formula": r"F(x) = \int_{-\infty}^{x} f(t)\,dt",
+            "variables": [
+                {"symbol": "F(x)", "name": {"de": "CDF", "en": "CDF"}, "desc": {"de": "P(X ≤ x)", "en": "P(X ≤ x)"}},
+                {"symbol": "f(t)", "name": {"de": "PDF", "en": "PDF"}, "desc": {"de": "Dichtefunktion", "en": "Density function"}},
+                {"symbol": r"\int", "name": {"de": "Integral", "en": "Integral"}, "desc": {"de": "Fläche unter Kurve", "en": "Area under curve"}}
+            ],
+            "when": {"de": "Aufgabe gibt PDF, fragt nach P(X ≤ x)", "en": "Problem gives PDF, asks for P(X ≤ x)"}
+        },
+        {
+            "title": {"de": "E[X] diskret", "en": "E[X] discrete"},
+            "intuition": {"de": "Gewichteter Durchschnitt aller möglichen Werte.", "en": "Weighted average of all possible values."},
+            "formula": r"E[X] = \sum_x x \cdot P(X=x)",
+            "variables": [
+                {"symbol": "E[X]", "name": {"de": "Erwartungswert", "en": "Expected Value"}, "desc": {"de": "Das 'Zentrum'", "en": "The 'center'"}},
+                {"symbol": "x", "name": {"de": "Werte", "en": "Values"}, "desc": {"de": "Mögliche Ergebnisse", "en": "Possible outcomes"}},
+                {"symbol": "P(X=x)", "name": {"de": "Wahrscheinlichkeit", "en": "Probability"}, "desc": {"de": "Gewicht jedes Werts", "en": "Weight of each value"}}
+            ],
+            "when": {"de": "Tabelle mit Werten + Wahrscheinlichkeiten gegeben", "en": "Table with values + probabilities given"}
+        },
+        {
+            "title": {"de": "E[X] stetig", "en": "E[X] continuous"},
+            "intuition": {"de": "Wie diskret, aber mit Integral statt Summe.", "en": "Like discrete, but with integral instead of sum."},
+            "formula": r"E[X] = \int x \cdot f(x)\,dx",
+            "variables": [
+                {"symbol": "E[X]", "name": {"de": "Erwartungswert", "en": "Expected Value"}, "desc": {"de": "Das 'Zentrum'", "en": "The 'center'"}},
+                {"symbol": "f(x)", "name": {"de": "PDF", "en": "PDF"}, "desc": {"de": "Dichtefunktion", "en": "Density function"}},
+                {"symbol": r"\int", "name": {"de": "Integral", "en": "Integral"}, "desc": {"de": "Über alle x", "en": "Over all x"}}
+            ],
+            "when": {"de": "Stetige Verteilung (PDF) gegeben", "en": "Continuous distribution (PDF) given"}
+        },
+        {
+            "title": {"de": "Varianz (Shortcut)", "en": "Variance (Shortcut)"},
+            "intuition": {"de": "Wie weit streuen die Werte vom Zentrum? IMMER diesen Shortcut nutzen!", "en": "How far do values spread from center? ALWAYS use this shortcut!"},
+            "formula": r"Var(X) = E[X^2] - (E[X])^2",
+            "variables": [
+                {"symbol": "Var(X)", "name": {"de": "Varianz", "en": "Variance"}, "desc": {"de": "Streuungsmaß", "en": "Spread measure"}},
+                {"symbol": "E[X²]", "name": {"de": "2. Moment", "en": "2nd Moment"}, "desc": {"de": "Erwartungswert der Quadrate", "en": "Expected value of squares"}},
+                {"symbol": "(E[X])²", "name": {"de": "Quadrat von E[X]", "en": "Square of E[X]"}, "desc": {"de": "Zentrum zum Quadrat", "en": "Center squared"}}
+            ],
+            "when": {"de": "Immer wenn Varianz gefragt! 'E vom Quadrat minus Quadrat vom E'", "en": "Whenever variance asked! 'E of square minus square of E'"}
+        },
+        {
+            "title": {"de": "Standardisierung", "en": "Standardization"},
+            "intuition": {"de": "Wandle jeden Wert in 'Anzahl Standardabweichungen vom Mittelwert' um.", "en": "Convert any value to 'number of standard deviations from mean'."},
+            "formula": r"Z = \frac{X - \mu}{\sigma}",
+            "variables": [
+                {"symbol": "Z", "name": {"de": "Z-Score", "en": "Z-Score"}, "desc": {"de": "Standardisierter Wert", "en": "Standardized value"}},
+                {"symbol": "X", "name": {"de": "Originalwert", "en": "Original value"}, "desc": {"de": "Der Rohwert", "en": "The raw value"}},
+                {"symbol": r"\mu", "name": {"de": "Mittelwert", "en": "Mean"}, "desc": {"de": "Zentrum", "en": "Center"}},
+                {"symbol": r"\sigma", "name": {"de": "Std.abw.", "en": "Std.dev."}, "desc": {"de": "Streuung", "en": "Spread"}}
+            ],
+            "when": {"de": "Vergleich zwischen Skalen oder Z-Tabelle nutzen", "en": "Comparing across scales or using Z-table"}
+        }
+    ],
+    
+    # ASK YOURSELF
+    "ask_yourself": {
+        "header": {"de": "Frag dich selbst", "en": "Ask Yourself"},
+        "questions": [
+            {"de": "Wann benutze ich die PDF und wann die CDF?", "en": "When do I use the PDF vs the CDF?"},
+            {"de": "Was ist der Unterschied zwischen E[X²] und (E[X])²?", "en": "What's the difference between E[X²] and (E[X])²?"},
+            {"de": "Warum ändert Var(X+b) die Varianz nicht?", "en": "Why doesn't Var(X+b) change the variance?"},
+            {"de": "Was bedeutet 'gleiche Verteilung' vs 'X = Y'?", "en": "What does 'same distribution' mean vs 'X = Y'?"},
+        ],
+        "conclusion": {
+            "de": "Wenn du diese Fragen beantworten kannst, bist du bereit für die Prüfung!",
+            "en": "If you can answer these questions, you're ready for the exam!"
+        }
     },
     
-    "traps": {
-        "header": {"de": "Prüfungsfallen", "en": "Exam Traps"},
-        "subtitle": {"de": "Diese Fehler vermeiden!", "en": "Avoid These Mistakes!"},
-        "items": [
-            {
-                "trap": {"de": "Gleiche Verteilung = Gleich", "en": "Same Distribution = Equal"},
-                "wrong": {"de": "X = Y", "en": "X = Y"},
-                "right": {"de": "X und Y haben gleiche Verteilung", "en": "X and Y have same distribution"},
-            },
-            {
-                "trap": {"de": "PDF vergessen zu normieren", "en": "Forgetting to normalize PDF"},
-                "wrong": {"de": "∫f(x)dx ≠ 1", "en": "∫f(x)dx ≠ 1"},
-                "right": {"de": "Immer prüfen: ∫f(x)dx = 1", "en": "Always check: ∫f(x)dx = 1"},
-            },
-            {
-                "trap": {"de": "Var mit Shift", "en": "Var with Shift"},
-                "wrong": {"de": "Var(X+5) = Var(X) + 25", "en": "Var(X+5) = Var(X) + 25"},
-                "right": {"de": "Var(X+b) = Var(X)", "en": "Var(X+b) = Var(X)"},
-            }
-        ]
-    },
-    
+    # INTERACTIVE
     "interactive": {
         "title": {"de": "Die Symmetrie-Maschine", "en": "The Symmetry Explorer"},
         "desc": {
             "de": "Ruben und Jochen spielen ein faires Münzspiel. Toggle die Overlay-Ansicht!",
             "en": "Ruben and Jochen play a fair coin game. Toggle the overlay view!"
         }
+    },
+    
+    # EXAM ESSENTIALS
+    "exam_essentials": {
+        "tips": [
+            {
+                "tip": {"de": "Varianz-Shortcut: E[X²] - (E[X])² statt E[(X-μ)²]", "en": "Variance Shortcut: E[X²] - (E[X])² instead of E[(X-μ)²]"},
+                "why": {"de": "Viel schneller zu rechnen!", "en": "Much faster to calculate!"}
+            },
+            {
+                "tip": {"de": "CDF-Sandwich: P(a<X≤b) = F(b) - F(a)", "en": "CDF Sandwich: P(a<X≤b) = F(b) - F(a)"},
+                "why": {"de": "Funktioniert für diskret UND stetig!", "en": "Works for discrete AND continuous!"}
+            },
+            {
+                "tip": {"de": "Lineare Transformation: Var(aX+b) = a²Var(X) — b verschwindet!", "en": "Linear Transform: Var(aX+b) = a²Var(X) — b disappears!"},
+                "why": {"de": "Verschiebung ändert Streuung nicht.", "en": "Shifting doesn't change spread."}
+            },
+            {
+                "tip": {"de": "Symmetrie-Hack: Symmetrisch um 0 → E[X] = 0", "en": "Symmetry Hack: Symmetric around 0 → E[X] = 0"},
+                "why": {"de": "Sofort ablesen, nicht rechnen!", "en": "Read off instantly, don't calculate!"}
+            },
+            {
+                "tip": {"de": "Z-Score Reisepass: Standardisiere zu N(0,1), dann eine Tabelle für alle!", "en": "Z-Score Passport: Standardize to N(0,1), then one table for all!"},
+                "why": {"de": "Universal für jede Normalverteilung.", "en": "Universal for any normal distribution."}
+            }
+        ],
+        "trap": {
+            "de": "<strong>Gleiche Verteilung ≠ Gleiche Variable:</strong> X und Y können dieselbe Verteilung haben, aber X ≠ Y. Beispiel: Ruben's Gewinn X und Jochen's Gewinn -X haben GLEICHE Verteilung, aber X ≠ -X!",
+            "en": "<strong>Same Distribution ≠ Same Variable:</strong> X and Y can have the same distribution, but X ≠ Y. Example: Ruben's winnings X and Jochen's winnings -X have the SAME distribution, but X ≠ -X!"
+        },
+        "trap_rule": {
+            "de": "Verwechsle nie 'identisch verteilt' mit 'gleich'!",
+            "en": "Never confuse 'identically distributed' with 'equal'!"
+        }
     }
 }
 
 
 def render_subtopic_3_7(model):
-    """3.7 Summary — Complete chapter review"""
+    """3.7 Summary — Complete chapter review
+    
+    Order: Intuition → Theory → Ask Yourself → Interactive → Exam Essentials → MCQ
+    """
     
     inject_equal_height_css()
-    st.markdown("<style>h3 { margin-top: 0 !important; }</style>", unsafe_allow_html=True)
     
     st.header(t(content_3_7["title"]))
     st.caption(t(content_3_7["subtitle"]))
     st.markdown("---")
     
-    # === SECTION 1: CHEAT SHEET ===
-    render_cheat_sheet()
+    # === SECTION 1: INTUITION (Header-Out) ===
+    st.markdown(f"### {t(content_3_7['intuition']['header'])}")
+    with st.container(border=True):
+        st.markdown(t(content_3_7["intuition"]["text"]))
     
     st.markdown("<br>", unsafe_allow_html=True)
     
-    # === SECTION 2: PRO TRICKS ===
-    render_pro_tricks()
+    # === SECTION 2: THEORY (FORMULA CARDS with Variable Decoder) ===
+    st.markdown(f"### {t({'de': 'Formel-Spickzettel', 'en': 'Formula Cheat Sheet'})}")
     
-    st.markdown("<br>", unsafe_allow_html=True)
-    
-    # === SECTION 3: EXAM TRAPS ===
-    render_exam_traps()
+    render_formula_cards()
     
     st.markdown("<br><br>", unsafe_allow_html=True)
     
-    # === SECTION 4: SYMMETRY EXPLORER ===
+    # === SECTION 3: ASK YOURSELF ===
+    render_ask_yourself(
+        header=content_3_7["ask_yourself"]["header"],
+        questions=content_3_7["ask_yourself"]["questions"],
+        conclusion=content_3_7["ask_yourself"]["conclusion"]
+    )
+    
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    
+    # === SECTION 4: INTERACTIVE (SYMMETRY EXPLORER) ===
     render_symmetry_explorer()
     
     st.markdown("<br><br>", unsafe_allow_html=True)
     
-    # === SECTION 5: EXAM PRACTICE ===
+    # === SECTION 5: EXAM ESSENTIALS ===
+    render_exam_essentials(
+        tips=content_3_7["exam_essentials"]["tips"],
+        trap=content_3_7["exam_essentials"]["trap"],
+        trap_rule=content_3_7["exam_essentials"]["trap_rule"]
+    )
+    
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    
+    # === SECTION 6: MCQ ===
     st.markdown(f"### {t({'de': 'Prüfungstraining', 'en': 'Exam Practice'})}")
     
     q_data = get_question("3.7", "hs2024_mc11")
@@ -181,126 +237,68 @@ def render_subtopic_3_7(model):
             )
 
 
-def render_cheat_sheet():
-    """Render cards that ALWAYS match the height of the tallest card."""
-    cs = content_3_7["cheat_sheet"]
-    st.markdown(f"### {t(cs['header'])}")
+def render_formula_cards():
+    """Render formula cards in 2-column grid with FULL context per card.
     
-    cards = cs["cards"]
+    Each card includes:
+    - Title
+    - Intuition (when to use)
+    - Formula
+    - Variable Decoder
+    - 'When to use' hint
+    """
+    cards = content_3_7["formula_cards"]
     
-    # 1. LATEX PHANTOM - Forces every formula to be at least as tall as Fraction + Integral
-    latex_phantom = r"\vphantom{\int_{-\infty}^{x} \frac{A^2}{B^2}}"
-    
-    # 2. CSS STRETCH - Forces border containers to fill 100% of column height
-    st.markdown("""
-    <style>
-    /* Turn the column into a flex container that stretches its children */
-    [data-testid="column"], [data-testid="stColumn"] {
-        display: flex;
-        flex-direction: column;
-    }
-    
-    /* Make the inner wrapper grow to fill available space */
-    [data-testid="column"] > div, [data-testid="stColumn"] > div {
-        flex: 1;
-    }
-    
-    /* Force the actual border container to take up 100% height */
-    [data-testid="stVerticalBlockBorderWrapper"] {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
-    </style>
-    """, unsafe_allow_html=True)
-
-    # Row 1
-    c1, c2, c3 = st.columns(3, gap="small")
-    for col, card in zip([c1, c2, c3], cards[:3]):
-        with col:
-            with st.container(border=True):
-                st.markdown(f"**{t(card['title'])}**")
-                st.latex(card['formula'] + latex_phantom)
-                st.caption(t(card['use']))
-    
-    # Row 2
-    c4, c5, c6 = st.columns(3, gap="small")
-    for col, card in zip([c4, c5, c6], cards[3:]):
-        with col:
-            with st.container(border=True):
-                st.markdown(f"**{t(card['title'])}**")
-                st.latex(card['formula'] + latex_phantom)
-                st.caption(t(card['use']))
+    # Render in 2-column grid
+    for i in range(0, len(cards), 2):
+        c1, c2 = st.columns(2, gap="medium")
+        
+        # Left card
+        with c1:
+            render_single_formula_card(cards[i])
+        
+        # Right card (if exists)
+        if i + 1 < len(cards):
+            with c2:
+                render_single_formula_card(cards[i + 1])
 
 
-def render_pro_tricks():
-    """Render the pro tips section"""
-    pt = content_3_7["pro_tricks"]
-    st.markdown(f"### {t(pt['header'])}")
-    st.caption(t(pt['subtitle']))
+def render_single_formula_card(card):
+    """Render a single formula card matching Topic 1.6 gold standard.
     
+    Structure (ONE container with --- separators):
+    1. Title (bold)
+    2. Intuition (italic, no math)
+    3. Formula (prominent)
+    --- separator ---
+    4. Variables: bullet list
+    --- separator ---
+    5. When/Insight (italic)
+    """
     with st.container(border=True):
-        tricks = pt["tricks"]
+        # 1. Title
+        st.markdown(f"**{t(card['title'])}**")
         
-        # Row 1: 3 tricks
-        c1, c2, c3 = st.columns(3, gap="small")
-        for col, trick in zip([c1, c2, c3], tricks[:3]):
-            with col:
-                render_trick_card(trick)
+        # 2. Intuition (italic, no nested container)
+        st.markdown(f"*{t(card['intuition'])}*")
         
-        st.markdown("<br>", unsafe_allow_html=True)
+        # 3. Formula (prominent)
+        st.latex(card['formula'])
         
-        # Row 2: 2 tricks (centered via padding)
-        c4, c5, _ = st.columns([1, 1, 1], gap="small")
-        for col, trick in zip([c4, c5], tricks[3:]):
-            with col:
-                render_trick_card(trick)
-
-
-def render_trick_card(trick):
-    """Render a single pro trick card"""
-    st.markdown(f"""
-    <div style="background: #f4f4f5; border-radius: 8px; padding: 12px; margin-bottom: 8px;">
-        <div style="font-weight: 600; color: #3f3f46; margin-bottom: 8px;">{t(trick['title'])}</div>
-        <div style="font-size: 0.85em;">
-            <span style="color: #dc2626; text-decoration: line-through;">{t(trick['wrong'])}</span><br>
-            <span style="color: #16a34a; font-weight: 500;">{t(trick['right'])}</span>
-        </div>
-        <div style="font-size: 0.75em; color: #71717a; margin-top: 4px; font-style: italic;">
-            {t(trick['reason'])}
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
-
-
-def render_exam_traps():
-    """Render the common exam traps section"""
-    traps = content_3_7["traps"]
-    st.markdown(f"### {t(traps['header'])}")
-    st.caption(t(traps['subtitle']))
-    
-    with st.container(border=True):
-        # Table header
-        st.markdown(f"""
-        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; font-weight: 600; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #e5e5ea;">
-            <div>{t({'de': 'Falle', 'en': 'Trap'})}</div>
-            <div style="color: #dc2626;">{t({'de': 'Falsch', 'en': 'Wrong'})}</div>
-            <div style="color: #16a34a;">{t({'de': 'Richtig', 'en': 'Right'})}</div>
-        </div>
-        """, unsafe_allow_html=True)
+        # --- Variable Decoder ---
+        st.markdown("---")
+        st.markdown(f"**{t({'de': 'Variablen', 'en': 'Variables'})}:**")
+        for v in card['variables']:
+            name = t(v['name'])
+            desc = t(v['desc'])
+            st.markdown(f"• ${v['symbol']}$ = **{name}** — {desc}")
         
-        # Table rows
-        for item in traps["items"]:
-            st.markdown(f"""
-            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; padding: 8px 0; border-bottom: 1px solid #f4f4f5;">
-                <div style="font-weight: 500;">{t(item['trap'])}</div>
-                <div style="color: #dc2626; font-family: monospace;">{t(item['wrong'])}</div>
-                <div style="color: #16a34a; font-family: monospace;">{t(item['right'])}</div>
-            </div>
-            """, unsafe_allow_html=True)
+        # --- When to use (insight) ---
+        st.markdown("---")
+        st.markdown(f"*{t(card['when'])}*")
 
 
+@st.fragment
 def render_symmetry_explorer():
     """Interactive symmetry visualization"""
     inter = content_3_7["interactive"]
@@ -352,10 +350,10 @@ def render_symmetry_explorer():
         
         # Pro tip
         st.markdown(f"""
-        <div style="background: #f4f4f5; border-radius: 8px; padding: 12px; color: #3f3f46; margin-top: 8px;">
-            <strong>Pro Tip:</strong> {t({'de': 'Bei fairen Spielen haben X und -X IMMER dieselbe Verteilung. "Gleiche Verteilung" ≠ "X = Y"!', 'en': 'In fair games, X and -X ALWAYS have the same distribution. "Same distribution" ≠ "X = Y"!'})}
-        </div>
-        """, unsafe_allow_html=True)
+<div style="background: #f4f4f5; border-radius: 8px; padding: 12px; color: #3f3f46; margin-top: 8px;">
+<strong>Pro Tip:</strong> {t({'de': 'Bei fairen Spielen haben X und -X IMMER dieselbe Verteilung. "Gleiche Verteilung" ≠ "X = Y"!', 'en': 'In fair games, X and -X ALWAYS have the same distribution. "Same distribution" ≠ "X = Y"!'})}
+</div>
+""", unsafe_allow_html=True)
 
 
 def create_symmetry_plot(n_rounds, show_overlay):

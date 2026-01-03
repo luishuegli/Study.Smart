@@ -125,3 +125,36 @@ div { margin: 0; }
 Non-interactive charts:
 
 fig.update_layout(clickmode='none', hovermode=False)
+
+[STRICT] Max 2 Columns for Formulas
+LaTeX formulas get cut off in narrow columns. NEVER use more than 2 columns for formula grids:
+
+# WRONG - Formulas will be cut off/scrollable
+c1, c2, c3 = st.columns(3)  # Too narrow!
+
+# CORRECT - Adequate width for LaTeX
+c1, c2 = st.columns(2, gap="medium")
+
+[STRICT] Formula Card Structure (Gold Standard: Topic 1.6)
+Formula cards use `---` separators, NOT nested containers:
+
+```python
+with st.container(border=True):
+    # 1. Title (bold)
+    st.markdown(f"**{t(title)}**")
+    
+    # 2. Intuition (italic, NO math)
+    st.markdown(f"*{t(intuition)}*")
+    
+    # 3. Formula (prominent)
+    st.latex(formula)
+    
+    # --- Variable Decoder ---
+    st.markdown("---")
+    st.markdown("**Variables:**")
+    for v in variables:
+        st.markdown(f"• ${v['symbol']}$ = **{name}** — {desc}")
+    
+    # --- Insight ---
+    st.markdown("---")
+    st.markdown(f"*{t(insight)}*")

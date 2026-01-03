@@ -27,6 +27,14 @@ _Rules that have been identified but not yet added to rule files._
 | **Layout-First Approval Gate** | User feedback: must show layout before implementing | implement.md (workflow) | ⏳ CRITICAL |
 | No special Unicode quotes | German `„"` caused SyntaxError | design-system.md | ⏳ Pending |
 
+### From Topic 3 (NEW)
+| Rule | Evidence | Add to File | Status |
+|------|----------|-------------|--------|
+| **Decoder-in-Card (uses `---` separators)** | Fix #7, #10: Gold standard is Topic 1.6. Variable Decoder is INSIDE the card container, separated by `---` lines, NOT nested divs | pedagogy.md, layout.md | ⏳ CRITICAL |
+| **Summary pages = same structure** | Fix #7: Summary pages (3.7) follow same Intuition→Theory→AskYourself→Interactive→ExamEssentials→MCQ order | pedagogy.md | ⏳ Pending |
+| **@st.fragment on ALL interactives** | Fix #8, #9: Every interactive function needs `@st.fragment` decorator | layout.md | ⏳ CRITICAL |
+| **Green reserved for success only** | Fix #9: Don't use `#34C759` for reference/target visuals, use Gray `#6B7280` | design-system.md | ⏳ Pending |
+
 ### From Topic 4
 | Rule | Evidence | Add to File | Status |
 |------|----------|-------------|--------|
@@ -46,6 +54,8 @@ _Same issue appearing across multiple topics = CRITICAL rule._
 | Equal height CSS missing | T1, T2, T3 | CRITICAL | ✅ Added |
 | Inline custom HTML for traps | T2 | MEDIUM | ⏳ NEW - Use utilities |
 | Formula columns too narrow | T1 | MEDIUM | ⏳ NEW - Max 2 columns |
+| **Decoder separated from formula** | T3 | HIGH | ⏳ NEW - Use `---` separators |
+| **Missing @st.fragment** | T3 (3.5, 3.6) | HIGH | ⏳ NEW - Decorator mandatory |
 
 ---
 
@@ -63,13 +73,17 @@ _Same issue appearing across multiple topics = CRITICAL rule._
 - **New rules created:** 1 (no inline traps)
 - **Key learnings:** Old inline HTML sections must be replaced with standardized utilities. The "Question Dissector" pattern could be a future utility.
 
-### Topic 4 Synthesis
-- **Completed:** [Date]
-- **Total fixes:** X
-- **New rules created:** Y
-- **Key learnings:** [Summary]
-
 ### Topic 3 Synthesis
+- **Completed:** 2026-01-03 ✅
+- **Total fixes:** 10
+- **New rules created:** 4 (decoder-in-card, summary-structure, fragment-mandatory, green-reserved)
+- **Key learnings:**
+  1. **Formula Card Structure:** Title → Intuition (italic) → Formula → `---` → Variables (bullets) → `---` → Insight (italic). All within ONE container, NO nested divs/callouts.
+  2. **Summary pages = regular structure:** Even summary pages (3.7) follow Intuition→Theory→AskYourself→Interactive→ExamEssentials→MCQ order.
+  3. **@st.fragment mandatory:** Every interactive function MUST have `@st.fragment` decorator for smooth UX.
+  4. **Green reserved:** `#34C759` only for success feedback, not for reference visuals.
+
+### Topic 4 Synthesis
 - **Completed:** [Date]
 - **Total fixes:** X
 - **New rules created:** Y
@@ -87,13 +101,15 @@ _Track how rules improve over time._
 | Grey callouts | v1 | Topic 4, Fix #2 | - |
 | Header-out protocol | v2 | Topic 2, refined in T4 | Added edge cases |
 | Max formula columns | v1 | Topic 1, Fix #3 | - |
+| **Decoder-in-Card** | v1 | Topic 3, Fix #7 | Uses `---` separators, matches Topic 1.6 |
+| **Fragment-mandatory** | v1 | Topic 3, Fix #8 | All interactives need `@st.fragment` |
 
 ---
 
 ## Metrics
 
 | Metric | T1 | T2 | T3 | T4 | T5 | Trend |
-|--------|----|----|----|----|----|----|
-| Fixes needed | 5 | 2 | - | - | - | ↓ |
+|--------|----|----|----|----|----|-------|
+| Fixes needed | 5 | 2 | 10 | - | - | ↑ (new topic) |
 | Implementation time | - | - | - | - | - | ↓ |
-| Rules added | 3 | 1 | - | - | - | ↑ |
+| Rules added | 3 | 1 | 4 | - | - | ↑ |

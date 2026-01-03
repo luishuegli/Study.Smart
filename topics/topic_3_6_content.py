@@ -5,6 +5,8 @@ import plotly.graph_objects as go
 from math import sqrt, erf
 from utils.localization import t
 from utils.quiz_helper import render_mcq
+from utils.ask_yourself import render_ask_yourself
+from utils.exam_essentials import render_exam_essentials
 from views.styles import inject_equal_height_css
 from data.exam_questions import get_question
 from utils.progress_tracker import track_question_answer, update_local_progress
@@ -22,11 +24,53 @@ content_3_6 = {
             "en": "Imagine comparing exam scores from two different countries. Country A grades 0-100 (average 65). Country B grades 1-6 (average 4.2). Raw values are useless for comparison. **Standardization** is like converting all currencies to dollars — it creates a universal language where '1.5 standard deviations above average' means the same thing everywhere."
         }
     },
+    "variable_decoder": {
+        "de": "$Z$ = <strong>Standardisierter Wert</strong> — Wie viele Standardabweichungen vom Mittelwert entfernt?<br>$X$ = <strong>Originalwert</strong> — Der Rohwert in der ursprünglichen Skala<br>$\\mu$ = <strong>Mittelwert</strong> — Das Zentrum der Verteilung<br>$\\sigma$ = <strong>Standardabweichung</strong> — Die Streuung der Verteilung",
+        "en": "$Z$ = <strong>Standardized Value</strong> — How many standard deviations from the mean?<br>$X$ = <strong>Original Value</strong> — The raw value in the original scale<br>$\\mu$ = <strong>Mean</strong> — The center of the distribution<br>$\\sigma$ = <strong>Standard Deviation</strong> — The spread of the distribution"
+    },
+    "key_insight": {
+        "de": "Der Z-Score ist die <strong>universelle Währung</strong> der Statistik. Egal ob Prüfungsnoten (0-100), IQ-Werte (100 ± 15), oder Körpergrössen — ein Z von +1.5 bedeutet überall dasselbe: 'deutlich überdurchschnittlich'. Das macht Vergleiche zwischen komplett unterschiedlichen Skalen möglich!",
+        "en": "The Z-score is the <strong>universal currency</strong> of statistics. Whether exam scores (0-100), IQ values (100 ± 15), or heights — a Z of +1.5 means the same everywhere: 'significantly above average'. This makes comparisons between completely different scales possible!"
+    },
     "theory": {
         "forward_title": {"de": "Standardisierung", "en": "Standardization"},
         "forward_text": {"de": "Subtrahiere das Zentrum, teile durch die Streuung.", "en": "Subtract the center, divide by the spread."},
         "reverse_title": {"de": "De-Standardisierung", "en": "De-Standardization"},
         "reverse_text": {"de": "Aus Z zurück zu X: Multipliziere mit σ, addiere μ.", "en": "From Z back to X: Multiply by σ, add μ."}
+    },
+    "frag_dich": {
+        "header": {"de": "Frag dich: Brauche ich Standardisierung?", "en": "Ask yourself: Do I need standardization?"},
+        "questions": [
+            {"de": "Muss ich Werte aus verschiedenen Skalen vergleichen?", "en": "Do I need to compare values from different scales?"},
+            {"de": "Suche ich einen Wert in der Z-Tabelle (Standardnormalverteilung)?", "en": "Am I looking up a value in the Z-table (standard normal)?"},
+            {"de": "Sehe ich Φ(z) oder 'N(0,1)' in der Aufgabe?", "en": "Do I see Φ(z) or 'N(0,1)' in the problem?"},
+            {"de": "Muss ich von Z zurück zum Originalwert rechnen?", "en": "Do I need to convert from Z back to the original value?"}
+        ],
+        "conclusion": {"de": "Mindestens 1× JA? → Standardisierung ist der Schlüssel!", "en": "At least 1 YES? → Standardization is the key!"}
+    },
+    "exam_essentials": {
+        "trap": {
+            "de": "Nach dem Nachschlagen von Z in der Tabelle vergessen, zurück zur Original-Skala zu rechnen. Du findest z.B. Z = 1.645 für das 95%-Perzentil, aber die Aufgabe fragt nach dem Wert in der Originalverteilung!",
+            "en": "After looking up Z in the table, forgetting to convert back to the original scale. You find Z = 1.645 for the 95th percentile, but the question asks for the value in the original distribution!"
+        },
+        "trap_rule": {
+            "de": "Immer prüfen: Fragt die Aufgabe nach Z oder nach X? Wenn X: X = μ + Z·σ nicht vergessen!",
+            "en": "Always check: Does the question ask for Z or X? If X: Don't forget X = μ + Z·σ!"
+        },
+        "tips": [
+            {
+                "tip": {"de": "Standardisieren: Z = (X - μ) / σ", "en": "Standardize: Z = (X - μ) / σ"},
+                "why": {"de": "Wandelt jeden Wert in 'Anzahl Standardabweichungen vom Mittelwert' um.", "en": "Converts any value to 'number of standard deviations from the mean'."}
+            },
+            {
+                "tip": {"de": "De-Standardisieren: X = μ + Z·σ", "en": "De-standardize: X = μ + Z·σ"},
+                "why": {"de": "Wandelt Z zurück in die Originalskala — unverzichtbar für Perzentil-Aufgaben!", "en": "Converts Z back to the original scale — essential for percentile problems!"}
+            },
+            {
+                "tip": {"de": "Symmetrie-Shortcut: Φ(-z) = 1 - Φ(z)", "en": "Symmetry shortcut: Φ(-z) = 1 - Φ(z)"},
+                "why": {"de": "Spart Nachschlagen für negative Z-Werte. Die Standardnormalverteilung ist symmetrisch um 0!", "en": "Saves lookup for negative Z values. The standard normal is symmetric around 0!"}
+            }
+        ]
     },
     "playground": {
         "title": {"de": "Z-Tabellen Explorer", "en": "Z-Table Explorer"},
@@ -40,10 +84,6 @@ content_3_6 = {
         },
         "target": 650,
         "tolerance": 10
-    },
-    "pro_tip": {
-        "de": "Der Z-Score ist dein universeller Reisepass. Egal welche Normalverteilung — berechne Z einmal, übersetze überall hin. In Prüfungen: Wenn du 'Standardnormalverteilung' oder 'Φ' siehst, ist Standardisierung der Schlüssel!",
-        "en": "The Z-score is your universal passport. Any normal distribution, anywhere — compute Z once, translate everywhere. In exams: When you see 'standard normal' or 'Φ', standardization is the key!"
     }
 }
 
@@ -70,30 +110,48 @@ def render_subtopic_3_6(model):
     st.markdown(t(content_3_6["subtitle"]))
     st.markdown("---")
     
-    # --- INTUITION ---
+    # --- INTUITION (Header OUTSIDE per header-out protocol) ---
+    st.markdown(f"### {t(content_3_6['intuition']['header'])}")
     with st.container(border=True):
-        st.markdown(f"### {t(content_3_6['intuition']['header'])}")
         st.markdown(t(content_3_6["intuition"]["text"]))
     
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # --- THEORY CARDS ---
-    c1, c2 = st.columns(2, gap="medium")
-    with c1:
-        with st.container(border=True):
-            st.markdown(f"**{t(content_3_6['theory']['forward_title'])}**")
-            st.caption(t(content_3_6['theory']['forward_text']))
-            st.latex(r"Z = \frac{X - \mu}{\sigma}")
-            st.markdown("<br>", unsafe_allow_html=True)
-            st.caption(t({"de": "Ergebnis: Z ~ N(0, 1)", "en": "Result: Z ~ N(0, 1)"}))
-
-    with c2:
-        with st.container(border=True):
-            st.markdown(f"**{t(content_3_6['theory']['reverse_title'])}**")
-            st.caption(t(content_3_6['theory']['reverse_text']))
-            st.latex(r"X = \mu + Z \cdot \sigma")
-            st.markdown("<br>", unsafe_allow_html=True)
-            st.caption(t({"de": "Anwendung: Perzentile finden", "en": "Use: Finding percentiles"}))
+    # --- THEORY SECTION: Using Layout B (Comparison) - Gold Standard from Topic 1.6 ---
+    from utils.layouts import render_comparison
+    render_comparison(
+        title={"de": "Die zwei Richtungen der Standardisierung", "en": "The Two Directions of Standardization"},
+        intuition=None,  # Already have intuition above
+        left={
+            "title": {"de": "Standardisierung", "en": "Standardization"},
+            "intuition": {"de": "Subtrahiere das Zentrum, teile durch die Streuung.", "en": "Subtract the center, divide by the spread."},
+            "formula": r"Z = \frac{X - \mu}{\sigma}",
+            "variables": [
+                {"symbol": "Z", "name": {"de": "Z-Score", "en": "Z-Score"}, "description": {"de": "Wie viele σ vom μ entfernt?", "en": "How many σ from μ?"}},
+                {"symbol": "X", "name": {"de": "Originalwert", "en": "Original value"}, "description": {"de": "Der Rohwert", "en": "The raw value"}},
+                {"symbol": r"\mu", "name": {"de": "Mittelwert", "en": "Mean"}, "description": {"de": "Das Zentrum", "en": "The center"}},
+                {"symbol": r"\sigma", "name": {"de": "Standardabweichung", "en": "Std Dev"}, "description": {"de": "Die Streuung", "en": "The spread"}}
+            ],
+            "insight": {"de": "Ergebnis: Z ~ N(0, 1) — universell vergleichbar!", "en": "Result: Z ~ N(0, 1) — universally comparable!"}
+        },
+        right={
+            "title": {"de": "De-Standardisierung", "en": "De-Standardization"},
+            "intuition": {"de": "Von Z zurück zu X: Multipliziere mit σ, addiere μ.", "en": "From Z back to X: Multiply by σ, add μ."},
+            "formula": r"X = \mu + Z \cdot \sigma",
+            "variables": [
+                {"symbol": "X", "name": {"de": "Gesuchter Wert", "en": "Target value"}, "description": {"de": "In Originalskala", "en": "In original scale"}},
+                {"symbol": "Z", "name": {"de": "Z-Score", "en": "Z-Score"}, "description": {"de": "Aus Tabelle", "en": "From table"}},
+                {"symbol": r"\mu", "name": {"de": "Mittelwert", "en": "Mean"}, "description": {"de": "Zentrum der Zielskala", "en": "Center of target scale"}},
+                {"symbol": r"\sigma", "name": {"de": "Standardabweichung", "en": "Std Dev"}, "description": {"de": "Streuung der Zielskala", "en": "Spread of target scale"}}
+            ],
+            "insight": {"de": "Anwendung: Perzentile finden (z.B. 'Top 5%' in Punkten)", "en": "Use: Finding percentiles (e.g., 'Top 5%' in points)"}
+        },
+        key_difference={
+            "de": "<strong>Der Z-Score ist die universelle Währung der Statistik.</strong> Egal ob Prüfungsnoten, IQ-Werte oder Körpergrössen — ein Z von +1.5 bedeutet überall dasselbe.",
+            "en": "<strong>The Z-score is the universal currency of statistics.</strong> Whether exam scores, IQ values, or heights — a Z of +1.5 means the same everywhere."
+        },
+        show_header=True
+    )
 
     st.markdown("<br><br>", unsafe_allow_html=True)
 
@@ -104,6 +162,24 @@ def render_subtopic_3_6(model):
 
     # --- SECTION 2: GRADE TRANSLATOR (Mission) ---
     render_grade_translator_mission()
+
+    st.markdown("<br><br>", unsafe_allow_html=True)
+
+    # --- FRAG DICH (Ask Yourself) ---
+    render_ask_yourself(
+        header=content_3_6["frag_dich"]["header"],
+        questions=content_3_6["frag_dich"]["questions"],
+        conclusion=content_3_6["frag_dich"]["conclusion"]
+    )
+
+    st.markdown("<br><br>", unsafe_allow_html=True)
+
+    # --- EXAM ESSENTIALS ---
+    render_exam_essentials(
+        trap=content_3_6["exam_essentials"]["trap"],
+        trap_rule=content_3_6["exam_essentials"]["trap_rule"],
+        tips=content_3_6["exam_essentials"]["tips"]
+    )
 
     st.markdown("<br><br>", unsafe_allow_html=True)
 
@@ -138,6 +214,7 @@ def render_subtopic_3_6(model):
             )
 
 
+@st.fragment
 def render_z_table_explorer():
     """Interactive Z-Table: See the relationship between Z and Φ(Z)"""
     
@@ -175,6 +252,7 @@ def render_z_table_explorer():
         st.latex(rf"\Phi({{\color{{blue}}{z_val:.2f}}}) = P(Z \leq {{\color{{blue}}{z_val:.2f}}}) = {{\color{{purple}}\mathbf{{{prob:.4f}}}}}")
 
 
+@st.fragment
 def render_grade_translator_mission():
     """Mission: Translate grades between different scales using Z-scores"""
     
@@ -270,14 +348,6 @@ def render_grade_translator_mission():
                 st.info(t({"de": "Zu hoch! Denk an die Formel: X = μ + Z·σ", "en": "Too high! Think about the formula: X = μ + Z·σ"}))
             else:
                 st.info(t({"de": "Zu niedrig! Denk an die Formel: X = μ + Z·σ", "en": "Too low! Think about the formula: X = μ + Z·σ"}))
-        
-        # Pro Tip (inside container, gray background)
-        st.markdown("<br>", unsafe_allow_html=True)
-        st.markdown(f"""
-        <div style="background-color: #f4f4f5; border-radius: 8px; padding: 12px; color: #3f3f46;">
-            <strong>Pro Tip:</strong> {t(content_3_6['pro_tip'])}
-        </div>
-        """, unsafe_allow_html=True)
 
 
 # --- HELPER FUNCTIONS ---

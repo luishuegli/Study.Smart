@@ -1,5 +1,6 @@
 import streamlit as st
 from utils.localization import t
+from utils.layouts.foundation import grey_info
 from utils.quiz_helper import render_mcq
 from utils.problem_renderer import render_multi_stage_problem, render_open_question
 from data.exam_questions import get_all_questions_for_topic
@@ -15,7 +16,7 @@ def render_subtopic_11_1(model):
     questions = get_all_questions_for_topic(SUBTOPIC_ID)
     
     if not questions:
-        st.info(t({"de": "Noch keine Aufgaben verfügbar.", "en": "No exercises available yet."}))
+        grey_info(t({"de": "Noch keine Aufgaben verfügbar.", "en": "No exercises available yet."}))
         return
 
     for q_id, q in questions.items():

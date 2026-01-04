@@ -2931,81 +2931,90 @@ der Median der zwei Werte notwendigerweise:""",
         "source": "HS 2015, Aufgabe 1 (12 Punkte)",
         "type": "problem",
         "question": {
-            "en": r"""Problem 1 (12 Points)
-Part 1A (4 Points)
-We have drawn random samples of 100 observations each from the following four distributions V1, V2, V3, and V4:
-V1) Normal distribution with expected value $\mu = 0$ and variance $\sigma^2 = 3$. Sample size: $n_1 = 100$.
-V2) Exponential distribution with parameter $\lambda = 3$. Sample size: $n_2 = 100$.
-V3) Normal distribution with expected value $\mu = 0$ and variance $\sigma^2 = 1$. Sample size: $n_3 = 100$.
-V4) Uniform distribution U $[-3, 3]$. Sample size: $n_4 = 100$.
-Below are a Boxplot (A), a Histogram (B), an empirical cumulative distribution function (C), and a QQ-Plot (vs. Normal distribution) (D) given for one sample each.
-Match the respective graphics (A, B, C, and D) to the corresponding samples (V1, V2, V3, and V4), e.g., V1: D.
-Important: Each sample corresponds to exactly one graphic!
-A                                                                                   B
-1.5
-●
-10 15 20
-●
-1.0
-0.5
-0.0
--2        -1       0       1       2       3
-C                                                                                   D
-1 2 3
-●● ●                                                                                ●●● ●
-Empirical Quantiles
-●
-●●●
-●●                                                                                  ●●●●
-●
-●●                                                                                ●●
-●●
-●
-●●●
-●                                                                                 ●
-●
-0.8
-●●●                                                                                ●
-●
-●●                                                                                  ●
-●
-●●
-●
-●                                                                                  ●
-●
-●●
-●
-●●
-●●●                                                                                ●●
-●
-●
-●●
-●
-●
-●●                                                                                 ●●
-●
-Fn(x)
-0.6
-0.4
-0.2
-0.0
--4
--2
-0
-2
-4
-Data
-Part 1B (8 Points)
-The results of the statistics exam at the University of Hawaii yielded the following frequency table:
-Grade    0.7   1.0   1.3   2.0   2.3   3.0   3.7   4.0   4.3   4.7   5.0
-ni       1     0     0     0     5     6     6     4     6     4     7
-1. Calculate the mean and mode of the sample.
-2. Draw a boxplot, calculate the corresponding measures, and draw them in.
-If you need more space, make a clear reference on the exam sheet and label the additional sheet clearly as well. Otherwise, the task will not be graded."""
+            "de": r"""**Teil 1A (4 Punkte) — Grafik-Zuordnung**
+
+Wir haben je 100 Beobachtungen aus folgenden 4 Verteilungen gezogen:
+
+| Verteilung | Parameter |
+|------------|-----------|
+| **V1** | Normal: $\mu = 0$, $\sigma^2 = 3$ |
+| **V2** | Exponential: $\lambda = 3$ |
+| **V3** | Normal: $\mu = 0$, $\sigma^2 = 1$ |
+| **V4** | Gleichverteilung: $U[-3, 3]$ |
+
+Unten sind 4 Grafiken gegeben:
+- **(A)** Boxplot
+- **(B)** Histogramm
+- **(C)** Empirische Verteilungsfunktion
+- **(D)** QQ-Plot (vs. Normalverteilung)
+
+**Aufgabe:** Ordne jede Grafik der richtigen Verteilung zu (z.B. V1: D).
+
+---
+
+**Teil 1B (8 Punkte) — Notenverteilung**
+
+Ergebnisse der Statistikprüfung an der Universität Hawaii:
+
+| Note | 0.7 | 1.0 | 1.3 | 2.0 | 2.3 | 3.0 | 3.7 | 4.0 | 4.3 | 4.7 | 5.0 |
+|------|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|
+| $n_i$ | 1 | 0 | 0 | 0 | 5 | 6 | 6 | 4 | 6 | 4 | 7 |
+
+**Aufgaben:**
+1. Berechne den **Mittelwert** und den **Modus** der Stichprobe.
+2. Zeichne einen **Boxplot**, berechne die entsprechenden Kennzahlen und trage sie ein.""",
+            "en": r"""**Part 1A (4 Points) — Graph Matching**
+
+We drew 100 observations from each of the following 4 distributions:
+
+| Distribution | Parameters |
+|--------------|------------|
+| **V1** | Normal: $\mu = 0$, $\sigma^2 = 3$ |
+| **V2** | Exponential: $\lambda = 3$ |
+| **V3** | Normal: $\mu = 0$, $\sigma^2 = 1$ |
+| **V4** | Uniform: $U[-3, 3]$ |
+
+Below are 4 graphics:
+- **(A)** Boxplot
+- **(B)** Histogram
+- **(C)** Empirical CDF
+- **(D)** QQ-Plot (vs. Normal)
+
+**Task:** Match each graphic to the correct distribution (e.g., V1: D).
+
+---
+
+**Part 1B (8 Points) — Grade Distribution**
+
+Results of the statistics exam at the University of Hawaii:
+
+| Grade | 0.7 | 1.0 | 1.3 | 2.0 | 2.3 | 3.0 | 3.7 | 4.0 | 4.3 | 4.7 | 5.0 |
+|-------|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|-----|
+| $n_i$ | 1 | 0 | 0 | 0 | 5 | 6 | 6 | 4 | 6 | 4 | 7 |
+
+**Tasks:**
+1. Calculate the **mean** and **mode** of the sample.
+2. Draw a **boxplot**, calculate the corresponding measures, and draw them in."""
         },
         "solution": {
-            "de": r"**Lösung 1A:**<br>A $\Leftrightarrow$ V2 (Asymmetrisch, viele Ausreißer)<br>B $\Leftrightarrow$ V3 (Glockenkurve)<br>C $\Leftrightarrow$ V1 (S-Kurve)<br>D $\Leftrightarrow$ V4 (QQ-Plot abweichend von Gerade an Rändern)<br><br>**Lösung 1B:**<br>1. Mittelwert = 3.79, Modus = 5.0 (7 Nennungen)<br>2. 25% Quartil = 3.0, Median = 4.0, 75% Quartil = 4.7. IQA = 1.7.",
-            "en": r"**Solution 1A:**<br>A $\Leftrightarrow$ V2 (Asymmetric, outliers)<br>B $\Leftrightarrow$ V3 (Bell curve)<br>C $\Leftrightarrow$ V1 (S-curve)<br>D $\Leftrightarrow$ V4 (QQ-plot deviates at tails)<br><br>**Solution 1B:**<br>1. Mean = 3.79, Mode = 5.0 (7 counts)<br>2. 25% Quartile = 3.0, Median = 4.0, 75% Quartile = 4.7. IQR = 1.7."
+            "de": r"""**Lösung 1A:**
+- A ↔ V2 (Asymmetrisch, viele Ausreisser rechts)
+- B ↔ V3 (Glockenkurve, $\sigma^2 = 1$)
+- C ↔ V1 (S-Kurve, breitere Streuung $\sigma^2 = 3$)
+- D ↔ V4 (QQ-Plot weicht an Rändern von Gerade ab)
+
+**Lösung 1B:**
+1. **Mittelwert** = 3.79, **Modus** = 5.0 (7 Nennungen)
+2. $Q_1 = 3.0$, Median $Q_2 = 4.0$, $Q_3 = 4.7$, IQR = 1.7""",
+            "en": r"""**Solution 1A:**
+- A ↔ V2 (Asymmetric, outliers on right)
+- B ↔ V3 (Bell curve, $\sigma^2 = 1$)
+- C ↔ V1 (S-curve, wider spread $\sigma^2 = 3$)
+- D ↔ V4 (QQ-plot deviates from line at tails)
+
+**Solution 1B:**
+1. **Mean** = 3.79, **Mode** = 5.0 (7 counts)
+2. $Q_1 = 3.0$, Median $Q_2 = 4.0$, $Q_3 = 4.7$, IQR = 1.7"""
         }
     },
     "test3_q3": {

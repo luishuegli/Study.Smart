@@ -2,6 +2,7 @@
 import streamlit as st
 from views.styles import inject_equal_height_css
 from utils.localization import t
+from utils.layouts.foundation import grey_info
 from utils.quiz_helper import render_mcq
 from data.exam_questions import get_question
 from utils.progress_tracker import track_question_answer, update_local_progress
@@ -330,7 +331,7 @@ def render_formula_finder():
                     st.latex(scenario['formula'])
                     st.caption(t(scenario['example']))
             else:
-                st.info(t({"de": "Wähle ein Szenario!", "en": "Select a scenario!"}))
+                grey_info(t({"de": "Wähle ein Szenario!", "en": "Select a scenario!"}))
         
         # Pro tip
         pro_tip_text = t({"de": "Bei Bayes-Aufgaben: Immer zuerst P(A) via Totale W'keit berechnen!", "en": "For Bayes problems: Always compute P(A) via Total Probability first!"})

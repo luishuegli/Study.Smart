@@ -2,6 +2,7 @@ import streamlit as st
 import re
 from views.styles import render_icon, inject_equal_height_css
 from utils.localization import t
+from utils.layouts.foundation import grey_info
 from utils.quiz_helper import render_mcq
 from data.exam_questions import get_question
 
@@ -492,7 +493,7 @@ border-color: #3B82F6;
                 st.caption(t(c["math_reveal"]))
             else:
                 # Empty State
-                st.info(t({"de": "Wähle mindestens ein Hemd und eine Hose.", "en": "Select at least one shirt and one pair of pants."}))
+                grey_info(t({"de": "Wähle mindestens ein Hemd und eine Hose.", "en": "Select at least one shirt and one pair of pants."}))
 
     # --- FRAG DICH (Ask Yourself) ---
     st.markdown("<br><br>", unsafe_allow_html=True)

@@ -2,6 +2,7 @@
 import streamlit as st
 import numpy as np
 from utils.localization import t
+from utils.layouts.foundation import grey_info
 from utils.quiz_helper import render_mcq
 from utils.ask_yourself import render_ask_yourself
 from utils.exam_essentials import render_exam_essentials
@@ -268,7 +269,7 @@ def render_subtopic_5_4(model):
                  "en": f"With n = {n} measurements, the mean is much more 'stable' than a single measurement. Uncertainty drops by factor √{n} ≈ {np.sqrt(n):.1f}. This is the √n-law — the foundation of statistical precision!"}
             )
         elif n >= 10:
-            st.info(t({
+            grey_info(t({
                 "de": f"Gut! Bei n = {n} ist σ̄ = {sd_mean:.2f}. Erhöhe n weiter auf 25+ um den vollen Effekt zu sehen.",
                 "en": f"Good! With n = {n}, σ̄ = {sd_mean:.2f}. Increase n to 25+ to see the full effect."
             }))

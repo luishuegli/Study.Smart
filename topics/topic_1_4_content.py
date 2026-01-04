@@ -1,6 +1,7 @@
 import streamlit as st
 import plotly.graph_objects as go
 from utils.localization import t
+from utils.layouts.foundation import grey_info
 from views.styles import render_icon, inject_equal_height_css
 from utils.ai_helper import render_ai_tutor
 from utils.quiz_helper import render_mcq
@@ -285,7 +286,7 @@ def render_subtopic_1_4(model):
                 elif user_total < 0:
                     st.error(f"Invalid! Negative probability: {user_total:.2f}")
                 else:
-                    st.info("Set the error term to 0.")
+                    grey_info("Set the error term to 0.")
         
         with col_vis:
             # The Donut Chart

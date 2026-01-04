@@ -5,6 +5,7 @@ import numpy as np
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from utils.localization import t
+from utils.layouts.foundation import grey_info
 from utils.quiz_helper import render_mcq
 from utils.ask_yourself import render_ask_yourself
 from utils.exam_essentials import render_exam_essentials
@@ -494,7 +495,7 @@ def clt_visualizer():
         st.warning(t({"de": "n ist sehr klein — die Mittelwerte sind noch nicht normalverteilt!", 
                       "en": "n is very small — the means are not yet normally distributed!"}))
     elif n < 30:
-        st.info(t({"de": "Besser! Die Verteilung wird glockenkurvenartiger...", 
+        grey_info(t({"de": "Besser! Die Verteilung wird glockenkurvenartiger...", 
                    "en": "Better! The distribution is becoming more bell-shaped..."}))
     else:
         st.success(t({"de": "Glockenkurve! Bei n ≥ 30 ist der ZGS wirksam!", 

@@ -1,6 +1,7 @@
 import streamlit as st
 from views.styles import render_icon, inject_equal_height_css
 from utils.localization import t
+from utils.layouts.foundation import grey_info
 from utils.quiz_helper import render_mcq
 from data.exam_questions import get_question
 
@@ -322,7 +323,7 @@ svg { width: 1.5rem; height: 1.5rem; }
             st.latex(rf"N = {n1} \times {n2} \times {n3} = 6")
         with c_txt:
             if step == 3:
-                st.info(t(c["toy"]["reveal"]))
+                grey_info(t(c["toy"]["reveal"]))
             else:
                 st.caption(t({"de": "Jeder Song, den du wählst, wird Teil der Formel.", "en": "Every song you pick becomes part of the formula."}))
 

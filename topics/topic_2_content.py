@@ -1,5 +1,6 @@
 import streamlit as st
 from utils.localization import t
+from utils.layouts.foundation import grey_info
 
 # --- CONTENT DICTIONARY ---
 content_2 = {
@@ -27,7 +28,7 @@ def render_topic_2_content(client, subtopic_id=None):
         from topics.topic_2_6_content import render_subtopic_2_6
         render_subtopic_2_6(client)
     else:
-        st.info(t({
+        grey_info(t({
             "de": "Dieser Abschnitt ist noch in Entwicklung. Schau bald wieder vorbei!",
             "en": "This section is still in development. Check back soon!"
         }))

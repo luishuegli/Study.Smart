@@ -3,6 +3,7 @@ import plotly.graph_objects as go
 import numpy as np
 from views.styles import render_icon, inject_equal_height_css
 from utils.localization import t
+from utils.layouts.foundation import grey_info
 from utils.quiz_helper import render_mcq
 from utils.progress_tracker import track_question_answer
 from data.exam_questions import get_question
@@ -196,7 +197,7 @@ def render_subtopic_1_8(model):
         res = (p_a/100 * da/100 + p_b/100 * db/100 + p_c/100 * dc/100) * 100
         
         if pa_val == 30 and defa_val == 5: # Defaults
-             st.info(t({
+             grey_info(t({
                  "de": "**Schritt 1:** Passe die **Marktanteile** (Priors) an. Wer produziert am meisten?",
                  "en": "**Step 1:** Adjust the **Market Shares** (Priors). Who produced the most?"
              }))

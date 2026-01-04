@@ -2,6 +2,7 @@ import streamlit as st
 import numpy as np
 import plotly.graph_objects as go
 from utils.localization import t
+from utils.layouts.foundation import grey_info
 from views.styles import inject_equal_height_css
 from utils.quiz_helper import render_mcq
 from data.exam_questions import get_question
@@ -298,9 +299,9 @@ def render_sharpshooter_mission():
             st.success(t({"de": "Volltreffer!", "en": "Bullseye!"}))
         else:
             if user_sigma < target_sigma:
-                st.info(t({"de": "Zu eng! Mehr streuen.", "en": "Too tight! Spread more."}))
+                grey_info(t({"de": "Zu eng! Mehr streuen.", "en": "Too tight! Spread more."}))
             else:
-                st.info(t({"de": "Zu breit! Präziser zielen.", "en": "Too wide! Aim tighter."}))
+                grey_info(t({"de": "Zu breit! Präziser zielen.", "en": "Too wide! Aim tighter."}))
     
     if st.session_state.sharp_done:
         if st.button(t({"de": "Nochmal spielen", "en": "Play again"}), key="reset_sharp"):

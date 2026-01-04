@@ -4,6 +4,7 @@ import numpy as np
 import plotly.graph_objects as go
 from math import sqrt, erf
 from utils.localization import t
+from utils.layouts.foundation import grey_info
 from utils.quiz_helper import render_mcq
 from utils.ask_yourself import render_ask_yourself
 from utils.exam_essentials import render_exam_essentials
@@ -341,9 +342,9 @@ def render_grade_translator_mission():
         st.session_state.mission_3_6_done = False
         diff = user_answer - correct_score_b
         if diff > 0:
-            st.info(t({"de": "Zu hoch! Denk an die Formel: X = μ + Z·σ", "en": "Too high! Think about the formula: X = μ + Z·σ"}))
+            grey_info(t({"de": "Zu hoch! Denk an die Formel: X = μ + Z·σ", "en": "Too high! Think about the formula: X = μ + Z·σ"}))
         else:
-            st.info(t({"de": "Zu niedrig! Denk an die Formel: X = μ + Z·σ", "en": "Too low! Think about the formula: X = μ + Z·σ"}))
+            grey_info(t({"de": "Zu niedrig! Denk an die Formel: X = μ + Z·σ", "en": "Too low! Think about the formula: X = μ + Z·σ"}))
 
 
 # --- HELPER FUNCTIONS ---

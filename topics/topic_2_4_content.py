@@ -1,6 +1,7 @@
 import streamlit as st
 from math import factorial
 from utils.localization import t
+from utils.layouts.foundation import grey_info
 from utils.quiz_helper import render_mcq
 from data.exam_questions import get_question
 from data.exam_questions import get_question
@@ -248,7 +249,7 @@ A→B, B→A, A→C, C→A, B→C, C→B = <b>6 {t({"de": "Ergebnisse", "en": "r
             sorted_committee = sorted(st.session_state.committee_2_4)
             
             if len(st.session_state.committee_2_4) == 0:
-                st.info(t({"de": "Wähle 3 Musiker aus...", "en": "Select 3 musicians..."}))
+                grey_info(t({"de": "Wähle 3 Musiker aus...", "en": "Select 3 musicians..."}))
             else:
                 selection_order = " → ".join(st.session_state.committee_2_4)
                 sorted_order = ", ".join(sorted_committee)

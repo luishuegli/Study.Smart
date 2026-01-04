@@ -178,13 +178,36 @@ from utils.layouts.foundation import (
 **Process:**
 1. Identify core insight hard to grasp from text
 2. Check Topics 1+2 for variety — AVOID repetition
-3. **PROPOSE 4 OPTIONS** with: Type, Scenario, Mission, Rough Layout
+3. **PROPOSE 4 OPTIONS** with: Type, Scenario, Mission, **Layout Preview**
 4. Wait for user to select best option
 5. Implement selected option
 
 **Types:** Slider (continuous), Click grid (discrete), Pills (category), Button sequence (multi-step), Simulation (probability)
 
-**Gate:** □ @st.fragment □ Different from last 3 topics □ Concrete scenario □ Completion state
+> [!IMPORTANT]
+> **Each option MUST include an ASCII layout preview.** Users praised this in Topic 7.4 — makes decision-making much easier.
+
+**Layout Preview Format (REQUIRED for each option):**
+```
+### Option X: [Name]
+**Type**: [Slider/Click grid/Pills/etc]
+**Scenario**: [One-line description]
+
+**Layout**:
+┌─────────────────────┬─────────────────────┐
+│ [Controls panel]    │ [Visualization]     │
+│ • n = [5──●──100]   │ [Chart/Diagram]     │
+│ • Distribution:     │                     │
+│   ○ Option A        │                     │
+│   ○ Option B        │                     │
+├─────────────────────┴─────────────────────┤
+│ [Feedback / Live interpretation]          │
+└───────────────────────────────────────────┘
+
+**Completion**: [What triggers success]
+```
+
+**Gate:** □ @st.fragment □ Different from last 3 topics □ Concrete scenario □ Completion state □ **Layout preview included**
 
 ---
 

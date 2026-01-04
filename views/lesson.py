@@ -25,6 +25,34 @@ else:
     client = None
 
 def lesson_view():
+    # --- SCROLL TO TOP (when coming from Next Lesson) ---
+    if st.session_state.get("scroll_to_top", False):
+        import streamlit.components.v1 as components
+        components.html(
+            """
+            <script>
+                // Delay scroll to ensure Streamlit has finished rendering
+                setTimeout(function() {
+                    // Try multiple selectors for different Streamlit versions
+                    var main = window.parent.document.querySelector('section.main');
+                    if (main) main.scrollTo(0, 0);
+                    
+                    var stMain = window.parent.document.querySelector('[data-testid="stMain"]');
+                    if (stMain) stMain.scrollTo(0, 0);
+                    
+                    // Also try the block container
+                    var block = window.parent.document.querySelector('.block-container');
+                    if (block) block.scrollTo(0, 0);
+                    
+                    // And the whole window as fallback
+                    window.parent.scrollTo(0, 0);
+                }, 100);
+            </script>
+            """,
+            height=0
+        )
+        st.session_state.scroll_to_top = False
+    
     # --- GLOBAL UI RULES: EQUAL HEIGHT BOXES ---
     # --- GLOBAL UI RULES ---
     st.markdown("""
@@ -161,7 +189,7 @@ def lesson_view():
                     topic_completed_count += s_completed
                     topic_total_count += s_total
                 
-                # Build Label
+                # Build Label (title already includes numbers like "1. Basics of Probability")
                 base_title = loc.t(topic['title'])
                 expander_label = base_title
                 
@@ -278,6 +306,8 @@ def render_navigation_buttons(course_id, current_topic_id, current_subtopic_id, 
         with col2:
             button_label = f"{loc.t({'de': 'Nächste Lektion', 'en': 'Next Lesson'})}: {next_subtopic_title} →"
             if st.button(button_label, use_container_width=True, type="primary"):
+                # Set flag to scroll to top after rerun
+                st.session_state.scroll_to_top = True
                 navigate_to_subtopic(next_topic_id, next_subtopic_id)
 
 

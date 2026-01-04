@@ -5,6 +5,7 @@ import plotly.graph_objects as go
 from scipy.special import comb
 from views.styles import inject_equal_height_css
 from utils.localization import t
+from utils.layouts.foundation import grey_info
 from utils.quiz_helper import render_mcq
 from utils.ask_yourself import render_ask_yourself
 from utils.exam_essentials import render_exam_essentials
@@ -298,7 +299,7 @@ def render_symmetry_explorer():
                 
                 st.success(t({"de": "Identisch! X und -X haben dieselbe Verteilung.", "en": "Identical! X and -X have the same distribution."}))
             else:
-                st.info(t({"de": "Toggle aktivieren!", "en": "Toggle to reveal!"}))
+                grey_info(t({"de": "Toggle aktivieren!", "en": "Toggle to reveal!"}))
         
         with col_vis:
             fig = create_symmetry_plot(n_rounds, show_overlay)

@@ -1,5 +1,6 @@
 import streamlit as st
 from utils.localization import t
+from utils.layouts.foundation import grey_info
 from utils.quiz_helper import render_mcq
 from data.exam_questions import get_question
 
@@ -9,7 +10,7 @@ def render_subtopic_9_4(model):
     st.header(t({"de": "9.4 Zusätzliche Prüfungsaufgaben", "en": "9.4 Additional Exam Questions"}))
     st.markdown("---")
     
-    st.info(t({
+    grey_info(t({
         "de": "Aufgaben zu Konfidenzintervallen.",
         "en": "Problems on Confidence Intervals."
     }))

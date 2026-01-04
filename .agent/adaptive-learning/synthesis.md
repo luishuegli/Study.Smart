@@ -39,6 +39,53 @@ _Rules that have been identified but not yet added to rule files._
 | **@st.fragment on ALL interactives** | Fix #8, #9: Every interactive function needs `@st.fragment` decorator | layout.md | ⏳ CRITICAL |
 | **Green reserved for success only** | Fix #9: Don't use `#34C759` for reference/target visuals, use Gray `#6B7280` | design-system.md | ⏳ Pending |
 
+### From Topic 7 (NEW - Slider State Bug)
+| Rule | Evidence | Add to File | Status |
+|------|----------|-------------|--------|
+| **SLIDER KEY-ONLY PATTERN** | Fix #1 Topic 7.3: Using BOTH `value=st.session_state.X` AND `key=Y` AND manual sync causes jump-back bug | interactive.md, templates.md | ⏳ **CRITICAL** |
+
+### From Topic 7.5 (NEW - Scatter Plot)
+| Rule | Evidence | Add to File | Status |
+|------|----------|-------------|--------|
+| **Visual comparisons required** | Fix #20: render_comparison() text-only boxes insufficient | layout.md | ⏳ **CRITICAL** |
+| **No HTML in worked_example answers** | Fix #21: `<br>`, `<strong>` render as raw text | templates.md | ⏳ **CRITICAL** |
+| **No redundant translations** | Fix #22: English should not show "(Streudiagramm)" | design-system.md | ⏳ Pending |
+| **Definition + visual pattern** | Fix #23: Use 2-column layout with example plot | layout.md | ⏳ Pending |
+
+**🚨 SLIDER STATE BUG - ROOT CAUSE & FIX:**
+
+When a Streamlit slider has a `key=`, it automatically syncs to `st.session_state[key]`. Creating a SEPARATE state variable causes circular dependency:
+
+```python
+# ❌ WRONG PATTERN (causes slider jump-back every 2nd move)
+if "slider_value" not in st.session_state:
+    st.session_state.slider_value = 50
+
+val = st.slider("Label", value=st.session_state.slider_value, key="slider_key")
+st.session_state.slider_value = val  # ← CAUSES BUG!
+
+# ✅ CORRECT PATTERN (use key auto-sync only)
+val = st.slider("Label", min_value=0, max_value=100, value=50, key="slider_key")
+# Streamlit auto-syncs to st.session_state["slider_key"] - no manual work needed!
+```
+
+### From Topic 7.3 (NEW - Additional Rules)
+| Rule | Evidence | Add to File | Status |
+|------|----------|-------------|--------|
+| **PROBLEM-TYPE QUESTION HANDLING** | Fix #12: Non-MCQ questions showed "No options to select" | quiz_helper.py, topic templates | ⏳ CRITICAL |
+| **EXAM QUESTION TABLES** | Fix #11: Multi-part exam questions must use markdown tables, not ASCII art | exam_questions.py | ⏳ Pending |
+
+**Problem-Type Questions:**
+```python
+# Check question type before rendering
+if q.get("type") == "problem" or not q.get("options"):
+    st.markdown(t(q["question"]), unsafe_allow_html=True)
+    if st.button("Show Solution"):
+        st.markdown(t(q["solution"]))
+else:
+    render_mcq(...)  # Only for actual MCQs
+```
+
 ### From Topic 4
 | Rule | Evidence | Add to File | Status |
 |------|----------|-------------|--------|
@@ -316,4 +363,116 @@ _Track how rules improve over time._
 > ```
 > 
 > **Exception:** Universal math terms like `\text{Cov}`, `\text{Var}` are OK.
+
+
+---
+
+## Topic 7 Synthesis
+- **Completed:** 2026-01-04 ✅
+- **Total fixes:** 8
+- **New rules created:** 5 (exam-essentials-latex, chf-only, slider-semantic-color, mission-compaction, feedback-sign-format)
+- **Key learnings:**
+  1. **Exam Essentials LaTeX (STRICT):** ALL math in tips/traps MUST use LaTeX ($...$), including variables ($n$), formulas ($K = \alpha n + 1$), and subscripts ($x_{(K-1)}$). NEVER use plain text like "n-1" or "x(K)".
+  2. **CHF Currency Only:** This is a Swiss project - always use CHF, never €.
+  3. **Slider Semantic Coloring:** Use CSS `.stSlider:has([aria-label*="X"])` pattern to color-code sliders matching semantic meaning (e.g., red #FF4B4B for outliers).
+  4. **Mission Compaction:** For missions to fit on screen: chart height ≤220px, padding 8px, remove `<br>` spacers, legend below chart (y=-0.3).
+  5. **Feedback Sign Format:** Use Python's `:+,.0f` format for values that can be positive/negative, NOT hardcoded `+` prefix (causes `+-14`).
+
+### From Topic 7 (NEW - 2026-01-04)
+| Rule | Evidence | Add to File | Status |
+|------|----------|-------------|--------|
+| **Exam Essentials LaTeX** | "K = αn + 1" rendered as plain text | pedagogy.md | ⏳ CRITICAL |
+| **CHF Only** | € appeared in worked example | design-system.md | ⏳ Pending |
+| **Slider Semantic Color** | CEO slider should be red (outlier) | interactive.md | ⏳ Pending |
+| **Plotly Legend Below Chart** | Legend overlapped with chart title | interactive.md | ⏳ Pending |
+| **Feedback Sign Format** | Use `:+,.0f` not `+{value}` | design-system.md | ⏳ Pending |
+| **KaTeX Overflow Fix** | Formulas clipped at top globally | styles.py | ✅ Integrated |
+
+### From Topic 7.4 (NEW - 2026-01-04)
+| Rule | Evidence | Add to File | Status |
+|------|----------|-------------|--------|
+| **LaTeX + latex_en pair** | "Für k=1" showed in English mode | design-system.md | ⏳ CRITICAL |
+| **Interactive Finite Limit** | Pattern Detective had infinite rounds | interactive.md | ⏳ Pending |
+| **Black Pill CSS Pattern** | st.pills renders grey, not black | templates.md | ⏳ Pending |
+| **Compact Chart Height (200px)** | Comparison didn't fit on screen | layout.md | ⏳ Pending |
+| **No Checkmarks in Options** | "Normal ✓" violates no-emoji rule | design-system.md | ✅ Fixed |
+
+---
+
+## Proposed Rule Integrations (Topic 7 Complete)
+
+### 1. design-system.md — Add LaTeX Bilingual Section
+
+```markdown
+[STRICT] Bilingual LaTeX Formulas
+Any LaTeX with text words (e.g., `\text{For}`, `\text{Point}`) MUST use bilingual support:
+
+Option A: Separate keys in data dicts
+```python
+{
+    "latex": r"\text{Für } k=1...",     # German default
+    "latex_en": r"\text{For } k=1...",  # English override
+}
+```
+
+Option B: Pure math (no text) — preferred when possible
+```python
+"latex": r"k=1: \quad F^{-1}(\ldots)"  # No language-specific text
+```
+
+Universal terms like `\text{Cov}`, `\text{Var}` are OK in any language.
+```
+
+### 2. interactive.md — Add Quiz Limit Pattern
+
+```markdown
+[STRICT] Quiz-Style Interactive Limits
+All quiz/detective/pattern-matching games MUST have:
+- Finite limit: `MAX_ROUNDS = 15` (or 10 for simpler games)
+- Completion state: Show final score and restart option
+- Progress indicator: `Score: X/Y`
+
+Pattern:
+```python
+MAX_ROUNDS = 15
+if st.session_state.round >= MAX_ROUNDS:
+    st.success(f"Complete! Score: {score}/{MAX_ROUNDS}")
+    if st.button("Play again"):
+        st.session_state.round = 0; st.rerun(scope="fragment")
+    return
+```
+```
+
+### 3. templates.md — Add Black Pill Button Pattern
+
+```markdown
+[PATTERN] Black Pill Button Group
+For site-consistent pill selection (black when selected):
+
+```python
+btn_cols = st.columns(len(options))
+for col, opt, key in zip(btn_cols, options, keys):
+    with col:
+        if st.session_state.selection == key:
+            st.markdown(f'''<div style="background:#000;color:#fff;
+                padding:8px 16px;border-radius:20px;text-align:center;
+                font-weight:500;font-size:0.9em;">{opt}</div>''', 
+                unsafe_allow_html=True)
+        else:
+            if st.button(opt, key=f"pill_{key}", use_container_width=True):
+                st.session_state.selection = key
+                st.rerun(scope="fragment")
+```
+```
+
+### 4. layout.md — Add Compact Comparison Pattern
+
+```markdown
+[PATTERN] Compact Visual Comparison
+For side-by-side chart comparisons on a single screen:
+- Chart height: max 200px
+- Column ratio: Give more space to controls ([1, 1.5] not [1.5, 1])
+- No interpretation boxes — use subtitle text
+- Key insight: Single-line caption
+```
 

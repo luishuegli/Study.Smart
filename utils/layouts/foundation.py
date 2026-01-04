@@ -91,3 +91,17 @@ COLORS = {
     "border": "rgba(0,0,0,0.20)"  # Standard border color
 }
 
+
+def grey_info(content):
+    """
+    Drop-in replacement for st.info() that uses grey callout styling.
+    Accepts either a string or a dict (for bilingual content via t()).
+    """
+    if isinstance(content, dict):
+        text = t(content)
+    else:
+        text = content
+    
+    st.markdown(f'''<div style="background: #f4f4f5; border-left: 4px solid #a1a1aa; padding: 12px 16px; border-radius: 8px; color: #3f3f46;">
+{text}
+</div>''', unsafe_allow_html=True)

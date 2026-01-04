@@ -3,6 +3,7 @@
 import streamlit as st
 from views.styles import inject_equal_height_css
 from utils.localization import t
+from utils.layouts.foundation import grey_info
 from utils.quiz_helper import render_mcq
 from data.exam_questions import get_question
 import numpy as np
@@ -491,7 +492,7 @@ def render_subtopic_4_6(model):
             # Progress feedback
             st.markdown("<br>", unsafe_allow_html=True)
             if surv_prob >= 0.50:
-                st.info(t({"de": "λ ist noch klein. Der Zerfall ist langsam — hohe Überlebensrate.", "en": "λ is still small. Decay is slow — high survival rate."}))
+                grey_info(t({"de": "λ ist noch klein. Der Zerfall ist langsam — hohe Überlebensrate.", "en": "λ is still small. Decay is slow — high survival rate."}))
             elif surv_prob >= target_survival:
                 st.warning(t({"de": f"Fast da! P(T>2) = {surv_prob:.1%} — erhöhe λ für schnelleren Zerfall!", "en": f"Almost there! P(T>2) = {surv_prob:.1%} — increase λ for faster decay!"}))
             else:

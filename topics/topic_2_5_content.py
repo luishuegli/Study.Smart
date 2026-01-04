@@ -1,6 +1,7 @@
 import streamlit as st
 from math import factorial
 from utils.localization import t
+from utils.layouts.foundation import grey_info
 from utils.quiz_helper import render_mcq
 from data.exam_questions import get_question
 from views.styles import render_icon, inject_equal_height_css
@@ -278,7 +279,7 @@ def render_subtopic_2_5(model):
             st.markdown(f"**{t({'de': 'Pool-Grösse nach jedem Schritt', 'en': 'Pool Size After Each Step'})}**")
             
             if len(st.session_state.pin_2_5) == 0:
-                st.info(t({"de": "Pool: 10/10 (alle verfügbar)", "en": "Pool: 10/10 (all available)"}))
+                grey_info(t({"de": "Pool: 10/10 (alle verfügbar)", "en": "Pool: 10/10 (all available)"}))
             else:
                 pin_str = "".join(map(str, st.session_state.pin_2_5))
                 st.markdown(f"**{t({'de': 'Aktueller PIN:', 'en': 'Current PIN:'})}** `{pin_str}`")

@@ -262,20 +262,20 @@ content_7_2 = {
     "worked_example": {
         "header": {"de": "Praxis: Welche Aktie ist volatiler?", "en": "Practice: Which Stock Is More Volatile?"},
         "problem": {
-            "de": """<strong>Gegeben (250 Handelstage):</strong><br>
-            • Daimler-Aktie: Mittelwert = <span style='color:#9B59B6;font-weight:600'>50.59 €</span>, 
-              Standardabweichung = <span style='color:#FF4B4B;font-weight:600'>36.18 €</span><br>
-            • Porsche-Aktie: Mittelwert = <span style='color:#9B59B6;font-weight:600'>396.10 €</span>, 
-              Standardabweichung = <span style='color:#FF4B4B;font-weight:600'>182.96 €</span>
+            "de": """**Gegeben (250 Handelstage):**<br>
+            • Daimler-Aktie: Mittelwert = <span style='color:#9B59B6;font-weight:600'>CHF 50.59</span>, 
+              Standardabweichung = <span style='color:#FF4B4B;font-weight:600'>CHF 36.18</span><br>
+            • Porsche-Aktie: Mittelwert = <span style='color:#9B59B6;font-weight:600'>CHF 396.10</span>, 
+              Standardabweichung = <span style='color:#FF4B4B;font-weight:600'>CHF 182.96</span>
             <br><br>
-            <strong>Frage:</strong> Welche Aktie streut relativ stärker?""",
-            "en": """<strong>Given (250 trading days):</strong><br>
-            • Daimler Stock: Mean = <span style='color:#9B59B6;font-weight:600'>€50.59</span>, 
-              Std Dev = <span style='color:#FF4B4B;font-weight:600'>€36.18</span><br>
-            • Porsche Stock: Mean = <span style='color:#9B59B6;font-weight:600'>€396.10</span>, 
-              Std Dev = <span style='color:#FF4B4B;font-weight:600'>€182.96</span>
+            **Frage:** Welche Aktie streut relativ stärker?""",
+            "en": """**Given (250 trading days):**<br>
+            • Daimler Stock: Mean = <span style='color:#9B59B6;font-weight:600'>CHF 50.59</span>, 
+              Std Dev = <span style='color:#FF4B4B;font-weight:600'>CHF 36.18</span><br>
+            • Porsche Stock: Mean = <span style='color:#9B59B6;font-weight:600'>CHF 396.10</span>, 
+              Std Dev = <span style='color:#FF4B4B;font-weight:600'>CHF 182.96</span>
             <br><br>
-            <strong>Question:</strong> Which stock has higher relative volatility?"""
+            **Question:** Which stock has higher relative volatility?"""
         },
         "steps": [
             {
@@ -290,10 +290,10 @@ content_7_2 = {
             }
         ],
         "answer": {
-            "de": "<strong>Fazit:</strong> Obwohl Porsche eine höhere absolute Standardabweichung hat (€182.96 vs €36.18), "
-                  "ist <strong>Daimler relativ volatiler</strong> (71.5% vs 46.2%). Der VK deckt das auf!",
-            "en": "<strong>Conclusion:</strong> Although Porsche has higher absolute standard deviation (€182.96 vs €36.18), "
-                  "<strong>Daimler is relatively more volatile</strong> (71.5% vs 46.2%). The CV reveals this!"
+            "de": "**Fazit:** Obwohl Porsche eine höhere absolute Standardabweichung hat (CHF 182.96 vs CHF 36.18), "
+                  "ist **Daimler relativ volatiler** (71.5% vs 46.2%). Der VK deckt das auf!",
+            "en": "**Conclusion:** Although Porsche has higher absolute standard deviation (CHF 182.96 vs CHF 36.18), "
+                  "**Daimler is relatively more volatile** (71.5% vs 46.2%). The CV reveals this!"
         }
     },
     
@@ -330,8 +330,8 @@ content_7_2 = {
         },
         "trap_formula": r"S^2_{\text{emp}} = \frac{1}{n}\sum(x_i-\bar{x})^2 \quad \text{vs} \quad \hat{\sigma}^2 = \frac{1}{n-1}\sum(x_i-\bar{x})^2",
         "trap_rule": {
-            "de": "Lies die Aufgabe genau: 'Empirische Varianz' = n, 'Stichprobenvarianz (erwartungstreu)' = n-1",
-            "en": "Read the problem carefully: 'Empirical variance' = n, 'Sample variance (unbiased)' = n-1"
+            "de": "Lies die Aufgabe genau: 'Empirische Varianz' = $n$, 'Stichprobenvarianz (erwartungstreu)' = $n-1$",
+            "en": "Read the problem carefully: 'Empirical variance' = $n$, 'Sample variance (unbiased)' = $n-1$"
         },
         "tips": [
             {
@@ -350,10 +350,10 @@ content_7_2 = {
             },
             {
                 "tip": {"de": "Quantile-Formel mit K", "en": "Quantile Formula with K"},
-                "why": {"de": "K = αn + 1 berechnen. Wenn K ganzzahlig → Mittelwert von x(K-1) und x(K). "
-                              "Nicht ganzzahlig → nimm x(K).", 
-                        "en": "Calculate K = αn + 1. If K is integer → average of x(K-1) and x(K). "
-                              "Not integer → take x(K)."}
+                "why": {"de": "$K = \\alpha n + 1$ berechnen. Wenn $K$ ganzzahlig → Mittelwert von $x_{(K-1)}$ und $x_{(K)}$. "
+                              "Nicht ganzzahlig → nimm $x_{(\\lceil K \\rceil)}$.", 
+                        "en": "Calculate $K = \\alpha n + 1$. If $K$ is integer → average of $x_{(K-1)}$ and $x_{(K)}$. "
+                              "Not integer → take $x_{(\\lceil K \\rceil)}$."}
             }
         ]
     },
@@ -421,20 +421,24 @@ def outlier_sensitivity_mission():
     base_salaries = np.array([4200, 4500, 4800, 5000, 5000, 5200, 5400, 5600, 5800, 6000])
     n_original = len(base_salaries)
     
-    # Scenario description (grey callout)
+    # Scenario description (compact grey callout)
     st.markdown(f"""
-<div style="background: #f4f4f5; border-left: 4px solid #a1a1aa; 
-            padding: 12px 16px; border-radius: 8px; color: #3f3f46;">
+<div style="background: #f4f4f5; border-left: 3px solid #a1a1aa; 
+            padding: 8px 12px; border-radius: 6px; color: #3f3f46; font-size: 0.9em;">
 {t(content_7_2["mission"]["scenario"])}
 </div>
 """, unsafe_allow_html=True)
     
-    st.markdown("<br>", unsafe_allow_html=True)
-    
-    # Mission statement
+    # Mission statement (inline, no extra spacing)
     st.markdown(f"**{t({'de': 'Mission', 'en': 'Mission'})}:** {t({'de': 'Finde heraus, was mit Mittelwert und Median passiert!', 'en': 'Find out what happens to mean and median!'})}")
     
-    st.markdown("<br>", unsafe_allow_html=True)
+    # === CEO SLIDER WITH RED COLOR (outlier semantic) ===
+    st.markdown("""
+    <style>
+    .stSlider:has([aria-label*="CEO"]) div[data-baseweb="slider"] > div:first-child > div:first-child { background-color: #FF4B4B !important; }
+    .stSlider:has([aria-label*="CEO"]) div[role="slider"] { background-color: #FFFFFF !important; border: 2px solid #FF4B4B !important; }
+    </style>
+    """, unsafe_allow_html=True)
     
     ceo_salary = st.slider(
         t({"de": "CEO-Gehalt (CHF)", "en": "CEO Salary (CHF)"}),
@@ -464,8 +468,7 @@ def outlier_sensitivity_mission():
     median_shift = new_median - original_median
     mean_shift_pct = (mean_shift / original_mean) * 100
     median_shift_pct = (median_shift / original_median) * 100 if original_median != 0 else 0
-    
-    st.markdown("<br>", unsafe_allow_html=True)
+
     
     # === VISUALIZATION ===
     # Create side-by-side charts using Plotly
@@ -546,13 +549,20 @@ def outlier_sensitivity_mission():
         row=1, col=2
     )
     
-    # Layout
+    # Layout - COMPACT with legend BELOW chart
     fig.update_layout(
-        height=400,
+        height=230,
         barmode="group",
         showlegend=True,
-        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
-        margin=dict(t=60, b=50, l=60, r=40),
+        legend=dict(
+            orientation="h", 
+            yanchor="top", 
+            y=-0.3,
+            xanchor="center", 
+            x=0.75,
+            font=dict(size=10)
+        ),
+        margin=dict(t=30, b=65, l=40, r=20),
         hovermode="x unified",
         dragmode=False
     )
@@ -568,48 +578,30 @@ def outlier_sensitivity_mission():
     
     st.plotly_chart(fig, use_container_width=True, config=config)
     
-    # === REAL-TIME FEEDBACK ===
-    st.markdown("<br>", unsafe_allow_html=True)
-    
-    # Color-coded feedback boxes
+    # === REAL-TIME FEEDBACK (compact inline) ===
     col1, col2 = st.columns(2)
     
     with col1:
-        # Mean shift (purple background for center measure)
         shift_color = COLOR_SPREAD if mean_shift_pct > 10 else COLOR_NEUTRAL
         st.markdown(f"""
-<div style="background: rgba(155, 89, 182, 0.1); border: 2px solid {COLOR_CENTER}; 
-            padding: 16px; border-radius: 8px; text-align: center;">
-<strong style="color: {COLOR_CENTER};">{t({"de": "Mittelwert-Verschiebung", "en": "Mean Shift"})}</strong><br>
-<span style="font-size: 1.8em; font-weight: 700; color: {shift_color};">
-+{mean_shift:,.0f} CHF ({mean_shift_pct:.1f}%)
+<div style="background: rgba(155, 89, 182, 0.1); border-left: 3px solid {COLOR_CENTER}; 
+            padding: 8px 12px; border-radius: 6px; text-align: center;">
+<strong style="color: {COLOR_CENTER}; font-size: 0.85em;">{t({"de": "Mittelwert", "en": "Mean"})}</strong><br>
+<span style="font-size: 1.3em; font-weight: 700; color: {shift_color};">
+{mean_shift:+,.0f} CHF ({mean_shift_pct:+.1f}%)
 </span>
 </div>
 """, unsafe_allow_html=True)
     
     with col2:
-        # Median shift (green background for robust measure)
         med_color = COLOR_RESULT if median_shift_pct < 5 else COLOR_NEUTRAL
         st.markdown(f"""
-<div style="background: rgba(22, 163, 74, 0.1); border: 2px solid {COLOR_RESULT}; 
-            padding: 16px; border-radius: 8px; text-align: center;">
-<strong style="color: {COLOR_RESULT};">{t({"de": "Median-Verschiebung", "en": "Median Shift"})}</strong><br>
-<span style="font-size: 1.8em; font-weight: 700; color: {med_color};">
-+{median_shift:,.0f} CHF ({median_shift_pct:.1f}%)
+<div style="background: rgba(22, 163, 74, 0.1); border-left: 3px solid {COLOR_RESULT}; 
+            padding: 8px 12px; border-radius: 6px; text-align: center;">
+<strong style="color: {COLOR_RESULT}; font-size: 0.85em;">{t({"de": "Median", "en": "Median"})}</strong><br>
+<span style="font-size: 1.3em; font-weight: 700; color: {med_color};">
+{median_shift:+,.0f} CHF ({median_shift_pct:+.1f}%)
 </span>
-</div>
-""", unsafe_allow_html=True)
-    
-    st.markdown("<br>", unsafe_allow_html=True)
-    
-    # === LEGEND (Semantic Color Explanation) ===
-    st.markdown(f"""
-<div style="background: #f8fafc; border: 1px solid #e2e8f0; padding: 12px 16px; border-radius: 8px;">
-<strong>{t({"de": "Farbcode", "en": "Color Code"})}:</strong>
-<span style="color: {COLOR_DATA}; font-weight: 600;">●</span> {t({"de": "Team-Gehälter", "en": "Team Salaries"})} | 
-<span style="color: {COLOR_SPREAD}; font-weight: 600;">●</span> {t({"de": "CEO (Ausreisser)", "en": "CEO (Outlier)"})} | 
-<span style="color: {COLOR_CENTER}; font-weight: 600;">●</span> {t({"de": "Mittelwert", "en": "Mean"})} | 
-<span style="color: {COLOR_RESULT}; font-weight: 600;">●</span> {t({"de": "Median (robust)", "en": "Median (robust)"})}
 </div>
 """, unsafe_allow_html=True)
     
@@ -693,7 +685,7 @@ def render_subtopic_7_2(model):
                 st.markdown("---")
             
             # When to use
-            st.markdown(f"**{t({'de': 'Wann verwenden?', 'en': 'When to use?'})}** {t(measure['when_to_use'])}")
+            st.markdown(f"**{t({'de': 'Wann verwenden?', 'en': 'When to use?'})}** {t(measure['when_to_use'])}", unsafe_allow_html=True)
             
             # Key insight
             st.markdown("---")
@@ -753,8 +745,7 @@ def render_subtopic_7_2(model):
     
     # === 6. INTERACTIVE MISSION ===
     st.markdown(f"### {t(content_7_2['mission']['title'])}")
-    with st.container(border=True):
-        outlier_sensitivity_mission()
+    outlier_sensitivity_mission()
     
     st.markdown("<br><br>", unsafe_allow_html=True)
     

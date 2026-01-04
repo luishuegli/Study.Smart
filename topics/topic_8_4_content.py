@@ -1,5 +1,6 @@
 import streamlit as st
 from utils.localization import t
+from utils.layouts.foundation import grey_info
 from utils.quiz_helper import render_mcq
 from utils.problem_renderer import render_open_question, render_multi_stage_problem
 from data.exam_questions import get_all_questions_for_topic
@@ -10,7 +11,7 @@ def render_subtopic_8_4(model):
     st.header(t({"de": "8.4 Zusätzliche Prüfungsaufgaben", "en": "8.4 Additional Exam Questions"}))
     st.markdown("---")
     
-    st.info(t({
+    grey_info(t({
         "de": "Aufgaben zu Schätzfunktionen (Erwartungstreue, Konsistenz, Effizienz, MSE) und Methoden (MOM, MLE).",
         "en": "Problems on Estimators (Unbiasedness, Consistency, Efficiency, MSE) and Methods (MOM, MLE)."
     }))

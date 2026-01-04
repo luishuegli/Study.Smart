@@ -345,6 +345,26 @@ def load_design_system():
             font-size: 1.1em !important;
         }
         
+        /* === FIX KATEX FORMULA CLIPPING === */
+        /* Formulas get cut off at top due to overflow:hidden on parent containers */
+        /* This ensures the full formula (especially fractions) renders completely */
+        .katex,
+        .katex-display,
+        .katex-display > .katex {
+            overflow: visible !important;
+        }
+        /* Add breathing room at top for tall elements like fractions */
+        .katex-display {
+            padding-top: 4px !important;
+            padding-bottom: 2px !important;
+        }
+        /* Ensure the Streamlit container holding st.latex doesn't clip */
+        [data-testid="stMarkdownContainer"] .katex-display,
+        [data-testid="stVerticalBlock"] .katex-display {
+            overflow: visible !important;
+            margin-top: 4px !important;
+        }
+        
         /* === COMPACT DIVIDERS WITHIN CONTAINERS === */
         /* CRITICAL: Streamlit's st.container(border=True) no longer uses stVerticalBlockBorderWrapper */
         /* The bordered container uses stVerticalBlock with emotion-cache classes for border */

@@ -10,7 +10,7 @@ COURSES = {
         "topics": [
             {
                 "id": "topic_1", 
-                "title": {"de": "1. Grundlagen der Wahrscheinlichkeit", "en": "1. Basics of Probability"}, 
+                "title": {"de": "1\. Grundlagen der Wahrscheinlichkeit", "en": "1\. Basics of Probability"}, 
                 "status": "open",
                 "slide_range": (7, 92),
                 "subtopics": [
@@ -28,7 +28,7 @@ COURSES = {
             },
             {
                 "id": "topic_2", 
-                "title": {"de": "2. Elementare Kombinatorik", "en": "2. Elementary Combinatorics"}, 
+                "title": {"de": "2\. Elementare Kombinatorik", "en": "2\. Elementary Combinatorics"}, 
                 "status": "open",
                 "slide_range": (93, 104),
                 "subtopics": [
@@ -42,7 +42,7 @@ COURSES = {
             },
             {
                 "id": "topic_3", 
-                "title": {"de": "3. Zufallsvariablen", "en": "3. Random Variables"}, 
+                "title": {"de": "3\. Zufallsvariablen", "en": "3\. Random Variables"}, 
                 "status": "open",
                 "slide_range": (105, 172),
                 "subtopics": [
@@ -57,7 +57,7 @@ COURSES = {
             },
             {
                 "id": "topic_4", 
-                "title": {"de": "4. Stochastische Modelle und spezielle Verteilungen", "en": "4. Stochastic Models and Special Distributions"}, 
+                "title": {"de": "4\. Stochastische Modelle und spezielle Verteilungen", "en": "4\. Stochastic Models and Special Distributions"}, 
                 "status": "open",
                 "slide_range": (173, 217),
                 "subtopics": [
@@ -74,7 +74,7 @@ COURSES = {
             },
             {
                 "id": "topic_5", 
-                "title": {"de": "5. Mehrdimensionale Zufallsvariablen", "en": "5. Multidimensional Random Variables"}, 
+                "title": {"de": "5\. Mehrdimensionale Zufallsvariablen", "en": "5\. Multidimensional Random Variables"}, 
                 "status": "open",
                 "slide_range": (218, 260),
                 "subtopics": [
@@ -87,7 +87,7 @@ COURSES = {
             },
             {
                 "id": "topic_6", 
-                "title": {"de": "6. Der zentrale Grenzwertsatz", "en": "6. Central Limit Theorem"}, 
+                "title": {"de": "6\. Der zentrale Grenzwertsatz", "en": "6\. Central Limit Theorem"}, 
                 "status": "open",
                 "slide_range": (261, 277),
                 "subtopics": [
@@ -98,7 +98,7 @@ COURSES = {
             },
             {
                 "id": "topic_7", 
-                "title": {"de": "7. Beschreibende/Deskriptive Statistik", "en": "7. Descriptive Statistics"}, 
+                "title": {"de": "7\. Beschreibende/Deskriptive Statistik", "en": "7\. Descriptive Statistics"}, 
                 "status": "open",
                 "slide_range": (278, 312),
                 "subtopics": [
@@ -112,7 +112,7 @@ COURSES = {
             },
             {
                 "id": "topic_8", 
-                "title": {"de": "8. Schätzung unbekannter Parameter: Punktschätzung", "en": "8. Point Estimation of Unknown Parameters"}, 
+                "title": {"de": "8\. Schätzung unbekannter Parameter: Punktschätzung", "en": "8\. Point Estimation of Unknown Parameters"}, 
                 "status": "open",
                 "slide_range": (313, 360),
                 "subtopics": [
@@ -124,7 +124,7 @@ COURSES = {
             },
             {
                 "id": "topic_9", 
-                "title": {"de": "9. Intervallschätzungen-Konfidenzintervalle", "en": "9. Interval Estimations - Confidence Intervals"}, 
+                "title": {"de": "9\. Intervallschätzungen-Konfidenzintervalle", "en": "9\. Interval Estimations - Confidence Intervals"}, 
                 "status": "open",
                 "slide_range": (361, 374),
                 "subtopics": [
@@ -136,7 +136,7 @@ COURSES = {
             },
             {
                 "id": "topic_10", 
-                "title": {"de": "10. Hypothesentests", "en": "10. Hypothesis Tests"}, 
+                "title": {"de": "10\. Hypothesentests", "en": "10\. Hypothesis Tests"}, 
                 "status": "open",
                 "slide_range": (375, 394),
                 "subtopics": [
@@ -149,7 +149,7 @@ COURSES = {
             },
             {
                 "id": "topic_11", 
-                "title": {"de": "11. Fachübergreifende Aufgaben", "en": "11. Interdisciplinary Problems"}, 
+                "title": {"de": "11\. Fachübergreifende Aufgaben", "en": "11\. Interdisciplinary Problems"}, 
                 "status": "open",
                 "slide_range": (395, 395),
                 "subtopics": [

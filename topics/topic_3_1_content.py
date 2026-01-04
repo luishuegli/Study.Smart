@@ -4,6 +4,7 @@ import math
 import plotly.graph_objects as go
 from views.styles import render_icon, inject_equal_height_css
 from utils.localization import t
+from utils.layouts.foundation import grey_info
 from utils.quiz_helper import render_mcq
 from data.exam_questions import get_question
 
@@ -287,9 +288,9 @@ def render_simulator_3_1():
                 st.session_state.miss_3_1_done = False
                 diff = curr_prob - target_prob
                 if diff > 0:
-                    st.info(t({"de": "Zu viel! (Mehr als 84%)", "en": "Too high! (More than 84%)"}))
+                    grey_info(t({"de": "Zu viel! (Mehr als 84%)", "en": "Too high! (More than 84%)"}))
                 else:
-                    st.info(t({"de": "Zu wenig! (Weniger als 84%)", "en": "Too low! (Less than 84%)"}))
+                    grey_info(t({"de": "Zu wenig! (Weniger als 84%)", "en": "Too low! (Less than 84%)"}))
 
         with col_vis:
             st.metric("Accumulated Probability", f"{curr_prob:.1%}", delta=f"{curr_prob-target_prob:.1%}")

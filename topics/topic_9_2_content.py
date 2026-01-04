@@ -1,6 +1,7 @@
 # Topic 9.2: Derivation of Confidence Intervals
 import streamlit as st
 from utils.localization import t
+from utils.layouts.foundation import grey_info
 from utils.quiz_helper import render_mcq
 from data.exam_questions import get_question
 
@@ -13,7 +14,7 @@ def render_subtopic_9_2(model):
     # --- THEORY PLACEHOLDER ---
     with st.container(border=True):
         st.markdown(f"### {t({'de': 'Theorie', 'en': 'Theory'})}")
-        st.info(t({
+        grey_info(t({
             "de": "**Theorie-Inhalte kommen bald!**\n\nDieser Abschnitt wird theoretische Erklärungen enthalten:\n\n• KI für Erwartungswert (σ bekannt)\n• KI für Erwartungswert (σ unbekannt)\n• KI für Proportionen",
             "en": "**Theory content coming soon!**\n\nThis section will contain theoretical explanations:\n\n• CI for mean (σ known)\n• CI for mean (σ unknown)\n• CI for proportions"
         }))

@@ -3,6 +3,7 @@ import numpy as np
 import plotly.graph_objects as go
 from views.styles import render_icon, inject_equal_height_css
 from utils.localization import t
+from utils.layouts.foundation import grey_info
 from utils.quiz_helper import render_mcq
 from data.exam_questions import get_question
 from utils.progress_tracker import track_question_answer, update_local_progress
@@ -354,9 +355,9 @@ def render_balance_simulator():
                 st.success(t({"de": "Perfekt balanciert!", "en": "Perfectly balanced!"}))
             else:
                 if e_x < target_ex:
-                    st.info(t({"de": "Kippt nach links!", "en": "Tilting left!"}))
+                    grey_info(t({"de": "Kippt nach links!", "en": "Tilting left!"}))
                 elif e_x > target_ex:
-                    st.info(t({"de": "Kippt nach rechts!", "en": "Tilting right!"}))
+                    grey_info(t({"de": "Kippt nach rechts!", "en": "Tilting right!"}))
         
         if st.session_state.bal_mission_done:
             if st.button(t({"de": "Nochmal spielen", "en": "Play again"}), key="reset_balance"):
@@ -418,9 +419,9 @@ def render_casino_mission():
             else:
                 st.session_state.casino_done = False
                 if expected_profit > 0:
-                    st.info(t({"de": "Zu billig! Der Spieler gewinnt durchschnittlich.", "en": "Too cheap! The player wins on average."}))
+                    grey_info(t({"de": "Zu billig! Der Spieler gewinnt durchschnittlich.", "en": "Too cheap! The player wins on average."}))
                 else:
-                    st.info(t({"de": "Zu teuer! Der Spieler verliert durchschnittlich.", "en": "Too expensive! The player loses on average."}))
+                    grey_info(t({"de": "Zu teuer! Der Spieler verliert durchschnittlich.", "en": "Too expensive! The player loses on average."}))
         
         # Hint expander
         with st.expander(t({"de": "Hinweis anzeigen", "en": "Show hint"})):

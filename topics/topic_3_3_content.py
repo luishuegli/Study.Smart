@@ -4,6 +4,7 @@ import numpy as np
 from math import erf, sqrt
 from views.styles import render_icon, inject_equal_height_css
 from utils.localization import t
+from utils.layouts.foundation import grey_info
 from utils.quiz_helper import render_mcq
 from data.exam_questions import get_question
 from utils.progress_tracker import track_question_answer, update_local_progress
@@ -251,9 +252,9 @@ def render_subtopic_3_3(model):
             else:
                  st.session_state.mission_3_3_done = False
                  if mu < target_mu:
-                     st.info(t({"de": "Zu weit links!", "en": "Too far left!"}))
+                     grey_info(t({"de": "Zu weit links!", "en": "Too far left!"}))
                  else:
-                     st.info(t({"de": "Zu weit rechts!", "en": "Too far right!"}))
+                     grey_info(t({"de": "Zu weit rechts!", "en": "Too far right!"}))
 
     st.markdown("<br><br>", unsafe_allow_html=True)
     

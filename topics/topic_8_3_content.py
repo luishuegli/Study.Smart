@@ -1,6 +1,7 @@
 # Topic 8.3: Methods for Constructing Estimating Functions
 import streamlit as st
 from utils.localization import t
+from utils.layouts.foundation import grey_info
 from utils.quiz_helper import render_mcq
 from data.exam_questions import get_question
 
@@ -13,7 +14,7 @@ def render_subtopic_8_3(model):
     # --- THEORY PLACEHOLDER ---
     with st.container(border=True):
         st.markdown(f"### {t({'de': 'Theorie', 'en': 'Theory'})}")
-        st.info(t({
+        grey_info(t({
             "de": "**Theorie-Inhalte kommen bald!**\n\nDieser Abschnitt wird theoretische Erklärungen enthalten:\n\n• Maximum-Likelihood-Methode\n• Likelihood-Funktion\n• Log-Likelihood",
             "en": "**Theory content coming soon!**\n\nThis section will contain theoretical explanations:\n\n• Maximum Likelihood Method\n• Likelihood Function\n• Log-Likelihood"
         }))

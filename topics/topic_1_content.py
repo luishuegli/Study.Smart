@@ -8,6 +8,7 @@ import plotly.graph_objects as go
 import numpy as np
 from views.styles import render_icon, inject_equal_height_css
 from utils.localization import t
+from utils.layouts.foundation import grey_info
 from utils.ai_helper import render_ai_tutor
 from utils.quiz_helper import render_mcq
 from data.exam_questions import get_question
@@ -410,4 +411,4 @@ def render_topic_1_content(model, subtopic_id=None):
         from topics.topic_1_11_content import render_subtopic_1_11
         render_subtopic_1_11(model)
     else:
-        st.info(f"Content for subtopic {subtopic_id} is under development.")
+        grey_info(f"Content for subtopic {subtopic_id} is under development.")

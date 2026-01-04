@@ -3,6 +3,7 @@ import plotly.graph_objects as go
 import math
 from views.styles import render_icon, inject_equal_height_css
 from utils.localization import t
+from utils.layouts.foundation import grey_info
 from utils.quiz_helper import render_mcq
 from data.exam_questions import get_question
 
@@ -356,7 +357,7 @@ def render_subtopic_1_7(model):
             # Brief feedback during progress
             if not is_done:
                 removed_count = 3 - current_noise
-                st.info(f"Squares Removed: {removed_count}/3")
+                grey_info(f"Squares Removed: {removed_count}/3")
     
     # THE MASTERY CARD - Full Width Below the Interactive Section
     if is_done:
@@ -376,7 +377,7 @@ def render_subtopic_1_7(model):
             with col_b:
                 st.markdown(f"**{t(content_1_7['feedback']['success']['math_title'])}**")
                 st.latex(content_1_7["feedback"]["success"]["calculated_formula"])
-                st.info(t(content_1_7["feedback"]["success"]["translation"]))
+                grey_info(t(content_1_7["feedback"]["success"]["translation"]))
 
             st.divider()
             
@@ -629,7 +630,7 @@ def render_subtopic_1_7(model):
             with col_b:
                 st.markdown(f"**{t(content_1_7['independence']['mastery']['math_title'])}**")
                 st.latex(fr"P(A \cap B) = {P_A:.2f} \times {P_B:.2f} = {P_A * P_B:.2f}")
-                st.info(t(content_1_7["independence"]["mastery"]["translation"]))
+                grey_info(t(content_1_7["independence"]["mastery"]["translation"]))
 
             st.divider()
             

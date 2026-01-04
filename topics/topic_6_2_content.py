@@ -4,6 +4,7 @@ import streamlit as st
 import numpy as np
 from scipy import stats
 from utils.localization import t
+from utils.layouts.foundation import grey_info
 from utils.quiz_helper import render_mcq
 from utils.ask_yourself import render_ask_yourself
 from utils.exam_essentials import render_exam_essentials
@@ -254,7 +255,7 @@ def continuity_correction_interactive():
             "en": f"WITH correction is closer to exact! Error: {error_with:.4f} vs {error_without:.4f}"
         }))
     else:
-        st.info(t({
+        grey_info(t({
             "de": f"In diesem Fall sind beide Approximationen ähnlich. Fehler: {error_with:.4f} vs {error_without:.4f}",
             "en": f"In this case both approximations are similar. Error: {error_with:.4f} vs {error_without:.4f}"
         }))

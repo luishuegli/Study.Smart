@@ -2,6 +2,7 @@
 import streamlit as st
 from views.styles import inject_equal_height_css
 from utils.localization import t
+from utils.layouts.foundation import grey_info
 from utils.quiz_helper import render_mcq
 from data.exam_questions import get_question
 from utils.progress_tracker import track_question_answer, update_local_progress
@@ -420,7 +421,7 @@ def render_counting_compass():
                 st.latex(formula)
                 st.caption(example)
             else:
-                st.info(t({"de": "Beantworte beide Fragen!", "en": "Answer both questions!"}))
+                grey_info(t({"de": "Beantworte beide Fragen!", "en": "Answer both questions!"}))
         
         # Pro tip
         st.markdown(f"""

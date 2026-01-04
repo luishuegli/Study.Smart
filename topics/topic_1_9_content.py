@@ -4,7 +4,9 @@ import numpy as np
 import pandas as pd
 from views.styles import render_icon, inject_equal_height_css
 from utils.localization import t
+from utils.layouts.foundation import grey_info
 from utils.localization import t
+from utils.layouts.foundation import grey_info
 from utils.quiz_helper import render_mcq
 from utils.progress_tracker import track_question_answer
 from data.exam_questions import get_question
@@ -253,10 +255,14 @@ def render_subtopic_1_9(model):
         st.markdown("<br>", unsafe_allow_html=True)
         with st.container(border=True):
             if stage == 0:
-                st.info(t({
-                    "de": "**Anker:** Wir starten mit einer Bevölkerung von 16. Aktuell könnte *jeder* krank sein. Wir wissen nichts.",
-                    "en": "**Anchor:** We start with a population of 16. At this point, *anyone* could be sick. We know nothing."
-                }))
+                st.markdown(f"""
+<div style="background: #f4f4f5; border-left: 4px solid #a1a1aa; padding: 12px 16px; border-radius: 8px; color: #3f3f46;">
+{t({
+    "de": "<strong>Anker:</strong> Wir starten mit einer Bevölkerung von 16. Aktuell könnte <em>jeder</em> krank sein. Wir wissen nichts.",
+    "en": "<strong>Anchor:</strong> We start with a population of 16. At this point, <em>anyone</em> could be sick. We know nothing."
+})}
+</div>
+""", unsafe_allow_html=True)
             
             elif stage == 1:
                 st.markdown(t({
@@ -856,7 +862,7 @@ def render_subtopic_1_9(model):
                 "en": f"**Found it!** You located the object after {attempts} attempts.\n\nSince our sensor is now 'perfect' (100% detection), you systematically eliminated all empty sectors. This is the extreme form of Bayes: P(Location|Miss) = 0."
             }))
         elif attempts == 0:
-            st.info(t({
+            grey_info(t({
                 "de": "**Deine Mission:** Das Raster zeigt Wahrscheinlichkeiten. Klicke auf den **dunkelsten Sektor** (höchste Chance), um zu suchen.",
                 "en": "**Your Mission:** The grid shows probabilities. Click the **darkest sector** (highest chance) to scan it."
             }))

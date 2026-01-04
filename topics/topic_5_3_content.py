@@ -3,6 +3,7 @@
 import streamlit as st
 from views.styles import inject_equal_height_css
 from utils.localization import t
+from utils.layouts.foundation import grey_info
 from utils.quiz_helper import render_mcq
 from data.exam_questions import get_question
 
@@ -368,13 +369,13 @@ def render_subtopic_5_3(model):
                 }))
             
             elif rho == 0:
-                st.info(t({
+                grey_info(t({
                     "de": f"ρ = 0 → Var = {portfolio_var:.0f}. Keine Korrelation = Varianzen addieren sich einfach. Geht das noch besser?",
                     "en": f"ρ = 0 → Var = {portfolio_var:.0f}. No correlation = variances simply add. Can you do better?"
                 }))
             
             elif rho < 0:
-                st.info(t({
+                grey_info(t({
                     "de": f"ρ = {rho:.1f} → Var = {portfolio_var:.1f}. Gute Richtung! Negative Korrelation senkt das Risiko. Aber es geht noch tiefer...",
                     "en": f"ρ = {rho:.1f} → Var = {portfolio_var:.1f}. Good direction! Negative correlation lowers risk. But you can go lower..."
                 }))

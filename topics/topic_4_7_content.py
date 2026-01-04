@@ -3,6 +3,7 @@
 import streamlit as st
 from views.styles import inject_equal_height_css
 from utils.localization import t
+from utils.layouts.foundation import grey_info
 from utils.quiz_helper import render_mcq
 from data.exam_questions import get_question
 import numpy as np
@@ -510,7 +511,7 @@ P(X ≤ {x_val:.0f}) = Φ({z_score:.2f}) = <span style="color:{prob_color}; font
             # Progress feedback
             st.markdown("<br>", unsafe_allow_html=True)
             if prob < 0.80:
-                st.info(t({"de": "X ist noch zu klein. Schiebe X nach rechts!", "en": "X is still too small. Push X to the right!"}))
+                grey_info(t({"de": "X ist noch zu klein. Schiebe X nach rechts!", "en": "X is still too small. Push X to the right!"}))
             elif prob < target_prob - tolerance:
                 st.warning(t({"de": f"Fast da! P = {prob:.1%} — noch etwas höher mit X!", "en": f"Almost there! P = {prob:.1%} — push X a bit higher!"}))
             elif prob > target_prob + tolerance:

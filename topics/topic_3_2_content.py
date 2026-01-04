@@ -3,6 +3,7 @@ import numpy as np
 import plotly.graph_objects as go
 from views.styles import render_icon, inject_equal_height_css
 from utils.localization import t
+from utils.layouts.foundation import grey_info
 from utils.quiz_helper import render_mcq
 from data.exam_questions import get_question
 
@@ -330,7 +331,7 @@ def render_die_mission(mission_key, desc_dict, target_p6, target_others, toleran
                     else:
                         st.warning(f"{t({'de': 'Summe < 100%', 'en': 'Total < 100%'})} ({total_prob:.0%})")
                 elif is_sum_ok:
-                    st.info(t({"de": f"Summe stimmt! Aber überprüfe die Verhältnisse.", "en": f"Sum is correct! But check the ratios."}))
+                    grey_info(t({"de": f"Summe stimmt! Aber überprüfe die Verhältnisse.", "en": f"Sum is correct! But check the ratios."}))
 
         with c2:
             # Visualization

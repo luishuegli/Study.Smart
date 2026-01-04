@@ -55,9 +55,9 @@ SUBTOPIC_QUESTION_COUNTS = {
     "7.1": 1,  # hs2015_mc8 + Distribution Matcher interactive
     "7.2": 6,  # test4_q3, hs2015_mc9, hs2023_mc4, test3_q3, hs2023_mc9, hs2015_mc8
     "7.3": 1,  # hs2015_prob1 (Boxplot)
-    "7.4": 0,  # No MCQs
-    "7.5": 0,  # No MCQs
-    "7.6": 3,  # Additional Questions + test4_mc3
+    "7.4": 2,  # 7_4_mcq1, 7_4_mcq2
+    "7.5": 2,  # 7_5_mcq1, 7_5_mcq2 (Correlation Explorer + MCQs)
+    "7.6": 6,  # 4 Quick Checks (visual, center, dispersion, boxplot) + 2 official exam questions
     # Topic 8: Point Estimation
     "8.1": 0,  # No MCQs
     "8.2": 2,  # hs2023_mc10, hs2015_mc10
@@ -185,7 +185,7 @@ def course_overview_view():
         else:
             status = topic.get("status", "open")
         
-        # Prepare Header Label
+        # Prepare Header Label (title already includes numbers like "1. Basics of Probability")
         base_title = loc.t(topic['title'])
         header_label = base_title
         
@@ -196,6 +196,7 @@ def course_overview_view():
         elif status == "in_progress":
             header_label = f"{base_title} ({int(completed_pct * 100)}%)"
         
+
         with st.expander(header_label, expanded=True):
             col1, col2 = st.columns([3, 1])
             with col1:

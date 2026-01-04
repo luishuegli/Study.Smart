@@ -4,6 +4,7 @@ import streamlit as st
 from views.styles import inject_equal_height_css
 import re
 from utils.localization import t
+from utils.layouts.foundation import grey_info
 from utils.quiz_helper import render_mcq
 from data.exam_questions import get_question
 import numpy as np
@@ -454,7 +455,7 @@ def render_subtopic_4_4(model):
             # Progress feedback
             st.markdown("<br>", unsafe_allow_html=True)
             if p0 >= 0.20:
-                st.info(t({"de": "λ ist noch klein. Die Wahrscheinlichkeit für 0 Ereignisse ist hoch.", "en": "λ is still small. Probability of 0 events is high."}))
+                grey_info(t({"de": "λ ist noch klein. Die Wahrscheinlichkeit für 0 Ereignisse ist hoch.", "en": "λ is still small. Probability of 0 events is high."}))
             elif p0 >= target_p0:
                 st.warning(t({"de": f"Fast da! P(X=0) = {p0:.1%} — noch etwas höher mit λ!", "en": f"Almost there! P(X=0) = {p0:.1%} — push λ a bit higher!"}))
             else:

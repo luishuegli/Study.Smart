@@ -419,35 +419,6 @@ def load_design_system():
         section[data-testid="stSidebar"] .stElementContainer {
             width: 100% !important;
         }
-        
-        /* --- 11. FORCE LIGHT MODE FOR SIDEBAR AND HEADER --- */
-        /* Override any dark mode detection from browser/OS */
-        section[data-testid="stSidebar"] {
-            background-color: #FFFFFF !important;
-        }
-        section[data-testid="stSidebar"] > div {
-            background-color: #F5F5F7 !important;
-        }
-        /* Force header/app bar to light theme */
-        header[data-testid="stHeader"] {
-            background-color: #FFFFFF !important;
-        }
-        /* Force the top decoration bar to light */
-        div[data-testid="stDecoration"] {
-            background-color: #FFFFFF !important;
-            background-image: none !important;
-        }
-        /* Force sidebar text color to dark for visibility */
-        section[data-testid="stSidebar"] * {
-            color: #1D1D1F !important;
-        }
-        /* Except buttons which should have their own styling */
-        section[data-testid="stSidebar"] .stButton > button {
-            color: #FFFFFF !important;
-        }
-        section[data-testid="stSidebar"] .stButton > button[kind="secondary"] {
-            color: #1D1D1F !important;
-        }
 
     </style>
     """, unsafe_allow_html=True)

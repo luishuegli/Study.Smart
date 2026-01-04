@@ -202,27 +202,29 @@ def distribution_matcher():
     if "dm_current" not in st.session_state:
         st.session_state.dm_current = 0
     
-    # Distribution scenarios
+    # Distribution scenarios (matching exam exercise HS2015)
+    # Use fixed seed per scenario for consistent display during fragment reruns
+    np.random.seed(42 + st.session_state.dm_current)
     scenarios = [
         {
-            "data": np.random.normal(50, 10, 200),
-            "correct": "normal",
-            "hint": {"de": "Symmetrisch, glockenförmig", "en": "Symmetric, bell-shaped"}
+            "data": np.random.normal(0, np.sqrt(3), 200),  # N(0, 3)
+            "correct": "v1",
+            "params": r"$N(\mu=0, \sigma^2=3)$"
         },
         {
-            "data": np.random.exponential(5, 200),
-            "correct": "exponential",
-            "hint": {"de": "Stark rechtsschief, bei 0 beginnend", "en": "Strongly right-skewed, starting at 0"}
+            "data": np.random.exponential(1/3, 200),  # Exp(λ=3)
+            "correct": "v2",
+            "params": r"$\text{Exp}(\lambda=3)$"
         },
         {
-            "data": np.random.uniform(0, 100, 200),
-            "correct": "uniform",
-            "hint": {"de": "Flach, alle Werte etwa gleich häufig", "en": "Flat, all values roughly equally frequent"}
+            "data": np.random.normal(0, 1, 200),  # N(0, 1)
+            "correct": "v3",
+            "params": r"$N(\mu=0, \sigma^2=1)$"
         },
         {
-            "data": np.random.poisson(5, 200),
-            "correct": "poisson",
-            "hint": {"de": "Diskret, leicht rechtsschief", "en": "Discrete, slightly right-skewed"}
+            "data": np.random.uniform(-3, 3, 200),  # U[-3, 3]
+            "correct": "v4",
+            "params": r"$U[-3, 3]$"
         }
     ]
     
@@ -233,8 +235,8 @@ def distribution_matcher():
 <div style="background: #f4f4f5; border-left: 4px solid #a1a1aa; 
             padding: 12px 16px; border-radius: 8px; color: #3f3f46;">
 <strong>{t({"de": "Szenario", "en": "Scenario"})}:</strong><br>
-{t({"de": "Ein Wissenschaftler hat 200 Messwerte gesammelt. Welche theoretische Verteilung passt am besten zu diesen Daten?", 
-    "en": "A scientist collected 200 measurements. Which theoretical distribution best fits this data?"})}
+{t({"de": "Eine Stichprobe von 200 Beobachtungen wurde aus einer der folgenden Verteilungen gezogen. Welche passt?", 
+    "en": "A sample of 200 observations was drawn from one of the following distributions. Which one fits?"})}
 </div>
 """, unsafe_allow_html=True)
     
@@ -267,32 +269,29 @@ def distribution_matcher():
     
     st.plotly_chart(fig, use_container_width=True)
     
-    # Hint
-    st.caption(f"{t({'de': 'Hinweis', 'en': 'Hint'})}: {t(current['hint'])}")
-    
     st.markdown("<br>", unsafe_allow_html=True)
     
-    # Answer options
+    # Answer options with mathematical notation (exam-style)
     options = {
-        "normal": {"de": "Normalverteilung (glockenförmig)", "en": "Normal (bell-shaped)"},
-        "exponential": {"de": "Exponentialverteilung (rechtsschief)", "en": "Exponential (right-skewed)"},
-        "uniform": {"de": "Gleichverteilung (flach)", "en": "Uniform (flat)"},
-        "poisson": {"de": "Poisson-Verteilung (diskret)", "en": "Poisson (discrete)"}
+        "v1": r"V1) $N(0, 3)$",
+        "v2": r"V2) $\text{Exp}(\lambda=3)$",
+        "v3": r"V3) $N(0, 1)$",
+        "v4": r"V4) $U[-3, 3]$"
     }
     
     col1, col2 = st.columns(2)
     
     with col1:
-        if st.button(t(options["normal"]), key="dm_normal", use_container_width=True):
-            check_answer("normal", current["correct"])
-        if st.button(t(options["exponential"]), key="dm_exp", use_container_width=True):
-            check_answer("exponential", current["correct"])
+        if st.button("V1) N(0, 3)", key="dm_v1", use_container_width=True):
+            check_answer("v1", current["correct"])
+        if st.button("V2) Exp(λ=3)", key="dm_v2", use_container_width=True):
+            check_answer("v2", current["correct"])
     
     with col2:
-        if st.button(t(options["uniform"]), key="dm_uniform", use_container_width=True):
-            check_answer("uniform", current["correct"])
-        if st.button(t(options["poisson"]), key="dm_poisson", use_container_width=True):
-            check_answer("poisson", current["correct"])
+        if st.button("V3) N(0, 1)", key="dm_v3", use_container_width=True):
+            check_answer("v3", current["correct"])
+        if st.button("V4) U[-3, 3]", key="dm_v4", use_container_width=True):
+            check_answer("v4", current["correct"])
     
     # Progress display
     if st.session_state.dm_attempts > 0:

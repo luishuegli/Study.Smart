@@ -1,6 +1,6 @@
 [theme]
 base = "light"           # STRICTLY enforces Light Mode.
-primaryColor = "#000000" # Black accents (Sliders, Progress bars)
+primaryColor = "#3DD4A9" # Teal accent (Sliders, Progress bars)
 backgroundColor = "#FFFFFF"
 secondaryBackgroundColor = "#F5F5F7" # The "Apple Surface" Grey
 textColor = "#1D1D1F"

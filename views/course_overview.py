@@ -46,13 +46,13 @@ SUBTOPIC_QUESTION_COUNTS = {
     "5.2": 4,  # 5_2_coin_mission, 5_2_cov, 5_2_vardiff, 5_2_varscale
     "5.3": 7,  # + hs2024_mc2
     "5.4": 3,  # uebung3_mc10, uebung3_mc11, hs2025_mc6
-    "5.5": 11,  # uebung3_mc2,3,4,6,8,12,13 + 4 Test
+    "5.5": 14,  # 3 Quick Checks + 11 official exam questions
     # Topic 6: Central Limit Theorem
-    "6.1": 1,  # hs2022_mc3
-    "6.2": 1,  # hs2022_mc10
-    "6.3": 5,  # uebung4_mc1,2,3, prob3, prob7
+    "6.1": 3,  # uebung4_mc1, uebung4_mc2, uebung4_prob7
+    "6.2": 3,  # uebung4_prob3, hs2022_mc10, hs2023_mc3 (De Moivre-Laplace)
+    "6.3": 9,  # 4 Quick Checks + 5 official exam questions (uebung4_mc1,2,3, prob3, prob7)
     # Topic 7: Descriptive Statistics
-    "7.1": 0,  # No MCQs
+    "7.1": 1,  # hs2015_mc8 + Distribution Matcher interactive
     "7.2": 6,  # test4_q3, hs2015_mc9, hs2023_mc4, test3_q3, hs2023_mc9, hs2015_mc8
     "7.3": 1,  # hs2015_prob1 (Boxplot)
     "7.4": 0,  # No MCQs

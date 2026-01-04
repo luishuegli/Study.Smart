@@ -87,6 +87,40 @@ APPLY FORMULA:
 
 **Anti-pattern:** DON'T use same color for different values just because they're "inputs".
 
+### From Topic 6 (UPDATED 2026-01-04)
+| Rule | Evidence | Add to File | Status |
+|------|----------|-------------|--------|
+| **Bilingual Formula Dicts** | Fix #2: German words in LaTeX formulas | design-system.md | ⏳ CRITICAL |
+| **Slider State Pattern** | Fix #3: value+key+sync causes ping-pong | troubleshooting.md | ⏳ CRITICAL |
+| **Inline Symbol Decoder** | Fix #5, #8: Consolidate symbol explanations into CLT expander | pedagogy.md | ⏳ Pending |
+| **No LaTeX in HTML divs** | Fix #1: st.markdown doesn't render LaTeX inside HTML | layout.md | ⏳ CRITICAL |
+| **HTML Cannot Wrap st Elements** | T6.2 Fix #1: Opening `<div>` and closing `</div>` in separate st.markdown() don't wrap elements between | layout.md | ⏳ CRITICAL |
+| **Slider CSS Requires Visible Labels** | T6.2 Fix #4-5: `label_visibility="collapsed"` breaks CSS targeting via `[aria-label*="..."]` | interactive.md | ⏳ Pending |
+| **Slider Semantic Coloring (1.5 Pattern)** | T6.2 Fix #4: Use `.stSlider:has([aria-label*="X"])` CSS selector pattern | interactive.md | ⏳ Pending |
+| **Formula Values Stay Black** | T6.2 Fix #6: Semantic coloring = slider-to-label, not slider-to-formula | design-system.md | ⏳ Pending |
+| **Bilingual trap_formula** | T6.2 Fix #3: trap_formula with text like "FALSCH!" must be bilingual dict | pedagogy.md | ⏳ Pending |
+| **Multi-line LaTeX Aligned** | T6.2 Fix #7: Use `\\begin{aligned}` for long formulas in narrow columns | layout.md | ⏳ Pending |
+| **why_formula for Tips** | T6.2 Fix #9: Tips with math need `why_formula` field for proper LaTeX rendering | pedagogy.md | ⏳ Pending |
+
+**Bilingual Formula Pattern:**
+```python
+# WRONG
+"formula": r"\text{Summe: } E = n\mu"
+
+# CORRECT
+"formula": {"de": r"\text{Summe: } E = n\mu", "en": r"\text{Sum: } E = n\mu"}
+```
+
+**Slider State Pattern:**
+```python
+# WRONG - causes ping-pong revert
+n = st.slider("n", value=st.session_state.n, key="slider")
+st.session_state.n = n
+
+# CORRECT - let Streamlit manage
+n = st.slider("n", value=5, key="slider")  # value=initial only
+```
+
 ---
 
 ## Cross-Topic Patterns
@@ -103,6 +137,14 @@ _Same issue appearing across multiple topics = CRITICAL rule._
 | **Decoder separated from formula** | T3 | HIGH | ⏳ NEW - Use `---` separators |
 | **Missing @st.fragment** | T3 (3.5, 3.6) | HIGH | ⏳ NEW - Decorator mandatory |
 | **Nested containers in columns** | T5.3 | HIGH | ⏳ NEW - Use HTML flexbox instead |
+| **German in LaTeX formulas** | T5.5, T6.1, T6.2 | HIGH | ✅ Fixed - Use bilingual dicts |
+| **Slider value/key conflict** | T6.1 | HIGH | ✅ Fixed - Use key only |
+| **Emojis in feedback widgets** | T6.1 | HIGH | ✅ Fixed - Absolute No Emojis v2 |
+| **Semantic color without legend** | T6.1 | HIGH | ✅ Fixed - Add visible legend |
+| **LaTeX in raw HTML** | T6.1 | HIGH | ✅ Fixed - Use HTML subscript |
+| **HTML divs spanning st elements** | T6.2 | HIGH | ✅ Fixed - Use st.container + CSS |
+| **Slider CSS with hidden labels** | T6.2 | HIGH | ✅ Fixed - Use visible labels |
+| **Formula values colored** | T6.2 | MEDIUM | ✅ Fixed - Values stay black |
 
 ---
 
@@ -131,10 +173,31 @@ _Same issue appearing across multiple topics = CRITICAL rule._
   4. **Green reserved:** `#34C759` only for success feedback, not for reference visuals.
 
 ### Topic 4 Synthesis
-- **Completed:** [Date]
-- **Total fixes:** X
-- **New rules created:** Y
-- **Key learnings:** [Summary]
+- **Completed:** 2026-01-02 ✅
+- **Total fixes:** 8
+- **New rules created:** 2 (grey-callouts-only, header-out-protocol)
+- **Key learnings:** Consistent styling with grey callouts only. Headers must be outside containers.
+
+### Topic 5 Synthesis
+- **Completed:** 2026-01-03 ✅
+- **Total fixes:** 12
+- **New rules created:** 3 (connection-coloring, scenario-first, discovery-debrief)
+- **Key learnings:** Connection Coloring traces values across steps. Nested containers in columns cause formula cutoff.
+
+### Topic 6 Synthesis
+- **Completed:** 2026-01-04 ✅ (6.2 added)
+- **Total fixes:** 15 (6.1) + 12 (6.2) = 27
+- **New rules created:** 11 (bilingual-formulas, slider-state, inline-decoder, no-latex-in-html, semantic-legend, emojis-in-widgets, html-subscript, slider-css-pattern, html-wrap-impossible, aligned-latex, why-formula-tips)
+- **Key learnings:**
+  1. **Bilingual Formulas:** Any LaTeX with text words MUST be a `{"de": ..., "en": ...}` dict
+  2. **Slider State:** Never use `value=session_state.x` + `key="x"` + manual sync - causes ping-pong
+  3. **Inline Symbol Decoder:** Use simple inline format for symbol/variable explanations
+  4. **No LaTeX in HTML:** Use separate `st.latex()` calls, not inline in HTML divs
+  5. **Semantic Color Legend:** If color changes have meaning, MUST add visible legend
+  6. **HTML Subscript:** In raw HTML contexts (like render_ask_yourself), use `X<sub>i</sub>` not `$X_i$`
+  7. **T6.2: HTML divs can't wrap st elements** - Use st.container + CSS override instead
+  8. **T6.2: Slider CSS needs visible labels** - `[aria-label*="..."]` only works with visible labels
+  9. **T6.2: Semantic coloring = slider-to-label** - Formula values stay BLACK
 
 ---
 
@@ -188,4 +251,69 @@ _Track how rules improve over time._
 - `decision_tree.py` — Emoji removal
 - `implement.md` — Added utility selection checklist
 - `exam_questions.py` — Fixed English translations for hs2015_mc6
+
+## Topic 5.5 Synthesis
+- **Completed:** 2026-01-03
+- **Total fixes:** 6
+- **New rules created:** 3 (absolute-no-emojis, no-help-tooltips, examples-use-arrow)
+- **Key learnings:**
+  1. **Absolute No Emojis (STRICT):** Emojis like 📌 and 💡 are NOT allowed, even in captions. The only exception remains `st.button()` labels. Use plain text or `→` arrow for examples.
+  2. **No Help Tooltips:** Do NOT use `help=` parameter in `st.markdown()`. It creates question mark icons that clutter the UI. Show the information directly instead via `st.caption()`.
+  3. **Examples with Arrow:** When showing "when" and "example" for formulas, use plain caption for "when" and prefix examples with `→` (arrow) instead of emojis.
+  
+**Rule Integration:**
+
+### From Topic 5.5 (NEW)
+| Rule | Evidence | Add to File | Status |
+|------|----------|-------------|--------|
+| **Absolute No Emojis** | Fixed 📌💡 in captions | design-system.md | ⏳ CRITICAL |
+| **No Help Tooltips** | Fixed help= in st.markdown | design-system.md | ⏳ Pending |
+| **Examples with Arrow** | Use → prefix | design-system.md | ⏳ Pending |
+| **LaTeX Must Be Language-Agnostic** | German text appeared in English mode | design-system.md | ⏳ CRITICAL |
+
+**Files modified:**
+- `topic_5_5_content.py` — Learn-Test-Learn summary with ULTRATHINK, fixed emojis/tooltips/LaTeX
+- `exam_essentials.py` — Added `tip_formula` and `why_formula` support
+
+---
+
+## Design System Rule Clarification
+
+### No Emoji Rule — Expanded (JAN 2026)
+
+**Before (v1):**
+> No emojis. Exception: Emojis OK in st.button() labels only.
+
+**After (v2 — STRICT):**
+> **NO EMOJIS ANYWHERE** except st.button() labels.
+> 
+> Specifically prohibited:
+> - 📌 💡 ⭐ ❓ or ANY emoji in `st.caption()`
+> - Emojis in grey callout HTML
+> - Emojis in st.info/warning/error (already banned)
+> - `help=` parameter in st.markdown (creates ? icon)
+> 
+> **Allowed alternatives:**
+> - Plain text labels
+> - `→` arrow for examples/flow
+> - `•` bullets for lists
+> - `ℹ️` ONLY in st.button() label
+
+### LaTeX Language-Agnostic Rule (JAN 2026)
+
+> **LaTeX formulas must NEVER contain language-specific text.**
+> 
+> **Problem:** Using `\text{Zeile}` in LaTeX shows German even when app is in English mode.
+> 
+> **Solution:** Keep formulas purely mathematical. Move any explanatory text to bilingual `why` fields:
+> 
+> ```python
+> # WRONG - German appears in English mode
+> "why_formula": r"f_X \text{ (Zeile)}, \quad f_Y \text{ (Spalte)}"
+> 
+> # CORRECT - Bilingual text in why field
+> "why": {"de": "f_X → Zeile, f_Y → Spalte", "en": "f_X → row, f_Y → column"}
+> ```
+> 
+> **Exception:** Universal math terms like `\text{Cov}`, `\text{Var}` are OK.
 

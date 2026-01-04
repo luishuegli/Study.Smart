@@ -23,6 +23,7 @@ def render_comparison(
     left: dict = None,
     right: dict = None,
     key_difference: dict = None,
+    key_difference_formula: str = None,
     show_header: bool = True
 ):
     """
@@ -64,10 +65,13 @@ def render_comparison(
     # Key difference callout
     if key_difference:
         st.markdown("<br>", unsafe_allow_html=True)
-        grey_callout(
-            {"de": "Der Kernunterschied", "en": "The Key Difference"},
-            key_difference
-        )
+        # Label outside box (as ### for consistency)
+        st.markdown(f"### {t({'de': 'Der Kernunterschied', 'en': 'The Key Difference'})}")
+        # Use container so LaTeX renders inside
+        with st.container(border=True):
+            st.markdown(f"**{t(key_difference)}**")
+            if key_difference_formula:
+                st.latex(key_difference_formula)
 
 
 def _render_concept_card(concept: dict):

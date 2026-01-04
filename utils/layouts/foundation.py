@@ -31,8 +31,10 @@ def grey_callout(label: dict, content: dict):
     Render a grey callout box with label and content.
     Uses 4px left border accent style.
     """
+    # Label OUTSIDE the box (no colon)
+    st.markdown(f"**{t(label)}**")
     st.markdown(f'''<div style="background: #f4f4f5; border-left: 4px solid #a1a1aa; padding: 12px 16px; border-radius: 8px; color: #3f3f46;">
-<strong>{t(label)}:</strong><br>{t(content)}
+{t(content)}
 </div>''', unsafe_allow_html=True)
 
 
@@ -42,30 +44,32 @@ def intuition_box(content: dict, label: dict = None):
     Use for opening context (NO math symbols, 12-year-old understands).
     
     Args:
-        content: {"de": "...", "en": "..."} - The intuition text
+        content: {"de": "...", "en": "..."} - The intuition text (HTML allowed)
         label: {"de": "...", "en": "..."} - Optional custom label (default: "The Intuition")
     """
     label_text = label or {"de": "Die Intuition", "en": "The Intuition"}
-    st.markdown(f'''<div style="background: #ffffff; border: {STANDARD_BORDER}; padding: 16px 20px; border-radius: {STANDARD_RADIUS}; color: #374151;">
-<strong>{t(label_text)}:</strong><br>
-{t(content)}
-</div>''', unsafe_allow_html=True)
+    # Heading OUTSIDE the box (as ### for proper size)
+    st.markdown(f"### {t(label_text)}")
+    # Content in styled box (standard border-radius)
+    with st.container(border=True):
+        st.markdown(t(content), unsafe_allow_html=True)
 
 
 def variable_decoder(variables: list):
     """
-    Render a variable decoder grey callout.
+    Render a variable decoder section (clean, no grey box).
+    Uses st.markdown for each variable to ensure proper formatting.
     """
-    items_html = ""
+    st.markdown(f"**{t({'de': 'Variablen-Decoder', 'en': 'Variable Decoder'})}:**")
+    
     for v in variables:
+        symbol = v["symbol"]
         name = t(v["name"])
         desc = t(v.get("description", {"de": "", "en": ""}))
         desc_part = f" — {desc}" if desc else ""
-        items_html += f"• ${v['symbol']}$ = <strong>{name}</strong>{desc_part}<br>"
-    
-    st.markdown(f'''<div style="background: #f4f4f5; border-left: 4px solid #a1a1aa; padding: 12px 16px; border-radius: 8px; color: #3f3f46;">
-<strong>{t({"de": "Variablen-Decoder", "en": "Variable Decoder"})}:</strong><br>{items_html}
-</div>''', unsafe_allow_html=True)
+        
+        # Use markdown with LaTeX inline
+        st.markdown(f"• ${symbol}$ = **{name}**{desc_part}")
 
 
 def key_insight(content: dict):

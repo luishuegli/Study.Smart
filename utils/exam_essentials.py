@@ -18,6 +18,7 @@ from utils.localization import t
 
 def render_exam_essentials(
     trap: dict = None,
+    trap_formula: str = None,
     trap_rule: dict = None,
     tips: list = None,
     items: list = None,
@@ -92,10 +93,19 @@ def render_exam_essentials(
             st.markdown("")
             
             for i, tip_data in enumerate(tips, 1):
-                # Bold title
-                st.markdown(f"**({i}) {t(tip_data['tip'])}**")
-                # Why? explanation on next line
-                st.markdown(f"*{t({'de': 'Warum', 'en': 'Why'})}?* {t(tip_data['why'])}")
+                # Bold title with optional LaTeX
+                if "tip_formula" in tip_data:
+                    st.markdown(f"**({i}) {t(tip_data['tip'])}**")
+                    st.latex(tip_data["tip_formula"])
+                else:
+                    st.markdown(f"**({i}) {t(tip_data['tip'])}**")
+                
+                # Why? explanation with optional LaTeX
+                if "why_formula" in tip_data:
+                    st.markdown(f"*{t({'de': 'Warum', 'en': 'Why'})}?* {t(tip_data['why'])}")
+                    st.latex(tip_data["why_formula"])
+                else:
+                    st.markdown(f"*{t({'de': 'Warum', 'en': 'Why'})}?* {t(tip_data['why'])}")
                 st.markdown("")
         
         # === TRAP SECTION LAST ===
@@ -105,6 +115,11 @@ def render_exam_essentials(
             st.markdown(f"**{t({'de': 'Die häufigste Falle', 'en': 'The Most Common Trap'})}**")
             st.markdown("<br>", unsafe_allow_html=True)
             st.markdown(t(trap), unsafe_allow_html=True)
+            
+            if trap_formula:
+                # Support both string and bilingual dict
+                formula = t(trap_formula) if isinstance(trap_formula, dict) else trap_formula
+                st.latex(formula)
             
             if trap_rule:
                 st.markdown("<br>", unsafe_allow_html=True)

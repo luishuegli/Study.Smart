@@ -188,6 +188,52 @@ from utils.layouts.foundation import (
 
 ---
 
+## MANDATORY: Full Page Layout Preview
+
+> **Every implementation plan MUST include a complete ASCII mockup of the page structure.**
+
+**Purpose:** User can visualize the ENTIRE layout before any code is written.
+
+**Format:** Use ASCII boxes, lines, and indentation to show:
+- All section headers (### Title)
+- Container boundaries (borders, columns)
+- Rough content placement (formulas, text, controls)
+- Component names (render_comparison, render_steps, etc.)
+
+**Example:**
+```
+Header: Topic Title
+Subtitle: One-liner
+
+────────────────────────────────────────────
+
+### 1. INTUITION
+Grey box - NO math symbols
+"Simple analogy..."
+
+────────────────────────────────────────────
+
+### 2. THEORY
+┌─────────────────────────┐    ┌─────────────────────────┐
+│ **Concept A**           │    │ **Concept B**           │
+│ Formula                 │    │ Formula                 │
+│ Explanation             │    │ Explanation             │
+└─────────────────────────┘    └─────────────────────────┘
+(render_comparison)
+
+────────────────────────────────────────────
+
+### 3. INTERACTIVE
+[Controls] → [Visualization] → [Result]
+(@st.fragment)
+
+...
+```
+
+**RULE:** The plan is INCOMPLETE without this layout preview.
+
+---
+
 ## Phase 5: FRAG DICH
 
 **Question types:** "Is this X or Y?", "What distribution for [signal]?", "Why can't we use [alternative]?"

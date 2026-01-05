@@ -392,10 +392,11 @@ def render_chunk_estimators(model):
     chunk = content_8_4["chunk_estimators"]
     st.markdown(f"### {t(chunk['header'])}")
     
-    # 3-column layout for estimators
-    cols = st.columns(3, gap="medium")
+    estimators = chunk["estimators"]
     
-    for col, est in zip(cols, chunk["estimators"]):
+    # Row 1: Sample Mean + Sample Variance (2 columns)
+    cols = st.columns(2, gap="medium")
+    for col, est in zip(cols, estimators[:2]):
         with col:
             with st.container(border=True):
                 st.markdown(f"**{t(est['name'])}**")
@@ -407,6 +408,22 @@ def render_chunk_estimators(model):
                 st.markdown("---")
                 st.markdown(f"*{t({'de': 'Schätzt', 'en': 'Estimates'})}:* {t(est['estimates'])}")
                 st.caption(t(est["when"]))
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+    # Row 2: Sample Proportion (1 column, centered)
+    est = estimators[2]
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
+        with st.container(border=True):
+            st.markdown(f"**{t(est['name'])}**")
+            if "formula_en" in est and t({"de": "x", "en": "y"}) == "y":
+                st.latex(est["formula_en"])
+            else:
+                st.latex(est["formula"])
+            st.markdown("---")
+            st.markdown(f"*{t({'de': 'Schätzt', 'en': 'Estimates'})}:* {t(est['estimates'])}")
+            st.caption(t(est["when"]))
     
     st.markdown("<br>", unsafe_allow_html=True)
     

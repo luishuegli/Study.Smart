@@ -109,6 +109,7 @@ def render_exam_essentials(
                 if "why_formula" in tip_data:
                     st.markdown(f"*{t({'de': 'Warum', 'en': 'Why'})}?* {t(tip_data['why'])}")
                     st.latex(tip_data["why_formula"])
+                    st.markdown("")  # Spacer after formula to prevent cutoff
                 else:
                     st.markdown(f"*{t({'de': 'Warum', 'en': 'Why'})}?* {t(tip_data['why'])}")
                 st.markdown("")

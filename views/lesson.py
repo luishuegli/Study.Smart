@@ -388,8 +388,8 @@ def render_topic_content(client, topic_id, subtopic_id):
             st.error(f"Interactive content not available: {str(e)}")
     elif topic_id == "topic_10":
         try:
-            from topics.topic_10_content import render_topic_10
-            render_topic_10(client)
+            from topics.topic_10_content import render_topic_10_content
+            render_topic_10_content(client, subtopic_id)
         except ImportError as e:
             st.error(f"Interactive content not available: {str(e)}")
     elif topic_id == "topic_11":

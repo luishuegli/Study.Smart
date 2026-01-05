@@ -99,6 +99,74 @@ else:
 | **No emojis in decision trees** | Emoji ⭐ in decision tree violates No Emojis rule | decision_tree.py | ✅ Fixed |
 | **Color the question too** | Given values in problem statement should use same colors as in solution steps | worked_example.py | ⏳ Pending |
 
+### From Topic 9.1 (NEW - January 2026)
+| Rule | Evidence | Add to File | Priority |
+|------|----------|-------------|----------|
+| **Spacer after LaTeX in containers** | Fix #5: `st.latex()` as last element gets cut off | layout.md, exam_essentials.py | ✅ Fixed |
+| **Bilingual MCQ options REQUIRED** | Fix #1: German text in English key causes wrong display | design-system.md | ⏳ CRITICAL |
+| **Singular/plural grammar** | Fix #2: "1 more samples" is grammatically wrong | templates.md | ⏳ Pending |
+| **Merge related content with ---** | Fix #3: Definition + Examples should be ONE container | layout.md | ⏳ Pending |
+| **Direct columns for HTML content** | Fix #4: `render_comparison` breaks with HTML in content | layout.md | ⏳ Pending |
+| **No duplicate dict definitions** | Fix #6: Second definition overwrites first | exam_questions.py | ⏳ CRITICAL |
+
+### From Topic 9.3 (NEW - January 2026)
+| Rule | Evidence | Add to File | Priority |
+|------|----------|-------------|----------|
+| **BLUE_THEME_ASK_YOURSELF_ONLY** | Fix #9.3-1: Blue `#007AFF` theme reserved ONLY for Ask Yourself sections | design-system.md | ⏳ CRITICAL |
+| **DISPLAY_MATH_ALWAYS_LATEX** | Fix #9.3-2: ALL display math uses `st.latex()`, not Unicode in HTML | pedagogy.md | ⏳ CRITICAL |
+| **SIMPLIFY_OVERLAPPING_VISUALS** | Fix #9.3-3: When chart labels overlap, replace with clear text/cards | interactive.md | ⏳ Pending |
+| **CHECK_UTILITY_SIGNATURES** | Fix #9.3-4: Always check function signatures — `grey_callout(label, content)` requires TWO args | implement.md | ⏳ Pending |
+
+### From Topic 9.4 (NEW - January 2026)
+| Rule | Evidence | Add to File | Priority |
+|------|----------|-------------|----------|
+| **UNICODE_IN_HTML_CONTEXTS** | Fix #9.4-1: LaTeX `$...$` does NOT render in `unsafe_allow_html=True` contexts. Use Unicode: μ₀, H₀, σ, θ, α | design-system.md, pedagogy.md | ⏳ **CRITICAL** |
+| **LEARN_TEST_LEARN_SUMMARY** | Fix #9.4-2: Summary pages use chunked Learn-Test-Learn pattern with embedded Quick Check MCQs | pedagogy.md | ⏳ Pending |
+| **SUMMARY_UTILITIES_MIN_3** | Fix #9.4-3: Summary pages must use ≥3 different layout utilities | implement.md | ⏳ Pending |
+
+**Unicode vs LaTeX Decision Matrix:**
+| Context | LaTeX Works? | Use |
+|---------|--------------|-----|
+| `st.latex()` | ✅ Yes | LaTeX |
+| `st.markdown()` (no HTML) | ✅ Yes | LaTeX |
+| `st.markdown(..., unsafe_allow_html=True)` | ❌ No | Unicode |
+| Grey callouts, MCQ questions/solutions | ❌ No | Unicode |
+| `render_exam_essentials` tips/trap | ❌ No | Unicode |
+
+**Unicode Symbol Reference:**
+```python
+# Common symbols
+μ  = "μ"   # mu
+μ₀ = "μ₀"  # mu subscript zero  
+H₀ = "H₀"  # H subscript zero
+σ  = "σ"   # sigma
+θ  = "θ"   # theta
+α  = "α"   # alpha
+Sₙ = "Sₙ"  # S subscript n
+x̄  = "x̄"   # x bar (macron)
+```
+
+**Display Math Pattern:**
+```python
+# ❌ WRONG - Unicode math in HTML (doesn't render as LaTeX)
+st.markdown("Calculate Z = (x̄ - μ₀) / SE")
+
+# ✅ CORRECT - Separate prose and LaTeX
+st.markdown("**2.** Calculate:")
+st.latex(r"Z = \frac{\bar{x} - \mu_0}{SE}")
+```
+
+**LaTeX Cutoff Fix Pattern:**
+```python
+# ✅ CORRECT - always add spacer after st.latex() if inside container
+st.latex(formula)
+st.markdown("")  # Prevents bottom cutoff
+
+# ❌ WRONG - formula gets clipped at bottom
+st.latex(formula)
+# (no spacer)
+```
+
 ### From Topic 8.3 (NEW - Quiz & Utilities)
 | Rule | Evidence | Add to File | Status |
 |------|----------|-------------|--------|

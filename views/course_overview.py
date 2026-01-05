@@ -64,12 +64,12 @@ SUBTOPIC_QUESTION_COUNTS = {
     "8.3": 3,  # hs2022_mc8, hs2015_prob5, +1
     "8.4": 22,  # uebung5_mc1-15 + prob3,5,6,8 + test5_mc3 + hs2023_prob5 + hs2022_prob5
     # Topic 9: Confidence Intervals
-    "9.1": 0,  # No MCQs
+    "9.1": 2,  # uebung5_mc16, uebung5_mc17
     "9.2": 1,  # hs2023_mc5
-    "9.3": 0,  # No MCQs
-    "9.4": 5,  # uebung5_mc16-18 + prob9 + test5_mc4
+    "9.3": 1,  # 9_3_duality (CI-Test connection)
+    "9.4": 8,  # 3 Quick Checks (concept, formulas, duality) + 5 exam questions
     # Topic 10: Hypothesis Tests
-    "10.1": 0,  # No MCQs
+    "10.1": 1,  # 10_1_types (Hypothesis classification MCQ)
     "10.2": 0,  # No MCQs
     "10.3": 0,  # No MCQs
     "10.4": 0,  # No MCQs

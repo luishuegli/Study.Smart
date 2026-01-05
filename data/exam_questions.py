@@ -3730,9 +3730,9 @@ QUESTIONS_9_4 = {
             "en": r"""Relation confidence level and interval width?"""
         },
         "options": [
-            {"de": "Niveau größer -> Intervall kleiner", "en": "Niveau größer -> Intervall kleiner"},
-            {"de": "Niveau größer -> Intervall größer", "en": "Niveau größer -> Intervall größer"},
-            {"de": "Keine Beziehung", "en": "Keine Beziehung"}
+            {"de": "Niveau größer -> Intervall kleiner", "en": "Higher level -> Narrower interval"},
+            {"de": "Niveau größer -> Intervall größer", "en": "Higher level -> Wider interval"},
+            {"de": "Keine Beziehung", "en": "No relationship"}
         ],
         "correct_idx": 1,
         "solution": {
@@ -4653,7 +4653,7 @@ $$p_Y(y) = \begin{cases} \frac{1}{\theta} & \text{for } y \in \{1, \dots, \theta
     }
 }
 QUESTIONS_8_4.update(QUESTIONS_8_4_EXTRA)
-QUESTIONS_9_4 = {
+QUESTIONS_9_4_EXTRA = {
     "hs2024_mc4": {
         "source": "HS 2024 Januar, MC #4",
         "type": "mc",
@@ -4677,6 +4677,7 @@ mittlere Gewicht zentriert sein und 99% aller Nudelpackungen enthalten.""",
         }
     }
 }
+QUESTIONS_9_4.update(QUESTIONS_9_4_EXTRA)
 QUESTIONS_11_1 = {
     # Interdisciplinary Exam Problems - Full past exam problems spanning multiple chapters
     "hs2023_full_prob1": {

@@ -75,8 +75,8 @@ content_3_5 = {
     # --- EXAM ESSENTIALS ---
     "exam_essentials": {
         "trap": {
-            "de": "<strong>Var(aX) ≠ a·Var(X)</strong> — Die Konstante kommt <strong>quadratisch</strong> raus, nicht linear! Var(2X) = 4·Var(X), nicht 2·Var(X).",
-            "en": "<strong>Var(aX) ≠ a·Var(X)</strong> — The constant comes out <strong>squared</strong>, not linear! Var(2X) = 4·Var(X), not 2·Var(X)."
+            "de": "<strong>$Var(aX) \\neq a \\cdot Var(X)$</strong> — Die Konstante kommt <strong>quadratisch</strong> raus, nicht linear! $Var(2X) = 4 \\cdot Var(X)$, nicht $2 \\cdot Var(X)$.",
+            "en": "<strong>$Var(aX) \\neq a \\cdot Var(X)$</strong> — The constant comes out <strong>squared</strong>, not linear! $Var(2X) = 4 \\cdot Var(X)$, not $2 \\cdot Var(X)$."
         },
         "trap_rule": {
             "de": "Multiplikation → Quadrat. Addition → Nichts.",
@@ -85,15 +85,15 @@ content_3_5 = {
         "tips": [
             {
                 "tip": {"de": "Verschiebungssatz ist fast immer schneller", "en": "Shift formula is almost always faster"},
-                "why": {"de": "E[X²] - (E[X])² braucht weniger Rechenschritte als die Definition.", "en": "E[X²] - (E[X])² requires fewer calculation steps than the definition."}
+                "why": {"de": "$E[X^2] - (E[X])^2$ braucht weniger Rechenschritte als die Definition.", "en": "$E[X^2] - (E[X])^2$ requires fewer calculation steps than the definition."}
             },
             {
-                "tip": {"de": "Var(X+b) = Var(X) — Verschiebung ändert nichts", "en": "Var(X+b) = Var(X) — Shifting changes nothing"},
+                "tip": {"de": "$Var(X+b) = Var(X)$ — Verschiebung ändert nichts", "en": "$Var(X+b) = Var(X)$ — Shifting changes nothing"},
                 "why": {"de": "Addieren verschiebt alle Werte gleich, die Abstände bleiben gleich.", "en": "Adding shifts all values equally, the distances stay the same."}
             },
             {
-                "tip": {"de": "Bei Linearkombination: Var(aX+b) = a²·Var(X)", "en": "For linear combination: Var(aX+b) = a²·Var(X)"},
-                "why": {"de": "Das +b fällt weg, das a wird quadriert.", "en": "The +b drops out, the a gets squared."}
+                "tip": {"de": "Bei Linearkombination: $Var(aX+b) = a^2 \\cdot Var(X)$", "en": "For linear combination: $Var(aX+b) = a^2 \\cdot Var(X)$"},
+                "why": {"de": "Das $+b$ fällt weg, das $a$ wird quadriert.", "en": "The $+b$ drops out, the $a$ gets squared."}
             }
         ]
     }

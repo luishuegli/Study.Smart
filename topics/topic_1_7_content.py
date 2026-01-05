@@ -149,9 +149,9 @@ content_1_7 = {
         "header": {"de": "Frag dich: Bedingt oder Unabhängig?", "en": "Ask yourself: Conditional or Independent?"},
         "questions": [
             {"de": "Verändert <strong>Wissen über B</strong> meine Einschätzung von A?", "en": "Does <strong>knowing B</strong> change my estimate of A?"},
-            {"de": "Ist $P(A|B) = P(A)$? Dann sind A und B <strong>unabhängig</strong>.", "en": "Is $P(A|B) = P(A)$? Then A and B are <strong>independent</strong>."},
+            {"de": "Ist P(A|B) = P(A)? Dann sind A und B <strong>unabhängig</strong>.", "en": "Is P(A|B) = P(A)? Then A and B are <strong>independent</strong>."},
             {"de": "Wird das <strong>Universum kleiner</strong> nach der Bedingung?", "en": "Does the <strong>universe shrink</strong> after the condition?"},
-            {"de": "Frage ich nach $P(A \\cap B)$ (Schnitt) oder $P(A|B)$ (gegeben)?", "en": "Am I asking for $P(A \\cap B)$ (intersection) or $P(A|B)$ (given)?"}
+            {"de": "Frage ich nach P(A∩B) (Schnitt) oder P(A|B) (gegeben)?", "en": "Am I asking for P(A∩B) (intersection) or P(A|B) (given)?"}
         ],
         "conclusion": {"de": "Strich = Filter → kleines Universum. Kein Strich = Multiplikation im ganzen Universum.", "en": "Bar = Filter → smaller universe. No bar = multiplication in the whole universe."}
     },
@@ -330,7 +330,7 @@ def render_subtopic_1_7(model):
                 
                 if p_type == "noise" and p_idx in st.session_state.visible_indices_1_7:
                     st.session_state.visible_indices_1_7.remove(p_idx)
-                    st.rerun()
+                    # NOTE: Do NOT call st.rerun() here - on_select="rerun" already triggers it
                 elif p_type != "noise" and p_idx in st.session_state.visible_indices_1_7:
                     st.toast("Keep the Circles! We need them for the condition.", icon="info")
 
@@ -587,7 +587,7 @@ def render_subtopic_1_7(model):
             elif current_shape["color"] == "red" and current_shape["shape"] == "circle":
                 shapes[clicked_idx] = {"color": "blue", "shape": "square"}
             
-            st.rerun()
+            # NOTE: Do NOT call st.rerun() here - on_select="rerun" already triggers it
         
         st.markdown("<br>", unsafe_allow_html=True)
         

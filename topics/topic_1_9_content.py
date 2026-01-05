@@ -93,7 +93,7 @@ content_1_9 = {
             {"de": "Habe ich einen <strong>Prior</strong> (was ich VORHER glaube)?", "en": "Do I have a <strong>prior</strong> (what I believe BEFORE)?"},
             {"de": "Bekomme ich <strong>neue Evidenz</strong> (z.B. Testergebnis)?", "en": "Do I get <strong>new evidence</strong> (e.g., test result)?"},
             {"de": "Muss ich <strong>rückwärts</strong> rechnen (Effekt → Ursache)?", "en": "Do I need to calculate <strong>backwards</strong> (effect → cause)?"},
-            {"de": "Kenne ich $P(B|A)$ aber brauche $P(A|B)$?", "en": "Do I know $P(B|A)$ but need $P(A|B)$?"}
+            {"de": "Kenne ich P(B|A) aber brauche P(A|B)?", "en": "Do I know P(B|A) but need P(A|B)?"}
         ],
         "conclusion": {"de": "Alle JA? → Bayes! Vorwärts (Ursache → Effekt)? → Totale Wahrscheinlichkeit.", "en": "All YES? → Bayes! Forward (cause → effect)? → Total Probability."}
     },
@@ -863,8 +863,8 @@ def render_subtopic_1_9(model):
             }))
         elif attempts == 0:
             grey_info(t({
-                "de": "**Deine Mission:** Das Raster zeigt Wahrscheinlichkeiten. Klicke auf den **dunkelsten Sektor** (höchste Chance), um zu suchen.",
-                "en": "**Your Mission:** The grid shows probabilities. Click the **darkest sector** (highest chance) to scan it."
+                "de": "<strong>Deine Mission:</strong> Das Raster zeigt Wahrscheinlichkeiten. Klicke auf den <strong>dunkelsten Sektor</strong> (höchste Chance), um zu suchen.",
+                "en": "<strong>Your Mission:</strong> The grid shows probabilities. Click the <strong>darkest sector</strong> (highest chance) to scan it."
             }))
         else:
             # Pedagogical Feedback: Explain the "Water Flow"
@@ -1064,7 +1064,9 @@ def render_subtopic_1_9(model):
                         if (c_idx, r_idx) not in st.session_state.search_history:
                             st.session_state.search_history.append((c_idx, r_idx))
                     
-                    st.rerun()
+                    # NOTE: Do NOT call st.rerun() here!
+                    # The on_select="rerun" already triggers a rerun.
+                    # Calling st.rerun() again causes double-rerun = every-other-click bug.
                     
                 except Exception as e:
                     st.error(f"Error: {e}")

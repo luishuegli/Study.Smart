@@ -47,7 +47,7 @@ content_2_3 = {
             {"de": "Gibt es <strong>Wiederholungen</strong>? (Gleiche Buchstaben wie in MISSISSIPPI?)", "en": "Are there <strong>repetitions</strong>? (Same letters like in MISSISSIPPI?)"},
             {"de": "Zählt die <strong>Reihenfolge</strong>? (Opener ≠ Closer?)", "en": "Does <strong>order</strong> matter? (Opener ≠ Closer?)"}
         ],
-        "conclusion": {"de": "Alle → n!. Mit Wiederholung → n!/(n₁!·n₂!...). Nur k aus n → P(n,k).", "en": "All → n!. With repetition → n!/(n₁!·n₂!...). Only k from n → P(n,k)."}
+        "conclusion": {"de": "Alle → n!. Mit Wiederholung → n!/(n₁!·n₂!·...). Nur k aus n → P(n,k).", "en": "All → n!. With repetition → n!/(n₁!·n₂!·...). Only k from n → P(n,k)."}
     },
     
     # --- EXAM ESSENTIALS ---
@@ -62,16 +62,16 @@ content_2_3 = {
         },
         "tips": [
             {
-                "tip": {"de": "n! = alle Elemente anordnen", "en": "n! = arrange all elements"},
-                "why": {"de": "Spezialfall von P(n,k) wenn k=n. Jeder Platz verbraucht eine Option.", "en": "Special case of P(n,k) when k=n. Each slot uses up one option."}
+                "tip": {"de": "$n!$ = alle Elemente anordnen", "en": "$n!$ = arrange all elements"},
+                "why": {"de": "Spezialfall von $P(n,k)$ wenn $k=n$. Jeder Platz verbraucht eine Option.", "en": "Special case of $P(n,k)$ when $k=n$. Each slot uses up one option."}
             },
             {
                 "tip": {"de": "MISSISSIPPI-Formel für Wiederholungen", "en": "MISSISSIPPI formula for repetitions"},
-                "why": {"de": "n!/(n₁!·n₂!·...) — identische Anordnungen rausdividieren!", "en": "n!/(n₁!·n₂!·...) — divide out identical arrangements!"}
+                "why": {"de": "$n!/(n_1! \\cdot n_2! \\cdots)$ — identische Anordnungen rausdividieren!", "en": "$n!/(n_1! \\cdot n_2! \\cdots)$ — divide out identical arrangements!"}
             },
             {
                 "tip": {"de": "Fakultäten explodieren schnell!", "en": "Factorials explode fast!"},
-                "why": {"de": "50! hat 65 Stellen. Immer Taschenrechner/Formelblatt nutzen.", "en": "50! has 65 digits. Always use calculator/formula sheet."}
+                "why": {"de": "$50!$ hat 65 Stellen. Immer Taschenrechner/Formelblatt nutzen.", "en": "$50!$ has 65 digits. Always use calculator/formula sheet."}
             }
         ]
     }

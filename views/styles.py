@@ -62,6 +62,15 @@ def load_design_system():
     st.markdown("""
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* === NUCLEAR OPTION: Force Streamlit's CSS variables to LIGHT MODE === */
+        /* This overrides localStorage/system dark mode preferences */
+        :root, [data-theme="dark"], [data-theme="light"], html, body {
+            --primary-color: #000000 !important;
+            --background-color: #FFFFFF !important;
+            --secondary-background-color: #F5F5F7 !important;
+            --text-color: #1D1D1F !important;
+        }
+        
         /* --- 1. VARIABLES (The Purge: Strict Light Mode) --- */
         :root {
             /* === COLORS === */
@@ -227,6 +236,33 @@ def load_design_system():
              background-color: #E5E5E5 !important; /* Light Grey Track */
         }
         
+        /* --- 5b. SLIDERS (Global Defaults) --- */
+        /* Remove red gradient from filled track */
+        div[data-baseweb="slider"] > div:first-child > div:first-child {
+            background-image: none !important;
+        }
+        
+        /* Force ALL slider value text to black - comprehensive selectors */
+        div[data-baseweb="slider"] > div > div > div[role="slider"] + div {
+            background-color: transparent !important;
+            color: #1D1D1F !important;
+            font-weight: bold !important;
+        }
+        
+        .stSlider [data-testid="stMarkdownContainer"] p,
+        .stSlider p,
+        .stSlider span,
+        div[data-baseweb="slider"] span,
+        div[data-baseweb="slider"] div[data-testid] {
+            color: #1D1D1F !important;
+        }
+        
+        /* Target the thumb value tooltip/label specifically */
+        div[data-baseweb="slider"] [aria-valuetext],
+        div[data-baseweb="slider"] [data-baseweb="tooltip"] {
+            color: #1D1D1F !important;
+        }
+        
         /* --- 6. EXPANDERS --- */
         .streamlit-expanderHeader {
             background-color: transparent !important;
@@ -246,7 +282,62 @@ def load_design_system():
             border-bottom: none !important;
         }
         
-        /* --- 7. RADIO BUTTONS (Border Selection Logic) --- */
+        /* --- 7a. PILLS (Black Selection - CENTRALIZED) --- */
+        /* Streamlit uses stButtonGroup container with stBaseButton-pills and stBaseButton-pillsActive */
+        
+        /* Unselected pills */
+        button[data-testid="stBaseButton-pills"] {
+            background-color: #FFFFFF !important;
+            border: 1px solid var(--border-color) !important;
+            border-radius: 20px !important;
+            color: var(--text-primary) !important;
+            font-weight: 500 !important;
+            padding: 6px 16px !important;
+            transition: all 0.15s ease !important;
+        }
+        
+        button[data-testid="stBaseButton-pills"]:hover {
+            border-color: #1D1D1F !important;
+            background-color: #FAFAFA !important;
+        }
+        
+        /* Selected pill - BLACK (override Streamlit's hardcoded red #FF4B4B) */
+        button[data-testid="stBaseButton-pillsActive"] {
+            background-color: #1D1D1F !important;
+            border: 1px solid #1D1D1F !important;
+            color: #FFFFFF !important;
+            font-weight: 600 !important;
+        }
+        
+        button[data-testid="stBaseButton-pillsActive"] p,
+        button[data-testid="stBaseButton-pillsActive"] span,
+        button[data-testid="stBaseButton-pillsActive"] div {
+            color: #FFFFFF !important;
+        }
+        
+        /* --- 7a-ii. TABS (Black Underline - override Streamlit's red) --- */
+        /* Active tab - black underline */
+        button[data-baseweb="tab"][aria-selected="true"] {
+            color: #1D1D1F !important;
+            border-bottom-color: #1D1D1F !important;
+        }
+        
+        /* The underline indicator itself */
+        div[data-baseweb="tab-highlight"] {
+            background-color: #1D1D1F !important;
+        }
+        
+        /* Alternative selector for tab underline */
+        .stTabs [data-baseweb="tab-list"] button[aria-selected="true"]::after {
+            background-color: #1D1D1F !important;
+        }
+        
+        /* Force black border on active tab */
+        .stTabs [data-baseweb="tab-list"] [aria-selected="true"] {
+            border-bottom: 2px solid #1D1D1F !important;
+        }
+        
+        /* --- 7b. RADIO BUTTONS (Border Selection Logic) --- */
         /* Force the element container wrapper to full width */
         div.stElementContainer:has(div.stRadio) {
             width: 100% !important;
@@ -357,12 +448,22 @@ def load_design_system():
         .katex-display {
             padding-top: 4px !important;
             padding-bottom: 2px !important;
+            text-align: center !important; /* Center display math */
         }
         /* Ensure the Streamlit container holding st.latex doesn't clip */
         [data-testid="stMarkdownContainer"] .katex-display,
         [data-testid="stVerticalBlock"] .katex-display {
             overflow: visible !important;
             margin-top: 4px !important;
+            text-align: center !important; /* Center display math */
+        }
+        /* Center $$...$$ display blocks in markdown */
+        [data-testid="stMarkdownContainer"] {
+            text-align: left; /* Default left for text */
+        }
+        [data-testid="stMarkdownContainer"] .katex-display {
+            margin-left: auto !important;
+            margin-right: auto !important;
         }
         
         /* === COMPACT DIVIDERS WITHIN CONTAINERS === */
@@ -401,6 +502,12 @@ def load_design_system():
         }
 
         /* --- 10. SIDEBAR TWEAKS --- */
+        /* FORCE WHITE BACKGROUND */
+        section[data-testid="stSidebar"] {
+            background-color: #FFFFFF !important;
+            border-right: var(--border-width) solid var(--border-color) !important;
+        }
+
         /* HELL BANNED RE-SIZE HANDLE */
         /* Target the resizing div that typically appears after the section */
         div[data-testid="stSidebar"] > div {

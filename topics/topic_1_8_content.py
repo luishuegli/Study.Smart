@@ -153,32 +153,44 @@ def render_subtopic_1_8(model):
     st.markdown("""
     <style>
     /* 1. Alpha (Blue) */
-    .stSlider:has([aria-label="Alpha"]) div[data-baseweb="slider"] > div:first-child > div:first-child { background-color: #60A5FA !important; }
+    .stSlider:has([aria-label="Alpha"]) div[data-baseweb="slider"] > div:first-child > div:first-child { 
+        background-color: #60A5FA !important; 
+        background-image: none !important; 
+    }
     .stSlider:has([aria-label="Alpha"]) div[role="slider"] { background-color: #FFFFFF !important; border: 2px solid #60A5FA !important; }
-    .stSlider:has([aria-label="Alpha"]) div[data-testid="stMarkdownContainer"] > p { color: #60A5FA !important; } 
 
     /* 2. Beta (Green) */
-    .stSlider:has([aria-label="Beta"]) div[data-baseweb="slider"] > div:first-child > div:first-child { background-color: #34D399 !important; }
+    .stSlider:has([aria-label="Beta"]) div[data-baseweb="slider"] > div:first-child > div:first-child { 
+        background-color: #34D399 !important; 
+        background-image: none !important; 
+    }
     .stSlider:has([aria-label="Beta"]) div[role="slider"] { background-color: #FFFFFF !important; border: 2px solid #34D399 !important; }
     
     /* 3. Defect Alpha (Blue) */
-    .stSlider:has([aria-label="Defect Alpha"]) div[data-baseweb="slider"] > div:first-child > div:first-child { background-color: #60A5FA !important; }
+    .stSlider:has([aria-label="Defect Alpha"]) div[data-baseweb="slider"] > div:first-child > div:first-child { 
+        background-color: #60A5FA !important; 
+        background-image: none !important; 
+    }
     .stSlider:has([aria-label="Defect Alpha"]) div[role="slider"] { background-color: #FFFFFF !important; border: 2px solid #60A5FA !important; }
 
     /* 4. Defect Beta (Green) */
-    .stSlider:has([aria-label="Defect Beta"]) div[data-baseweb="slider"] > div:first-child > div:first-child { background-color: #34D399 !important; }
+    .stSlider:has([aria-label="Defect Beta"]) div[data-baseweb="slider"] > div:first-child > div:first-child { 
+        background-color: #34D399 !important; 
+        background-image: none !important; 
+    }
     .stSlider:has([aria-label="Defect Beta"]) div[role="slider"] { background-color: #FFFFFF !important; border: 2px solid #34D399 !important; }
 
     /* 5. Defect Gamma (Amber) */
-    .stSlider:has([aria-label="Defect Gamma"]) div[data-baseweb="slider"] > div:first-child > div:first-child { background-color: #FBBF24 !important; }
+    .stSlider:has([aria-label="Defect Gamma"]) div[data-baseweb="slider"] > div:first-child > div:first-child { 
+        background-color: #FBBF24 !important; 
+        background-image: none !important; 
+    }
     .stSlider:has([aria-label="Defect Gamma"]) div[role="slider"] { background-color: #FFFFFF !important; border: 2px solid #FBBF24 !important; }
     
-    /* Global Slider Label/Value Tweak */
-    /* Try to force the value label to be colored text on transparent bg */
-    /* Note: This is a best-effort guess at Streamlit's internal DOM for value labels */
+    /* Global Slider Label/Value Tweak - force black text */
     div[data-baseweb="slider"] > div > div > div[role="slider"] + div {
         background-color: transparent !important;
-        color: inherit !important; /* Inherit from parent which we might set */
+        color: #1D1D1F !important;
         font-weight: bold !important;
     }
     </style>
@@ -198,8 +210,8 @@ def render_subtopic_1_8(model):
         
         if pa_val == 30 and defa_val == 5: # Defaults
              grey_info(t({
-                 "de": "**Schritt 1:** Passe die **Marktanteile** (Priors) an. Wer produziert am meisten?",
-                 "en": "**Step 1:** Adjust the **Market Shares** (Priors). Who produced the most?"
+                 "de": "<strong>Schritt 1:</strong> Passe die <strong>Marktanteile</strong> (Priors) an. Wer produziert am meisten?",
+                 "en": "<strong>Step 1:</strong> Adjust the <strong>Market Shares</strong> (Priors). Who produced the most?"
              }))
         elif res >= 2.0:
             st.warning(t({

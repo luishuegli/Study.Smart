@@ -96,29 +96,29 @@ content_3_7 = {
     "exam_essentials": {
         "tips": [
             {
-                "tip": {"de": "Varianz-Shortcut: E[X²] - (E[X])² statt E[(X-μ)²]", "en": "Variance Shortcut: E[X²] - (E[X])² instead of E[(X-μ)²]"},
+                "tip": {"de": "Varianz-Shortcut: $E[X^2] - (E[X])^2$ statt $E[(X-\\mu)^2]$", "en": "Variance Shortcut: $E[X^2] - (E[X])^2$ instead of $E[(X-\\mu)^2]$"},
                 "why": {"de": "Viel schneller zu rechnen!", "en": "Much faster to calculate!"}
             },
             {
-                "tip": {"de": "CDF-Sandwich: P(a<X≤b) = F(b) - F(a)", "en": "CDF Sandwich: P(a<X≤b) = F(b) - F(a)"},
+                "tip": {"de": "CDF-Sandwich: $P(a<X\\leq b) = F(b) - F(a)$", "en": "CDF Sandwich: $P(a<X\\leq b) = F(b) - F(a)$"},
                 "why": {"de": "Funktioniert für diskret UND stetig!", "en": "Works for discrete AND continuous!"}
             },
             {
-                "tip": {"de": "Lineare Transformation: Var(aX+b) = a²Var(X) — b verschwindet!", "en": "Linear Transform: Var(aX+b) = a²Var(X) — b disappears!"},
+                "tip": {"de": "Lineare Transformation: $Var(aX+b) = a^2 \\cdot Var(X)$ — $b$ verschwindet!", "en": "Linear Transform: $Var(aX+b) = a^2 \\cdot Var(X)$ — $b$ disappears!"},
                 "why": {"de": "Verschiebung ändert Streuung nicht.", "en": "Shifting doesn't change spread."}
             },
             {
-                "tip": {"de": "Symmetrie-Hack: Symmetrisch um 0 → E[X] = 0", "en": "Symmetry Hack: Symmetric around 0 → E[X] = 0"},
+                "tip": {"de": "Symmetrie-Hack: Symmetrisch um 0 → $E[X] = 0$", "en": "Symmetry Hack: Symmetric around 0 → $E[X] = 0$"},
                 "why": {"de": "Sofort ablesen, nicht rechnen!", "en": "Read off instantly, don't calculate!"}
             },
             {
-                "tip": {"de": "Z-Score Reisepass: Standardisiere zu N(0,1), dann eine Tabelle für alle!", "en": "Z-Score Passport: Standardize to N(0,1), then one table for all!"},
+                "tip": {"de": "Z-Score Reisepass: Standardisiere zu $N(0,1)$, dann eine Tabelle für alle!", "en": "Z-Score Passport: Standardize to $N(0,1)$, then one table for all!"},
                 "why": {"de": "Universal für jede Normalverteilung.", "en": "Universal for any normal distribution."}
             }
         ],
         "trap": {
-            "de": "<strong>Gleiche Verteilung ≠ Gleiche Variable:</strong> X und Y können dieselbe Verteilung haben, aber X ≠ Y. Beispiel: Ruben's Gewinn X und Jochen's Gewinn -X haben GLEICHE Verteilung, aber X ≠ -X!",
-            "en": "<strong>Same Distribution ≠ Same Variable:</strong> X and Y can have the same distribution, but X ≠ Y. Example: Ruben's winnings X and Jochen's winnings -X have the SAME distribution, but X ≠ -X!"
+            "de": "<strong>Gleiche Verteilung ≠ Gleiche Variable:</strong> $X$ und $Y$ können dieselbe Verteilung haben, aber $X \\neq Y$. Beispiel: Ruben's Gewinn $X$ und Jochen's Gewinn $-X$ haben GLEICHE Verteilung, aber $X \\neq -X$!",
+            "en": "<strong>Same Distribution ≠ Same Variable:</strong> $X$ and $Y$ can have the same distribution, but $X \\neq Y$. Example: Ruben's winnings $X$ and Jochen's winnings $-X$ have the SAME distribution, but $X \\neq -X$!"
         },
         "trap_rule": {
             "de": "Verwechsle nie 'identisch verteilt' mit 'gleich'!",
@@ -261,9 +261,25 @@ def render_symmetry_explorer():
     inter = content_3_7["interactive"]
     st.markdown(f"### {t(inter['title'])}")
     
-    with st.container(border=True):
+    # Blue slider CSS
+    st.markdown("""
+    <style>
+    .stSlider:has([aria-label*="Rounds"]), .stSlider:has([aria-label*="Runden"]) {
+        div[data-baseweb="slider"] > div:first-child > div:first-child { 
+            background-color: #007AFF !important; 
+            background-image: none !important;
+        }
+    }
+    .stSlider:has([aria-label*="Rounds"]) div[role="slider"],
+    .stSlider:has([aria-label*="Runden"]) div[role="slider"] { 
+        background-color: #FFFFFF !important; 
+        border: 2px solid #007AFF !important; 
+    }
+    </style>
+    """, unsafe_allow_html=True)
+    
+    with st.container(border=False):
         st.markdown(t(inter["desc"]))
-        st.markdown("---")
         
         # State
         if "sym_n_rounds" not in st.session_state:

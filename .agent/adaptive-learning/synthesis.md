@@ -99,6 +99,15 @@ else:
 | **No emojis in decision trees** | Emoji ⭐ in decision tree violates No Emojis rule | decision_tree.py | ✅ Fixed |
 | **Color the question too** | Given values in problem statement should use same colors as in solution steps | worked_example.py | ⏳ Pending |
 
+### From Topic 8.3 (NEW - Quiz & Utilities)
+| Rule | Evidence | Add to File | Status |
+|------|----------|-------------|--------|
+| **QUIZ_LATEX_SEPARATE** | Fix #5: Separate LaTeX from prose text in quiz questions for proper rendering | interactive.md | ✅ Fixed |
+| **PILL_BUTTON_CONSISTENCY** | Fix #6: Both st.button CSS and result HTML must use same border-radius (20px) | interactive.md | ✅ Fixed |
+| **NO_EMOJI_IN_UTILITIES** | Fix #7: Utility components (decision_tree.py) should not add emojis/symbols like ✓ | utils/layouts | ✅ Fixed |
+| **UNIFIED_FEEDBACK_BOX** | Fix #8: Don't split feedback into multiple colored boxes - use st.success() | interactive.md | ✅ Fixed |
+| **API_VERIFICATION_MANDATORY** | Fixes #1-4: Always view utility .py files before using them | implement.md | ⏳ CRITICAL |
+
 ### From Topic 8 (NEW - 2026-01-05)
 | Rule | Evidence | Add to File | Status |
 |------|----------|-------------|--------|
@@ -110,6 +119,9 @@ else:
 | **NO_LATEX_IN_HTML** | Confirmed again: `$...$` in HTML divs does not render. Use `st.latex()` | layout.md | ✅ DOCUMENTED (Topic 6) |
 | **VERTICAL_CENTER_EQUAL_PADDING** | Fix #8: When centering content vertically in side-by-side columns, use EQUAL padding on top and bottom | layout.md | ⏳ Pending |
 | **DYNAMIC_CHART_AXES** | Fix #9: Don't hardcode chart axis ranges - use `max(min_range, data_length + buffer)` to expand with data | interactive.md | ⏳ Pending |
+| **BLUE_SLIDER_DEFAULT** | Fix T8.2 #6: Sliders should be blue by default, override Streamlit's red/pink styling | design-system.md, interactive.md | ⏳ NEW |
+| **EXAM_ESSENTIALS_LATEX_STRICT** | Session 2026-01-05: ALL math in exam_essentials MUST use LaTeX, no plain text like "Cov = 0" | pedagogy.md | ⏳ CRITICAL |
+
 
 **Vertical Centering in Side-by-Side Columns:**
 
@@ -587,4 +599,84 @@ Examples:
 - x₍ₖ₎ (not $x_{(k)}$)
 - σ² (not $\sigma^2$)
 ```
+
+### 7. design-system.md — Add Blue Slider Default
+
+```markdown
+[STRICT] Blue Slider Default
+Streamlit sliders have red/pink default styling. Override with blue (#007AFF) for consistency.
+
+Only use different colors for semantic meaning:
+- **Blue (#007AFF)**: Default, sample size, neutral parameters
+- **Red (#FF4B4B)**: Outliers, danger, selection
+- **Purple (#9B59B6)**: Intermediate values
+
+Pattern:
+```python
+# Inject BEFORE the slider
+st.markdown("""
+<style>
+.stSlider div[data-baseweb="slider"] > div:first-child > div:first-child { 
+    background-color: #007AFF !important; 
+}
+.stSlider div[role="slider"] { 
+    background-color: #FFFFFF !important; 
+    border: 2px solid #007AFF !important; 
+}
+</style>
+""", unsafe_allow_html=True)
+
+st.slider("Label", ...)
+```
+
+For scoped coloring (specific slider only), use `[aria-label*="..."]`:
+```python
+.stSlider:has([aria-label*="CEO"]) div[data-baseweb="slider"] > div:first-child > div:first-child { 
+    background-color: #FF4B4B !important; 
+}
+```
+```
+
+---
+
+## Topic 8 Synthesis (Completed)
+- **Started:** 2026-01-05
+- **Completed:** 2026-01-05 ✅
+- **Total fixes:** 15 (8.1: 7, 8.2: 6, 8.3: 8, 8.4: 5)
+- **New rules created:** 12
+
+### Summary by Subtopic
+
+| Subtopic | Focus | Key Fixes |
+|----------|-------|-----------|
+| 8.1 | Heuristic Estimators | LaTeX in HTML, intuition containers, interactive charts, relatable scenarios |
+| 8.2 | Estimator Properties | API mismatches (render_definition, render_comparison), slider jumping bug, blue slider CSS |
+| 8.3 | MOM vs MLE Methods | API verification, quiz LaTeX, pill button consistency, unified feedback |
+| 8.4 | MLE Deep Dive | Bilingual options, `<br>` rendering, display math centering, piecewise formatting |
+
+### Key Patterns Established
+1. **Slider State Management:** Use `on_change` callback pattern or key-only auto-sync
+2. **Blue Slider Default:** All sliders blue unless semantic exception
+3. **Contained Grey Elements:** Key insights/tips go INSIDE parent container with `---` dividers
+4. **API Verification:** Always check utility function signatures before use
+5. **Bilingual Options:** All exam question options MUST have proper de/en translations
+6. **Problem Renderer HTML Safety:** All st.markdown in problem_renderer needs unsafe_allow_html=True
+7. **Display Math Centering:** Wrap `$$` blocks in centered div for reliable centering
+
+### New Rules from Topic 8
+
+| Rule | Description | Integration Target |
+|------|-------------|-------------------|
+| INTUITION_WHITE_CONTAINER | Intuition sections use st.container(border=True) | pedagogy.md |
+| SLIDER_ON_CHANGE_PATTERN | Never write to state after reading slider | interactive.md |
+| BLUE_SLIDER_DEFAULT | All sliders blue by default | design-system.md |
+| API_VERIFICATION_MANDATORY | Always view utility .py files before use | implement.md |
+| QUIZ_LATEX_SEPARATE | Separate LaTeX from prose in quiz questions | interactive.md |
+| PILL_BUTTON_CONSISTENCY | Button CSS and result HTML use same radius | interactive.md |
+| BILINGUAL_OPTIONS_STRICT | All option dicts must have proper de/en | design-system.md |
+| PROBLEM_RENDERER_HTML_SAFE | problem_renderer markdown needs unsafe_allow_html | utils |
+| ASK_YOURSELF_NO_LATEX | Use Unicode (θ̂, μ) not LaTeX in ask_yourself | design-system.md |
+| CENTERED_DISPLAY_MATH | Wrap `$$` blocks in centered div | layout.md |
+| PROBLEM_VISUAL_STRUCTURE | Bold headers + line breaks for multi-part problems | layout.md |
+| EXAM_ESSENTIALS_LATEX_STRICT | ALL math in exam_essentials MUST use LaTeX | pedagogy.md |
 

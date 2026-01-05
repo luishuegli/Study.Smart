@@ -275,12 +275,12 @@ content_5_5 = {
             }
         ],
         "trap": {
-            "de": "<strong>Die Cov = 0 Falle:</strong> Unkorreliert ≠ Unabhängig! Cov = 0 bedeutet nur 'kein linearer Zusammenhang'. Es kann trotzdem eine nicht-lineare Abhängigkeit bestehen.",
-            "en": "<strong>The Cov = 0 Trap:</strong> Uncorrelated ≠ Independent! Cov = 0 only means 'no linear relationship'. There can still be a non-linear dependence."
+            "de": "<strong>Die $\\text{Cov} = 0$ Falle:</strong> Unkorreliert ≠ Unabhängig! $\\text{Cov} = 0$ bedeutet nur 'kein linearer Zusammenhang'. Es kann trotzdem eine nicht-lineare Abhängigkeit bestehen.",
+            "en": "<strong>The $\\text{Cov} = 0$ Trap:</strong> Uncorrelated ≠ Independent! $\\text{Cov} = 0$ only means 'no linear relationship'. There can still be a non-linear dependence."
         },
         "trap_rule": {
-            "de": "Unabhängig → Cov = 0.  Aber:  Cov = 0 → NICHT unbedingt unabhängig!",
-            "en": "Independent → Cov = 0.  But:  Cov = 0 → NOT necessarily independent!"
+            "de": "Unabhängig → $\\text{Cov} = 0$.  Aber:  $\\text{Cov} = 0$ → NICHT unbedingt unabhängig!",
+            "en": "Independent → $\\text{Cov} = 0$.  But:  $\\text{Cov} = 0$ → NOT necessarily independent!"
         }
     },
     

@@ -51,25 +51,25 @@ content_3_6 = {
     },
     "exam_essentials": {
         "trap": {
-            "de": "Nach dem Nachschlagen von Z in der Tabelle vergessen, zurück zur Original-Skala zu rechnen. Du findest z.B. Z = 1.645 für das 95%-Perzentil, aber die Aufgabe fragt nach dem Wert in der Originalverteilung!",
-            "en": "After looking up Z in the table, forgetting to convert back to the original scale. You find Z = 1.645 for the 95th percentile, but the question asks for the value in the original distribution!"
+            "de": "Nach dem Nachschlagen von $Z$ in der Tabelle vergessen, zurück zur Original-Skala zu rechnen. Du findest z.B. $Z = 1.645$ für das 95%-Perzentil, aber die Aufgabe fragt nach dem Wert in der Originalverteilung!",
+            "en": "After looking up $Z$ in the table, forgetting to convert back to the original scale. You find $Z = 1.645$ for the 95th percentile, but the question asks for the value in the original distribution!"
         },
         "trap_rule": {
-            "de": "Immer prüfen: Fragt die Aufgabe nach Z oder nach X? Wenn X: X = μ + Z·σ nicht vergessen!",
-            "en": "Always check: Does the question ask for Z or X? If X: Don't forget X = μ + Z·σ!"
+            "de": "Immer prüfen: Fragt die Aufgabe nach $Z$ oder nach $X$? Wenn $X$: $X = \\mu + Z \\cdot \\sigma$ nicht vergessen!",
+            "en": "Always check: Does the question ask for $Z$ or $X$? If $X$: Don't forget $X = \\mu + Z \\cdot \\sigma$!"
         },
         "tips": [
             {
-                "tip": {"de": "Standardisieren: Z = (X - μ) / σ", "en": "Standardize: Z = (X - μ) / σ"},
+                "tip": {"de": "Standardisieren: $Z = (X - \\mu) / \\sigma$", "en": "Standardize: $Z = (X - \\mu) / \\sigma$"},
                 "why": {"de": "Wandelt jeden Wert in 'Anzahl Standardabweichungen vom Mittelwert' um.", "en": "Converts any value to 'number of standard deviations from the mean'."}
             },
             {
-                "tip": {"de": "De-Standardisieren: X = μ + Z·σ", "en": "De-standardize: X = μ + Z·σ"},
-                "why": {"de": "Wandelt Z zurück in die Originalskala — unverzichtbar für Perzentil-Aufgaben!", "en": "Converts Z back to the original scale — essential for percentile problems!"}
+                "tip": {"de": "De-Standardisieren: $X = \\mu + Z \\cdot \\sigma$", "en": "De-standardize: $X = \\mu + Z \\cdot \\sigma$"},
+                "why": {"de": "Wandelt $Z$ zurück in die Originalskala — unverzichtbar für Perzentil-Aufgaben!", "en": "Converts $Z$ back to the original scale — essential for percentile problems!"}
             },
             {
-                "tip": {"de": "Symmetrie-Shortcut: Φ(-z) = 1 - Φ(z)", "en": "Symmetry shortcut: Φ(-z) = 1 - Φ(z)"},
-                "why": {"de": "Spart Nachschlagen für negative Z-Werte. Die Standardnormalverteilung ist symmetrisch um 0!", "en": "Saves lookup for negative Z values. The standard normal is symmetric around 0!"}
+                "tip": {"de": "Symmetrie-Shortcut: $\\Phi(-z) = 1 - \\Phi(z)$", "en": "Symmetry shortcut: $\\Phi(-z) = 1 - \\Phi(z)$"},
+                "why": {"de": "Spart Nachschlagen für negative $Z$-Werte. Die Standardnormalverteilung ist symmetrisch um 0!", "en": "Saves lookup for negative $Z$ values. The standard normal is symmetric around 0!"}
             }
         ]
     },

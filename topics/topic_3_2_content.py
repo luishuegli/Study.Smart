@@ -58,17 +58,17 @@ content_3_2 = {
             "en": "Forgetting to check if the sum really equals 1."
         },
         "trap_rule": {
-            "de": "**Immer prüfen:** Summe = 1? Alle Werte ≥ 0?",
-            "en": "**Always check:** Sum = 1? All values ≥ 0?"
+            "de": "**Immer prüfen:** $\\sum P(x) = 1$? Alle Werte $\\geq 0$?",
+            "en": "**Always check:** $\\sum P(x) = 1$? All values $\\geq 0$?"
         },
         "tips": [
             {
                 "tip": {"de": "Der Kuchen-Trick", "en": "The Cake Trick"},
-                "why": {"de": "Fehlender Wert = 1 - Summe(Rest). Spart Zeit!", "en": "Missing value = 1 - Sum(Rest). Saves time!"}
+                "why": {"de": "Fehlender Wert = $1 - \\sum(\\text{Rest})$. Spart Zeit!", "en": "Missing value = $1 - \\sum(\\text{Rest})$. Saves time!"}
             },
             {
-                "tip": {"de": "Normierungskonstante c finden", "en": "Finding normalization constant c"},
-                "why": {"de": "Setze Σf(x) = 1 und löse nach c auf.", "en": "Set Σf(x) = 1 and solve for c."}
+                "tip": {"de": "Normierungskonstante $c$ finden", "en": "Finding normalization constant $c$"},
+                "why": {"de": "Setze $\\sum f(x) = 1$ und löse nach $c$ auf.", "en": "Set $\\sum f(x) = 1$ and solve for $c$."}
             }
         ]
     }

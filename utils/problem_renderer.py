@@ -28,7 +28,7 @@ def render_multi_stage_problem(
     
     with st.container(border=True):
         # Stem / Context
-        st.markdown(t(stem_text))
+        st.markdown(t(stem_text), unsafe_allow_html=True)
         
         st.markdown("---")
         
@@ -76,7 +76,7 @@ def render_multi_stage_problem(
             # Let's just default to expanded=True for visibility.
             
             with st.expander(label, expanded=True):
-                st.markdown(t(part['question']))
+                st.markdown(t(part['question']), unsafe_allow_html=True)
                 
                 # Check state
                 is_submitted = st.session_state.get(f"{full_qid}_submitted", False)
@@ -100,7 +100,7 @@ def render_multi_stage_problem(
                     st.markdown("---")
                     sol = part['solution']
                     # Dual Mode Display
-                    st.markdown(t(sol))
+                    st.markdown(t(sol), unsafe_allow_html=True)
                     
                     # Optional: "Hide" button to reset? (Maybe later)
 
@@ -124,7 +124,7 @@ def render_open_question(
     st.markdown(f"**{source}**")
     
     with st.container(border=True):
-        st.markdown(t(question_text))
+        st.markdown(t(question_text), unsafe_allow_html=True)
         
         # Hints
         if hints:
@@ -161,7 +161,7 @@ def render_open_question(
                 st.rerun()
         else:
             st.markdown("---")
-            st.markdown(t(solution_text_dict))
+            st.markdown(t(solution_text_dict), unsafe_allow_html=True)
             
             # Reset button for practice
             if st.button(t({'de': 'Zurücksetzen', 'en': 'Reset'}), key=f"reset_{question_id}", type="secondary"):

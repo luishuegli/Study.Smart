@@ -3396,8 +3396,8 @@ QUESTIONS_8_4 = {
             "en": r"""An estimator is unbiased if it is symmetrically distributed around its expectation."""
         },
         "options": [
-            {"de": "Richtig", "en": "Richtig"},
-            {"de": "Falsch", "en": "Falsch"}
+            {"de": "Richtig", "en": "True"},
+            {"de": "Falsch", "en": "False"}
         ],
         "correct_idx": 1, 
         "solution": {
@@ -3413,8 +3413,8 @@ QUESTIONS_8_4 = {
             "en": r"""Efficient estimators are always unbiased (in lecture context)."""
         },
         "options": [
-            {"de": "Richtig", "en": "Richtig"},
-            {"de": "Falsch", "en": "Falsch"}
+            {"de": "Richtig", "en": "True"},
+            {"de": "Falsch", "en": "False"}
         ],
         "correct_idx": 0,
         "solution": {
@@ -3430,8 +3430,8 @@ QUESTIONS_8_4 = {
             "en": r"""Unbiased estimators are consistent."""
         },
         "options": [
-            {"de": "Richtig", "en": "Richtig"},
-            {"de": "Falsch", "en": "Falsch"}
+            {"de": "Richtig", "en": "True"},
+            {"de": "Falsch", "en": "False"}
         ],
         "correct_idx": 1,
         "solution": {
@@ -3447,8 +3447,8 @@ QUESTIONS_8_4 = {
             "en": r"""Estimators are random variables."""
         },
         "options": [
-            {"de": "Richtig", "en": "Richtig"},
-            {"de": "Falsch", "en": "Falsch"}
+            {"de": "Richtig", "en": "True"},
+            {"de": "Falsch", "en": "False"}
         ],
         "correct_idx": 0,
         "solution": {
@@ -3464,8 +3464,8 @@ QUESTIONS_8_4 = {
             "en": r"""An unbiased estimator always has a lower MSE than a biased one."""
         },
         "options": [
-            {"de": "Richtig", "en": "Richtig"},
-            {"de": "Falsch", "en": "Falsch"}
+            {"de": "Richtig", "en": "True"},
+            {"de": "Falsch", "en": "False"}
         ],
         "correct_idx": 1,
         "solution": {
@@ -3481,10 +3481,10 @@ QUESTIONS_8_4 = {
             "en": r"""$\bar{X}$. True?<br>(a) $Var(\bar{X}) = \sigma^2/n$.<br>(b) Consistent.<br>(c) Standard Normal."""
         },
         "options": [
-            {"de": "a) und b)", "en": "a) und b)"},
-            {"de": "b) und c)", "en": "b) und c)"},
-            {"de": "a) und c)", "en": "a) und c)"},
-            {"de": "Nur a)", "en": "Nur a)"}
+            {"de": "a) und b)", "en": "a) and b)"},
+            {"de": "b) und c)", "en": "b) and c)"},
+            {"de": "a) und c)", "en": "a) and c)"},
+            {"de": "Nur a)", "en": "Only a)"}
         ],
         "correct_idx": 0,
         "solution": {
@@ -3538,8 +3538,8 @@ QUESTIONS_8_4 = {
             "en": r"""MOM and MLE always yield same results?"""
         },
         "options": [
-            {"de": "Richtig", "en": "Richtig"},
-            {"de": "Falsch", "en": "Falsch"}
+            {"de": "Richtig", "en": "True"},
+            {"de": "Falsch", "en": "False"}
         ],
         "correct_idx": 1,
         "solution": {
@@ -3555,8 +3555,8 @@ QUESTIONS_8_4 = {
             "en": r"""MLE are never unbiased?"""
         },
         "options": [
-            {"de": "Richtig", "en": "Richtig"},
-            {"de": "Falsch", "en": "Falsch"}
+            {"de": "Richtig", "en": "True"},
+            {"de": "Falsch", "en": "False"}
         ],
         "correct_idx": 1,
         "solution": {
@@ -3572,9 +3572,9 @@ QUESTIONS_8_4 = {
             "en": r"""$X_i \sim U[1, \theta]$. Est $\hat{\theta} = \frac{2}{n}\sum X_i$."""
         },
         "options": [
-            {"de": r"Varianz ist $\frac{(\theta-1)^2}{3n}$", "en": r"Varianz ist $\frac{(\theta-1)^2}{3n}$"},
-            {"de": "Erwartungstreu", "en": "Erwartungstreu"},
-            {"de": "Konsistent", "en": "Konsistent"},
+            {"de": r"Varianz ist $\frac{(\theta-1)^2}{3n}$", "en": r"Variance is $\frac{(\theta-1)^2}{3n}$"},
+            {"de": "Erwartungstreu", "en": "Unbiased"},
+            {"de": "Konsistent", "en": "Consistent"},
             {"de": "Bias ...", "en": "Bias ..."}
         ],
         "correct_idx": 0,
@@ -3591,8 +3591,8 @@ QUESTIONS_8_4 = {
             "en": r"""Systematic error in estimation is called Bias."""
         },
         "options": [
-            {"de": "Richtig", "en": "Richtig"},
-            {"de": "Falsch", "en": "Falsch"}
+            {"de": "Richtig", "en": "True"},
+            {"de": "Falsch", "en": "False"}
         ],
         "correct_idx": 0,
         "solution": {
@@ -3608,8 +3608,8 @@ QUESTIONS_8_4 = {
             "en": r"""Positive bias (Bias > 0). Does it over- or underestimate on average?"""
         },
         "options": [
-            {"de": "Überschätzt", "en": "Überschätzt"},
-            {"de": "Unterschätzt", "en": "Unterschätzt"}
+            {"de": "Überschätzt", "en": "Overestimates"},
+            {"de": "Unterschätzt", "en": "Underestimates"}
         ],
         "correct_idx": 0,
         "solution": {
@@ -3625,8 +3625,8 @@ QUESTIONS_8_4 = {
             "en": r"""Main goal is finding estimators with small variances."""
         },
         "options": [
-            {"de": "Richtig", "en": "Richtig"},
-            {"de": "Falsch", "en": "Falsch"}
+            {"de": "Richtig", "en": "True"},
+            {"de": "Falsch", "en": "False"}
         ],
         "correct_idx": 1,
         "solution": {
@@ -3642,8 +3642,8 @@ QUESTIONS_8_4 = {
             "en": r"""Maximizing Loglikelihood vs Likelihood yields the same estimator."""
         },
         "options": [
-            {"de": "Richtig", "en": "Richtig"},
-            {"de": "Falsch", "en": "Falsch"}
+            {"de": "Richtig", "en": "True"},
+            {"de": "Falsch", "en": "False"}
         ],
         "correct_idx": 0,
         "solution": {
@@ -3748,8 +3748,8 @@ QUESTIONS_9_4 = {
             "en": r"""CI boundaries are random."""
         },
         "options": [
-            {"de": "Richtig", "en": "Richtig"},
-            {"de": "Falsch", "en": "Falsch"}
+            {"de": "Richtig", "en": "True"},
+            {"de": "Falsch", "en": "False"}
         ],
         "correct_idx": 0,
         "solution": {
@@ -3765,8 +3765,8 @@ QUESTIONS_9_4 = {
             "en": r"""Length of CI increases with parameter magnitude."""
         },
         "options": [
-            {"de": "Richtig", "en": "Richtig"},
-            {"de": "Falsch", "en": "Falsch"}
+            {"de": "Richtig", "en": "True"},
+            {"de": "Falsch", "en": "False"}
         ],
         "correct_idx": 1,
         "solution": {
@@ -3825,8 +3825,8 @@ QUESTIONS_10_5_EXTRA = {
              "en": r"""Step length. $\sigma=0.2, n=7, \bar{x}=85.186$. Test $H_0: \mu \le 85$ ($\alpha=0.01$)."""
         },
         "options": [
-            {"de": "Verwerfen", "en": "Verwerfen"},
-            {"de": "Nicht verwerfen", "en": "Nicht verwerfen"}
+            {"de": "Verwerfen", "en": "Reject"},
+            {"de": "Nicht verwerfen", "en": "Do not reject"}
         ],
         "correct_idx": 0,
         "solution": {
@@ -4533,37 +4533,72 @@ QUESTIONS_8_4_EXTRA = {
         "source": "HS 2023 Januar, Problem 5 (15 Punkte)",
         "type": "problem",
         "question": {
-            "de": r"""Problem 5 (15 Punkte)
-Teil 5A (7 Punkte)
+            "de": r"""**Problem 5 (15 Punkte)**
+
+**Teil 5A (7 Punkte)**
+
 Betrachten Sie die folgende Wahrscheinlichkeitsdichtefunktion:
+
+<div style="text-align: center; margin: 16px 0;">
+
 $$f_X(x; \lambda) = \begin{cases} \frac{2x}{\lambda^2} e^{-(x/\lambda)^2} & \text{für } x \ge 0 \\ 0 & \text{für } x < 0 \end{cases}$$
+
+</div>
+
 mit unbekanntem Parameter $\lambda > 0$.
+
 Berechnen Sie den Maximum-Likelihood-Schätzer für $\lambda$ auf der Grundlage einer Zufallsstichprobe $X_1, \dots, X_n$, die aus der oben erwähnten Verteilung gezogen wurde.
 
-Teil 5B (8 Punkte)
-Nehmen wir an, dass die in der Tabelle 1 gezeigte Daten die Realisierungen einer Zufallsvariable $Y$ mit Wahrscheinlichkeitsdichtefunktion (PMF) sind:
-$$p_Y(y) = \begin{cases} \frac{1}{\theta} & \text{für } y \in \{1, \dots, \theta\} \\ 0 & \text{sonst} \end{cases}$$
-1. Berechnen Sie einen Momentenschätzer für $\theta$ auf Grundlage einer Zufallsstichprobe $Y_1, \dots, Y_n$.
-Hinweis: $\sum_{i=1}^K i = \frac{K(K+1)}{2}$.
-2. Berechnen Sie den Maximum-Likelihood-Schätzer für $\theta$ auf Grundlage einer Zufallsstichprobe $Y_1, \dots, Y_n$.
-3. Berechnen Sie anhand der Beobachtungsdaten in Tabelle 1 die Werte der Momentenschätzer und Maximum-Likelihood-Schätzer für $\theta$.
+---
 
-Tabelle 1: Beobachtungen der Zufallsvariable $Y$
-$y_1 = 1, y_2 = 4, y_3 = 3, y_4 = 4, y_5 = 2$""",
-            "en": r"""Problem 5 (15 Points)
-Part 5A (7 Points)
+**Teil 5B (8 Punkte)**
+
+Nehmen wir an, dass die in der Tabelle 1 gezeigte Daten die Realisierungen einer Zufallsvariable $Y$ mit Wahrscheinlichkeitsmassenfunktion (PMF) sind:
+
+<div style="text-align: center; margin: 16px 0;">
+
+$$p_Y(y) = \begin{cases} \frac{1}{\theta} & \text{für } y \in \{1, \dots, \theta\} \\ 0 & \text{sonst} \end{cases}$$
+
+</div>
+
+1. Berechnen Sie einen Momentenschätzer für $\theta$ auf Grundlage einer Zufallsstichprobe $Y_1, \dots, Y_n$.
+   Hinweis: $\sum_{i=1}^K i = \frac{K(K+1)}{2}$.
+2. Berechnen Sie den Maximum-Likelihood-Schätzer für $\theta$ auf Grundlage einer Zufallsstichprobe $Y_1, \dots, Y_n$.
+
+**Tabelle 1:** $y_1 = 1, y_2 = 4, y_3 = 3, y_4 = 4, y_5 = 2$""",
+            "en": r"""**Problem 5 (15 Points)**
+
+**Part 5A (7 Points)**
+
 Consider the following probability density function:
+
+<div style="text-align: center; margin: 16px 0;">
+
 $$f_X(x; \lambda) = \begin{cases} \frac{2x}{\lambda^2} e^{-(x/\lambda)^2} & \text{for } x \ge 0 \\ 0 & \text{for } x < 0 \end{cases}$$
+
+</div>
+
 with unknown parameter $\lambda > 0$.
+
 Calculate the Maximum Likelihood Estimator for $\lambda$ based on a random sample $X_1, \dots, X_n$ drawn from the above distribution.
 
-Part 5B (8 Points)
+---
+
+**Part 5B (8 Points)**
+
 Assume the data shown in Table 1 are realizations of a random variable $Y$ with probability mass function (PMF):
+
+<div style="text-align: center; margin: 16px 0;">
+
 $$p_Y(y) = \begin{cases} \frac{1}{\theta} & \text{for } y \in \{1, \dots, \theta\} \\ 0 & \text{otherwise} \end{cases}$$
+
+</div>
+
 1. Calculate a Method of Moments estimator for $\theta$ based on a random sample $Y_1, \dots, Y_n$.
-Hint: $\sum_{i=1}^K i = \frac{K(K+1)}{2}$.
+   Hint: $\sum_{i=1}^K i = \frac{K(K+1)}{2}$.
 2. Calculate the Maximum Likelihood Estimator for $\theta$ based on a random sample $Y_1, \dots, Y_n$.
-$y_1 = 1, y_2 = 4, y_3 = 3, y_4 = 4, y_5 = 2$"""
+
+**Table 1:** $y_1 = 1, y_2 = 4, y_3 = 3, y_4 = 4, y_5 = 2$"""
         },
         "solution": {
             "de": r"**Lösung:**<br>5A: $\hat{\lambda} = \sqrt{\frac{1}{n} \sum x_i^2}$.<br>5B: MME $\hat{\theta} = 2\bar{X} - 1 = 4.6$. MLE $\hat{\theta} = \max(x_i) = 4$.",

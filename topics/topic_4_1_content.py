@@ -194,12 +194,12 @@ $V(X) = \\frac{6^2 - 1}{12} = \\frac{35}{12} \\approx 2.92$
         },
         "tips": [
             {
-                "tip": {"de": "P = 1/m für jeden Ausgang", "en": "P = 1/m for each outcome"},
-                "why": {"de": "\"Gleich\"verteilung = alle gleich wahrscheinlich. Bei m Möglichkeiten muss sich 1 (= 100%) auf alle aufteilen.", "en": "\"Uniform\" distribution = all equally likely. With m possibilities, 1 (= 100%) must split evenly."}
+                "tip": {"de": "$P = \\frac{1}{m}$ für jeden Ausgang", "en": "$P = \\frac{1}{m}$ for each outcome"},
+                "why": {"de": "\"Gleich\"verteilung = alle gleich wahrscheinlich. Bei $m$ Möglichkeiten muss sich 1 (= 100%) auf alle aufteilen.", "en": "\"Uniform\" distribution = all equally likely. With $m$ possibilities, 1 (= 100%) must split evenly."}
             },
             {
-                "tip": {"de": "E[X] = (m+1)/2 als Schnellformel", "en": "E[X] = (m+1)/2 as shortcut formula"},
-                "why": {"de": "Funktioniert nur wenn X ∈ {1, 2, ..., m}. Der Durchschnitt von 1 bis m ist immer die Mitte.", "en": "Only works when X ∈ {1, 2, ..., m}. The average of 1 to m is always the midpoint."}
+                "tip": {"de": "$E[X] = \\frac{m+1}{2}$ als Schnellformel", "en": "$E[X] = \\frac{m+1}{2}$ as shortcut formula"},
+                "why": {"de": "Funktioniert nur wenn $X \\in \\{1, 2, ..., m\\}$. Der Durchschnitt von 1 bis $m$ ist immer die Mitte.", "en": "Only works when $X \\in \\{1, 2, ..., m\\}$. The average of 1 to $m$ is always the midpoint."}
             },
             {
                 "tip": {"de": "Summen sind NICHT gleichverteilt", "en": "Sums are NOT uniformly distributed"},

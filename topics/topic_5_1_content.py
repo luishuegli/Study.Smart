@@ -29,8 +29,8 @@ content_5_1 = {
     
     "exam_essentials": {
         "trap": {
-            "de": "Richtung verwechselt: Für f_X summierst du ÜBER alle Y (Zeile). Für f_Y summierst du ÜBER alle X (Spalte).",
-            "en": "Direction confused: For f_X you sum ACROSS all Y (row). For f_Y you sum ACROSS all X (column)."
+            "de": "Richtung verwechselt: Für $f_X$ summierst du ÜBER alle $Y$ (Zeile). Für $f_Y$ summierst du ÜBER alle $X$ (Spalte).",
+            "en": "Direction confused: For $f_X$ you sum ACROSS all $Y$ (row). For $f_Y$ you sum ACROSS all $X$ (column)."
         },
         "tips": [
             {

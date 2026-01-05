@@ -219,12 +219,12 @@ $p = 1 - \\left(\\frac{5}{6}\\right)^3 = 1 - \\frac{125}{216} = \\frac{91}{216} 
     "exam_essentials": {
         "header": {"de": "Prüfungs-Essentials", "en": "Exam Essentials"},
         "trap": {
-            "de": "Bernoulli mit Binomial verwechselt! Bernoulli ist EIN Wurf, Binomial ist n Würfe.",
-            "en": "Confusing Bernoulli with Binomial! Bernoulli is ONE trial, Binomial is n trials."
+            "de": "Bernoulli mit Binomial verwechselt! Bernoulli ist EIN Wurf, Binomial ist $n$ Würfe.",
+            "en": "Confusing Bernoulli with Binomial! Bernoulli is ONE trial, Binomial is $n$ trials."
         },
         "trap_rule": {
-            "de": "Faustregel: X ∈ {0,1}? → Bernoulli. X ∈ {0,1,2,...,n}? → Binomial.",
-            "en": "Rule of thumb: X ∈ {0,1}? → Bernoulli. X ∈ {0,1,2,...,n}? → Binomial."
+            "de": "Faustregel: $X \\in \\{0,1\\}$? → Bernoulli. $X \\in \\{0,1,2,...,n\\}$? → Binomial.",
+            "en": "Rule of thumb: $X \\in \\{0,1\\}$? → Bernoulli. $X \\in \\{0,1,2,...,n\\}$? → Binomial."
         },
         "tips": [
             {
@@ -232,15 +232,15 @@ $p = 1 - \\left(\\frac{5}{6}\\right)^3 = 1 - \\frac{125}{216} = \\frac{91}{216} 
                 "why": {"de": "Bernoulli ist der Grundbaustein! Münzwurf, Prüfung bestanden/nicht bestanden, Produkt defekt/OK — alles Bernoulli.", "en": "Bernoulli is the building block! Coin flip, exam pass/fail, product defective/OK — all Bernoulli."}
             },
             {
-                "tip": {"de": "n Bernoullis = Binomial", "en": "n Bernoullis = Binomial"},
-                "why": {"de": "Wenn du den gleichen Bernoulli-Versuch n-mal unabhängig wiederholst und die Erfolge zählst, landest du bei der Binomialverteilung.", "en": "When you repeat the same Bernoulli trial n times independently and count successes, you get the Binomial distribution."}
+                "tip": {"de": "$n$ Bernoullis = Binomial", "en": "$n$ Bernoullis = Binomial"},
+                "why": {"de": "Wenn du den gleichen Bernoulli-Versuch $n$-mal unabhängig wiederholst und die Erfolge zählst, landest du bei der Binomialverteilung.", "en": "When you repeat the same Bernoulli trial $n$ times independently and count successes, you get the Binomial distribution."}
             },
             {
-                "tip": {"de": "Varianz maximal bei p = 0.5", "en": "Variance maximum at p = 0.5"},
-                "why": {"de": "V(X) = p(1-p) ist eine Parabel. Der Scheitelpunkt liegt bei p = 0.5. Dort ist die Unsicherheit am grössten.", "en": "V(X) = p(1-p) is a parabola. The vertex is at p = 0.5. That's where uncertainty is greatest."}
+                "tip": {"de": "Varianz maximal bei $p = 0.5$", "en": "Variance maximum at $p = 0.5$"},
+                "why": {"de": "$V(X) = p(1-p)$ ist eine Parabel. Der Scheitelpunkt liegt bei $p = 0.5$. Dort ist die Unsicherheit am grössten.", "en": "$V(X) = p(1-p)$ is a parabola. The vertex is at $p = 0.5$. That's where uncertainty is greatest."}
             },
             {
-                "tip": {"de": "E[X] = p und V(X) = p(1-p) auswendig lernen!", "en": "Memorize E[X] = p and V(X) = p(1-p)!"},
+                "tip": {"de": "$E[X] = p$ und $V(X) = p(1-p)$ auswendig lernen!", "en": "Memorize $E[X] = p$ and $V(X) = p(1-p)$!"},
                 "why": {"de": "Diese kommen in fast jeder Prüfung vor. Keine Zeit fürs Herleiten — direkt anwenden!", "en": "These appear in almost every exam. No time to derive — apply directly!"}
             }
         ]

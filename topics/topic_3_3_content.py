@@ -71,21 +71,21 @@ content_3_3 = {
     },
     "exam_essentials": {
         "trap": {
-            "de": "Glauben, dass f(x) ≤ 1 sein muss (wie bei diskreten Variablen).",
-            "en": "Believing that f(x) must be ≤ 1 (like with discrete variables)."
+            "de": "Glauben, dass $f(x) \\leq 1$ sein muss (wie bei diskreten Variablen).",
+            "en": "Believing that $f(x)$ must be $\\leq 1$ (like with discrete variables)."
         },
         "trap_rule": {
-            "de": "**Merke:** f(x) ist DICHTE, nicht Wahrscheinlichkeit! f(x) kann 5, 10, 100 sein - nur die FLÄCHE muss 1 sein.",
-            "en": "**Remember:** f(x) is DENSITY, not probability! f(x) can be 5, 10, 100 - only the AREA must be 1."
+            "de": "**Merke:** $f(x)$ ist DICHTE, nicht Wahrscheinlichkeit! $f(x)$ kann 5, 10, 100 sein - nur die FLÄCHE muss 1 sein.",
+            "en": "**Remember:** $f(x)$ is DENSITY, not probability! $f(x)$ can be 5, 10, 100 - only the AREA must be 1."
         },
         "tips": [
             {
                 "tip": {"de": "Einzelpunkt = 0", "en": "Single point = 0"},
-                "why": {"de": "P(X = exakter Wert) = 0, IMMER. Nutze das für Vereinfachungen!", "en": "P(X = exact value) = 0, ALWAYS. Use this for simplifications!"}
+                "why": {"de": "$P(X = \\text{exakter Wert}) = 0$, IMMER. Nutze das für Vereinfachungen!", "en": "$P(X = \\text{exact value}) = 0$, ALWAYS. Use this for simplifications!"}
             },
             {
-                "tip": {"de": "≤ und < sind gleichwertig", "en": "≤ and < are equivalent"},
-                "why": {"de": "P(X ≤ 3) = P(X < 3) weil P(X=3) = 0. Spart Rechenzeit!", "en": "P(X ≤ 3) = P(X < 3) because P(X=3) = 0. Saves calculation time!"}
+                "tip": {"de": "$\\leq$ und $<$ sind gleichwertig", "en": "$\\leq$ and $<$ are equivalent"},
+                "why": {"de": "$P(X \\leq 3) = P(X < 3)$ weil $P(X=3) = 0$. Spart Rechenzeit!", "en": "$P(X \\leq 3) = P(X < 3)$ because $P(X=3) = 0$. Saves calculation time!"}
             }
         ]
     }

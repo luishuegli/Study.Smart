@@ -121,25 +121,25 @@ content_4_9 = {
                 "why": {"de": "Das Signalwort für die Poisson-Verteilung.", "en": "The signal word for Poisson distribution."}
             },
             {
-                "tip": {"de": "N(100, 25) → σ² = 25, σ = 5 (NICHT σ = 25!)", "en": "N(100, 25) → σ² = 25, σ = 5 (NOT σ = 25!)"},
-                "why": {"de": "Der zweite Parameter ist IMMER die Varianz, nicht σ!", "en": "The second parameter is ALWAYS variance, not σ!"}
+                "tip": {"de": "$N(100, 25) \\rightarrow \\sigma^2 = 25, \\sigma = 5$ (NICHT $\\sigma = 25$!)", "en": "$N(100, 25) \\rightarrow \\sigma^2 = 25, \\sigma = 5$ (NOT $\\sigma = 25$!)"},
+                "why": {"de": "Der zweite Parameter ist IMMER die Varianz, nicht $\\sigma$!", "en": "The second parameter is ALWAYS variance, not $\\sigma$!"}
             },
             {
-                "tip": {"de": "E[X] bei Exponential = 1/λ (nicht λ!)", "en": "E[X] for Exponential = 1/λ (not λ!)"},
-                "why": {"de": "Bei Poisson ist λ der Mittelwert, bei Exponential ist es 1/λ.", "en": "For Poisson λ is the mean, for Exponential it's 1/λ."}
+                "tip": {"de": "$E[X]$ bei Exponential $= \\frac{1}{\\lambda}$ (nicht $\\lambda$!)", "en": "$E[X]$ for Exponential $= \\frac{1}{\\lambda}$ (not $\\lambda$!)"},
+                "why": {"de": "Bei Poisson ist $\\lambda$ der Mittelwert, bei Exponential ist es $\\frac{1}{\\lambda}$.", "en": "For Poisson $\\lambda$ is the mean, for Exponential it's $\\frac{1}{\\lambda}$."}
             },
             {
-                "tip": {"de": "P(X = x) = 0 für ALLE stetigen Verteilungen", "en": "P(X = x) = 0 for ALL continuous distributions"},
-                "why": {"de": "Nur Intervalle haben Wahrscheinlichkeit > 0.", "en": "Only intervals have probability > 0."}
+                "tip": {"de": "$P(X = x) = 0$ für ALLE stetigen Verteilungen", "en": "$P(X = x) = 0$ for ALL continuous distributions"},
+                "why": {"de": "Nur Intervalle haben Wahrscheinlichkeit $> 0$.", "en": "Only intervals have probability $> 0$."}
             }
         ],
         "trap": {
-            "de": "<strong>σ vs σ² Verwirrung:</strong> N(μ, σ²) hat σ² als Parameter! Bei N(100, 25) ist σ = 5, NICHT 25.",
-            "en": "<strong>σ vs σ² Confusion:</strong> N(μ, σ²) has σ² as parameter! For N(100, 25), σ = 5, NOT 25."
+            "de": "<strong>$\\sigma$ vs $\\sigma^2$ Verwirrung:</strong> $N(\\mu, \\sigma^2)$ hat $\\sigma^2$ als Parameter! Bei $N(100, 25)$ ist $\\sigma = 5$, NICHT 25.",
+            "en": "<strong>$\\sigma$ vs $\\sigma^2$ Confusion:</strong> $N(\\mu, \\sigma^2)$ has $\\sigma^2$ as parameter! For $N(100, 25)$, $\\sigma = 5$, NOT 25."
         },
         "trap_rule": {
-            "de": "Immer prüfen: Steht der Parameter für σ oder σ²?",
-            "en": "Always check: Does the parameter represent σ or σ²?"
+            "de": "Immer prüfen: Steht der Parameter für $\\sigma$ oder $\\sigma^2$?",
+            "en": "Always check: Does the parameter represent $\\sigma$ or $\\sigma^2$?"
         }
     }
 }

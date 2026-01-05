@@ -47,7 +47,7 @@ def render_decision_tree(
             then_text = t(decision.get("result", {}))
             
             if decision.get("highlight"):
-                st.markdown(f"**{t({'de': 'WENN', 'en': 'IF'})}** {if_text} → **{then_text}** ✓")
+                st.markdown(f"**{t({'de': 'WENN', 'en': 'IF'})}** {if_text} → **{then_text}!**")
             else:
                 st.markdown(f"**{t({'de': 'WENN', 'en': 'IF'})}** {if_text} → **{then_text}**")
             

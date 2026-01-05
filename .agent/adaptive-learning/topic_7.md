@@ -279,23 +279,12 @@ else:
 
 ---
 
-## Global Config Issue (RECURRING)
+## Global Config Issue (DEPRECATED)
 
-### 24. Black UI / Topic Headers Invisible (CRITICAL)
-**Issue:** Sidebar turned dark gray, topic expander headers appeared as black bars with invisible text.
-**Root Cause:** `primaryColor = "#000000"` in `.streamlit/config.toml` causes Streamlit to render expander headers with black background and black text.
-**Fix:** Change to a visible accent color:
-```toml
-# ❌ WRONG - causes black UI elements
-primaryColor = "#000000"
-
-# ✅ CORRECT - teal accent, visible on white
-primaryColor = "#000000"
-```
-**Detection:** If topics in course overview show as black bars, check `config.toml` primary color.
-**Related Issue:** Often triggered when uncommitted code changes cause KeyError crashes, breaking Streamlit's state.
-**Rule:** [CRITICAL] **NEVER set primaryColor to #000000.** Always use a visible accent color like teal (#14B8A6).
-**Rule Added to:** `.streamlit/config.toml` (inline comment)
+### 24. ~~Black UI / Topic Headers Invisible~~ (FALSE ALARM)
+**Status:** DEPRECATED - User confirmed `primaryColor = "#000000"` works fine.
+**Original concern:** Was thought to cause black UI elements, but this was likely caused by other issues (KeyError crashes, state corruption).
+**Current setting:** `primaryColor = "#000000"` (black accents) is acceptable.
 
 ---
 

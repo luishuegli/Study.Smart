@@ -53,21 +53,21 @@ content_3_4 = {
     },
     "exam_essentials": {
         "trap": {
-            "de": "Glauben, dass E[X] ein möglicher Wert sein muss.",
-            "en": "Believing that E[X] must be a possible value."
+            "de": "Glauben, dass $E[X]$ ein möglicher Wert sein muss.",
+            "en": "Believing that $E[X]$ must be a possible value."
         },
         "trap_rule": {
-            "de": "**Merke:** E[X] ist der Schwerpunkt, nicht ein Ergebnis! E[Würfel] = 3.5, aber 3.5 kann nie fallen.",
-            "en": "**Remember:** E[X] is the balance point, not an outcome! E[Die] = 3.5, but 3.5 can never occur."
+            "de": "**Merke:** $E[X]$ ist der Schwerpunkt, nicht ein Ergebnis! $E[\\text{Würfel}] = 3.5$, aber 3.5 kann nie fallen.",
+            "en": "**Remember:** $E[X]$ is the balance point, not an outcome! $E[\\text{Die}] = 3.5$, but 3.5 can never occur."
         },
         "tips": [
             {
                 "tip": {"de": "Linearität nutzen!", "en": "Use linearity!"},
-                "why": {"de": "E[aX + b] = a·E[X] + b. Spart viel Rechenzeit bei transformierten Variablen.", "en": "E[aX + b] = a·E[X] + b. Saves calculation time for transformed variables."}
+                "why": {"de": "$E[aX + b] = a \\cdot E[X] + b$. Spart viel Rechenzeit bei transformierten Variablen.", "en": "$E[aX + b] = a \\cdot E[X] + b$. Saves calculation time for transformed variables."}
             },
             {
-                "tip": {"de": "E[X + Y] = E[X] + E[Y] gilt IMMER", "en": "E[X + Y] = E[X] + E[Y] holds ALWAYS"},
-                "why": {"de": "Auch wenn X und Y abhängig sind! Das vergessen viele.", "en": "Even if X and Y are dependent! Many forget this."}
+                "tip": {"de": "$E[X + Y] = E[X] + E[Y]$ gilt IMMER", "en": "$E[X + Y] = E[X] + E[Y]$ holds ALWAYS"},
+                "why": {"de": "Auch wenn $X$ und $Y$ abhängig sind! Das vergessen viele.", "en": "Even if $X$ and $Y$ are dependent! Many forget this."}
             }
         ]
     }

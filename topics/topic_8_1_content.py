@@ -211,14 +211,18 @@ def estimator_showdown():
     
     st.markdown("<br>", unsafe_allow_html=True)
     
-    # Formulas using proper st.latex() - with better labels
+    # Formulas using proper st.latex() - with variance formulas
     col_a, col_b = st.columns(2)
     with col_a:
         st.markdown(f"**A: {t({'de': 'Stichprobenmittel', 'en': 'Sample Mean'})}**")
         st.latex(r"\hat{\mu}_A = \frac{X_1 + X_2}{2}")
+        st.latex(r"\text{Var} = \frac{\sigma^2}{2} = 5.0")
+        st.markdown(f"<span style='color: #007AFF; font-weight: bold;'>{t({'de': 'EFFIZIENT', 'en': 'EFFICIENT'})}</span>", unsafe_allow_html=True)
     with col_b:
         st.markdown(f"**B: {t({'de': 'Gewichteter Durchschnitt', 'en': 'Weighted Average'})}**")
         st.latex(r"\hat{\mu}_B = \frac{X_1}{3} + \frac{2X_2}{3}")
+        st.latex(r"\text{Var} = \frac{5\sigma^2}{9} = 5.56")
+        st.markdown(f"<span style='color: #FF4B4B; font-weight: bold;'>{t({'de': 'WENIGER EFFIZIENT', 'en': 'LESS EFFICIENT'})}</span>", unsafe_allow_html=True)
     
     # Buttons
     b1, b2, b3 = st.columns(3)

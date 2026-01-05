@@ -69,7 +69,7 @@ def render_comparison(
         st.markdown(f"### {t({'de': 'Der Kernunterschied', 'en': 'The Key Difference'})}")
         # Use container so LaTeX renders inside
         with st.container(border=True):
-            st.markdown(f"**{t(key_difference)}**")
+            st.markdown(t(key_difference), unsafe_allow_html=True)
             if key_difference_formula:
                 st.latex(key_difference_formula)
 

@@ -15,7 +15,7 @@ content_3_1 = {
     "title": {"de": "3.1 Die Verteilungsfunktion (CDF)", "en": "3.1 Distribution Function (CDF)"},
     "anchor": {
         "header": {"de": "Die Intuition", "en": "The Intuition"},
-        "text": {"de": "Stell dir vor, du läufst einen Zahlenstrahl entlang und sammelst Wahrscheinlichkeit wie Regenwasser in einem Tank. Die Funktion F(x) zeigt dir den aktuellen Füllstand an. Ganz links (-∞) ist der Tank leer (0). Ganz rechts (+∞) ist er voll (1). Du kannst niemals Wasser verlieren – der Tank wird nur voller!", "en": "Imagine walking along a number line collecting probability like rainwater in a tank. The function F(x) shows you the current fill level. At the far left (-∞), the tank is empty (0). At the far right (+∞), it is full (1). You can never lose water – the tank only gets fuller!"},
+        "text": {"de": "Stell dir vor, du läufst einen Zahlenstrahl entlang und sammelst Wahrscheinlichkeit wie Regenwasser in einem Tank. Die Funktion $F(x)$ zeigt dir den aktuellen Füllstand an. Ganz links $(-\\infty)$ ist der Tank leer (0). Ganz rechts $(+\\infty)$ ist er voll (1). Du kannst niemals Wasser verlieren – der Tank wird nur voller!", "en": "Imagine walking along a number line collecting probability like rainwater in a tank. The function $F(x)$ shows you the current fill level. At the far left $(-\\infty)$, the tank is empty (0). At the far right $(+\\infty)$, it is full (1). You can never lose water – the tank only gets fuller!"},
         "metaphor": {"de": "Der Wahrscheinlichkeits-Scanner", "en": "The Probability Scanner"}
     },
     "theory": {
@@ -54,24 +54,24 @@ content_3_1 = {
     # --- EXAM ESSENTIALS ---
     "exam_essentials": {
         "trap": {
-            "de": "<strong>< vs. ≤</strong> verwechseln! Bei stetigen Verteilungen ist P(X < x) = P(X ≤ x). Bei diskreten Verteilungen ist das NICHT der Fall!",
-            "en": "Confusing <strong>< vs. ≤</strong>! For continuous distributions, P(X < x) = P(X ≤ x). For discrete distributions, this is NOT the case!"
+            "de": "<strong>< vs. ≤</strong> verwechseln! Bei stetigen Verteilungen ist $P(X < x) = P(X \\leq x)$. Bei diskreten Verteilungen ist das NICHT der Fall!",
+            "en": "Confusing <strong>< vs. ≤</strong>! For continuous distributions, $P(X < x) = P(X \\leq x)$. For discrete distributions, this is NOT the case!"
         },
         "trap_rule": {
-            "de": "Stetig: < und ≤ sind gleich. Diskret: Aufpassen!",
-            "en": "Continuous: < and ≤ are equal. Discrete: Be careful!"
+            "de": "Stetig: $<$ und $\\leq$ sind gleich. Diskret: Aufpassen!",
+            "en": "Continuous: $<$ and $\\leq$ are equal. Discrete: Be careful!"
         },
         "tips": [
             {
-                "tip": {"de": "Intervall-Trick: P(a < X ≤ b) = F(b) - F(a)", "en": "Interval trick: P(a < X ≤ b) = F(b) - F(a)"},
+                "tip": {"de": "Intervall-Trick: $P(a < X \\leq b) = F(b) - F(a)$", "en": "Interval trick: $P(a < X \\leq b) = F(b) - F(a)$"},
                 "why": {"de": "Die CDF akkumuliert - subtrahiere um ein Stück herauszuschneiden.", "en": "The CDF accumulates - subtract to cut out a piece."}
             },
             {
-                "tip": {"de": "Komplementär-Trick: P(X > x) = 1 - F(x)", "en": "Complement trick: P(X > x) = 1 - F(x)"},
-                "why": {"de": "Der Tank ist bei 1 voll. Was übrig bleibt nach F(x) ist 1 - F(x).", "en": "The tank is full at 1. What's left after F(x) is 1 - F(x)."}
+                "tip": {"de": "Komplementär-Trick: $P(X > x) = 1 - F(x)$", "en": "Complement trick: $P(X > x) = 1 - F(x)$"},
+                "why": {"de": "Der Tank ist bei 1 voll. Was übrig bleibt nach $F(x)$ ist $1 - F(x)$.", "en": "The tank is full at 1. What's left after $F(x)$ is $1 - F(x)$."}
             },
             {
-                "tip": {"de": "Grenzen prüfen: F(-∞) = 0, F(+∞) = 1", "en": "Check limits: F(-∞) = 0, F(+∞) = 1"},
+                "tip": {"de": "Grenzen prüfen: $F(-\\infty) = 0$, $F(+\\infty) = 1$", "en": "Check limits: $F(-\\infty) = 0$, $F(+\\infty) = 1$"},
                 "why": {"de": "Deine Antwort muss zwischen 0 und 1 liegen!", "en": "Your answer must be between 0 and 1!"}
             }
         ]
@@ -199,11 +199,28 @@ def render_simulator_3_1():
     Standard Normal Distribution.
     """
 
-    # --- CSS: SCOPED SLIDER ---
+    # --- CSS: SCOPED SLIDER COLORS ---
     st.markdown("""
     <style>
-    .stSlider:has([aria-label*="Scanner"]) div[data-baseweb="slider"] > div:first-child > div:first-child { background-color: #007AFF !important; }
-    .stSlider:has([aria-label*="Scanner"]) div[role="slider"] { background-color: #FFFFFF !important; border: 2px solid #007AFF !important; }
+    /* Scanner Slider (Blue) - Track and Thumb */
+    .stSlider:has([aria-label*="Scanner"]) div[data-baseweb="slider"] > div:first-child > div:first-child { 
+        background-color: #007AFF !important; 
+        background-image: none !important;
+    }
+    .stSlider:has([aria-label*="Scanner"]) div[role="slider"] { 
+        background-color: #FFFFFF !important; 
+        border: 2px solid #007AFF !important; 
+    }
+    
+    /* Mission Slider (Purple) - Track and Thumb */
+    .stSlider:has([aria-label*="Threshold"]) div[data-baseweb="slider"] > div:first-child > div:first-child { 
+        background-color: #AF52DE !important; 
+        background-image: none !important;
+    }
+    .stSlider:has([aria-label*="Threshold"]) div[role="slider"] { 
+        background-color: #FFFFFF !important; 
+        border: 2px solid #AF52DE !important; 
+    }
     </style>
     """, unsafe_allow_html=True)
 

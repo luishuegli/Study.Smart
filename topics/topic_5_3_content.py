@@ -127,25 +127,25 @@ content_5_3 = {
     # --- EXAM ESSENTIALS ---
     "exam_essentials": {
         "trap": {
-            "de": "**Cov = 0 bedeutet NICHT Unabhangigkeit!** Die Kovarianz misst nur **linearen** Zusammenhang. Klassisches Gegenbeispiel: X gleichverteilt auf [-1,1], dann ist Y = X² abhangig von X, aber Cov(X, Y) = 0!",
-            "en": "**Cov = 0 does NOT mean independence!** Covariance only measures **linear** relationship. Classic counterexample: X uniform on [-1,1], then Y = X² depends on X, but Cov(X, Y) = 0!"
+            "de": "**$\\text{Cov} = 0$ bedeutet NICHT Unabhängigkeit!** Die Kovarianz misst nur **linearen** Zusammenhang. Klassisches Gegenbeispiel: $X$ gleichverteilt auf $[-1,1]$, dann ist $Y = X^2$ abhängig von $X$, aber $\\text{Cov}(X, Y) = 0$!",
+            "en": "**$\\text{Cov} = 0$ does NOT mean independence!** Covariance only measures **linear** relationship. Classic counterexample: $X$ uniform on $[-1,1]$, then $Y = X^2$ depends on $X$, but $\\text{Cov}(X, Y) = 0$!"
         },
         "trap_rule": {
-            "de": "Unabhangigkeit → Cov = 0. Aber Cov = 0 → NICHT unbedingt unabhangig!",
-            "en": "Independence → Cov = 0. But Cov = 0 → NOT necessarily independent!"
+            "de": "Unabhängigkeit → $\\text{Cov} = 0$. Aber $\\text{Cov} = 0$ → NICHT unbedingt unabhängig!",
+            "en": "Independence → $\\text{Cov} = 0$. But $\\text{Cov} = 0$ → NOT necessarily independent!"
         },
         "tips": [
             {
-                "tip": {"de": "Verwende den Verschiebungssatz: E[XY] - E[X]E[Y]", "en": "Use the shift formula: E[XY] - E[X]E[Y]"},
-                "why": {"de": "Viel weniger Rechnung als die Definitionsformel. Prufungszeit sparen!", "en": "Much less calculation than the definition formula. Save exam time!"}
+                "tip": {"de": "Verwende den Verschiebungssatz: $E[XY] - E[X]E[Y]$", "en": "Use the shift formula: $E[XY] - E[X]E[Y]$"},
+                "why": {"de": "Viel weniger Rechnung als die Definitionsformel. Prüfungszeit sparen!", "en": "Much less calculation than the definition formula. Save exam time!"}
             },
             {
-                "tip": {"de": "Lineare Transformation: Cov(aX, bY) = ab · Cov(X,Y)", "en": "Linear transformation: Cov(aX, bY) = ab · Cov(X,Y)"},
+                "tip": {"de": "Lineare Transformation: $\\text{Cov}(aX, bY) = ab \\cdot \\text{Cov}(X,Y)$", "en": "Linear transformation: $\\text{Cov}(aX, bY) = ab \\cdot \\text{Cov}(X,Y)$"},
                 "why": {"de": "Konstanten verschwinden nicht wie bei Varianz. Sie werden nur multipliziert.", "en": "Constants don't disappear like with variance. They just get multiplied."}
             },
             {
-                "tip": {"de": "Korrelation bei linearer Transformation: ρ(aX+b, cY+d) = sign(ac) · ρ(X,Y)", "en": "Correlation under linear transformation: ρ(aX+b, cY+d) = sign(ac) · ρ(X,Y)"},
-                "why": {"de": "Additive Konstanten (b, d) andern ρ nicht. Vorzeichen nur wenn a oder c negativ.", "en": "Additive constants (b, d) don't change ρ. Sign only flips if a or c is negative."}
+                "tip": {"de": "Korrelation bei linearer Transformation: $\\rho(aX+b, cY+d) = \\text{sign}(ac) \\cdot \\rho(X,Y)$", "en": "Correlation under linear transformation: $\\rho(aX+b, cY+d) = \\text{sign}(ac) \\cdot \\rho(X,Y)$"},
+                "why": {"de": "Additive Konstanten ($b$, $d$) ändern $\\rho$ nicht. Vorzeichen nur wenn $a$ oder $c$ negativ.", "en": "Additive constants ($b$, $d$) don't change $\\rho$. Sign only flips if $a$ or $c$ is negative."}
             }
         ]
     }

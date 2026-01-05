@@ -137,7 +137,7 @@ content_1_11 = {
             {"de": "Suche ich <strong>A oder B</strong>? → Additionssatz (Überlappung abziehen!)", "en": "Looking for <strong>A or B</strong>? → Addition law (subtract overlap!)"},
             {"de": "Suche ich <strong>A gegeben B</strong>? → Bedingte Wahrscheinlichkeit", "en": "Looking for <strong>A given B</strong>? → Conditional probability"},
             {"de": "Muss ich die <strong>Bedingung umkehren</strong>? → Bayes!", "en": "Need to <strong>flip the condition</strong>? → Bayes!"},
-            {"de": "Sind A und B <strong>unabhängig</strong>? → Teste $P(A \\cap B) = P(A) \\cdot P(B)$", "en": "Are A and B <strong>independent</strong>? → Test $P(A \\cap B) = P(A) \\cdot P(B)$"},
+            {"de": "Sind A und B <strong>unabhängig</strong>? → Teste P(A∩B) = P(A) · P(B)", "en": "Are A and B <strong>independent</strong>? → Test P(A∩B) = P(A) · P(B)"},
             {"de": "Suche ich <strong>mindestens eins</strong>? → Komplement: 1 - P(keins)", "en": "Looking for <strong>at least one</strong>? → Complement: 1 - P(none)"}
         ],
         "conclusion": {"de": "Signalwörter im Aufgabentext verraten die Formel!", "en": "Signal words in the problem reveal the formula!"}
@@ -312,7 +312,6 @@ def render_formula_finder():
                 
                 if scenario_key:
                     scenario = scenarios[scenario_key]
-                    color = scenario["color"]
                     
                     # Track mission completion
                     if not st.session_state.finder_done:
@@ -322,12 +321,8 @@ def render_formula_finder():
                             track_question_answer(user["localId"], "vwl", "1", "1.11", "1_11_finder_mission", True)
                             update_local_progress("1", "1.11", "1_11_finder_mission", True)
                     
-                    # Result display
-                    st.markdown(f"""
-                    <div style="background: {color}20; border: 2px solid {color}; border-radius: 12px; padding: 16px; text-align: center;">
-                        <div style="font-weight: 700; font-size: 1.1em; color: {color}; margin-bottom: 8px;">{t(scenario['label'])}</div>
-                    </div>
-                    """, unsafe_allow_html=True)
+                    # Clean result display - NO border, just formula
+                    st.markdown(f"**{t(scenario['label'])}**")
                     st.latex(scenario['formula'])
                     st.caption(t(scenario['example']))
             else:

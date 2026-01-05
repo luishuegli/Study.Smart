@@ -201,27 +201,44 @@ def render_simulator_1_5():
     # --- CSS: SCOPED SLIDER COLORS ---
     st.markdown("""
     <style>
-    /* 1. iPhone (Blue) */
-    .stSlider:has([aria-label*="iPhone"]) div[data-baseweb="slider"] > div:first-child > div:first-child { background-color: #007AFF !important; }
+    /* 1. iPhone (Blue) - filled track */
+    .stSlider:has([aria-label*="iPhone"]) div[data-baseweb="slider"] > div:first-child > div:first-child { 
+        background-color: #007AFF !important; 
+        background-image: none !important; 
+    }
     .stSlider:has([aria-label*="iPhone"]) div[role="slider"] { background-color: #FFFFFF !important; border: 2px solid #007AFF !important; }
 
-    /* 2. MacBook (Purple) */
-    .stSlider:has([aria-label*="Mac"]) div[data-baseweb="slider"] > div:first-child > div:first-child { background-color: #AF52DE !important; }
+    /* 2. MacBook (Purple) - filled track */
+    .stSlider:has([aria-label*="Mac"]) div[data-baseweb="slider"] > div:first-child > div:first-child { 
+        background-color: #AF52DE !important; 
+        background-image: none !important; 
+    }
     .stSlider:has([aria-label*="Mac"]) div[role="slider"] { background-color: #FFFFFF !important; border: 2px solid #AF52DE !important; }
 
-    /* 3. Intersection/Overlap (Indigo) - Selector 1 */
-    .stSlider:has([aria-label*="P(A and B)"]) div[data-baseweb="slider"] > div:first-child > div:first-child { background-color: #5856D6 !important; }
+    /* 3. Intersection/Overlap (Indigo) - filled track */
+    .stSlider:has([aria-label*="P(A and B)"]) div[data-baseweb="slider"] > div:first-child > div:first-child { 
+        background-color: #5856D6 !important; 
+        background-image: none !important; 
+    }
     .stSlider:has([aria-label*="P(A and B)"]) div[role="slider"] { background-color: #FFFFFF !important; border: 2px solid #5856D6 !important; }
 
-    /* 4. Intersection/Overlap (Indigo) - Selector 2 (Mission) */
-    .stSlider:has([aria-label*="Overlap"]) div[data-baseweb="slider"] > div:first-child > div:first-child { background-color: #5856D6 !important; }
+    /* 4. Overlap slider in Mission (Indigo) - filled track */
+    .stSlider:has([aria-label*="Overlap"]) div[data-baseweb="slider"] > div:first-child > div:first-child { 
+        background-color: #5856D6 !important; 
+        background-image: none !important; 
+    }
     .stSlider:has([aria-label*="Overlap"]) div[role="slider"] { background-color: #FFFFFF !important; border: 2px solid #5856D6 !important; }
 
-    /* Global Slider Label/Value Tweak */
+    /* Global Slider Label/Value Tweak - force black numbers */
     div[data-baseweb="slider"] > div > div > div[role="slider"] + div {
         background-color: transparent !important;
-        color: inherit !important;
+        color: #1D1D1F !important;
         font-weight: bold !important;
+    }
+    
+    /* Also target the value display above thumb */
+    .stSlider [data-testid="stMarkdownContainer"] p {
+        color: #1D1D1F !important;
     }
     </style>
     """, unsafe_allow_html=True)

@@ -59,7 +59,7 @@ SUBTOPIC_QUESTION_COUNTS = {
     "7.5": 2,  # 7_5_mcq1, 7_5_mcq2 (Correlation Explorer + MCQs)
     "7.6": 6,  # 4 Quick Checks (visual, center, dispersion, boxplot) + 2 official exam questions
     # Topic 8: Point Estimation
-    "8.1": 0,  # No MCQs
+    "8.1": 1,  # hs2023_mc10
     "8.2": 2,  # hs2023_mc10, hs2015_mc10
     "8.3": 3,  # hs2022_mc8, hs2015_prob5, +1
     "8.4": 22,  # uebung5_mc1-15 + prob3,5,6,8 + test5_mc3 + hs2023_prob5 + hs2022_prob5

@@ -93,10 +93,15 @@ def render_exam_essentials(
             st.markdown("")
             
             for i, tip_data in enumerate(tips, 1):
-                # Bold title with optional LaTeX
+                # Bold title with optional LaTeX (supports bilingual)
                 if "tip_formula" in tip_data:
                     st.markdown(f"**({i}) {t(tip_data['tip'])}**")
-                    st.latex(tip_data["tip_formula"])
+                    # Check for bilingual formula
+                    from utils.localization import get_current_language
+                    if get_current_language() == "en" and "tip_formula_en" in tip_data:
+                        st.latex(tip_data["tip_formula_en"])
+                    else:
+                        st.latex(tip_data["tip_formula"])
                 else:
                     st.markdown(f"**({i}) {t(tip_data['tip'])}**")
                 

@@ -4397,47 +4397,88 @@ QUESTIONS_7_6 = {
         "source": "HS 2023 Januar, Problem 1 (12 Punkte)",
         "type": "problem",
         "question": {
-            "de": r"""Aufgabe 1 (12 Punkte)
-Teil 1A (4 Punkte)
-Aus jeder der vier Verteilungen F1 , F2 , F3 und F4 wird eine Zufallsstichprobe von Beobachtungen
-gezogen:
-F1 ) Poissonverteilung mit λ = 50.
-Stichprobenumfang n1 = 200
-F2 ) Gleichverteilung auf dem Intervall [14, 26].
-Stichprobenumfang n2 = 200
-F3 ) Normalverteilung mit µ = 20 und σ 2 = 4.
-Stichprobenumfang n3 = 200
-F4 ) Binomialverteilung mit n = 200 und p = 0.2.
-Stichprobenumfang n4 = 200
-Die folgenden Diagramme zeigen empirische Verteilungsfuktionen und Histogramme der entsprechenden Stichproben (F1 , F2 , F3 und F4 ). Ordne jedem Diagramm die entsprechende Verteilung
-zu, z.B. F1 : a
-Hinweis: Jeder Graph entspricht genau einer der vier Verteilungen F1 , F2 , F3 und F4 .
-Teil 1B (8 Punkte)
-Die Höchstgeschwindigkeit von zehn zufällig gewählten Autos lautet wie folgt:
-180, 195, 240, 185, 230, 300, 290, 180, 235, 280
-1. Berechnen Sie den Mittelwert, den Modus und den Interquartilsabstand für die
-Höchstgeschwindigkeiten der Autos.
-2. Zeichne Sie ein Histogramm der Höchstgeschwindigkeiten der Autos.
-beschriften Sie auch das zusätzliche Blatt klar und deutlich. Die Aufgabe wird sonst nicht gewertet.""",
-            "en": r"""Problem 1 (12 Points)
-Part 1A (4 Points)
-A random sample of observations is drawn from each of the four distributions F1, F2, F3, and F4:
-F1) Poisson distribution with $\lambda = 50$. Sample size $n_1 = 200$.
-F2) Uniform distribution on the interval $[14, 26]$. Sample size $n_2 = 200$.
-F3) Normal distribution with $\mu = 20$ and $\sigma^2 = 4$. Sample size $n_3 = 200$.
-F4) Binomial distribution with $n = 200$ and $p = 0.2$. Sample size $n_4 = 200$.
-The following diagrams show empirical distribution functions and histograms of the corresponding samples (F1, F2, F3, and F4). Match each diagram to the corresponding distribution, e.g., F1: a.
-Hint: Each graph corresponds to exactly one of the four distributions F1, F2, F3, and F4.
-Part 1B (8 Points)
-The top speed of ten randomly chosen cars is as follows:
-180, 195, 240, 185, 230, 300, 290, 180, 235, 280
-1. Calculate the mean, the mode, and the interquartile range for the top speeds of the cars.
-2. Draw a histogram of the top speeds of the cars.
-Label the additional sheet clearly as well. Otherwise, the task will not be graded."""
+            "de": r"""**Teil 1A (4 Punkte) — Grafik-Zuordnung**
+
+Aus jeder der vier Verteilungen F1, F2, F3 und F4 wird eine Zufallsstichprobe gezogen:
+
+| Verteilung | Parameter |
+|------------|-----------|
+| **F1** | Poisson: $\lambda = 50$, $n_1 = 200$ |
+| **F2** | Gleichverteilung: $U[14, 26]$, $n_2 = 200$ |
+| **F3** | Normal: $\mu = 20$, $\sigma^2 = 4$, $n_3 = 200$ |
+| **F4** | Binomial: $n = 200$, $p = 0.2$, $n_4 = 200$ |
+
+Die folgenden Diagramme zeigen empirische Verteilungsfunktionen und Histogramme.
+
+**Aufgabe:** Ordne jedes Diagramm der richtigen Verteilung zu (z.B. F1: a).
+
+*Hinweis: Jeder Graph entspricht genau einer der vier Verteilungen.*
+
+---
+
+**Teil 1B (8 Punkte) — Höchstgeschwindigkeit**
+
+Die Höchstgeschwindigkeit von zehn zufällig gewählten Autos:
+
+$$180, 195, 240, 185, 230, 300, 290, 180, 235, 280$$
+
+**Aufgaben:**
+1. Berechne den **Mittelwert**, den **Modus** und den **Interquartilsabstand** (IQR).
+2. Zeichne ein **Histogramm** der Höchstgeschwindigkeiten.""",
+            "en": r"""**Part 1A (4 Points) — Graph Matching**
+
+A random sample is drawn from each of the four distributions F1, F2, F3, and F4:
+
+| Distribution | Parameters |
+|--------------|------------|
+| **F1** | Poisson: $\lambda = 50$, $n_1 = 200$ |
+| **F2** | Uniform: $U[14, 26]$, $n_2 = 200$ |
+| **F3** | Normal: $\mu = 20$, $\sigma^2 = 4$, $n_3 = 200$ |
+| **F4** | Binomial: $n = 200$, $p = 0.2$, $n_4 = 200$ |
+
+The following diagrams show empirical distribution functions and histograms.
+
+**Task:** Match each diagram to the correct distribution (e.g., F1: a).
+
+*Hint: Each graph corresponds to exactly one of the four distributions.*
+
+---
+
+**Part 1B (8 Points) — Top Speed**
+
+The top speed of ten randomly chosen cars:
+
+$$180, 195, 240, 185, 230, 300, 290, 180, 235, 280$$
+
+**Tasks:**
+1. Calculate the **mean**, **mode**, and **interquartile range** (IQR).
+2. Draw a **histogram** of the top speeds."""
         },
         "solution": {
-            "de": r"**Lösung 1A:**<br>F1: 50 (Mittel), F4: 40 (Mittel), F3: 20 (Mittel), F2: Flach.<br>**Lösung 1B:**<br>Sortiert: 180, 180, 185, 195, 230, 235, 240, 280, 290, 300.<br>Mittelwert: 231.5. Modus: 180.<br>IQR: $Q_3 - Q_1 = 280 - 185 = 95$.",
-            "en": r"**Solution 1A:**<br>F1: 50 (Mean), F4: 40 (Mean), F3: 20 (Mean), F2: Flat.<br>**Solution 1B:**<br>Mean: 231.5. Mode: 180.<br>IQR: $280 - 185 = 95$."
+            "de": r"""**Lösung 1A:**
+- F1 (Poisson λ=50): Erwartungswert 50, rechtsschiefe Glocke
+- F2 (Uniform): Flaches Histogramm, lineare ECDF
+- F3 (Normal): Symmetrische Glocke um 20
+- F4 (Binomial): Erwartungswert np=40, diskrete Glocke
+
+**Lösung 1B:**
+Sortiert: 180, 180, 185, 195, 230, 235, 240, 280, 290, 300
+
+- **Mittelwert:** $\bar{x} = 231.5$
+- **Modus:** 180 (kommt 2× vor)
+- **IQR:** $Q_3 - Q_1 = 280 - 185 = 95$""",
+            "en": r"""**Solution 1A:**
+- F1 (Poisson λ=50): Mean 50, right-skewed bell
+- F2 (Uniform): Flat histogram, linear ECDF
+- F3 (Normal): Symmetric bell around 20
+- F4 (Binomial): Mean np=40, discrete bell
+
+**Solution 1B:**
+Sorted: 180, 180, 185, 195, 230, 235, 240, 280, 290, 300
+
+- **Mean:** $\bar{x} = 231.5$
+- **Mode:** 180 (appears 2×)
+- **IQR:** $Q_3 - Q_1 = 280 - 185 = 95$"""
         }
     },
     "hs2022_prob1": {

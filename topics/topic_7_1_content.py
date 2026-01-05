@@ -282,15 +282,15 @@ def distribution_matcher():
     col1, col2 = st.columns(2)
     
     with col1:
-        if st.button("V1) N(0, 3)", key="dm_v1", use_container_width=True):
+        if st.button("V1) N(μ=0, σ²=3)", key="dm_v1", use_container_width=True):
             check_answer("v1", current["correct"])
         if st.button("V2) Exp(λ=3)", key="dm_v2", use_container_width=True):
             check_answer("v2", current["correct"])
     
     with col2:
-        if st.button("V3) N(0, 1)", key="dm_v3", use_container_width=True):
+        if st.button("V3) N(μ=0, σ²=1)", key="dm_v3", use_container_width=True):
             check_answer("v3", current["correct"])
-        if st.button("V4) U[-3, 3]", key="dm_v4", use_container_width=True):
+        if st.button("V4) U[−3, 3]", key="dm_v4", use_container_width=True):
             check_answer("v4", current["correct"])
     
     # Progress display

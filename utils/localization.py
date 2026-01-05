@@ -5,6 +5,10 @@ def init_lang():
     if 'lang' not in st.session_state:
         st.session_state.lang = 'en'
 
+def get_current_language():
+    """Return current language code ('de' or 'en')."""
+    return st.session_state.get('lang', 'de')
+
 def t(content_dict):
     """
     Translate content based on current session state language.

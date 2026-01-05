@@ -45,6 +45,7 @@ content_7_6 = {
             "left": {
                 "title": {"de": "Histogram", "en": "Histogram"},
                 "formula": r"\text{Fläche} = f_j = \frac{n_j}{n}",
+                "formula_en": r"\text{Area} = f_j = \frac{n_j}{n}",
                 "insight": {
                     "de": "<strong>Zeigt:</strong> Verteilungsform — Symmetrie, Schiefe, Peaks",
                     "en": "<strong>Shows:</strong> Distribution shape — Symmetry, skewness, peaks"
@@ -200,8 +201,8 @@ content_7_6 = {
                        "en": "K integer → Average of x₍ₖ₋₁₎ and x₍ₖ₎. K non-integer → x₍⌊K⌋₎."}
         },
         "whisker_rule": {
-            "de": "<strong>Whiskers:</strong> Enden beim tatsächlichen Datenpunkt INNERHALB der Grenze Q₁ - 1.5·IQR bzw. Q₃ + 1.5·IQR. Alles ausserhalb = Ausreisser (○).",
-            "en": "<strong>Whiskers:</strong> End at actual data point WITHIN the boundary Q₁ - 1.5·IQR or Q₃ + 1.5·IQR. Anything outside = Outlier (○)."
+            "de": "<strong>Whiskers:</strong> Enden beim tatsächlichen Datenpunkt INNERHALB der Grenze Q₁ − 1.5·IQR bzw. Q₃ + 1.5·IQR. Alles ausserhalb = Ausreisser (○).",
+            "en": "<strong>Whiskers:</strong> End at actual data point WITHIN the boundary Q₁ − 1.5·IQR or Q₃ + 1.5·IQR. Anything outside = Outlier (○)."
         },
         "mcq": {
             "question": {"de": r"Bei $n=16$, $\alpha=0.25$: $K = 0.25 \cdot 16 + 1 = 5$. Wie berechnest du $Q_1$?", 
@@ -339,6 +340,7 @@ content_7_6 = {
             {
                 "tip": {"de": "Histogram: Fläche = Häufigkeit", "en": "Histogram: Area = Frequency"},
                 "tip_formula": r"\text{Höhe} \ne f_j \text{ bei ungleichen Klassenbreiten!}",
+                "tip_formula_en": r"\text{Height} \ne f_j \text{ for unequal class widths!}",
                 "why": {"de": "Balkenhöhe ≠ Häufigkeit bei variabler Klassenbreite.", 
                        "en": "Bar height ≠ Frequency with variable class width."}
             }
@@ -427,17 +429,19 @@ def render_subtopic_7_6(model):
             st.caption(q.get("source", ""))
             
             # Handle different question types
-            if q.get("type") == "problem" or not q.get("options"):
-                st.markdown(t(q["question"]), unsafe_allow_html=True)
-                with st.expander(t({"de": "Lösung anzeigen", "en": "Show Solution"})):
-                    st.markdown(t(q["solution"]), unsafe_allow_html=True)
-            elif q.get("type") == "multi_stage":
+            if q.get("type") == "multi_stage":
+                # Multi-stage questions have stem + parts
                 st.markdown(t(q.get("stem", {})), unsafe_allow_html=True)
                 for part in q.get("parts", []):
                     st.markdown(f"---")
                     st.markdown(t(part["question"]), unsafe_allow_html=True)
                     with st.expander(t({"de": "Lösung", "en": "Solution"})):
                         st.markdown(t(part.get("solution", {})), unsafe_allow_html=True)
+            elif q.get("type") == "problem" or not q.get("options"):
+                # Open-ended problem questions
+                st.markdown(t(q["question"]), unsafe_allow_html=True)
+                with st.expander(t({"de": "Lösung anzeigen", "en": "Show Solution"})):
+                    st.markdown(t(q["solution"]), unsafe_allow_html=True)
             else:
                 opts = q.get("options", [])
                 if opts and isinstance(opts[0], dict):
@@ -479,7 +483,12 @@ def render_chunk_visual(model):
         with st.container(border=True):
             comp = chunk["comparison_1"]["left"]
             st.markdown(f"**{t(comp['title'])}**")
-            st.latex(comp["formula"])
+            # Support bilingual formulas
+            from utils.localization import get_current_language
+            if get_current_language() == "en" and "formula_en" in comp:
+                st.latex(comp["formula_en"])
+            else:
+                st.latex(comp["formula"])
             st.markdown("---")
             st.markdown(t(comp["insight"]), unsafe_allow_html=True)
     
@@ -643,17 +652,24 @@ def render_key_formulas():
 
 @st.fragment
 def render_tool_wizard():
-    """Interactive decision tree for tool selection"""
+    """Interactive decision tree for tool selection with visual preview"""
+    from utils.layouts.foundation import inject_equal_height_css
+    inject_equal_height_css()
+    
     dt = content_7_6["decision_tree"]
     st.markdown(f"### {t(dt['header'])}")
     
-    with st.container(border=True):
-        st.markdown(f"**{t(dt['root']['question'])}**")
-        
-        # Create options for radio
-        options = dt["root"]["options"]
-        option_labels = [t(opt["label"]) for opt in options]
-        
+    # NO container wrapper - content flows directly
+    st.markdown(f"**{t(dt['root']['question'])}**")
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+    # Two-column layout: options left, recommendation + visual right
+    col_opts, col_vis = st.columns([1, 1.2], gap="medium")
+    
+    options = dt["root"]["options"]
+    option_labels = [t(opt["label"]) for opt in options]
+    
+    with col_opts:
         selected = st.radio(
             t({"de": "Wähle:", "en": "Choose:"}),
             options=option_labels,
@@ -661,13 +677,86 @@ def render_tool_wizard():
             horizontal=False,
             label_visibility="collapsed"
         )
+    
+    # Find selected option
+    selected_opt = None
+    selected_idx = 0
+    for i, opt in enumerate(options):
+        if t(opt["label"]) == selected:
+            selected_opt = opt
+            selected_idx = i
+            break
+    
+    with col_vis:
+        # Recommendation ABOVE the visual
+        st.markdown(f"**{t({'de': 'Empfehlung', 'en': 'Recommendation'})}:**")
+        if selected_opt:
+            st.latex(selected_opt["result_formula"])
+            st.caption(t(selected_opt["result_note"]))
         
-        st.markdown("---")
+        st.markdown("<br>", unsafe_allow_html=True)
         
-        # Find selected option and show result
-        for opt in options:
-            if t(opt["label"]) == selected:
-                st.markdown(f"**{t({'de': 'Empfehlung', 'en': 'Recommendation'})}:**")
-                st.latex(opt["result_formula"])
-                st.caption(t(opt["result_note"]))
-                break
+        # Generate preview visualization based on selection
+        import numpy as np
+        import plotly.graph_objects as go
+        
+        np.random.seed(42)
+        sample_data = np.random.normal(50, 15, 50)
+        sample_data = np.append(sample_data, [5, 95])  # Add outliers
+        
+        fig = go.Figure()
+        
+        if selected_idx == 0:  # Histogram
+            fig.add_trace(go.Histogram(x=sample_data, nbinsx=12, marker_color="#007AFF"))
+            fig.update_layout(title=dict(text="Histogram", font=dict(size=14)))
+        
+        elif selected_idx == 1:  # ECDF/Boxplot
+            sorted_data = np.sort(sample_data)
+            ecdf_y = np.arange(1, len(sorted_data)+1) / len(sorted_data)
+            fig.add_trace(go.Scatter(x=sorted_data, y=ecdf_y, mode="lines+markers",
+                                    marker=dict(size=4, color="#007AFF"), line=dict(color="#007AFF")))
+            fig.update_layout(title=dict(text="ECDF", font=dict(size=14)), 
+                             yaxis_title="F(x)", xaxis_title="x")
+        
+        elif selected_idx == 2:  # Boxplot
+            fig.add_trace(go.Box(y=sample_data, marker_color="#007AFF", boxpoints="outliers"))
+            fig.update_layout(title=dict(text="Boxplot", font=dict(size=14)))
+        
+        elif selected_idx == 3:  # QQ-Plot
+            from scipy import stats
+            theoretical = stats.norm.ppf(np.linspace(0.01, 0.99, len(sample_data)))
+            empirical = np.sort(sample_data)
+            fig.add_trace(go.Scatter(x=theoretical, y=empirical, mode="markers",
+                                    marker=dict(size=6, color="#007AFF")))
+            min_val, max_val = min(theoretical), max(theoretical)
+            fig.add_trace(go.Scatter(x=[min_val, max_val], y=[min_val*15+50, max_val*15+50],
+                                    mode="lines", line=dict(color="#FF4B4B", dash="dash")))
+            fig.update_layout(title=dict(text="QQ-Plot", font=dict(size=14)),
+                             xaxis_title="Theoretical", yaxis_title="Empirical", showlegend=False)
+        
+        elif selected_idx == 4:  # Scatter
+            x_scatter = np.random.uniform(20, 80, 30)
+            y_scatter = 0.8 * x_scatter + np.random.normal(0, 8, 30)
+            fig.add_trace(go.Scatter(x=x_scatter, y=y_scatter, mode="markers",
+                                    marker=dict(size=8, color="#16a34a")))
+            fig.update_layout(title=dict(text="Scatter Plot", font=dict(size=14)),
+                             xaxis_title="X", yaxis_title="Y")
+        
+        elif selected_idx == 5:  # Side-by-side Boxplot
+            group_a = np.random.normal(45, 10, 30)
+            group_b = np.random.normal(55, 12, 30)
+            fig.add_trace(go.Box(y=group_a, name="A", marker_color="#007AFF"))
+            fig.add_trace(go.Box(y=group_b, name="B", marker_color="#FF4B4B"))
+            fig.update_layout(title=dict(text="Grouped Boxplots", font=dict(size=14)), showlegend=False)
+        
+        fig.update_layout(
+            height=220,
+            margin=dict(t=30, b=35, l=45, r=15),
+            plot_bgcolor="white",
+            paper_bgcolor="white",
+            xaxis=dict(showgrid=True, gridcolor="#e5e7eb"),
+            yaxis=dict(showgrid=True, gridcolor="#e5e7eb")
+        )
+        st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False})
+
+

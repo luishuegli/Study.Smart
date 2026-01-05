@@ -603,29 +603,30 @@ def render_subtopic_7_5(model):
         )
     
     with col_vis:
-        # Simple example scatter plot
-        np.random.seed(123)
-        x_ex = np.random.uniform(10, 90, 15)
-        y_ex = 0.6 * x_ex + np.random.normal(0, 12, 15)
-        
-        fig_ex = go.Figure()
-        fig_ex.add_trace(go.Scatter(
-            x=x_ex, y=y_ex, mode="markers",
-            marker=dict(color=COLOR_POSITIVE, size=12, line=dict(width=1, color="white")),
-            hoverinfo="skip"
-        ))
-        fig_ex.update_layout(
-            height=180,
-            margin=dict(t=30, b=40, l=50, r=20),
-            title=dict(text=t({"de": "Beispiel", "en": "Example"}), font=dict(size=14)),
-            xaxis_title="X",
-            yaxis_title="Y",
-            xaxis=dict(showgrid=True, gridcolor="#e5e7eb"),
-            yaxis=dict(showgrid=True, gridcolor="#e5e7eb"),
-            plot_bgcolor="white",
-            paper_bgcolor="white"
-        )
-        st.plotly_chart(fig_ex, use_container_width=True, config={'displayModeBar': False})
+        with st.container(border=True):
+            st.markdown(f"**{t({'de': 'Beispiel', 'en': 'Example'})}**")
+            # Simple example scatter plot
+            np.random.seed(123)
+            x_ex = np.random.uniform(10, 90, 15)
+            y_ex = 0.6 * x_ex + np.random.normal(0, 12, 15)
+            
+            fig_ex = go.Figure()
+            fig_ex.add_trace(go.Scatter(
+                x=x_ex, y=y_ex, mode="markers",
+                marker=dict(color=COLOR_POSITIVE, size=12, line=dict(width=1, color="white")),
+                hoverinfo="skip"
+            ))
+            fig_ex.update_layout(
+                height=140,
+                margin=dict(t=10, b=30, l=40, r=20),
+                xaxis_title="X",
+                yaxis_title="Y",
+                xaxis=dict(showgrid=True, gridcolor="#e5e7eb"),
+                yaxis=dict(showgrid=True, gridcolor="#e5e7eb"),
+                plot_bgcolor="white",
+                paper_bgcolor="white"
+            )
+            st.plotly_chart(fig_ex, use_container_width=True, config={'displayModeBar': False})
     
     st.markdown("<br><br>", unsafe_allow_html=True)
     

@@ -1,7 +1,7 @@
 # Adaptive Learning: Synthesis
 
 > **Purpose:** Track patterns across topics and pending rules to integrate.
-> **Updated:** 2026-01-03
+> **Updated:** 2026-01-05
 
 ---
 
@@ -99,6 +99,64 @@ else:
 | **No emojis in decision trees** | Emoji ⭐ in decision tree violates No Emojis rule | decision_tree.py | ✅ Fixed |
 | **Color the question too** | Given values in problem statement should use same colors as in solution steps | worked_example.py | ⏳ Pending |
 
+### From Topic 8 (NEW - 2026-01-05)
+| Rule | Evidence | Add to File | Status |
+|------|----------|-------------|--------|
+| **INTUITION_WHITE_CONTAINER** | User feedback: Intuition sections should use `st.container(border=True)`, NOT grey callouts | pedagogy.md, layout.md | ⏳ CRITICAL |
+| **INTERACTIVE_EMPTY_CHART** | Fix #4: Show empty chart from start, add data lines as interaction happens | interactive.md | ⏳ Pending |
+| **INTERACTIVE_SHOW_CALCULATION** | Fix #5: Show actual X₁, X₂ values and calculation breakdown, not just results | interactive.md | ⏳ CRITICAL |
+| **RELATABLE_SCENARIOS** | Fix #6: Use everyday examples (pizza delivery, friends guessing) instead of abstract μ = 50 | pedagogy.md | ⏳ Pending |
+| **EXPLAIN_THE_WHY** | Fix #7: Success messages should explain WHY the pattern works, not just state "A wins 55%" | interactive.md | ⏳ CRITICAL |
+| **NO_LATEX_IN_HTML** | Confirmed again: `$...$` in HTML divs does not render. Use `st.latex()` | layout.md | ✅ DOCUMENTED (Topic 6) |
+| **VERTICAL_CENTER_EQUAL_PADDING** | Fix #8: When centering content vertically in side-by-side columns, use EQUAL padding on top and bottom | layout.md | ⏳ Pending |
+| **DYNAMIC_CHART_AXES** | Fix #9: Don't hardcode chart axis ranges - use `max(min_range, data_length + buffer)` to expand with data | interactive.md | ⏳ Pending |
+
+**Vertical Centering in Side-by-Side Columns:**
+
+When you have two columns where one has content (text, tables) and the other has a centered element (symbol, icon, chart):
+
+```python
+# ❌ WRONG - Unequal padding causes misalignment
+<div style="padding: 100px 0 40px 0;">  # More top than bottom = too low
+<div style="padding: 40px 0 100px 0;">  # More bottom than top = too high
+
+# ✅ CORRECT - Equal padding for perfect vertical center
+<div style="display: flex; flex-direction: column; justify-content: center; 
+            align-items: center; padding: 70px 0;">
+    <span style="font-size: 5em;">θ̂</span>
+    <em>theta-hat</em>
+</div>
+```
+
+**Key insight:** The padding value should be roughly half the height difference between your content and the adjacent column's content.
+
+**Intuition Container Pattern:**
+```python
+# ❌ WRONG - Grey callout
+st.markdown(f"""
+<div style="background: #f4f4f5; border-left: 4px solid #a1a1aa; ...">
+{content}
+</div>
+""", unsafe_allow_html=True)
+
+# ✅ CORRECT - White container with border
+st.markdown("### Intuition")
+with st.container(border=True):
+    st.markdown(t(content), unsafe_allow_html=True)
+```
+
+**Interactive Calculation Breakdown Pattern:**
+```python
+# Track last round details
+st.session_state.sd_last = {"x1": x1, "x2": x2, "a": est_a, "b": est_b, ...}
+
+# Show the story
+with st.container(border=True):
+    st.markdown(f"Friend 1 says **{lr['x1']:.1f}** min, Friend 2 says **{lr['x2']:.1f}** min")
+    st.latex(fr"\frac{{{lr['x1']:.1f} + {lr['x2']:.1f}}}{{2}} = {lr['a']:.1f}")
+    st.caption(f"Error: |{lr['a']:.1f} - 50| = **{lr['err_a']:.1f}**")
+```
+
 **Connection Coloring Specification:**
 
 > **Purpose:** Colors trace the SAME value across steps, showing where numbers come from.
@@ -188,10 +246,11 @@ _Same issue appearing across multiple topics = CRITICAL rule._
 | **Slider value/key conflict** | T6.1 | HIGH | ✅ Fixed - Use key only |
 | **Emojis in feedback widgets** | T6.1 | HIGH | ✅ Fixed - Absolute No Emojis v2 |
 | **Semantic color without legend** | T6.1 | HIGH | ✅ Fixed - Add visible legend |
-| **LaTeX in raw HTML** | T6.1 | HIGH | ✅ Fixed - Use HTML subscript |
+| **LaTeX in raw HTML** | T6.1, T7.6 | HIGH | ✅ Fixed - Use Unicode or st.latex() |
 | **HTML divs spanning st elements** | T6.2 | HIGH | ✅ Fixed - Use st.container + CSS |
 | **Slider CSS with hidden labels** | T6.2 | HIGH | ✅ Fixed - Use visible labels |
 | **Formula values colored** | T6.2 | MEDIUM | ✅ Fixed - Values stay black |
+| **Double border on interactives** | T7.2, T7.6 | HIGH | ✅ Fixed - Remove outer st.container() |
 
 ---
 
@@ -368,15 +427,18 @@ _Track how rules improve over time._
 ---
 
 ## Topic 7 Synthesis
-- **Completed:** 2026-01-04 ✅
-- **Total fixes:** 8
-- **New rules created:** 5 (exam-essentials-latex, chf-only, slider-semantic-color, mission-compaction, feedback-sign-format)
+- **Completed:** 2026-01-05 ✅
+- **Total fixes:** 26 (across 7.1-7.6)
+- **New rules created:** 8 (exam-essentials-latex, chf-only, slider-semantic-color, mission-compaction, feedback-sign-format, no-double-border, no-latex-in-html, unicode-for-callouts)
 - **Key learnings:**
   1. **Exam Essentials LaTeX (STRICT):** ALL math in tips/traps MUST use LaTeX ($...$), including variables ($n$), formulas ($K = \alpha n + 1$), and subscripts ($x_{(K-1)}$). NEVER use plain text like "n-1" or "x(K)".
   2. **CHF Currency Only:** This is a Swiss project - always use CHF, never €.
   3. **Slider Semantic Coloring:** Use CSS `.stSlider:has([aria-label*="X"])` pattern to color-code sliders matching semantic meaning (e.g., red #FF4B4B for outliers).
   4. **Mission Compaction:** For missions to fit on screen: chart height ≤220px, padding 8px, remove `<br>` spacers, legend below chart (y=-0.3).
   5. **Feedback Sign Format:** Use Python's `:+,.0f` format for values that can be positive/negative, NOT hardcoded `+` prefix (causes `+-14`).
+  6. **No Double Border (CRITICAL):** Interactive elements (radios, sliders, pills) should NOT have outer `st.container(border=True)`. Remove the container wrapper entirely.
+  7. **No LaTeX in HTML Grey Callouts:** Streamlit doesn't render LaTeX inside `st.markdown(..., unsafe_allow_html=True)`. Use Unicode subscripts (Q₁, x₍ₖ₎) or separate `st.latex()` calls.
+  8. **Multipart Question Formatting:** Use markdown tables, `---` dividers, bold headers for multi-stage exam questions.
 
 ### From Topic 7 (NEW - 2026-01-04)
 | Rule | Evidence | Add to File | Status |
@@ -396,6 +458,13 @@ _Track how rules improve over time._
 | **Black Pill CSS Pattern** | st.pills renders grey, not black | templates.md | ⏳ Pending |
 | **Compact Chart Height (200px)** | Comparison didn't fit on screen | layout.md | ⏳ Pending |
 | **No Checkmarks in Options** | "Normal ✓" violates no-emoji rule | design-system.md | ✅ Fixed |
+
+### From Topic 7.6 (NEW - 2026-01-05)
+| Rule | Evidence | Add to File | Status |
+|------|----------|-------------|--------|
+| **No Double Border on Interactives** | Tool wizard had outer border + radio borders | layout.md | ⏳ CRITICAL |
+| **No LaTeX in HTML Grey Callouts** | `$Q_1 - 1.5 \cdot \text{IQR}$` showed as raw text | layout.md | ⏳ CRITICAL |
+| **Unicode Subscripts for Callouts** | Use Q₁ Q₃ x₍ₖ₎ instead of $Q_1$ etc. | design-system.md | ⏳ Pending |
 
 ---
 
@@ -474,5 +543,48 @@ For side-by-side chart comparisons on a single screen:
 - Column ratio: Give more space to controls ([1, 1.5] not [1.5, 1])
 - No interpretation boxes — use subtitle text
 - Key insight: Single-line caption
+```
+
+### 5. layout.md — Add No Double Border Rule
+
+```markdown
+[STRICT] No Double Border on Interactive Elements
+Interactive elements (radios, sliders, pill buttons) should NOT have outer `st.container(border=True)`.
+
+The inner elements already provide visual separation. Adding an outer border:
+- Creates ugly double-border effect
+- Wastes screen space
+- Reduces content area
+
+Pattern:
+```python
+# ❌ WRONG - creates double border
+with st.container(border=True):
+    st.radio(...)
+
+# ✅ CORRECT - no wrapper OR use st.container() without border
+st.radio(...)
+# OR
+with st.container():  # No border parameter
+    st.radio(...)
+```
+```
+
+### 6. design-system.md — Add Unicode for Grey Callouts
+
+```markdown
+[STRICT] Unicode Math in Grey Callouts
+LaTeX does NOT render inside HTML grey callouts (`st.markdown(..., unsafe_allow_html=True)`).
+
+Use Unicode subscripts/superscripts instead:
+- Subscripts: ₀₁₂₃₄₅₆₇₈₉ₐₑₓₙₖ₍₎
+- Superscripts: ⁰¹²³⁴⁵⁶⁷⁸⁹
+- Math: × · − ± √ ∞ ≈ ≠ ≤ ≥ → ∑ ∏
+- Floor/ceiling: ⌊ ⌋ ⌈ ⌉
+
+Examples:
+- Q₁ − 1.5·IQR (not $Q_1 - 1.5 \cdot \text{IQR}$)
+- x₍ₖ₎ (not $x_{(k)}$)
+- σ² (not $\sigma^2$)
 ```
 

@@ -276,3 +276,61 @@ else:
 | **No HTML in worked_example answers** | Fix #21: HTML renders as text | templates.md | ⏳ CRITICAL |
 | **No redundant translations** | Fix #22: Only origin words | design-system.md | ⏳ Pending |
 | **Definition + visual pattern** | Fix #23: Side-by-side layout | layout.md | ⏳ Pending |
+
+---
+
+## Global Config Issue (RECURRING)
+
+### 24. Black UI / Topic Headers Invisible (CRITICAL)
+**Issue:** Sidebar turned dark gray, topic expander headers appeared as black bars with invisible text.
+**Root Cause:** `primaryColor = "#000000"` in `.streamlit/config.toml` causes Streamlit to render expander headers with black background and black text.
+**Fix:** Change to a visible accent color:
+```toml
+# ❌ WRONG - causes black UI elements
+primaryColor = "#000000"
+
+# ✅ CORRECT - teal accent, visible on white
+primaryColor = "#000000"
+```
+**Detection:** If topics in course overview show as black bars, check `config.toml` primary color.
+**Related Issue:** Often triggered when uncommitted code changes cause KeyError crashes, breaking Streamlit's state.
+**Rule:** [CRITICAL] **NEVER set primaryColor to #000000.** Always use a visible accent color like teal (#14B8A6).
+**Rule Added to:** `.streamlit/config.toml` (inline comment)
+
+---
+
+### 25. Double Border on Interactive Elements (RECURRING)
+**Issue:** Tool wizard and other interactive elements wrapped in `st.container(border=True)`, creating double borders with inner radio buttons.
+**Root Cause:** Using `st.container(border=True)` around elements that already have visual separation (radios, buttons with borders).
+**Fix:** Use `st.container()` without `border=True` for interactive sections:
+```python
+# ❌ WRONG - creates double border
+with st.container(border=True):
+    st.radio(...)
+
+# ✅ CORRECT - no outer border
+with st.container():
+    st.radio(...)
+```
+**Rule:** [STRICT] **Interactive elements (radios, sliders, pill buttons) should NOT have outer bordered containers.** The inner elements provide sufficient visual separation.
+
+---
+
+### 26. LaTeX Does Not Render in HTML Grey Callouts
+**Issue:** LaTeX like `$Q_1 - 1.5 \cdot \text{IQR}$` shows as raw text inside grey callouts.
+**Root Cause:** Grey callouts use `st.markdown(..., unsafe_allow_html=True)` with HTML divs. Streamlit's LaTeX rendering only works with native markdown, not inside HTML.
+**Fix:** Use Unicode subscripts/superscripts instead of LaTeX in grey callouts:
+```python
+# ❌ WRONG - LaTeX won't render
+"insight": r"$Q_1 - 1.5 \cdot \text{IQR}$"
+
+# ✅ CORRECT - Unicode renders properly
+"insight": "Q₁ − 1.5·IQR"
+```
+**Common Unicode substitutes:**
+- Subscripts: ₀₁₂₃₄₅₆₇₈₉ₐₑₓₙₖ (use ₍ₖ₎ for x₍ₖ₎)
+- Superscripts: ⁰¹²³⁴⁵⁶⁷⁸⁹
+- Math symbols: × · − ± √ ∞ ≈ ≠ ≤ ≥ → ∑ ∏
+- Floor/ceiling: ⌊ ⌋ ⌈ ⌉
+**Rule:** [STRICT] **No LaTeX in grey callouts or HTML divs.** Use Unicode alternatives or render LaTeX separately with `st.latex()`.
+

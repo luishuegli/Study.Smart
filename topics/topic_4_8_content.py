@@ -133,28 +133,28 @@ content_4_8 = {
     "example_worked": {
         "header": {"de": "Schritt-für-Schritt Beispiel", "en": "Step-by-Step Example"},
         "problem": {
-            "de": "Eine Urne enthält <strong>10 Kugeln</strong>: 4 rote und 6 weisse. Du ziehst <strong>3 Kugeln ohne Zurücklegen</strong>. Wie wahrscheinlich ist es, <strong>genau 2 rote</strong> zu ziehen?",
-            "en": "An urn contains <strong>10 balls</strong>: 4 red and 6 white. You draw <strong>3 balls without replacement</strong>. What's the probability of drawing <strong>exactly 2 red</strong>?"
+            "de": "Eine Urne enthält <span style='color:#007AFF;font-weight:bold;'>10 Kugeln</span>: <span style='color:#FF4B4B;font-weight:bold;'>4 rote</span> und 6 weisse. Du ziehst <span style='color:#9B59B6;font-weight:bold;'>3 Kugeln</span> ohne Zurücklegen. Wie wahrscheinlich ist es, <span style='color:#34C759;font-weight:bold;'>genau 2 rote</span> zu ziehen?",
+            "en": "An urn contains <span style='color:#007AFF;font-weight:bold;'>10 balls</span>: <span style='color:#FF4B4B;font-weight:bold;'>4 red</span> and 6 white. You draw <span style='color:#9B59B6;font-weight:bold;'>3 balls</span> without replacement. What's the probability of drawing <span style='color:#34C759;font-weight:bold;'>exactly 2 red</span>?"
         },
         "steps": [
             {
                 "label": {"de": "Gegeben", "en": "Given"},
-                "latex": r"{\color{#007AFF}N = 10}, \quad {\color{#FF4B4B}M = 4}, \quad {\color{#007AFF}n = 3}, \quad {\color{#FF4B4B}x = 2}",
+                "latex": r"{\color{#007AFF}N = 10}, \quad {\color{#FF4B4B}M = 4}, \quad {\color{#9B59B6}n = 3}, \quad {\color{#34C759}x = 2}",
                 "note": {"de": "(Gesamt, Rot, Ziehungen, Gesucht)", "en": "(Total, Red, Draws, Wanted)"}
             },
             {
                 "label": {"de": "Zähler Teil 1", "en": "Numerator Part 1"},
-                "latex": r"\binom{\color{#FF4B4B}M}{\color{#FF4B4B}x} = \binom{\color{#FF4B4B}4}{\color{#FF4B4B}2} = 6",
+                "latex": r"\binom{\color{#FF4B4B}M}{\color{#34C759}x} = \binom{\color{#FF4B4B}4}{\color{#34C759}2} = 6",
                 "note": {"de": "Wege, 2 Rote aus 4 zu wählen", "en": "ways to choose 2 red from 4"}
             },
             {
                 "label": {"de": "Zähler Teil 2", "en": "Numerator Part 2"},
-                "latex": r"\binom{\color{#6B7280}N-M}{\color{#6B7280}n-x} = \binom{\color{#6B7280}6}{\color{#6B7280}1} = 6",
+                "latex": r"\binom{{\color{#007AFF}N}-{\color{#FF4B4B}M}}{{\color{#9B59B6}n}-{\color{#34C759}x}} = \binom{6}{1} = 6",
                 "note": {"de": "Wege, 1 Weisse aus 6 zu wählen", "en": "ways to choose 1 white from 6"}
             },
             {
                 "label": {"de": "Nenner", "en": "Denominator"},
-                "latex": r"\binom{\color{#007AFF}N}{\color{#007AFF}n} = \binom{\color{#007AFF}10}{\color{#007AFF}3} = 120",
+                "latex": r"\binom{\color{#007AFF}N}{\color{#9B59B6}n} = \binom{\color{#007AFF}10}{\color{#9B59B6}3} = 120",
                 "note": {"de": "Alle möglichen Ziehungen", "en": "All possible draws"}
             },
             {
@@ -202,7 +202,7 @@ content_4_8 = {
             },
             {
                 "label": {"de": "Shortcut", "en": "Shortcut"},
-                "title": {"de": "n < 0.05×N → Binomial benutzen", "en": "n < 0.05×N → Use Binomial"},
+                "title": {"de": "$n < 0.05 \\times N$ → Binomial benutzen", "en": "$n < 0.05 \\times N$ → Use Binomial"},
                 "content": {
                     "de": "Bei grosser Population und kleiner Stichprobe ist der Unterschied vernachlässigbar. Spart Zeit!",
                     "en": "With large population and small sample, the difference is negligible. Saves time!"

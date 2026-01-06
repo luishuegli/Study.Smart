@@ -210,20 +210,25 @@ def continuity_correction_interactive():
     with c1:
         with st.container(border=True):
             st.markdown(f"**{t({'de': 'OHNE Korrektur', 'en': 'WITHOUT Correction'})}**")
-            st.latex(rf"Z = \frac{{\color{{#FF4B4B}}{k}} - {{\color{{#6B7280}}{mu:.1f}}}}}{{\color{{#6B7280}}{sigma:.2f}}} = {z_without:.3f}")
+            # Build LaTeX string without f-string to avoid escaping issues
+            z_formula_without = r"Z = \frac{" + f"{{\\color{{#FF4B4B}}{k}}} - {{\\color{{#6B7280}}{mu:.1f}}}" + r"}{" + f"{{\\color{{#6B7280}}{sigma:.2f}}}" + r"}" + f" = {z_without:.3f}"
+            st.latex(z_formula_without)
             st.latex(rf"\Rightarrow P(X \geq {{\color{{#FF4B4B}}{k}}}) \approx {p_without:.4f}")
     
     # WITH Correction - semantic colors
     with c2:
         with st.container(border=True):
             st.markdown(f"**{t({'de': 'MIT Korrektur', 'en': 'WITH Correction'})}**")
-            st.latex(rf"Z = \frac{{\color{{#FF4B4B}}{k - 0.5}} - {{\color{{#6B7280}}{mu:.1f}}}}}{{\color{{#6B7280}}{sigma:.2f}}} = {z_with:.3f}")
+            # Build LaTeX string without f-string to avoid escaping issues
+            z_formula_with = r"Z = \frac{" + f"{{\\color{{#FF4B4B}}{k - 0.5}}} - {{\\color{{#6B7280}}{mu:.1f}}}" + r"}{" + f"{{\\color{{#6B7280}}{sigma:.2f}}}" + r"}" + f" = {z_with:.3f}"
+            st.latex(z_formula_with)
             st.latex(rf"\Rightarrow P(X \geq {{\color{{#FF4B4B}}{k}}}) \approx {p_with:.4f}")
     
     # BOTTOM ROW: EXACT (full width) - with semantic colors
     with st.container(border=True):
         st.markdown(f"**{t({'de': 'EXAKT (Binomial)', 'en': 'EXACT (Binomial)'})}**")
-        st.latex(rf"P(X \geq {{\color{{#FF4B4B}}{k}}}) = \sum_{{i={{\color{{#FF4B4B}}{k}}}}}^{{{{\color{{#007AFF}}{n}}}}} \binom{{{{\color{{#007AFF}}{n}}}}}{{i}} {{\color{{#9B59B6}}{p}}}^i (1-{{\color{{#9B59B6}}{p}}})^{{{{\color{{#007AFF}}{n}}}-i}} = {p_exact:.4f}")
+        # Simplified exact formula display
+        st.latex(rf"P(X \geq {{\color{{#FF4B4B}}{k}}}) = {p_exact:.4f}")
     
     # Error comparison (no extra break)
     error_without = abs(p_without - p_exact)

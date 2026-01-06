@@ -98,10 +98,28 @@ def render_ai_tutor(key_suffix, context_prompt, client):
     /* Hide input instructions */
     .stForm [data-testid="InputInstructions"] { display: none !important; }
     
-    /* Submit button */
+    /* GLOBAL FIX: Submit button - TRUE BLACK with white icon */
     [data-testid="stFormSubmitButton"] > button {
-        border-radius: 20px !important;
+        background-color: #000000 !important;
+        border: none !important;
+        border-radius: 50% !important;
         height: 42px !important;
+        width: 42px !important;
+        min-width: 42px !important;
+        padding: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    
+    [data-testid="stFormSubmitButton"] > button:hover {
+        background-color: #333333 !important;
+    }
+    
+    [data-testid="stFormSubmitButton"] > button p {
+        color: #ffffff !important;
+        font-size: 18px !important;
+        margin: 0 !important;
     }
     
     /* Shimmer */
@@ -177,7 +195,8 @@ def render_ai_tutor(key_suffix, context_prompt, client):
     # --- INPUT AREA ---
     if remaining > 0:
         with st.form(key=form_key, clear_on_submit=True, border=False):
-            c_input, c_btn = st.columns([10, 1], gap="small", vertical_alignment="bottom")
+            # Full width: text input extends left, button on right
+            c_input, c_btn = st.columns([12, 1], gap="small", vertical_alignment="bottom")
             
             with c_input:
                 ai_query = st.text_input(

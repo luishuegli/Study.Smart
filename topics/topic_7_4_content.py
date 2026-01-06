@@ -546,17 +546,12 @@ def qq_distribution_lab():
         st.markdown("<br>", unsafe_allow_html=True)
         
         # Semantic slider coloring (Blue = sample size)
-        st.markdown("""
-        <style>
-        .stSlider:has([aria-label*="n ="]) div[data-baseweb="slider"] > div:first-child > div:first-child { 
-            background-color: #007AFF !important; 
-        }
-        .stSlider:has([aria-label*="n ="]) div[role="slider"] { 
-            background-color: #FFFFFF !important; 
-            border: 2px solid #007AFF !important; 
-        }
-        </style>
-        """, unsafe_allow_html=True)
+        from utils.layouts.foundation import inject_slider_css
+        inject_slider_css([
+            {"label_contains": "n =", "color": "#007AFF"},
+            {"label_contains": "Stichprobengrösse", "color": "#007AFF"},
+            {"label_contains": "Sample size", "color": "#007AFF"},
+        ])
         
         n_samples = st.slider(
             "n = " + t({"de": "Stichprobengrösse", "en": "Sample size"}),

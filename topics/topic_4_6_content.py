@@ -569,9 +569,36 @@ def render_subtopic_4_6(model):
     # --- EXAM SECTION ---
     st.markdown(f"### {t({'de': 'Prüfungstraining', 'en': 'Exam Practice'})}")
     
-    with st.container(border=True):
-        st.markdown(f"""
+    q_data = get_question("4.6", "uebung2_mc12")
+    if q_data:
+        with st.container(border=True):
+            st.caption(q_data.get("source", ""))
+            opts = q_data.get("options", [])
+            if opts and isinstance(opts[0], dict):
+                option_labels = [t(o) for o in opts]
+            else:
+                option_labels = opts
+            
+            render_mcq(
+                key_suffix="4_6_exp",
+                question_text=t(q_data["question"]),
+                options=option_labels,
+                correct_idx=q_data["correct_idx"],
+                solution_text_dict=q_data["solution"],
+                success_msg_dict={"de": "Korrekt!", "en": "Correct!"},
+                error_msg_dict={"de": "Nicht ganz.", "en": "Not quite."},
+                client=model,
+                ai_context="Exponential distribution",
+                course_id="vwl",
+                topic_id="4",
+                subtopic_id="4.6",
+                question_id="4_6_exp"
+            )
+    else:
+        with st.container(border=True):
+            st.markdown(f"""
 <div style="background: #f4f4f5; border-left: 4px solid #a1a1aa; padding: 12px 16px; border-radius: 8px; color: #3f3f46;">
 {t({"de": "Für diesen Abschnitt gibt es derzeit keine MCQ-Fragen. Die Theorie oben deckt die Prüfungsinhalte ab.", "en": "This section currently has no MCQ questions. The theory above covers the exam content."})}
 </div>
 """, unsafe_allow_html=True)
+

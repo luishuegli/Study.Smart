@@ -637,7 +637,7 @@ P(X ≤ {x_val:.0f}) = Φ({z_score:.2f}) = <span style="color:{prob_color}; font
     # --- EXAM SECTION ---
     st.markdown(f"### {t({'de': 'Prüfungstraining', 'en': 'Exam Practice'})}")
     
-    q_data = get_question("4.7", "normal_std")
+    q_data = get_question("4.7", "hs2023_mc7")
     if q_data:
         with st.container(border=True):
             st.caption(q_data.get("source", ""))

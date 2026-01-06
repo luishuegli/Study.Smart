@@ -256,17 +256,13 @@ A factory produces screws with a target weight of µ₀ = 10g. The quality manag
     st.markdown("<br>", unsafe_allow_html=True)
     
     # === CSS FOR BLUE SLIDERS ===
-    st.markdown("""
-<style>
-.stSlider div[data-baseweb="slider"] > div:first-child > div:first-child { 
-    background-color: #007AFF !important; 
-}
-.stSlider div[role="slider"] { 
-    background-color: #FFFFFF !important; 
-    border: 2px solid #007AFF !important; 
-}
-</style>
-""", unsafe_allow_html=True)
+    from utils.layouts.foundation import inject_slider_css
+    inject_slider_css([
+        {"label_contains": "Kritischer", "color": "#007AFF"},
+        {"label_contains": "Critical", "color": "#007AFF"},
+        {"label_contains": "Stichprobengrösse", "color": "#007AFF"},
+        {"label_contains": "Sample", "color": "#007AFF"},
+    ])
     
     # === CONTROLS ===
     col_ctrl, col_chart = st.columns([1, 1.8], gap="medium")

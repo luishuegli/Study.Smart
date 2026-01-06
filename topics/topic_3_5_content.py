@@ -104,6 +104,13 @@ def render_subtopic_3_5(model):
     """3.5 Variance - The Sharpshooter Design"""
     
     inject_equal_height_css()
+    
+    # Slider Colors: Precision slider = Blue (matches blue dots in pattern)
+    from utils.layouts.foundation import inject_slider_css
+    inject_slider_css([
+        {"label_contains": "Präzision", "color": "#007AFF"},  # German
+        {"label_contains": "Precision", "color": "#007AFF"},  # English
+    ])
 
     st.header(t(content_3_5["title"]))
     st.markdown(t(content_3_5["subtitle"]))

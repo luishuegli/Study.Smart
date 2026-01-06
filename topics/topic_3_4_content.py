@@ -77,6 +77,14 @@ def render_subtopic_3_4(model):
     """3.4 Expected Values - Premium Implementation"""
     
     inject_equal_height_css()
+    
+    # Slider Colors: Balance sliders green/orange, Casino slider purple
+    from utils.layouts.foundation import inject_slider_css
+    inject_slider_css([
+        {"label_contains": "X=", "color": "#34C759"},       # Balance weights - green
+        {"label_contains": "Preis", "color": "#AF52DE"},    # Casino price - purple
+        {"label_contains": "Price", "color": "#AF52DE"},    # Casino price English
+    ])
 
     st.header(t(content_3_4["title"]))
     st.markdown("---")

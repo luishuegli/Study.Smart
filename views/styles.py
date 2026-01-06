@@ -248,71 +248,58 @@ def load_design_system():
              background-color: #E5E5E5 !important; /* Light Grey Track */
         }
         
-        /* --- 5b. SLIDERS (Global Defaults - ULTRA AGGRESSIVE for Streamlit Cloud) --- */
-        /* The slider container - keep transparent, NO grey background */
-        div[data-baseweb="slider"],
-        div[data-baseweb="slider"] > div,
-        div[data-baseweb="slider"] > div > div,
-        [data-testid="stSlider"],
-        [data-testid="stSlider"] > div,
-        [data-testid="stSlider"] > div > div,
-        [data-testid="stSlider"] > div > div > div,
-        .stSlider,
-        .stSlider > div,
-        .stSlider > div > div {
+        /* --- 5b. SLIDERS (Global: BLACK by default) --- */
+        /* All sliders are black by default. Topics inject semantic colors via inject_slider_css */
+        /* to match sliders that control colored visual elements. */
+        
+        /* The slider wrapper - keep transparent */
+        div[data-baseweb="slider"] {
             background-color: transparent !important;
-            background: transparent !important;
         }
         
-        /* The actual track bar (BaseUI uses specific class) */
-        div[data-baseweb="slider"] [class*="Track"],
-        div[data-baseweb="slider"] [class*="track"],
-        div[data-baseweb="slider"] [class*="ProgressBar"],
-        [data-testid="stSlider"] [class*="Track"] {
-            background-color: #E5E5EA !important;
-            height: 6px !important;
-            border-radius: 3px !important;
+        /* Track container - transparent (unfilled shows through) */
+        .stSlider div[data-baseweb="slider"] > div:first-child {
+            background-color: transparent !important;
         }
         
-        /* Filled portion of slider (left side) - semantic blue */
-        div[data-baseweb="slider"] [class*="Track"] > div:first-child,
-        div[data-baseweb="slider"] [class*="InnerTrack"],
-        div[data-baseweb="slider"] > div:first-child > div:first-child,
-        div[data-baseweb="slider"] > div > div > div:first-child,
-        [data-testid="stSlider"] > div > div > div > div:first-child {
-            background-color: #007AFF !important; /* Pool blue */
-            background-image: none !important;
+        /* THE INTEGRAL FIX: Color the FILLED portion BLACK by default using mix-blend-mode */
+        /* This tints Streamlit's red gradient to black, leaving unfilled transparent */
+        .stSlider div[data-baseweb="slider"] > div:first-child > div:first-child {
+            filter: none !important;
+            position: relative !important;
+        }
+        .stSlider div[data-baseweb="slider"] > div:first-child > div:first-child::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-color: #1D1D1F !important;
+            mix-blend-mode: hue !important;
+            pointer-events: none;
+            z-index: 1;
+            border-radius: inherit;
         }
         
-        /* Slider thumb - BLACK dot (GLOBAL DEFAULT - high specificity to override topic CSS) */
-        div[data-baseweb="slider"] [role="slider"],
-        div[data-baseweb="slider"] [class*="Thumb"],
-        [data-testid="stSlider"] [role="slider"],
-        .stSlider [role="slider"],
-        .stSlider div[role="slider"],
-        .stSlider div[data-baseweb="slider"] div[role="slider"] {
-            background-color: #000000 !important;
-            border: 2px solid #000000 !important;
+        /* Default thumb styling - black with white border */
+        .stSlider div[role="slider"] {
+            background-color: #1D1D1F !important;
+            border: none !important;
+            z-index: 2 !important;
         }
         
         /* Force ALL slider value text to black - comprehensive selectors */
-        div[data-baseweb="slider"] > div > div > div[role="slider"] + div {
-            background-color: transparent !important;
+        div[data-baseweb="slider"] > div > div > div[role="slider"] + div,
+        div[data-baseweb="slider"] [data-testid],
+        div[data-baseweb="slider"] div[style*="color"],
+        .stSlider div[data-baseweb="slider"] div {
             color: #1D1D1F !important;
-            font-weight: bold !important;
         }
         
         .stSlider [data-testid="stMarkdownContainer"] p,
         .stSlider p,
         .stSlider span,
+        .stSlider label,
         div[data-baseweb="slider"] span,
-        div[data-baseweb="slider"] div[data-testid] {
-            color: #1D1D1F !important;
-        }
-        
-        /* Target the thumb value tooltip/label specifically */
-        div[data-baseweb="slider"] [aria-valuetext],
-        div[data-baseweb="slider"] [data-baseweb="tooltip"] {
+        div[data-baseweb="slider"] [aria-valuetext] {
             color: #1D1D1F !important;
         }
         

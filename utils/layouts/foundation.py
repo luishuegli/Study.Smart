@@ -109,62 +109,54 @@ def grey_info(content):
 
 def inject_slider_css(slider_configs: list = None):
     """
-    Inject CSS for proper slider styling.
+    Inject CSS for semantic slider colors (overrides global black default).
     
-    Slider structure:
-    - Filled (left of thumb): semantic color or black
-    - Unfilled (right of thumb): grey (#e0e0e0)
-    - Thumb: solid color matching filled portion
+    ARCHITECTURE:
+    - Global CSS in styles.py: ALL sliders are BLACK by default (via mix-blend-mode:hue)
+    - This utility: Adds higher-specificity CSS to override with semantic colors
+    - Only use this when a slider controls a colored visual element (e.g., blue chart line)
+    - Uses mix-blend-mode:hue on a ::before pseudo-element to tint the filled portion
     
-    Args:
-        slider_configs: List of dicts with {"label_contains": str, "color": str}
-                       If None, applies default black styling to all sliders.
-    
-    Example:
+    Usage:
+        # Only call this if sliders control colored elements in visualizations
         inject_slider_css([
-            {"label_contains": "n =", "color": "#007AFF"},   # Blue for n
-            {"label_contains": "p =", "color": "#9B59B6"},   # Purple for p
-            {"label_contains": "k =", "color": "#FF4B4B"},   # Red for k
+            {"label_contains": "Alpha", "color": "#007AFF"},  # Blue (matches blue element)
+            {"label_contains": "Beta", "color": "#16a34a"},   # Green (matches green element)
+            {"label_contains": "Outlier", "color": "#FF4B4B"},  # Red (matches red element)
         ])
     """
-    # Default: black filled, grey unfilled
-    default_color = "#1f1f1f"
-    unfilled_color = "#e0e0e0"
+    if not slider_configs:
+        return  # No semantic colors, use global black default
     
     css_parts = []
     
-    # Default styling for ALL sliders (black)
-    css_parts.append(f"""
-/* Default slider styling - black filled, grey unfilled */
-.stSlider div[data-baseweb="slider"] > div:first-child {{
-    background-color: {unfilled_color} !important;
-}}
-.stSlider div[data-baseweb="slider"] > div:first-child > div:first-child {{
-    background-color: {default_color} !important;
-}}
-.stSlider div[role="slider"] {{
-    background-color: {default_color} !important;
-    border: none !important;
-}}
-""")
-    
-    # Semantic overrides for specific sliders
-    if slider_configs:
-        for config in slider_configs:
-            label = config.get("label_contains", "")
-            color = config.get("color", default_color)
-            
-            css_parts.append(f"""
+    for config in slider_configs:
+        label = config.get("label_contains", "")
+        color = config.get("color", "#1f1f1f")
+        
+        css_parts.append(f"""
 /* Semantic slider: {label} */
-.stSlider:has([aria-label*="{label}"]) div[data-baseweb="slider"] > div:first-child {{
-    background-color: {unfilled_color} !important;
-}}
+/* Reset grayscale, setup for overlay */
 .stSlider:has([aria-label*="{label}"]) div[data-baseweb="slider"] > div:first-child > div:first-child {{
-    background-color: {color} !important;
+    filter: none !important;
+    position: relative !important;
 }}
+/* Color overlay with mix-blend-mode:hue */
+.stSlider:has([aria-label*="{label}"]) div[data-baseweb="slider"] > div:first-child > div:first-child::before {{
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: {color} !important;
+    mix-blend-mode: hue !important;
+    pointer-events: none;
+    z-index: 1;
+    border-radius: inherit;
+}}
+/* Thumb - semantic color, above overlay */
 .stSlider:has([aria-label*="{label}"]) div[role="slider"] {{
     background-color: {color} !important;
     border: none !important;
+    z-index: 2 !important;
 }}
 """)
     

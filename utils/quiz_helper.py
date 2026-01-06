@@ -148,81 +148,69 @@ def render_mcq(
         user_submitted = False
         is_correct = False
         
-        # --- CASE A: MULTIPLE SELECT (Custom Button Bars) ---
+        # --- CASE A: MULTIPLE SELECT (Checkboxes with Check Answer button) ---
         if is_multi_select:
-            selected_indices = []
+            # Initialize state
+            answered_key = f"mcq_answered_{key_suffix}"
+            result_key = f"mcq_result_{key_suffix}"
             
-            # Initialize state for each option
+            if answered_key not in st.session_state:
+                st.session_state[answered_key] = False
+            if result_key not in st.session_state:
+                st.session_state[result_key] = None  # None, True, or False
+            
+            # Initialize checkbox states
             for i in range(len(options)):
                 k = f"{checkbox_prefix}_{i}"
                 if k not in st.session_state:
                     st.session_state[k] = False
             
-            # Render custom option bars (matching radio button styling)
+            # Render checkboxes (clean, no black bars)
             for i, opt in enumerate(options):
                 k = f"{checkbox_prefix}_{i}"
-                is_selected = st.session_state.get(k, False)
-                
-                # Style: selected = black border + gray background, unselected = light border
-                if is_selected:
-                    selected_indices.append(i)
-                    border_style = "border: 2px solid #1f2937; background: #f3f4f6;"
-                else:
-                    border_style = "border: 1px solid #e5e7eb; background: white;"
-                
-                # Render as a clickable button
-                if st.button(
-                    opt,
-                    key=f"{checkbox_prefix}_btn_{i}",
-                    use_container_width=True,
-                    type="secondary"
-                ):
-                    # Toggle selection
-                    st.session_state[k] = not st.session_state[k]
-                    st.rerun(scope="fragment")
+                st.checkbox(opt, key=k, disabled=st.session_state[answered_key])
             
             # Collect current selection
             selected_indices = [i for i in range(len(options)) if st.session_state.get(f"{checkbox_prefix}_{i}", False)]
             
-            # Check Answer Button (Combined Submit + Show Solution)
-            st.markdown("<br>", unsafe_allow_html=True)
-            if st.button(t({"de": "Antwort prüfen", "en": "Check Answer"}), key=check_btn_key, type="primary"):
-                user_submitted = True
-                # Sort for comparison
-                selected_indices.sort()
-                correct_set = sorted(correct_idx)
-                is_correct = (selected_indices == correct_set)
-                
-                # Reveal solution immediately on check
-                st.session_state[show_sol_key] = True
-                
-                # Persist Result
-                if all([course_id, topic_id, subtopic_id, question_id]):
-                    user = st.session_state.get("user")
-                    if user and "localId" in user:
-                        track_question_answer(
-                            user_id=user["localId"],
-                            course_id=course_id,
-                            topic_id=topic_id,
-                            subtopic_id=subtopic_id,
-                            question_id=question_id,
-                            is_correct=is_correct,
-                            selected_index=selected_indices # Store list
-                        )
-                        from utils.progress_tracker import update_local_progress
-                        update_local_progress(topic_id, subtopic_id, question_id, is_correct, selected_indices)
-
-            # Feedback Display (Only if button clicked or solution visible)
-            if st.session_state[show_sol_key]:
-                 # Re-calc correctness for display in case user changed boxes after clicking 
-                 curr_selection = [i for i in range(len(options)) if st.session_state.get(f"{checkbox_prefix}_{i}", False)]
-                 curr_selection.sort()
-                 curr_correct = (curr_selection == sorted(correct_idx))
-                 
-                 if curr_correct:
-                     st.success(t(success_msg_dict))
-                 else:
-                     st.error(t(error_msg_dict))
+            # Check Answer Button (only if not yet answered)
+            if not st.session_state[answered_key]:
+                st.markdown("<br>", unsafe_allow_html=True)
+                if st.button(t({"de": "Antwort prüfen", "en": "Check Answer"}), key=check_btn_key, type="primary"):
+                    # Sort for comparison
+                    selected_indices.sort()
+                    correct_set = sorted(correct_idx)
+                    is_correct = (selected_indices == correct_set)
+                    
+                    # Store result
+                    st.session_state[answered_key] = True
+                    st.session_state[result_key] = is_correct
+                    
+                    # Persist Result
+                    if all([course_id, topic_id, subtopic_id, question_id]):
+                        user = st.session_state.get("user")
+                        if user and "localId" in user:
+                            track_question_answer(
+                                user_id=user["localId"],
+                                course_id=course_id,
+                                topic_id=topic_id,
+                                subtopic_id=subtopic_id,
+                                question_id=question_id,
+                                is_correct=is_correct,
+                                selected_index=selected_indices
+                            )
+                            from utils.progress_tracker import update_local_progress
+                            update_local_progress(topic_id, subtopic_id, question_id, is_correct, selected_indices)
+                    
+                    st.rerun(scope="fragment")
+            
+            # Show feedback if answered
+            if st.session_state[answered_key]:
+                is_correct = st.session_state[result_key]
+                if is_correct:
+                    st.success(t(success_msg_dict))
+                else:
+                    st.error(t(error_msg_dict))
 
 
         # --- CASE B: SINGLE SELECT (Radio - Instant) ---
@@ -274,47 +262,49 @@ def render_mcq(
 
 
         # 4. Solution Display Logic
-        # Multi-select: Shows after Check Answer button
-        # Single-select: Uses expander (inside fragment = no tab reset)
+        # Both cases now use expander (inside fragment = no tab reset)
         
-        if is_multi_select:
-            # Multi-select: Show solution if Check Answer was clicked
-            if st.session_state.get(show_sol_key, False):
-                with st.container(border=True):
-                    sol_content = t(solution_text_dict)
-                    st.markdown(sol_content, unsafe_allow_html=True)
-                    full_context = f"{ai_context}\n\nProblem: {question_text}\nCorrect Indices: {correct_idx}"
-                    render_ai_tutor(f"mcq_ai_{key_suffix}", full_context, client)
-        else:
-            # Single-select: Use expander (inside fragment = no tab reset)
-            # PERSIST EXPANDER STATE
-            expander_state_key = f"exp_state_{key_suffix}"
-            
-            # Logic: If AI interaction happened (history exists and not empty), force open or keep open
-            ai_history_key = f"ai_history_mcq_ai_{key_suffix}"
-            has_ai_interaction = len(st.session_state.get(ai_history_key, [])) > 0
-            
-            default_expanded = st.session_state.get(expander_state_key, False) or has_ai_interaction
-            
+        # Get answer state for multi-select
+        answered_key = f"mcq_answered_{key_suffix}" if is_multi_select else None
+        is_answered = st.session_state.get(answered_key, False) if is_multi_select else True
+        
+        # PERSIST EXPANDER STATE
+        expander_state_key = f"exp_state_{key_suffix}"
+        
+        # Logic: If AI interaction happened (history exists and not empty), force open or keep open
+        ai_history_key = f"ai_history_mcq_ai_{key_suffix}"
+        has_ai_interaction = len(st.session_state.get(ai_history_key, [])) > 0
+        
+        default_expanded = st.session_state.get(expander_state_key, False) or has_ai_interaction
+        
+        # Multi-select: Only show expander after Check Answer clicked
+        # Single-select: Always show expander
+        if (is_multi_select and is_answered) or not is_multi_select:
             with st.expander(t({"de": "Lösung zeigen", "en": "Show Solution"}), expanded=default_expanded):
-                # Mark as open when interacted with (this is tricky in Streamlit, but the user likely intends to keep it open)
+                # Mark as open when interacted with
                 st.session_state[expander_state_key] = True 
                 
                 sol_content = t(solution_text_dict)
                 st.markdown(sol_content, unsafe_allow_html=True)
-                full_context = f"{ai_context}\n\nProblem: {question_text}\nCorrect Answer Index: {correct_idx}"
+                
+                if is_multi_select:
+                    full_context = f"{ai_context}\n\nProblem: {question_text}\nCorrect Indices: {correct_idx}"
+                else:
+                    full_context = f"{ai_context}\n\nProblem: {question_text}\nCorrect Answer Index: {correct_idx}"
                 render_ai_tutor(f"mcq_ai_{key_suffix}", full_context, client)
 
         # Retry/Reset
         if allow_retry:
             if st.button(t({"de": "Frage zurücksetzen", "en": "Reset Question"}), key=f"retry_{key_suffix}", type="secondary"):
                 if is_multi_select:
-                     for i in range(len(options)):
-                         st.session_state[f"{checkbox_prefix}_{i}"] = False
-                     st.session_state[show_sol_key] = False
+                    for i in range(len(options)):
+                        st.session_state[f"{checkbox_prefix}_{i}"] = False
+                    st.session_state[f"mcq_answered_{key_suffix}"] = False
+                    st.session_state[f"mcq_result_{key_suffix}"] = None
+                    st.session_state[expander_state_key] = False
                 else:
                     st.session_state[radio_key] = None
-                    st.session_state[show_sol_key] = False
+                    st.session_state[expander_state_key] = False
                 st.rerun(scope="fragment")
     
     # Execute the fragment

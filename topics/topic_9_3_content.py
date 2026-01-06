@@ -168,13 +168,12 @@ def verdict_detector_interactive():
     z_values = [1.645, 1.96, 2.576]
     alpha_values = [0.10, 0.05, 0.01]
     
-    # Blue slider CSS
-    st.markdown("""
-<style>
-.stSlider div[data-baseweb="slider"] > div:first-child > div:first-child { background-color: #007AFF !important; }
-.stSlider div[role="slider"] { background-color: #FFFFFF !important; border: 2px solid #007AFF !important; }
-</style>
-""", unsafe_allow_html=True)
+    # Blue slider CSS for μ₀ control
+    from utils.layouts.foundation import inject_slider_css
+    inject_slider_css([
+        {"label_contains": "Wert", "color": "#007AFF"},
+        {"label_contains": "value", "color": "#007AFF"},
+    ])
     
     # Controls in columns
     c1, c2 = st.columns([1.5, 1])

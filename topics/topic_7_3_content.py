@@ -451,22 +451,12 @@ def boxplot_laboratory():
             "en": "Move the slider to add a 13th component with variable lifespan:"
         }))
         
-        # Semantic slider coloring (Red = outlier zone)
-        st.markdown("""
-        <style>
-        .stSlider:has([aria-label*="Lebensdauer"]) div[data-baseweb="slider"] > div:first-child > div:first-child { 
-            background: linear-gradient(90deg, #16a34a 0%, #16a34a 45%, #FFD700 50%, #FF4B4B 70%, #FF4B4B 100%) !important; 
-        }
-        .stSlider:has([aria-label*="Lifespan"]) div[data-baseweb="slider"] > div:first-child > div:first-child { 
-            background: linear-gradient(90deg, #16a34a 0%, #16a34a 45%, #FFD700 50%, #FF4B4B 70%, #FF4B4B 100%) !important; 
-        }
-        .stSlider:has([aria-label*="Lebensdauer"]) div[role="slider"], 
-        .stSlider:has([aria-label*="Lifespan"]) div[role="slider"] { 
-            background-color: #FFFFFF !important; 
-            border: 2px solid #1c1c1e !important; 
-        }
-        </style>
-        """, unsafe_allow_html=True)
+        # Semantic slider coloring (Blue for data control)
+        from utils.layouts.foundation import inject_slider_css
+        inject_slider_css([
+            {"label_contains": "Lebensdauer", "color": "#007AFF"},
+            {"label_contains": "Lifespan", "color": "#007AFF"},
+        ])
         
         # CORRECT PATTERN: Use key only, no value= parameter, no manual sync
         # Slider auto-syncs to st.session_state["bp_outlier_slider"]

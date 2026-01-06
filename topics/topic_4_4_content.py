@@ -221,6 +221,12 @@ def render_subtopic_4_4(model):
     """4.4 Poisson-Verteilung - ULTRATHINK Enhanced"""
     inject_equal_height_css()
     
+    # Slider Colors: λ slider = Blue (matches the bar chart)
+    from utils.layouts.foundation import inject_slider_css
+    inject_slider_css([
+        {"label_contains": "λ", "color": "#007AFF"},  # Blue bars in chart
+    ])
+    
     # --- CSS INJECTION FOR EQUAL HEIGHT (AGGRESSIVE) ---
     st.markdown("""
     <style>
@@ -563,7 +569,7 @@ def render_subtopic_4_4(model):
     # --- EXAM SECTION ---
     st.markdown(f"### {t({'de': 'Prüfungstraining', 'en': 'Exam Practice'})}")
     
-    q_data = get_question("4.4", "poisson_rate")
+    q_data = get_question("4.4", "test4_q1")
     if q_data:
         with st.container(border=True):
             st.caption(q_data.get("source", ""))

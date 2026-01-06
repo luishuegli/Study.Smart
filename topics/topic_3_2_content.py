@@ -251,18 +251,12 @@ def render_missions_3_2():
 def render_die_mission(mission_key, desc_dict, target_p6, target_others, tolerance):
     """Reusable die-building mission component"""
     
-    # Scoped CSS for slider colors
-    st.markdown(f"""
-    <style>
-    /* Blue slider for P(1-5) */
-    .stSlider:has([aria-label*="P(1)"]) div[data-baseweb="slider"] > div:first-child > div:first-child {{ background-color: #007AFF !important; }}
-    .stSlider:has([aria-label*="P(1)"]) div[role="slider"] {{ background-color: #FFFFFF !important; border: 2px solid #007AFF !important; }}
-    
-    /* Purple slider for P(6) */
-    .stSlider:has([aria-label="P(6)"]) div[data-baseweb="slider"] > div:first-child > div:first-child {{ background-color: #AF52DE !important; }}
-    .stSlider:has([aria-label="P(6)"]) div[role="slider"] {{ background-color: #FFFFFF !important; border: 2px solid #AF52DE !important; }}
-    </style>
-    """, unsafe_allow_html=True)
+    # Slider Colors: Blue for P(1-5), Purple for P(6) - matching bar chart colors
+    from utils.layouts.foundation import inject_slider_css
+    inject_slider_css([
+        {"label_contains": "P(1)", "color": "#007AFF"},  # Blue bars
+        {"label_contains": "P(6)", "color": "#AF52DE"},  # Purple bar
+    ])
     
     with st.container(border=True):
         st.markdown(t(desc_dict))

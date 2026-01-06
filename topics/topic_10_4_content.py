@@ -210,18 +210,13 @@ def evidence_meter_interactive():
     col_ctrl, col_viz = st.columns([1, 1.6], gap="medium")
     
     with col_ctrl:
-        # Blue slider CSS
-        st.markdown("""
-<style>
-.stSlider div[data-baseweb="slider"] > div:first-child > div:first-child { 
-    background-color: #007AFF !important; 
-}
-.stSlider div[role="slider"] { 
-    background-color: #FFFFFF !important; 
-    border: 2px solid #007AFF !important; 
-}
-</style>
-""", unsafe_allow_html=True)
+        # Blue slider CSS for sample mean control
+        from utils.layouts.foundation import inject_slider_css
+        inject_slider_css([
+            {"label_contains": "Stichprobenmittelwert", "color": "#007AFF"},
+            {"label_contains": "Sample Mean", "color": "#007AFF"},
+            {"label_contains": "x̄", "color": "#007AFF"},
+        ])
         
         # The main slider - sample mean
         x_bar_label = t({"de": "Stichprobenmittelwert", "en": "Sample Mean"})

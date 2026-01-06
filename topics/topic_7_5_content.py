@@ -366,27 +366,12 @@ def correlation_explorer():
     
     st.markdown("<br>", unsafe_allow_html=True)
     
-    # === CSS for semantic slider coloring ===
-    st.markdown("""
-    <style>
-    /* Correlation slider: Color based on value - applied via class */
-    .stSlider:has([aria-label*="ρ"]) div[data-baseweb="slider"] > div:first-child > div:first-child { 
-        background: linear-gradient(90deg, #9B59B6 0%, #6B7280 50%, #16a34a 100%) !important; 
-    }
-    .stSlider:has([aria-label*="ρ"]) div[role="slider"] { 
-        background-color: #FFFFFF !important; 
-        border: 2px solid #000000 !important; 
-    }
-    /* Sample size slider: Blue */
-    .stSlider:has([aria-label*="n ="]) div[data-baseweb="slider"] > div:first-child > div:first-child { 
-        background-color: #007AFF !important; 
-    }
-    .stSlider:has([aria-label*="n ="]) div[role="slider"] { 
-        background-color: #FFFFFF !important; 
-        border: 2px solid #007AFF !important; 
-    }
-    </style>
-    """, unsafe_allow_html=True)
+    # === SLIDER STYLING (via utility) ===
+    from utils.layouts.foundation import inject_slider_css
+    inject_slider_css([
+        {"label_contains": "ρ", "color": "#16a34a"},     # Green for correlation (positive by default)
+        {"label_contains": "n =", "color": "#007AFF"},   # Blue for sample size
+    ])
     
     # === CONTROLS ===
     col_ctrl, col_viz = st.columns([1, 2], gap="medium")

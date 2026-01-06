@@ -149,52 +149,14 @@ def render_subtopic_1_8(model):
     # --- PART 1: THE FACTORY (Interactive Visualizer) ---
     st.markdown(f"### {t(content_1_8['mission']['title'])}")
     
-    # --- CSS: SCOPED SLIDER COLORS FOR 1.8 (REFINED) ---
-    st.markdown("""
-    <style>
-    /* 1. Alpha (Blue) */
-    .stSlider:has([aria-label="Alpha"]) div[data-baseweb="slider"] > div:first-child > div:first-child { 
-        background-color: #60A5FA !important; 
-        background-image: none !important; 
-    }
-    .stSlider:has([aria-label="Alpha"]) div[role="slider"] { background-color: #FFFFFF !important; border: 2px solid #60A5FA !important; }
-
-    /* 2. Beta (Green) */
-    .stSlider:has([aria-label="Beta"]) div[data-baseweb="slider"] > div:first-child > div:first-child { 
-        background-color: #34D399 !important; 
-        background-image: none !important; 
-    }
-    .stSlider:has([aria-label="Beta"]) div[role="slider"] { background-color: #FFFFFF !important; border: 2px solid #34D399 !important; }
-    
-    /* 3. Defect Alpha (Blue) */
-    .stSlider:has([aria-label="Defect Alpha"]) div[data-baseweb="slider"] > div:first-child > div:first-child { 
-        background-color: #60A5FA !important; 
-        background-image: none !important; 
-    }
-    .stSlider:has([aria-label="Defect Alpha"]) div[role="slider"] { background-color: #FFFFFF !important; border: 2px solid #60A5FA !important; }
-
-    /* 4. Defect Beta (Green) */
-    .stSlider:has([aria-label="Defect Beta"]) div[data-baseweb="slider"] > div:first-child > div:first-child { 
-        background-color: #34D399 !important; 
-        background-image: none !important; 
-    }
-    .stSlider:has([aria-label="Defect Beta"]) div[role="slider"] { background-color: #FFFFFF !important; border: 2px solid #34D399 !important; }
-
-    /* 5. Defect Gamma (Amber) */
-    .stSlider:has([aria-label="Defect Gamma"]) div[data-baseweb="slider"] > div:first-child > div:first-child { 
-        background-color: #FBBF24 !important; 
-        background-image: none !important; 
-    }
-    .stSlider:has([aria-label="Defect Gamma"]) div[role="slider"] { background-color: #FFFFFF !important; border: 2px solid #FBBF24 !important; }
-    
-    /* Global Slider Label/Value Tweak - force black text */
-    div[data-baseweb="slider"] > div > div > div[role="slider"] + div {
-        background-color: transparent !important;
-        color: #1D1D1F !important;
-        font-weight: bold !important;
-    }
-    </style>
-    """, unsafe_allow_html=True)
+    # --- SEMANTIC SLIDER COLORS FOR 1.8 ---
+    # Use the inject_slider_css utility for proper styling (filled=color, unfilled=grey)
+    from utils.layouts.foundation import inject_slider_css
+    inject_slider_css([
+        {"label_contains": "Alpha", "color": "#60A5FA"},       # Blue for Alpha
+        {"label_contains": "Beta", "color": "#34D399"},        # Green for Beta
+        {"label_contains": "Gamma", "color": "#FBBF24"}        # Amber for Gamma
+    ])
 
     with st.container(border=True):
         # 1. NARRATIVE HUD (AGGRESSIVE GUIDANCE)
@@ -214,9 +176,9 @@ def render_subtopic_1_8(model):
                  "en": "<strong>Step 1:</strong> Adjust the <strong>Market Shares</strong> (Priors). Who produced the most?"
              }))
         elif res >= 2.0:
-            st.warning(t({
-                "de": "**Schritt 2:** Die Defektrate ist zu hoch! Optimiere die **Fehlerraten**, um unter das Ziel von 2.0% zu kommen.",
-                "en": "**Step 2:** The defect rate is too high! Optimize the **Defect Rates** to get under the 2.0% target."
+            grey_info(t({
+                "de": "<strong>Schritt 2:</strong> Die Defektrate ist zu hoch! Optimiere die <strong>Fehlerraten</strong>, um unter das Ziel von 2.0% zu kommen.",
+                "en": "<strong>Step 2:</strong> The defect rate is too high! Optimize the <strong>Defect Rates</strong> to get under the 2.0% target."
             }))
         else:
             st.balloons()
@@ -401,7 +363,11 @@ def render_subtopic_1_8(model):
                 if user := st.session_state.get("user"):
                     track_question_answer(user["localId"], "vwl", "1", "1.8", "1_8_mission", True)
             else:
-                st.warning(f"{t({'de': 'Ziel verfehlt.', 'en': 'Target missed.'})} ({total_defect_pct:.1f}% > {target_val}%)")
+                st.markdown(f"""
+                <div style="background: #f4f4f5; border-left: 4px solid #a1a1aa; padding: 12px 16px; border-radius: 8px; color: #3f3f46;">
+                    <strong>{t({'de': 'Ziel verfehlt.', 'en': 'Target missed.'})}</strong> ({total_defect_pct:.1f}% > {target_val}%)
+                </div>
+                """, unsafe_allow_html=True)
             
             st.caption(t({
                 "de": "Insight: Großer Balken x Kleine Rate = Großer Einfluss.",

@@ -96,13 +96,14 @@ def render_subtopic_3_3(model):
 
     inject_equal_height_css()
     
-    # Slider Colors for Factory
-    st.markdown("""
-    <style>
-    .stSlider:has([aria-label*="Mean"]) div[data-baseweb="slider"] > div:first-child > div:first-child { background-color: #34C759 !important; }
-    .stSlider:has([aria-label*="Mean"]) div[role="slider"] { border: 2px solid #34C759 !important; }
-    </style>
-    """, unsafe_allow_html=True)
+    # Slider Colors: Smoothie Scanner = Light Blue, Factory = Green
+    from utils.layouts.foundation import inject_slider_css
+    inject_slider_css([
+        {"label_contains": "Interval", "color": "#007AFF"},    # Smoothie Scanner - light blue
+        {"label_contains": "Intervall", "color": "#007AFF"},   # German version
+        {"label_contains": "Machine", "color": "#34C759"},     # Factory Tycoon - green
+        {"label_contains": "Maschinen", "color": "#34C759"},   # German version
+    ])
 
     st.header(t(content_3_3["title"]))
     st.markdown("---")

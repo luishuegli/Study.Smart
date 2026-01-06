@@ -94,18 +94,14 @@ def render_subtopic_3_6(model):
     
     inject_equal_height_css()
     
-    # Slider styling
-    st.markdown("""
-    <style>
-    /* Blue slider for Z */
-    .stSlider:has([aria-label*="Z"]) div[data-baseweb="slider"] > div:first-child > div:first-child { background-color: #007AFF !important; }
-    .stSlider:has([aria-label*="Z"]) div[role="slider"] { background-color: #FFFFFF !important; border: 2px solid #007AFF !important; }
-    
-    /* Purple slider for equivalent */
-    .stSlider:has([aria-label*="Equivalent"]) div[data-baseweb="slider"] > div:first-child > div:first-child { background-color: #AF52DE !important; }
-    .stSlider:has([aria-label*="Equivalent"]) div[role="slider"] { background-color: #FFFFFF !important; border: 2px solid #AF52DE !important; }
-    </style>
-    """, unsafe_allow_html=True)
+    # Slider Colors: Z-Value = Blue, Equivalent = Purple (matching card colors)
+    from utils.layouts.foundation import inject_slider_css
+    inject_slider_css([
+        {"label_contains": "Z", "color": "#007AFF"},          # Blue for Z-value
+        {"label_contains": "Equivalent", "color": "#AF52DE"}, # Purple for equivalent
+        {"label_contains": "Antwort", "color": "#AF52DE"},    # German "Your Answer"
+        {"label_contains": "Answer", "color": "#AF52DE"},     # English "Your Answer"
+    ])
 
     st.header(t(content_3_6["title"]))
     st.markdown(t(content_3_6["subtitle"]))

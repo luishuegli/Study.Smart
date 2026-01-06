@@ -433,12 +433,10 @@ def outlier_sensitivity_mission():
     st.markdown(f"**{t({'de': 'Mission', 'en': 'Mission'})}:** {t({'de': 'Finde heraus, was mit Mittelwert und Median passiert!', 'en': 'Find out what happens to mean and median!'})}")
     
     # === CEO SLIDER WITH RED COLOR (outlier semantic) ===
-    st.markdown("""
-    <style>
-    .stSlider:has([aria-label*="CEO"]) div[data-baseweb="slider"] > div:first-child > div:first-child { background-color: #FF4B4B !important; }
-    .stSlider:has([aria-label*="CEO"]) div[role="slider"] { background-color: #FFFFFF !important; border: 2px solid #FF4B4B !important; }
-    </style>
-    """, unsafe_allow_html=True)
+    from utils.layouts.foundation import inject_slider_css
+    inject_slider_css([
+        {"label_contains": "CEO", "color": "#FF4B4B"},
+    ])
     
     ceo_salary = st.slider(
         t({"de": "CEO-Gehalt (CHF)", "en": "CEO Salary (CHF)"}),

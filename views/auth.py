@@ -69,7 +69,7 @@ def render_auth(cookie_manager=None):
                                 st.session_state["user"] = user
                                 # Set persistence cookie if manager available
                                 if cookie_manager:
-                                    cookie_manager.set("token", user["idToken"])
+                                    cookie_manager.set("token", user["idToken"], expires_at=None, same_site="lax")
                                 st.rerun()
 
         with tab2:
@@ -108,7 +108,7 @@ def render_auth(cookie_manager=None):
                                 st.session_state["user"] = user
                                 # Set persistence cookie
                                 if cookie_manager:
-                                    cookie_manager.set("token", user["idToken"])
+                                    cookie_manager.set("token", user["idToken"], expires_at=None, same_site="lax")
                                 st.rerun()
         
         # Language Selector bottom of the card

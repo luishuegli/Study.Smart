@@ -261,22 +261,12 @@ def render_symmetry_explorer():
     inter = content_3_7["interactive"]
     st.markdown(f"### {t(inter['title'])}")
     
-    # Blue slider CSS
-    st.markdown("""
-    <style>
-    .stSlider:has([aria-label*="Rounds"]), .stSlider:has([aria-label*="Runden"]) {
-        div[data-baseweb="slider"] > div:first-child > div:first-child { 
-            background-color: #007AFF !important; 
-            background-image: none !important;
-        }
-    }
-    .stSlider:has([aria-label*="Rounds"]) div[role="slider"],
-    .stSlider:has([aria-label*="Runden"]) div[role="slider"] { 
-        background-color: #FFFFFF !important; 
-        border: 2px solid #007AFF !important; 
-    }
-    </style>
-    """, unsafe_allow_html=True)
+    # Blue slider CSS for rounds control
+    from utils.layouts.foundation import inject_slider_css
+    inject_slider_css([
+        {"label_contains": "Rounds", "color": "#007AFF"},
+        {"label_contains": "Runden", "color": "#007AFF"},
+    ])
     
     with st.container(border=False):
         st.markdown(t(inter["desc"]))

@@ -111,10 +111,10 @@ if st.session_state.auth_status == "unknown":
     else:
         # No token found yet.
         # Check if we should wait (maybe it's loading?)
-        if st.session_state.cookie_retries < 2:
+        if st.session_state.cookie_retries < 5:
             st.session_state.cookie_retries += 1
             import time
-            time.sleep(0.1) # Small sleep to let frontend catch up
+            time.sleep(0.2) # Wait for frontend to load cookies
             st.rerun()
         else:
             # We waited, still nothing. Assume truly logged out.

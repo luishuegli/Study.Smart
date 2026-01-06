@@ -198,50 +198,14 @@ def render_simulator_1_5():
     Vertical layout: Playground first, then Mission. No emojis.
     """
     
-    # --- CSS: SCOPED SLIDER COLORS ---
-    st.markdown("""
-    <style>
-    /* 1. iPhone (Blue) - filled track */
-    .stSlider:has([aria-label*="iPhone"]) div[data-baseweb="slider"] > div:first-child > div:first-child { 
-        background-color: #007AFF !important; 
-        background-image: none !important; 
-    }
-    .stSlider:has([aria-label*="iPhone"]) div[role="slider"] { background-color: #FFFFFF !important; border: 2px solid #007AFF !important; }
-
-    /* 2. MacBook (Purple) - filled track */
-    .stSlider:has([aria-label*="Mac"]) div[data-baseweb="slider"] > div:first-child > div:first-child { 
-        background-color: #AF52DE !important; 
-        background-image: none !important; 
-    }
-    .stSlider:has([aria-label*="Mac"]) div[role="slider"] { background-color: #FFFFFF !important; border: 2px solid #AF52DE !important; }
-
-    /* 3. Intersection/Overlap (Indigo) - filled track */
-    .stSlider:has([aria-label*="P(A and B)"]) div[data-baseweb="slider"] > div:first-child > div:first-child { 
-        background-color: #5856D6 !important; 
-        background-image: none !important; 
-    }
-    .stSlider:has([aria-label*="P(A and B)"]) div[role="slider"] { background-color: #FFFFFF !important; border: 2px solid #5856D6 !important; }
-
-    /* 4. Overlap slider in Mission (Indigo) - filled track */
-    .stSlider:has([aria-label*="Overlap"]) div[data-baseweb="slider"] > div:first-child > div:first-child { 
-        background-color: #5856D6 !important; 
-        background-image: none !important; 
-    }
-    .stSlider:has([aria-label*="Overlap"]) div[role="slider"] { background-color: #FFFFFF !important; border: 2px solid #5856D6 !important; }
-
-    /* Global Slider Label/Value Tweak - force black numbers */
-    div[data-baseweb="slider"] > div > div > div[role="slider"] + div {
-        background-color: transparent !important;
-        color: #1D1D1F !important;
-        font-weight: bold !important;
-    }
-    
-    /* Also target the value display above thumb */
-    .stSlider [data-testid="stMarkdownContainer"] p {
-        color: #1D1D1F !important;
-    }
-    </style>
-    """, unsafe_allow_html=True)
+    # --- CSS: SCOPED SLIDER COLORS (using utility) ---
+    from utils.layouts.foundation import inject_slider_css
+    inject_slider_css([
+        {"label_contains": "iPhone", "color": "#007AFF"},     # Blue
+        {"label_contains": "Mac", "color": "#AF52DE"},        # Purple
+        {"label_contains": "P(A and B)", "color": "#5856D6"}, # Indigo
+        {"label_contains": "Overlap", "color": "#5856D6"},    # Indigo
+    ])
 
     # ==========================================
     # SECTION 1: PLAYGROUND (Free Mode)

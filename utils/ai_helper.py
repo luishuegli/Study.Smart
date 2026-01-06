@@ -184,7 +184,7 @@ def render_ai_tutor(key_suffix, context_prompt, client):
     # 2. Input Area (only if under limit)
     if remaining > 0:
         with st.form(key=f"ai_form_{key_suffix}", clear_on_submit=True, border=False):
-            c_input, c_btn = st.columns([6, 1], gap="small", vertical_alignment="bottom")
+            c_input, c_btn = st.columns([10, 1], gap="small", vertical_alignment="bottom")
             
             with c_input:
                 ai_query = st.text_input(
@@ -195,7 +195,7 @@ def render_ai_tutor(key_suffix, context_prompt, client):
                 )
                 
             with c_btn:
-                submitted = st.form_submit_button("→", type="primary", use_container_width=True)
+                submitted = st.form_submit_button("→", type="primary")
 
             if submitted:
                 if not client:

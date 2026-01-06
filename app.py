@@ -75,6 +75,7 @@ if "user" not in st.session_state:
         
         # Verify token and restore session
         from firebase_config import get_account_info
+        auth_success = False
         try:
             account_info = get_account_info(saved_token)
             if account_info and "users" in account_info and len(account_info["users"]) > 0:
@@ -86,11 +87,16 @@ if "user" not in st.session_state:
                     "displayName": user_data.get("displayName"),
                     "idToken": saved_token  # Keep the token for API calls
                 }
+                auth_success = True
                 st.rerun()  # Rerun to proceed with authenticated state
         except Exception as e:
-            # Token invalid or expired, continue to login
-            pass
-        st.stop()
+            # Token invalid or expired
+            auth_success = False
+        
+        # If auth failed, show login (don't stay stuck on loading)
+        if not auth_success:
+            render_auth(cookie_manager=cookie_manager)
+            st.stop()
     else:
         # No token - show login immediately
         render_auth(cookie_manager=cookie_manager)

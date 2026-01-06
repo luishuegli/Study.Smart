@@ -281,38 +281,35 @@ def render_mcq(
     # Multi-select: Controlled by "Check Answer" (which sets show_sol_key=True)
     # Single-select: Controlled by "Show Solution" Toggle
     
-    should_show_solution = False
-    
-    if is_multi_select:
-        # Already handled by Check Button setting the key
-        should_show_solution = st.session_state[show_sol_key]
-        # Allow manual toggle if user wants to hide it? 
-        # User requirement: "Serve as a show answer button simultaneously"
-        # So "Check Answer" enables it. We can validly keep a manual toggle for Single Choice.
-        # For Multi-choice, maybe just showing it is enough. 
-        # Let's keep the explicit toggle button ONLY for Single Choice to avoid clutter,
-        # OR keep it for both but sync the state?
-        # Requirement: "Submit button... should serve as show answer button".
-        # Implies we don't need a separate button for Multi.
-        pass
-    else:
-        # Standard Single Choice Toggle
-        if st.button(t({"de": "Lösung zeigen", "en": "Show Solution"}), key=f"toggle_{key_suffix}", type="primary"):
-            st.session_state[show_sol_key] = not st.session_state[show_sol_key]
-        should_show_solution = st.session_state[show_sol_key]
+    # CRITICAL: Wrap solution section in fragment to prevent full page rerun
+    # This fixes tabs resetting to first tab when clicking "Show Solution"
+    @st.fragment
+    def _render_solution_section():
+        should_show_solution = False
+        
+        if is_multi_select:
+            # Already handled by Check Button setting the key
+            should_show_solution = st.session_state.get(show_sol_key, False)
+        else:
+            # Standard Single Choice Toggle
+            if st.button(t({"de": "Lösung zeigen", "en": "Show Solution"}), key=f"toggle_{key_suffix}", type="primary"):
+                st.session_state[show_sol_key] = not st.session_state.get(show_sol_key, False)
+            should_show_solution = st.session_state.get(show_sol_key, False)
 
-    if should_show_solution:
-        with st.container(border=True):
-            sol_content = t(solution_text_dict)
-            st.markdown(sol_content, unsafe_allow_html=True)
-            
-            # AI Tutor
-            if is_multi_select:
-                 full_context = f"{ai_context}\n\nProblem: {question_text}\nCorrect Indices: {correct_idx}"
-            else:
-                 full_context = f"{ai_context}\n\nProblem: {question_text}\nCorrect Answer Index: {correct_idx}"
-            
-            render_ai_tutor(f"mcq_ai_{key_suffix}", full_context, client)
+        if should_show_solution:
+            with st.container(border=True):
+                sol_content = t(solution_text_dict)
+                st.markdown(sol_content, unsafe_allow_html=True)
+                
+                # AI Tutor
+                if is_multi_select:
+                     full_context = f"{ai_context}\n\nProblem: {question_text}\nCorrect Indices: {correct_idx}"
+                else:
+                     full_context = f"{ai_context}\n\nProblem: {question_text}\nCorrect Answer Index: {correct_idx}"
+                
+                render_ai_tutor(f"mcq_ai_{key_suffix}", full_context, client)
+    
+    _render_solution_section()
 
     # Retry/Reset
     if allow_retry:

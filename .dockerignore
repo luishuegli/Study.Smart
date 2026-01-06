@@ -1,0 +1,9 @@
+.git
+.gitignore
+.env
+venv/
+__pycache__/
+.streamlit/secrets.toml
+serviceAccountKey.json
+.DS_Store
+*.pyc

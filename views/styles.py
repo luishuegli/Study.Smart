@@ -363,15 +363,15 @@ def load_design_system():
         
         /* Container Style - Force full width */
         div[class*="stRadio"] > div[role="radiogroup"] > label {
-            background-color: var(--bg-void); /* White background for options */
-            border: var(--border-width) solid var(--border-color) !important;
-            border-radius: var(--radius-md) !important;
+            background-color: #FFFFFF !important; /* Explicit white */
+            border: 1px solid rgba(0,0,0,0.20) !important;
+            border-radius: 12px !important; /* Explicit value, not variable */
             padding: 12px 16px !important;
             margin-bottom: 8px !important;
             transition: all 0.1s ease-in-out;
-            color: var(--text-primary);
+            color: #1D1D1F !important;
             cursor: pointer;
-            display: block !important; /* Changed to block */
+            display: block !important;
             width: 100% !important;
             max-width: 100% !important;
             box-sizing: border-box !important;
@@ -390,19 +390,20 @@ def load_design_system():
         
         /* Selected State: Designer's Choice (Clean & Bold) */
         div[class*="stRadio"] > div[role="radiogroup"] > label:has(input:checked) {
-            border: 2px solid var(--accent-fill) !important; /* Thick Black Border */
-            background-color: #F8F9FA !important; /* Very subtle grey to show depth */
-            color: var(--text-primary) !important; /* Keep text Black */
-            font-weight: 700; /* Extra Bold */
-            transform: scale(1.005); /* Micro-pop */
-            box-shadow: var(--shadow-card);
+            border: 2px solid #000000 !important; /* Explicit black border */
+            background-color: #F8F9FA !important;
+            color: #1D1D1F !important;
+            font-weight: 700 !important;
+            transform: scale(1.005);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.12) !important;
+            border-radius: 12px !important; /* Maintain radius on selected */
         }
         
         /* Reset text color to standard black */
         div[class*="stRadio"] > div[role="radiogroup"] > label:has(input:checked) p,
         div[class*="stRadio"] > div[role="radiogroup"] > label:has(input:checked) div,
         div[class*="stRadio"] > div[role="radiogroup"] > label:has(input:checked) span {
-            color: var(--text-primary) !important;
+            color: #1D1D1F !important;
         }
         
         /* Fix text alignment */

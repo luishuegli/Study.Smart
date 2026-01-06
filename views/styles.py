@@ -175,15 +175,22 @@ def load_design_system():
         }
         
         /* --- 4. BUTTONS (The 'Ghost' Fix) --- */
-        .stButton > button {
+        /* SUPER AGGRESSIVE: Target ALL button variants */
+        .stButton > button,
+        .stButton button,
+        div[data-testid="stButton"] > button,
+        button[data-testid="stBaseButton-primary"],
+        button[data-testid="stBaseButton-secondary"],
+        button[kind="primary"],
+        button[kind="secondary"] {
             width: 100%;
-            background-color: var(--accent-fill) !important; /* Pure Black */
-            color: #FFFFFF !important; /* Force Pure White for Icon */
-            border: var(--border-width) solid var(--border-color) !important;
-            border-radius: var(--space-md) !important; /* Pill shape */
+            background-color: #000000 !important; /* Pure Black */
+            color: #FFFFFF !important; /* Force Pure White */
+            border: 1px solid rgba(0,0,0,0.20) !important;
+            border-radius: 24px !important; /* Pill shape */
             font-weight: 600 !important;
-            padding: 8px 24px !important; /* Reduced padding to match input height */
-            line-height: normal !important; /* Use normal line height for button */
+            padding: 8px 24px !important;
+            line-height: normal !important;
             transition: all 0.2s ease;
             display: flex !important;
             align-items: center !important;
@@ -194,6 +201,10 @@ def load_design_system():
         .stButton > button p, 
         .stButton > button div,
         .stButton > button span,
+        button[data-testid="stBaseButton-primary"] p,
+        button[data-testid="stBaseButton-primary"] span,
+        button[data-testid="stBaseButton-secondary"] p,
+        button[data-testid="stBaseButton-secondary"] span,
         div[data-testid="stFormSubmitButton"] > button p,
         div[data-testid="stFormSubmitButton"] > button div,
         div[data-testid="stFormSubmitButton"] > button span {
@@ -203,25 +214,26 @@ def load_design_system():
             padding: 0 !important;
         }
         
-        .stButton > button:hover {
+        .stButton > button:hover,
+        button[data-testid="stBaseButton-primary"]:hover,
+        button[data-testid="stBaseButton-secondary"]:hover {
             opacity: 0.85;
             transform: scale(0.99);
-            box-shadow: var(--shadow-card);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.12);
+            background-color: #000000 !important;
             color: #FFFFFF !important;
         }
         
-        /* Secondary Buttons (Outlined) */
-        .stButton > button[kind="secondary"] {
+        /* ONLY explicit type="secondary" should be outlined (white bg) */
+        .stButton > button[data-testid="stBaseButton-secondary"][type="secondary"],
+        button.secondary-outlined {
             background-color: transparent !important;
-            color: var(--text-primary) !important;
-            border: var(--border-width) solid var(--border-color) !important;
+            color: #1D1D1F !important;
+            border: 1px solid rgba(0,0,0,0.20) !important;
         }
-         .stButton > button[kind="secondary"]:hover {
-            background-color: rgba(0,0,0,0.05) !important;
-        }
-        /* Fix secondary button text */
-        .stButton > button[kind="secondary"] p {
-             color: var(--text-primary) !important;
+        .stButton > button[data-testid="stBaseButton-secondary"][type="secondary"] p,
+        button.secondary-outlined p {
+             color: #1D1D1F !important;
         }
         
 

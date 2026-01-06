@@ -421,7 +421,7 @@ def render_subtopic_4_4(model):
     with st.container(border=True):
         # REAL-WORLD SCENARIO
         st.markdown(f"""
-<div style="background: rgba(0, 122, 255, 0.08); padding:14px; border-radius:8px; color:#1c1c1e; margin-bottom:12px; border-left: 4px solid #007AFF;">
+<div style="background: #f4f4f5; padding:14px; border-radius:8px; color:#3f3f46; margin-bottom:12px; border-left: 4px solid #a1a1aa;">
 <strong>{t({'de': 'Szenario:', 'en': 'Scenario:'})}</strong> {t({'de': 'Eine Notaufnahme plant die Schichtbesetzung. Sie müssen wissen: Ab welcher durchschnittlichen Ankunftsrate (λ) ist es fast sicher, dass mindestens ein Patient pro Stunde kommt?', 'en': 'An emergency room is planning shift coverage. They need to know: At what average arrival rate (λ) is it almost certain that at least one patient arrives per hour?'})}
 </div>""", unsafe_allow_html=True)
         

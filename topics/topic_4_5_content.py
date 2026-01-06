@@ -322,7 +322,7 @@ def render_subtopic_4_5(model):
         st.latex(content_4_5["interval"]["derivation"])
         intuition_text = t({"de": content_4_5["interval"]["intuition_de"], "en": content_4_5["interval"]["intuition_en"]})
         st.markdown(f"""
-<div style="background-color: rgba(0, 122, 255, 0.08); border-radius: 8px; padding: 12px; border-left: 4px solid #007AFF; color: #1c1c1e;">
+<div style="background-color: #f4f4f5; border-radius: 8px; padding: 12px; border-left: 4px solid #a1a1aa; color: #3f3f46;">
 {intuition_text}
 </div>""", unsafe_allow_html=True)
     

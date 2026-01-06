@@ -127,13 +127,12 @@ def consistency_visualizer():
     
     st.markdown("<br>", unsafe_allow_html=True)
     
-    # Blue slider CSS (semantic: n = sample size)
-    st.markdown("""
-<style>
-.stSlider div[data-baseweb="slider"] > div:first-child > div:first-child { background-color: #007AFF !important; }
-.stSlider div[role="slider"] { background-color: #FFFFFF !important; border: 2px solid #007AFF !important; }
-</style>
-""", unsafe_allow_html=True)
+    # Blue slider (semantic: n = sample size)
+    from utils.layouts.foundation import inject_slider_css
+    inject_slider_css([
+        {"label_contains": "Stichprobengrösse", "color": "#007AFF"},  # Blue for n
+        {"label_contains": "Sample size", "color": "#007AFF"},  # Blue for n (English)
+    ])
     
     # Slider with on_change callback
     st.slider(

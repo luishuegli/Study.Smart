@@ -200,29 +200,11 @@ def render_simulator_3_1():
     """
 
     # --- CSS: SCOPED SLIDER COLORS ---
-    st.markdown("""
-    <style>
-    /* Scanner Slider (Blue) - Track and Thumb */
-    .stSlider:has([aria-label*="Scanner"]) div[data-baseweb="slider"] > div:first-child > div:first-child { 
-        background-color: #007AFF !important; 
-        background-image: none !important;
-    }
-    .stSlider:has([aria-label*="Scanner"]) div[role="slider"] { 
-        background-color: #FFFFFF !important; 
-        border: 2px solid #007AFF !important; 
-    }
-    
-    /* Mission Slider (Purple) - Track and Thumb */
-    .stSlider:has([aria-label*="Threshold"]) div[data-baseweb="slider"] > div:first-child > div:first-child { 
-        background-color: #AF52DE !important; 
-        background-image: none !important;
-    }
-    .stSlider:has([aria-label*="Threshold"]) div[role="slider"] { 
-        background-color: #FFFFFF !important; 
-        border: 2px solid #AF52DE !important; 
-    }
-    </style>
-    """, unsafe_allow_html=True)
+    from utils.layouts.foundation import inject_slider_css
+    inject_slider_css([
+        {"label_contains": "Scanner", "color": "#007AFF"},    # Blue for scanner
+        {"label_contains": "Threshold", "color": "#AF52DE"}, # Purple for threshold
+    ])
 
     # ==========================================
     # SECTION 1: PLAYGROUND

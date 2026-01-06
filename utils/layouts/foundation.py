@@ -105,3 +105,67 @@ def grey_info(content):
     st.markdown(f'''<div style="background: #f4f4f5; border-left: 4px solid #a1a1aa; padding: 12px 16px; border-radius: 8px; color: #3f3f46;">
 {text}
 </div>''', unsafe_allow_html=True)
+
+
+def inject_slider_css(slider_configs: list = None):
+    """
+    Inject CSS for proper slider styling.
+    
+    Slider structure:
+    - Filled (left of thumb): semantic color or black
+    - Unfilled (right of thumb): grey (#e0e0e0)
+    - Thumb: solid color matching filled portion
+    
+    Args:
+        slider_configs: List of dicts with {"label_contains": str, "color": str}
+                       If None, applies default black styling to all sliders.
+    
+    Example:
+        inject_slider_css([
+            {"label_contains": "n =", "color": "#007AFF"},   # Blue for n
+            {"label_contains": "p =", "color": "#9B59B6"},   # Purple for p
+            {"label_contains": "k =", "color": "#FF4B4B"},   # Red for k
+        ])
+    """
+    # Default: black filled, grey unfilled
+    default_color = "#1f1f1f"
+    unfilled_color = "#e0e0e0"
+    
+    css_parts = []
+    
+    # Default styling for ALL sliders (black)
+    css_parts.append(f"""
+/* Default slider styling - black filled, grey unfilled */
+.stSlider div[data-baseweb="slider"] > div:first-child {{
+    background-color: {unfilled_color} !important;
+}}
+.stSlider div[data-baseweb="slider"] > div:first-child > div:first-child {{
+    background-color: {default_color} !important;
+}}
+.stSlider div[role="slider"] {{
+    background-color: {default_color} !important;
+    border: none !important;
+}}
+""")
+    
+    # Semantic overrides for specific sliders
+    if slider_configs:
+        for config in slider_configs:
+            label = config.get("label_contains", "")
+            color = config.get("color", default_color)
+            
+            css_parts.append(f"""
+/* Semantic slider: {label} */
+.stSlider:has([aria-label*="{label}"]) div[data-baseweb="slider"] > div:first-child {{
+    background-color: {unfilled_color} !important;
+}}
+.stSlider:has([aria-label*="{label}"]) div[data-baseweb="slider"] > div:first-child > div:first-child {{
+    background-color: {color} !important;
+}}
+.stSlider:has([aria-label*="{label}"]) div[role="slider"] {{
+    background-color: {color} !important;
+    border: none !important;
+}}
+""")
+    
+    st.markdown(f"<style>{''.join(css_parts)}</style>", unsafe_allow_html=True)

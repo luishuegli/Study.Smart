@@ -169,22 +169,13 @@ def continuity_correction_interactive():
         "en": "You're a quality controller. Among $n$ products, each is defective with probability $p$. How likely are at least $k$ defective products?"
     }))
     
-    # Semantic slider colors: n=blue, p=purple, k=red
-    st.markdown("""
-<style>
-/* 1. n (Blue) */
-.stSlider:has([aria-label*="n ="]) div[data-baseweb="slider"] > div:first-child > div:first-child { background-color: #007AFF !important; }
-.stSlider:has([aria-label*="n ="]) div[role="slider"] { background-color: #FFFFFF !important; border: 2px solid #007AFF !important; }
-
-/* 2. p (Purple) */
-.stSlider:has([aria-label*="p ="]) div[data-baseweb="slider"] > div:first-child > div:first-child { background-color: #9B59B6 !important; }
-.stSlider:has([aria-label*="p ="]) div[role="slider"] { background-color: #FFFFFF !important; border: 2px solid #9B59B6 !important; }
-
-/* 3. k (Red) */
-.stSlider:has([aria-label*="k ="]) div[data-baseweb="slider"] > div:first-child > div:first-child { background-color: #FF4B4B !important; }
-.stSlider:has([aria-label*="k ="]) div[role="slider"] { background-color: #FFFFFF !important; border: 2px solid #FF4B4B !important; }
-</style>
-""", unsafe_allow_html=True)
+    # Semantic slider styling: n=blue, p=purple, k=red
+    from utils.layouts.foundation import inject_slider_css
+    inject_slider_css([
+        {"label_contains": "n =", "color": "#007AFF"},   # Blue for n
+        {"label_contains": "p =", "color": "#9B59B6"},   # Purple for p
+        {"label_contains": "k =", "color": "#FF4B4B"},   # Red for k
+    ])
     
     # Controls with visible labeled sliders
     col1, col2, col3 = st.columns(3)

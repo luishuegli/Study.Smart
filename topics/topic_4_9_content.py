@@ -30,7 +30,7 @@ content_4_9 = {
         "cards": [
             {"name": "Bernoulli", "notation": "X ~ Ber(p)", "oneliner": {"de": "Ein Versuch", "en": "One trial"}},
             {"name": "Binomial", "notation": "X ~ Bi(n, p)", "oneliner": {"de": "n Versuche, MIT Zurücklegen", "en": "n trials, WITH replacement"}},
-            {"name": {"de": "Gleichförmig", "en": "Uniform"}, "notation": "X ~ Gleich(m)", "oneliner": {"de": "Alle m gleich wahrscheinlich", "en": "All m equally likely"}}
+            {"name": {"de": "Gleichförmig", "en": "Uniform"}, "notation": {"de": "X ~ Gleich(m)", "en": "X ~ U(m)"}, "oneliner": {"de": "Alle m gleich wahrscheinlich", "en": "All m equally likely"}}
         ],
         "mcq": {
             "question": {"de": "Du wirfst eine Münze 10 Mal und zählst Köpfe. Welche Verteilung?", "en": "You flip a coin 10 times and count heads. Which distribution?"},
@@ -87,8 +87,8 @@ content_4_9 = {
     "key_formulas": {
         "header": {"de": "Die wichtigsten Formeln", "en": "The Key Formulas"},
         "formulas": [
-            {"name": "E[X] diskret", "formula": r"\sum_x x \cdot P(X=x)"},
-            {"name": "E[X] stetig", "formula": r"\int x \cdot f(x)\,dx"},
+            {"name": {"de": "E[X] diskret", "en": "E[X] discrete"}, "formula": r"\sum_x x \cdot P(X=x)"},
+            {"name": {"de": "E[X] stetig", "en": "E[X] continuous"}, "formula": r"\int x \cdot f(x)\,dx"},
             {"name": "Var(X)", "formula": r"E[X^2] - E[X]^2"},
             {"name": "Z-Score", "formula": r"Z = \frac{X - \mu}{\sigma}"}
         ]
@@ -219,11 +219,12 @@ def render_chunk(chunk, chunk_id, model):
     for col, card in zip(cols, chunk["cards"]):
         with col:
             name = t(card["name"]) if isinstance(card["name"], dict) else card["name"]
+            notation = t(card['notation']) if isinstance(card['notation'], dict) else card['notation']
             oneliner = t(card["oneliner"])
             st.markdown(f"""
             <div class="compact-card">
                 <div class="name">{name}</div>
-                <div class="notation">{card['notation']}</div>
+                <div class="notation">{notation}</div>
                 <div class="oneliner">{oneliner}</div>
             </div>
             """, unsafe_allow_html=True)
@@ -235,7 +236,7 @@ def render_chunk(chunk, chunk_id, model):
     opts = [t(o) for o in mcq["options"]]
     
     with st.container(border=True):
-        st.markdown(f"🧠 **{t({'de': 'Schnell-Check', 'en': 'Quick Check'})}**")
+        st.markdown(f"**{t({'de': 'Schnell-Check', 'en': 'Quick Check'})}**")
         render_mcq(
             key_suffix=f"4_9_{chunk_id}",
             question_text=t(mcq["question"]),
@@ -262,5 +263,6 @@ def render_key_formulas():
     for col, f in zip(cols, kf["formulas"]):
         with col:
             with st.container(border=True):
-                st.markdown(f"**{f['name']}**")
+                name = t(f['name']) if isinstance(f['name'], dict) else f['name']
+                st.markdown(f"**{name}**")
                 st.latex(f["formula"])

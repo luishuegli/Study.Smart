@@ -151,8 +151,8 @@ content_5_2 = {
             "en": "The probability is $\\frac{1}{3} \\approx 33.3\\%$"
         },
         "check": {
-            "de": "**Plausibilitäts-Check:** Alle bedingten Wsk f(x|Y=1) müssen sich zu 1 summieren. Hier: f(0|1) + f(1|1) = 2/3 + 1/3 = 1 ✓",
-            "en": "**Plausibility Check:** All conditional probs f(x|Y=1) must sum to 1. Here: f(0|1) + f(1|1) = 2/3 + 1/3 = 1 ✓"
+            "de": "<strong>Plausibilitäts-Check:</strong> Alle bedingten Wsk f(x|Y=1) müssen sich zu 1 summieren. Hier: f(0|1) + f(1|1) = 2/3 + 1/3 = 1 ✓",
+            "en": "<strong>Plausibility Check:</strong> All conditional probs f(x|Y=1) must sum to 1. Here: f(0|1) + f(1|1) = 2/3 + 1/3 = 1 ✓"
         }
     },
     

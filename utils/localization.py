@@ -220,6 +220,14 @@ def render_sidebar_footer():
         
         # Sign Out inside Settings
         if st.button(t({"de": "Abmelden", "en": "Sign Out"}), type="primary", use_container_width=True, key="signout_btn"):
+            # Clear cookie to prevent auto-restore on refresh
+            try:
+                import extra_streamlit_components as stx
+                cookie_manager = stx.CookieManager(key="study_smart_auth_logout")
+                cookie_manager.delete("token")
+            except Exception:
+                pass  # Cookie clearing failed, but continue with logout
+            
             if "user" in st.session_state:
                 del st.session_state["user"]
             st.rerun()

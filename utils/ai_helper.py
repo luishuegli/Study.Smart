@@ -211,27 +211,43 @@ def render_ai_tutor(key_suffix, context_prompt, client):
                     if current_usage >= MAX_CHAT_HISTORY:
                         st.error(t({"de": "Fragenlimit erreicht.", "en": "Question limit reached."}))
                     else:
+                        # Show "Thinking" indicator immediately
+                        thinking_placeholder = st.empty()
+                        thinking_placeholder.markdown(f"""
+                        <div style="display: flex; align-items: center; gap: 8px; padding: 12px; background: #f8f9fa; border-radius: 12px; margin: 8px 0;">
+                            <div style="width: 8px; height: 8px; background: #9aa0a6; border-radius: 50%; animation: pulse 1.5s infinite;"></div>
+                            <span style="color: #5f6368;">{t({"de": "Gemini denkt nach...", "en": "Gemini is thinking..."})}</span>
+                        </div>
+                        <style>
+                        @keyframes pulse {{
+                            0%, 100% {{ opacity: 0.4; transform: scale(1); }}
+                            50% {{ opacity: 1; transform: scale(1.2); }}
+                        }}
+                        </style>
+                        """, unsafe_allow_html=True)
+                        
                         try:
-                            with st.spinner(t({"de": "Gemini denkt nach...", "en": "Gemini is thinking..."})):
-                                history_context = ""
-                                for qa in chat_history:
-                                    history_context += f"\nUser: {qa['q']}\nAI: {qa['a']}\n"
-                                
-                                full_prompt = f"{context_prompt}\n\n--- CHAT HISTORY ---{history_context}\n--- NEW QUESTION ---\n{ai_query}"
-                                response = client.models.generate_content(
-                                    model='gemini-2.0-flash',
-                                    contents=full_prompt
-                                )
-                                
-                                # Increment usage in Firestore BEFORE adding to history
-                                increment_ai_usage(user_id, key_suffix)
-                                
-                                st.session_state[history_key].append({
-                                    "q": ai_query,
-                                    "a": response.text
-                                })
-                                st.rerun()
+                            history_context = ""
+                            for qa in chat_history:
+                                history_context += f"\nUser: {qa['q']}\nAI: {qa['a']}\n"
+                            
+                            full_prompt = f"{context_prompt}\n\n--- CHAT HISTORY ---{history_context}\n--- NEW QUESTION ---\n{ai_query}"
+                            response = client.models.generate_content(
+                                model='gemini-2.0-flash',
+                                contents=full_prompt
+                            )
+                            
+                            # Increment usage in Firestore BEFORE adding to history
+                            increment_ai_usage(user_id, key_suffix)
+                            
+                            st.session_state[history_key].append({
+                                "q": ai_query,
+                                "a": response.text
+                            })
+                            thinking_placeholder.empty()
+                            st.rerun()
                         except Exception as e:
+                            thinking_placeholder.empty()
                             st.error(f"AI Error: {str(e)}")
         
         # Show remaining (from Firestore)

@@ -356,7 +356,7 @@ def render_subtopic_4_7(model):
             st.markdown(f"### {t(content_4_7['standard']['header'])}")
             st.markdown(t(content_4_7["standard"]["text"]))
             st.latex(content_4_7["standard"]["notation"])
-            st.markdown("<br>", unsafe_allow_html=True)
+            st.markdown("---")
             st.caption(t({"de": "Dichtefunktion:", "en": "Density function:"}))
             st.latex(content_4_7["standard"]["pdf"])
             st.markdown("<br>", unsafe_allow_html=True)
@@ -367,7 +367,7 @@ def render_subtopic_4_7(model):
             st.markdown(f"### {t(content_4_7['general']['header'])}")
             st.markdown(t(content_4_7["general"]["text"]))
             st.latex(content_4_7["general"]["notation"])
-            st.markdown("<br>", unsafe_allow_html=True)
+            st.markdown("---")
             st.caption(t({"de": "Dichtefunktion:", "en": "Density function:"}))
             st.latex(content_4_7["general"]["pdf"])
     

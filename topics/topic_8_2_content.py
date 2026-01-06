@@ -413,8 +413,8 @@ def render_subtopic_8_2(model):
     render_exam_essentials(
         tips=[
             {
-                "tip": {"de": "Immer (n-1) für erwartungstreue Varianz", "en": "Always (n-1) for unbiased variance"},
-                "why": {"de": "Die naive Formel mit 1/n unterschätzt systematisch", "en": "The naive formula with 1/n systematically underestimates"},
+                "tip": {"de": r"Immer $(n-1)$ für erwartungstreue Varianz", "en": r"Always $(n-1)$ for unbiased variance"},
+                "why": {"de": r"Die naive Formel mit $\frac{1}{n}$ unterschätzt systematisch", "en": r"The naive formula with $\frac{1}{n}$ systematically underestimates"},
                 "tip_formula": r"S^2_{n-1} = \frac{1}{n-1} \sum (X_i - \bar{X})^2"
             },
             {
@@ -427,8 +427,8 @@ def render_subtopic_8_2(model):
             }
         ],
         trap={
-            "de": "Die naive Stichprobenvarianz (1/n) mit der korrekten (1/(n-1)) verwechseln",
-            "en": "Confusing the naive sample variance (1/n) with the correct (1/(n-1))"
+            "de": r"Die naive Stichprobenvarianz $\frac{1}{n}$ mit der korrekten $\frac{1}{n-1}$ verwechseln",
+            "en": r"Confusing the naive sample variance $\frac{1}{n}$ with the correct $\frac{1}{n-1}$"
         },
         trap_rule={
             "de": "Merke: Wir verlieren 1 Freiheitsgrad durch die Schätzung des Mittelwerts",

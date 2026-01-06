@@ -155,26 +155,26 @@ that should be as close as possible to the true (but unknown) population value."
     # EXAM ESSENTIALS
     "exam_essentials": {
         "trap": {
-            "de": "Verwechslung von n und (n-1) bei der Varianz! Die Stichprobenvarianz S² = (1/n)Σ(Xᵢ-X̄)² ist <strong>verzerrt</strong>. Für einen <strong>erwartungstreuen</strong> Schätzer muss durch (n-1) geteilt werden.",
-            "en": "Confusing n and (n-1) for variance! The sample variance S² = (1/n)Σ(Xᵢ-X̄)² is <strong>biased</strong>. For an <strong>unbiased</strong> estimator, divide by (n-1)."
+            "de": r"Verwechslung von $n$ und $(n-1)$ bei der Varianz! Die Stichprobenvarianz $S^2 = \frac{1}{n}\sum(X_i-\bar{X})^2$ ist <strong>verzerrt</strong>. Für einen <strong>erwartungstreuen</strong> Schätzer muss durch $(n-1)$ geteilt werden.",
+            "en": r"Confusing $n$ and $(n-1)$ for variance! The sample variance $S^2 = \frac{1}{n}\sum(X_i-\bar{X})^2$ is <strong>biased</strong>. For an <strong>unbiased</strong> estimator, divide by $(n-1)$."
         },
         "trap_rule": {
-            "de": "Fragen nach 'erwartungstreuem Varianzschätzer'? Immer (n-1) im Nenner!",
-            "en": "Question asks for 'unbiased variance estimator'? Always (n-1) in denominator!"
+            "de": r"Fragen nach 'erwartungstreuem Varianzschätzer'? Immer $(n-1)$ im Nenner!",
+            "en": r"Question asks for 'unbiased variance estimator'? Always $(n-1)$ in denominator!"
         },
         "tips": [
             {
                 "tip": {"de": "Hut = Schätzung", "en": "Hat = Estimate"},
-                "why": {"de": "θ̂ bedeutet immer 'geschätzt aus Daten', θ ist der wahre Wert.", "en": "θ̂ always means 'estimated from data', θ is the true value."}
+                "why": {"de": r"$\hat{\theta}$ bedeutet immer 'geschätzt aus Daten', $\theta$ ist der wahre Wert.", "en": r"$\hat{\theta}$ always means 'estimated from data', $\theta$ is the true value."}
             },
             {
                 "tip": {"de": "Gewichte summieren zu 1", "en": "Weights sum to 1"},
-                "why": {"de": "Für erwartungstreue lineare Schätzer muss Σwᵢ = 1 gelten.", "en": "For unbiased linear estimators, Σwᵢ = 1 must hold."},
+                "why": {"de": r"Für erwartungstreue lineare Schätzer muss $\sum w_i = 1$ gelten.", "en": r"For unbiased linear estimators, $\sum w_i = 1$ must hold."},
                 "why_formula": r"\sum_{i=1}^{n} w_i = 1 \implies E[\hat{\theta}] = \theta"
             },
             {
                 "tip": {"de": "Mehr Stichproben = weniger Varianz", "en": "More samples = less variance"},
-                "why": {"de": "Die Varianz des Stichprobenmittels schrumpft mit n.", "en": "The variance of the sample mean shrinks with n."},
+                "why": {"de": r"Die Varianz des Stichprobenmittels schrumpft mit $n$.", "en": r"The variance of the sample mean shrinks with $n$."},
                 "why_formula": r"\text{Var}(\bar{X}) = \frac{\sigma^2}{n}"
             }
         ]

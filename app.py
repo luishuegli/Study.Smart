@@ -166,6 +166,10 @@ def main():
             st.session_state.current_page = "dashboard"
             st.rerun()
 
+    # Force Sync URL (Atomic JS Fallback)
+    from utils.url_checker import sync_url_with_session
+    sync_url_with_session()
+
 if __name__ == "__main__":
     main()
 

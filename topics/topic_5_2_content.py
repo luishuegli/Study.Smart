@@ -79,8 +79,8 @@ content_5_2 = {
                 }
             ],
             "full_reading": {
-                "de": "**Lies die Formel so:**<br>'Die Wahrscheinlichkeit von X gegeben Y ist gleich der gemeinsamen Wahrscheinlichkeit geteilt durch die Randwahrscheinlichkeit der Bedingung.'",
-                "en": "**Read the formula as:**<br>'The probability of X given Y equals the joint probability divided by the marginal probability of the condition.'"
+                "de": "<strong>Lies die Formel so:</strong><br>'Die Wahrscheinlichkeit von X gegeben Y ist gleich der gemeinsamen Wahrscheinlichkeit geteilt durch die Randwahrscheinlichkeit der Bedingung.'",
+                "en": "<strong>Read the formula as:</strong><br>'The probability of X given Y equals the joint probability divided by the marginal probability of the condition.'"
             }
         }
     },

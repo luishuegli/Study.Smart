@@ -19,16 +19,31 @@ def initialize_firebase_admin():
     if not firebase_admin._apps:
         cred = None
         
-        # Try 1: Load from Streamlit Secrets (for Cloud deployment)
+        # Try 1: Load from Environment Variable (Cloud Run / Docker standard)
+        # This acts as the "Standard" way for containerized apps
         try:
-            if "FIREBASE_SERVICE_ACCOUNT" in st.secrets:
-                service_account_info = dict(st.secrets["FIREBASE_SERVICE_ACCOUNT"])
-                cred = credentials.Certificate(service_account_info)
-                print("Firebase Admin initialized from Streamlit Secrets.")
+            env_service_account = os.getenv("FIREBASE_SERVICE_ACCOUNT")
+            if env_service_account:
+                # If it's a JSON string, load it
+                if env_service_account.startswith("{"):
+                    service_account_info = json.loads(env_service_account)
+                    cred = credentials.Certificate(service_account_info)
+                    print("Firebase Admin initialized from FIREBASE_SERVICE_ACCOUNT env var.")
         except Exception as e:
-            print(f"Could not load from Streamlit Secrets: {e}")
+            print(f"Could not load from env var: {e}")
+
+        # Try 2: Load from Streamlit Secrets (for Streamlit Cloud)
+        if cred is None:
+            try:
+                if "FIREBASE_SERVICE_ACCOUNT" in st.secrets:
+                    # st.secrets auto-parses TOML/JSON into a dict
+                    service_account_info = dict(st.secrets["FIREBASE_SERVICE_ACCOUNT"])
+                    cred = credentials.Certificate(service_account_info)
+                    print("Firebase Admin initialized from Streamlit Secrets.")
+            except Exception as e:
+                print(f"Could not load from Streamlit Secrets: {e}")
         
-        # Try 2: Load from local file (for development)
+        # Try 3: Load from local file (for local development)
         if cred is None:
             cred_path = "serviceAccountKey.json"
             if os.path.exists(cred_path):
@@ -38,8 +53,6 @@ def initialize_firebase_admin():
                 except Exception as e:
                     print(f"Error loading from file: {e}")
             else:
-                # Only warn if we really expected a file (local dev)
-                # print(f"Info: Local creds not found (normal in Cloud).")
                 pass
         
         # Initialize if we have credentials

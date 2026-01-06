@@ -45,8 +45,8 @@ content_6_2 = {
             {"symbol": r"\sqrt{np(1-p)}", "name": {"de": "Standardabweichung", "en": "Standard deviation"}, "description": {"de": "Streuung der Binomialverteilung", "en": "Spread of the Binomial distribution"}},
         ],
         "insight": {
-            "de": "Der Schlüssel: Das ist der ZGS für den SPEZIALFALL, wo alle X_i Bernoulli(p) sind. Die Binomialverteilung wird zur Normalverteilung!",
-            "en": "The key: This is the CLT for the SPECIAL CASE where all X_i are Bernoulli(p). The Binomial distribution becomes the Normal distribution!"
+            "de": "Der Schlüssel: Das ist der ZGS für den SPEZIALFALL, wo alle $X_i$ $\\text{Bernoulli}(p)$ sind. Die Binomialverteilung wird zur Normalverteilung!",
+            "en": "The key: This is the CLT for the SPECIAL CASE where all $X_i$ are $\\text{Bernoulli}(p)$. The Binomial distribution becomes the Normal distribution!"
         }
     },
     

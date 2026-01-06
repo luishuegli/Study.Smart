@@ -2776,7 +2776,7 @@ QUESTIONS_6_3 = {
             {"de": r"Die standardisierte ZV $S_n$ ist approximativ normalverteilt (n > 30).", "en": r"The standardized RV $S_n$ is approximately normal (n > 30)."},
             {"de": r"Die standardisierte ZV $S_n$ ist approximativ standardnormalverteilt (n <= 30).", "en": r"The standardized RV $S_n$ is approximately standard normal (n <= 30)."}
         ],
-        "correct_idx": 1,
+        "correct_idx": [1, 2, 3],
         "solution": {
             "de": r"**Richtig: (b), (c), (d)**<br>Präzise (b): Standardisierte Summe konvergiert gegen $N(0,1)$.<br>Praktisch (c): Summe ist approx. $N(n\mu, n\sigma^2)$.",
             "en": r"**Correct: (b), (c), (d)**<br>Precise (b): Standardized sum converges to $N(0,1)$.<br>Practical (c): Sum is approx. $N(n\mu, n\sigma^2)$."
@@ -2796,7 +2796,7 @@ QUESTIONS_6_3 = {
             {"de": r"$X_i$ sind gleichverteilt.", "en": r"$X_i$ are uniformly distributed."},
             {"de": r"$n > 30$.", "en": r"$n > 30$."}
         ],
-        "correct_idx": 2,
+        "correct_idx": [0, 2, 4],
         "solution": {
             "de": r"**Richtig: (a), (c), (e)**<br>Summe (a), i.i.d. (c), Großes n (e).",
             "en": r"**Correct: (a), (c), (e)**<br>Sum (a), i.i.d. (c), Large n (e)."

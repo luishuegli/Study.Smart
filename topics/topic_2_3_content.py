@@ -26,8 +26,8 @@ content_2_3 = {
             {"label_de": "Closer", "label_en": "Closer", "color": "#F59E0B"}
         ],
         "reveal": {
-            "de": "Jeder Slot verbraucht eine Option. Das ist $n!$ (Fakultät).",
-            "en": "Every slot consumes one option. This is $n!$ (Factorial)."
+            "de": "Jeder Slot verbraucht eine Option. Das ist n! (Fakultät).",
+            "en": "Every slot consumes one option. This is n! (Factorial)."
         }
     },
     "exam": {

@@ -284,7 +284,7 @@ A→B, B→A, A→C, C→A, B→C, C→B = <b>6 {t({"de": "Ergebnisse", "en": "r
         
         # Reset button
         if len(st.session_state.committee_2_4) > 0:
-            if st.button(t({"de": "Zurücksetzen", "en": "Reset"}), key="reset_committee_2_4"):
+            if st.button(t({"de": "Zurücksetzen", "en": "Reset"}), key="reset_committee_2_4", type="primary"):
                 st.session_state.committee_2_4 = []
                 st.rerun()
     
@@ -324,9 +324,8 @@ A→B, B→A, A→C, C→A, B→C, C→B = <b>6 {t({"de": "Ergebnisse", "en": "r
     
     st.markdown("<br><br>", unsafe_allow_html=True)
     
-    # -- FORMULA COMPASS (like 2.2) ---
+    st.markdown(f"### {t({'de': 'Formel-Kompass', 'en': 'Formula Compass'})}")
     with st.container(border=True):
-        st.markdown(f"### {t({'de': 'Formel-Kompass', 'en': 'Formula Compass'})}")
         
         col_formula, col_explain = st.columns([1, 1.2], gap="medium")
         

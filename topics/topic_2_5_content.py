@@ -326,7 +326,7 @@ def render_subtopic_2_5(model):
         
         # Reset button
         if len(st.session_state.pin_2_5) > 0:
-            if st.button(t({"de": "Neuen PIN bauen", "en": "Build New PIN"}), key="reset_pin_2_5"):
+            if st.button(t({"de": "Neuen PIN bauen", "en": "Build New PIN"}), key="reset_pin_2_5", type="primary"):
                 st.session_state.pin_2_5 = []
                 st.rerun()
     
@@ -368,9 +368,8 @@ def render_subtopic_2_5(model):
     
     st.markdown("<br><br>", unsafe_allow_html=True)
     
-    # --- FORMULA COMPASS ---
+    st.markdown(f"### {t({'de': 'Formel-Kompass', 'en': 'Formula Compass'})}")
     with st.container(border=True):
-        st.markdown(f"### {t({'de': 'Formel-Kompass', 'en': 'Formula Compass'})}")
         
         col_formula, col_explain = st.columns([1, 1.2], gap="medium")
         

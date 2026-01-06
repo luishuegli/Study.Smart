@@ -99,10 +99,17 @@ import requests
 import json
 
 # Firebase Web API Key
-try:
-    FIREBASE_WEB_API_KEY = os.getenv("FIREBASE_API_KEY") or st.secrets.get("FIREBASE_API_KEY")
-except Exception:
-    FIREBASE_WEB_API_KEY = None
+# Firebase Web API Key
+# 1. Try Environment Variable (Cloud Run / Docker) - PRIORITY
+FIREBASE_WEB_API_KEY = os.getenv("FIREBASE_API_KEY")
+
+# 2. Fallback to Streamlit Secrets (Streamlit Cloud)
+if not FIREBASE_WEB_API_KEY:
+    try:
+        if "FIREBASE_API_KEY" in st.secrets:
+            FIREBASE_WEB_API_KEY = st.secrets["FIREBASE_API_KEY"]
+    except Exception:
+        pass # Ignore secrets errors if env var is missing too, allows None result
 
 def sign_in_user(email, password):
     """Signs in a user using Firebase REST API."""

@@ -24,8 +24,6 @@ if api_key:
 else:
     client = None
 
-
-
 def lesson_view():
     # --- SCROLL TO TOP (when coming from Next Lesson) ---
     if st.session_state.get("scroll_to_top", False):
@@ -92,9 +90,6 @@ def lesson_view():
                 first_sub = topic["subtopics"][0]
                 st.session_state.selected_subtopic = first_sub["id"]
                 st.session_state.current_slide_num = first_sub.get("slide_start", 0)
-                
-                # IMMEDIATE URL SYNC (Auto-select)
-                st.query_params.update({"subtopic": first_sub["id"]})
             else:
                 st.session_state.selected_subtopic = None
     
@@ -105,12 +100,10 @@ def lesson_view():
         st.session_state.selected_subtopic = subtopic_id
         
         # CRITICAL: Sync to URL query params for persistence
-        st.query_params.update({
-            "page": "lesson",
-            "course": st.session_state.get("selected_course", "vwl"),
-            "topic": topic_id,
-            "subtopic": subtopic_id
-        })
+        st.query_params.page = "lesson"
+        st.query_params.course = st.session_state.get("selected_course", "vwl")
+        st.query_params.topic = topic_id
+        st.query_params.subtopic = subtopic_id
         
         # Determine slide number
         c = COURSES.get(st.session_state.get("selected_course", "vwl"))
@@ -126,28 +119,14 @@ def lesson_view():
             del st.session_state[radio_key]
             
         st.rerun()
-            
-        # No rerun needed if used as callback (Streamlit reruns automatically)
 
     # --- SIDEBAR NAVIGATION ---
     with st.sidebar:
         # 1. Back Button at Field Top
-        if st.button("← " + loc.t({"de": "Zurück zur Übersicht", "en": "Back to Dashboard"}), 
-                     key="back_to_dash", 
-                     use_container_width=True
-                    ):
+        if st.button(f"← {loc.t({'de': 'Zurück zum Dashboard', 'en': 'Back to Dashboard'})}", use_container_width=True, type="primary"):
             st.session_state.current_page = "dashboard"
             st.session_state.selected_topic = None
             st.session_state.selected_subtopic = None
-            
-            # IMMEDIATE URL SYNC
-            # Clear topic/subtopic by setting new dict or clearing first
-            st.query_params.clear()
-            st.query_params.update({
-                "page": "dashboard",
-                "course": st.session_state.get("selected_course", "vwl")
-            })
-            
             st.rerun()
         
         # --- COURSE LEVEL PROGRESS ---
@@ -172,16 +151,10 @@ def lesson_view():
             def on_subtopic_change(topic_id, sub_map, key):
                 selected_title = st.session_state[key]
                 selected_id = sub_map[selected_title]
-                
-                # Update Session State
+                # Use the centralized handler (but without rerun here as on_change already triggers it)
+                # However, for consistency and to handle the 'lag', we'll just set the state
                 st.session_state.selected_topic = topic_id
                 st.session_state.selected_subtopic = selected_id
-                
-                # IMMEDIATE URL SYNC (Sidebar Radio)
-                st.query_params.update({
-                    "topic": topic_id,
-                    "subtopic": selected_id
-                })
                 
                 # Retrieve course content to find slide
                 c = COURSES.get(st.session_state.get("selected_course", "vwl"))
@@ -190,6 +163,9 @@ def lesson_view():
                     s = next((x for x in t["subtopics"] if x["id"] == selected_id), None)
                     if s and "slide_start" in s:
                         st.session_state.current_slide_num = s["slide_start"]
+                    # If it's a new topic, ensure subtopic is updated immediately for query param sync
+                    st.session_state.selected_topic = topic_id
+                    st.session_state.selected_subtopic = selected_id
 
             current_topic_id = st.session_state.get("selected_topic")
             current_sub_id = st.session_state.get("selected_subtopic")
@@ -340,10 +316,13 @@ def render_navigation_buttons(course_id, current_topic_id, current_subtopic_id, 
         col1, col2, col3 = st.columns([1, 2, 1])
         with col2:
             button_label = f"{loc.t({'de': 'Nächste Lektion', 'en': 'Next Lesson'})}: {next_subtopic_title} →"
-            
             if st.button(button_label, use_container_width=True, type="primary", key="next_lesson_btn"):
-                 st.session_state.scroll_to_top = True
-                 navigate_to_subtopic(next_topic_id, next_subtopic_id)
+                # Read from session state, not from closure variables
+                target_topic = st.session_state.get("_next_topic_id")
+                target_subtopic = st.session_state.get("_next_subtopic_id")
+                if target_topic and target_subtopic:
+                    st.session_state.scroll_to_top = True
+                    navigate_to_subtopic(target_topic, target_subtopic)
 
 
 def render_topic_content(client, topic_id, subtopic_id):

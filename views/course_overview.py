@@ -101,8 +101,9 @@ def calculate_topic_progress(topic_data, subtopic_ids):
     # Clamp to 1.0 incase of ghost data (e.g., renamed ids)
     return min(1.0, total_completed / total_questions)
 
-
 def course_overview_view():
+    # Add sidebar footer
+
     # Sidebar: Back Button + Spacer + Footer
     with st.sidebar:
         if st.button(f"← {loc.t({'de': 'Zurück zum Dashboard', 'en': 'Back to Dashboard'})}", use_container_width=True, type="primary"):
@@ -167,8 +168,7 @@ def course_overview_view():
     # List Topics
     for topic in course["topics"]:
         topic_id = topic["id"].replace("topic_", "")
-        subtopics = topic.get("subtopics", [])
-        subtopic_ids = [st["id"] for st in subtopics]
+        subtopic_ids = [st["id"] for st in topic.get("subtopics", [])]
         
         # Get topic data from progress
         topics_data = user_progress.get("topics", {})
@@ -215,25 +215,4 @@ def course_overview_view():
                     if st.button(loc.t({"de": "Lernen starten", "en": "Start Learning"}), key=topic['id'], type="primary"):
                         st.session_state.current_page = "lesson"
                         st.session_state.selected_topic = topic['id']
-                        
-                        # Find first subtopic to default to
-                        subtopics = topic.get("subtopics", [])
-                        first_sub = subtopics[0]["id"] if subtopics else None
-                        st.session_state.selected_subtopic = first_sub
-                        
-                        # IMMEDIATE URL SYNC
-                        # Use update() for robust setting
-                        params = {
-                            "page": "lesson",
-                            "topic": topic['id'],
-                            "course": st.session_state.get("selected_course", "vwl")
-                        }
-                        if first_sub:
-                            params["subtopic"] = first_sub
-                        
-                        st.query_params.update(params)
-                            
                         st.rerun()
-                    
-                    # Progress Bar
-                    st.progress(completed_pct)

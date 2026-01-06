@@ -3145,14 +3145,7 @@ QUESTIONS_8 = {
         "source": "HS 2022 Januar, MC #8 (4 Punkte)",
         "type": "mc",
         "question": {
-            "de": r"""Sie beobachten eine auf dem Interval [0, b] gleichverteilte Zufallsvariable X. Im
-Konkreten beobachten Sie folgende Realisierungen: 1.1, 3.8, 4.2, 0.5, 5.2.
-Welche der folgenden Aussagen ist korrekt?
-Wie lautet der Maximum-Likelihood-Schätzer für b?
-(a) b̂ML = 6.23
-(b) b̂ML = 5.20
-(c) b̂ML = 5.92
-(d) b̂ML = 5.75""",
+            "de": r"""Sie beobachten eine auf dem Interval $[0, b]$ gleichverteilte Zufallsvariable $X$. Im Konkreten beobachten Sie folgende Realisierungen: 1.1, 3.8, 4.2, 0.5, 5.2. Wie lautet der Maximum-Likelihood-Schätzer für $b$?""",
 "en": r"""You observe a random variable $X$ uniformly distributed on the interval $[0, b]$. Specifically, you observe the following realizations: 1.1, 3.8, 4.2, 0.5, 5.2. What is the Maximum-Likelihood Estimator for $b$?"""
         },
         "options": [

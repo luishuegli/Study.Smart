@@ -133,18 +133,18 @@ def render_subtopic_5_4(model):
     # --- INTERACTIVE MISSION: Sample Mean Simulator ---
     st.markdown(f"### {t({'de': 'Interaktive Mission: Das √n-Gesetz entdecken', 'en': 'Interactive Mission: Discover the √n-Law'})}")
     
-    # Scenario first (grey callout)
-    grey_callout(
-        {"de": "Szenario", "en": "Scenario"},
-        {"de": "Ein Qualitätsingenieur entnimmt wiederholt Stichproben aus der Produktion. Jede Einzelmessung hat Varianz σ² = 100. Wie sehr 'streut' der Mittelwert bei unterschiedlichen Stichprobengrössen?",
-         "en": "A quality engineer repeatedly takes samples from production. Each individual measurement has variance σ² = 100. How much does the mean 'spread' for different sample sizes?"}
-    )
-    
-    st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown(f"**{t({'de': 'Mission', 'en': 'Mission'})}:** {t({'de': 'Beobachte, wie die Streuung des Mittelwerts mit wachsendem n schrumpft.', 'en': 'Observe how the spread of the mean shrinks as n grows.'})}")
-    
     @st.fragment
     def sample_mean_simulator():
+        # Scenario inside fragment (plain text, no grey background)
+        st.markdown(t({
+            "de": "Ein Qualitätsingenieur entnimmt wiederholt Stichproben aus der Produktion. Jede Einzelmessung hat Varianz $\\sigma^2 = 100$. Wie sehr 'streut' der Mittelwert bei unterschiedlichen Stichprobengrössen?",
+            "en": "A quality engineer repeatedly takes samples from production. Each individual measurement has variance $\\sigma^2 = 100$. How much does the mean 'spread' for different sample sizes?"
+        }))
+        
+        st.markdown(f"**{t({'de': 'Mission', 'en': 'Mission'})}:** {t({'de': 'Beobachte, wie die Streuung des Mittelwerts mit wachsendem n schrumpft.', 'en': 'Observe how the spread of the mean shrinks as n grows.'})}")
+        
+        st.markdown("<br>", unsafe_allow_html=True)
+        
         # Fixed parameters
         sigma_sq = 100  # Variance of individual observation
         sigma = 10      # Standard deviation
@@ -304,20 +304,20 @@ def render_subtopic_5_4(model):
             "en": "Simply adding variances without checking if variables are uncorrelated."
         },
         trap_rule={
-            "de": "Var(X+Y) = Var(X) + Var(Y) + 2·Cov(X,Y). Der Cov-Term ist nur dann 0, wenn X und Y unkorreliert sind!",
-            "en": "Var(X+Y) = Var(X) + Var(Y) + 2·Cov(X,Y). The Cov term is only 0 when X and Y are uncorrelated!"
+            "de": "$\\text{Var}(X+Y) = \\text{Var}(X) + \\text{Var}(Y) + 2 \\cdot \\text{Cov}(X,Y)$. Der Cov-Term ist nur dann 0, wenn X und Y unkorreliert sind!",
+            "en": "$\\text{Var}(X+Y) = \\text{Var}(X) + \\text{Var}(Y) + 2 \\cdot \\text{Cov}(X,Y)$. The Cov term is only 0 when X and Y are uncorrelated!"
         },
         tips=[
             {
-                "tip": {"de": "E[X+Y] = E[X] + E[Y] gilt IMMER", "en": "E[X+Y] = E[X] + E[Y] holds ALWAYS"},
+                "tip": {"de": "$E[X+Y] = E[X] + E[Y]$ gilt IMMER", "en": "$E[X+Y] = E[X] + E[Y]$ holds ALWAYS"},
                 "why": {"de": "Linearität des Erwartungswerts — keine Bedingungen nötig!", "en": "Linearity of expectation — no conditions needed!"}
             },
             {
-                "tip": {"de": "Var(X-Y) = Var(X) + Var(Y) - 2·Cov(X,Y)", "en": "Var(X-Y) = Var(X) + Var(Y) - 2·Cov(X,Y)"},
-                "why": {"de": "Das Minus vor Y ändert das Vorzeichen vor der Kovarianz, nicht vor Var(Y)!", "en": "The minus before Y changes the sign before covariance, not before Var(Y)!"}
+                "tip": {"de": "$\\text{Var}(X-Y) = \\text{Var}(X) + \\text{Var}(Y) - 2 \\cdot \\text{Cov}(X,Y)$", "en": "$\\text{Var}(X-Y) = \\text{Var}(X) + \\text{Var}(Y) - 2 \\cdot \\text{Cov}(X,Y)$"},
+                "why": {"de": "Das Minus vor Y ändert das Vorzeichen vor der Kovarianz, nicht vor $\\text{Var}(Y)$!", "en": "The minus before Y changes the sign before covariance, not before $\\text{Var}(Y)$!"}
             },
             {
-                "tip": {"de": "Var(X̄ₙ) = σ²/n — das √n-Gesetz", "en": "Var(X̄ₙ) = σ²/n — the √n-law"},
+                "tip": {"de": "$\\text{Var}(\\bar{X}_n) = \\sigma^2/n$ — das $\\sqrt{n}$-Gesetz", "en": "$\\text{Var}(\\bar{X}_n) = \\sigma^2/n$ — the $\\sqrt{n}$-law"},
                 "why": {"de": "Verdopple n → Halbiere die Standardabweichung des Mittelwerts.", "en": "Double n → Halve the standard deviation of the mean."}
             },
         ]

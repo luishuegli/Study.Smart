@@ -102,8 +102,7 @@ def calculate_topic_progress(topic_data, subtopic_ids):
     return min(1.0, total_completed / total_questions)
 
 
-    # Add sidebar footer
-
+def course_overview_view():
     # Sidebar: Back Button + Spacer + Footer
     with st.sidebar:
         if st.button(f"← {loc.t({'de': 'Zurück zum Dashboard', 'en': 'Back to Dashboard'})}", use_container_width=True, type="primary"):

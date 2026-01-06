@@ -39,58 +39,30 @@ st.markdown(get_firebase_analytics_script(), unsafe_allow_html=True)
 # Cookie manager for session persistence (cannot be cached - it's a widget)
 cookie_manager = stx.CookieManager(key="study_smart_auth")
 
-# CRITICAL: Capture URL params BEFORE auth check to preserve deep links on refresh
-_preserved_page = st.query_params.get("page")
-_preserved_course = st.query_params.get("course")
-_preserved_topic = st.query_params.get("topic")
-_preserved_subtopic = st.query_params.get("subtopic")
-
-# Track if we've completed the initial cookie check
-# CookieManager is async - on first render, get() returns None even if cookie exists
-if "_auth_check_done" not in st.session_state:
-    st.session_state._auth_check_done = False
-
 # Check for existing session or restore from cookie
 if "user" not in st.session_state:
+    # Try to restore session from cookie
     saved_token = cookie_manager.get("token")
+    if saved_token:
+        # Verify token and restore session
+        from firebase_config import get_account_info
+        try:
+            account_info = get_account_info(saved_token)
+            if account_info and "users" in account_info and len(account_info["users"]) > 0:
+                user_data = account_info["users"][0]
+                # Reconstruct user session
+                st.session_state["user"] = {
+                    "localId": user_data.get("localId"),
+                    "email": user_data.get("email"),
+                    "displayName": user_data.get("displayName"),
+                    "idToken": saved_token  # Keep the token for API calls
+                }
+                st.rerun()  # Rerun to proceed with authenticated state
+        except Exception as e:
+            # Token invalid or expired, continue to login
+            pass
     
-    # First render: cookie manager not yet initialized, show loading and wait
-    if not st.session_state._auth_check_done:
-        st.session_state._auth_check_done = True
-        
-        # If we have a token, try to restore session
-        if saved_token:
-            from firebase_config import get_account_info
-            try:
-                account_info = get_account_info(saved_token)
-                if account_info and "users" in account_info and len(account_info["users"]) > 0:
-                    user_data = account_info["users"][0]
-                    st.session_state["user"] = {
-                        "localId": user_data.get("localId"),
-                        "email": user_data.get("email"),
-                        "displayName": user_data.get("displayName"),
-                        "idToken": saved_token
-                    }
-                    
-                    # Restore preserved URL params
-                    if _preserved_page:
-                        st.session_state.current_page = _preserved_page
-                    if _preserved_course:
-                        st.session_state.selected_course = _preserved_course
-                    if _preserved_topic:
-                        st.session_state.selected_topic = _preserved_topic
-                    if _preserved_subtopic:
-                        st.session_state.selected_subtopic = _preserved_subtopic
-                    
-                    st.rerun()
-            except Exception:
-                pass
-        else:
-            # No token on first check - but cookie manager might not be ready yet
-            # Show blank and rerun once to let cookie manager initialize
-            st.rerun()
-    
-    # Second render onwards: cookie manager is ready, if still no user, show login
+    # No valid session, show login
     render_auth(cookie_manager=cookie_manager)
     st.stop()
 

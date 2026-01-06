@@ -215,4 +215,15 @@ def course_overview_view():
                     if st.button(loc.t({"de": "Lernen starten", "en": "Start Learning"}), key=topic['id'], type="primary"):
                         st.session_state.current_page = "lesson"
                         st.session_state.selected_topic = topic['id']
+                        
+                        # Find first subtopic to default to
+                        first_sub = subtopics[0]["id"] if subtopics else None
+                        st.session_state.selected_subtopic = first_sub
+                        
+                        # IMMEDIATE URL SYNC
+                        st.query_params.page = "lesson"
+                        st.query_params.topic = topic['id']
+                        if first_sub:
+                            st.query_params.subtopic = first_sub
+                            
                         st.rerun()

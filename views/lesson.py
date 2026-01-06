@@ -90,6 +90,9 @@ def lesson_view():
                 first_sub = topic["subtopics"][0]
                 st.session_state.selected_subtopic = first_sub["id"]
                 st.session_state.current_slide_num = first_sub.get("slide_start", 0)
+                
+                # IMMEDIATE URL SYNC (Auto-select)
+                st.query_params.subtopic = first_sub["id"]
             else:
                 st.session_state.selected_subtopic = None
     
@@ -127,6 +130,12 @@ def lesson_view():
             st.session_state.current_page = "dashboard"
             st.session_state.selected_topic = None
             st.session_state.selected_subtopic = None
+            
+            # IMMEDIATE URL SYNC
+            st.query_params.page = "dashboard"
+            if "topic" in st.query_params: del st.query_params["topic"]
+            if "subtopic" in st.query_params: del st.query_params["subtopic"]
+            
             st.rerun()
         
         # --- COURSE LEVEL PROGRESS ---
@@ -151,10 +160,14 @@ def lesson_view():
             def on_subtopic_change(topic_id, sub_map, key):
                 selected_title = st.session_state[key]
                 selected_id = sub_map[selected_title]
-                # Use the centralized handler (but without rerun here as on_change already triggers it)
-                # However, for consistency and to handle the 'lag', we'll just set the state
+                
+                # Update Session State
                 st.session_state.selected_topic = topic_id
                 st.session_state.selected_subtopic = selected_id
+                
+                # IMMEDIATE URL SYNC (Sidebar Radio)
+                st.query_params.topic = topic_id
+                st.query_params.subtopic = selected_id
                 
                 # Retrieve course content to find slide
                 c = COURSES.get(st.session_state.get("selected_course", "vwl"))
@@ -163,9 +176,6 @@ def lesson_view():
                     s = next((x for x in t["subtopics"] if x["id"] == selected_id), None)
                     if s and "slide_start" in s:
                         st.session_state.current_slide_num = s["slide_start"]
-                    # If it's a new topic, ensure subtopic is updated immediately for query param sync
-                    st.session_state.selected_topic = topic_id
-                    st.session_state.selected_subtopic = selected_id
 
             current_topic_id = st.session_state.get("selected_topic")
             current_sub_id = st.session_state.get("selected_subtopic")

@@ -547,6 +547,15 @@ def load_design_system():
         section[data-testid="stSidebar"] .stElementContainer {
             width: 100% !important;
         }
+        
+        /* --- 11. HIDE FORM SUBMIT HELPER TEXT --- */
+        /* Hides "Press Enter to submit form" text from st.form */
+        div[data-testid="stFormSubmitButton"] + div,
+        .stForm [data-testid="stMarkdownContainer"]:has(p:empty),
+        .stForm > div:last-child > div:last-child > small,
+        div[data-testid="stForm"] > div > div:last-of-type:not(:has(button)) {
+            display: none !important;
+        }
 
     </style>
     """, unsafe_allow_html=True)

@@ -557,21 +557,12 @@ def load_design_system():
             display: none !important;
         }
         
-        /* --- 12. HIDE FRAGMENT BORDERS --- */
-        /* Fragments create nested stVerticalBlockBorderWrapper - hide the outer one */
-        /* Target: border wrappers that ONLY contain another border wrapper or just a button */
-        div[data-testid="stVerticalBlockBorderWrapper"] > div > div[data-testid="stVerticalBlock"] > div[data-testid="stVerticalBlockBorderWrapper"] {
+        /* --- 12. HIDE NESTED FRAGMENT BORDERS --- */
+        /* When a bordered container is inside another bordered container (fragment pattern) */
+        /* Only remove the INNER border to avoid double-borders, outer stays for context */
+        div[data-testid="stVerticalBlockBorderWrapper"] div[data-testid="stVerticalBlockBorderWrapper"] {
             border: none !important;
-            padding: 0 !important;
             box-shadow: none !important;
-        }
-        
-        /* Also hide fragment wrapper when it only has button + optional solution */
-        div[data-testid="stVerticalBlockBorderWrapper"]:has(> div[data-testid="stVerticalBlock"] > div:first-child > div > button[kind="primary"]):not(:has(div[data-testid="stRadio"])) {
-            border: none !important;
-            padding: 0 !important;
-            box-shadow: none !important;
-            background: transparent !important;
         }
 
     </style>

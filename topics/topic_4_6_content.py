@@ -362,7 +362,7 @@ def render_subtopic_4_6(model):
             st.latex(content_4_6["parameter"]["symbol"])
         with col_desc:
             st.markdown(f"**{t({'de': content_4_6['parameter']['name_de'], 'en': content_4_6['parameter']['name_en']})}**")
-            st.warning(t({"de": content_4_6["parameter"]["meaning_de"], "en": content_4_6["parameter"]["meaning_en"]}))
+            grey_info(t({"de": content_4_6["parameter"]["meaning_de"], "en": content_4_6["parameter"]["meaning_en"]}))
     
     st.markdown("<br>", unsafe_allow_html=True)
     
@@ -495,7 +495,7 @@ def render_subtopic_4_6(model):
             if surv_prob >= 0.50:
                 grey_info(t({"de": "λ ist noch klein. Der Zerfall ist langsam — hohe Überlebensrate.", "en": "λ is still small. Decay is slow — high survival rate."}))
             elif surv_prob >= target_survival:
-                st.warning(t({"de": f"Fast da! P(T>2) = {surv_prob:.1%} — erhöhe λ für schnelleren Zerfall!", "en": f"Almost there! P(T>2) = {surv_prob:.1%} — increase λ for faster decay!"}))
+                grey_info(t({"de": f"Fast da! P(T>2) = {surv_prob:.1%} — erhöhe λ für schnelleren Zerfall!", "en": f"Almost there! P(T>2) = {surv_prob:.1%} — increase λ for faster decay!"}))
             else:
                 if not st.session_state.exp_mission_done:
                     st.balloons()

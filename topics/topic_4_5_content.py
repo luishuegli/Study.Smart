@@ -121,17 +121,17 @@ content_4_5 = {
         "steps": [
             {
                 "label": {"de": "Modell", "en": "Model"},
-                "latex": r"X \sim R({\color{#007AFF}0}, {\color{#007AFF}10}), \quad {\color{#007AFF}a = 0}, \quad {\color{#007AFF}b = 10}",
+                "latex": r"X \sim R({\color{#007AFF}0}, {\color{#FF4B4B}10}), \quad {\color{#007AFF}a = 0}, \quad {\color{#FF4B4B}b = 10}",
                 "note": {"de": "X = Wartezeit in Minuten", "en": "X = Wait time in minutes"}
             },
             {
                 "label": {"de": "(a) E[X]", "en": "(a) E[X]"},
-                "latex": r"E[X] = \frac{{\color{#007AFF}a} + {\color{#007AFF}b}}{2} = \frac{{\color{#007AFF}0} + {\color{#007AFF}10}}{2} = \mathbf{5 \text{ Min}}",
+                "latex": r"E[X] = \frac{{\color{#007AFF}a} + {\color{#FF4B4B}b}}{2} = \frac{{\color{#007AFF}0} + {\color{#FF4B4B}10}}{2} = \mathbf{5 \text{ Min}}",
                 "note": None
             },
             {
                 "label": {"de": "(b) P(X < 3)", "en": "(b) P(X < 3)"},
-                "latex": r"P(X < {\color{#FF4B4B}3}) = \frac{{\color{#FF4B4B}3} - {\color{#007AFF}0}}{{\color{#007AFF}10} - {\color{#007AFF}0}} = \frac{{\color{#FF4B4B}3}}{{\color{#007AFF}10}} = \mathbf{30\%}",
+                "latex": r"P(X < {\color{#9B59B6}3}) = \frac{{\color{#9B59B6}3} - {\color{#007AFF}0}}{{\color{#FF4B4B}10} - {\color{#007AFF}0}} = \frac{{\color{#9B59B6}3}}{{\color{#FF4B4B}10}} = \mathbf{30\%}",
                 "note": None
             }
         ],

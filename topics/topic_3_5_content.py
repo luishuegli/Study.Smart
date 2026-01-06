@@ -162,12 +162,10 @@ def render_subtopic_3_5(model):
     st.markdown("<br>", unsafe_allow_html=True)
     
     # --- VARIABLE DECODER ---
-    st.markdown(f"""
-<div style="background: #f4f4f5; border-left: 4px solid #a1a1aa; padding: 12px 16px; border-radius: 8px; color: #3f3f46;">
-<strong>{t(content_3_5['variable_decoder']['header'])}:</strong><br><br>
-{t(content_3_5['variable_decoder']['content'])}
-</div>
-""", unsafe_allow_html=True)
+    with st.container(border=True):
+        st.markdown(f"**{t(content_3_5['variable_decoder']['header'])}:**")
+        st.markdown("")
+        st.markdown(t(content_3_5['variable_decoder']['content']), unsafe_allow_html=True)
     
     st.markdown("<br>", unsafe_allow_html=True)
     

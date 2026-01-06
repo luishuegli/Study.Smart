@@ -556,6 +556,15 @@ def load_design_system():
         div[data-testid="stForm"] > div > div:last-of-type:not(:has(button)) {
             display: none !important;
         }
+        
+        /* --- 12. HIDE FRAGMENT BORDERS --- */
+        /* Fragments should be invisible wrappers, not bordered containers */
+        div[data-testid="stVerticalBlockBorderWrapper"]:has(> div > div > button[data-testid="stBaseButton-primary"]:only-child),
+        div[data-testid="stVerticalBlockBorderWrapper"]:has(> div > div > div[data-testid="stVerticalBlockBorderWrapper"]) {
+            border: none !important;
+            padding: 0 !important;
+            background: transparent !important;
+        }
 
     </style>
     """, unsafe_allow_html=True)

@@ -38,29 +38,49 @@ def dashboard_view():
         col = cols[i % 3]
         with col:
             # Create a card-like container with clickable link
-                # Create a card-like container
-                with st.container(border=True):
-                    # Progress bar
-                    st.markdown(f'<div style="height: 8px; width: 50%; background-color: {course_data["color"]}; border-radius: 4px; margin-bottom: 20px;"></div>', unsafe_allow_html=True)
-                    
-                    st.markdown(f'<h3 style="margin-top: 0; color: var(--text-color); font-weight: 700;">{loc.t(course_data["title"])}</h3>', unsafe_allow_html=True)
-                    st.markdown(f'<p style="color: var(--text-color); opacity: 0.8; font-size: 0.9em; line-height: 1.6;">{loc.t(course_data["description"])}</p>', unsafe_allow_html=True)
-                    
-                    st.markdown(f"""
-                        <div style="margin-top: 20px; margin-bottom: 20px;">
-                            <span style="font-size: 0.85em; color: {course_data['color']}; font-weight: 600;">{loc.t({'de': 'Fortschritt', 'en': 'Progress'})}: {int(current_progress * 100)}%</span>
-                            <div style="width: 100%; background-color: rgba(128, 128, 128, 0.1); border-radius: 4px; height: 8px; margin-top: 8px;">
-                                <div style="width: {int(current_progress * 100)}%; background-color: {course_data['color']}; height: 100%; border-radius: 4px;"></div>
+            st.markdown(
+                f"""
+                <a href="/?page=course_overview&course={course_id}" target="_self" style="text-decoration: none; color: inherit; display: block;">
+                    <div style="
+                        background-color: var(--background-color);
+                        border: 1px solid rgba(128, 128, 128, 0.2);
+                        border-radius: 15px;
+                        padding: 20px;
+                        height: 380px; /* Fixed height for consistency */
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-between;
+                        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+                        transition: transform 0.2s;
+                        margin-bottom: 20px;
+                    " onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                        <div>
+                            <div style="height: 8px; width: 50%; background-color: {course_data['color']}; border-radius: 4px; margin-bottom: 20px;"></div>
+                            <h3 style="margin-top: 0; color: var(--text-color); font-weight: 700;">{loc.t(course_data['title'])}</h3>
+                            <p style="color: var(--text-color); opacity: 0.8; font-size: 0.9em; line-height: 1.6;">{loc.t(course_data['description'])}</p>
+                            <div style="margin-top: 20px;">
+                                <span style="font-size: 0.85em; color: {course_data['color']}; font-weight: 600;">{loc.t({'de': 'Fortschritt', 'en': 'Progress'})}: {int(current_progress * 100)}%</span>
+                                <div style="
+                                    width: 100%;
+                                    background-color: rgba(128, 128, 128, 0.1);
+                                    border-radius: 4px;
+                                    height: 8px;
+                                    margin-top: 8px;
+                                ">
+                                    <div style="
+                                        width: {int(current_progress * 100)}%;
+                                        background-color: {course_data['color']};
+                                        height: 100%;
+                                        border-radius: 4px;
+                                    "></div>
+                                </div>
                             </div>
                         </div>
-                    """, unsafe_allow_html=True)
-
-                    # NATIVE STREAMLIT BUTTON (Prevents Page Reload/Session Loss)
-                    if st.button(loc.t({"de": "Kurs öffnen", "en": "Open Course"}), key=f"btn_{course_id}", use_container_width=True):
-                        st.session_state.current_page = "course_overview"
-                        st.session_state.selected_course = course_id
-                        st.query_params.update({"page": "course_overview", "course": course_id})
-                        st.rerun()
+                    </div>
+                </a>
+                """,
+                unsafe_allow_html=True
+            )
             
             # Removed separate button as per request
             # if st.button(loc.t({"de": "Kurs öffnen", "en": "Open Course"}), key=f"btn_{course_id}", use_container_width=True):

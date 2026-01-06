@@ -287,7 +287,19 @@ def render_mcq(
                     render_ai_tutor(f"mcq_ai_{key_suffix}", full_context, client)
         else:
             # Single-select: Use expander (inside fragment = no tab reset)
-            with st.expander(t({"de": "Lösung zeigen", "en": "Show Solution"}), expanded=False):
+            # PERSIST EXPANDER STATE
+            expander_state_key = f"exp_state_{key_suffix}"
+            
+            # Logic: If AI interaction happened (history exists and not empty), force open or keep open
+            ai_history_key = f"ai_history_mcq_ai_{key_suffix}"
+            has_ai_interaction = len(st.session_state.get(ai_history_key, [])) > 0
+            
+            default_expanded = st.session_state.get(expander_state_key, False) or has_ai_interaction
+            
+            with st.expander(t({"de": "Lösung zeigen", "en": "Show Solution"}), expanded=default_expanded):
+                # Mark as open when interacted with (this is tricky in Streamlit, but the user likely intends to keep it open)
+                st.session_state[expander_state_key] = True 
+                
                 sol_content = t(solution_text_dict)
                 st.markdown(sol_content, unsafe_allow_html=True)
                 full_context = f"{ai_context}\n\nProblem: {question_text}\nCorrect Answer Index: {correct_idx}"

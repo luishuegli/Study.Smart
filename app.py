@@ -48,62 +48,86 @@ if "session_hydrated" not in st.session_state:
     # Mark as hydrated so we don't overwrite user actions later
     st.session_state.session_hydrated = True
 
-# --- AUTHENTICATION ---
-# Cookie manager for session persistence (cannot be cached - it's a widget)
+# --- AUTHENTICATION (Tri-State Logic) ---
+# Cookie manager for session persistence
 cookie_manager = stx.CookieManager(key="study_smart_auth")
 
-# Check for existing session or restore from cookie
-if "user" not in st.session_state:
-    # Try to restore session from cookie
+# 1. Initialize Auth State
+if "auth_status" not in st.session_state:
+    st.session_state.auth_status = "unknown"
+
+# 2. Check for User Session (Immediate Login)
+if "user" in st.session_state:
+    st.session_state.auth_status = "logged_in"
+
+# 3. State Machine
+# STATE: UNKNOWN (Default) -> Show Spinner, Check Cookie
+if st.session_state.auth_status == "unknown":
+    # Show loading spinner
+    loading_placeholder = st.empty()
+    loading_placeholder.markdown("""
+    <div style="display: flex; justify-content: center; align-items: center; height: 80vh;">
+        <div style="text-align: center; color: #6B7280;">
+            <div style="font-size: 1.1rem; margin-bottom: 8px;">Loading Study.Smart...</div>
+            <div style="width: 24px; height: 24px; border: 3px solid #e5e7eb; border-top: 3px solid #1f2937; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto;"></div>
+        </div>
+    </div>
+    <style>@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }</style>
+    """, unsafe_allow_html=True)
+    
+    # Check Cookie
+    # NOTE: stx.CookieManager is ASYNC. It needs a moment to load from the frontend.
+    # We use a retry mechanism to wait for the cookie to arrive.
     saved_token = cookie_manager.get("token")
     
+    # Initialize retry counter
+    if "cookie_retries" not in st.session_state:
+        st.session_state.cookie_retries = 0
+
     if saved_token:
-        # Use placeholder so we can clear loading if auth fails
-        loading_placeholder = st.empty()
-        loading_placeholder.markdown("""
-        <div style="display: flex; justify-content: center; align-items: center; height: 80vh;">
-            <div style="text-align: center; color: #6B7280;">
-                <div style="font-size: 1.1rem; margin-bottom: 8px;">Loading...</div>
-                <div style="width: 24px; height: 24px; border: 3px solid #e5e7eb; border-top: 3px solid #1f2937; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto;"></div>
-            </div>
-        </div>
-        <style>
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        </style>
-        """, unsafe_allow_html=True)
-        
-        # Verify token and restore session
-        from firebase_config import get_account_info
-        auth_success = False
+        # Token found! Reset retries and verify.
         try:
+            from firebase_config import get_account_info
             account_info = get_account_info(saved_token)
             if account_info and "users" in account_info and len(account_info["users"]) > 0:
                 user_data = account_info["users"][0]
-                # Reconstruct user session
                 st.session_state["user"] = {
                     "localId": user_data.get("localId"),
                     "email": user_data.get("email"),
                     "displayName": user_data.get("displayName"),
-                    "idToken": saved_token  # Keep the token for API calls
+                    "idToken": saved_token
                 }
-                auth_success = True
-                st.rerun()  # Rerun to proceed with authenticated state
-        except Exception as e:
-            # Token invalid or expired
-            auth_success = False
-        
-        # If auth failed, CLEAR loading and show login
-        if not auth_success:
-            loading_placeholder.empty()  # Clear the loading spinner
-            render_auth(cookie_manager=cookie_manager)
-            st.stop()
+                st.session_state.auth_status = "logged_in"
+                loading_placeholder.empty()
+                st.rerun()
+            else:
+                 st.session_state.auth_status = "logged_out"
+                 loading_placeholder.empty()
+                 st.rerun()
+        except:
+            st.session_state.auth_status = "logged_out"
+            loading_placeholder.empty()
+            st.rerun()
     else:
-        # No token - show login immediately
-        render_auth(cookie_manager=cookie_manager)
-        st.stop()
+        # No token found yet.
+        # Check if we should wait (maybe it's loading?)
+        if st.session_state.cookie_retries < 2:
+            st.session_state.cookie_retries += 1
+            import time
+            time.sleep(0.1) # Small sleep to let frontend catch up
+            st.rerun()
+        else:
+            # We waited, still nothing. Assume truly logged out.
+            st.session_state.auth_status = "logged_out"
+            loading_placeholder.empty()
+            st.rerun()
+
+# STATE: LOGGED_OUT -> Show Login Form
+elif st.session_state.auth_status == "logged_out":
+    render_auth(cookie_manager=cookie_manager)
+    st.stop()
+
+# STATE: LOGGED_IN -> Fall through to App (Main)
 
 
 def main():

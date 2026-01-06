@@ -92,7 +92,7 @@ def lesson_view():
                 st.session_state.current_slide_num = first_sub.get("slide_start", 0)
                 
                 # IMMEDIATE URL SYNC (Auto-select)
-                st.query_params.subtopic = first_sub["id"]
+                st.query_params.update({"subtopic": first_sub["id"]})
             else:
                 st.session_state.selected_subtopic = None
     
@@ -103,10 +103,12 @@ def lesson_view():
         st.session_state.selected_subtopic = subtopic_id
         
         # CRITICAL: Sync to URL query params for persistence
-        st.query_params.page = "lesson"
-        st.query_params.course = st.session_state.get("selected_course", "vwl")
-        st.query_params.topic = topic_id
-        st.query_params.subtopic = subtopic_id
+        st.query_params.update({
+            "page": "lesson",
+            "course": st.session_state.get("selected_course", "vwl"),
+            "topic": topic_id,
+            "subtopic": subtopic_id
+        })
         
         # Determine slide number
         c = COURSES.get(st.session_state.get("selected_course", "vwl"))
@@ -132,9 +134,12 @@ def lesson_view():
             st.session_state.selected_subtopic = None
             
             # IMMEDIATE URL SYNC
-            st.query_params.page = "dashboard"
-            if "topic" in st.query_params: del st.query_params["topic"]
-            if "subtopic" in st.query_params: del st.query_params["subtopic"]
+            # Clear topic/subtopic by setting new dict or clearing first
+            st.query_params.clear()
+            st.query_params.update({
+                "page": "dashboard",
+                "course": st.session_state.get("selected_course", "vwl")
+            })
             
             st.rerun()
         
@@ -166,8 +171,10 @@ def lesson_view():
                 st.session_state.selected_subtopic = selected_id
                 
                 # IMMEDIATE URL SYNC (Sidebar Radio)
-                st.query_params.topic = topic_id
-                st.query_params.subtopic = selected_id
+                st.query_params.update({
+                    "topic": topic_id,
+                    "subtopic": selected_id
+                })
                 
                 # Retrieve course content to find slide
                 c = COURSES.get(st.session_state.get("selected_course", "vwl"))

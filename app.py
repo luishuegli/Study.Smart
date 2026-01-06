@@ -111,20 +111,47 @@ def main():
     # 2. Sync FROM Session State to URL (always, for URL bar consistency)
     # At this point, session state is the SOURCE OF TRUTH (set by hydration or user action)
     
-    st.query_params.page = st.session_state.current_page
-    st.query_params.course = st.session_state.selected_course
+    # Debug: Show current state in sidebar during dev/debug
+    # st.sidebar.write("Debug State:", {
+    #     "page": st.session_state.current_page,
+    #     "topic": st.session_state.get("selected_topic"),
+    #     "subtopic": st.session_state.get("selected_subtopic")
+    # })
+
+    # Construct the desired query params
+    desired_params = {
+        "page": st.session_state.current_page,
+        "course": st.session_state.selected_course
+    }
     
     if st.session_state.get("selected_topic"):
-        st.query_params.topic = st.session_state.selected_topic
-    else:
-        if "topic" in st.query_params:
-            del st.query_params.topic
+        desired_params["topic"] = st.session_state.selected_topic
             
     if st.session_state.get("selected_subtopic"):
-        st.query_params.subtopic = st.session_state.selected_subtopic
-    else:
-        if "subtopic" in st.query_params:
-            del st.query_params.subtopic
+        desired_params["subtopic"] = st.session_state.selected_subtopic
+    
+    # Sync if different
+    # Note: We use .to_dict() to compare valid params only
+    current_params = st.query_params.to_dict()
+    
+    # Only update if there's a semantic difference to avoid unnecessary re-renders loop
+    # (Though st.query_params usually handles this well internally)
+    needs_update = False
+    for k, v in desired_params.items():
+        if current_params.get(k) != v:
+            needs_update = True
+            break
+            
+    # Also check if we need to remove keys
+    if not needs_update:
+        for k in ["topic", "subtopic"]:
+            if k not in desired_params and k in current_params:
+                needs_update = True
+                break
+    
+    if needs_update:
+        st.query_params.clear()
+        st.query_params.update(desired_params)
 
     # Router
     if st.session_state.current_page == "dashboard":

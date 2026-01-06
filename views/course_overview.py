@@ -222,9 +222,15 @@ def course_overview_view():
                         st.session_state.selected_subtopic = first_sub
                         
                         # IMMEDIATE URL SYNC
-                        st.query_params.page = "lesson"
-                        st.query_params.topic = topic['id']
+                        # Use update() for robust setting
+                        params = {
+                            "page": "lesson",
+                            "topic": topic['id'],
+                            "course": st.session_state.get("selected_course", "vwl")
+                        }
                         if first_sub:
-                            st.query_params.subtopic = first_sub
+                            params["subtopic"] = first_sub
+                        
+                        st.query_params.update(params)
                             
                         st.rerun()

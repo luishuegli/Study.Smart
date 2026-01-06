@@ -304,13 +304,42 @@ Intuitively: p = 0.7! Because at p = 0.5, getting 7/10 would be less probable.
 def method_detective_quiz():
     """Interactive quiz: identify which method is being used."""
     
-    # Pill button styling
+    # Pill button styling - ULTRATHINK FIX - Always white text, fixed size
     st.markdown("""
 <style>
-.stButton > button {
+/* ULTRATHINK: Force ALL buttons to FIXED size and WHITE text */
+.stButton > button,
+.stButton > button[kind="secondary"],
+.stButton > button[kind="primary"],
+div[data-testid="stButton"] > button,
+[data-testid="stHorizontalBlock"] .stButton > button {
     border-radius: 20px !important;
-    padding: 8px 24px !important;
+    padding: 10px 24px !important;
     font-weight: 500 !important;
+    height: 44px !important;
+    min-height: 44px !important;
+    max-height: 44px !important;
+    background: #000 !important;
+    background-color: #000 !important;
+    color: #fff !important;
+    border: 1px solid #000 !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+.stButton > button:hover,
+div[data-testid="stButton"] > button:hover {
+    background: #333 !important;
+    background-color: #333 !important;
+    border-color: #333 !important;
+}
+/* CRITICAL: Force ALL nested elements to white text */
+.stButton > button *,
+div[data-testid="stButton"] > button * {
+    color: #fff !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 </style>
 """, unsafe_allow_html=True)

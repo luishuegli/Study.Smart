@@ -1363,7 +1363,7 @@ Y - 2Z] = -1. X und Y sind unabhängig. Wie groß ist der Wert von E[Z]?""",
             {"de": "-0.5", "en": "-0.5"},
             {"de": "1.5", "en": "1.5"},
             {"de": "3", "en": "3"},
-            {"de": "Nicht genügend Informationen.", "en": "Nicht genügend Informationen."}
+            {"de": "Nicht genügend Informationen.", "en": "Not enough information."}
         ],
         "correct_idx": 3,
         "solution": {
@@ -2453,7 +2453,7 @@ der folgenden Aussagen ist richtig?""",
             {"de": r"$\text{Corr}(X, Y) > \text{Corr}(X, Z)$", "en": r"$\text{Corr}(X, Y) > \text{Corr}(X, Z)$"},
             {"de": r"$\text{Corr}(X, Y) = \text{Corr}(X, Z)$", "en": r"$\text{Corr}(X, Y) = \text{Corr}(X, Z)$"},
             {"de": r"$\text{Corr}(X, Y) < \text{Corr}(X, Z)$", "en": r"$\text{Corr}(X, Y) < \text{Corr}(X, Z)$"},
-            {"de": "Nicht genügend Informationen.", "en": "Nicht genügend Informationen."}
+            {"de": "Nicht genügend Informationen.", "en": "Not enough information."}
         ],
         "correct_idx": 1,
         "solution": {
@@ -2919,7 +2919,7 @@ der Median der zwei Werte notwendigerweise:""",
             {"de": "-1", "en": "-1"},
             {"de": "1", "en": "1"},
             {"de": "4", "en": "4"},
-            {"de": "Wir haben nicht genügend Informationen.", "en": "Wir haben nicht genügend Informationen."}
+            {"de": "Wir haben nicht genügend Informationen.", "en": "We do not have enough information."}
         ],
         "correct_idx": 3,
         "solution": {
@@ -3081,7 +3081,7 @@ von 1 m3 Rohöl?
             {"de": "0.0064", "en": "0.0064"},
             {"de": "0.0802", "en": "0.0802"},
             {"de": "193.1477", "en": "193.1477"},
-            {"de": "Nicht genügend Informationen.", "en": "Nicht genügend Informationen."}
+            {"de": "Nicht genügend Informationen.", "en": "Not enough information."}
         ],
         "correct_idx": 0,
         "solution": {
@@ -3957,7 +3957,7 @@ QUESTIONS_10_5_EXTRA = {
             {"de": r"$P(A | B) = 1$", "en": r"$P(A | B) = 1$"},
             {"de": r"$P(A | B) = P(A)/P(B)$", "en": r"$P(A | B) = P(A)/P(B)$"},
             {"de": r"$P(A | B) = 0$", "en": r"$P(A | B) = 0$"},
-            {"de": "Nicht genügend Informationen.", "en": "Nicht genügend Informationen."}
+            {"de": "Nicht genügend Informationen.", "en": "Not enough information."}
         ],
         "correct_idx": 0,
         "solution": {
@@ -3976,7 +3976,7 @@ QUESTIONS_10_5_EXTRA = {
             {"de": r"$P(A | B) = 1$", "en": r"$P(A | B) = 1$"},
             {"de": r"$P(A | B) = P(A)/P(B)$", "en": r"$P(A | B) = P(A)/P(B)$"},
             {"de": r"$P(A | B) = 0$", "en": r"$P(A | B) = 0$"},
-            {"de": "Nicht genügend Informationen.", "en": "Nicht genügend Informationen."}
+            {"de": "Nicht genügend Informationen.", "en": "Not enough information."}
         ],
         "correct_idx": 2,
         "solution": {
@@ -4052,7 +4052,7 @@ QUESTIONS_10_5_EXTRA = {
             {"de": r"$P(A \cap B) = 0.05$", "en": r"$P(A \cap B) = 0.05$"},
             {"de": r"$P(A \cap B) = 0.6$", "en": r"$P(A \cap B) = 0.6$"},
             {"de": r"$P(A \cap B) = P(A | B)$", "en": r"$P(A \cap B) = P(A | B)$"},
-            {"de": "Nicht genügend Informationen.", "en": "Nicht genügend Informationen."}
+            {"de": "Nicht genügend Informationen.", "en": "Not enough information."}
         ],
         "correct_idx": 3,
         "solution": {
@@ -4087,10 +4087,10 @@ QUESTIONS_10_5_EXTRA = {
             "en": r"""$P(A \cap B \cap C) = P(A)P(B)P(C)$. Then:"""
         },
         "options": [
-            {"de": "A, B, C sind unabhängig.", "en": "A, B, C sind unabhängig."},
-            {"de": "A und C sind unabhängig.", "en": "A und C sind unabhängig."},
-            {"de": "A, B, C sind nicht unabhängig.", "en": "A, B, C sind nicht unabhängig."},
-            {"de": "Nicht genügend Informationen für Unabhängigkeit.", "en": "Nicht genügend Informationen für Unabhängigkeit."}
+            {"de": "A, B, C sind unabhängig.", "en": "A, B, C are independent."},
+            {"de": "A und C sind unabhängig.", "en": "A and C are independent."},
+            {"de": "A, B, C sind nicht unabhängig.", "en": "A, B, C are not independent."},
+            {"de": "Nicht genügend Informationen für Unabhängigkeit.", "en": "Not enough information for independence."}
         ],
         "correct_idx": 3,
         "solution": {

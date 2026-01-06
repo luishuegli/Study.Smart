@@ -1,9 +1,14 @@
 import streamlit as st
 
 def init_lang():
-    """Initialize language state if not present."""
+    """Initialize language state from URL or default to 'en'."""
     if 'lang' not in st.session_state:
-        st.session_state.lang = 'en'
+        # Check URL query param first for persistence across refresh
+        url_lang = st.query_params.get('lang', 'en')
+        st.session_state.lang = url_lang if url_lang in ('de', 'en') else 'en'
+    
+    # Always sync to URL for persistence
+    st.query_params.lang = st.session_state.lang
 
 def get_current_language():
     """Return current language code ('de' or 'en')."""
@@ -87,16 +92,48 @@ def render_language_selector(container=None):
     with col1:
         if st.button("EN", key="lang_en", type=get_type("en"), use_container_width=True):
             st.session_state.lang = "en"
+            st.query_params.lang = "en"  # Persist to URL
             st.rerun()
             
     with col2:
         if st.button("DE", key="lang_de", type=get_type("de"), use_container_width=True):
             st.session_state.lang = "de"
+            st.query_params.lang = "de"  # Persist to URL
             st.rerun()
+
+def reset_user_progress(user_id: str, course_id: str) -> bool:
+    """
+    Resets all progress for a user in a specific course.
+    Clears Firestore data and session state.
+    
+    Returns:
+        True if successful, False otherwise
+    """
+    try:
+        import firebase_admin.firestore
+        db = firebase_admin.firestore.client()
+        
+        # Delete progress document from Firestore
+        progress_ref = db.collection("users").document(user_id).collection("progress").document(course_id)
+        progress_ref.delete()
+        
+        # Also reset the dashboard progress summary
+        user_ref = db.collection("users").document(user_id)
+        user_ref.set({
+            "progress": {
+                course_id: 0.0
+            }
+        }, merge=True)
+        
+        return True
+    except Exception as e:
+        print(f"Error resetting progress: {e}")
+        return False
+
 
 def render_sidebar_footer():
     """
-    Renders the sidebar footer with language selector and logout button.
+    Renders the sidebar footer with settings, language selector, and logout button.
     Should be called at the end of sidebar content in each view.
     """
     # CSS to force the sidebar content to fill the height and use flexbox
@@ -142,9 +179,50 @@ def render_sidebar_footer():
         </div>
         """, unsafe_allow_html=True)
     
-    render_language_selector()
+    # --- SETTINGS ---
+    with st.expander(t({"de": "Einstellungen", "en": "Settings"}), expanded=False):
+        # Reset Progress inside Settings
+        st.markdown(f"**{t({'de': 'Fortschritt zurücksetzen', 'en': 'Reset Progress'})}**")
+        st.caption(t({
+            "de": "Löscht deinen gesamten Lernfortschritt für diesen Kurs.",
+            "en": "Deletes all your learning progress for this course."
+        }))
+        
+        if st.button(
+            t({"de": "Fortschritt löschen", "en": "Delete Progress"}),
+            type="secondary",
+            use_container_width=True,
+            key="reset_progress_btn"
+        ):
+            user = st.session_state.get("user")
+            course_id = st.session_state.get("selected_course", "vwl")
+            
+            if user and "localId" in user:
+                success = reset_user_progress(user["localId"], course_id)
+                
+                if success:
+                    # Clear local session state
+                    if "user_progress" in st.session_state:
+                        del st.session_state["user_progress"]
+                    if "overall_course_progress" in st.session_state:
+                        del st.session_state["overall_course_progress"]
+                    if "last_progress_load" in st.session_state:
+                        del st.session_state["last_progress_load"]
+                    
+                    st.success(t({"de": "Fortschritt zurückgesetzt!", "en": "Progress reset!"}))
+                    st.rerun()
+                else:
+                    st.error(t({"de": "Fehler beim Zurücksetzen.", "en": "Error resetting progress."}))
+            else:
+                st.warning(t({"de": "Nicht angemeldet.", "en": "Not logged in."}))
+        
+        st.markdown("---")
+        
+        # Sign Out inside Settings
+        if st.button(t({"de": "Abmelden", "en": "Sign Out"}), type="primary", use_container_width=True, key="signout_btn"):
+            if "user" in st.session_state:
+                del st.session_state["user"]
+            st.rerun()
     
-    if st.button(t({"de": "Abmelden", "en": "Sign Out"}), type="primary", use_container_width=True):
-        if "user" in st.session_state:
-            del st.session_state["user"]
-        st.rerun()
+    # Language selector at the bottom
+    render_language_selector()

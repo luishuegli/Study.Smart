@@ -70,9 +70,9 @@ SUBTOPIC_QUESTION_COUNTS = {
     "9.4": 8,  # 3 Quick Checks (concept, formulas, duality) + 5 exam questions
     # Topic 10: Hypothesis Tests
     "10.1": 1,  # 10_1_types (Hypothesis classification MCQ)
-    "10.2": 0,  # No MCQs
-    "10.3": 0,  # No MCQs
-    "10.4": 0,  # No MCQs
+    "10.2": 1,  # 10_2_critical (Critical region MCQ)
+    "10.3": 1,  # 10_3_errors (Type I/II errors MCQ)
+    "10.4": 1,  # hs2024_mc8 p-value calculation
     "10.5": 4,  # uebung6_prob1-4 (Implemented)
     # Topic 11: Interdisciplinary
     "11.1": 4,  # hs2023_full_prob1,2,3 + hs2022_full_prob3

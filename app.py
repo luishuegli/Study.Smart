@@ -39,8 +39,30 @@ st.markdown(get_firebase_analytics_script(), unsafe_allow_html=True)
 # Cookie manager for session persistence (cannot be cached - it's a widget)
 cookie_manager = stx.CookieManager(key="study_smart_auth")
 
-# Check for existing session or show login
+# Check for existing session or restore from cookie
 if "user" not in st.session_state:
+    # Try to restore session from cookie
+    saved_token = cookie_manager.get("token")
+    if saved_token:
+        # Verify token and restore session
+        from firebase_config import get_account_info
+        try:
+            account_info = get_account_info(saved_token)
+            if account_info and "users" in account_info and len(account_info["users"]) > 0:
+                user_data = account_info["users"][0]
+                # Reconstruct user session
+                st.session_state["user"] = {
+                    "localId": user_data.get("localId"),
+                    "email": user_data.get("email"),
+                    "displayName": user_data.get("displayName"),
+                    "idToken": saved_token  # Keep the token for API calls
+                }
+                st.rerun()  # Rerun to proceed with authenticated state
+        except Exception as e:
+            # Token invalid or expired, continue to login
+            pass
+    
+    # No valid session, show login
     render_auth(cookie_manager=cookie_manager)
     st.stop()
 

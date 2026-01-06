@@ -7,7 +7,10 @@ def dashboard_view():
     import utils.localization as loc
     with st.sidebar:
         loc.render_language_selector(st.sidebar)
-        st.sidebar.markdown(f"### {loc.t({'de': 'Hallo', 'en': 'Hello'})}, **{st.session_state['user'].get('displayName', 'Student')}**!")
+        # Fallback: use displayName, then email prefix, then "Student"
+        user = st.session_state.get('user', {})
+        display_name = user.get('displayName') or (user.get('email', '').split('@')[0]) or 'Student'
+        st.sidebar.markdown(f"### {loc.t({'de': 'Hallo', 'en': 'Hello'})}, **{display_name}**!")
     
     # Load Progress from Firebase
     try:

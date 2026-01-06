@@ -36,12 +36,8 @@ load_design_system()
 st.markdown(get_firebase_analytics_script(), unsafe_allow_html=True)
 
 # --- AUTHENTICATION ---
-# Cookie manager for session persistence across refreshes
-@st.cache_resource
-def get_cookie_manager():
-    return stx.CookieManager(key="study_smart_auth")
-
-cookie_manager = get_cookie_manager()
+# Cookie manager for session persistence (cannot be cached - it's a widget)
+cookie_manager = stx.CookieManager(key="study_smart_auth")
 
 # Check for existing session or show login
 if "user" not in st.session_state:

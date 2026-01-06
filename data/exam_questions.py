@@ -3153,11 +3153,7 @@ Wie lautet der Maximum-Likelihood-Schätzer für b?
 (b) b̂ML = 5.20
 (c) b̂ML = 5.92
 (d) b̂ML = 5.75""",
-"en": r"""You observe a random variable X uniformly distributed on the interval $[0, b]$. Specifically, you observe the following realizations: 1.1, 3.8, 4.2, 0.5, 5.2. What is the Maximum-Likelihood Estimator for b?
-(a) $\hat{b}_{ML} = 6.23$
-(b) $\hat{b}_{ML} = 5.20$
-(c) $\hat{b}_{ML} = 5.92$
-(d) $\hat{b}_{ML} = 5.75$"""
+"en": r"""You observe a random variable $X$ uniformly distributed on the interval $[0, b]$. Specifically, you observe the following realizations: 1.1, 3.8, 4.2, 0.5, 5.2. What is the Maximum-Likelihood Estimator for $b$?"""
         },
         "options": [
             {"de": r"$\hat{b}_{ML} = 6.23$", "en": r"$\hat{b}_{ML} = 6.23$"},

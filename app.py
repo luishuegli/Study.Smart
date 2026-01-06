@@ -40,34 +40,39 @@ st.markdown(get_firebase_analytics_script(), unsafe_allow_html=True)
 cookie_manager = stx.CookieManager(key="study_smart_auth")
 
 # CRITICAL: Capture URL params BEFORE auth check to preserve deep links on refresh
-# These get lost if we redirect to login then back to dashboard
 _preserved_page = st.query_params.get("page")
 _preserved_course = st.query_params.get("course")
 _preserved_topic = st.query_params.get("topic")
 _preserved_subtopic = st.query_params.get("subtopic")
 
+# Track if we've completed the initial cookie check
+# CookieManager is async - on first render, get() returns None even if cookie exists
+if "_auth_check_done" not in st.session_state:
+    st.session_state._auth_check_done = False
+
 # Check for existing session or restore from cookie
 if "user" not in st.session_state:
-    # Try to restore session from cookie
     saved_token = cookie_manager.get("token")
     
-    if saved_token:
-        # Show loading state while verifying token (prevents flash of login form)
-        with st.spinner(loc.t({"de": "Session wird wiederhergestellt...", "en": "Restoring session..."})):
+    # First render: cookie manager not yet initialized, show loading and wait
+    if not st.session_state._auth_check_done:
+        st.session_state._auth_check_done = True
+        
+        # If we have a token, try to restore session
+        if saved_token:
             from firebase_config import get_account_info
             try:
                 account_info = get_account_info(saved_token)
                 if account_info and "users" in account_info and len(account_info["users"]) > 0:
                     user_data = account_info["users"][0]
-                    # Reconstruct user session
                     st.session_state["user"] = {
                         "localId": user_data.get("localId"),
                         "email": user_data.get("email"),
                         "displayName": user_data.get("displayName"),
-                        "idToken": saved_token  # Keep the token for API calls
+                        "idToken": saved_token
                     }
                     
-                    # Restore preserved URL params to session state BEFORE rerun
+                    # Restore preserved URL params
                     if _preserved_page:
                         st.session_state.current_page = _preserved_page
                     if _preserved_course:
@@ -77,12 +82,15 @@ if "user" not in st.session_state:
                     if _preserved_subtopic:
                         st.session_state.selected_subtopic = _preserved_subtopic
                     
-                    st.rerun()  # Rerun to proceed with authenticated state
-            except Exception as e:
-                # Token invalid or expired, continue to login
+                    st.rerun()
+            except Exception:
                 pass
+        else:
+            # No token on first check - but cookie manager might not be ready yet
+            # Show blank and rerun once to let cookie manager initialize
+            st.rerun()
     
-    # No valid session, show login (only reached if no token or token invalid)
+    # Second render onwards: cookie manager is ready, if still no user, show login
     render_auth(cookie_manager=cookie_manager)
     st.stop()
 

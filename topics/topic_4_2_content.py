@@ -212,7 +212,10 @@ $p = 1 - \\left(\\frac{5}{6}\\right)^3 = 1 - \\frac{125}{216} = \\frac{91}{216} 
             "de": "Die Binomialverteilung ist die <strong>Summe von $n$ unabhängigen Bernoulli-Versuchen</strong>. Wenn du $n$ mal ein Bernoulli-Experiment wiederholst und die Erfolge zählst:",
             "en": "The Binomial distribution is the <strong>sum of $n$ independent Bernoulli trials</strong>. When you repeat a Bernoulli experiment $n$ times and count the successes:"
         },
-        "formula": r"\text{Wenn } Y_i \sim \text{Ber}(p), \text{ dann } X = \sum_{i=1}^{n} Y_i \sim \text{Bin}(n, p)"
+        "formula": {
+            "de": r"\text{Wenn } Y_i \sim \text{Ber}(p), \text{ dann } X = \sum_{i=1}^{n} Y_i \sim \text{Bin}(n, p)",
+            "en": r"\text{If } Y_i \sim \text{Ber}(p), \text{ then } X = \sum_{i=1}^{n} Y_i \sim \text{Bin}(n, p)"
+        }
     },
     
     # --- EXAM ESSENTIALS ---
@@ -396,7 +399,7 @@ def render_subtopic_4_2(model):
     # --- PARAMETER ---
     st.markdown(f"### {t(content_4_2['parameter']['header'])}")
     with st.container(border=True):
-        col_sym, col_desc = st.columns([1, 3])
+        col_sym, col_desc = st.columns([1, 3], vertical_alignment="center")
         with col_sym:
             st.latex(content_4_2["parameter"]["symbol"])
         with col_desc:
@@ -457,7 +460,7 @@ def render_subtopic_4_2(model):
     st.markdown(f"### {t(content_4_2['link_binomial']['header'])}")
     with st.container(border=True):
         st.markdown(t(content_4_2["link_binomial"]["text"]), unsafe_allow_html=True)
-        st.latex(content_4_2["link_binomial"]["formula"])
+        st.latex(t(content_4_2["link_binomial"]["formula"]))
     
     st.markdown("<br>", unsafe_allow_html=True)
     

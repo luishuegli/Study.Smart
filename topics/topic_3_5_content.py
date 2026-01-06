@@ -46,8 +46,8 @@ content_3_5 = {
     "variable_decoder": {
         "header": {"de": "Variablen-Decoder", "en": "Variable Decoder"},
         "content": {
-            "de": "$Var(X)$ = <strong>Varianz</strong> — Wie weit die Werte im Schnitt vom Mittelwert abweichen (quadriert)<br><br>$\\sigma$ = <strong>Standardabweichung</strong> — Wurzel der Varianz (gleiche Einheit wie X)<br><br>$E[X^2]$ = <strong>Zweites Moment</strong> — Erwartungswert der quadrierten Werte (für Verschiebungssatz)",
-            "en": "$Var(X)$ = <strong>Variance</strong> — How far values deviate from the mean on average (squared)<br><br>$\\sigma$ = <strong>Standard Deviation</strong> — Square root of variance (same unit as X)<br><br>$E[X^2]$ = <strong>Second Moment</strong> — Expected value of squared outcomes (for shift formula)"
+            "de": "<strong>Var(X)</strong> = Varianz — Wie weit die Werte im Schnitt vom Mittelwert abweichen (quadriert)<br><br><strong>σ</strong> = Standardabweichung — Wurzel der Varianz (gleiche Einheit wie X)<br><br><strong>E[X²]</strong> = Zweites Moment — Erwartungswert der quadrierten Werte (für Verschiebungssatz)",
+            "en": "<strong>Var(X)</strong> = Variance — How far values deviate from the mean on average (squared)<br><br><strong>σ</strong> = Standard Deviation — Square root of variance (same unit as X)<br><br><strong>E[X²]</strong> = Second Moment — Expected value of squared outcomes (for shift formula)"
         }
     },
     

@@ -138,6 +138,9 @@ def render_ai_tutor(key_suffix, context_prompt, client):
         border-color: #1e1e1e !important;
         color: #FFFFFF !important;
         border-radius: 20px !important;
+        max-width: 50px !important;
+        min-width: 40px !important;
+        padding: 8px 16px !important;
     }
     [data-testid="stFormSubmitButton"] > button:hover {
         background-color: #333333 !important;

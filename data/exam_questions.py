@@ -2473,10 +2473,10 @@ QUESTIONS_5_4 = {
             "en": r"""The correlation coefficient is always between..."""
         },
         "options": [
-            {"de": r"$-1$ und $1$", "en": r"$-1$ und $1$"},
-            {"de": r"$0$ und $1$", "en": r"$0$ und $1$"},
-            {"de": r"$-\infty$ und $\infty$", "en": r"$-\infty$ und $\infty$"},
-            {"de": r"$0$ und $\infty$", "en": r"$0$ und $\infty$"}
+            {"de": r"$-1$ und $1$", "en": r"$-1$ and $1$"},
+            {"de": r"$0$ und $1$", "en": r"$0$ and $1$"},
+            {"de": r"$-\infty$ und $\infty$", "en": r"$-\infty$ and $\infty$"},
+            {"de": r"$0$ und $\infty$", "en": r"$0$ and $\infty$"}
         ],
         "correct_idx": 0,
         "solution": {
@@ -2514,10 +2514,7 @@ X            X
 V ar       Xi =         V ar (Xi ) = n · V ar (Xj ) , ∀j = 1, . . . , n
 i=1        i=1
 Welche der folgenden Aussagen ist korrekt?""",
-"en": r"""Let $X_i, i = 1, \dots, n$ be random variables, which are not necessarily independent or identically distributed. Assume the following equations hold:
-(1) $\text{Var}(\sum_{i=1}^n X_i) = \sum_{i=1}^n \text{Var}(X_i)$
-(2) $\text{Var}(\sum_{i=1}^n X_i) = n \cdot \text{Var}(X_j), \forall j = 1, \dots, n$
-Which of the following statements is correct?"""
+"en": r"""Let $X_i, i = 1, \dots, n$ be random variables, which are not necessarily independent or identically distributed. Assume the following equations hold:<br><br>(1) $\text{Var}(\sum_{i=1}^n X_i) = \sum_{i=1}^n \text{Var}(X_i)$<br><br>(2) $\text{Var}(\sum_{i=1}^n X_i) = n \cdot \text{Var}(X_j), \forall j = 1, \dots, n$<br><br>Which of the following statements is correct?"""
         },
         "options": [
             {"de": "Hinreichend für 1: Identisch verteilt. Hinreichend für 2: Unabhängig.", "en": "Sufficient for 1: Identically distributed. Sufficient for 2: Independent."},

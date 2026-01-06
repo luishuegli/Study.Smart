@@ -41,8 +41,8 @@ content_3_3 = {
     "mission": {
         "title": {"de": "Mission: Der Fabrik-Tycoon", "en": "Mission: The Factory Tycoon"},
         "briefing": {
-            "de": r"Du produzierst High-Tech-Bolzen. Kunden zahlen **$10** pro gutem Bolzen (9.8-10.2mm). Jeder Ausschuss (zu klein/groß) kostet dich **$5** Strafe.",
-            "en": r"You produce high-tech bolts. Clients pay **$10** per good bolt (9.8-10.2mm). Any defect (too small/big) costs you **$5** in penalty."
+            "de": "Du produzierst High-Tech-Bolzen. Kunden zahlen 10€ pro gutem Bolzen (9.8-10.2mm). Jeder Ausschuss (zu klein/groß) kostet dich 5€ Strafe.",
+            "en": "You produce high-tech bolts. Clients pay €10 per good bolt (9.8-10.2mm). Any defect (too small/big) costs you €5 in penalty."
         },
         "task": {
             "de": r"Die Maschine streut mit $\sigma=0.2$. Stelle den Mittelwert $\mu$ so ein, dass dein Profit maximiert wird.",
@@ -227,7 +227,7 @@ def render_subtopic_3_3(model):
             st.metric("Theoretical Yield", f"{yield_rate:.1%}")
 
             # Simulation
-            if st.button(t(content_3_3["mission"]["sim_btn"])):
+            if st.button(t(content_3_3["mission"]["sim_btn"]), type="primary"):
                 rng = np.random.default_rng()
                 bolts = rng.normal(mu, sigma, 100)
                 good = np.sum((bolts >= lower) & (bolts <= upper))

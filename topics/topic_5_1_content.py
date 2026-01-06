@@ -142,6 +142,7 @@ div[data-testid="stVerticalBlock"], div[data-testid="stVerticalBlockBorderWrappe
     st.markdown("<br><br>", unsafe_allow_html=True)
     
     # =========================================
+    # =========================================
     # SECTION 3: INTERACTIVE MISSION (Simple - Stupid Person Rule)
     # =========================================
     st.markdown(f"### {t({'de': 'Übung: Randverteilung berechnen', 'en': 'Exercise: Calculate Marginal'})}")
@@ -152,28 +153,27 @@ div[data-testid="stVerticalBlock"], div[data-testid="stVerticalBlockBorderWrappe
         if "marginal_answer" not in st.session_state:
             st.session_state.marginal_answer = None
         
-        with st.container(border=True):
-            # Context - why this matters (normal font, not grey caption)
-            why_de = 'Stell dir vor: Du hast Umfragedaten mit Alter (X) und Einkommen (Y). Dein Chef fragt: "Wie viel Prozent sind 25-34 Jahre alt?" — Er will NICHT wissen, welches Einkommen sie haben. Das ist eine Randverteilung: Du "vergisst" Y und konzentrierst dich nur auf X.'
-            why_en = "Imagine: You have survey data with Age (X) and Income (Y). Your boss asks: 'What percentage are 25-34 years old?' — They don't care about income. That's a marginal: You 'forget' Y and focus only on X."
-            
-            st.markdown(t({'de': why_de, 'en': why_en}))
-            
-            st.markdown("<br>", unsafe_allow_html=True)
-            
-            # Task - bold header with LaTeX formula
-            st.markdown(f"**{t({'de': 'Aufgabe', 'en': 'Task'})}:**")
-            st.latex(r"f_X(1) = ?")
-            st.markdown(t({'de': 'Die Wahrscheinlichkeit, dass X=1 ist (egal welches Y).', 
-                'en': 'The probability that X=1 (regardless of Y).'}))
-            
-            st.markdown("---")
-            
-            # Hint - just bold text, no grey box
-            st.markdown(f"**{t({'de': 'Hinweis', 'en': 'Hint'})}:** {t({'de': 'Addiere alle Werte in der roten Zeile.', 'en': 'Add all values in the red row.'})}")
-            
-            # Centered table
-            st.markdown("""
+        # Context - why this matters (normal font, not grey caption)
+        why_de = 'Stell dir vor: Du hast Umfragedaten mit Alter (X) und Einkommen (Y). Dein Chef fragt: "Wie viel Prozent sind 25-34 Jahre alt?" — Er will NICHT wissen, welches Einkommen sie haben. Das ist eine Randverteilung: Du "vergisst" Y und konzentrierst dich nur auf X.'
+        why_en = "Imagine: You have survey data with Age (X) and Income (Y). Your boss asks: 'What percentage are 25-34 years old?' — They don't care about income. That's a marginal: You 'forget' Y and focus only on X."
+        
+        st.markdown(t({'de': why_de, 'en': why_en}))
+        
+        st.markdown("<br>", unsafe_allow_html=True)
+        
+        # Task - bold header with LaTeX formula
+        st.markdown(f"**{t({'de': 'Aufgabe', 'en': 'Task'})}:**")
+        st.latex(r"f_X(1) = ?")
+        st.markdown(t({'de': 'Die Wahrscheinlichkeit, dass X=1 ist (egal welches Y).', 
+            'en': 'The probability that X=1 (regardless of Y).'}))
+        
+        st.markdown("---")
+        
+        # Hint - just bold text, no grey box
+        st.markdown(f"**{t({'de': 'Hinweis', 'en': 'Hint'})}:** {t({'de': 'Addiere alle Werte in der roten Zeile.', 'en': 'Add all values in the red row.'})}")
+        
+        # Centered table
+        st.markdown("""
 <div style="display: flex; justify-content: center; margin: 16px 0;">
 <table style="border-collapse: collapse; text-align: center; font-size: 1rem;">
 <tr style="background: #e5e7eb;">
@@ -203,34 +203,34 @@ div[data-testid="stVerticalBlock"], div[data-testid="stVerticalBlockBorderWrappe
 </table>
 </div>
 """, unsafe_allow_html=True)
-            
-            # Step-by-step prompts
-            st.markdown(f"**{t({'de': 'Schritt 1', 'en': 'Step 1'})}:** {t({'de': 'Finde die Zeile X=1 (rot markiert)', 'en': 'Find row X=1 (marked red)'})}")
-            st.markdown(f"**{t({'de': 'Schritt 2', 'en': 'Step 2'})}:** {t({'de': 'Addiere alle Werte: 0.10 + 0.15 + 0.05 = ?', 'en': 'Add all values: 0.10 + 0.15 + 0.05 = ?'})}")
-            
-            st.markdown("---")
-            
-            # Question with LaTeX
-            st.markdown(f"**{t({'de': 'Deine Antwort', 'en': 'Your Answer'})}:**")
-            st.latex(r"f_X(1) = ?")
-            
-            answer = st.radio(
-                t({"de": "Wähle:", "en": "Choose:"}),
-                ["0.20", "0.25", "0.30", "0.35"],
-                key="marginal_radio",
-                index=None,
-                horizontal=True
-            )
-            
-            if answer:
-                if answer == "0.30":
-                    st.success(t({"de": "Richtig! f_X(1) = 0.10 + 0.15 + 0.05 = 0.30", "en": "Correct! f_X(1) = 0.10 + 0.15 + 0.05 = 0.30"}))
-                    # Track progress
-                    from utils.progress_tracker import track_question_answer
-                    if user := st.session_state.get("user"):
-                        track_question_answer(user["localId"], "vwl", "5", "5.1", "marginal_mission", True)
-                else:
-                    st.error(t({"de": "Summiere die rote Zeile: 0.10 + 0.15 + 0.05 = 0.30", "en": "Sum the red row: 0.10 + 0.15 + 0.05 = 0.30"}))
+        
+        # Step-by-step prompts
+        st.markdown(f"**{t({'de': 'Schritt 1', 'en': 'Step 1'})}:** {t({'de': 'Finde die Zeile X=1 (rot markiert)', 'en': 'Find row X=1 (marked red)'})}")
+        st.markdown(f"**{t({'de': 'Schritt 2', 'en': 'Step 2'})}:** {t({'de': 'Addiere alle Werte: 0.10 + 0.15 + 0.05 = ?', 'en': 'Add all values: 0.10 + 0.15 + 0.05 = ?'})}")
+        
+        st.markdown("---")
+        
+        # Question with LaTeX
+        st.markdown(f"**{t({'de': 'Deine Antwort', 'en': 'Your Answer'})}:**")
+        st.latex(r"f_X(1) = ?")
+        
+        answer = st.radio(
+            t({"de": "Wähle:", "en": "Choose:"}),
+            ["0.20", "0.25", "0.30", "0.35"],
+            key="marginal_radio",
+            index=None,
+            horizontal=True
+        )
+        
+        if answer:
+            if answer == "0.30":
+                st.success(t({"de": "Richtig! f_X(1) = 0.10 + 0.15 + 0.05 = 0.30", "en": "Correct! f_X(1) = 0.10 + 0.15 + 0.05 = 0.30"}))
+                # Track progress
+                from utils.progress_tracker import track_question_answer
+                if user := st.session_state.get("user"):
+                    track_question_answer(user["localId"], "vwl", "5", "5.1", "marginal_mission", True)
+            else:
+                st.error(t({"de": "Summiere die rote Zeile: 0.10 + 0.15 + 0.05 = 0.30", "en": "Sum the red row: 0.10 + 0.15 + 0.05 = 0.30"}))
     
     simple_mission()
     

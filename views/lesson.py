@@ -99,6 +99,12 @@ def lesson_view():
         st.session_state.selected_topic = topic_id
         st.session_state.selected_subtopic = subtopic_id
         
+        # CRITICAL: Sync to URL query params for persistence
+        st.query_params.page = "lesson"
+        st.query_params.course = st.session_state.get("selected_course", "vwl")
+        st.query_params.topic = topic_id
+        st.query_params.subtopic = subtopic_id
+        
         # Determine slide number
         c = COURSES.get(st.session_state.get("selected_course", "vwl"))
         t = next((x for x in c["topics"] if x["id"] == topic_id), None)

@@ -4,5 +4,6 @@ google-genai
 python-dotenv
 plotly
 numpy
+scipy
 requests
 extra-streamlit-components

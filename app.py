@@ -10,6 +10,10 @@ from firebase_config import initialize_firebase_admin, get_firebase_analytics_sc
 from dotenv import load_dotenv
 import os
 import utils.localization as loc
+import extra_streamlit_components as stx
+
+# Load Env first (for Firebase config)
+load_dotenv()
 
 # Initialize Firebase
 initialize_firebase_admin()
@@ -19,7 +23,7 @@ st.set_page_config(
     page_title="Study.Smart",
     page_icon="tao.png",
     layout="centered",
-    initial_sidebar_state="expanded", # User requested sidebar back
+    initial_sidebar_state="expanded",
 )
 
 # Initialize Language State
@@ -31,25 +35,19 @@ load_design_system()
 # Inject Firebase Analytics
 st.markdown(get_firebase_analytics_script(), unsafe_allow_html=True)
 
-# Authentication Flow with Persistence
-# import extra_streamlit_components as stx
-# cookie_manager = stx.CookieManager(key="main_auth_cookies")
+# --- AUTHENTICATION ---
+# Cookie manager for session persistence across refreshes
+@st.cache_resource
+def get_cookie_manager():
+    return stx.CookieManager(key="study_smart_auth")
 
+cookie_manager = get_cookie_manager()
+
+# Check for existing session or show login
 if "user" not in st.session_state:
-    # Bypass Auth for testing
-    st.session_state["user"] = {
-        "localId": "test_user_id",
-        "email": "test@example.com",
-        "displayName": "Test User",
-        "idToken": "dummy_token"
-    }
+    render_auth(cookie_manager=cookie_manager)
+    st.stop()
 
-# if "user" not in st.session_state:
-#     render_auth(cookie_manager=cookie_manager)
-#     st.stop()
-    
-# Load Env
-load_dotenv()
 
 def main():
     # --- QUERY PARAM SYNC (PERSISTENCE) ---

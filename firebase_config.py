@@ -106,6 +106,12 @@ except Exception:
 
 def sign_in_user(email, password):
     """Signs in a user using Firebase REST API."""
+    # DEBUG PRINT
+    if FIREBASE_WEB_API_KEY:
+        print(f"DEBUG: Using API KEY: {FIREBASE_WEB_API_KEY[:5]}...  (Length: {len(FIREBASE_WEB_API_KEY)})")
+    else:
+        print("DEBUG: API KEY IS NONE!")
+
     request_url = f"https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key={FIREBASE_WEB_API_KEY}"
     payload = {
         "email": email,
@@ -115,12 +121,15 @@ def sign_in_user(email, password):
     try:
         response = requests.post(request_url, json=payload)
         response.raise_for_status()
+        print("DEBUG: Auth Request Success")
         return response.json()
     except requests.exceptions.HTTPError as e:
         error_json = e.response.json()
         error_message = error_json.get("error", {}).get("message", "Unknown error")
+        print(f"DEBUG: Auth Request Failed: {error_message}")
         return {"error": error_message}
     except Exception as e:
+        print(f"DEBUG: Auth Exception: {e}")
         return {"error": str(e)}
 
 def sign_up_user(email, password):

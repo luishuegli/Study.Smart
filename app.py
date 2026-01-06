@@ -35,6 +35,18 @@ load_design_system()
 # Inject Firebase Analytics
 st.markdown(get_firebase_analytics_script(), unsafe_allow_html=True)
 
+# --- PRESERVE NAVIGATION STATE BEFORE AUTH (Critical for refresh persistence) ---
+# Read query params into session state BEFORE auth check
+# This ensures navigation survives the auth rerun cycle
+if "current_page" not in st.session_state:
+    st.session_state.current_page = st.query_params.get("page", "dashboard")
+if "selected_course" not in st.session_state:
+    st.session_state.selected_course = st.query_params.get("course", "vwl")
+if "selected_topic" not in st.session_state:
+    st.session_state.selected_topic = st.query_params.get("topic")
+if "selected_subtopic" not in st.session_state:
+    st.session_state.selected_subtopic = st.query_params.get("subtopic")
+
 # --- AUTHENTICATION ---
 # Cookie manager for session persistence (cannot be cached - it's a widget)
 cookie_manager = stx.CookieManager(key="study_smart_auth")
@@ -43,7 +55,24 @@ cookie_manager = stx.CookieManager(key="study_smart_auth")
 if "user" not in st.session_state:
     # Try to restore session from cookie
     saved_token = cookie_manager.get("token")
+    
     if saved_token:
+        # Show loading placeholder instead of login (prevents flash)
+        st.markdown("""
+        <div style="display: flex; justify-content: center; align-items: center; height: 80vh;">
+            <div style="text-align: center; color: #6B7280;">
+                <div style="font-size: 1.1rem; margin-bottom: 8px;">Loading...</div>
+                <div style="width: 24px; height: 24px; border: 3px solid #e5e7eb; border-top: 3px solid #1f2937; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto;"></div>
+            </div>
+        </div>
+        <style>
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        </style>
+        """, unsafe_allow_html=True)
+        
         # Verify token and restore session
         from firebase_config import get_account_info
         try:
@@ -61,10 +90,11 @@ if "user" not in st.session_state:
         except Exception as e:
             # Token invalid or expired, continue to login
             pass
-    
-    # No valid session, show login
-    render_auth(cookie_manager=cookie_manager)
-    st.stop()
+        st.stop()
+    else:
+        # No token - show login immediately
+        render_auth(cookie_manager=cookie_manager)
+        st.stop()
 
 
 def main():

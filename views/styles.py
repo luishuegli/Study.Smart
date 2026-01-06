@@ -248,18 +248,31 @@ def load_design_system():
              background-color: #E5E5E5 !important; /* Light Grey Track */
         }
         
-        /* --- 5b. SLIDERS (Global Defaults) --- */
-        /* Slider track - make it visible (AGGRESSIVE for Streamlit Cloud) */
-        div[data-baseweb="slider"] > div:first-child,
+        /* --- 5b. SLIDERS (Global Defaults - ULTRA AGGRESSIVE for Streamlit Cloud) --- */
+        /* The track bar container */
+        div[data-baseweb="slider"] > div,
         div[data-baseweb="slider"] > div > div,
+        div[data-baseweb="slider"] > div > div > div,
         [data-testid="stSlider"] > div > div > div,
+        [data-testid="stSlider"] > div > div > div > div,
+        .stSlider > div > div > div,
         .stSlider > div > div > div > div {
             background-color: #E5E5EA !important; /* Light grey track */
+        }
+        
+        /* The actual track bar (BaseUI uses specific class) */
+        div[data-baseweb="slider"] [class*="Track"],
+        div[data-baseweb="slider"] [class*="track"],
+        div[data-baseweb="slider"] [class*="ProgressBar"],
+        [data-testid="stSlider"] [class*="Track"] {
+            background-color: #E5E5EA !important;
             height: 6px !important;
             border-radius: 3px !important;
         }
         
         /* Filled portion of slider (left side) - semantic blue */
+        div[data-baseweb="slider"] [class*="Track"] > div:first-child,
+        div[data-baseweb="slider"] [class*="InnerTrack"],
         div[data-baseweb="slider"] > div:first-child > div:first-child,
         div[data-baseweb="slider"] > div > div > div:first-child,
         [data-testid="stSlider"] > div > div > div > div:first-child {
@@ -269,6 +282,7 @@ def load_design_system():
         
         /* Slider thumb - black dot */
         div[data-baseweb="slider"] [role="slider"],
+        div[data-baseweb="slider"] [class*="Thumb"],
         [data-testid="stSlider"] [role="slider"] {
             background-color: #000000 !important;
             border: 2px solid #000000 !important;

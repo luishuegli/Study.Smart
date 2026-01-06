@@ -34,17 +34,19 @@ load_design_system()
 # Inject Firebase Analytics
 st.markdown(get_firebase_analytics_script(), unsafe_allow_html=True)
 
-# --- PRESERVE NAVIGATION STATE BEFORE AUTH (Critical for refresh persistence) ---
-# Read query params into session state BEFORE auth check
-# This ensures navigation survives the auth rerun cycle
-if "current_page" not in st.session_state:
+# --- 1. ATOMIC HYDRATION (The "Shield") ---
+# We must capture URL params BEFORE any auth logic triggers a rerun.
+# This ensures that when st.rerun() happens, the session state is already populated
+# and preserved, preventing the app from falling back to default "dashboard".
+if "session_hydrated" not in st.session_state:
+    # Aggressively Hydrate from URL -> Session State
     st.session_state.current_page = st.query_params.get("page", "dashboard")
-if "selected_course" not in st.session_state:
     st.session_state.selected_course = st.query_params.get("course", "vwl")
-if "selected_topic" not in st.session_state:
     st.session_state.selected_topic = st.query_params.get("topic")
-if "selected_subtopic" not in st.session_state:
     st.session_state.selected_subtopic = st.query_params.get("subtopic")
+    
+    # Mark as hydrated so we don't overwrite user actions later
+    st.session_state.session_hydrated = True
 
 # --- AUTHENTICATION ---
 # Cookie manager for session persistence (cannot be cached - it's a widget)
@@ -106,29 +108,9 @@ if "user" not in st.session_state:
 
 def main():
     # --- QUERY PARAM SYNC (PERSISTENCE) ---
-    # 1. On FIRST LOAD (session state is empty), read from URL
-    # This ensures refresh restores the last location, but button clicks are not overwritten.
-    
-    if "current_page" not in st.session_state:
-        if "page" in st.query_params:
-            st.session_state.current_page = st.query_params["page"]
-        else:
-            st.session_state.current_page = "dashboard"
-    
-    if "selected_course" not in st.session_state:
-        if "course" in st.query_params:
-            st.session_state.selected_course = st.query_params["course"]
-        else:
-            st.session_state.selected_course = "vwl"
-    
-    # Topic and subtopic: only load from URL if not already set
-    if "selected_topic" not in st.session_state and "topic" in st.query_params:
-        st.session_state.selected_topic = st.query_params["topic"]
-    
-    if "selected_subtopic" not in st.session_state and "subtopic" in st.query_params:
-        st.session_state.selected_subtopic = st.query_params["subtopic"]
-
     # 2. Sync FROM Session State to URL (always, for URL bar consistency)
+    # At this point, session state is the SOURCE OF TRUTH (set by hydration or user action)
+    
     st.query_params.page = st.session_state.current_page
     st.query_params.course = st.session_state.selected_course
     

@@ -389,10 +389,10 @@ def render_subtopic_5_2(model):
             st.markdown("<br>", unsafe_allow_html=True)
             
             # Color key
-            st.caption(t({
-                "de": "Farbcode: 🟣 = f(1,1), 🔵 = f_Y(1) (die Bedingung)",
-                "en": "Color code: 🟣 = f(1,1), 🔵 = f_Y(1) (the condition)"
-            }))
+            st.markdown(f"""
+<span style="color: #9B59B6; font-weight: bold;">●</span> = f(1,1), 
+<span style="color: #007AFF; font-weight: bold;">●</span> = f<sub>Y</sub>(1) ({t({'de': 'die Bedingung', 'en': 'the condition'})})
+""", unsafe_allow_html=True)
             
             st.markdown("---")
             
@@ -415,9 +415,10 @@ def render_subtopic_5_2(model):
                 if answer == "1/3":
                     st.balloons()
                     st.success(t({
-                        "de": "**Richtig!** (1/8) ÷ (3/8) = (1/8) × (8/3) = 1/3",
-                        "en": "**Correct!** (1/8) ÷ (3/8) = (1/8) × (8/3) = 1/3"
+                        "de": "**Richtig!**",
+                        "en": "**Correct!**"
                     }))
+                    st.latex(r"\frac{1/8}{3/8} = \frac{1}{8} \times \frac{8}{3} = \frac{1}{3}")
                     
                     # Mastery card
                     st.markdown("<br>", unsafe_allow_html=True)
@@ -438,9 +439,10 @@ def render_subtopic_5_2(model):
                             track_question_answer(user["localId"], "vwl", "5", "5.2", "5_2_coin_mission", True)
                 else:
                     st.error(t({
-                        "de": "**Nicht ganz.** Tipp: Bruch dividieren = mit Kehrwert multiplizieren. (1/8) ÷ (3/8) = ?",
-                        "en": "**Not quite.** Tip: Divide by fraction = multiply by reciprocal. (1/8) ÷ (3/8) = ?"
+                        "de": "**Nicht ganz.** Tipp: Bruch dividieren = mit Kehrwert multiplizieren.",
+                        "en": "**Not quite.** Tip: Divide by fraction = multiply by reciprocal."
                     }))
+                    st.latex(r"\frac{1/8}{3/8} = ?")
     
     coin_toss_mission()
     

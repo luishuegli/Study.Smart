@@ -66,16 +66,16 @@ def render_subtopic_5_4(model):
         decisions=[
             {
                 "condition": {"de": "X und Y sind unabhängig", "en": "X and Y are independent"},
-                "result": {"de": "Var(X+Y) = Var(X) + Var(Y)", "en": "Var(X+Y) = Var(X) + Var(Y)"},
+                "result": {"de": "$\\text{Var}(X+Y) = \\text{Var}(X) + \\text{Var}(Y)$!", "en": "$\\text{Var}(X+Y) = \\text{Var}(X) + \\text{Var}(Y)$!"},
                 "highlight": True
             },
             {
-                "condition": {"de": "X und Y sind unkorreliert (Cov=0)", "en": "X and Y are uncorrelated (Cov=0)"},
-                "result": {"de": "Var(X+Y) = Var(X) + Var(Y)", "en": "Var(X+Y) = Var(X) + Var(Y)"},
+                "condition": {"de": "X und Y sind unkorreliert ($\\text{Cov}=0$)", "en": "X and Y are uncorrelated ($\\text{Cov}=0$)"},
+                "result": {"de": "$\\text{Var}(X+Y) = \\text{Var}(X) + \\text{Var}(Y)$", "en": "$\\text{Var}(X+Y) = \\text{Var}(X) + \\text{Var}(Y)$"},
             },
             {
                 "condition": {"de": "X und Y sind korreliert", "en": "X and Y are correlated"},
-                "result": {"de": "Var(X+Y) = Var(X) + Var(Y) + 2Cov(X,Y)", "en": "Var(X+Y) = Var(X) + Var(Y) + 2Cov(X,Y)"},
+                "result": {"de": "$\\text{Var}(X+Y) = \\text{Var}(X) + \\text{Var}(Y) + 2\\text{Cov}(X,Y)$", "en": "$\\text{Var}(X+Y) = \\text{Var}(X) + \\text{Var}(Y) + 2\\text{Cov}(X,Y)$"},
             },
         ]
     )

@@ -381,7 +381,7 @@ def render_subtopic_5_3(model):
                 }))
             
             else:  # rho > 0
-                st.warning(t({
+                grey_info(t({
                     "de": f"ρ = {rho:.1f} → Var = {portfolio_var:.1f}. Positive Korrelation erhöht das Risiko! Versuch's in die andere Richtung.",
                     "en": f"ρ = {rho:.1f} → Var = {portfolio_var:.1f}. Positive correlation increases risk! Try the other direction."
                 }))

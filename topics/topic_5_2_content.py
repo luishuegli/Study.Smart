@@ -162,10 +162,10 @@ content_5_2 = {
         "items": [
             {
                 "label": {"de": "Falle", "en": "Trap"},
-                "title": {"de": "Cov = 0 ≠ Unabhängigkeit!", "en": "Cov = 0 ≠ Independence!"},
+                "title": {"de": "$\\text{Cov} = 0 \\neq$ Unabhängigkeit!", "en": "$\\text{Cov} = 0 \\neq$ Independence!"},
                 "content": {
-                    "de": "Korrelation misst nur **linearen** Zusammenhang. X und Y können stark abhängig sein (z.B. Y = X²) mit Cov(X,Y) = 0!",
-                    "en": "Correlation only measures **linear** relationship. X and Y can be strongly dependent (e.g., Y = X²) with Cov(X,Y) = 0!"
+                    "de": "Korrelation misst nur **linearen** Zusammenhang. X und Y können stark abhängig sein (z.B. $Y = X^2$) mit $\\text{Cov}(X,Y) = 0$!",
+                    "en": "Correlation only measures **linear** relationship. X and Y can be strongly dependent (e.g., $Y = X^2$) with $\\text{Cov}(X,Y) = 0$!"
                 },
                 "type": "warning"
             },
@@ -180,10 +180,10 @@ content_5_2 = {
             },
             {
                 "label": {"de": "Tipp", "en": "Tip"},
-                "title": {"de": "E[XY] = E[X]·E[Y] braucht nur Unkorreliertheit", "en": "E[XY] = E[X]·E[Y] only needs uncorrelatedness"},
+                "title": {"de": "$E[XY] = E[X] \\cdot E[Y]$ braucht nur Unkorreliertheit", "en": "$E[XY] = E[X] \\cdot E[Y]$ only needs uncorrelatedness"},
                 "content": {
-                    "de": "Diese Eigenschaft gilt schon wenn Cov = 0, nicht erst bei Unabhängigkeit. Unabhängigkeit ist **stärker**.",
-                    "en": "This property holds when Cov = 0, not only for independence. Independence is **stronger**."
+                    "de": "Diese Eigenschaft gilt schon wenn $\\text{Cov} = 0$, nicht erst bei Unabhängigkeit. Unabhängigkeit ist **stärker**.",
+                    "en": "This property holds when $\\text{Cov} = 0$, not only for independence. Independence is **stronger**."
                 },
                 "type": "tip"
             }

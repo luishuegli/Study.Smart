@@ -278,38 +278,24 @@ def render_mcq(
 
 
     # 4. Solution Display Logic
-    # Multi-select: Controlled by "Check Answer" (which sets show_sol_key=True)
-    # Single-select: Controlled by "Show Solution" Toggle
+    # Multi-select: Shows after Check Answer button
+    # Single-select: Uses expander (no page rerun, no ugly borders, no tab reset)
     
-    # CRITICAL: Wrap solution section in fragment to prevent full page rerun
-    # This fixes tabs resetting to first tab when clicking "Show Solution"
-    @st.fragment
-    def _render_solution_section():
-        should_show_solution = False
-        
-        if is_multi_select:
-            # Already handled by Check Button setting the key
-            should_show_solution = st.session_state.get(show_sol_key, False)
-        else:
-            # Standard Single Choice Toggle
-            if st.button(t({"de": "Lösung zeigen", "en": "Show Solution"}), key=f"toggle_{key_suffix}", type="primary"):
-                st.session_state[show_sol_key] = not st.session_state.get(show_sol_key, False)
-            should_show_solution = st.session_state.get(show_sol_key, False)
-
-        if should_show_solution:
+    if is_multi_select:
+        # Multi-select: Show solution if Check Answer was clicked
+        if st.session_state.get(show_sol_key, False):
             with st.container(border=True):
                 sol_content = t(solution_text_dict)
                 st.markdown(sol_content, unsafe_allow_html=True)
-                
-                # AI Tutor
-                if is_multi_select:
-                     full_context = f"{ai_context}\n\nProblem: {question_text}\nCorrect Indices: {correct_idx}"
-                else:
-                     full_context = f"{ai_context}\n\nProblem: {question_text}\nCorrect Answer Index: {correct_idx}"
-                
+                full_context = f"{ai_context}\n\nProblem: {question_text}\nCorrect Indices: {correct_idx}"
                 render_ai_tutor(f"mcq_ai_{key_suffix}", full_context, client)
-    
-    _render_solution_section()
+    else:
+        # Single-select: Use expander (no full page rerun, no tab reset, no ugly borders)
+        with st.expander(t({"de": "Lösung zeigen", "en": "Show Solution"}), expanded=False):
+            sol_content = t(solution_text_dict)
+            st.markdown(sol_content, unsafe_allow_html=True)
+            full_context = f"{ai_context}\n\nProblem: {question_text}\nCorrect Answer Index: {correct_idx}"
+            render_ai_tutor(f"mcq_ai_{key_suffix}", full_context, client)
 
     # Retry/Reset
     if allow_retry:

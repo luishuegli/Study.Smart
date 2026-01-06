@@ -557,13 +557,7 @@ def load_design_system():
             display: none !important;
         }
         
-        /* --- 12. HIDE NESTED FRAGMENT BORDERS --- */
-        /* When a bordered container is inside another bordered container (fragment pattern) */
-        /* Only remove the INNER border to avoid double-borders, outer stays for context */
-        div[data-testid="stVerticalBlockBorderWrapper"] div[data-testid="stVerticalBlockBorderWrapper"] {
-            border: none !important;
-            box-shadow: none !important;
-        }
+        /* Fragment border CSS removed - now using st.expander instead */
 
     </style>
     """, unsafe_allow_html=True)

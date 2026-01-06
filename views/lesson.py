@@ -24,19 +24,7 @@ if api_key:
 else:
     client = None
 
-# --- CALLBACKS ---
-def back_to_dashboard_callback(course_id):
-    """Callback to return to dashboard and clear topic params."""
-    st.session_state.current_page = "dashboard"
-    st.session_state.selected_topic = None
-    st.session_state.selected_subtopic = None
-    
-    # URL Sync
-    st.query_params.clear()
-    st.query_params.update({
-        "page": "dashboard",
-        "course": course_id
-    })
+
 
 def lesson_view():
     # --- SCROLL TO TOP (when coming from Next Lesson) ---
@@ -137,6 +125,8 @@ def lesson_view():
         if radio_key in st.session_state:
             del st.session_state[radio_key]
             
+        st.rerun()
+            
         # No rerun needed if used as callback (Streamlit reruns automatically)
 
     # --- SIDEBAR NAVIGATION ---
@@ -144,11 +134,21 @@ def lesson_view():
         # 1. Back Button at Field Top
         if st.button("← " + loc.t({"de": "Zurück zur Übersicht", "en": "Back to Dashboard"}), 
                      key="back_to_dash", 
-                     use_container_width=True,
-                     on_click=back_to_dashboard_callback,
-                     args=(st.session_state.get("selected_course", "vwl"),)
+                     use_container_width=True
                     ):
-            pass # changes handled in callback
+            st.session_state.current_page = "dashboard"
+            st.session_state.selected_topic = None
+            st.session_state.selected_subtopic = None
+            
+            # IMMEDIATE URL SYNC
+            # Clear topic/subtopic by setting new dict or clearing first
+            st.query_params.clear()
+            st.query_params.update({
+                "page": "dashboard",
+                "course": st.session_state.get("selected_course", "vwl")
+            })
+            
+            st.rerun()
         
         # --- COURSE LEVEL PROGRESS ---
         overall_completed = st.session_state.get("overall_course_progress", 0.0)
@@ -341,15 +341,9 @@ def render_navigation_buttons(course_id, current_topic_id, current_subtopic_id, 
         with col2:
             button_label = f"{loc.t({'de': 'Nächste Lektion', 'en': 'Next Lesson'})}: {next_subtopic_title} →"
             
-            # Use callback for Next Lesson
-            st.button(
-                button_label, 
-                use_container_width=True, 
-                type="primary", 
-                key="next_lesson_btn",
-                on_click=navigate_to_subtopic,
-                args=(next_topic_id, next_subtopic_id)
-            )
+            if st.button(button_label, use_container_width=True, type="primary", key="next_lesson_btn"):
+                 st.session_state.scroll_to_top = True
+                 navigate_to_subtopic(next_topic_id, next_subtopic_id)
 
 
 def render_topic_content(client, topic_id, subtopic_id):

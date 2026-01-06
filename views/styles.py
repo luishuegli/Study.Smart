@@ -558,11 +558,19 @@ def load_design_system():
         }
         
         /* --- 12. HIDE FRAGMENT BORDERS --- */
-        /* Fragments should be invisible wrappers, not bordered containers */
-        div[data-testid="stVerticalBlockBorderWrapper"]:has(> div > div > button[data-testid="stBaseButton-primary"]:only-child),
-        div[data-testid="stVerticalBlockBorderWrapper"]:has(> div > div > div[data-testid="stVerticalBlockBorderWrapper"]) {
+        /* Fragments create nested stVerticalBlockBorderWrapper - hide the outer one */
+        /* Target: border wrappers that ONLY contain another border wrapper or just a button */
+        div[data-testid="stVerticalBlockBorderWrapper"] > div > div[data-testid="stVerticalBlock"] > div[data-testid="stVerticalBlockBorderWrapper"] {
             border: none !important;
             padding: 0 !important;
+            box-shadow: none !important;
+        }
+        
+        /* Also hide fragment wrapper when it only has button + optional solution */
+        div[data-testid="stVerticalBlockBorderWrapper"]:has(> div[data-testid="stVerticalBlock"] > div:first-child > div > button[kind="primary"]):not(:has(div[data-testid="stRadio"])) {
+            border: none !important;
+            padding: 0 !important;
+            box-shadow: none !important;
             background: transparent !important;
         }
 

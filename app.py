@@ -134,24 +134,15 @@ def main():
     # Note: We use .to_dict() to compare valid params only
     current_params = st.query_params.to_dict()
     
-    # Only update if there's a semantic difference to avoid unnecessary re-renders loop
-    # (Though st.query_params usually handles this well internally)
-    needs_update = False
+    # 1. Update keys that differ
     for k, v in desired_params.items():
         if current_params.get(k) != v:
-            needs_update = True
-            break
+            st.query_params[k] = v
             
-    # Also check if we need to remove keys
-    if not needs_update:
-        for k in ["topic", "subtopic"]:
-            if k not in desired_params and k in current_params:
-                needs_update = True
-                break
-    
-    if needs_update:
-        st.query_params.clear()
-        st.query_params.update(desired_params)
+    # 2. Remove keys that shouldn't be there (only topic/subtopic)
+    for k in ["topic", "subtopic"]:
+        if k not in desired_params and k in current_params:
+            del st.query_params[k]
 
     # Router
     if st.session_state.current_page == "dashboard":
@@ -165,10 +156,6 @@ def main():
         if st.button("Go Home"):
             st.session_state.current_page = "dashboard"
             st.rerun()
-
-    # Force Sync URL (Atomic JS Fallback)
-    from utils.url_checker import sync_url_with_session
-    sync_url_with_session()
 
 if __name__ == "__main__":
     main()

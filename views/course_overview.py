@@ -101,6 +101,30 @@ def calculate_topic_progress(topic_data, subtopic_ids):
     # Clamp to 1.0 incase of ghost data (e.g., renamed ids)
     return min(1.0, total_completed / total_questions)
 
+# --- NAVIGATION CALLBACKS ---
+def start_learning_callback(course_id, topic_id, topic_data):
+    """Callback to handle topic selection and URL sync safely."""
+    st.session_state.current_page = "lesson"
+    st.session_state.selected_topic = topic_id
+    
+    # Init subtopic logic
+    subtopics = topic_data.get("subtopics", [])
+    first_sub = subtopics[0]["id"] if subtopics else None
+    
+    if first_sub:
+        st.session_state.selected_subtopic = first_sub
+    
+    # URL Update
+    params = {
+        "page": "lesson",
+        "topic": topic_id,
+        "course": course_id
+    }
+    if first_sub:
+        params["subtopic"] = first_sub
+    
+    st.query_params.update(params)
+
 def course_overview_view():
     # Add sidebar footer
 
@@ -213,24 +237,19 @@ def course_overview_view():
                 if status == 'locked':
                     st.button(loc.t({"de": "Gesperrt", "en": "Locked"}), key=topic['id'], disabled=True)
                 else:
-                    if st.button(loc.t({"de": "Lernen starten", "en": "Start Learning"}), key=topic['id'], type="primary"):
-                        st.session_state.current_page = "lesson"
-                        st.session_state.selected_topic = topic['id']
-                        
-                        # Find first subtopic to default to
-                        first_sub = subtopics[0]["id"] if subtopics else None
-                        st.session_state.selected_subtopic = first_sub
-                        
-                        # IMMEDIATE URL SYNC
-                        # Use update() for robust setting
-                        params = {
-                            "page": "lesson",
-                            "topic": topic['id'],
-                            "course": st.session_state.get("selected_course", "vwl")
-                        }
-                        if first_sub:
-                            params["subtopic"] = first_sub
-                        
-                        st.query_params.update(params)
-                            
-                        st.rerun()
+                    # "Start Learning" Button with Callback
+                    st.button(
+                        loc.t({"de": "Lernen starten", "en": "Start Learning"}),
+                        key=f"btn_start_{topic['id']}",
+                        use_container_width=False,
+                        type="primary",
+                        on_click=start_learning_callback,
+                        args=(
+                            st.session_state.get("selected_course", "vwl"),
+                            topic['id'],
+                            topic
+                        )
+                    )
+                    
+                    # Progress Bar
+                    st.progress(completed_pct)

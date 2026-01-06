@@ -163,21 +163,13 @@ content_6_2 = {
 def continuity_correction_interactive():
     """Interactive element to compare WITH vs WITHOUT continuity correction."""
     
-    # Scenario
-    grey_callout(
-        {"de": "Szenario", "en": "Scenario"},
-        {"de": "Du bist Qualitätskontrolleur. Bei n Produkten ist jedes mit Wahrscheinlichkeit p defekt. Du fragst: Wie wahrscheinlich sind mindestens k defekte Produkte?", 
-         "en": "You're a quality controller. Among n products, each is defective with probability p. You ask: How likely are at least k defective products?"}
-    )
-    st.markdown("<br>", unsafe_allow_html=True)
+    # Scenario (plain text, no grey callout to save space)
+    st.markdown(t({
+        "de": "Du bist Qualitätskontrolleur. Bei $n$ Produkten ist jedes mit Wahrscheinlichkeit $p$ defekt. Wie wahrscheinlich sind mindestens $k$ defekte Produkte?",
+        "en": "You're a quality controller. Among $n$ products, each is defective with probability $p$. How likely are at least $k$ defective products?"
+    }))
     
-    st.markdown("<br>", unsafe_allow_html=True)
-    
-    st.markdown(f"**{t({'de': 'Mission', 'en': 'Mission'})}:** {t({'de': 'Beobachte, wie die Stetigkeitskorrektur das Ergebnis beeinflusst.', 'en': 'Observe how the continuity correction affects the result.'})}")
-    
-    st.markdown("<br>", unsafe_allow_html=True)
-    
-    # Semantic slider colors: n=blue, p=purple, k=red (same CSS pattern as topic 1.5)
+    # Semantic slider colors: n=blue, p=purple, k=red
     st.markdown("""
 <style>
 /* 1. n (Blue) */
@@ -194,7 +186,7 @@ def continuity_correction_interactive():
 </style>
 """, unsafe_allow_html=True)
     
-    # Controls with visible labeled sliders (so CSS can target them)
+    # Controls with visible labeled sliders
     col1, col2, col3 = st.columns(3)
     with col1:
         n = st.slider("n = Sample Size", min_value=20, max_value=200, value=70, step=10, key="cc_n")
@@ -218,55 +210,44 @@ def continuity_correction_interactive():
     # Exact Binomial
     p_exact = 1 - stats.binom.cdf(k - 1, n, p)
     
-    # Display results
-    st.markdown("<br>", unsafe_allow_html=True)
-    
     inject_equal_height_css()
     
-    # TOP ROW: WITHOUT and WITH (2 columns)
+    # TOP ROW: WITHOUT and WITH (2 columns) - with SEMANTIC COLORS in formulas
     c1, c2 = st.columns(2, gap="medium")
     
-    # WITHOUT Correction
+    # WITHOUT Correction - semantic colors: k=red, μ=derived, σ=derived
     with c1:
         with st.container(border=True):
             st.markdown(f"**{t({'de': 'OHNE Korrektur', 'en': 'WITHOUT Correction'})}**")
-            st.latex(rf"Z = \frac{{{k} - {mu:.1f}}}{{{sigma:.2f}}} = {z_without:.3f}")
-            st.latex(rf"\Rightarrow \quad P(X \geq {k}) \approx {p_without:.4f}")
+            st.latex(rf"Z = \frac{{\color{{#FF4B4B}}{k}} - {{\color{{#6B7280}}{mu:.1f}}}}}{{\color{{#6B7280}}{sigma:.2f}}} = {z_without:.3f}")
+            st.latex(rf"\Rightarrow P(X \geq {{\color{{#FF4B4B}}{k}}}) \approx {p_without:.4f}")
     
-    # WITH Correction
+    # WITH Correction - semantic colors
     with c2:
         with st.container(border=True):
             st.markdown(f"**{t({'de': 'MIT Korrektur', 'en': 'WITH Correction'})}**")
-            st.latex(rf"Z = \frac{{{k - 0.5} - {mu:.1f}}}{{{sigma:.2f}}} = {z_with:.3f}")
-            st.latex(rf"\Rightarrow \quad P(X \geq {k}) \approx {p_with:.4f}")
+            st.latex(rf"Z = \frac{{\color{{#FF4B4B}}{k - 0.5}} - {{\color{{#6B7280}}{mu:.1f}}}}}{{\color{{#6B7280}}{sigma:.2f}}} = {z_with:.3f}")
+            st.latex(rf"\Rightarrow P(X \geq {{\color{{#FF4B4B}}{k}}}) \approx {p_with:.4f}")
     
-    # BOTTOM ROW: EXACT (full width) - with full formula
+    # BOTTOM ROW: EXACT (full width) - with semantic colors
     with st.container(border=True):
         st.markdown(f"**{t({'de': 'EXAKT (Binomial)', 'en': 'EXACT (Binomial)'})}**")
-        st.latex(rf"P(X \geq {k}) = \sum_{{i={k}}}^{{{n}}} \binom{{{n}}}{{i}} {p}^i (1-{p})^{{{n}-i}} = {p_exact:.4f}")
+        st.latex(rf"P(X \geq {{\color{{#FF4B4B}}{k}}}) = \sum_{{i={{\color{{#FF4B4B}}{k}}}}}^{{{{\color{{#007AFF}}{n}}}}} \binom{{{{\color{{#007AFF}}{n}}}}}{{i}} {{\color{{#9B59B6}}{p}}}^i (1-{{\color{{#9B59B6}}{p}}})^{{{{\color{{#007AFF}}{n}}}-i}} = {p_exact:.4f}")
     
-    # Error comparison
+    # Error comparison (no extra break)
     error_without = abs(p_without - p_exact)
     error_with = abs(p_with - p_exact)
     
     if error_without > error_with:
         st.success(t({
-            "de": f"MIT Korrektur ist näher am exakten Wert! Fehler: {error_with:.4f} vs {error_without:.4f}",
-            "en": f"WITH correction is closer to exact! Error: {error_with:.4f} vs {error_without:.4f}"
+            "de": f"MIT Korrektur ist näher! Fehler: {error_with:.4f} vs {error_without:.4f}",
+            "en": f"WITH correction is closer! Error: {error_with:.4f} vs {error_without:.4f}"
         }))
     else:
         grey_info(t({
-            "de": f"In diesem Fall sind beide Approximationen ähnlich. Fehler: {error_with:.4f} vs {error_without:.4f}",
-            "en": f"In this case both approximations are similar. Error: {error_with:.4f} vs {error_without:.4f}"
+            "de": f"Beide ähnlich. Fehler: {error_with:.4f} vs {error_without:.4f}",
+            "en": f"Both similar. Error: {error_with:.4f} vs {error_without:.4f}"
         }))
-    
-    # Discovery debrief
-    st.markdown("<br>", unsafe_allow_html=True)
-    grey_callout(
-        {"de": "Was du gelernt hast", "en": "What you learned"},
-        {"de": "Die Stetigkeitskorrektur (±0.5) verringert den Fehler, wenn wir eine diskrete Verteilung (Binomial) mit einer stetigen (Normal) approximieren. Der Unterschied wird umso wichtiger, je kleiner n oder je extremer k.", 
-         "en": "The continuity correction (±0.5) reduces the error when approximating a discrete distribution (Binomial) with a continuous one (Normal). The difference becomes more important with smaller n or more extreme k."}
-    )
 
 
 # ==========================================

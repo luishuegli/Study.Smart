@@ -96,8 +96,8 @@ content_6_3 = {
             ],
             "correct_idx": 1,
             "solution": {
-                "de": r"Die Standardabweichung der Summe ist σ√n (Varianz ist nσ²). Der Nenner ist IMMER die Standardabweichung der Grösse, die du standardisierst!",
-                "en": r"The standard deviation of the sum is σ√n (variance is nσ²). The denominator is ALWAYS the standard deviation of the quantity you're standardizing!"
+                "de": r"Die Standardabweichung der Summe ist $\sigma\sqrt{n}$ (Varianz ist $n\sigma^2$). Der Nenner ist IMMER die Standardabweichung der Grösse, die du standardisierst!",
+                "en": r"The standard deviation of the sum is $\sigma\sqrt{n}$ (variance is $n\sigma^2$). The denominator is ALWAYS the standard deviation of the quantity you're standardizing!"
             }
         }
     },
@@ -292,7 +292,7 @@ content_6_3 = {
             },
             {
                 "tip": {"de": "Nenner beim Standardisieren = Standardabweichung der Grösse", "en": "Denominator when standardizing = standard deviation of the quantity"},
-                "why": {"de": "Summe: σ√n, Mittelwert: σ/√n, Binomial: √(np(1-p))", "en": "Sum: σ√n, Mean: σ/√n, Binomial: √(np(1-p))"}
+                "why": {"de": "Summe: $\\sigma\\sqrt{n}$, Mittelwert: $\\sigma/\\sqrt{n}$, Binomial: $\\sqrt{np(1-p)}$", "en": "Sum: $\\sigma\\sqrt{n}$, Mean: $\\sigma/\\sqrt{n}$, Binomial: $\\sqrt{np(1-p)}$"}
             },
             {
                 "tip": {"de": "i.i.d. prüfen: Unabhängig + Identisch verteilt + Grosses n", "en": "Check i.i.d.: Independent + Identically distributed + Large n"},
@@ -305,8 +305,8 @@ content_6_3 = {
             }
         ],
         "trap": {
-            "de": "<strong>Die Korrektur-Richtungs-Falle:</strong> Bei P(X ≥ k) wird k KLEINER (k-0.5), bei P(X ≤ k) wird k GRÖSSER (k+0.5). Die Richtung ist kontraintuitiv!",
-            "en": "<strong>The Correction Direction Trap:</strong> For P(X ≥ k), k becomes SMALLER (k-0.5), for P(X ≤ k), k becomes LARGER (k+0.5). The direction is counterintuitive!"
+            "de": "<strong>Die Korrektur-Richtungs-Falle:</strong> Bei $P(X \\geq k)$ wird k KLEINER ($k-0.5$), bei $P(X \\leq k)$ wird k GRÖSSER ($k+0.5$). Die Richtung ist kontraintuitiv!",
+            "en": "<strong>The Correction Direction Trap:</strong> For $P(X \\geq k)$, k becomes SMALLER ($k-0.5$), for $P(X \\leq k)$, k becomes LARGER ($k+0.5$). The direction is counterintuitive!"
         },
         "trap_rule": {
             "de": "Merke: Du erweiterst immer das Intervall, um den diskreten Wert vollständig einzuschliessen.",

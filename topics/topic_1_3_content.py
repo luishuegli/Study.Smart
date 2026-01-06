@@ -45,8 +45,8 @@ content_1_3 = {
         "en": "Simulate dice rolls. Watch how the bars converge to the theoretical line (16.7%)."
     },
     "vis_note": {
-        "de": "**Beachte:** Bei wenigen Würfen schwanken die Balken stark. Erst bei sehr vielen Würfen ($n \\to \\infty$) stabilisiert sich die Verteilung.",
-        "en": "**Note:** With few rolls, the bars fluctuate wildly. Only with many rolls ($n \\to \\infty$) does the distribution stabilize."
+        "de": "**Beachte:** Bei wenigen Würfen schwanken die Balken stark. Erst bei sehr vielen Würfen (n → ∞) stabilisiert sich die Verteilung.",
+        "en": "**Note:** With few rolls, the bars fluctuate wildly. Only with many rolls (n → ∞) does the distribution stabilize."
     }
 }
 

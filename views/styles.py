@@ -237,9 +237,21 @@ def load_design_system():
         }
         
         /* --- 5b. SLIDERS (Global Defaults) --- */
-        /* Remove red gradient from filled track */
+        /* Slider track - make it visible */
+        div[data-baseweb="slider"] > div:first-child {
+            background-color: #E5E5EA !important; /* Light grey track */
+        }
+        
+        /* Filled portion of slider (left side) - semantic blue */
         div[data-baseweb="slider"] > div:first-child > div:first-child {
+            background-color: #007AFF !important; /* Pool blue */
             background-image: none !important;
+        }
+        
+        /* Slider thumb - black dot */
+        div[data-baseweb="slider"] [role="slider"] {
+            background-color: #000000 !important;
+            border: 2px solid #000000 !important;
         }
         
         /* Force ALL slider value text to black - comprehensive selectors */

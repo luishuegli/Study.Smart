@@ -217,22 +217,13 @@ content_4_7 = {
         "formula": r"\text{Wenn } X_i \sim N(\mu_i, \sigma_i^2) \text{ unabhängig: } \sum X_i \sim N\left(\sum \mu_i, \sum \sigma_i^2\right)"
     },
     
-    # --- EXAM ESSENTIALS (Merged Trap + Pro Tip) ---
     "exam_essentials": {
         "header": {"de": "Prüfungs-Essentials", "en": "Exam Essentials"},
         "items": [
             {
-                "label": {"de": "Falle", "en": "Trap"},
-                "title": {"de": "N(μ, σ²) vs N(μ, σ)", "en": "N(μ, σ²) vs N(μ, σ)"},
-                "content": {
-                    "de": "Notation variiert! Prüfe IMMER ob der Parameter σ oder σ² ist.<br><em>Beispiel:</em> N(100, 225) bedeutet σ² = 225, also <strong>σ = 15</strong>",
-                    "en": "Notation varies! ALWAYS check if the parameter is σ or σ².<br><em>Example:</em> N(100, 225) means σ² = 225, so <strong>σ = 15</strong>"
-                },
-                "type": "warning"
-            },
-            {
                 "label": {"de": "Formel", "en": "Formula"},
-                "title": {"de": "Z = (X - μ)/σ immer standardisieren", "en": "Always standardize Z = (X - μ)/σ"},
+                "title": {"de": "Immer standardisieren", "en": "Always standardize"},
+                "title_formula": r"Z = \frac{X - \mu}{\sigma}",
                 "content": {
                     "de": "Die Z-Tabelle gilt nur für N(0,1)! Jede Normalverteilung muss erst umgerechnet werden.",
                     "en": "Z-table only works for N(0,1)! Every normal distribution must first be converted."
@@ -241,7 +232,7 @@ content_4_7 = {
             },
             {
                 "label": {"de": "Symmetrie", "en": "Symmetry"},
-                "title": {"de": "Φ(-z) = 1 - Φ(z)", "en": "Φ(-z) = 1 - Φ(z)"},
+                "title_formula": r"\Phi(-z) = 1 - \Phi(z)",
                 "content": {
                     "de": "Die Tabelle zeigt oft nur positive z-Werte. Für negative z: nutze die Symmetrie.",
                     "en": "Table often shows only positive z-values. For negative z: use symmetry."
@@ -250,12 +241,22 @@ content_4_7 = {
             },
             {
                 "label": {"de": "Merken", "en": "Memorize"},
-                "title": {"de": "Φ(1.96) ≈ 0.975 für 95%-CI", "en": "Φ(1.96) ≈ 0.975 for 95% CI"},
+                "title_formula": r"\Phi(1.96) \approx 0.975 \text{ für 95\%-KI}",
+                "title_formula_en": r"\Phi(1.96) \approx 0.975 \text{ for 95\% CI}",
                 "content": {
                     "de": "DER wichtigste z-Wert! 2.5% in jedem Schwanz → 95% in der Mitte.",
                     "en": "THE most important z-value! 2.5% in each tail → 95% in the middle."
                 },
                 "type": "tip"
+            },
+            {
+                "label": {"de": "Falle", "en": "Trap"},
+                "title_formula": r"N(\mu, \sigma^2) \text{ vs } N(\mu, \sigma)",
+                "content": {
+                    "de": "Notation variiert! Prüfe IMMER ob der Parameter σ oder σ² ist.<br><em>Beispiel:</em> N(100, 225) bedeutet σ² = 225, also <strong>σ = 15</strong>",
+                    "en": "Notation varies! ALWAYS check if the parameter is σ or σ².<br><em>Example:</em> N(100, 225) means σ² = 225, so <strong>σ = 15</strong>"
+                },
+                "type": "warning"
             }
         ]
     }
@@ -466,7 +467,7 @@ def render_subtopic_4_7(model):
     with st.container(border=True):
         # REAL-WORLD SCENARIO
         st.markdown(f"""
-<div style="background: rgba(0, 122, 255, 0.08); padding:14px; border-radius:8px; color:#1c1c1e; margin-bottom:12px; border-left: 4px solid #007AFF;">
+<div style="background: #f4f4f5; padding:14px; border-radius:8px; color:#3f3f46; margin-bottom:12px; border-left: 4px solid #a1a1aa;">
 <strong>{t({'de': 'Szenario:', 'en': 'Scenario:'})}</strong> {t({'de': 'Ein Unternehmen möchte Bonuszahlungen an die Top 5% der Verkäufer vergeben. Sie müssen wissen: Welcher Verkaufswert (X) markiert die Grenze zum „Elite-Status"?', 'en': 'A company wants to award bonuses to the top 5% of salespeople. They need to know: What sales value (X) marks the threshold for "Elite Status"?'})}
 </div>""", unsafe_allow_html=True)
         

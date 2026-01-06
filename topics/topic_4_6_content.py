@@ -186,17 +186,8 @@ content_4_6 = {
         "header": {"de": "Prüfungs-Essentials", "en": "Exam Essentials"},
         "items": [
             {
-                "label": {"de": "Falle", "en": "Trap"},
-                "title": {"de": "λ vs. 1/λ verwechseln!", "en": "Confusing λ and 1/λ!"},
-                "content": {
-                    "de": "'Mittlere Lebensdauer = 5000h' ist E[X] = 1/λ, <strong>nicht λ</strong>!<br><em>Merke:</em> λ = Rate (pro Zeit), 1/λ = mittlere Wartezeit",
-                    "en": "'Average lifetime = 5000h' is E[X] = 1/λ, <strong>not λ</strong>!<br><em>Remember:</em> λ = rate (per time), 1/λ = mean waiting time"
-                },
-                "type": "warning"
-            },
-            {
                 "label": {"de": "Formel", "en": "Formula"},
-                "title": {"de": "P(X > x) = e^−λx", "en": "P(X > x) = e^−λx"},
+                "title_formula": r"P(X > x) = e^{-\lambda x}",
                 "content": {
                     "de": "Auswendig lernen! 'Wie wahrscheinlich dauert es länger als x?' → direkt anwenden.",
                     "en": "Memorize this! 'How likely does it last longer than x?' → apply directly."
@@ -206,11 +197,21 @@ content_4_6 = {
             {
                 "label": {"de": "Konzept", "en": "Concept"},
                 "title": {"de": "Gedächtnislosigkeit", "en": "Memorylessness"},
+                "title_formula": r"P(X > s+t \mid X > s) = P(X > t)",
                 "content": {
-                    "de": "P(X > s+t | X > s) = P(X > t). Die Restwartezeit ist unabhängig davon, wie lange du schon gewartet hast!",
-                    "en": "P(X > s+t | X > s) = P(X > t). Remaining time is independent of how long you've already waited!"
+                    "de": "Die Restwartezeit ist unabhängig davon, wie lange du schon gewartet hast!",
+                    "en": "Remaining time is independent of how long you've already waited!"
                 },
                 "type": "tip"
+            },
+            {
+                "label": {"de": "Falle", "en": "Trap"},
+                "title_formula": r"\lambda \text{ vs. } \frac{1}{\lambda}",
+                "content": {
+                    "de": "'Mittlere Lebensdauer = 5000h' ist E[X] = 1/λ, <strong>nicht λ</strong>!<br><em>Merke:</em> λ = Rate (pro Zeit), 1/λ = mittlere Wartezeit",
+                    "en": "'Average lifetime = 5000h' is E[X] = 1/λ, <strong>not λ</strong>!<br><em>Remember:</em> λ = rate (per time), 1/λ = mean waiting time"
+                },
+                "type": "warning"
             }
         ]
     }
@@ -356,7 +357,7 @@ def render_subtopic_4_6(model):
     # --- PARAMETER ---
     st.markdown(f"### {t(content_4_6['parameter']['header'])}")
     with st.container(border=True):
-        col_sym, col_desc = st.columns([1, 3])
+        col_sym, col_desc = st.columns([1, 3], vertical_alignment="center")
         with col_sym:
             st.latex(content_4_6["parameter"]["symbol"])
         with col_desc:
@@ -453,7 +454,7 @@ def render_subtopic_4_6(model):
     with st.container(border=True):
         # REAL-WORLD SCENARIO
         st.markdown(f"""
-<div style="background: rgba(0, 122, 255, 0.08); padding:14px; border-radius:8px; color:#1c1c1e; margin-bottom:12px; border-left: 4px solid #007AFF;">
+<div style="background: #f4f4f5; padding:14px; border-radius:8px; color:#3f3f46; margin-bottom:12px; border-left: 4px solid #a1a1aa;">
 <strong>{t({'de': 'Szenario:', 'en': 'Scenario:'})}</strong> {t({'de': 'Ein Qualitätsingenieur testet Bauteile. Er muss wissen: Bei welcher Ausfallrate (λ) überleben weniger als 10% der Teile eine 2-jährige Garantiezeit?', 'en': 'A quality engineer tests components. They need to know: At what failure rate (λ) will less than 10% of parts survive a 2-year warranty period?'})}
 </div>""", unsafe_allow_html=True)
         

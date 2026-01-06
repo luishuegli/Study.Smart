@@ -8,7 +8,8 @@ def init_lang():
         st.session_state.lang = url_lang if url_lang in ('de', 'en') else 'en'
     
     # Always sync to URL for persistence
-    st.query_params.lang = st.session_state.lang
+    # Always sync to URL for persistence
+    st.query_params.update({"lang": st.session_state.lang})
 
 def get_current_language():
     """Return current language code ('de' or 'en')."""
@@ -110,13 +111,13 @@ def render_language_selector(container=None):
     with col1:
         if st.button("EN", key="lang_en", type=get_type("en"), use_container_width=True):
             st.session_state.lang = "en"
-            st.query_params.lang = "en"  # Persist to URL
+            st.query_params.update({"lang": "en"})  # Persist to URL
             st.rerun()
             
     with col2:
         if st.button("DE", key="lang_de", type=get_type("de"), use_container_width=True):
             st.session_state.lang = "de"
-            st.query_params.lang = "de"  # Persist to URL
+            st.query_params.update({"lang": "de"})  # Persist to URL
             st.rerun()
 
 def reset_user_progress(user_id: str, course_id: str) -> bool:

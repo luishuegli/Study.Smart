@@ -38,7 +38,9 @@ def initialize_firebase_admin():
                 except Exception as e:
                     print(f"Error loading from file: {e}")
             else:
-                print(f"Warning: {cred_path} not found and no Streamlit Secrets. Firebase Admin not initialized.")
+                # Only warn if we really expected a file (local dev)
+                # print(f"Info: Local creds not found (normal in Cloud).")
+                pass
         
         # Initialize if we have credentials
         if cred:
@@ -84,7 +86,10 @@ import requests
 import json
 
 # Firebase Web API Key
-FIREBASE_WEB_API_KEY = os.getenv("FIREBASE_API_KEY")
+try:
+    FIREBASE_WEB_API_KEY = os.getenv("FIREBASE_API_KEY") or st.secrets.get("FIREBASE_API_KEY")
+except Exception:
+    FIREBASE_WEB_API_KEY = None
 
 def sign_in_user(email, password):
     """Signs in a user using Firebase REST API."""

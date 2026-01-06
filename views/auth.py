@@ -8,7 +8,7 @@ def render_auth(cookie_manager=None):
     """
     Renders login/signup tabs.
     """
-    # Centered card layout
+    # Centered card layout + pill buttons
     st.markdown("""
     <style>
     /* Center the auth container */
@@ -23,6 +23,18 @@ def render_auth(cookie_manager=None):
     .auth-header {
         text-align: center;
         margin-bottom: 30px;
+    }
+    /* Pill-shaped black auth buttons */
+    [data-testid="stFormSubmitButton"] > button {
+        background-color: #000000 !important;
+        color: #FFFFFF !important;
+        border: none !important;
+        border-radius: 50px !important;
+        padding: 10px 32px !important;
+        font-weight: 500 !important;
+    }
+    [data-testid="stFormSubmitButton"] > button:hover {
+        background-color: #333333 !important;
     }
     </style>
     """, unsafe_allow_html=True)

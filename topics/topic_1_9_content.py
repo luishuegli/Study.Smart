@@ -271,10 +271,14 @@ def render_subtopic_1_9(model):
                 }), unsafe_allow_html=True)
             
             elif stage == 2:
-                st.warning(t({
-                    "de": "**Das Testergebnis:** Schau dir die gelben Ränder an! Der Test hat 3 Kranke 'erwischt', aber auch 3 Gesunde 'falsch verdächtigt'.",
-                    "en": "**The Test Result:** Look at the yellow borders! The test 'caught' 3 sick people, but it also 'falsely accused' 3 healthy people."
-                }))
+                st.markdown(f"""
+<div style="background: #f4f4f5; border-left: 4px solid #a1a1aa; padding: 12px 16px; border-radius: 8px; color: #3f3f46;">
+{t({
+    "de": "<strong>Das Testergebnis:</strong> Schau dir die gelben Ränder an! Der Test hat 3 Kranke 'erwischt', aber auch 3 Gesunde 'falsch verdächtigt'.",
+    "en": "<strong>The Test Result:</strong> Look at the yellow borders! The test 'caught' 3 sick people, but it also 'falsely accused' 3 healthy people."
+})}
+</div>
+""", unsafe_allow_html=True)
                 st.latex(r"P(+|S) = 75\% \text{ (Sensitivity)} \quad P(+|H) = 25\% \text{ (False Positive Rate)}")
     
             elif stage == 3:
@@ -429,8 +433,12 @@ def render_subtopic_1_9(model):
             with c_m2:
                 st.write(t({"de": "Davon sind krank:", "en": "Of those, sick are:"}))
                 st.latex(fr"P(\text{{{label_sick}}}|\text{{{label_pos}}}) = \frac{{3}}{{6}} = 50\%")
-            st.warning(t({"de": "Trotz 75% genauem Test ist die Chance nur 50%! Schau dir die Punkte an.", 
-                          "en": "Despite 75% accuracy, the chance is only 50%! Look at the dots."}))
+            st.markdown(f"""
+<div style="background: #f4f4f5; border-left: 4px solid #a1a1aa; padding: 12px 16px; border-radius: 8px; color: #3f3f46;">
+{t({"de": "Trotz 75% genauem Test ist die Chance nur 50%! Schau dir die Punkte an.", 
+    "en": "Despite 75% accuracy, the chance is only 50%! Look at the dots."})}
+</div>
+""", unsafe_allow_html=True)
 
     st.markdown("---")
 
@@ -871,7 +879,11 @@ def render_subtopic_1_9(model):
             last_click = st.session_state.search_history[-1] if st.session_state.search_history else None
             coord_str = f"{chr(65+last_click[0])}{last_click[1]+1}" if last_click else "?"
             
-            st.warning(f"**Miss at {coord_str}:** {t({'de': 'Nichts gefunden.', 'en': 'Nothing found.'})}")
+            st.markdown(f"""
+<div style="background: #f4f4f5; border-left: 4px solid #a1a1aa; padding: 12px 16px; border-radius: 8px; color: #3f3f46;">
+<strong>Miss at {coord_str}:</strong> {t({'de': 'Nichts gefunden.', 'en': 'Nothing found.'})}
+</div>
+""", unsafe_allow_html=True)
             
             # The "Aha!" Moment Visualization
             c_narrative, c_math = st.columns([0.7, 0.3])

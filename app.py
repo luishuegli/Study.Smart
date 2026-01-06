@@ -3,7 +3,6 @@ import course_config as config
 from views.dashboard import dashboard_view
 from views.course_overview import course_overview_view
 from views.lesson import lesson_view
-from views import dashboard, lesson
 from views.auth import render_auth
 from views.styles import load_design_system
 from firebase_config import initialize_firebase_admin, get_firebase_analytics_script

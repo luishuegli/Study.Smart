@@ -56,8 +56,9 @@ if "user" not in st.session_state:
     saved_token = cookie_manager.get("token")
     
     if saved_token:
-        # Show loading placeholder instead of login (prevents flash)
-        st.markdown("""
+        # Use placeholder so we can clear loading if auth fails
+        loading_placeholder = st.empty()
+        loading_placeholder.markdown("""
         <div style="display: flex; justify-content: center; align-items: center; height: 80vh;">
             <div style="text-align: center; color: #6B7280;">
                 <div style="font-size: 1.1rem; margin-bottom: 8px;">Loading...</div>
@@ -92,8 +93,9 @@ if "user" not in st.session_state:
             # Token invalid or expired
             auth_success = False
         
-        # If auth failed, show login (don't stay stuck on loading)
+        # If auth failed, CLEAR loading and show login
         if not auth_success:
+            loading_placeholder.empty()  # Clear the loading spinner
             render_auth(cookie_manager=cookie_manager)
             st.stop()
     else:

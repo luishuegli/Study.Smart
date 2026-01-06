@@ -307,14 +307,22 @@ def render_navigation_buttons(course_id, current_topic_id, current_subtopic_id, 
             break
 
     if next_topic_id and next_subtopic_id:
+        # CRITICAL FIX: Store next values in session state to persist across reruns
+        # This fixes the closure problem where variables change between render and click
+        st.session_state._next_topic_id = next_topic_id
+        st.session_state._next_subtopic_id = next_subtopic_id
+        
         st.markdown("<br><br>", unsafe_allow_html=True)
         col1, col2, col3 = st.columns([1, 2, 1])
         with col2:
             button_label = f"{loc.t({'de': 'Nächste Lektion', 'en': 'Next Lesson'})}: {next_subtopic_title} →"
-            if st.button(button_label, use_container_width=True, type="primary"):
-                # Set flag to scroll to top after rerun
-                st.session_state.scroll_to_top = True
-                navigate_to_subtopic(next_topic_id, next_subtopic_id)
+            if st.button(button_label, use_container_width=True, type="primary", key="next_lesson_btn"):
+                # Read from session state, not from closure variables
+                target_topic = st.session_state.get("_next_topic_id")
+                target_subtopic = st.session_state.get("_next_subtopic_id")
+                if target_topic and target_subtopic:
+                    st.session_state.scroll_to_top = True
+                    navigate_to_subtopic(target_topic, target_subtopic)
 
 
 def render_topic_content(client, topic_id, subtopic_id):

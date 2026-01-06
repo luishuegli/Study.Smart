@@ -9,22 +9,43 @@ from dotenv import load_dotenv
 load_dotenv()
 
 def initialize_firebase_admin():
-    """Initializes the Firebase Admin SDK."""
+    """Initializes the Firebase Admin SDK.
+    
+    Supports two modes:
+    1. Local development: Uses serviceAccountKey.json file
+    2. Streamlit Cloud: Uses st.secrets["FIREBASE_SERVICE_ACCOUNT"]
+    """
     # Check if already initialized to avoid errors on rerun
     if not firebase_admin._apps:
-        # Load credentials from the service account key file
-        # USER MUST PROVIDE THIS FILE
-        cred_path = "serviceAccountKey.json"
+        cred = None
         
-        if os.path.exists(cred_path):
+        # Try 1: Load from Streamlit Secrets (for Cloud deployment)
+        try:
+            if "FIREBASE_SERVICE_ACCOUNT" in st.secrets:
+                service_account_info = dict(st.secrets["FIREBASE_SERVICE_ACCOUNT"])
+                cred = credentials.Certificate(service_account_info)
+                print("Firebase Admin initialized from Streamlit Secrets.")
+        except Exception as e:
+            print(f"Could not load from Streamlit Secrets: {e}")
+        
+        # Try 2: Load from local file (for development)
+        if cred is None:
+            cred_path = "serviceAccountKey.json"
+            if os.path.exists(cred_path):
+                try:
+                    cred = credentials.Certificate(cred_path)
+                    print("Firebase Admin initialized from local file.")
+                except Exception as e:
+                    print(f"Error loading from file: {e}")
+            else:
+                print(f"Warning: {cred_path} not found and no Streamlit Secrets. Firebase Admin not initialized.")
+        
+        # Initialize if we have credentials
+        if cred:
             try:
-                cred = credentials.Certificate(cred_path)
                 firebase_admin.initialize_app(cred)
-                print("Firebase Admin initialized successfully.")
             except Exception as e:
                 print(f"Error initializing Firebase Admin: {e}")
-        else:
-            print(f"Warning: {cred_path} not found. Firebase Admin not initialized.")
 
 def get_firebase_analytics_script():
     """Returns the HTML script for Firebase Analytics."""

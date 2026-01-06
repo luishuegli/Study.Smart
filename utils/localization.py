@@ -92,11 +92,14 @@ def render_language_selector(container=None):
     # CSS to make secondary buttons white (unselected state)
     container.markdown("""
     <style>
-    /* Language toggle: unselected (secondary) = white background */
+    /* Language toggle: unselected (secondary) = white background, black text */
     [data-testid="stHorizontalBlock"]:has([data-testid="stButton"]) button[kind="secondary"] {
         background-color: #FFFFFF !important;
         color: #1D1D1F !important;
         border: 1px solid rgba(0,0,0,0.20) !important;
+    }
+    [data-testid="stHorizontalBlock"]:has([data-testid="stButton"]) button[kind="secondary"] p {
+        color: #1D1D1F !important;
     }
     [data-testid="stHorizontalBlock"]:has([data-testid="stButton"]) button[kind="secondary"]:hover {
         background-color: #F5F5F7 !important;

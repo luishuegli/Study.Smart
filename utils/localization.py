@@ -88,6 +88,21 @@ def render_language_selector(container=None):
     # Helper to determine button type based on state
     def get_type(target_lang):
         return "primary" if st.session_state.lang == target_lang else "secondary"
+    
+    # CSS to make secondary buttons white (unselected state)
+    container.markdown("""
+    <style>
+    /* Language toggle: unselected (secondary) = white background */
+    [data-testid="stHorizontalBlock"]:has([data-testid="stButton"]) button[kind="secondary"] {
+        background-color: #FFFFFF !important;
+        color: #1D1D1F !important;
+        border: 1px solid rgba(0,0,0,0.20) !important;
+    }
+    [data-testid="stHorizontalBlock"]:has([data-testid="stButton"]) button[kind="secondary"]:hover {
+        background-color: #F5F5F7 !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
 
     with col1:
         if st.button("EN", key="lang_en", type=get_type("en"), use_container_width=True):

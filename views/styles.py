@@ -249,12 +249,19 @@ def load_design_system():
         }
         
         /* --- 5b. SLIDERS (Global Defaults - ULTRA AGGRESSIVE for Streamlit Cloud) --- */
-        /* The track bar container - keep transparent */
+        /* The slider container - keep transparent, NO grey background */
+        div[data-baseweb="slider"],
         div[data-baseweb="slider"] > div,
         div[data-baseweb="slider"] > div > div,
+        [data-testid="stSlider"],
+        [data-testid="stSlider"] > div,
         [data-testid="stSlider"] > div > div,
+        [data-testid="stSlider"] > div > div > div,
+        .stSlider,
+        .stSlider > div,
         .stSlider > div > div {
             background-color: transparent !important;
+            background: transparent !important;
         }
         
         /* The actual track bar (BaseUI uses specific class) */

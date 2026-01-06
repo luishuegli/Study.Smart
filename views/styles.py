@@ -284,10 +284,13 @@ def load_design_system():
             background-image: none !important;
         }
         
-        /* Slider thumb - black dot */
+        /* Slider thumb - BLACK dot (GLOBAL DEFAULT - high specificity to override topic CSS) */
         div[data-baseweb="slider"] [role="slider"],
         div[data-baseweb="slider"] [class*="Thumb"],
-        [data-testid="stSlider"] [role="slider"] {
+        [data-testid="stSlider"] [role="slider"],
+        .stSlider [role="slider"],
+        .stSlider div[role="slider"],
+        .stSlider div[data-baseweb="slider"] div[role="slider"] {
             background-color: #000000 !important;
             border: 2px solid #000000 !important;
         }

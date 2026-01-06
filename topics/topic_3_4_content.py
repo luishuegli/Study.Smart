@@ -425,4 +425,5 @@ def render_casino_mission():
         
         # Hint expander
         with st.expander(t({"de": "Hinweis anzeigen", "en": "Show hint"})):
-            st.markdown(t(content_3_4['mission']['hint']))
+            st.markdown(f"**{t({'de': 'Tipp', 'en': 'Hint'})}:**")
+            st.latex(r"E[\text{Win}] = \frac{1}{6} \times 60 + \frac{5}{6} \times 0 = \, ?")

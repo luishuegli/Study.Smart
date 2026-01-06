@@ -168,7 +168,8 @@ def course_overview_view():
     # List Topics
     for topic in course["topics"]:
         topic_id = topic["id"].replace("topic_", "")
-        subtopic_ids = [st["id"] for st in topic.get("subtopics", [])]
+        subtopics = topic.get("subtopics", [])
+        subtopic_ids = [st["id"] for st in subtopics]
         
         # Get topic data from progress
         topics_data = user_progress.get("topics", {})

@@ -416,8 +416,7 @@ def render_subtopic_7_1(model):
     
     # === 6. INTERACTIVE: Distribution Matcher ===
     st.markdown(f"### {t({'de': 'Interaktiv: Verteilungs-Matcher', 'en': 'Interactive: Distribution Matcher'})}")
-    with st.container(border=True):
-        distribution_matcher()
+    distribution_matcher()
     
     st.markdown("<br><br>", unsafe_allow_html=True)
     

@@ -268,22 +268,15 @@ def render_mcq(
         answered_key = f"mcq_answered_{key_suffix}" if is_multi_select else None
         is_answered = st.session_state.get(answered_key, False) if is_multi_select else True
         
-        # PERSIST EXPANDER STATE
-        expander_state_key = f"exp_state_{key_suffix}"
-        
-        # Logic: If AI interaction happened (history exists and not empty), force open or keep open
+        # Expander starts CLOSED by default - no persistence across navigation
+        # Only keep open if there's an active AI conversation
         ai_history_key = f"ai_history_mcq_ai_{key_suffix}"
         has_ai_interaction = len(st.session_state.get(ai_history_key, [])) > 0
-        
-        default_expanded = st.session_state.get(expander_state_key, False) or has_ai_interaction
         
         # Multi-select: Only show expander after Check Answer clicked
         # Single-select: Always show expander
         if (is_multi_select and is_answered) or not is_multi_select:
-            with st.expander(t({"de": "Lösung zeigen", "en": "Show Solution"}), expanded=default_expanded):
-                # Mark as open when interacted with
-                st.session_state[expander_state_key] = True 
-                
+            with st.expander(t({"de": "Lösung zeigen", "en": "Show Solution"}), expanded=has_ai_interaction):
                 sol_content = t(solution_text_dict)
                 st.markdown(sol_content, unsafe_allow_html=True)
                 
@@ -301,10 +294,8 @@ def render_mcq(
                         st.session_state[f"{checkbox_prefix}_{i}"] = False
                     st.session_state[f"mcq_answered_{key_suffix}"] = False
                     st.session_state[f"mcq_result_{key_suffix}"] = None
-                    st.session_state[expander_state_key] = False
                 else:
                     st.session_state[radio_key] = None
-                    st.session_state[expander_state_key] = False
                 st.rerun(scope="fragment")
     
     # Execute the fragment

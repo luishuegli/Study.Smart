@@ -256,7 +256,14 @@ def render_ai_tutor(key_suffix, context_prompt, client):
                             for qa in chat_history:
                                 history_context += f"\nUser: {qa['q']}\nAI: {qa['a']}\n"
                             
-                            latex_instruction = """
+                            # Get current language for response
+                            import utils.localization as loc
+                            current_lang = loc.get_language()
+                            lang_instruction = "RESPOND IN GERMAN (Deutsch)." if current_lang == "de" else "RESPOND IN ENGLISH."
+                            
+                            latex_instruction = f"""
+                            LANGUAGE: {lang_instruction}
+                            
                             TEACHING STYLE (Feynman Method):
                             - Explain like teaching a smart friend who's new to the topic.
                             - Show the relevant formula using LaTeX: $$formula$$.

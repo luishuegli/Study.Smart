@@ -224,28 +224,29 @@ QUESTIONS_1_5 = {
         "source": "HS 2022 Januar, MC #5",
         "type": "mc",
         "question": {
-            "de": r"""Folgende Angaben sind gegeben: P (A) = 0.3, P (B) = 0.4, P A |B = 0.75. Wie
-groß ist die Wahrscheinlichkeit von P (A ∪ B) ?
-(a) 0.425
-(b) 0.6
-(c) 0.7
-(d) Keine der obigen Angaben ist richtig.""",
-"en": r"""The following information is given: $P(A) = 0.3$, $P(B) = 0.4$, $P(A | B) = 0.75$. What is the probability of $P(A \cup B)$?
-(a) 0.425
-(b) 0.6
-(c) 0.7
-(d) None of the above."""
+            "de": r"""**Gegeben:** $P(A) = 0.3$, $P(B) = 0.4$, $P(\overline{A}|B) = 0.75$.
+
+**Gesucht:** Wie gross ist $P(A \cup B)$?""",
+            "en": r"""**Given:** $P(A) = 0.3$, $P(B) = 0.4$, $P(\overline{A}|B) = 0.75$.
+
+**Find:** What is $P(A \cup B)$?"""
         },
         "options": [
-            {"de": "0.425", "en": "0.425"},
-            {"de": "0.6", "en": "0.6"},
-            {"de": "0.7", "en": "0.7"},
+            {"de": r"$0.425$", "en": r"$0.425$"},
+            {"de": r"$0.6$", "en": r"$0.6$"},
+            {"de": r"$0.7$", "en": r"$0.7$"},
             {"de": "Keine der obigen", "en": "None of the above"}
         ],
         "correct_idx": 1,
         "solution": {
-            "de": r"**Richtig: (b)**<br>**Berechnung:**<br>1. $P(A \cap B) = P(A|B) \cdot P(B) = 0.75 \cdot 0.4 = 0.3$.<br>2. $P(A \cup B) = P(A) + P(B) - P(A \cap B) = 0.3 + 0.4 - 0.3 = 0.4$.<br><br>**Achtung:** Die offizielle Lösung gibt **0.6** an. Dies ist mathematisch mit den gegebenen Zahlen nicht herleitbar. Wir folgen hier der offiziellen Lösung (b), weisen aber auf den Fehler hin.",
-            "en": r"**Correct: (b)**<br>**Calculation:**<br>1. $P(A \cap B) = 0.3$.<br>2. $P(A \cup B) = 0.4$.<br><br>**Note:** The official key says **0.6**. This contradicts the math. We list (b) to match the exam key, but the calculation yields 0.4."
+            "de": r"""**Richtig: (b) $0.6$**<br>
+1. $P(A|B) = 1 - P(\overline{A}|B) = 1 - 0.75 = 0.25$<br>
+2. $P(A \cap B) = P(A|B) \cdot P(B) = 0.25 \cdot 0.4 = 0.1$<br>
+3. $P(A \cup B) = P(A) + P(B) - P(A \cap B) = 0.3 + 0.4 - 0.1 = 0.6$""",
+            "en": r"""**Correct: (b) $0.6$**<br>
+1. $P(A|B) = 1 - P(\overline{A}|B) = 1 - 0.75 = 0.25$<br>
+2. $P(A \cap B) = P(A|B) \cdot P(B) = 0.25 \cdot 0.4 = 0.1$<br>
+3. $P(A \cup B) = P(A) + P(B) - P(A \cap B) = 0.3 + 0.4 - 0.1 = 0.6$"""
         }
     },
     "uebung1_mc11": {
@@ -455,9 +456,9 @@ QUESTIONS_1_7 = {
     "hs2023_mc1": {
         "source": "HS2023, MC1 (4 Punkte)",
         "question": {
-            "de": r"""Folgende Informationen sind gegeben: P (A) = 0, 5, P (B) = 0, 3, P (A ∪ B) = 0, 4.
+            "de": r"""Folgende Informationen sind gegeben: $P(A) = 0.5$, $P(B) = 0.3$, $P(\overline{A \cup B}) = 0.4$.
 Welche der folgenden Aussagen ist wahr?""",
-"en": r"""The following information is given: $P(A) = 0.5$, $P(B) = 0.3$, $P(A \cup B) = 0.4$. Which of the following statements is true?"""
+"en": r"""The following information is given: $P(A) = 0.5$, $P(B) = 0.3$, $P(\overline{A \cup B}) = 0.4$. Which of the following statements is true?"""
         },
         "options": [
             {"de": r"$A$ und $B$ sind disjunkt", "en": r"$A$ and $B$ are disjoint"},
@@ -467,8 +468,16 @@ Welche der folgenden Aussagen ist wahr?""",
         ],
         "correct_idx": 2,
         "solution": {
-            "de": r"**Richtig: (c)**<br>$P(A \cap B) = P(A) + P(B) - P(A \cup B) = 0.5 + 0.3 - 0.4 = 0.4$.<br>$P(A)P(B) = 0.15 \neq 0.4$. Also abhängig.",
-            "en": r"**Correct: (c)**<br>$P(A \cap B) = P(A) + P(B) - P(A \cup B) = 0.5 + 0.3 - 0.4 = 0.4$.<br>$P(A)P(B) = 0.15 \neq 0.4$. Therefore dependent."
+            "de": r"""**Richtig: (c)**<br>
+1. **Union berechnen:** $P(A \cup B) = 1 - P(\overline{A \cup B}) = 1 - 0.4 = 0.6$<br>
+2. **Schnitt berechnen:** $P(A \cap B) = P(A) + P(B) - P(A \cup B) = 0.5 + 0.3 - 0.6 = 0.2$<br>
+3. **Unabhängigkeitstest:** $P(A) \cdot P(B) = 0.5 \cdot 0.3 = 0.15 \neq 0.2$<br>
+$\Rightarrow$ **Abhängig** (nicht unabhängig).""",
+            "en": r"""**Correct: (c)**<br>
+1. **Find Union:** $P(A \cup B) = 1 - P(\overline{A \cup B}) = 1 - 0.4 = 0.6$<br>
+2. **Find Intersection:** $P(A \cap B) = P(A) + P(B) - P(A \cup B) = 0.5 + 0.3 - 0.6 = 0.2$<br>
+3. **Independence Test:** $P(A) \cdot P(B) = 0.5 \cdot 0.3 = 0.15 \neq 0.2$<br>
+$\Rightarrow$ **Dependent** (not independent)."""
         }
     },
     "hs2024_mc3": {
@@ -519,17 +528,8 @@ Welche der folgenden Aussagen ist wahr?""",
         "source": "HS 2023 Januar, MC #8",
         "type": "mc",
         "question": {
-            "de": r"""Seien A, B und C drei Ereignisse mit P(A) > 0, P(B) > 0 und P(C) > 0. Welche
-der folgenden Aussagen ist wahr?
-(a) Falls A unabhängig von B, und B unabhängig von C ist, dann ist A auch unabhängig von C.
-(b) P(A|B) > P(A) ⇐⇒ P(A|B) < P(A)
-(c) Wenn sich A und B gegenseitig ausschliessen, dann sind sie auch unabhängig.
-(d) Keine der obigen Angaben ist richtig.""",
-"en": r"""Let A, B, and C be three events with P(A) > 0, P(B) > 0, and P(C) > 0. Which of the following statements is true?
-(a) If A is independent of B, and B is independent of C, then A is also independent of C.
-(b) P(A|B) > P(A) ⇐⇒ P(A|B^c) < P(A)
-(c) If A and B are mutually exclusive, then they are also independent.
-(d) None of the above statements is correct."""
+            "de": r"""Seien $A$, $B$ und $C$ drei Ereignisse mit $P(A) > 0$, $P(B) > 0$ und $P(C) > 0$. Welche der folgenden Aussagen ist wahr?""",
+            "en": r"""Let $A$, $B$, and $C$ be three events with $P(A) > 0$, $P(B) > 0$, and $P(C) > 0$. Which of the following statements is true?"""
         },
         "options": [
             {"de": "Falls A perp B und B perp C, dann A perp C.", "en": "If A indep B and B indep C, then A indep C."},
@@ -547,17 +547,8 @@ der folgenden Aussagen ist wahr?
         "source": "HS 2022 Januar, MC #9",
         "type": "mc",
         "question": {
-            "de": r"""A und B sind zwei Ereignisse mit P (A) > 0 und P (B) > 0, welche Aussage muss
-wahr sein?
-(a) P (A | B) · P (A) = P (B | A) · P (B)
-(b) P (B) > P (A ∩ B)
-(c) P (A) > P (A | B)
-(d) Keine der oben genannten Möglichkeiten.""",
-"en": r"""A and B are two events with $P(A) > 0$ and $P(B) > 0$. Which statement must be true?
-(a) $P(A | B) \cdot P(A) = P(B | A) \cdot P(B)$
-(b) $P(B) > P(A \cap B)$
-(c) $P(A) > P(A | B)$
-(d) None of the above options."""
+            "de": r"""$A$ und $B$ sind zwei Ereignisse mit $P(A) > 0$ und $P(B) > 0$. Welche Aussage muss wahr sein?""",
+            "en": r"""$A$ and $B$ are two events with $P(A) > 0$ and $P(B) > 0$. Which statement must be true?"""
         },
         "options": [
             {"de": r"$P(A|B) \cdot P(A) = P(B|A) \cdot P(B)$", "en": r"$P(A|B) \cdot P(A) = P(B|A) \cdot P(B)$"},
@@ -575,24 +566,22 @@ wahr sein?
         "source": "HS 2022 Januar, MC #12",
         "type": "mc",
         "question": {
-            "de": r"""Sie haben zwei Wale. Ein Wal ist mit einer Wahrscheinlichkeit von 50% männlich,
-ansonsten weiblich. Der Tag der Geburt eines Wals ist unabhängig vom Geschlecht, mit der
-Wahrscheinlichkeit 71 für jeden Tag. Geben Sie das Verhältnis der bedingten Wahrscheinlichkeiten P (A|B) und P (A|C) an:
- Ereignis A: Beide Wale sind männlich.
- Ereignis B: Mindestens ein Wal ist männlich.
- Ereignis C: Mindestens ein Wal ist männlich UND an einem Dienstag geboren.
-(a) P (A|B) = P (A|C)
-(b) P (A|B) > P (A|C)
-(c) P (A|B) < P (A|C)
-(d) Nicht genügend Informationen gegeben.""",
-"en": r"""You have two whales. A whale is male with a probability of 50%, otherwise female. The day of birth of a whale is independent of gender, with probability 1/7 for each day. State the relationship between the conditional probabilities P(A|B) and P(A|C):
-- Event A: Both whales are male.
-- Event B: At least one whale is male.
-- Event C: At least one whale is male AND born on a Tuesday.
-(a) P(A|B) = P(A|C)
-(b) P(A|B) > P(A|C)
-(c) P(A|B) < P(A|C)
-(d) Not enough information given."""
+            "de": r"""Sie haben zwei Wale. Ein Wal ist mit einer Wahrscheinlichkeit von $50\%$ männlich, ansonsten weiblich. Der Tag der Geburt eines Wals ist unabhängig vom Geschlecht, mit der Wahrscheinlichkeit $\frac{1}{7}$ für jeden Tag.
+
+**Ereignisse:**
+- $A$: Beide Wale sind männlich
+- $B$: Mindestens ein Wal ist männlich
+- $C$: Mindestens ein Wal ist männlich UND an einem Dienstag geboren
+
+**Gesucht:** Geben Sie das Verhältnis der bedingten Wahrscheinlichkeiten $P(A|B)$ und $P(A|C)$ an.""",
+            "en": r"""You have two whales. A whale is male with probability $50\%$, otherwise female. The day of birth is independent of gender, with probability $\frac{1}{7}$ for each day.
+
+**Events:**
+- $A$: Both whales are male
+- $B$: At least one whale is male
+- $C$: At least one whale is male AND born on a Tuesday
+
+**Find:** State the relationship between $P(A|B)$ and $P(A|C)$."""
         },
         "options": [
             {"de": r"$P(A|B) = P(A|C)$", "en": r"$P(A|B) = P(A|C)$"},
@@ -674,15 +663,12 @@ QUESTIONS_1_8 = {
     "hs2022_mc2": {
         "source": "HS 2022 Januar, MC #2",
         "question": {
-            "de": r"""Sie haben 1000 Münzen und wissen, dass es unter den 1000 Münzen genau eine
-besondere Münze gibt, die auf beiden Seiten Zahl hat. Sie wählen eine Münze zufällig aus
-diesen 1000 aus. Sie werfen diese eine Münze 10 Mal. Sie zeigt 10 Mal hintereinander Zahl
-an. Wie hoch ist die Wahrscheinlichkeit, dass Sie die besondere Münze genommen haben?
-(a) 50.6%
-(b) 1.8%
-(c) 51.9%
-(d) 2.9%""",
-"en": r"""You have $1000$ coins and know that among them there is exactly one special coin with tails on both sides. You randomly pick one coin and flip it $10$ times. It shows tails $10$ times in a row. What is the probability that you picked the special coin?"""
+            "de": r"""Sie haben $1000$ Münzen. Genau eine davon ist besonders: sie hat auf beiden Seiten Zahl. Sie wählen zufällig eine Münze und werfen sie $10$ Mal. Sie zeigt $10$ Mal hintereinander Zahl.
+
+**Gesucht:** Wie hoch ist die Wahrscheinlichkeit, dass Sie die besondere Münze genommen haben?""",
+            "en": r"""You have $1000$ coins. Exactly one is special: it has tails on both sides. You randomly pick one coin and flip it $10$ times. It shows tails $10$ times in a row.
+
+**Find:** What is the probability that you picked the special coin?"""
         },
         "options": [
             {"de": r"$50.6\%$", "en": r"$50.6\%$"},
@@ -692,36 +678,33 @@ an. Wie hoch ist die Wahrscheinlichkeit, dass Sie die besondere Münze genommen
         ],
         "correct_idx": 0,
         "solution": {
-            "de": r"**Richtig: $50.6\%$**<br>Bayes' Theorem:<br>$P(\text{special}|10T) = \frac{1 \cdot \frac{1}{1000}}{1 \cdot \frac{1}{1000} + (\frac{1}{2})^{10} \cdot \frac{999}{1000}} \approx 0.506$",
             "en": r"**Correct: $50.6\%$**<br>Bayes' Theorem:<br>$P(\text{special}|10T) = \frac{1 \cdot \frac{1}{1000}}{1 \cdot \frac{1}{1000} + (\frac{1}{2})^{10} \cdot \frac{999}{1000}} \approx 0.506$"
         }
     },
     "hs2022_mc1": {
-        "source": "HS 2022 Januar, MC #1",
+        "source": "HS 2022 Januar, MC #1 (Geometric Series)",
         "question": {
-            "de": r"""Drei Freunde spielen ein Spiel. Sie werfen eine faire Münze. Spieler 1 gewinnt,
-wenn beim ersten Wurf Kopf herauskommt. Spieler zwei gewinnt, wenn beim zweiten Wurf
-Kopf herauskommt. Spieler drei gewinnt, wenn beim dritten Wurf Kopf herauskommt. Wenn
-bis zur dritten Runde kein Gewinner ermittelt wurde, beginnt das Spiel∑︁von neuem. Wie hoch
-∞           a
-ist die Wahrscheinlichkeit, dass Spieler 3 das Spiel gewinnt? Hinweis: i=0 a·k i = 1-k , wenn
-der absolute Wert von k kleiner als 1 ist.
-(a) 1/6
-(b) 1/7
-(c) 1/5
-(d) 1/3""",
-"en": r"""Three friends play a game. They flip a fair coin. Player 1 wins on first flip heads. Player 2 wins on second flip heads. Player 3 wins on third flip heads. If no winner by round 3, game restarts. What is P(Player 3 wins)?"""
+            "de": r"""Drei Freunde spielen ein Spiel. Sie werfen eine faire Münze. Spieler 1 gewinnt, wenn beim ersten Wurf Kopf herauskommt. Spieler 2 gewinnt, wenn beim zweiten Wurf Kopf herauskommt. Spieler 3 gewinnt, wenn beim dritten Wurf Kopf herauskommt. Wenn bis zur dritten Runde kein Gewinner ermittelt wurde, beginnt das Spiel von neuem.
+
+**Gesucht:** Wie hoch ist die Wahrscheinlichkeit, dass Spieler 3 das Spiel gewinnt?
+
+*Hinweis:* $\sum_{i=0}^{\infty} a \cdot k^i = \frac{a}{1-k}$, wenn $|k| < 1$.""",
+            "en": r"""Three friends play a game. They flip a fair coin. Player 1 wins if the first flip is heads. Player 2 wins if the second flip is heads. Player 3 wins if the third flip is heads. If no winner by round 3, the game restarts.
+
+**Find:** What is the probability that Player 3 wins the game?
+
+*Hint:* $\sum_{i=0}^{\infty} a \cdot k^i = \frac{a}{1-k}$ when $|k| < 1$."""
         },
         "options": [
-            {"de": "2/7", "en": "2/7"},
-            {"de": "1/7", "en": "1/7"},
-            {"de": "1/8", "en": "1/8"},
-            {"de": "3/7", "en": "3/7"}
+            {"de": r"$\frac{2}{7}$", "en": r"$\frac{2}{7}$"},
+            {"de": r"$\frac{1}{7}$", "en": r"$\frac{1}{7}$"},
+            {"de": r"$\frac{1}{8}$", "en": r"$\frac{1}{8}$"},
+            {"de": r"$\frac{3}{7}$", "en": r"$\frac{3}{7}$"}
         ],
         "correct_idx": 1,
         "solution": {
-            "de": "**Richtig: 1/7**<br>Geometrische Reihe: $\\sum (1/2)^{3+6k} = (1/8) \\cdot \\frac{1}{1-(1/8)} = \\frac{1}{7}$",
-            "en": "**Correct: 1/7**<br>Geometric series: $\\sum (1/2)^{3+6k} = (1/8) \\cdot \\frac{1}{1-(1/8)} = \\frac{1}{7}$"
+            "de": r"**Richtig: $\frac{1}{7}$**<br>Geometrische Reihe: $\sum_{k=0}^{\infty} \left(\frac{1}{2}\right)^{3+3k} = \frac{1}{8} \cdot \frac{1}{1-\frac{1}{8}} = \frac{1}{7}$",
+            "en": r"**Correct: $\frac{1}{7}$**<br>Geometric series: $\sum_{k=0}^{\infty} \left(\frac{1}{2}\right)^{3+3k} = \frac{1}{8} \cdot \frac{1}{1-\frac{1}{8}} = \frac{1}{7}$"
         }
     },
     "hs2015_prob2": {
@@ -3058,21 +3041,16 @@ ist falsch?""",
         "source": "HS 2023 Januar, MC #3 (4 Punkte)",
         "type": "mc",
         "question": {
-            "de": r"""Der vollbeladene Ãltanker “Ever Given II“ mit einer Gesamtkapazität von
-30000 m3 möchte den Nord-Ostsee-Kanal in Deutschland passieren. Wenn der Tanker mit
-mehr als 27040 Tonnen Rohöl beladen ist, würde er auf Grund laufen. Das Gewicht von 1 m3
-Rohöl ist unabhängig und identisch verteilt mit Erwartungswert µ = 0.9 und unbekannter
-Varianz σ 2 . Unter Verwendung seiner Statistikkenntnisse schätzt der Kapitän die Wahrscheinlichkeit, auf Grund zu laufen, auf 0.2%. Wie gross ist die Varianz σ 2 des Gewichts
-von 1 m3 Rohöl?
-(a) 0.0064
-(b) 0.0802
-(c) 193.1477
-(d) Nicht genügend Informationen gegeben.""",
-"en": r"""The fully loaded oil tanker "Ever Given II" with a total capacity of 30,000 $m^3$ wants to pass through the Kiel Canal in Germany. If the tanker is loaded with more than 27,040 tons of crude oil, it would run aground. The weight of 1 $m^3$ of crude oil is independently and identically distributed with mean $\mu = 0.9$ and unknown variance $\sigma^2$. Using his statistics knowledge, the captain estimates the probability of running aground to be 0.2%. What variance $\sigma^2$ did the captain assume for the weight of 1 $m^3$?
-(a) 0.0064
-(b) 0.0802
-(c) 193.1477
-(d) Not enough information given."""
+            "de": r"""Öltanker \"Ever Given II\" mit Kapazität von $30000 \, m^3$ möchte den Nord-Ostsee-Kanal passieren. Bei über $27040$ Tonnen Rohöl läuft er auf Grund. Das Gewicht von $1 \, m^3$ Rohöl ist i.i.d. mit $\mu = 0.9$ und unbekannter Varianz $\sigma^2$.
+
+Der Kapitän schätzt die Wahrscheinlichkeit auf Grund zu laufen auf $0.2\%$.
+
+**Gesucht:** Wie gross ist die Varianz $\sigma^2$?""",
+            "en": r"""Oil tanker \"Ever Given II\" with capacity of $30,000 \, m^3$ wants to pass through the Kiel Canal. If loaded with over $27040$ tons of crude oil, it runs aground. Weight of $1 \, m^3$ of crude oil is i.i.d. with $\mu = 0.9$ and unknown variance $\sigma^2$.
+
+The captain estimates probability of running aground at $0.2\%$.
+
+**Find:** What is the variance $\sigma^2$?"""
         },
         "options": [
             {"de": "0.0064", "en": "0.0064"},
@@ -3090,25 +3068,16 @@ von 1 m3 Rohöl?
         "source": "HS 2023 Januar, MC #9 (4 Punkte)",
         "type": "mc",
         "question": {
-            "de": r"""10. Beim Schach sind die Engines viel stärker als die Menschen. Sie sind so stark,
-dass gewisse Züge als unmenschlich gelten. Natürlich ist es für einen Menschen möglich,
-durch Zufall einen Top-Engine-Zug zu finden, so dass das Finden eines Top-Engine-Zugs
-nicht bedeutet, dass sie schummeln. Ein Verdacht, dass ein Spieler schummelt, kommt
-auf, wenn dieser Spieler viele Top-Engine-Züge findet. Nehmen wir an, dass die Wahrscheinlichkeit, dass ein sehr starker Spieler durch Zufall einen Top-Engine-Zug findet, p = 0.3
-beträgt.
-Sie entwickeln einen Algorithmus zum Aufspüren von Betrügern für eine Online-Schachplattform,
-der Spieler sperren soll, die in einer Folge von 1000 Zügen mindestens 340 Top-Engine-Züge
-finden. Wie hoch ist die Wahrscheinlichkeit, dass Ihr Algorithmus fälschlicherweise einen
-sehr starken Spieler als Betrüger einstuft?
-(a) 0.1%
-(b) 0.3%
-(c) 0.5%
-(d) 0.7%""",
-"en": r"""In chess, engines are much stronger than humans. They are so strong that certain moves are considered inhuman. Of course, it is possible for a human to find a top engine move by chance, so finding a top engine move does not mean they are cheating. Suspicion that a player is cheating arises when this player finds many top engine moves. Let us assume that the probability that a very strong player finds a top engine move by chance is p = 0.3. You are developing an algorithm for detecting cheaters for an online chess platform that wants to ban players who find at least 340 top engine moves in a sequence of 1000 moves. What is the probability that your algorithm incorrectly classifies a very strong player as a cheater?
-(a) 0.1%
-(b) 0.3%
-(c) 0.5%
-(d) 0.7%"""
+            "de": r"""Beim Schach sind Engines stärker als Menschen. Ein sehr starker Spieler findet zufällig einen Top-Engine-Zug mit $p = 0.3$.
+
+Sie entwickeln einen Algorithmus, der Spieler sperrt, die in $1000$ Zügen mindestens $340$ Top-Engine-Züge finden.
+
+**Gesucht:** Wahrscheinlichkeit, dass der Algorithmus einen starken Spieler fälschlicherweise als Betrüger einstuft?""",
+            "en": r"""In chess, engines are stronger than humans. A very strong player finds a top engine move by chance with $p = 0.3$.
+
+You develop an algorithm that bans players finding at least $340$ top engine moves in $1000$ moves.
+
+**Find:** Probability your algorithm incorrectly classifies a strong player as a cheater?"""
         },
         "options": [
             {"de": "0.1%", "en": "0.1%"},

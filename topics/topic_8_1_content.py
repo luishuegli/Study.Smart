@@ -530,19 +530,18 @@ def render_subtopic_8_1(model):
         options = q.get("options", [])
         option_labels = [t({"de": o["de"], "en": o["en"]}) for o in options]
         
-        with st.container(border=True):
-            render_mcq(
-                key_suffix="8_1_unbiased",
-                question_text=t(q["question"]),
-                options=option_labels,
-                correct_idx=q["correct_idx"],
-                solution_text_dict=q["solution"],
-                success_msg_dict={"de": "Korrekt!", "en": "Correct!"},
-                error_msg_dict={"de": "Falsch.", "en": "Incorrect."},
-                client=model,
-                ai_context="Question about unbiased estimators in point estimation. Tests understanding of E[estimator] = true parameter.",
-                course_id="vwl",
-                topic_id="8",
-                subtopic_id="8.1",
-                question_id="8_1_unbiased"
-            )
+        render_mcq(
+            key_suffix="8_1_unbiased",
+            question_text=t(q["question"]),
+            options=option_labels,
+            correct_idx=q["correct_idx"],
+            solution_text_dict=q["solution"],
+            success_msg_dict={"de": "Korrekt!", "en": "Correct!"},
+            error_msg_dict={"de": "Falsch.", "en": "Incorrect."},
+            client=model,
+            ai_context="Question about unbiased estimators in point estimation. Tests understanding of E[estimator] = true parameter.",
+            course_id="vwl",
+            topic_id="8",
+            subtopic_id="8.1",
+            question_id="8_1_unbiased"
+        )

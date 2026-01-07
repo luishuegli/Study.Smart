@@ -437,19 +437,18 @@ def render_subtopic_9_3(model):
     opts = mcq["options"]
     opt_labels = [t(o) for o in opts]
     
-    with st.container(border=True):
-        render_mcq(
-            key_suffix="9_3_duality",
-            question_text=t(mcq["question"]),
-            options=opt_labels,
-            correct_idx=mcq["correct_idx"],
-            solution_text_dict=mcq["solution"],
-            success_msg_dict={"de": "Korrekt!", "en": "Correct!"},
-            error_msg_dict={"de": "Nicht ganz.", "en": "Not quite."},
-            client=model,
-            ai_context="Testing understanding of CI-Hypothesis Test duality",
-            course_id="vwl",
-            topic_id="9",
-            subtopic_id="9.3",
-            question_id="9_3_duality"
-        )
+    render_mcq(
+        key_suffix="9_3_duality",
+        question_text=t(mcq["question"]),
+        options=opt_labels,
+        correct_idx=mcq["correct_idx"],
+        solution_text_dict=mcq["solution"],
+        success_msg_dict={"de": "Korrekt!", "en": "Correct!"},
+        error_msg_dict={"de": "Nicht ganz.", "en": "Not quite."},
+        client=model,
+        ai_context="Testing understanding of CI-Hypothesis Test duality",
+        course_id="vwl",
+        topic_id="9",
+        subtopic_id="9.3",
+        question_id="9_3_duality"
+    )

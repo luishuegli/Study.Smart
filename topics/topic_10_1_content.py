@@ -560,19 +560,18 @@ def render_subtopic_10_1(model):
     opt_labels = [t({"de": o["de"], "en": o["en"]}) for o in opts]
     correct_idx = next((i for i, o in enumerate(opts) if o["id"] == mcq["correct_id"]), 0)
     
-    with st.container(border=True):
-        render_mcq(
-            key_suffix="10_1_types",
-            question_text=t(mcq["question"]),
-            options=opt_labels,
-            correct_idx=correct_idx,
-            solution_text_dict=mcq["solution"],
-            success_msg_dict={"de": "Korrekt!", "en": "Correct!"},
-            error_msg_dict={"de": "Falsch.", "en": "Incorrect."},
-            client=model,
-            ai_context="Topic 10.1: Types of Hypotheses - testing understanding of simple vs composite and one-sided vs two-sided hypotheses",
-            course_id="vwl",
-            topic_id="10",
-            subtopic_id="10.1",
-            question_id="10_1_types"
-        )
+    render_mcq(
+        key_suffix="10_1_types",
+        question_text=t(mcq["question"]),
+        options=opt_labels,
+        correct_idx=correct_idx,
+        solution_text_dict=mcq["solution"],
+        success_msg_dict={"de": "Korrekt!", "en": "Correct!"},
+        error_msg_dict={"de": "Falsch.", "en": "Incorrect."},
+        client=model,
+        ai_context="Topic 10.1: Types of Hypotheses - testing understanding of simple vs composite and one-sided vs two-sided hypotheses",
+        course_id="vwl",
+        topic_id="10",
+        subtopic_id="10.1",
+        question_id="10_1_types"
+    )

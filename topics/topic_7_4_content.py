@@ -965,22 +965,21 @@ def render_subtopic_7_4(model):
     opt_labels1 = [t({"de": o["de"], "en": o["en"]}) for o in opts1]
     correct_idx1 = next((i for i, o in enumerate(opts1) if o["id"] == mcq1["correct_id"]), 0)
     
-    with st.container(border=True):
-        render_mcq(
-            key_suffix="7_4_mcq1",
-            question_text=t(mcq1["question"]),
-            options=opt_labels1,
-            correct_idx=correct_idx1,
-            solution_text_dict=mcq1["solution"],
-            success_msg_dict={"de": "Korrekt!", "en": "Correct!"},
-            error_msg_dict={"de": "Falsch.", "en": "Incorrect."},
-            client=model,
-            ai_context="QQ-Plot interpretation: upward curve at right end means right-skewed data",
-            course_id="vwl",
-            topic_id="7",
-            subtopic_id="7.4",
-            question_id="7_4_mcq1"
-        )
+    render_mcq(
+        key_suffix="7_4_mcq1",
+        question_text=t(mcq1["question"]),
+        options=opt_labels1,
+        correct_idx=correct_idx1,
+        solution_text_dict=mcq1["solution"],
+        success_msg_dict={"de": "Korrekt!", "en": "Correct!"},
+        error_msg_dict={"de": "Falsch.", "en": "Incorrect."},
+        client=model,
+        ai_context="QQ-Plot interpretation: upward curve at right end means right-skewed data",
+        course_id="vwl",
+        topic_id="7",
+        subtopic_id="7.4",
+        question_id="7_4_mcq1"
+    )
     
     st.markdown("<br>", unsafe_allow_html=True)
     
@@ -990,19 +989,18 @@ def render_subtopic_7_4(model):
     opt_labels2 = [t({"de": o["de"], "en": o["en"]}) for o in opts2]
     correct_idx2 = next((i for i, o in enumerate(opts2) if o["id"] == mcq2["correct_id"]), 0)
     
-    with st.container(border=True):
-        render_mcq(
-            key_suffix="7_4_mcq2",
-            question_text=t(mcq2["question"]),
-            options=opt_labels2,
-            correct_idx=correct_idx2,
-            solution_text_dict=mcq2["solution"],
-            success_msg_dict={"de": "Korrekt!", "en": "Correct!"},
-            error_msg_dict={"de": "Falsch.", "en": "Incorrect."},
-            client=model,
-            ai_context="QQ-Plot axes: X-axis shows theoretical quantiles, Y-axis shows empirical (observed) data",
-            course_id="vwl",
-            topic_id="7",
-            subtopic_id="7.4",
-            question_id="7_4_mcq2"
-        )
+    render_mcq(
+        key_suffix="7_4_mcq2",
+        question_text=t(mcq2["question"]),
+        options=opt_labels2,
+        correct_idx=correct_idx2,
+        solution_text_dict=mcq2["solution"],
+        success_msg_dict={"de": "Korrekt!", "en": "Correct!"},
+        error_msg_dict={"de": "Falsch.", "en": "Incorrect."},
+        client=model,
+        ai_context="QQ-Plot axes: X-axis shows theoretical quantiles, Y-axis shows empirical (observed) data",
+        course_id="vwl",
+        topic_id="7",
+        subtopic_id="7.4",
+        question_id="7_4_mcq2"
+    )

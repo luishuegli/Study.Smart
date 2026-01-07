@@ -343,20 +343,19 @@ def render_subtopic_1_6(model):
     q_data_dart = get_question("1.6", q_dart_id)
     
     if q_data_dart:
-        with st.container(border=True):
-            render_mcq(
-                key_suffix="1_6_mcq",
-                question_text=t(q_text),
-                options=["0", f"1/{curr_r if curr_r>0 else 100}", "1", f"{r_float:.2f}"],
-                correct_idx=0,
-                solution_text_dict=sol_text,
-                success_msg_dict={"de": "Richtig! In stetigen Räumen ist die Wahrscheinlichkeit für exakte Punkte immer 0.", "en": "Correct! In continuous spaces, the probability of exact points is always 0."},
-                error_msg_dict={"de": "Nicht ganz. Denke an die Dartscheibe: Ein einzelner Punkt hat keine Fläche.", "en": "Not quite. Think of the dartboard: A single point has no area."},
-                client=model,
-                ai_context="Topic 1.6: Continuous probability spaces - dartboard problem",
-                allow_retry=False,
-                course_id="vwl",
-                topic_id="1",
-                subtopic_id="1.6",
-                question_id="p_single_point"
-            )
+        render_mcq(
+            key_suffix="1_6_mcq",
+            question_text=t(q_text),
+            options=["0", f"1/{curr_r if curr_r>0 else 100}", "1", f"{r_float:.2f}"],
+            correct_idx=0,
+            solution_text_dict=sol_text,
+            success_msg_dict={"de": "Richtig! In stetigen Räumen ist die Wahrscheinlichkeit für exakte Punkte immer 0.", "en": "Correct! In continuous spaces, the probability of exact points is always 0."},
+            error_msg_dict={"de": "Nicht ganz. Denke an die Dartscheibe: Ein einzelner Punkt hat keine Fläche.", "en": "Not quite. Think of the dartboard: A single point has no area."},
+            client=model,
+            ai_context="Topic 1.6: Continuous probability spaces - dartboard problem",
+            allow_retry=False,
+            course_id="vwl",
+            topic_id="1",
+            subtopic_id="1.6",
+            question_id="p_single_point"
+        )

@@ -499,22 +499,21 @@ def render_subtopic_9_1(model):
         options1 = q1.get("options", [])
         option_labels1 = [t({"de": o["de"], "en": o["en"]}) if isinstance(o, dict) else o for o in options1]
         
-        with st.container(border=True):
-            render_mcq(
-                key_suffix="9_1_mc1",
-                question_text=t(q1["question"]),
-                options=option_labels1,
-                correct_idx=q1["correct_idx"],
-                solution_text_dict=q1["solution"],
-                success_msg_dict={"de": "Korrekt!", "en": "Correct!"},
-                error_msg_dict={"de": "Falsch.", "en": "Incorrect."},
-                client=model,
-                ai_context="Question about the relationship between confidence level and interval width.",
-                course_id="vwl",
-                topic_id="9",
-                subtopic_id="9.1",
-                question_id="9_1_mc1"
-            )
+        render_mcq(
+            key_suffix="9_1_mc1",
+            question_text=t(q1["question"]),
+            options=option_labels1,
+            correct_idx=q1["correct_idx"],
+            solution_text_dict=q1["solution"],
+            success_msg_dict={"de": "Korrekt!", "en": "Correct!"},
+            error_msg_dict={"de": "Falsch.", "en": "Incorrect."},
+            client=model,
+            ai_context="Question about the relationship between confidence level and interval width.",
+            course_id="vwl",
+            topic_id="9",
+            subtopic_id="9.1",
+            question_id="9_1_mc1"
+        )
     
     st.markdown("<br>", unsafe_allow_html=True)
     
@@ -526,19 +525,18 @@ def render_subtopic_9_1(model):
         options2 = q2.get("options", [])
         option_labels2 = [t({"de": o["de"], "en": o["en"]}) if isinstance(o, dict) else o for o in options2]
         
-        with st.container(border=True):
-            render_mcq(
-                key_suffix="9_1_mc2",
-                question_text=t(q2["question"]),
-                options=option_labels2,
-                correct_idx=q2["correct_idx"],
-                solution_text_dict=q2["solution"],
-                success_msg_dict={"de": "Korrekt!", "en": "Correct!"},
-                error_msg_dict={"de": "Falsch.", "en": "Incorrect."},
-                client=model,
-                ai_context="Question about whether CI boundaries are random or fixed.",
-                course_id="vwl",
-                topic_id="9",
-                subtopic_id="9.1",
-                question_id="9_1_mc2"
-            )
+        render_mcq(
+            key_suffix="9_1_mc2",
+            question_text=t(q2["question"]),
+            options=option_labels2,
+            correct_idx=q2["correct_idx"],
+            solution_text_dict=q2["solution"],
+            success_msg_dict={"de": "Korrekt!", "en": "Correct!"},
+            error_msg_dict={"de": "Falsch.", "en": "Incorrect."},
+            client=model,
+            ai_context="Question about whether CI boundaries are random or fixed.",
+            course_id="vwl",
+            topic_id="9",
+            subtopic_id="9.1",
+            question_id="9_1_mc2"
+        )

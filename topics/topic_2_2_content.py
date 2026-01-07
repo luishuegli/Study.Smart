@@ -528,19 +528,18 @@ border-color: #3B82F6;
         else:
             option_labels = opts
         
-        with st.container(border=True):
-            render_mcq(
-                key_suffix="2_2_exam", 
-                question_text=t(q_data["question"]), 
-                options=option_labels, 
-                correct_idx=q_data["correct_idx"], 
-                solution_text_dict=q_data["solution"], 
-                success_msg_dict={"de": "Korrekt!", "en": "Correct!"},
-                error_msg_dict={"de": "Falsch.", "en": "Incorrect."}, 
-                client=client, 
-                ai_context="The user is learning the Fundamental Counting Principle. The problem involves combining choices (women, men) using multiplication.",
-                course_id="vwl", topic_id="2", subtopic_id="2.2", question_id="q_2_2_club"
-            )
+        render_mcq(
+            key_suffix="2_2_exam", 
+            question_text=t(q_data["question"]), 
+            options=option_labels, 
+            correct_idx=q_data["correct_idx"], 
+            solution_text_dict=q_data["solution"], 
+            success_msg_dict={"de": "Korrekt!", "en": "Correct!"},
+            error_msg_dict={"de": "Falsch.", "en": "Incorrect."}, 
+            client=client, 
+            ai_context="The user is learning the Fundamental Counting Principle. The problem involves combining choices (women, men) using multiplication.",
+            course_id="vwl", topic_id="2", subtopic_id="2.2", question_id="q_2_2_club"
+        )
         
         # Visual Solution: The "Slot Machine"
         if st.toggle(t({"de": "Lösung visualisieren", "en": "Visualize Solution"})):

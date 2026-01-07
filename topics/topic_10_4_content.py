@@ -569,19 +569,18 @@ def render_subtopic_10_4(model):
     opt_labels = [t({"de": o["de"], "en": o["en"]}) for o in opts]
     correct_idx = next((i for i, o in enumerate(opts) if o["id"] == mcq["correct_id"]), 0)
     
-    with st.container(border=True):
-        render_mcq(
-            key_suffix="10_4_pvalue",
-            question_text=t(mcq["question"]),
-            options=opt_labels,
-            correct_idx=correct_idx,
-            solution_text_dict=mcq["solution"],
-            success_msg_dict={"de": "Korrekt!", "en": "Correct!"},
-            error_msg_dict={"de": "Falsch.", "en": "Incorrect."},
-            client=model,
-            ai_context="Topic 10.4: The p-Value - testing calculation of p-value for two-sided z-test with known variance",
-            course_id="vwl",
-            topic_id="10",
-            subtopic_id="10.4",
-            question_id="10_4_pvalue"
-        )
+    render_mcq(
+        key_suffix="10_4_pvalue",
+        question_text=t(mcq["question"]),
+        options=opt_labels,
+        correct_idx=correct_idx,
+        solution_text_dict=mcq["solution"],
+        success_msg_dict={"de": "Korrekt!", "en": "Correct!"},
+        error_msg_dict={"de": "Falsch.", "en": "Incorrect."},
+        client=model,
+        ai_context="Topic 10.4: The p-Value - testing calculation of p-value for two-sided z-test with known variance",
+        course_id="vwl",
+        topic_id="10",
+        subtopic_id="10.4",
+        question_id="10_4_pvalue"
+    )

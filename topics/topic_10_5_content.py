@@ -531,19 +531,18 @@ def render_subtopic_10_5(model):
     opt_labels = [t({"de": o["de"], "en": o["en"]}) for o in opts]
     correct_idx = next((i for i, o in enumerate(opts) if o["id"] == mcq["correct_id"]), 0)
     
-    with st.container(border=True):
-        render_mcq(
-            key_suffix="10_5_final",
-            question_text=t(mcq["question"]),
-            options=opt_labels,
-            correct_idx=correct_idx,
-            solution_text_dict=mcq["solution"],
-            success_msg_dict={"de": "Perfekt! Du bist bereit!", "en": "Perfect! You're ready!"},
-            error_msg_dict={"de": "Fast! Lies die Lösung.", "en": "Almost! Read the solution."},
-            client=model,
-            ai_context="Topic 10.5 Final Boss: Comprehensive hypothesis testing workflow question",
-            course_id="vwl",
-            topic_id="10",
-            subtopic_id="10.5",
-            question_id="10_5_final_boss"
-        )
+    render_mcq(
+        key_suffix="10_5_final",
+        question_text=t(mcq["question"]),
+        options=opt_labels,
+        correct_idx=correct_idx,
+        solution_text_dict=mcq["solution"],
+        success_msg_dict={"de": "Perfekt! Du bist bereit!", "en": "Perfect! You're ready!"},
+        error_msg_dict={"de": "Fast! Lies die Lösung.", "en": "Almost! Read the solution."},
+        client=model,
+        ai_context="Topic 10.5 Final Boss: Comprehensive hypothesis testing workflow question",
+        course_id="vwl",
+        topic_id="10",
+        subtopic_id="10.5",
+        question_id="10_5_final_boss"
+    )

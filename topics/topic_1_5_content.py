@@ -174,23 +174,22 @@ def render_subtopic_1_5(model):
         # Fix escaped newlines in question text
         question_text = t(q_data["question"]).replace("\\n\\n", "<br><br>").replace("\\n", "<br>")
         
-        with st.container(border=True):
-             render_mcq(
-                key_suffix="1_5_q1",
-                question_text=question_text,
-                options=translated_options,
-                correct_idx=q_data["correct_idx"],
-                solution_text_dict=q_data["solution"],
-                success_msg_dict={"de": "Korrekt!", "en": "Correct!"},
-                error_msg_dict={"de": "Falsch. Schau dir den Lösungsweg an.", "en": "Incorrect. Check the solution steps."},
-                client=model,
-                hint_text_dict=q_data.get("hint"),
-                ai_context="Addition rule and conditional probability calculation.",
-                course_id="vwl",
-                topic_id="1",
-                subtopic_id="1.5",
-                question_id="1_5_q1"
-            )
+        render_mcq(
+            key_suffix="1_5_q1",
+            question_text=question_text,
+            options=translated_options,
+            correct_idx=q_data["correct_idx"],
+            solution_text_dict=q_data["solution"],
+            success_msg_dict={"de": "Korrekt!", "en": "Correct!"},
+            error_msg_dict={"de": "Falsch. Schau dir den Lösungsweg an.", "en": "Incorrect. Check the solution steps."},
+            client=model,
+            hint_text_dict=q_data.get("hint"),
+            ai_context="Addition rule and conditional probability calculation.",
+            course_id="vwl",
+            topic_id="1",
+            subtopic_id="1.5",
+            question_id="1_5_q1"
+        )
 
 def render_simulator_1_5():
     """

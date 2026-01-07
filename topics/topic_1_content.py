@@ -349,29 +349,28 @@ An experiment is a **random experiment** if:
             text = t(opt) 
             formatted_options.append(text)
 
-        with st.container(border=True):
-            render_mcq(
-                key_suffix=q_key,
-                question_text=t(q_data["question"]),
-                options=formatted_options,
-                correct_idx=q_data["correct_idx"],
-                solution_text_dict=q_data["solution"],
-                success_msg_dict={
-                    "de": "**Richtig!** Stetige Räume beschreiben Messgrößen wie Zeit, Länge oder Temperatur.",
-                    "en": "**Correct** Continuous spaces describe measurements like time, length, or temperature."
-                },
-                error_msg_dict={
-                    "de": "**Nicht ganz.** Stetige Räume sind Intervalle (z.B. $[0, \\infty)$), keine diskreten Punkte.",
-                    "en": "**Not quite.** Continuous spaces are intervals (e.g. $[0, \\infty)$), not discrete points."
-                },
-                client=model,
-                ai_context=theory_context,
-                allow_retry=False,
-                course_id="vwl",
-                topic_id="1",
-                subtopic_id="1.1",
-                question_id="q_1_1_stetig"
-            )
+        render_mcq(
+            key_suffix=q_key,
+            question_text=t(q_data["question"]),
+            options=formatted_options,
+            correct_idx=q_data["correct_idx"],
+            solution_text_dict=q_data["solution"],
+            success_msg_dict={
+                "de": "**Richtig!** Stetige Räume beschreiben Messgrößen wie Zeit, Länge oder Temperatur.",
+                "en": "**Correct** Continuous spaces describe measurements like time, length, or temperature."
+            },
+            error_msg_dict={
+                "de": "**Nicht ganz.** Stetige Räume sind Intervalle (z.B. $[0, \\infty)$), keine diskreten Punkte.",
+                "en": "**Not quite.** Continuous spaces are intervals (e.g. $[0, \\infty)$), not discrete points."
+            },
+            client=model,
+            ai_context=theory_context,
+            allow_retry=False,
+            course_id="vwl",
+            topic_id="1",
+            subtopic_id="1.1",
+            question_id="q_1_1_stetig"
+        )
 
 
 # Main render function for Topic 1

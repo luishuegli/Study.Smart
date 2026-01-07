@@ -54,19 +54,18 @@ def render_subtopic_11_1(model):
             st.markdown("<br><br>", unsafe_allow_html=True)
             
         else:
-            with st.container(border=True):
-                 render_mcq(
-                    key_suffix=q_id,
-                    question_text=t(q["question"]),
-                    options=q.get("options", []),
-                    correct_idx=q.get("correct_idx", 0),
-                    solution_text_dict=q["solution"],
-                    success_msg_dict={"de": "Richtig!", "en": "Correct!"},
-                    error_msg_dict={"de": "Falsch.", "en": "Incorrect."},
-                    model=model,
-                    ai_context=q.get("ai_context", ""),
-                    course_id="vwl",
-                    topic_id=TOPIC_ID.replace("topic_", ""),
-                    subtopic_id=SUBTOPIC_ID,
-                    question_id=q_id
-                )
+             render_mcq(
+                key_suffix=q_id,
+                question_text=t(q["question"]),
+                options=q.get("options", []),
+                correct_idx=q.get("correct_idx", 0),
+                solution_text_dict=q["solution"],
+                success_msg_dict={"de": "Richtig!", "en": "Correct!"},
+                error_msg_dict={"de": "Falsch.", "en": "Incorrect."},
+                model=model,
+                ai_context=q.get("ai_context", ""),
+                course_id="vwl",
+                topic_id=TOPIC_ID.replace("topic_", ""),
+                subtopic_id=SUBTOPIC_ID,
+                question_id=q_id
+            )

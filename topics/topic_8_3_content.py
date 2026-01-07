@@ -765,22 +765,21 @@ def render_subtopic_8_3(model):
         opts = q1.get("options", [])
         option_labels = [t({"de": o["de"], "en": o["en"]}) for o in opts] if opts else []
         
-        with st.container(border=True):
-            render_mcq(
-                key_suffix="8_3_mle_uniform",
-                question_text=t(q1["question"]),
-                options=option_labels,
-                correct_idx=q1["correct_idx"],
-                solution_text_dict=q1["solution"],
-                success_msg_dict={"de": "Korrekt!", "en": "Correct!"},
-                error_msg_dict={"de": "Nicht ganz.", "en": "Not quite."},
-                client=model,
-                ai_context="Maximum Likelihood Estimator for uniform distribution U[0,b]. MLE = max of sample.",
-                course_id="vwl",
-                topic_id="8",
-                subtopic_id="8.3",
-                question_id="8_3_mle_uniform"
-            )
+        render_mcq(
+            key_suffix="8_3_mle_uniform",
+            question_text=t(q1["question"]),
+            options=option_labels,
+            correct_idx=q1["correct_idx"],
+            solution_text_dict=q1["solution"],
+            success_msg_dict={"de": "Korrekt!", "en": "Correct!"},
+            error_msg_dict={"de": "Nicht ganz.", "en": "Not quite."},
+            client=model,
+            ai_context="Maximum Likelihood Estimator for uniform distribution U[0,b]. MLE = max of sample.",
+            course_id="vwl",
+            topic_id="8",
+            subtopic_id="8.3",
+            question_id="8_3_mle_uniform"
+        )
     
     st.markdown("<br>", unsafe_allow_html=True)
     
@@ -792,19 +791,18 @@ def render_subtopic_8_3(model):
         opts2 = q2.get("options", [])
         option_labels2 = [t({"de": o["de"], "en": o["en"]}) for o in opts2] if opts2 else []
         
-        with st.container(border=True):
-            render_mcq(
-                key_suffix="8_3_mom_mle_compare",
-                question_text=t(q2["question"]),
-                options=option_labels2,
-                correct_idx=q2["correct_idx"],
-                solution_text_dict=q2["solution"],
-                success_msg_dict={"de": "Korrekt!", "en": "Correct!"},
-                error_msg_dict={"de": "Nicht ganz.", "en": "Not quite."},
-                client=model,
-                ai_context="Comparison of Method of Moments vs Maximum Likelihood - they don't always give same results.",
-                course_id="vwl",
-                topic_id="8",
-                subtopic_id="8.3",
-                question_id="8_3_mom_mle_compare"
-            )
+        render_mcq(
+            key_suffix="8_3_mom_mle_compare",
+            question_text=t(q2["question"]),
+            options=option_labels2,
+            correct_idx=q2["correct_idx"],
+            solution_text_dict=q2["solution"],
+            success_msg_dict={"de": "Korrekt!", "en": "Correct!"},
+            error_msg_dict={"de": "Nicht ganz.", "en": "Not quite."},
+            client=model,
+            ai_context="Comparison of Method of Moments vs Maximum Likelihood - they don't always give same results.",
+            course_id="vwl",
+            topic_id="8",
+            subtopic_id="8.3",
+            question_id="8_3_mom_mle_compare"
+        )

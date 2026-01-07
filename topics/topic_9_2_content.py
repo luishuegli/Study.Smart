@@ -480,19 +480,18 @@ def render_subtopic_9_2(model):
             else:
                 option_labels.append(o)
         
-        with st.container(border=True):
-            render_mcq(
-                key_suffix="9_2_ci_calc",
-                question_text=t(q1["question"]),
-                options=option_labels,
-                correct_idx=q1["correct_idx"],
-                solution_text_dict=q1["solution"],
-                success_msg_dict={"de": "Korrekt!", "en": "Correct!"},
-                error_msg_dict={"de": "Nicht ganz.", "en": "Not quite."},
-                client=model,
-                ai_context="Confidence interval calculation for mean fill amount with known variance. Tests application of the CI formula derived in this section.",
-                course_id="vwl",
-                topic_id="9",
-                subtopic_id="9.2",
-                question_id="9_2_ci_calc"
-            )
+        render_mcq(
+            key_suffix="9_2_ci_calc",
+            question_text=t(q1["question"]),
+            options=option_labels,
+            correct_idx=q1["correct_idx"],
+            solution_text_dict=q1["solution"],
+            success_msg_dict={"de": "Korrekt!", "en": "Correct!"},
+            error_msg_dict={"de": "Nicht ganz.", "en": "Not quite."},
+            client=model,
+            ai_context="Confidence interval calculation for mean fill amount with known variance. Tests application of the CI formula derived in this section.",
+            course_id="vwl",
+            topic_id="9",
+            subtopic_id="9.2",
+            question_id="9_2_ci_calc"
+        )

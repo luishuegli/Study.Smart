@@ -288,7 +288,7 @@ def render_ai_tutor(key_suffix, context_prompt, client):
                             })
                             
                             thinking_placeholder.empty()
-                            st.rerun()
+                            st.rerun(scope="fragment")
                             
                         except Exception as e:
                             thinking_placeholder.empty()

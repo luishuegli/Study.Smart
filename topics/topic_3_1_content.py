@@ -214,7 +214,7 @@ def render_simulator_3_1():
         st.caption(t(content_3_1['interactive']['desc']))
 
         # Controls
-        x_val = st.slider("Scanner Position (x)", -3.0, 3.0, 0.0, 0.1, key="play_x_3_1")
+        x_val = st.slider(t({"de": "Scanner-Position (x)", "en": "Scanner Position (x)"}), -3.0, 3.0, 0.0, 0.1, key="play_x_3_1")
 
         # Calculate Math
         cdf_val = get_normal_cdf(x_val)

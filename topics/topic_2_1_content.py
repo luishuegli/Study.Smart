@@ -235,14 +235,24 @@ But the permutation formula counts each order separately! For 3 people, there ar
             st.markdown(f"<h4>{t({'de': 'Szenario', 'en': 'Scenario'})}</h4>", unsafe_allow_html=True)
             
             # Map scenarios to icons for display (NOT inside pills, but as context)
+            # Store current selection in session state to prevent None on re-click
+            if "scenario_2_1" not in st.session_state:
+                st.session_state.scenario_2_1 = "abstract"
+            
             scen_key = st.pills(
                 "Scenario",
                 options=["abstract", "race", "lotto"],
                 format_func=lambda x: c["scenarios"][x]["label"],
-                default="abstract",
+                default=st.session_state.scenario_2_1,
                 selection_mode="single",
                 label_visibility="collapsed"
             )
+            
+            # Prevent None (clicking already-selected pill deselects it)
+            if scen_key is None:
+                scen_key = st.session_state.scenario_2_1
+            else:
+                st.session_state.scenario_2_1 = scen_key
             
             # Display active scenario icon
             icon_map = {"abstract": "shapes", "race": "trophy", "lotto": "ticket"}

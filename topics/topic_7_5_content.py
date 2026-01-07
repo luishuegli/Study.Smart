@@ -604,8 +604,8 @@ def render_subtopic_7_5(model):
             fig_ex.update_layout(
                 height=140,
                 margin=dict(t=10, b=30, l=40, r=20),
-                xaxis_title="X",
-                yaxis_title="Y",
+                xaxis_title=t({"de": "X", "en": "X"}),
+                yaxis_title=t({"de": "Y", "en": "Y"}),
                 xaxis=dict(showgrid=True, gridcolor="#e5e7eb"),
                 yaxis=dict(showgrid=True, gridcolor="#e5e7eb"),
                 plot_bgcolor="white",

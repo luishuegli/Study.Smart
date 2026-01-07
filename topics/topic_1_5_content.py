@@ -209,21 +209,21 @@ def render_simulator_1_5():
     # ==========================================
     # SECTION 1: PLAYGROUND (Free Mode)
     # ==========================================
-    st.markdown(f"### Playground")
+    st.markdown(f"### {t({'de': 'Spielwiese', 'en': 'Playground'})}")
     with st.container(border=True):
-        st.caption("Experiment freely. The Overlap slider automatically adapts.")
+        st.caption(t({"de": "Experimentiere frei. Der Overlap-Slider passt sich automatisch an.", "en": "Experiment freely. The Overlap slider automatically adapts."}))
         
         c1, c2, c3 = st.columns(3)
         with c1:
-            val_a_p = st.slider("P(A) iPhone", 0.0, 1.0, 0.5, key="play_a")
+            val_a_p = st.slider(t({"de": "P(A) iPhone", "en": "P(A) iPhone"}), 0.0, 1.0, 0.5, key="play_a")
         with c2:
-            val_b_p = st.slider("P(B) MacBook", 0.0, 1.0, 0.5, key="play_b")
+            val_b_p = st.slider(t({"de": "P(B) MacBook", "en": "P(B) MacBook"}), 0.0, 1.0, 0.5, key="play_b")
         with c3:
             # Relative Slider (0-100% of valid range)
             limit_upper = min(val_a_p, val_b_p)
             limit_lower = max(0.0, val_a_p + val_b_p - 1.0 + 0.0001)
             
-            t_rel = st.slider("P(A and B) Position (Min ↔ Max)", 0.0, 1.0, 0.5, key="play_t")
+            t_rel = st.slider(t({"de": "P(A und B) Position (Min ↔ Max)", "en": "P(A and B) Position (Min ↔ Max)"}), 0.0, 1.0, 0.5, key="play_t")
             val_i_p = limit_lower + t_rel * (limit_upper - limit_lower)
             
             st.caption(f"P(A and B) = **{val_i_p:.2f}**")
@@ -445,7 +445,7 @@ def render_simulator_1_5():
                 st.session_state.miss_i = 0.0
                 st.session_state.balloons_done = False
             
-            st.button("Restart Mission", on_click=reset_mission)
+            st.button(t({"de": "Mission neu starten", "en": "Restart Mission"}), on_click=reset_mission)
 
     # ROW 4: THE PRO TIP (Footer - outside the simulator box for breathing room)
     st.markdown("<br>", unsafe_allow_html=True)

@@ -292,7 +292,7 @@ def render_subtopic_1_7(model):
         col_vis, col_math = st.columns([1.5, 1], gap="large")
 
         with col_vis:
-            st.caption("Click the Squares to remove them.")
+            st.caption(t({"de": "Klicke auf die Quadrate, um sie zu entfernen.", "en": "Click the Squares to remove them."}))
             
             # CHART GENERATION
             x, y, c, s, op, ids = [], [], [], [], [], []
@@ -403,7 +403,7 @@ def render_subtopic_1_7(model):
             track_question_answer(user["localId"], "vwl", "1", "1.7", "1_7_narrative_mission", True)
             
     # Reset
-    if st.button("Reset Story"):
+    if st.button(t({"de": "Geschichte zurücksetzen", "en": "Reset Story"})):
         st.session_state.visible_indices_1_7 = list(range(9))
         st.rerun()
 
@@ -656,7 +656,7 @@ def render_subtopic_1_7(model):
             track_question_answer(user["localId"], "vwl", "1", "1.7", "1_7_balance_mission", True)
     
     # Reset button
-    if st.button("Reset Grid"):
+    if st.button(t({"de": "Raster zurücksetzen", "en": "Reset Grid"})):
         st.session_state.shapes_1_7_balance = [
             {"color": "blue", "shape": "square"},
             {"color": "blue", "shape": "square"},

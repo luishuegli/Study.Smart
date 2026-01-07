@@ -716,7 +716,7 @@ def render_tool_wizard():
             fig.add_trace(go.Scatter(x=sorted_data, y=ecdf_y, mode="lines+markers",
                                     marker=dict(size=4, color="#007AFF"), line=dict(color="#007AFF")))
             fig.update_layout(title=dict(text="ECDF", font=dict(size=14)), 
-                             yaxis_title="F(x)", xaxis_title="x")
+                             yaxis_title=t({"de": "F(x)", "en": "F(x)"}), xaxis_title=t({"de": "x", "en": "x"}))
         
         elif selected_idx == 2:  # Boxplot
             fig.add_trace(go.Box(y=sample_data, marker_color="#007AFF", boxpoints="outliers"))
@@ -732,7 +732,7 @@ def render_tool_wizard():
             fig.add_trace(go.Scatter(x=[min_val, max_val], y=[min_val*15+50, max_val*15+50],
                                     mode="lines", line=dict(color="#FF4B4B", dash="dash")))
             fig.update_layout(title=dict(text="QQ-Plot", font=dict(size=14)),
-                             xaxis_title="Theoretical", yaxis_title="Empirical", showlegend=False)
+                             xaxis_title=t({"de": "Theoretisch", "en": "Theoretical"}), yaxis_title=t({"de": "Empirisch", "en": "Empirical"}), showlegend=False)
         
         elif selected_idx == 4:  # Scatter
             x_scatter = np.random.uniform(20, 80, 30)
@@ -740,7 +740,7 @@ def render_tool_wizard():
             fig.add_trace(go.Scatter(x=x_scatter, y=y_scatter, mode="markers",
                                     marker=dict(size=8, color="#16a34a")))
             fig.update_layout(title=dict(text="Scatter Plot", font=dict(size=14)),
-                             xaxis_title="X", yaxis_title="Y")
+                             xaxis_title=t({"de": "X", "en": "X"}), yaxis_title=t({"de": "Y", "en": "Y"}))
         
         elif selected_idx == 5:  # Side-by-side Boxplot
             group_a = np.random.normal(45, 10, 30)

@@ -211,11 +211,11 @@ def render_subtopic_1_8(model):
             """, unsafe_allow_html=True)
             alpha_s, alpha_d = st.columns(2)
             with alpha_s:
-                st.caption("Share (Bar Width)")
-                p_a = st.slider("Alpha", 0, 100, 30, key="slider_1_8_pa", label_visibility="collapsed", on_change=update_alpha)
+                st.caption(t({"de": "Anteil (Balkenbreite)", "en": "Share (Bar Width)"}))
+                p_a = st.slider(t({"de": "Alpha", "en": "Alpha"}), 0, 100, 30, key="slider_1_8_pa", label_visibility="collapsed", on_change=update_alpha)
             with alpha_d:
-                st.caption("Defect Rate (Bar Height)")
-                def_a = st.slider("Defect Alpha", 0, 100, 5, key="slider_1_8_defa", label_visibility="collapsed")
+                st.caption(t({"de": "Fehlerrate (Balkenhöhe)", "en": "Defect Rate (Bar Height)"}))
+                def_a = st.slider(t({"de": "Defekt Alpha", "en": "Defect Alpha"}), 0, 100, 5, key="slider_1_8_defa", label_visibility="collapsed")
             
             # Beta Card (Green)
             st.markdown("""
@@ -225,11 +225,11 @@ def render_subtopic_1_8(model):
             """, unsafe_allow_html=True)
             beta_s, beta_d = st.columns(2)
             with beta_s:
-                st.caption("Share (Bar Width)")
-                p_b = st.slider("Beta", 0, 100, 50, key="slider_1_8_pb", label_visibility="collapsed", on_change=update_beta)
+                st.caption(t({"de": "Anteil (Balkenbreite)", "en": "Share (Bar Width)"}))
+                p_b = st.slider(t({"de": "Beta", "en": "Beta"}), 0, 100, 50, key="slider_1_8_pb", label_visibility="collapsed", on_change=update_beta)
             with beta_d:
-                st.caption("Defect Rate (Bar Height)")
-                def_b = st.slider("Defect Beta", 0, 100, 20, key="slider_1_8_defb", label_visibility="collapsed")
+                st.caption(t({"de": "Fehlerrate (Balkenhöhe)", "en": "Defect Rate (Bar Height)"}))
+                def_b = st.slider(t({"de": "Defekt Beta", "en": "Defect Beta"}), 0, 100, 20, key="slider_1_8_defb", label_visibility="collapsed")
             
             # Gamma Card (Amber)
             p_c = 100 - p_a - p_b
@@ -240,8 +240,8 @@ def render_subtopic_1_8(model):
             """, unsafe_allow_html=True)
             gamma_d_col, _ = st.columns([1, 1])
             with gamma_d_col:
-                st.caption("Defect Rate (Bar Height)")
-                def_c = st.slider("Defect Gamma", 0, 100, 50, key="slider_1_8_defc", label_visibility="collapsed")
+                st.caption(t({"de": "Fehlerrate (Balkenhöhe)", "en": "Defect Rate (Bar Height)"}))
+                def_c = st.slider(t({"de": "Defekt Gamma", "en": "Defect Gamma"}), 0, 100, 50, key="slider_1_8_defc", label_visibility="collapsed")
             
             # Target
             target_val = 2.0

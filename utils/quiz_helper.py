@@ -280,10 +280,14 @@ def render_mcq(
                 sol_content = t(solution_text_dict)
                 st.markdown(sol_content, unsafe_allow_html=True)
                 
+                # Build options context with correct answer marked
+                options_text = "\n".join([f"  [{i}] {opt}{' ← CORRECT' if (i == correct_idx if not is_multi_select else i in correct_idx) else ''}" for i, opt in enumerate(options)])
+                
                 if is_multi_select:
-                    full_context = f"{ai_context}\n\nProblem: {question_text}\nCorrect Indices: {correct_idx}"
+                    correct_options = [options[i] for i in correct_idx]
+                    full_context = f"{ai_context}\n\nProblem: {question_text}\n\nOptions:\n{options_text}\n\nCorrect Answer(s): {correct_options}"
                 else:
-                    full_context = f"{ai_context}\n\nProblem: {question_text}\nCorrect Answer Index: {correct_idx}"
+                    full_context = f"{ai_context}\n\nProblem: {question_text}\n\nOptions:\n{options_text}\n\nCorrect Answer: [{correct_idx}] {options[correct_idx]}"
                 render_ai_tutor(f"mcq_ai_{key_suffix}", full_context, client)
 
         # Retry/Reset

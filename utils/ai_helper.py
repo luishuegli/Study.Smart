@@ -220,13 +220,12 @@ def render_ai_tutor(key_suffix, context_prompt, client):
             latex_instruction = f"""
             LANGUAGE: {lang_instruction}
             
-            TEACHING STYLE (Feynman Method):
-            - Explain like teaching a smart friend who's new to the topic.
-            - Show the relevant formula using LaTeX: $$formula$$.
-            - Break down what each variable/symbol means in plain words.
-            - Give the intuition: WHY does this work? What's the "aha" moment?
-            - Use simple analogies when helpful.
-            - Use inline math $x$ for variables in sentences.
+            STYLE:
+            - Be CONCISE (max 150 words). Skip preambles like "Let me explain..." or "I'll break this down..."
+            - Jump straight into the explanation.
+            - Use LaTeX: $$formula$$ for display math, $x$ for inline.
+            - Give intuition briefly: WHY does this work?
+            - Use a simple analogy if helpful.
             """
             
             full_prompt = f"{latex_instruction}\n\n{context_prompt}\n\n--- CHAT HISTORY ---{history_context}\n--- NEW QUESTION ---\n{pending_query}"

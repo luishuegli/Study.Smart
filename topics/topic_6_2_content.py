@@ -180,11 +180,11 @@ def continuity_correction_interactive():
     # Controls with visible labeled sliders
     col1, col2, col3 = st.columns(3)
     with col1:
-        n = st.slider("n = Sample Size", min_value=20, max_value=200, value=70, step=10, key="cc_n")
+        n = st.slider(t({"de": "n = Stichprobengrösse", "en": "n = Sample Size"}), min_value=20, max_value=200, value=70, step=10, key="cc_n")
     with col2:
-        p = st.slider("p = Probability", min_value=0.1, max_value=0.5, value=0.3, step=0.05, key="cc_p")
+        p = st.slider(t({"de": "p = Wahrscheinlichkeit", "en": "p = Probability"}), min_value=0.1, max_value=0.5, value=0.3, step=0.05, key="cc_p")
     with col3:
-        k = st.slider("k = Threshold", min_value=int(n*p*0.5), max_value=int(n*p*1.5), value=int(n*p*1.2), step=1, key="cc_k")
+        k = st.slider(t({"de": "k = Schwellenwert", "en": "k = Threshold"}), min_value=int(n*p*0.5), max_value=int(n*p*1.5), value=int(n*p*1.2), step=1, key="cc_k")
     
     # Calculations
     mu = n * p

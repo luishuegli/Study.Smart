@@ -276,13 +276,13 @@ def render_subtopic_1_4(model):
                 if abs(user_total - correct_val) < 0.001:
                     st.success(f"Correct! $P(A \\cup B) = {user_total:.2f}$")
                 elif user_total < correct_val:
-                    st.warning("Too small!")
+                    st.warning(t({"de": "Zu klein!", "en": "Too small!"}))
                 else:
-                    st.error("Too high!")
+                    st.error(t({"de": "Zu hoch!", "en": "Too high!"}))
                     
             elif mode == "negativity":
                 if user_total == 0.0:
-                    st.success("Correct. Probabilities cannot be negative.")
+                    st.success(t({"de": "Richtig. Wahrscheinlichkeiten können nicht negativ sein.", "en": "Correct. Probabilities cannot be negative."}))
                 elif user_total < 0:
                     st.error(f"Invalid! Negative probability: {user_total:.2f}")
                 else:

@@ -234,8 +234,8 @@ def render_missions_3_2():
         render_die_mission(
             mission_key="m2",
             desc_dict=content_3_2["mission2"]["desc"],
-            target_p6=0.375,
-            target_others=0.125,
+            target_p6=0.40,       # Fixed: was 0.375
+            target_others=0.12,   # Fixed: was 0.125
             tolerance=0.015  # Tighter for advanced
         )
     

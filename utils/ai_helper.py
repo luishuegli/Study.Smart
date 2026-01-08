@@ -274,12 +274,24 @@ def render_ai_tutor(key_suffix, context_prompt, client):
         c_input, c_btn = st.columns([12, 1], gap="small", vertical_alignment="bottom")
         
         with c_input:
+            st.markdown('''<style>
+            /* Auto-expanding textarea like Gemini */
+            .gemini-input textarea {
+                min-height: 44px !important;
+                max-height: 200px !important;
+                overflow-y: auto !important;
+                resize: none !important;
+                line-height: 1.4 !important;
+                padding: 10px 16px !important;
+            }
+            </style>''', unsafe_allow_html=True)
             st.markdown('<div class="gemini-input">', unsafe_allow_html=True)
-            ai_query = st.text_input(
+            ai_query = st.text_area(
                 "AI Input",
                 placeholder=t({"de": "Frag Gemini...", "en": "Ask Gemini..."}),
                 label_visibility="collapsed",
-                key=input_key
+                key=input_key,
+                height=44  # Start small, CSS handles expansion
             )
             st.markdown('</div>', unsafe_allow_html=True)
         

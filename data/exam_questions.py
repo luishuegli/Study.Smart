@@ -1625,15 +1625,31 @@ gesamte Spiel gewinnt?""",
             "en": r"""Two players face each other in a Best-of-5 game, i.e., the first player to win 3 rounds wins the game. In each round, Player A has a 60% chance of winning and Player B has a 40% chance (there are no draws). After one round, Player B takes the lead and now has a lead of one in the Best-of-5 series. What is the probability that Player B wins the entire game after this first round?"""
         },
         "options": [
-            {"de": r"$65\%$", "en": r"$65\%$"},
-            {"de": r"$35\%$", "en": r"$35\%$"},
-            {"de": r"$50\%$", "en": r"$50\%$"},
-            {"de": r"$80\%$", "en": r"$80\%$"}
+            {"de": r"$52.48\%$", "en": r"$52.48\%$"},
+            {"de": r"$34.56\%$", "en": r"$34.56\%$"},
+            {"de": r"$50.05\%$", "en": r"$50.05\%$"},
+            {"de": r"$45.24\%$", "en": r"$45.24\%$"}
         ],
         "correct_idx": 0,
         "solution": {
-            "de": r"**Richtig: $65\%$**<br>$X \sim \text{Bin}(7, 0.7)$.<br>$P(X \ge 5) = P(X=5) + P(X=6) + P(X=7) \approx 0.65$",
-            "en": r"**Correct: $65\%$**<br>$X \sim \text{Bin}(7, 0.7)$.<br>$P(X \ge 5) = P(X=5) + P(X=6) + P(X=7) \approx 0.65$"
+            "de": r"""**Richtig: $52.48\%$ (a)**<br>Stand: B führt 1:0. B braucht noch 2 Siege.<br>
+<strong>Möglichkeiten für B zu gewinnen:</strong><br>
+• Runden 2+3: $0.4^2$<br>
+• Runden 2+4: $0.4^2 \cdot 0.6$<br>
+• Runden 2+5: $0.4^2 \cdot 0.6^2$<br>
+• Runden 3+4: $0.4^2 \cdot 0.6$<br>
+• Runden 3+5: $0.4^2 \cdot 0.6^2$<br>
+• Runden 4+5: $0.4^2 \cdot 0.6^2$<br><br>
+$P = 0.4^2 \cdot (1 + 2 \cdot 0.6 + 3 \cdot 0.6^2) = 0.16 \cdot 3.28 = \mathbf{0.5248}$""",
+            "en": r"""**Correct: $52.48\%$ (a)**<br>Score: B leads 1-0. B needs 2 more wins.<br>
+<strong>Ways B can win:</strong><br>
+• Rounds 2+3: $0.4^2$<br>
+• Rounds 2+4: $0.4^2 \cdot 0.6$<br>
+• Rounds 2+5: $0.4^2 \cdot 0.6^2$<br>
+• Rounds 3+4: $0.4^2 \cdot 0.6$<br>
+• Rounds 3+5: $0.4^2 \cdot 0.6^2$<br>
+• Rounds 4+5: $0.4^2 \cdot 0.6^2$<br><br>
+$P = 0.4^2 \cdot (1 + 2 \cdot 0.6 + 3 \cdot 0.6^2) = 0.16 \cdot 3.28 = \mathbf{0.5248}$"""
         }
     },
     "hs2023_mc12": {

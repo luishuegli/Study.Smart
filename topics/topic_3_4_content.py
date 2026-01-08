@@ -238,7 +238,6 @@ def render_balance_simulator():
         
         target_ex = 3.0
         
-        # VISUALIZATION FIRST (Full Width)
         values = [1, 2, 3, 4, 5]
         
         # Use pills for quick weight selection (more gamified)
@@ -248,7 +247,6 @@ def render_balance_simulator():
         probs = []
         for i, col in enumerate(cols):
             with col:
-                # Use fresh key on reset to avoid session state conflict
                 key_suffix = "_r" if reset_mode else ""
                 p = st.slider(
                     f"X={i+1}", 0.0, 0.50, default_vals[i], 0.05,
@@ -256,7 +254,6 @@ def render_balance_simulator():
                     disabled=st.session_state.bal_mission_done
                 )
                 probs.append(p)
-        
         
         total = sum(probs)
         
@@ -267,7 +264,9 @@ def render_balance_simulator():
             e_x = 3.0
         
         # Calculate tilt angle (max ±15 degrees)
-        tilt_factor = (e_x - 3.0) * 10  # -20 to +20
+        # PHYSICS FIX: Heavier left (E[X] < 3) should tilt LEFT side DOWN (positive angle)
+        # So we NEGATE: when E[X] < 3, tilt_factor is positive → left goes down
+        tilt_factor = (3.0 - e_x) * 10  # NEGATED: left heavy = positive = left down
         tilt_angle = max(-15, min(15, tilt_factor))
         
         # Create tilting beam visualization
